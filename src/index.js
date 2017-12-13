@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,15 +7,18 @@ import { createStore, applyMiddleware } from 'redux';
 
 import App from './components/App';
 import reducer from './reducer';
-import timerMiddleware from './timerMiddleware';
+import middlewares from './middlewares';
+import theme from './theme';
 
 const rootEl = document.querySelector('#root');
 
-const store = createStore(reducer, applyMiddleware(timerMiddleware, createLogger()));
+const store = createStore(reducer, applyMiddleware(...middlewares, createLogger()));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  </ThemeProvider>,
   rootEl
 );
