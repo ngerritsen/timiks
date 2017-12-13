@@ -1,4 +1,4 @@
-import { INCREMENT_TIME, RESET_TIME, START_TIMER, STOP_TIMER } from './constants';
+import { INCREMENT_TIME, RESET_TIME, START_TIMER, STOP_TIMER } from '../constants';
 
 const initialState = {
   time: 0,

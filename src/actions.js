@@ -16,3 +16,16 @@ export const startTimer = () => ({
 export const stopTimer = () => ({
   type: constants.STOP_TIMER
 });
+
+export const prepareActivation = () => ({
+  type: constants.PREPARE_ACTIVATION
+});
+
+export const fireActivation = () => ({
+  type: constants.FIRE_ACTIVATION
+});
+
+export const setScramble = scramble => ({
+  type: constants.SET_SCRAMBLE,
+  scramble
+});

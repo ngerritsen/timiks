@@ -1,7 +1,9 @@
-import spacebarMiddleware from './spacebarMiddleware';
+import activationMiddleware from './activationMiddleware';
+import scrambleMiddleware from './scrambleMiddleware';
 import timerMiddleware from './timerMiddleware';
 
 export default [
-  spacebarMiddleware,
+  activationMiddleware,
+  scrambleMiddleware,
   timerMiddleware
 ];
