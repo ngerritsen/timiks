@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 const Button = styled.button`
   margin: 0 0 1rem;
   height: 6rem;
