@@ -9,7 +9,7 @@ export const FIRE_ACTIVATION = 'FIRE_ACTIVATION';
 
 export const SET_SCRAMBLE = 'SET_SCRAMBLE';
 
-export const TIMER_INTERVAL = 50;
+export const TIMER_INTERVAL = 25;
 export const SPACEBAR_KEYCODE = 32;
 
 export const SCRAMBLE_LENGTH = 20;

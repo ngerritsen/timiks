@@ -3,21 +3,23 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import Time from './Time';
-import { calculateAverageTime } from '../helpers';
+import { calculateAverageTime, markBestTime } from '../helpers';
 
 const Timeboard = ({ times, average }) => {
   return (
     <TimeList>
-      {times.map(({ time }, index) => (
+      {times.map(({ time, best }, index) => (
         <TimeRow key={index}>
-          <TimeIndex>{index + 1}.</TimeIndex> <Time ms={time}/>
+          <TimeIndex>{index + 1}.</TimeIndex>
+          <Time ms={time}/>
+          {(best && times.length > 1) && <TimeInfo>👍</TimeInfo>}
         </TimeRow>
       ))}
       {
         times.length > 0 &&
         <TimeRow>
           <TimeIndex></TimeIndex>
-          <strong> <Time ms={average}/></strong>
+          <strong><Time ms={average}/></strong>
           <TimeInfo>(avg.)</TimeInfo>
         </TimeRow>
       }
@@ -51,7 +53,7 @@ const TimeIndex = styled.span`
 
 function mapStateToProps(state) {
   return {
-    times: state.timer.times,
+    times: markBestTime(state.timer.times),
     average: calculateAverageTime(state.timer.times)
   };
 }

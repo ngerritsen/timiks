@@ -51,3 +51,11 @@ export function calculateAverageTime(times) {
 
   return total / times.length;
 }
+
+export function markBestTime(times) {
+  const bestTime = Math.min(...times.map(t => t.time));
+
+  return times.map(t => (
+    t.time === bestTime ? { ...t, best: true } : t
+  ));
+}
