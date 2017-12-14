@@ -1,37 +1,13 @@
 import styled from 'styled-components';
-import Grid from 'styled-components-grid';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import React from 'react';
 
-import Time from './Time';
+import TimerContainer from '../containers/TimerContainer';
 import TimeBoard from './TimeBoard';
-import Button from './Button';
-import { obfuscateScramble } from '../helpers';
-import { startTimer, stopTimer, resetTime } from '../actions';
 
-const App = ({ time, stopped, scramble, startTimer, resetTime, stopTimer, preparing }) => (
+const App = () => (
   <Container>
     <Title>Timiks</Title>
-    <TimeContainer>
-      <Time ms={time} fontSize={6.2} />
-    </TimeContainer>
-    <Scramble>{scramble.join(' ')}</Scramble>
-    {
-      stopped ?
-        (
-          preparing ?
-            <Button>Ready</Button> :
-            <Button onClick={() => { resetTime(); startTimer() }}>Start</Button>
-        ) :
-        <Button onClick={stopTimer}>Stop</Button>
-    }
-    <Explain>
-      {(stopped && !preparing) && 'Press and release '}
-      {(stopped && preparing) && 'Release '}
-      {!stopped && 'Press '}
-      spacebar <Spacebar/> to {stopped ? 'start' : 'stop'}.
-    </Explain>
+    <TimerContainer/>
     <TimeBoard/>
   </Container>
 )
@@ -42,60 +18,10 @@ const Container = styled.div`
   padding: 0 ${props => props.theme.sizes.md};
 `;
 
-const TimeContainer = styled.div`
-  text-align: center;
-  padding: ${props => props.theme.sizes.md} 0;
-  margin-bottom: ${props => props.theme.sizes.md};
-`
-
-const Scramble = styled.p`
-  font-size: 1.6rem;
-  text-align: center;
-  font-family: ${props => props.theme.monoFont};
-  background-color: ${props => props.theme.colors.subtleBg};
-  padding: ${props => props.theme.sizes.xs};
-  font-weight: bold;
-  border-radius: 3px;
-`;
-
 const Title = styled.h1`
-  margin: 0 0 ${props => props.theme.sizes.lg};
+  margin: 0;
   font-size: 2.6rem;
   font-weight: bold;
 `;
 
-const Explain = styled.p`
-  color: ${props => props.theme.colors.subtleFg};
-  font-size: 1.6rem;
-  text-align: center;
-  margin-top: ${props => props.theme.sizes.xs};
-`;
-
-const Spacebar = styled.span`
-  position: relative;
-  top: 0.1rem;
-  display: inline-block;
-  border-radius: 0.3rem;
-  margin: 0 ${props => props.theme.sizes.xxs};
-  border: 2px solid ${props => props.theme.colors.subtleFg};
-  height: 0.8rem;
-  width: 4rem;
-`;
-
-function mapStateToProps ({ timer, activation, scramble }) {
-  const { stopped, time } = timer;
-  const { preparing } = activation;
-
-  return {
-    time,
-    stopped,
-    preparing,
-    scramble: stopped ? scramble : obfuscateScramble(scramble)
-  }
-};
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ startTimer, stopTimer, resetTime }, dispatch)
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

@@ -1,4 +1,4 @@
-import styled, { ThemeProvider, injectGlobal } from 'styled-components';
+import { ThemeProvider, injectGlobal } from 'styled-components';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';

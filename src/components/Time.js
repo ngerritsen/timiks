@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { formatTime } from '../helpers';
@@ -13,6 +14,11 @@ const Time = ({ ms, fontSize = 1.8 }) => {
     </span>
   );
 }
+
+Time.propTypes = {
+  ms: PropTypes.number.isRequired,
+  fontSize: PropTypes.number
+};
 
 const TimeNumber = styled.span`
   display: inline-block;

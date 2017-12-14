@@ -1,4 +1,4 @@
-import { SPACEBAR_KEYCODE, PREPARE_ACTIVATION, FIRE_ACTIVATION } from '../constants';
+import { SPACEBAR_KEYCODE } from '../constants';
 
 import { resetTime, stopTimer, startTimer, prepareActivation, fireActivation } from '../actions';
 

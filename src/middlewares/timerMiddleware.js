@@ -1,5 +1,5 @@
 import { START_TIMER, TIMER_INTERVAL, STOP_TIMER } from '../constants';
-import { incrementTime, resetTime } from '../actions';
+import { incrementTime } from '../actions';
 
 const timerMiddleware = store => next => {
   let timer = null;
