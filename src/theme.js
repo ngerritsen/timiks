@@ -14,7 +14,7 @@ export default {
     subtleBg: darken(0.1, WHITE),
     fg: BLACK,
     subtleFg: lighten(0.3, BLACK),
-    grey: lighten(0.6, BLACK),
+    grey: darken(0.25, WHITE),
     primary: PRIMARY_COLOR
   },
   sizes: {

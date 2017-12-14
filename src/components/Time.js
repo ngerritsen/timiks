@@ -9,7 +9,7 @@ const Time = ({ ms }) => {
       {formatTime(ms)
         .split('')
         .map(char => char === '.' ? char : <TimeNumber>{char}</TimeNumber>)}
-      <small>s</small>
+      <Unit>s</Unit>
     </StyledTime>
   );
 }
@@ -25,6 +25,10 @@ const TimeNumber = styled.span`
   display: inline-block;
   width: 0.5em;
   text-align: center;
-`
+`;
+
+const Unit = styled.small`
+  padding-left: 0.1em;
+`;
 
 export default Time;

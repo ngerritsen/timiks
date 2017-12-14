@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import React from 'react';
 
 import Time from './Time';
+import TimeBoard from './TimeBoard';
 import Button from './Button';
 import { obfuscateScramble } from '../helpers';
 import { startTimer, stopTimer, resetTime } from '../actions';
@@ -29,6 +30,7 @@ const App = ({ time, stopped, scramble, startTimer, resetTime, stopTimer, prepar
       {!stopped && 'Press '}
       spacebar <Spacebar/> to {stopped ? 'start' : 'stop'}.
     </Explain>
+    <TimeBoard/>
   </Container>
 )
 

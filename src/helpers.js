@@ -45,3 +45,9 @@ function randomBoolean() {
 function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
+
+export function calculateAverageTime(times) {
+  const total = times.reduce((totalTimes, { time }) => totalTimes + time, 0);
+
+  return total / times.length;
+}
