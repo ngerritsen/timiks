@@ -4,17 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React from 'react';
 
+import Time from './Time';
 import Button from './Button';
-import { formatTime, obfuscateScramble } from '../helpers';
+import { obfuscateScramble } from '../helpers';
 import { startTimer, stopTimer, resetTime } from '../actions';
 
 const App = ({ time, stopped, scramble, startTimer, resetTime, stopTimer, preparing }) => (
   <Container>
     <Title>Timiks</Title>
-    <Time>
-      {formatTime(time)}
-      <small>s</small>
-    </Time>
+    <Time ms={time} />
     <Scramble>{scramble.join(' ')}</Scramble>
     {
       stopped ?
@@ -55,17 +53,6 @@ const Title = styled.h1`
   font-size: 2.6rem;
   font-weight: bold;
 `;
-
-const Time = styled.p`
-  margin: 0 0 ${props => props.theme.sizes.xl};
-  padding: ${props => props.theme.sizes.sm} 0;
-  text-align: center;
-  font-size: 6.2rem;
-`;
-
-const TimeUnit = styled.span`
-  color: ${props => props.theme.colors.subtleFg};
-`
 
 const Explain = styled.p`
   color: ${props => props.theme.colors.subtleFg};

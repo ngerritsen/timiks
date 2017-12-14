@@ -2,7 +2,8 @@ import { INCREMENT_TIME, RESET_TIME, START_TIMER, STOP_TIMER } from '../constant
 
 const initialState = {
   time: 0,
-  stopped: true
+  stopped: true,
+  times: []
 }
 
 export default function reducer(state = initialState, action) {
@@ -15,7 +16,12 @@ export default function reducer(state = initialState, action) {
     case STOP_TIMER:
       return {
         ...state,
-        stopped: true
+        stopped: true,
+        times: [
+          ...state.times, {
+            time: state.time
+          }
+        ]
       }
     case INCREMENT_TIME:
       return {

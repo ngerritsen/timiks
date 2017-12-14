@@ -1,6 +1,6 @@
 import { lighten, darken } from 'polished';
 
-const PRIMARY_COLOR = '#4b46e2';
+const PRIMARY_COLOR = '#6f42c1';
 const WHITE = '#fff';
 const BLACK = '#000';
 const BASE_SIZE = 0.8;
