@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 
 const Button = styled.button`
-  margin: 0 0 ${props => props.theme.sizes.sm};
+  margin: 0;
   height: 6rem;
   line-height: 6rem;
   width: 100%;

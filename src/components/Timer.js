@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 import Time from './Time';
+import Section from './Section';
 import ActivationContainer from '../containers/ActivationContainer';
 
 const Timer = ({ scramble, time }) => (
@@ -22,18 +23,9 @@ const Timer = ({ scramble, time }) => (
 );
 
 Timer.propTypes = {
-  preparing: PropTypes.bool.isRequired,
-  resetTime: PropTypes.func.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
-  startTimer: PropTypes.func.isRequired,
-  stopped: PropTypes.bool.isRequired,
-  stopTimer: PropTypes.func.isRequired,
   time: PropTypes.number.isRequired
 };
-
-const Section = styled.div`
-  margin-bottom: ${props => props.theme.sizes.sm};
-`;
 
 const TimerTime = styled.div`
   text-align: center;

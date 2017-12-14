@@ -3,12 +3,15 @@ import React from 'react';
 
 import TimerContainer from '../containers/TimerContainer';
 import TimeBoard from './TimeBoard';
+import Section from './Section';
 
 const App = () => (
   <Container>
     <Title>Timiks</Title>
     <TimerContainer/>
-    <TimeBoard/>
+    <Section>
+      <TimeBoard/>
+    </Section>
   </Container>
 )
 

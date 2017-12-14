@@ -29,7 +29,7 @@ const Timeboard = ({ times, average }) => {
 };
 
 Timeboard.propTypes = {
-  times: PropTypes.arrayOf(PropTypes.number).isRequired,
+  times: PropTypes.arrayOf(PropTypes.object).isRequired,
   average: PropTypes.number.isRequired
 };
 
@@ -37,7 +37,7 @@ const TimeList = styled.ul`
   list-style: none;
   display: block;
   padding: 0;
-  margin-bottom: ${props => props.theme.sizes.md};
+  margin: 0;
 `;
 
 const TimeInfo = styled.small`

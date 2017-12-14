@@ -37,7 +37,7 @@ const Explain = styled.p`
   color: ${props => props.theme.colors.subtleFg};
   font-size: 1.6rem;
   text-align: center;
-  margin-top: ${props => props.theme.sizes.xs};
+  margin-top: ${props => props.theme.sizes.xxs};
 `;
 
 const Spacebar = styled.span`

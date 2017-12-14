@@ -9,7 +9,7 @@ const Time = ({ ms, fontSize = 1.8 }) => {
     <span style={{ fontSize: fontSize.toFixed(1) + 'rem' }}>
       {formatTime(ms)
         .split('')
-        .map(char => char === '.' ? char : <TimeNumber>{char}</TimeNumber>)}
+        .map((char, i) => char === '.' ? char : <TimeNumber key={i}>{char}</TimeNumber>)}
       <Unit>s</Unit>
     </span>
   );
