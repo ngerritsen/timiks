@@ -2,20 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { formatTime, calculateAverageTime } from '../helpers';
+import Time from './Time';
+import { calculateAverageTime } from '../helpers';
 
 const Timeboard = ({ times, average }) => {
   return (
     <TimeList>
       {times.map(({ time }, index) => (
         <TimeRow key={index}>
-          <TimeIndex>{index + 1}.</TimeIndex> {formatTime(time)}s
+          <TimeIndex>{index + 1}.</TimeIndex> <Time ms={time}/>
         </TimeRow>
       ))}
       {
         times.length > 0 &&
         <TimeRow>
-          <TimeIndex></TimeIndex> <strong>{formatTime(average)}s</strong>
+          <TimeIndex></TimeIndex>
+          <strong> <Time ms={average}/></strong>
+          <TimeInfo>(avg.)</TimeInfo>
         </TimeRow>
       }
     </TimeList>
@@ -27,6 +30,11 @@ const TimeList = styled.ul`
   display: block;
   padding: 0;
   margin-bottom: ${props => props.theme.sizes.md};
+`;
+
+const TimeInfo = styled.small`
+  padding-left: 0.5em;
+  color: ${props => props.theme.colors.subtleFg};
 `;
 
 const TimeRow = styled.li`

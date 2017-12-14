@@ -13,7 +13,9 @@ import { startTimer, stopTimer, resetTime } from '../actions';
 const App = ({ time, stopped, scramble, startTimer, resetTime, stopTimer, preparing }) => (
   <Container>
     <Title>Timiks</Title>
-    <Time ms={time} />
+    <TimeContainer>
+      <Time ms={time} fontSize={6.2} />
+    </TimeContainer>
     <Scramble>{scramble.join(' ')}</Scramble>
     {
       stopped ?
@@ -39,6 +41,12 @@ const Container = styled.div`
   margin: ${props => props.theme.sizes.lg} auto;
   padding: 0 ${props => props.theme.sizes.md};
 `;
+
+const TimeContainer = styled.div`
+  text-align: center;
+  padding: ${props => props.theme.sizes.md} 0;
+  margin-bottom: ${props => props.theme.sizes.md};
+`
 
 const Scramble = styled.p`
   font-size: 1.6rem;

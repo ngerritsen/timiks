@@ -3,27 +3,20 @@ import styled from 'styled-components';
 
 import { formatTime } from '../helpers';
 
-const Time = ({ ms }) => {
+const Time = ({ ms, fontSize = 1.8 }) => {
   return (
-    <StyledTime>
+    <span style={{ fontSize: fontSize.toFixed(1) + 'rem' }}>
       {formatTime(ms)
         .split('')
         .map(char => char === '.' ? char : <TimeNumber>{char}</TimeNumber>)}
       <Unit>s</Unit>
-    </StyledTime>
+    </span>
   );
 }
 
-const StyledTime = styled.p`
-  margin: 0 0 ${props => props.theme.sizes.xl};
-  padding: ${props => props.theme.sizes.sm} 0;
-  text-align: center;
-  font-size: 6.2rem;
-`;
-
 const TimeNumber = styled.span`
   display: inline-block;
-  width: 0.5em;
+  width: 0.55em;
   text-align: center;
 `;
 
