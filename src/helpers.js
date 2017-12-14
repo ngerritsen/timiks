@@ -1,7 +1,11 @@
 import { SCRAMBLE_DIRECTIONS, SCRAMBLE_LENGTH, SCRAMBLE_OBFUSCATION_CHAR } from './constants';
 
 export function formatTime(ms) {
-  return (ms / 1000).toFixed(2)
+  const secondsString = (ms / 1000).toFixed(2);
+
+  return secondsString.length === 4 ?
+    '0' + secondsString :
+    secondsString
 }
 
 export function generateScramble() {
