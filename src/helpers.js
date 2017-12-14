@@ -1,4 +1,4 @@
-import { SCRAMBLE_DIRECTIONS, SCRAMBLE_LENGTH } from './constants';
+import { SCRAMBLE_DIRECTIONS, SCRAMBLE_LENGTH, SCRAMBLE_OBFUSCATION_CHAR } from './constants';
 
 export function formatTime(ms) {
   return (ms / 1000).toFixed(2)
@@ -18,6 +18,20 @@ export function generateScramble() {
   }
 
   return moves;
+}
+
+export function obfuscateScramble(scramble) {
+  return scramble.map(move => generateString(2, SCRAMBLE_OBFUSCATION_CHAR));
+}
+
+function generateString(amount, char) {
+  let string = '';
+
+  for (let i = 0; i < amount; i++) {
+    string += char;
+  }
+
+  return string;
 }
 
 function pickRandom(array) {

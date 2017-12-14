@@ -30,6 +30,7 @@ const activationMiddleware = store => next => {
 function onSpacebarPress(callback) {
   window.addEventListener('keydown', (event) => {
     if (isActivationSpacebarEvent(event)) {
+      event.preventDefault();
       callback();
     }
   });
@@ -38,6 +39,7 @@ function onSpacebarPress(callback) {
 function onSpacebarRelease(callback) {
   window.addEventListener('keyup', (event) => {
     if (isActivationSpacebarEvent(event)) {
+      event.preventDefault();
       callback();
     }
   });
@@ -45,7 +47,6 @@ function onSpacebarRelease(callback) {
 
 function isActivationSpacebarEvent(event) {
   return (
-    event.target.tagName.toLowerCase() !== 'button' &&
     event.keyCode === SPACEBAR_KEYCODE &&
     !event.repeat
   );

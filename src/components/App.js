@@ -5,20 +5,23 @@ import { bindActionCreators } from 'redux';
 import React from 'react';
 
 import Button from './Button';
-import { formatTime } from '../helpers';
-import { startTimer, stopTimer } from '../actions';
+import { formatTime, obfuscateScramble } from '../helpers';
+import { startTimer, stopTimer, resetTime } from '../actions';
 
-const App = ({ time, stopped, scramble, startTimer, stopTimer, preparing }) => (
+const App = ({ time, stopped, scramble, startTimer, resetTime, stopTimer, preparing }) => (
   <Container>
     <Title>Timiks</Title>
-    <Time>{formatTime(time)}<small>s</small></Time>
+    <Time>
+      {formatTime(time)}
+      <small>s</small>
+    </Time>
     <Scramble>{scramble.join(' ')}</Scramble>
     {
       stopped ?
         (
           preparing ?
             <Button>Ready</Button> :
-            <Button onClick={startTimer}>Start</Button>
+            <Button onClick={() => { resetTime(); startTimer() }}>Start</Button>
         ) :
         <Button onClick={stopTimer}>Stop</Button>
     }
@@ -40,10 +43,11 @@ const Container = styled.div`
 const Scramble = styled.p`
   font-size: 1.6rem;
   text-align: center;
+  font-family: ${props => props.theme.monoFont};
   background-color: ${props => props.theme.colors.subtleBg};
   padding: ${props => props.theme.sizes.xs};
   font-weight: bold;
-  word-spacing: ${props => props.theme.sizes.xs};
+  border-radius: 3px;
 `;
 
 const Title = styled.h1`
@@ -54,8 +58,9 @@ const Title = styled.h1`
 
 const Time = styled.p`
   margin: 0 0 ${props => props.theme.sizes.xl};
+  padding: ${props => props.theme.sizes.sm} 0;
   text-align: center;
-  font-size: 6rem;
+  font-size: 6.2rem;
 `;
 
 const TimeUnit = styled.span`
@@ -80,15 +85,20 @@ const Spacebar = styled.span`
   width: 4rem;
 `;
 
-function mapStateToProps ({ timer: { time, stopped }, activation: { preparing }, scramble }) {
+function mapStateToProps ({ timer, activation, scramble }) {
+  const { stopped, time } = timer;
+  const { preparing } = activation;
+
   return {
     time,
     stopped,
     preparing,
-    scramble
+    scramble: stopped ? scramble : obfuscateScramble(scramble)
   }
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ startTimer, stopTimer }, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ startTimer, stopTimer, resetTime }, dispatch)
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

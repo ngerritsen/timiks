@@ -13,4 +13,5 @@ export const TIMER_INTERVAL = 50;
 export const SPACEBAR_KEYCODE = 32;
 
 export const SCRAMBLE_LENGTH = 20;
+export const SCRAMBLE_OBFUSCATION_CHAR = '*';
 export const SCRAMBLE_DIRECTIONS = ['U', 'R', 'D', 'L', 'F', 'B'];

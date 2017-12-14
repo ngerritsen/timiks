@@ -9,6 +9,7 @@ const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
 export default {
   font: 'Barlow, Arial, sans-serif',
+  monoFont: '"Roboto Mono", monospace',
   colors: {
     subtleBg: darken(0.1, WHITE),
     fg: BLACK,
