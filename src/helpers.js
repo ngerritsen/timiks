@@ -10,8 +10,8 @@ export function generateScramble() {
   for (let i = 0; i < SCRAMBLE_LENGTH; i++) {
     const previousDirection = (moves[moves.length - 1] || '').slice(0, 1);
     const direction = pickRandom(SCRAMBLE_DIRECTIONS.filter(d => d !== previousDirection));
-    const twice = randomBoolean();
-    const reversed = randomBoolean();
+    const twice = pickRandom([false, false, true]);
+    const reversed = twice ? false : randomBoolean();
     const move = direction + (twice ? '2' : '') + (reversed ? '\'' : '');
 
     moves = [...moves, move];
@@ -21,7 +21,7 @@ export function generateScramble() {
 }
 
 export function obfuscateScramble(scramble) {
-  return scramble.map(move => generateString(2, SCRAMBLE_OBFUSCATION_CHAR));
+  return scramble.map(move => generateString(move.length, SCRAMBLE_OBFUSCATION_CHAR));
 }
 
 function generateString(amount, char) {
@@ -34,10 +34,10 @@ function generateString(amount, char) {
   return string;
 }
 
-function pickRandom(array) {
-  return array[Math.floor(Math.random() * array.length)];
+function randomBoolean() {
+  return pickRandom([false, true]);
 }
 
-function randomBoolean() {
-  return Boolean(Math.round(Math.random()));
+function pickRandom(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }
