@@ -8,7 +8,9 @@ import Section from './Section';
 const App = () => (
   <Container>
     <Title>Timiks</Title>
-    <TimerContainer/>
+    <Section margin="lg">
+      <TimerContainer/>
+    </Section>
     <Section>
       <TimeBoardContainer/>
     </Section>
@@ -16,9 +18,9 @@ const App = () => (
 )
 
 const Container = styled.div`
-  max-width: 75rem;
-  margin: ${props => props.theme.sizes.lg} auto;
-  padding: 0 ${props => props.theme.sizes.md};
+  max-width: 70rem;
+  margin: ${props => props.theme.sizes.md} auto;
+  padding: 0 ${props => props.theme.sizes.sm};
 `;
 
 const Title = styled.h1`

@@ -3,8 +3,8 @@ import { lighten } from 'polished';
 
 const Button = styled.button`
   margin: 0;
-  height: 6rem;
-  line-height: 6rem;
+  height: 6.2rem;
+  line-height: 6.2rem;
   width: 100%;
   background-color: ${props => props.theme.colors.primary};
   padding: 0 ${props => props.theme.sizes.lg};

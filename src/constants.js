@@ -10,6 +10,7 @@ export const FIRE_ACTIVATION = 'FIRE_ACTIVATION';
 export const SET_SCRAMBLE = 'SET_SCRAMBLE';
 
 export const SAVE_TIME = 'SAVE_TIME';
+export const REMOVE_TIME = 'REMOVE_TIME';
 
 export const TIMER_INTERVAL = 25;
 export const SPACEBAR_KEYCODE = 32;

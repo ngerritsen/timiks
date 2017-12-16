@@ -4,38 +4,45 @@ import styled from 'styled-components';
 
 import Time from './Time';
 
-const TimeBoard = ({ times, average }) => {
+const TimeBoard = ({ times, average, removeTime }) => {
   return (
-    <TimeList>
-      {times.map(({ ms, best }, index) => (
-        <TimeRow key={index}>
-          <TimeIndex>{index + 1}.</TimeIndex>
-          <Time ms={ms}/>
-          {(best && times.length > 1) && <TimeInfo>👍</TimeInfo>}
-        </TimeRow>
-      ))}
-      {
-        times.length > 0 &&
-        <TimeRow>
-          <TimeIndex></TimeIndex>
-          <strong><Time ms={average}/></strong>
-          <TimeInfo>(avg.)</TimeInfo>
-        </TimeRow>
-      }
-    </TimeList>
+    <TimeBoardTable>
+      <tbody>
+        {times.map(({ ms, id, best }, index) => (
+          <tr key={index}>
+            <TimeIndexCell>{index + 1}.</TimeIndexCell>
+            <TimeBoardCell>
+              <Time ms={ms}/>
+              {(best && times.length > 1) && <TimeInfo>👍</TimeInfo>}
+            </TimeBoardCell>
+            <TimeActionCell onClick={() => removeTime(id)}>❌</TimeActionCell>
+          </tr>
+        ))}
+        {
+          times.length > 0 &&
+          <tr>
+            <TimeIndexCell></TimeIndexCell>
+            <TimeBoardCell>
+              <strong><Time ms={average}/></strong>
+              <TimeInfo>(avg.)</TimeInfo>
+            </TimeBoardCell>
+            <TimeActionCell/>
+          </tr>
+        }
+      </tbody>
+    </TimeBoardTable>
   )
 };
 
 TimeBoard.propTypes = {
+  average: PropTypes.number.isRequired,
   times: PropTypes.arrayOf(PropTypes.object).isRequired,
-  average: PropTypes.number.isRequired
+  removeTime: PropTypes.func.isRequired
 };
 
-const TimeList = styled.ul`
-  list-style: none;
-  display: block;
-  padding: 0;
-  margin: 0;
+const TimeBoardTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
 `;
 
 const TimeInfo = styled.small`
@@ -43,16 +50,28 @@ const TimeInfo = styled.small`
   color: ${props => props.theme.colors.subtleFg};
 `;
 
-const TimeRow = styled.li`
+const TimeBoardCell = styled.td`
+  font-size: 1.8rem;
   padding: ${props => props.theme.sizes.xs} 0;
   border-bottom: 1px solid ${props => props.theme.colors.grey};
-  font-size: 1.8rem;
 `;
 
-const TimeIndex = styled.span`
-  display: inline-block;
-  width: 1.5em;
+const TimeIndexCell = TimeBoardCell.extend`
+  width: 2em;
   color: ${props => props.theme.colors.subtleFg};
+`;
+
+const TimeActionCell = TimeBoardCell.extend`
+  font-size: 1rem;
+  width: 2em;
+  opacity: 0.75;
+  padding-left: ${props => props.theme.sizes.xxs};
+  padding-right: ${props => props.theme.sizes.xxs};
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
 `;
 
 export default TimeBoard;

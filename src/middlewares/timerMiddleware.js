@@ -1,3 +1,5 @@
+import shortid from 'shortid';
+
 import { START_TIMER, TIMER_INTERVAL, STOP_TIMER } from '../constants';
 import { incrementTime, saveTime } from '../actions';
 
@@ -15,7 +17,7 @@ const timerMiddleware = store => next => {
         const { timer, scramble } = store.getState();
 
         clearInterval(timerInterval);
-        store.dispatch(saveTime(timer.time, new Date().toISOString(), scramble))
+        store.dispatch(saveTime(shortid.generate(), timer.time, new Date().toISOString(), scramble))
         break;
       }
     }

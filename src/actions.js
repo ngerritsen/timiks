@@ -30,9 +30,13 @@ export const setScramble = scramble => ({
   scramble
 });
 
-export const saveTime = (ms, date, scamble) => ({
-  type: constants.SAVE_TIME,
-  ms,
-  date,
-  scamble
+export const saveTime = (id, ms, date, scamble) => {
+  const type = constants.SAVE_TIME;
+
+  return { type, id, ms, date, scamble };
+};
+
+export const removeTime = id => ({
+  type: constants.REMOVE_TIME,
+  id
 });
