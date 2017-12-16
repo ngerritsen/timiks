@@ -47,15 +47,15 @@ function pickRandom(array) {
 }
 
 export function calculateAverageTime(times) {
-  const total = times.reduce((totalTimes, { time }) => totalTimes + time, 0);
+  const total = times.reduce((totalTimes, time) => totalTimes + time.ms, 0);
 
   return total / times.length;
 }
 
 export function markBestTime(times) {
-  const bestTime = Math.min(...times.map(t => t.time));
+  const bestTime = Math.min(...times.map(time => time.ms));
 
-  return times.map(t => (
-    t.time === bestTime ? { ...t, best: true } : t
+  return times.map(time => (
+    time.ms === bestTime ? { ...time, best: true } : time
   ));
 }

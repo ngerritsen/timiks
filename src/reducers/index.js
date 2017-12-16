@@ -3,9 +3,11 @@ import { combineReducers } from 'redux';
 import activationReducer from './activationReducer';
 import scrambleReducer from './scrambleReducer';
 import timerReducer from './timerReducer';
+import timesReducer from './timesReducer';
 
 export default combineReducers({
-  timer: timerReducer,
+  activation: activationReducer,
   scramble: scrambleReducer,
-  activation: activationReducer
+  timer: timerReducer,
+  times: timesReducer
 });

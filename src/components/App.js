@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 import TimerContainer from '../containers/TimerContainer';
-import TimeBoard from './TimeBoard';
+import TimeBoardContainer from '../containers/TimeBoardContainer';
 import Section from './Section';
 
 const App = () => (
@@ -10,7 +10,7 @@ const App = () => (
     <Title>Timiks</Title>
     <TimerContainer/>
     <Section>
-      <TimeBoard/>
+      <TimeBoardContainer/>
     </Section>
   </Container>
 )

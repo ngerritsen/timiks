@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
 import Time from './Time';
-import { calculateAverageTime, markBestTime } from '../helpers';
 
-const Timeboard = ({ times, average }) => {
+const TimeBoard = ({ times, average }) => {
   return (
     <TimeList>
-      {times.map(({ time, best }, index) => (
+      {times.map(({ ms, best }, index) => (
         <TimeRow key={index}>
           <TimeIndex>{index + 1}.</TimeIndex>
-          <Time ms={time}/>
+          <Time ms={ms}/>
           {(best && times.length > 1) && <TimeInfo>👍</TimeInfo>}
         </TimeRow>
       ))}
@@ -28,7 +26,7 @@ const Timeboard = ({ times, average }) => {
   )
 };
 
-Timeboard.propTypes = {
+TimeBoard.propTypes = {
   times: PropTypes.arrayOf(PropTypes.object).isRequired,
   average: PropTypes.number.isRequired
 };
@@ -57,11 +55,4 @@ const TimeIndex = styled.span`
   color: ${props => props.theme.colors.subtleFg};
 `;
 
-function mapStateToProps(state) {
-  return {
-    times: markBestTime(state.timer.times),
-    average: calculateAverageTime(state.timer.times)
-  };
-}
-
-export default connect(mapStateToProps)(Timeboard);
+export default TimeBoard;

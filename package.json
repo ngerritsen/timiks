@@ -31,8 +31,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "styled-components": "^2.2.4",
-    "styled-components-grid": "^1.0.0-preview.15"
+    "styled-components": "^2.2.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

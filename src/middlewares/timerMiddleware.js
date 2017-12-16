@@ -1,19 +1,23 @@
 import { START_TIMER, TIMER_INTERVAL, STOP_TIMER } from '../constants';
-import { incrementTime } from '../actions';
+import { incrementTime, saveTime } from '../actions';
 
 const timerMiddleware = store => next => {
-  let timer = null;
+  let timerInterval = null;
 
   const tick = () => store.dispatch(incrementTime(TIMER_INTERVAL));
 
   return action => {
     switch (action.type) {
       case START_TIMER:
-        timer = setInterval(tick, TIMER_INTERVAL);
+        timerInterval = setInterval(tick, TIMER_INTERVAL);
         break;
-      case STOP_TIMER:
-        clearInterval(timer);
+      case STOP_TIMER: {
+        const { timer, scramble } = store.getState();
+
+        clearInterval(timerInterval);
+        store.dispatch(saveTime(timer.time, new Date().toISOString(), scramble))
         break;
+      }
     }
 
     return next(action);

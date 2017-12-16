@@ -29,3 +29,10 @@ export const setScramble = scramble => ({
   type: constants.SET_SCRAMBLE,
   scramble
 });
+
+export const saveTime = (ms, date, scamble) => ({
+  type: constants.SAVE_TIME,
+  ms,
+  date,
+  scamble
+});
