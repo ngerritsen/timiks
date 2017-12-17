@@ -1,11 +1,10 @@
 import { SPACEBAR_KEYCODE } from '../constants';
-
 import { resetTime, stopTimer, startTimer, prepareActivation, fireActivation } from '../actions';
 
 const activationMiddleware = store => next => {
   const { dispatch, getState } = store;
 
-  onSpacebarPress(() => {
+  onSpacebarPress(store, () => {
     if (getState().timer.stopped) {
       dispatch(resetTime());
       dispatch(prepareActivation());
@@ -15,7 +14,7 @@ const activationMiddleware = store => next => {
     dispatch(stopTimer());
   });
 
-  onSpacebarRelease(() => {
+  onSpacebarRelease(store, () => {
     const { timer, activation } = getState();
 
     if (timer.stopped && activation.preparing) {
@@ -27,26 +26,27 @@ const activationMiddleware = store => next => {
   return action => next(action);
 }
 
-function onSpacebarPress(callback) {
+function onSpacebarPress(store, callback) {
   window.addEventListener('keydown', (event) => {
-    if (isActivationSpacebarEvent(event)) {
+    if (isActivationSpacebarEvent(store, event)) {
       event.preventDefault();
       callback();
     }
   });
 }
 
-function onSpacebarRelease(callback) {
+function onSpacebarRelease(store, callback) {
   window.addEventListener('keyup', (event) => {
-    if (isActivationSpacebarEvent(event)) {
+    if (isActivationSpacebarEvent(store, event)) {
       event.preventDefault();
       callback();
     }
   });
 }
 
-function isActivationSpacebarEvent(event) {
+function isActivationSpacebarEvent(store, event) {
   return (
+    !store.getState().times.isModalOpen &&
     event.keyCode === SPACEBAR_KEYCODE &&
     !event.repeat
   );

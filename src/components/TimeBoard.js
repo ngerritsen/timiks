@@ -1,77 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-import Time from './Time';
+import Section from './Section';
+import TimeBoardActionsContainer from '../containers/TimeBoardActionsContainer';
+import TimeTableContainer from '../containers/TimeTableContainer';
 
-const TimeBoard = ({ times, average, removeTime }) => {
+const TimeBoard = () => {
   return (
-    <TimeBoardTable>
-      <tbody>
-        {times.map(({ ms, id, best }, index) => (
-          <tr key={index}>
-            <TimeIndexCell>{index + 1}.</TimeIndexCell>
-            <TimeBoardCell>
-              <Time ms={ms}/>
-              {(best && times.length > 1) && <TimeInfo>👍</TimeInfo>}
-            </TimeBoardCell>
-            <TimeActionCell onClick={() => removeTime(id)}>❌</TimeActionCell>
-          </tr>
-        ))}
-        {
-          times.length > 0 &&
-          <tr>
-            <TimeIndexCell></TimeIndexCell>
-            <TimeBoardCell>
-              <strong><Time ms={average}/></strong>
-              <TimeInfo>(avg.)</TimeInfo>
-            </TimeBoardCell>
-            <TimeActionCell/>
-          </tr>
-        }
-      </tbody>
-    </TimeBoardTable>
-  )
+    <div>
+      <Section>
+        <TimeTableContainer/>
+      </Section>
+
+      <Section>
+        <TimeBoardActionsContainer/>
+      </Section>
+    </div>
+  );
 };
-
-TimeBoard.propTypes = {
-  average: PropTypes.number.isRequired,
-  times: PropTypes.arrayOf(PropTypes.object).isRequired,
-  removeTime: PropTypes.func.isRequired
-};
-
-const TimeBoardTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const TimeInfo = styled.small`
-  padding-left: 0.5em;
-  color: ${props => props.theme.colors.subtleFg};
-`;
-
-const TimeBoardCell = styled.td`
-  font-size: 1.8rem;
-  padding: ${props => props.theme.sizes.xs} 0;
-  border-bottom: 1px solid ${props => props.theme.colors.grey};
-`;
-
-const TimeIndexCell = TimeBoardCell.extend`
-  width: 2em;
-  color: ${props => props.theme.colors.subtleFg};
-`;
-
-const TimeActionCell = TimeBoardCell.extend`
-  font-size: 1rem;
-  width: 2em;
-  opacity: 0.75;
-  padding-left: ${props => props.theme.sizes.xxs};
-  padding-right: ${props => props.theme.sizes.xxs};
-
-  &:hover {
-    cursor: pointer;
-    opacity: 1;
-  }
-`;
 
 export default TimeBoard;

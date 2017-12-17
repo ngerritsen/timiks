@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { formatTime } from '../helpers';
+import { formatTime } from '../helpers/formatting';
 
 const Time = ({ ms, fontSize = 1.8 }) => {
   return (

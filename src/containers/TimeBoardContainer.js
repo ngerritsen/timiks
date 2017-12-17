@@ -1,19 +1,19 @@
+import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import TimeBoard from '../components/TimeBoard';
-import { removeTime } from '../actions';
-import { calculateAverageTime, markBestTime } from '../helpers';
+
+const TimeBoardContainer = ({ hasTimes }) => hasTimes ? <TimeBoard/> : null;
+
+TimeBoardContainer.propTypes = {
+  hasTimes: PropTypes.bool.isRequired
+};
 
 function mapStateToProps(state) {
   return {
-    times: markBestTime(state.times),
-    average: calculateAverageTime(state.times)
+    hasTimes: state.times.times.length > 0
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ removeTime }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimeBoard);
+export default connect(mapStateToProps)(TimeBoardContainer);

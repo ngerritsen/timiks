@@ -9,11 +9,11 @@ const Activation = ({ stopped, preparing, startTimer, stopTimer, resetTime }) =>
     {(() => {
       if (stopped) {
         return preparing ?
-          <Button>Ready</Button> :
-          <Button onClick={() => (resetTime() && startTimer())}>Start</Button>
+          <Button big primary>Ready</Button> :
+          <Button big primary onClick={() => (resetTime() && startTimer())}>Start</Button>
       }
 
-      return <Button onClick={stopTimer}>Stop</Button>
+      return <Button big primary onClick={stopTimer}>Stop</Button>
     })()}
 
     <Explain>
@@ -37,17 +37,16 @@ const Explain = styled.p`
   color: ${props => props.theme.colors.subtleFg};
   font-size: 1.6rem;
   text-align: center;
-  margin-top: ${props => props.theme.sizes.xxs};
+  margin: ${props => props.theme.sizes.sm} 0 0;
 `;
 
 const Spacebar = styled.span`
   position: relative;
-  top: 0.1rem;
   display: inline-block;
   border-radius: 0.3rem;
-  margin: ${props => props.theme.sizes.sm} 0 0;
+  margin: 0 ${props => props.theme.sizes.xxs};
   border: 2px solid ${props => props.theme.colors.subtleFg};
-  height: 0.8rem;
+  height: 1rem;
   width: 4rem;
 `;
 

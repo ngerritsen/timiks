@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { obfuscateScramble } from '../helpers';
+import { obfuscateScramble } from '../helpers/scramble';
 import Timer from '../components/Timer';
 
 function mapStateToProps ({ timer, scramble }) {

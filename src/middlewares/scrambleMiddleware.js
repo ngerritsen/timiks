@@ -1,6 +1,6 @@
 import { STOP_TIMER } from '../constants';
 import { setScramble } from '../actions';
-import { generateScramble } from '../helpers';
+import { generateScramble } from '../helpers/scramble';
 
 const scrambleMiddleware = store => next => {
   store.dispatch(setScramble(generateScramble()));
