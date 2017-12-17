@@ -7,8 +7,11 @@ const propColorMap = {
 }
 
 const Button = styled.button.attrs({
-  color: props => Object.keys(props)
-    .reduce((color, key) => (propColorMap[key] || color), 'blue'),
+  color: props => (
+    (props.disabled && 'grey') ||
+    Object.keys(props)
+      .reduce((color, key) => (propColorMap[key] || color), 'blue')
+  ),
   fontSize: props => props.big ? '1.8rem': '1.4rem',
   height: props => props.big ? '6.2rem' : '3.6rem',
   sidepadding: props => props.big ? 'lg' : 'md',
@@ -29,8 +32,8 @@ const Button = styled.button.attrs({
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: ${props => lighten(0.03, props.theme.colors[props.color])};
-    cursor: pointer;
+    background-color: ${props => lighten(props.disabled ? 0 : 0.03, props.theme.colors[props.color])};
+    cursor: ${props => props.disabled ? 'default' : 'pointer'};
   }
 `;
 

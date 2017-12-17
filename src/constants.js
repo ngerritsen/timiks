@@ -21,6 +21,7 @@ export const OPEN_SAVE_TIMES_MODAL = 'OPEN_SAVE_TIMES_MODAL';
 export const CLOSE_SAVE_TIMES_MODAL = 'CLOSE_SAVE_TIMES_MODAL';
 export const SAVE_TIMES = 'SAVE_TIMES';
 export const LOAD_TIMES = 'LOAD_TIMES';
+export const INPUT_TIMES_TITLE = 'INPUT_TIMES_TITLE';
 
 // Timer
 export const TIMER_INTERVAL = 25;

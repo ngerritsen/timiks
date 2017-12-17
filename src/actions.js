@@ -25,3 +25,4 @@ export const openSaveTimesModal = () => ({ type: constants.OPEN_SAVE_TIMES_MODAL
 export const closeSaveTimesModal = () => ({ type: constants.CLOSE_SAVE_TIMES_MODAL });
 export const saveTimes = title => ({ type: constants.SAVE_TIMES, title });
 export const loadTimes = times => ({ type: constants.LOAD_TIMES, times });
+export const inputTimesTitle = title => ({ type: constants.INPUT_TIMES_TITLE, title });

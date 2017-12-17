@@ -3,7 +3,8 @@ import * as constants from '../constants';
 const initialState = {
   times: [],
   groups: [],
-  isModalOpen: false
+  isModalOpen: false,
+  titleInput: ''
 };
 
 export default function timesReducer(state = initialState, action) {
@@ -39,13 +40,15 @@ export default function timesReducer(state = initialState, action) {
     case constants.CLOSE_SAVE_TIMES_MODAL:
       return {
         ...state,
-        isModalOpen: false
+        isModalOpen: false,
+        titleInput: ''
       }
     case constants.SAVE_TIMES:
       return {
         ...state,
         times: [],
         isModalOpen: false,
+        titleInput: '',
         groups: [
           ...state.groups,
           {
@@ -54,6 +57,11 @@ export default function timesReducer(state = initialState, action) {
           }
         ]
       };
+    case constants.INPUT_TIMES_TITLE:
+      return {
+        ...state,
+        titleInput: action.title
+      }
     default:
       return state;
   }

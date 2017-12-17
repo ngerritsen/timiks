@@ -9,19 +9,18 @@ import Section from './Section';
 const TimeBoardActions = ({
     clearTimes,
     closeSaveTimesModal,
+    inputTimesTitle,
     isModalOpen,
     openSaveTimesModal,
-    saveTimes
+    saveTimes,
+    titleInput
 }) => {
-  let titleInputEl;
-
+  const canSubmit = titleInput.trim().length > 0;
   const onSubmit = event => {
     event.preventDefault();
 
-    const title = titleInputEl.value;
-
-    if (title && title.trim().length > 0) {
-      saveTimes(title);
+    if (canSubmit) {
+      saveTimes(titleInput);
     }
   }
 
@@ -32,12 +31,17 @@ const TimeBoardActions = ({
         <Modal isOpen={isModalOpen} title="Save times">
           <form onSubmit={onSubmit}>
             <Section>
-              <TitleInput placeholder="Title" type="text" innerRef={el => titleInputEl = el}/>
+              <TitleInput
+                value={titleInput}
+                placeholder="Title"
+                type="text"
+                onInput={e => inputTimesTitle(e.target.value)}
+              />
             </Section>
 
             <ButtonDuo>
               <ButtonDuoItem>
-                <Button type="submit">Save</Button>
+                <Button disabled={!canSubmit} type="submit">Save</Button>
               </ButtonDuoItem>
               <ButtonDuoItem>
                 <Button danger type="button" onClick={closeSaveTimesModal}>Cancel</Button>
@@ -56,9 +60,11 @@ const TimeBoardActions = ({
 TimeBoardActions.propTypes = {
   clearTimes: PropTypes.func.isRequired,
   closeSaveTimesModal: PropTypes.func.isRequired,
+  inputTimesTitle: PropTypes.func.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
   openSaveTimesModal: PropTypes.func.isRequired,
-  saveTimes: PropTypes.func.isRequired
+  saveTimes: PropTypes.func.isRequired,
+  titleInput: PropTypes.string.isRequired
 }
 
 const ButtonDuo = styled.div`
