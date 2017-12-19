@@ -20,14 +20,6 @@ export function obfuscateScramble(scramble) {
   return scramble.map(move => generateString(move.length, constants.SCRAMBLE_OBFUSCATION_CHAR));
 }
 
-export function serializeScramble(scramble) {
-  return scramble.join(constants.SCRAMBLE_DELIMITER);
-}
-
-export function deserializeScramble(rawScramble) {
-  return rawScramble.split(constants.SCRAMBLE_DELIMITER);
-}
-
 function generateString(amount, char) {
   let string = '';
 

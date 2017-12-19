@@ -7,8 +7,8 @@ import { calculateAverageTime, markBestTime } from '../helpers/times';
 
 function mapStateToProps(state) {
   return {
-    times: markBestTime(state.times.times),
-    average: calculateAverageTime(state.times.times)
+    times: markBestTime(state.times.current),
+    average: calculateAverageTime(state.times.current)
   };
 }
 

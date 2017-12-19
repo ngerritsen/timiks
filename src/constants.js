@@ -34,5 +34,5 @@ export const SCRAMBLE_DIRECTIONS = ['U', 'R', 'D', 'L', 'F', 'B'];
 export const SCRAMBLE_DELIMITER = ' ';
 
 // Times
-export const TIMES_STORAGE_KEY = 'times';
-export const GROUP_STORAGE_KEY = 'groups';
+export const CURRENT_TIMES_STORAGE_KEY = 'currentTimes';
+export const ARCHIVED_TIMES_STORAGE_KEY = 'archivedTimes';

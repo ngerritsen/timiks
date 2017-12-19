@@ -11,4 +11,3 @@ export function markBestTime(times) {
     time.ms === bestTime ? { ...time, best: true } : time
   ));
 }
-

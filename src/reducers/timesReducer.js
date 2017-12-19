@@ -1,8 +1,8 @@
 import * as constants from '../constants';
 
 const initialState = {
-  times: [],
-  groups: [],
+  current: [],
+  archive: [],
   isModalOpen: false,
   titleInput: ''
 };
@@ -14,23 +14,24 @@ export default function timesReducer(state = initialState, action) {
 
       return {
         ...state,
-        times: [...state.times, { id, ms, date, scramble }]
+        current: [...state.current, { id, ms, date, scramble }]
       };
     }
     case constants.REMOVE_TIME:
       return {
         ...state,
-        times: state.times.filter(time => time.id !== action.id)
+        current: state.current.filter(time => time.id !== action.id)
       };
     case constants.CLEAR_TIMES:
       return {
         ...state,
-        times: []
+        current: []
       };
     case constants.LOAD_TIMES:
       return {
         ...state,
-        times: action.times
+        current: action.current,
+        archive: action.archive
       };
     case constants.OPEN_SAVE_TIMES_MODAL:
       return {
@@ -46,14 +47,14 @@ export default function timesReducer(state = initialState, action) {
     case constants.SAVE_TIMES:
       return {
         ...state,
-        times: [],
+        current: [],
         isModalOpen: false,
         titleInput: '',
-        groups: [
-          ...state.groups,
+        archive: [
+          ...state.archive,
           {
             title: action.title,
-            times: state.times
+            times: state.current
           }
         ]
       };

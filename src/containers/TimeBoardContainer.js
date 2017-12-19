@@ -12,7 +12,7 @@ TimeBoardContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    hasTimes: state.times.times.length > 0
+    hasTimes: state.times.current.length > 0
   };
 }
 

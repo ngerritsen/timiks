@@ -5,17 +5,22 @@ import * as timesRepository from '../repositories/timesRepository';
 const storeActions = [SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, SAVE_TIMES];
 
 const timesMiddleware = store => next => {
-  const times = timesRepository.getAll();
+  const current = timesRepository.getCurrent();
+  const archive = timesRepository.getArchive();
 
-  if (times) {
-    store.dispatch(loadTimes(times));
-  }
+  store.dispatch(loadTimes(current, archive));
 
   return action => {
     const result = next(action);
 
     if (storeActions.includes(action.type)) {
-      timesRepository.store(store.getState().times.times);
+      const { current, archive } = store.getState().times;
+
+      timesRepository.storeCurrent(current);
+
+      if (action.type === SAVE_TIMES) {
+        timesRepository.storeArchive(archive);
+      }
     }
 
     return result;
