@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/ngerritsen/timiks#readme",
   "dependencies": {
+    "nosleep.js": "^0.7.0",
     "polished": "^1.9.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
