@@ -2,7 +2,7 @@ import * as constants from '../constants/app';
 import puzzles from '../constants/puzzles';
 
 export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
-  const { directions, length } = puzzles.find(({ name }) => name === puzzle).scrambleOptions;
+  const { directions, length, extraLayers } = puzzles.find(({ name }) => name === puzzle).scrambleOptions;
   let moves = [];
 
   for (let i = 0; i < length; i++) {
@@ -10,7 +10,16 @@ export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
     const direction = pickRandom(directions.filter(d => d !== previousDirection));
     const twice = pickRandom([false, false, true]);
     const reversed = twice ? false : randomBoolean();
-    const move = direction + (twice ? '2' : '') + (reversed ? '\'' : '');
+    const outerLayers = extraLayers === 0 ? false : randomBoolean();
+    const threeOuterLayers = (outerLayers && extraLayers > 1) ? randomBoolean(): false;
+
+    const move = (
+      (threeOuterLayers ? '3' : '') +
+      direction +
+      (outerLayers ? 'w' : '') +
+      (twice ? '2' : '') +
+      (reversed ? '\'' : '')
+    );
 
     moves = [...moves, move];
   }
