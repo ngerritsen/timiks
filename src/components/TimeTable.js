@@ -9,7 +9,7 @@ import Time from './Time';
 
 const { colors: { green, red } } = theme;
 
-const TimeTable = ({ average, removeTime, times }) => (
+const TimeTable = ({ average, averageOfBestThree, removeTime, times }) => (
   <TimeBoardTable>
     <tbody>
       {times.map(({ ms, id, best }, index) => (
@@ -35,12 +35,24 @@ const TimeTable = ({ average, removeTime, times }) => (
           </TimeBoardCell>
           <TimeActionCell/>
         </tr>
+        {
+          times.length >= 5 &&
+          <tr>
+            <TimeIndexCell></TimeIndexCell>
+            <TimeBoardCell>
+              <strong><Time ms={averageOfBestThree}/></strong>
+              <TimeInfo>(avg. best 3)</TimeInfo>
+            </TimeBoardCell>
+            <TimeActionCell/>
+          </tr>
+        }
     </tbody>
   </TimeBoardTable>
 )
 
 TimeTable.propTypes = {
   average: PropTypes.number.isRequired,
+  averageOfBestThree: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(PropTypes.object).isRequired
 };

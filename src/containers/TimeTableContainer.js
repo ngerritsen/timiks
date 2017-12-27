@@ -3,12 +3,13 @@ import { bindActionCreators } from 'redux';
 
 import TimeTable from '../components/TimeTable';
 import { removeTime } from '../actions';
-import { calculateAverageTime, markBestTime } from '../helpers/times';
+import { calculateAverageTime, markBestTime, calculateAverageTimeOfBestThree } from '../helpers/times';
 
 function mapStateToProps(state) {
   return {
     times: markBestTime(state.times.current),
-    average: calculateAverageTime(state.times.current)
+    average: calculateAverageTime(state.times.current),
+    averageOfBestThree: calculateAverageTimeOfBestThree(state.times.current)
   };
 }
 

@@ -4,6 +4,14 @@ export function calculateAverageTime(times) {
   return total / times.length;
 }
 
+export function calculateAverageTimeOfBestThree(times) {
+  const bestThreeTimes = times
+    .sort((a, b) => a.ms - b.ms)
+    .slice(0, 3);
+
+  return calculateAverageTime(bestThreeTimes);
+}
+
 export function markBestTime(times) {
   const bestTime = Math.min(...times.map(time => time.ms));
 
