@@ -1,17 +1,25 @@
-import { STOP_TIMER } from '../constants';
+import { STOP_TIMER, CHANGE_PUZZLE } from '../constants/actionTypes';
 import { setScramble } from '../actions';
 import { generateScramble } from '../helpers/scramble';
 
 const scrambleMiddleware = store => next => {
-  store.dispatch(setScramble(generateScramble()));
+  dispatchScramble(store)
 
   return action => {
-    if (action.type === STOP_TIMER) {
-      store.dispatch(setScramble(generateScramble()));
+    const result = next(action);
+
+    if ([STOP_TIMER, CHANGE_PUZZLE].includes(action.type)) {
+      dispatchScramble(store)
     }
 
-    return next(action);
+    return result;
   }
+}
+
+function dispatchScramble(store) {
+  const scramble = generateScramble(store.getState().settings.puzzle);
+
+  store.dispatch(setScramble(scramble));
 }
 
 export default scrambleMiddleware;

@@ -16,6 +16,7 @@ export default {
     fg: BLACK,
     subtleFg: lighten(0.3, BLACK),
     grey: darken(0.25, WHITE),
+    green: '#28a745',
     primary: PRIMARY_COLOR,
     blue: '#0366d6',
     red: '#d73a49'

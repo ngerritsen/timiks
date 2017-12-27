@@ -1,4 +1,4 @@
-import { SPACEBAR_KEYCODE } from '../constants';
+import { SPACEBAR_KEYCODE } from '../constants/app';
 import { resetTime, stopTimer, startTimer, prepareActivation, fireActivation } from '../actions';
 
 const activationMiddleware = store => next => {

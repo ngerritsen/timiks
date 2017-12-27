@@ -1,4 +1,4 @@
-import { PREPARE_ACTIVATION, FIRE_ACTIVATION } from '../constants';
+import { PREPARE_ACTIVATION, FIRE_ACTIVATION } from '../constants/actionTypes';
 
 const initialState = {
   preparing: false

@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 
-import { START_TIMER, TIMER_INTERVAL, STOP_TIMER } from '../constants';
+import { START_TIMER, STOP_TIMER } from '../constants/actionTypes';
+import { TIMER_INTERVAL } from '../constants/app';
 import { incrementTime, saveTime } from '../actions';
 
 const timerMiddleware = store => next => {

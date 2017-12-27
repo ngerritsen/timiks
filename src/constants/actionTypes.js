@@ -1,0 +1,23 @@
+export const START_TIMER = 'START_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
+
+export const INCREMENT_TIME = 'INCREMENT_TIME';
+export const RESET_TIME = 'RESET_TIME';
+
+export const PREPARE_ACTIVATION = 'PREPARE_ACTIVATION';
+export const FIRE_ACTIVATION = 'FIRE_ACTIVATION';
+
+export const SET_SCRAMBLE = 'SET_SCRAMBLE';
+
+export const SAVE_TIME = 'SAVE_TIME';
+export const REMOVE_TIME = 'REMOVE_TIME';
+export const CLEAR_TIMES = 'CLEAR_TIMES';
+export const OPEN_SAVE_TIMES_MODAL = 'OPEN_SAVE_TIMES_MODAL';
+export const CLOSE_SAVE_TIMES_MODAL = 'CLOSE_SAVE_TIMES_MODAL';
+export const SAVE_TIMES = 'SAVE_TIMES';
+export const LOAD_TIMES = 'LOAD_TIMES';
+export const INPUT_TIMES_TITLE = 'INPUT_TIMES_TITLE';
+
+export const OPEN_SETTINGS = 'OPEN_SETTINGS';
+export const CLOSE_SETTINGS = 'CLOSE_SETTINGS';
+export const CHANGE_PUZZLE = ' CHANGE_PUZZLE';

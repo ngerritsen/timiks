@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/ngerritsen/timiks#readme",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.0",
+    "@fortawesome/fontawesome-pro-solid": "^5.0.2",
+    "@fortawesome/react-fontawesome": "0.0.17",
     "nosleep.js": "^0.7.0",
     "polished": "^1.9.0",
     "prop-types": "^15.6.0",

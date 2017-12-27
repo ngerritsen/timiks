@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 
-import { INCREMENT_TIME, APP_ROOT_SELECTOR } from './constants';
+import { APP_ROOT_SELECTOR } from './constants/app';
+import { INCREMENT_TIME } from './constants/actionTypes';
 import App from './components/App';
 import reducer from './reducers';
 import middlewares from './middlewares';

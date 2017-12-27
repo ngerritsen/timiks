@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
   current: [],
@@ -9,7 +9,7 @@ const initialState = {
 
 export default function timesReducer(state = initialState, action) {
   switch (action.type) {
-    case constants.SAVE_TIME: {
+    case actionTypes.SAVE_TIME: {
       const { id, ms, date, scramble } = action;
 
       return {
@@ -17,34 +17,34 @@ export default function timesReducer(state = initialState, action) {
         current: [...state.current, { id, ms, date, scramble }]
       };
     }
-    case constants.REMOVE_TIME:
+    case actionTypes.REMOVE_TIME:
       return {
         ...state,
         current: state.current.filter(time => time.id !== action.id)
       };
-    case constants.CLEAR_TIMES:
+    case actionTypes.CLEAR_TIMES:
       return {
         ...state,
         current: []
       };
-    case constants.LOAD_TIMES:
+    case actionTypes.LOAD_TIMES:
       return {
         ...state,
         current: action.current,
         archive: action.archive
       };
-    case constants.OPEN_SAVE_TIMES_MODAL:
+    case actionTypes.OPEN_SAVE_TIMES_MODAL:
       return {
         ...state,
         isModalOpen: true
       }
-    case constants.CLOSE_SAVE_TIMES_MODAL:
+    case actionTypes.CLOSE_SAVE_TIMES_MODAL:
       return {
         ...state,
         isModalOpen: false,
         titleInput: ''
       }
-    case constants.SAVE_TIMES:
+    case actionTypes.SAVE_TIMES:
       return {
         ...state,
         current: [],
@@ -58,7 +58,7 @@ export default function timesReducer(state = initialState, action) {
           }
         ]
       };
-    case constants.INPUT_TIMES_TITLE:
+    case actionTypes.INPUT_TIMES_TITLE:
       return {
         ...state,
         titleInput: action.title

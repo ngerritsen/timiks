@@ -1,4 +1,4 @@
-import { SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, SAVE_TIMES } from '../constants';
+import { SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, SAVE_TIMES } from '../constants/actionTypes';
 import { loadTimes } from '../actions';
 import * as timesRepository from '../repositories/timesRepository';
 

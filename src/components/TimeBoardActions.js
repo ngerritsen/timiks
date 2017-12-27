@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import { faSave, faTrash } from '@fortawesome/fontawesome-pro-solid'
 
+import IconButton from './IconButton';
 import Button from './Button';
 import Modal from './Modal';
 import Section from './Section';
@@ -25,9 +28,18 @@ const TimeBoardActions = ({
   }
 
   return (
-    <ButtonDuo>
-      <ButtonDuoItem>
-        <Button onClick={openSaveTimesModal}>Save</Button>
+    <Toolbar>
+      <ToolbarItem>
+        <IconButton color="blue" onClick={openSaveTimesModal}>
+          <FontAwesome icon={faSave} />
+        </IconButton>
+      </ToolbarItem>
+
+      <ToolbarItem>
+        <IconButton color="red" onClick={clearTimes}>
+          <FontAwesome icon={faTrash} />
+        </IconButton>
+
         <Modal isOpen={isModalOpen} title="Save times">
           <form onSubmit={onSubmit}>
             <Section>
@@ -49,11 +61,8 @@ const TimeBoardActions = ({
             </ButtonDuo>
           </form>
         </Modal>
-      </ButtonDuoItem>
-      <ButtonDuoItem>
-        <Button danger onClick={clearTimes}>Clear</Button>
-      </ButtonDuoItem>
-    </ButtonDuo>
+      </ToolbarItem>
+    </Toolbar>
   );
 };
 
@@ -66,6 +75,16 @@ TimeBoardActions.propTypes = {
   saveTimes: PropTypes.func.isRequired,
   titleInput: PropTypes.string.isRequired
 }
+
+const Toolbar = styled.p`
+  text-align: right;
+  font-size: 1.75rem;
+  margin: 0;
+`;
+
+const ToolbarItem = styled.span`
+  margin-left: ${props => props.theme.sizes.sm};
+`;
 
 const ButtonDuo = styled.div`
   display: flex;

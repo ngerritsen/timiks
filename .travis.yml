@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - "8"
 script:
+  - npm config set @fortawesome:registry https://npm.fontawesome.com/$FONTAWESOME_NPM_TOKEN
   - npm run test
   - npm run build
 after_success:

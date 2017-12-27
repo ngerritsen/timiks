@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+import * as constants from '../constants/app';
 import { createTime } from '../helpers/time';
 
 export function getCurrent() {

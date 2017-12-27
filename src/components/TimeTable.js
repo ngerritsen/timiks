@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import { faTimes, faThumbsUp } from '@fortawesome/fontawesome-pro-solid';
 
+import theme from '../theme';
 import Time from './Time';
+
+const { colors: { green, red } } = theme;
 
 const TimeTable = ({ average, removeTime, times }) => (
   <TimeBoardTable>
@@ -12,9 +17,14 @@ const TimeTable = ({ average, removeTime, times }) => (
           <TimeIndexCell>{index + 1}.</TimeIndexCell>
           <TimeBoardCell>
             <Time ms={ms}/>
-            {(best && times.length > 1) && <TimeInfo>👍</TimeInfo>}
+            {
+              (best && times.length > 1) &&
+              <TimeInfo><FontAwesome style={{ color: green }} icon={faThumbsUp}/></TimeInfo>
+            }
           </TimeBoardCell>
-          <TimeActionCell onClick={() => removeTime(id)}>❌</TimeActionCell>
+          <TimeActionCell onClick={() => removeTime(id)}>
+            <FontAwesome style={{ color: red }} icon={faTimes} size="lg" />
+          </TimeActionCell>
         </tr>
       ))}
         <tr>
@@ -41,7 +51,7 @@ const TimeBoardTable = styled.table`
 `;
 
 const TimeInfo = styled.small`
-  padding-left: 0.5em;
+  padding-left: ${props => props.theme.sizes.xs};
   color: ${props => props.theme.colors.subtleFg};
 `;
 

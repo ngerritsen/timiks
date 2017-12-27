@@ -1,11 +1,13 @@
-import * as constants from '../constants';
+import * as constants from '../constants/app';
+import puzzles from '../constants/puzzles';
 
-export function generateScramble() {
+export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
+  const { directions, length } = puzzles.find(({ name }) => name === puzzle).scrambleOptions;
   let moves = [];
 
-  for (let i = 0; i < constants.SCRAMBLE_LENGTH; i++) {
+  for (let i = 0; i < length; i++) {
     const previousDirection = (moves[moves.length - 1] || '').slice(0, 1);
-    const direction = pickRandom(constants.SCRAMBLE_DIRECTIONS.filter(d => d !== previousDirection));
+    const direction = pickRandom(directions.filter(d => d !== previousDirection));
     const twice = pickRandom([false, false, true]);
     const reversed = twice ? false : randomBoolean();
     const move = direction + (twice ? '2' : '') + (reversed ? '\'' : '');
