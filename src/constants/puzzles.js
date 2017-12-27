@@ -1,16 +1,30 @@
-const FULL_CUBE_DIRECTIONS = ['U', 'R', 'D', 'L', 'F', 'B'];
+const UP = 'U';
+const RIGHT = 'R';
+const DOWN = 'D';
+const LEFT = 'L';
+const FRONT = 'F';
+const BACK = 'B';
+
+const FULL_CUBE_DIRECTIONS = [UP, RIGHT, DOWN, LEFT, FRONT, BACK];
+const DODECAHEDRON_DIRECTIONS = [RIGHT, DOWN];
+const DODECAHEDRON_END_DIRECTION = UP;
+
+const CUBE = 'CUBE';
+const DODECAHEDRON = 'DODECAHEDRON';
 
 const puzzles = [
   {
     name: '2x2x2',
+    type: CUBE,
     scrambleOptions: {
-      directions: ['U', 'R', 'F'],
+      directions: [UP, RIGHT, FRONT],
       extraLayers: 0,
       length: 9
     }
   },
   {
     name: '3x3x3',
+    type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 0,
@@ -19,6 +33,7 @@ const puzzles = [
   },
   {
     name: '4x4x4',
+    type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 1,
@@ -27,6 +42,7 @@ const puzzles = [
   },
   {
     name: '5x5x5',
+    type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 1,
@@ -35,6 +51,7 @@ const puzzles = [
   },
   {
     name: '6x6x6',
+    type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 2,
@@ -43,6 +60,7 @@ const puzzles = [
   },
   {
     name: '7x7x7',
+    type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 2,
@@ -50,14 +68,37 @@ const puzzles = [
     }
   },
   {
-    name: 'skewb',
+    name: 'megaminx',
+    type: DODECAHEDRON,
     scrambleOptions: {
-      directions: ['R', 'L', 'F', 'B'],
+      directions: DODECAHEDRON_DIRECTIONS,
+      endDirection: DODECAHEDRON_END_DIRECTION,
+      lineLength: 11,
+      lines: 7
+    }
+  },
+  {
+    name: 'kilominx',
+    type: DODECAHEDRON,
+    scrambleOptions: {
+      directions: DODECAHEDRON_DIRECTIONS,
+      endDirection: DODECAHEDRON_END_DIRECTION,
+      lineLength: 11,
+      lines: 7
+    }
+  },
+  {
+    name: 'skewb',
+    type: CUBE,
+    scrambleOptions: {
+      directions: [RIGHT, LEFT, FRONT, BACK],
       extraLayers: 0,
       length: 25
     }
   }
 ];
 
+const DEFAULT_PUZZLE = puzzles[1];
+
 export default puzzles;
-export const DEFAULT_PUZZLE = puzzles[1];
+export { DODECAHEDRON, CUBE, DEFAULT_PUZZLE };

@@ -14,7 +14,9 @@ const Timer = ({ scramble, time }) => (
       </TimerTime>
     </Section>
     <Section>
-      <Scramble>{scramble.join(' ')}</Scramble>
+      <Scramble>
+        {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
+      </Scramble>
     </Section>
     <Section>
       <ActivationContainer/>
@@ -41,6 +43,16 @@ const Scramble = styled.p`
   margin: 0;
   font-weight: bold;
   border-radius: 3px;
+`;
+
+const Move = styled.span`
+  display: inline-block;
+  whitespace: nowrap;
+  margin-right: 0.5em;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 export default Timer

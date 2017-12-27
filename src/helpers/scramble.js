@@ -1,16 +1,30 @@
 import * as constants from '../constants/app';
-import puzzles from '../constants/puzzles';
+import puzzles, { DODECAHEDRON } from '../constants/puzzles';
 
 export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
-  const { directions, length, extraLayers } = puzzles.find(({ name }) => name === puzzle).scrambleOptions;
+  const { scrambleOptions, type } = getPuzzle(puzzle);
+
+  if (type === DODECAHEDRON) {
+    return createDodecahedronScramble(scrambleOptions);
+  }
+
+  return createCubeScramble(scrambleOptions);
+}
+
+export function obfuscateScramble(scramble) {
+  return scramble.map(move => generateString(move.length, constants.SCRAMBLE_OBFUSCATION_CHAR));
+}
+
+function createCubeScramble(scrambleOptions) {
+  const { directions, length, extraLayers } = scrambleOptions;
   let moves = [];
 
-  for (let i = 0; i < length; i++) {
+  doTimes(length, () => {
     const previousDirection = (moves[moves.length - 1] || '').slice(0, 1);
     const direction = pickRandom(directions.filter(d => d !== previousDirection));
     const twice = pickRandom([false, false, true]);
     const reversed = twice ? false : randomBoolean();
-    const outerLayers = extraLayers === 0 ? false : randomBoolean();
+    const outerLayers = extraLayers ? randomBoolean() : false;
     const threeOuterLayers = (outerLayers && extraLayers > 1) ? randomBoolean(): false;
 
     const move = (
@@ -22,13 +36,29 @@ export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
     );
 
     moves = [...moves, move];
-  }
+  });
 
   return moves;
 }
 
-export function obfuscateScramble(scramble) {
-  return scramble.map(move => generateString(move.length, constants.SCRAMBLE_OBFUSCATION_CHAR));
+function createDodecahedronScramble(scrambleOptions) {
+  const { directions, endDirection, lineLength, lines } = scrambleOptions;
+  let moves = [];
+
+  doTimes(lines, () => {
+    const endMove = endDirection + (randomBoolean() ? '\'' : '');
+
+    doTimes(lineLength - 1, () => {
+      const direction = pickRandom(directions);
+      const move = direction + (randomBoolean() ? '--' : '++');
+
+      moves = [...moves, move];
+    });
+
+    moves = [...moves, endMove]
+  });
+
+  return moves;
 }
 
 function generateString(amount, char) {
@@ -41,10 +71,20 @@ function generateString(amount, char) {
   return string;
 }
 
+function getPuzzle(puzzle) {
+  return puzzles.find(({ name }) => name === puzzle);
+}
+
 function randomBoolean() {
   return pickRandom([false, true]);
 }
 
 function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
+}
+
+function doTimes(n, callback) {
+  for (let i = 0; i < n; i++) {
+    callback(i);
+  }
 }
