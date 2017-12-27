@@ -22,7 +22,7 @@ const Settings = ({
       <FontAwesome icon={faCog} size="2x"/>
     </IconButton>
     <Modal isOpen={isOpen} title="Settings">
-      <SettingsSection>
+      <SettingsSection margin="md">
         <Label>Puzzle:</Label>
         <Select value={puzzle} onChange={event => changePuzzle(event.target.value)}>
           {puzzles.map(({ name: puzzle }) =>

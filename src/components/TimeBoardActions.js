@@ -42,7 +42,7 @@ const TimeBoardActions = ({
 
         <Modal isOpen={isModalOpen} title="Save times">
           <form onSubmit={onSubmit}>
-            <Section>
+            <Section margin="md">
               <TitleInput
                 value={titleInput}
                 placeholder="Title"

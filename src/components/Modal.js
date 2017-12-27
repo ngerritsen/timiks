@@ -68,7 +68,7 @@ const ModalBox = styled.div`
 
 const ModalTitle = styled.h2`
   font-size: 2rem;
-  margin: 0 0 ${props => props.theme.sizes.sm};
+  margin: 0 0 ${props => props.theme.sizes.md};
 `;
 
 export default Modal;
