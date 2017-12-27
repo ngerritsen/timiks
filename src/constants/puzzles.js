@@ -10,6 +10,7 @@ const DODECAHEDRON_DIRECTIONS = [RIGHT, DOWN];
 const DODECAHEDRON_END_DIRECTION = UP;
 
 const CUBE = 'CUBE';
+const TETRAHEDRON = 'TETRAHEDRON';
 const DODECAHEDRON = 'DODECAHEDRON';
 
 const puzzles = [
@@ -18,7 +19,6 @@ const puzzles = [
     type: CUBE,
     scrambleOptions: {
       directions: [UP, RIGHT, FRONT],
-      extraLayers: 0,
       length: 9
     }
   },
@@ -27,7 +27,6 @@ const puzzles = [
     type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
-      extraLayers: 0,
       length: 25
     }
   },
@@ -88,11 +87,18 @@ const puzzles = [
     }
   },
   {
+    name: 'pyraminx',
+    type: TETRAHEDRON,
+    scrambleOptions: {
+      directions: [UP, RIGHT, LEFT, BACK],
+      length: 11
+    }
+  },
+  {
     name: 'skewb',
     type: CUBE,
     scrambleOptions: {
       directions: [RIGHT, LEFT, FRONT, BACK],
-      extraLayers: 0,
       length: 25
     }
   }
@@ -101,4 +107,4 @@ const puzzles = [
 const DEFAULT_PUZZLE = puzzles[1];
 
 export default puzzles;
-export { DODECAHEDRON, CUBE, DEFAULT_PUZZLE };
+export { DODECAHEDRON, CUBE, TETRAHEDRON, DEFAULT_PUZZLE };
