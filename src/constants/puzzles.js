@@ -19,7 +19,7 @@ const puzzles = [
     type: CUBE,
     scrambleOptions: {
       directions: [UP, RIGHT, FRONT],
-      length: 9
+      length: 11
     }
   },
   {
@@ -27,7 +27,7 @@ const puzzles = [
     type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
-      length: 25
+      length: 23
     }
   },
   {
@@ -36,7 +36,7 @@ const puzzles = [
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 1,
-      length: 40
+      length: 45
     }
   },
   {
@@ -45,7 +45,7 @@ const puzzles = [
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 1,
-      length: 60
+      length: 50
     }
   },
   {
@@ -63,7 +63,7 @@ const puzzles = [
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 2,
-      length: 90
+      length: 100
     }
   },
   {
@@ -99,7 +99,7 @@ const puzzles = [
     type: CUBE,
     scrambleOptions: {
       directions: [RIGHT, LEFT, FRONT, BACK],
-      length: 25
+      length: 11
     }
   }
 ];
