@@ -2,21 +2,13 @@ import { ThemeProvider, injectGlobal } from 'styled-components';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createLogger } from 'redux-logger';
-import { createStore, applyMiddleware } from 'redux';
 
 import { APP_ROOT_SELECTOR } from './constants/app';
-import { INCREMENT_TIME } from './constants/actionTypes';
 import App from './components/App';
-import reducer from './reducers';
-import middlewares from './middlewares';
 import theme from './theme';
+import store from './store';
 
 const rootEl = document.querySelector(APP_ROOT_SELECTOR);
-
-const loggerMiddleware = createLogger({ predicate: (_, action) => action.type !== INCREMENT_TIME });
-
-const store = createStore(reducer, applyMiddleware(...middlewares, loggerMiddleware));
 
 injectGlobal`
   *,
