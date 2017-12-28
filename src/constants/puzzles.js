@@ -9,9 +9,10 @@ const FULL_CUBE_DIRECTIONS = [UP, RIGHT, DOWN, LEFT, FRONT, BACK];
 const DODECAHEDRON_DIRECTIONS = [RIGHT, DOWN];
 const DODECAHEDRON_END_DIRECTION = UP;
 
-const CUBE = 'CUBE';
-const TETRAHEDRON = 'TETRAHEDRON';
-const DODECAHEDRON = 'DODECAHEDRON';
+export const CUBE = 'CUBE';
+export const SQUARE_ONE = 'SQUARE_ONE';
+export const TETRAHEDRON = 'TETRAHEDRON';
+export const DODECAHEDRON = 'DODECAHEDRON';
 
 const puzzles = [
   {
@@ -101,10 +102,17 @@ const puzzles = [
       directions: [RIGHT, LEFT, FRONT, BACK],
       length: 11
     }
+  },
+  {
+    name: 'square-1',
+    type: SQUARE_ONE,
+    scrambleOptions: {
+      length: 16
+    }
   }
 ];
 
-const DEFAULT_PUZZLE = puzzles[1];
+export const DEFAULT_PUZZLE = puzzles[1];
 
 export default puzzles;
-export { DODECAHEDRON, CUBE, TETRAHEDRON, DEFAULT_PUZZLE };
+

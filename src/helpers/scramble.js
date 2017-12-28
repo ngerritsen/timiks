@@ -1,10 +1,11 @@
 import * as constants from '../constants/app';
-import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON } from '../constants/puzzles';
+import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE } from '../constants/puzzles';
 
 const scrambleGeneratorMap = {
   [CUBE]: generateCubeScramble,
   [DODECAHEDRON]: generateDodecahedronScramble,
-  [TETRAHEDRON]: generateTetrahedronScramble
+  [TETRAHEDRON]: generateTetrahedronScramble,
+  [SQUARE_ONE]: generateSquareOneScramble
 }
 
 export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
@@ -20,45 +21,43 @@ export function obfuscateScramble(scramble) {
 function generateCubeScramble(scrambleOptions) {
   const { directions, length, extraLayers } = scrambleOptions;
 
-  return generateArr(length)
-    .reduce(moves => {
-      const previousDirection = extractLastDirection(moves, directions);
-      const direction = pickRandomDirection(directions, previousDirection);
-      const twice = pickRandom([false, false, true]);
-      const reversed = twice ? false : randomBoolean();
-      const outerLayers = extraLayers ? randomBoolean() : false;
-      const threeOuterLayers = (outerLayers && extraLayers > 1) ? randomBoolean(): false;
+  return generateArr(length).reduce(moves => {
+    const previousDirection = extractLastDirection(moves, directions);
+    const direction = pickRandomDirection(directions, previousDirection);
+    const twice = pickRandom([false, false, true]);
+    const reversed = twice ? false : randomBoolean();
+    const outerLayers = extraLayers ? randomBoolean() : false;
+    const threeOuterLayers = (outerLayers && extraLayers > 1) ? randomBoolean(): false;
 
-      const move = (
-        charIf(threeOuterLayers, '3') +
-        direction +
-        charIf(outerLayers, 'w') +
-        charIf(twice, '2') +
-        charIf(reversed, `'`)
-      );
+    const move = (
+      charIf(threeOuterLayers, '3') +
+      direction +
+      charIf(outerLayers, 'w') +
+      charIf(twice, '2') +
+      charIf(reversed, `'`)
+    );
 
-      return [...moves, move];
-    }, []);
+    return [...moves, move];
+  }, []);
 }
 
 function generateDodecahedronScramble(scrambleOptions) {
   const { directions, endDirection, lineLength, lines } = scrambleOptions;
 
-  return generateArr(lines * lineLength)
-    .reduce((moves, index) => {
-      const isEndMove = (index + 1) % lineLength === 0;
+  return generateArr(lines * lineLength).reduce((moves, index) => {
+    const isEndMove = (index + 1) % lineLength === 0;
 
-      if (isEndMove) {
-        const endMove = endDirection + charIf(randomBoolean(), `'`);
-        return [...moves, endMove]
-      }
+    if (isEndMove) {
+      const endMove = endDirection + charIf(randomBoolean(), `'`);
+      return [...moves, endMove]
+    }
 
-      const previousDirection = extractLastDirection(moves, directions);
-      const direction = pickRandomDirection(directions, previousDirection);
-      const move = direction + charIf(randomBoolean(), '--', '++');
+    const previousDirection = extractLastDirection(moves, directions);
+    const direction = pickRandomDirection(directions, previousDirection);
+    const move = direction + charIf(randomBoolean(), '--', '++');
 
-      return [...moves, move];
-    }, []);
+    return [...moves, move];
+  }, []);
 }
 
 function generateTetrahedronScramble(scrambleOptions) {
@@ -66,17 +65,23 @@ function generateTetrahedronScramble(scrambleOptions) {
   const lowerCaseAmount = pickRandom(generateArr(directions.length).map(i => i + 1));
   const lowerCaseDirections = pickMultipleRandom(directions, lowerCaseAmount);
 
-  return [
-    ...generateArr(length)
-      .reduce((moves) => {
-        const previousDirection = extractLastDirection(moves, directions);
-        const move = pickRandomDirection(directions, previousDirection) + charIf(randomBoolean(), `'`);
+  const moves = generateArr(length).reduce((moves) => {
+    const previousDirection = extractLastDirection(moves, directions);
+    const move = pickRandomDirection(directions, previousDirection) + charIf(randomBoolean(), `'`);
 
-        return [...moves, move];
-      }, []),
-    ...lowerCaseDirections
-      .map(direction => direction.toLowerCase() + charIf(randomBoolean(), `'`))
-  ];
+    return [...moves, move];
+  }, [])
+
+  const endMoves = lowerCaseDirections
+    .map(direction => direction.toLowerCase() + charIf(randomBoolean(), `'`))
+
+  return [...moves, endMoves];
+}
+
+function generateSquareOneScramble(scrambleOptions) {
+  return generateArr(scrambleOptions.length).map(() => {
+    return `${randomNumber(-6, 6)},${randomNumber(-6, 6)} /`;
+  });
 }
 
 function generateString(amount, char) {
@@ -110,6 +115,12 @@ function pickMultipleRandom(array, amount, items = []) {
   const nextArray = array.filter(item => item !== pickedItem)
 
   return pickMultipleRandom(nextArray, amount - 1, nextItems);
+}
+
+function randomNumber(min, max) {
+  const choices = generateArr(max - min + 1).map(int => int + min);
+
+  return pickRandom(choices);
 }
 
 function generateArr(n) {
