@@ -1,8 +1,9 @@
 import * as constants from '../constants/app';
-import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE } from '../constants/puzzles';
+import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE, CLOCK } from '../constants/puzzles';
 
 const scrambleGeneratorMap = {
   [CUBE]: generateCubeScramble,
+  [CLOCK]: generateClockScamble,
   [DODECAHEDRON]: generateDodecahedronScramble,
   [TETRAHEDRON]: generateTetrahedronScramble,
   [SQUARE_ONE]: generateSquareOneScramble
@@ -78,6 +79,16 @@ function generateTetrahedronScramble(scrambleOptions) {
   return [...moves, endMoves];
 }
 
+function generateClockScamble(scrambleOptions) {
+  return generateArr(scrambleOptions.length).map(() => {
+    const pins = generateArr(4).map(() => pickRandom(['d', 'U'])).join('');
+    const wheel = randomNumber(1, 4);
+    const turns = pickRandom([randomNumber(-6, -1), randomNumber(1, 6)]);
+
+    return `(${pins}, ${wheel}, ${turns})`;
+  });
+}
+
 function generateSquareOneScramble(scrambleOptions) {
   return generateArr(scrambleOptions.length).map(() => {
     return `${randomNumber(-6, 6)},${randomNumber(-6, 6)} /`;
@@ -118,9 +129,7 @@ function pickMultipleRandom(array, amount, items = []) {
 }
 
 function randomNumber(min, max) {
-  const choices = generateArr(max - min + 1).map(int => int + min);
-
-  return pickRandom(choices);
+  return pickRandom(generateArr(max - min + 1)) + min;
 }
 
 function generateArr(n) {

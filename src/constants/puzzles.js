@@ -10,6 +10,7 @@ const DODECAHEDRON_DIRECTIONS = [RIGHT, DOWN];
 const DODECAHEDRON_END_DIRECTION = UP;
 
 export const CUBE = 'CUBE';
+export const CLOCK = 'CLOCK';
 export const SQUARE_ONE = 'SQUARE_ONE';
 export const TETRAHEDRON = 'TETRAHEDRON';
 export const DODECAHEDRON = 'DODECAHEDRON';
@@ -108,6 +109,13 @@ const puzzles = [
     type: SQUARE_ONE,
     scrambleOptions: {
       length: 16
+    }
+  },
+  {
+    name: 'clock',
+    type: CLOCK,
+    scrambleOptions: {
+      length: 12
     }
   }
 ];
