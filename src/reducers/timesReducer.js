@@ -1,20 +1,17 @@
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
-  current: [],
-  archive: [],
-  isModalOpen: false,
-  titleInput: ''
+  current: []
 };
 
 export default function timesReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SAVE_TIME: {
-      const { id, ms, date, scramble } = action;
+      const { id, ms, date, scramble, puzzle } = action;
 
       return {
         ...state,
-        current: [...state.current, { id, ms, date, scramble }]
+        current: [...state.current, { id, ms, date, scramble, puzzle }]
       };
     }
     case actionTypes.REMOVE_TIME:
@@ -30,39 +27,8 @@ export default function timesReducer(state = initialState, action) {
     case actionTypes.LOAD_TIMES:
       return {
         ...state,
-        current: action.current,
-        archive: action.archive
+        current: action.current
       };
-    case actionTypes.OPEN_SAVE_TIMES_MODAL:
-      return {
-        ...state,
-        isModalOpen: true
-      }
-    case actionTypes.CLOSE_SAVE_TIMES_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-        titleInput: ''
-      }
-    case actionTypes.SAVE_TIMES:
-      return {
-        ...state,
-        current: [],
-        isModalOpen: false,
-        titleInput: '',
-        archive: [
-          ...state.archive,
-          {
-            title: action.title,
-            times: state.current
-          }
-        ]
-      };
-    case actionTypes.INPUT_TIMES_TITLE:
-      return {
-        ...state,
-        titleInput: action.title
-      }
     default:
       return state;
   }

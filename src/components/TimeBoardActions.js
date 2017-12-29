@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faSave, faTrash } from '@fortawesome/fontawesome-pro-solid'
+import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid'
 
 import IconButton from './IconButton';
 import Button from './Button';
@@ -11,11 +11,11 @@ import Section from './Section';
 
 const TimeBoardActions = ({
     clearTimes,
-    closeSaveTimesModal,
+    closeArchiveModal,
     inputTimesTitle,
     isModalOpen,
-    openSaveTimesModal,
-    saveTimes,
+    openArchiveModal,
+    archiveCurrentTimes,
     titleInput
 }) => {
   const canSubmit = titleInput.trim().length > 0;
@@ -23,15 +23,15 @@ const TimeBoardActions = ({
     event.preventDefault();
 
     if (canSubmit) {
-      saveTimes(titleInput);
+      archiveCurrentTimes(titleInput);
     }
   }
 
   return (
     <Toolbar>
       <ToolbarItem>
-        <IconButton color="blue" onClick={openSaveTimesModal}>
-          <FontAwesome icon={faSave} />
+        <IconButton color="blue" onClick={openArchiveModal}>
+          <FontAwesome icon={faArchive} />
         </IconButton>
       </ToolbarItem>
 
@@ -40,7 +40,7 @@ const TimeBoardActions = ({
           <FontAwesome icon={faTrash} />
         </IconButton>
 
-        <Modal isOpen={isModalOpen} title="Save times">
+        <Modal isOpen={isModalOpen} title="Archive times">
           <form onSubmit={onSubmit}>
             <Section margin="md">
               <TitleInput
@@ -53,10 +53,10 @@ const TimeBoardActions = ({
 
             <ButtonDuo>
               <ButtonDuoItem>
-                <Button disabled={!canSubmit} type="submit">Save</Button>
+                <Button disabled={!canSubmit} type="submit">Archive</Button>
               </ButtonDuoItem>
               <ButtonDuoItem>
-                <Button danger type="button" onClick={closeSaveTimesModal}>Cancel</Button>
+                <Button danger type="button" onClick={closeArchiveModal}>Cancel</Button>
               </ButtonDuoItem>
             </ButtonDuo>
           </form>
@@ -68,11 +68,11 @@ const TimeBoardActions = ({
 
 TimeBoardActions.propTypes = {
   clearTimes: PropTypes.func.isRequired,
-  closeSaveTimesModal: PropTypes.func.isRequired,
+  closeArchiveModal: PropTypes.func.isRequired,
   inputTimesTitle: PropTypes.func.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
-  openSaveTimesModal: PropTypes.func.isRequired,
-  saveTimes: PropTypes.func.isRequired,
+  openArchiveModal: PropTypes.func.isRequired,
+  archiveCurrentTimes: PropTypes.func.isRequired,
   titleInput: PropTypes.string.isRequired
 }
 

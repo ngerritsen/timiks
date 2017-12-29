@@ -1,4 +1,5 @@
 import activationMiddleware from './activationMiddleware';
+import archiveMiddleware from './archiveMiddleware';
 import noSleepMiddleware from './noSleepMiddleware';
 import puzzleMiddleware from './puzzleMiddleware';
 import scrambleMiddleware from './scrambleMiddleware';
@@ -7,6 +8,7 @@ import timesMiddleware from './timesMiddleware';
 
 export default [
   activationMiddleware,
+  archiveMiddleware,
   noSleepMiddleware,
   puzzleMiddleware,
   scrambleMiddleware,

@@ -1,5 +1,6 @@
+import shortid from 'shortid';
+
 import * as constants from '../constants/app';
-import { createTime } from '../helpers/time';
 
 export function getCurrent() {
   return getParsed(constants.CURRENT_TIMES_STORAGE_KEY, parseTimes);
@@ -24,9 +25,12 @@ function getParsed(storageKey, parser) {
 }
 
 function parseTimes(rawTimes) {
-  return rawTimes.map(raw => {
-    return createTime(raw.ms, parseScramble(raw.scramble), raw.date);
-  });
+  return rawTimes.map(raw => ({
+    id: shortid.generate(),
+    ms: raw.ms,
+    scramble: parseScramble(raw.scramble),
+    date: raw.date
+  }));
 }
 
 function serializeTimes(times) {
@@ -38,16 +42,19 @@ function serializeTimes(times) {
 }
 
 function parseArchive(rawArchive) {
-  return rawArchive.map(archivedTimes => ({
-    title: archivedTimes.title,
-    times: parseTimes(archivedTimes.times)
+  return rawArchive.map(item => ({
+    title: item.title,
+    times: parseTimes(item.times),
+    id: shortid.generate(),
+    puzzle: item.puzzle
   }));
 }
 
 function serializeArchive(archive) {
-  return archive.map(archivedTimes => ({
-    title: archivedTimes.title,
-    times: serializeTimes(archivedTimes.times)
+  return archive.map(item => ({
+    title: item.title,
+    times: serializeTimes(item.times),
+    puzzle: item.puzzle
   }));
 }
 

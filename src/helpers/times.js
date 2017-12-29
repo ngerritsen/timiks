@@ -19,3 +19,7 @@ export function markBestTime(times) {
     time.ms === bestTime ? { ...time, best: true } : time
   ));
 }
+
+export function getFirstDate(times) {
+  return new Date(Math.min(...times.map(time => Date.parse(time.date))));
+}

@@ -5,6 +5,7 @@ import SettingsContainer from '../containers/SettingsContainer';
 import TimerContainer from '../containers/TimerContainer';
 import TimeBoardContainer from '../containers/TimeBoardContainer';
 import Section from './Section';
+import ArchiveContainer from '../containers/ArchiveContainer';
 
 const App = () => (
   <Container>
@@ -17,6 +18,9 @@ const App = () => (
     </Section>
     <Section>
       <TimeBoardContainer/>
+    </Section>
+    <Section>
+      <ArchiveContainer/>
     </Section>
   </Container>
 )

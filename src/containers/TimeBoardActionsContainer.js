@@ -4,26 +4,26 @@ import { bindActionCreators } from 'redux';
 import TimeBoardActions from '../components/TimeBoardActions';
 import {
   clearTimes,
-  saveTimes,
-  openSaveTimesModal,
-  closeSaveTimesModal,
+  archiveCurrentTimes,
+  openArchiveModal,
+  closeArchiveModal,
   inputTimesTitle
 } from '../actions';
 
 function mapStateToProps(state) {
   return {
-    titleInput: state.times.titleInput,
-    isModalOpen: state.times.isModalOpen
+    titleInput: state.archive.titleInput,
+    isModalOpen: state.archive.isModalOpen
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     clearTimes,
-    openSaveTimesModal,
+    openArchiveModal,
     inputTimesTitle,
-    closeSaveTimesModal,
-    saveTimes
+    closeArchiveModal,
+    archiveCurrentTimes,
   }, dispatch);
 }
 
