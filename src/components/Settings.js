@@ -19,7 +19,7 @@ const Settings = ({
 }) => (
   <span>
     <IconButton onClick={openSettings}>
-      <FontAwesome icon={faCog} size="2x"/>
+      <FontAwesome icon={faCog} size="lg"/>
     </IconButton>
     <Modal isOpen={isOpen} title="Settings">
       <SettingsSection margin="md">

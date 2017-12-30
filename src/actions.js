@@ -22,6 +22,9 @@ export const loadTimes = (current = [], archive = []) => ({ type: actionTypes.LO
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
 
+export const showTimeDetails = id => ({ type: actionTypes.SHOW_TIME_DETAILS, id });
+export const hideTimeDetails = id => ({ type: actionTypes.HIDE_TIME_DETAILS, id });
+
 // Archive
 export const openArchiveModal = () => ({ type: actionTypes.OPEN_ARCHIVE_MODAL });
 export const closeArchiveModal = () => ({ type: actionTypes.CLOSE_ARCHIVE_MODAL });

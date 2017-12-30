@@ -20,6 +20,13 @@ export function markBestTime(times) {
   ));
 }
 
+export function markShowDetails(times, id) {
+  return times.map(time => ({
+    ...time,
+    showDetails: time.id === id
+  }));
+}
+
 export function getFirstDate(times) {
-  return new Date(Math.min(...times.map(time => Date.parse(time.date))));
+  return new Date(Math.min(...times.map(time => time.date.getTime())));
 }

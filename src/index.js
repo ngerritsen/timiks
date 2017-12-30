@@ -22,6 +22,7 @@ injectGlobal`
   }
 
   body {
+    font-size: 1.6rem;
     font-family: ${theme.font};
     color: ${theme.colors.fg};
   }

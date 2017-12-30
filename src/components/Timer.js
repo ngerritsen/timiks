@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Time from './Time';
 import Section from './Section';
+import Scramble from './Scramble';
 import ActivationContainer from '../containers/ActivationContainer';
 
 const Timer = ({ scramble, time }) => (
@@ -14,9 +15,7 @@ const Timer = ({ scramble, time }) => (
       </TimerTime>
     </Section>
     <Section>
-      <Scramble>
-        {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
-      </Scramble>
+      <Scramble scramble={scramble} />
     </Section>
     <Section>
       <ActivationContainer/>
@@ -32,27 +31,6 @@ Timer.propTypes = {
 const TimerTime = styled.div`
   text-align: center;
   padding: ${props => props.theme.sizes.xl} 0;
-`;
-
-const Scramble = styled.p`
-  font-size: 1.6rem;
-  text-align: center;
-  font-family: ${props => props.theme.monoFont};
-  background-color: ${props => props.theme.colors.subtleBg};
-  padding: ${props => props.theme.sizes.xs};
-  margin: 0;
-  font-weight: bold;
-  border-radius: 3px;
-`;
-
-const Move = styled.span`
-  display: inline-block;
-  whitespace: nowrap;
-  margin-right: 0.5em;
-
-  &:last-child {
-    margin-right: 0;
-  }
 `;
 
 export default Timer

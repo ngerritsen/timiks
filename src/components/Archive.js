@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import ArchiveItem from './ArchiveItem';
 
-const Archive = ({ archive, collapseArchiveItem, expandArchiveItem }) => (
+const Archive = ({ archive, collapseArchiveItem, expandArchiveItem, hideTimeDetails, showTimeDetails }) => (
   <div>
     <ArchiveTitle>Archive</ArchiveTitle>
     <ArchiveList>
@@ -12,6 +12,8 @@ const Archive = ({ archive, collapseArchiveItem, expandArchiveItem }) => (
         <ArchiveItem
           key={index}
           {...item}
+          hideTimeDetails={hideTimeDetails}
+          showTimeDetails={showTimeDetails}
           onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
         />
       )}
@@ -22,7 +24,9 @@ const Archive = ({ archive, collapseArchiveItem, expandArchiveItem }) => (
 Archive.propTypes = {
   archive: PropTypes.arrayOf(PropTypes.object),
   collapseArchiveItem: PropTypes.func.isRequired,
-  expandArchiveItem: PropTypes.func.isRequired
+  expandArchiveItem: PropTypes.func.isRequired,
+  hideTimeDetails: PropTypes.func.isRequired,
+  showTimeDetails: PropTypes.func.isRequired
 }
 
 const ArchiveTitle = styled.h2`

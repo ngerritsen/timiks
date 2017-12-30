@@ -29,7 +29,7 @@ function parseTimes(rawTimes) {
     id: shortid.generate(),
     ms: raw.ms,
     scramble: parseScramble(raw.scramble),
-    date: raw.date
+    date: new Date(raw.date)
   }));
 }
 
@@ -37,7 +37,7 @@ function serializeTimes(times) {
   return times.map(time => ({
     ms: time.ms,
     scramble: serializeScramble(time.scramble),
-    date: time.date
+    date: time.date.toISOString()
   }));
 }
 

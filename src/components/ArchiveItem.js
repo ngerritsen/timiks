@@ -5,11 +5,23 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/fontawesome-pro-solid'
 
+import Info, { InfoItem, InfoIcon } from './Info';
 import TimeTable from './TimeTable';
 
-const ArchiveItem = ({ averageOfBestThree, average, collapsed, date, onClick, puzzle, times, title }) => (
-  <ArchiveItemBox onClick={onClick}>
-    <ArchiveItemHeader>
+const ArchiveItem = ({
+  averageOfBestThree,
+  average,
+  collapsed,
+  date,
+  hideTimeDetails,
+  onClick,
+  puzzle,
+  showTimeDetails,
+  times,
+  title
+}) => (
+  <ArchiveItemBox>
+    <ArchiveItemHeader onClick={onClick}>
       <strong>{title}</strong>
       <Info>
         <InfoItem>
@@ -26,7 +38,13 @@ const ArchiveItem = ({ averageOfBestThree, average, collapsed, date, onClick, pu
     {
       !collapsed &&
       <ArchiveItemContent>
-        <TimeTable times={times} average={average} averageOfBestThree={averageOfBestThree}/>
+        <TimeTable
+          average={average}
+          averageOfBestThree={averageOfBestThree}
+          hideTimeDetails={hideTimeDetails}
+          showTimeDetails={showTimeDetails}
+          times={times}
+        />
       </ArchiveItemContent>
     }
   </ArchiveItemBox>
@@ -37,8 +55,10 @@ ArchiveItem.propTypes = {
   average: PropTypes.number.isRequired,
   collapsed: PropTypes.bool.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
+  hideTimeDetails: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
+  showTimeDetails: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired
 };
@@ -60,6 +80,8 @@ const ArchiveItemBox = styled.div`
 const ArchiveItemHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: ${props => props.theme.sizes.sm};
+  margin: -${props => props.theme.sizes.sm};
 `;
 
 const ArchiveItemContent = styled.div`
@@ -70,20 +92,6 @@ const CollapseIcon = styled.span`
   display: inline-block;
   color: ${props => props.theme.colors.subtleFg};
   width: 0.8em;
-`;
-
-const Info = styled.span`
-  font-size: 1.4rem;
-  color: ${props => props.theme.colors.subtleFg};
-`;
-
-const InfoItem = styled.span`
-  margin-right: ${props => props.theme.sizes.sm};
-`
-
-const InfoIcon = styled.span`
-  margin-right: ${props => props.theme.sizes.xxs};
-
 `;
 
 export default ArchiveItem;

@@ -12,6 +12,8 @@ export const SET_SCRAMBLE = 'SET_SCRAMBLE';
 export const SAVE_TIME = 'SAVE_TIME';
 export const REMOVE_TIME = 'REMOVE_TIME';
 export const CLEAR_TIMES = 'CLEAR_TIMES';
+export const SHOW_TIME_DETAILS = 'OPEN_TIME_DETAILS';
+export const HIDE_TIME_DETAILS = 'HIDE_TIME_DETAILS';
 
 export const LOAD_TIMES = 'LOAD_TIMES';
 export const INPUT_ARCHIVE_TITLE = 'INPUT_ARCHIVE_TITLE';

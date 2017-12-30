@@ -76,7 +76,7 @@ function generateTetrahedronScramble(scrambleOptions) {
   const endMoves = lowerCaseDirections
     .map(direction => direction.toLowerCase() + charIf(randomBoolean(), `'`))
 
-  return [...moves, endMoves];
+  return [...moves, ...endMoves];
 }
 
 function generateClockScamble(scrambleOptions) {

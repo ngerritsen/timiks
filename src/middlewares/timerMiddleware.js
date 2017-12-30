@@ -18,7 +18,7 @@ const timerMiddleware = store => next => {
         const { timer, scramble } = store.getState();
 
         clearInterval(timerInterval);
-        store.dispatch(saveTime(shortid.generate(), timer.time, new Date().toISOString(), scramble))
+        store.dispatch(saveTime(shortid.generate(), timer.time, new Date(), scramble))
         break;
       }
     }

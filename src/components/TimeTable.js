@@ -2,17 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faTimes, faThumbsUp } from '@fortawesome/fontawesome-pro-solid';
+import { faTimes, faThumbsUp, faInfoCircle, faCalendarAlt, faStopwatch } from '@fortawesome/fontawesome-pro-solid';
 
 import theme from '../theme';
 import Time from './Time';
+import Modal from './Modal';
+import Button from './Button';
+import Section from './Section';
+import IconButton from './IconButton';
+import Scramble from './Scramble';
 
-const { colors: { green, red } } = theme;
+const { colors: { green, red, blue } } = theme;
 
-const TimeTable = ({ average, averageOfBestThree, removeTime, times }) => (
+const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, showTimeDetails, times }) => (
   <TimeBoardTable>
     <tbody>
-      {times.map(({ ms, id, best }, index) => (
+      {times.map(({ ms, id, best, date, scramble, showDetails }, index) => (
         <tr key={index}>
           <TimeIndexCell>{index + 1}.</TimeIndexCell>
           <TimeBoardCell>
@@ -22,11 +27,31 @@ const TimeTable = ({ average, averageOfBestThree, removeTime, times }) => (
               <TimeInfo><FontAwesome style={{ color: green }} icon={faThumbsUp}/></TimeInfo>
             }
           </TimeBoardCell>
-
+          <TimeActionCell>
+            <IconButton onClick={() => showTimeDetails(id)}>
+              <FontAwesome style={{ color: blue }} icon={faInfoCircle} size="lg" />
+            </IconButton>
+            <Modal title="Details" isOpen={showDetails}>
+              <Section>
+                  <FontAwesome icon={faStopwatch} /> &nbsp;
+                  {ms}ms
+              </Section>
+              <Section margin="md">
+                  <FontAwesome icon={faCalendarAlt} /> &nbsp;
+                  {date.toLocaleString()}
+              </Section>
+              <Section margin="md">
+                <Scramble scramble={scramble} small />
+              </Section>
+              <Button onClick={hideTimeDetails}>Close</Button>
+            </Modal>
+          </TimeActionCell>
           {
             removeTime &&
-            <TimeActionCell onClick={() => removeTime(id)}>
-              <FontAwesome style={{ color: red }} icon={faTimes} size="lg" />
+            <TimeActionCell >
+              <IconButton onClick={() => removeTime(id)}>
+                <FontAwesome style={{ color: red }} icon={faTimes} size="lg" />
+              </IconButton>
             </TimeActionCell>
           }
         </tr>
@@ -57,7 +82,9 @@ const TimeTable = ({ average, averageOfBestThree, removeTime, times }) => (
 TimeTable.propTypes = {
   average: PropTypes.number.isRequired,
   averageOfBestThree: PropTypes.number.isRequired,
+  hideTimeDetails: PropTypes.func.isRequired,
   removeTime: PropTypes.func,
+  showTimeDetails: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
@@ -85,14 +112,8 @@ const TimeIndexCell = TimeBoardCell.extend`
 const TimeActionCell = TimeBoardCell.extend`
   font-size: 1rem;
   width: 2em;
-  opacity: 0.9;
   padding-left: ${props => props.theme.sizes.xxs};
   padding-right: ${props => props.theme.sizes.xxs};
-
-  &:hover {
-    cursor: pointer;
-    opacity: 1;
-  }
 `;
 
 export default TimeTable;

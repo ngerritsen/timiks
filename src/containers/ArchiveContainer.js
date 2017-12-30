@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as times from '../helpers/times';
-import { expandArchiveItem, collapseArchiveItem } from '../actions';
+import { expandArchiveItem, collapseArchiveItem, hideTimeDetails, showTimeDetails } from '../actions';
 import Archive from '../components/Archive';
 
 function mapStateToProps(state) {
@@ -11,7 +11,7 @@ function mapStateToProps(state) {
       .map(item => ({
         ...item,
         collapsed: state.archive.expanded !== item.id,
-        times: times.markBestTime(item.times),
+        times: times.markShowDetails(times.markBestTime(item.times), state.times.timeDetailsShown),
         average: times.calculateAverageTime(item.times),
         averageOfBestThree: times.calculateAverageTimeOfBestThree(item.times),
         date: times.getFirstDate(item.times)
@@ -21,7 +21,12 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ expandArchiveItem, collapseArchiveItem }, dispatch);
+  return bindActionCreators({
+    expandArchiveItem,
+    collapseArchiveItem,
+    hideTimeDetails,
+    showTimeDetails
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Archive);
