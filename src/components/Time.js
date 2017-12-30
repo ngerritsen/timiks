@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import { formatTime } from '../helpers/formatting';
 
-const Time = ({ ms, fontSize = 1.8 }) => {
+const Time = ({ ms, fontSize }) => {
   return (
-    <span style={{ fontSize: fontSize.toFixed(1) + 'rem' }}>
+    <span style={{ fontSize: fontSize ? (fontSize.toFixed(1) + 'rem') : 'inherit' }}>
       {formatTime(ms)
         .split('')
         .map((char, i) => char === '.' ? char : <TimeNumber key={i}>{char}</TimeNumber>)}

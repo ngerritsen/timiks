@@ -1,30 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faCaretRight, faCaretDown } from '@fortawesome/fontawesome-pro-solid'
+import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/fontawesome-pro-solid'
 
 import Time from './Time';
+import TimeTable from './TimeTable';
 
-const ArchiveItem = ({ averageOfBestThree, average, collapsed, date, onClick, puzzle, title }) => (
+const ArchiveItem = ({ averageOfBestThree, average, collapsed, date, onClick, puzzle, times, title }) => (
   <ArchiveItemBox onClick={onClick}>
     <ArchiveItemHeader>
       <strong>{title}</strong>
-      <div>
-        <Time  fontSize={1.6} ms={averageOfBestThree}/>
-        <AverageTime>
-          <Time fontSize={1.6} ms={average}/>
-        </AverageTime>
+      <Info>
+        <InfoItem>
+          <InfoIcon><FontAwesome icon={faCube}/></InfoIcon> {puzzle}
+        </InfoItem>
+        <InfoItem>
+          <InfoIcon><FontAwesome icon={faCalendarAlt}/></InfoIcon> {date.toLocaleDateString()}
+        </InfoItem>
         <CollapseIcon>
           <FontAwesome icon={collapsed ? faCaretRight : faCaretDown}/>
         </CollapseIcon>
-      </div>
+      </Info>
     </ArchiveItemHeader>
     {
       !collapsed &&
       <ArchiveItemContent>
-        <Info>{puzzle} - {date.toLocaleDateString()}</Info>
+        <TimeTable times={times} average={average} averageOfBestThree={averageOfBestThree}/>
       </ArchiveItemContent>
     }
   </ArchiveItemBox>
@@ -37,6 +40,7 @@ ArchiveItem.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   onClick: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
+  times: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired
 };
 
@@ -45,7 +49,7 @@ const ArchiveItemBox = styled.div`
   font-size: 1.6rem;
   border: 1px solid ${props => props.theme.colors.grey};
   border-radius: 4px;
-  padding: ${props => props.theme.sizes.xs};
+  padding: ${props => props.theme.sizes.sm};
   margin-bottom: ${props => props.theme.sizes.xs};
 
   &:hover {
@@ -60,24 +64,27 @@ const ArchiveItemHeader = styled.div`
 `;
 
 const ArchiveItemContent = styled.div`
-  margin-top: ${props => props.theme.sizes.xs};
+  margin-top: ${props => props.theme.sizes.sm};
 `;
 
 const CollapseIcon = styled.span`
   display: inline-block;
-  color: ${props => props.theme.colors.grey};
-  margin-left: ${props => props.theme.sizes.sm};
+  color: ${props => props.theme.colors.subtleFg};
   width: 0.8em;
 `;
 
-const AverageTime = styled.strong`
-  font-weight: bold;
-  margin-left: ${props => props.theme.sizes.sm};
+const Info = styled.span`
+  font-size: 1.4rem;
+  color: ${props => props.theme.colors.subtleFg};
 `;
 
-const Info = styled.p`
-  color: ${props => props.theme.colors.subtleFg};
-  margin: 0;
+const InfoItem = styled.span`
+  margin-right: ${props => props.theme.sizes.sm};
+`
+
+const InfoIcon = styled.span`
+  margin-right: ${props => props.theme.sizes.xxs};
+
 `;
 
 export default ArchiveItem;

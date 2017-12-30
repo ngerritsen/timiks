@@ -22,9 +22,13 @@ const TimeTable = ({ average, averageOfBestThree, removeTime, times }) => (
               <TimeInfo><FontAwesome style={{ color: green }} icon={faThumbsUp}/></TimeInfo>
             }
           </TimeBoardCell>
-          <TimeActionCell onClick={() => removeTime(id)}>
-            <FontAwesome style={{ color: red }} icon={faTimes} size="lg" />
-          </TimeActionCell>
+
+          {
+            removeTime &&
+            <TimeActionCell onClick={() => removeTime(id)}>
+              <FontAwesome style={{ color: red }} icon={faTimes} size="lg" />
+            </TimeActionCell>
+          }
         </tr>
       ))}
         <tr>
@@ -43,7 +47,7 @@ const TimeTable = ({ average, averageOfBestThree, removeTime, times }) => (
               <strong><Time ms={averageOfBestThree}/></strong>
               <TimeInfo>(avg. best 3)</TimeInfo>
             </TimeBoardCell>
-            <TimeActionCell/>
+            {removeTime && <TimeActionCell/>}
           </tr>
         }
     </tbody>
@@ -53,7 +57,7 @@ const TimeTable = ({ average, averageOfBestThree, removeTime, times }) => (
 TimeTable.propTypes = {
   average: PropTypes.number.isRequired,
   averageOfBestThree: PropTypes.number.isRequired,
-  removeTime: PropTypes.func.isRequired,
+  removeTime: PropTypes.func,
   times: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
@@ -68,7 +72,7 @@ const TimeInfo = styled.small`
 `;
 
 const TimeBoardCell = styled.td`
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   padding: ${props => props.theme.sizes.xs} 0;
   border-bottom: 1px solid ${props => props.theme.colors.grey};
 `;
