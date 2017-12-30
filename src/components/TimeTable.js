@@ -85,7 +85,7 @@ const TimeIndexCell = TimeBoardCell.extend`
 const TimeActionCell = TimeBoardCell.extend`
   font-size: 1rem;
   width: 2em;
-  opacity: 0.8;
+  opacity: 0.9;
   padding-left: ${props => props.theme.sizes.xxs};
   padding-right: ${props => props.theme.sizes.xxs};
 

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { darken, lighten } from 'polished';
+import { darken } from 'polished';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/fontawesome-pro-solid'
 
-import Time from './Time';
 import TimeTable from './TimeTable';
 
 const ArchiveItem = ({ averageOfBestThree, average, collapsed, date, onClick, puzzle, times, title }) => (

@@ -46,7 +46,7 @@ function onSpacebarRelease(store, callback) {
 
 function isActivationSpacebarEvent(store, event) {
   return (
-    !store.getState().times.isModalOpen &&
+    !store.getState().archive.isModalOpen &&
     event.keyCode === SPACEBAR_KEYCODE &&
     !event.repeat
   );

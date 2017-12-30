@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.button`
   border: none;
   background: transparent;
-  opacity: 0.9;
+  opacity: 0.95;
   padding: 0;
   color: ${props => props.theme.colors[props.color] || 'inherit'};
 
