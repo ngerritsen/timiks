@@ -29,6 +29,11 @@ function archiveReducer(state = initialState, action) {
           }
         ]
       }
+    case actionTypes.REMOVE_ARCHIVE_ITEM:
+      return {
+        ...state,
+        items: state.items.filter(item => item.id !== action.id)
+      }
     case actionTypes.EXPAND_ARCHIVE_ITEM:
       return {
         ...state,

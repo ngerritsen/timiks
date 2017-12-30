@@ -7,6 +7,8 @@ import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/f
 
 import Info, { InfoItem, InfoIcon } from './Info';
 import TimeTable from './TimeTable';
+import Button from './Button';
+import Section from './Section';
 
 const ArchiveItem = ({
   averageOfBestThree,
@@ -14,8 +16,10 @@ const ArchiveItem = ({
   collapsed,
   date,
   hideTimeDetails,
+  id,
   onClick,
   puzzle,
+  removeArchiveItem,
   showTimeDetails,
   times,
   title
@@ -38,13 +42,16 @@ const ArchiveItem = ({
     {
       !collapsed &&
       <ArchiveItemContent>
-        <TimeTable
-          average={average}
-          averageOfBestThree={averageOfBestThree}
-          hideTimeDetails={hideTimeDetails}
-          showTimeDetails={showTimeDetails}
-          times={times}
-        />
+        <Section>
+          <TimeTable
+            average={average}
+            averageOfBestThree={averageOfBestThree}
+            hideTimeDetails={hideTimeDetails}
+            showTimeDetails={showTimeDetails}
+            times={times}
+          />
+        </Section>
+        <Button danger onClick={() => removeArchiveItem(id)}>Remove</Button>
       </ArchiveItemContent>
     }
   </ArchiveItemBox>
@@ -56,8 +63,10 @@ ArchiveItem.propTypes = {
   collapsed: PropTypes.bool.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
   hideTimeDetails: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
+  removeArchiveItem: PropTypes.func.isRequired,
   showTimeDetails: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired

@@ -2,8 +2,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as times from '../helpers/times';
-import { expandArchiveItem, collapseArchiveItem, hideTimeDetails, showTimeDetails } from '../actions';
 import Archive from '../components/Archive';
+import {
+  expandArchiveItem,
+  collapseArchiveItem,
+  hideTimeDetails,
+  removeArchiveItem,
+  showTimeDetails
+} from '../actions';
 
 function mapStateToProps(state) {
   return {
@@ -16,7 +22,7 @@ function mapStateToProps(state) {
         averageOfBestThree: times.calculateAverageTimeOfBestThree(item.times),
         date: times.getFirstDate(item.times)
       }))
-      .sort((a, b) => a.date.getTime() - b.date.getTime())
+      .sort((a, b) => a.date - b.date)
   }
 }
 
@@ -25,6 +31,7 @@ function mapDispatchToProps(dispatch) {
     expandArchiveItem,
     collapseArchiveItem,
     hideTimeDetails,
+    removeArchiveItem,
     showTimeDetails
   }, dispatch);
 }

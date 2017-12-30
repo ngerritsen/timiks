@@ -33,6 +33,7 @@ export const inputTimesTitle = title => ({ type: actionTypes.INPUT_ARCHIVE_TITLE
 export const archive = (id, times, puzzle) => ({ type: actionTypes.ARCHIVE, id, times, puzzle });
 export const expandArchiveItem = id => ({ type: actionTypes.EXPAND_ARCHIVE_ITEM, id });
 export const collapseArchiveItem = id => ({ type: actionTypes.COLLAPSE_ARCHIVE_ITEM, id });
+export const removeArchiveItem = id => ({ type: actionTypes.REMOVE_ARCHIVE_ITEM, id });
 
 // Settings
 export const openSettings = () => ({ type: actionTypes.OPEN_SETTINGS });
