@@ -26,18 +26,20 @@ const ArchiveItem = ({
 }) => (
   <ArchiveItemBox>
     <ArchiveItemHeader onClick={onClick}>
-      <strong>{title}</strong>
-      <Info>
-        <InfoItem>
-          <InfoIcon><FontAwesome icon={faCube}/></InfoIcon> {puzzle}
-        </InfoItem>
-        <InfoItem>
-          <InfoIcon><FontAwesome icon={faCalendarAlt}/></InfoIcon> {date.toLocaleDateString()}
-        </InfoItem>
-        <CollapseIcon>
-          <FontAwesome icon={collapsed ? faCaretRight : faCaretDown}/>
-        </CollapseIcon>
-      </Info>
+      <div>
+        <ArchiveItemTitle>{title}</ArchiveItemTitle>
+        <Info>
+          <InfoItem>
+            <InfoIcon><FontAwesome icon={faCube}/></InfoIcon> {puzzle}
+          </InfoItem>
+          <InfoItem>
+            <InfoIcon><FontAwesome icon={faCalendarAlt}/></InfoIcon> {date.toLocaleDateString()}
+          </InfoItem>
+        </Info>
+      </div>
+      <CollapseIcon>
+        <FontAwesome icon={collapsed ? faCaretRight : faCaretDown}/>
+      </CollapseIcon>
     </ArchiveItemHeader>
     {
       !collapsed &&
@@ -73,12 +75,10 @@ ArchiveItem.propTypes = {
 };
 
 const ArchiveItemBox = styled.div`
-  width: 100%;
   font-size: 1.6rem;
   border: 1px solid ${props => props.theme.colors.grey};
   border-radius: 4px;
   padding: ${props => props.theme.sizes.sm};
-  margin-bottom: ${props => props.theme.sizes.xs};
 
   &:hover {
     cursor: pointer;
@@ -93,12 +93,18 @@ const ArchiveItemHeader = styled.div`
   margin: -${props => props.theme.sizes.sm};
 `;
 
+const ArchiveItemTitle = styled.strong`
+  display: block;
+  margin-bottom: ${props => props.theme.sizes.xxs};
+`;
+
 const ArchiveItemContent = styled.div`
   margin-top: ${props => props.theme.sizes.sm};
 `;
 
 const CollapseIcon = styled.span`
-  display: inline-block;
+  display: flex;
+  align-items: center;
   color: ${props => props.theme.colors.subtleFg};
   width: 0.8em;
 `;

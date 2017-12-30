@@ -1,7 +1,7 @@
-export function formatTime(ms) {
-  const secondsString = (ms / 1000).toFixed(2);
+export function formatTime(ms, decimals = 2) {
+  const secondsString = (ms / 1000).toFixed(decimals);
 
-  return secondsString.length === 4 ?
+  return secondsString.length === (2 + decimals) ?
     '0' + secondsString :
     secondsString
 }

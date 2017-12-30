@@ -16,14 +16,15 @@ const Archive = ({
     <ArchiveTitle>Archive</ArchiveTitle>
     <ArchiveList>
       {archive.map((item, index) =>
-        <ArchiveItem
-          key={index}
-          {...item}
-          hideTimeDetails={hideTimeDetails}
-          showTimeDetails={showTimeDetails}
-          removeArchiveItem={removeArchiveItem}
-          onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
-        />
+        <ArchiveListItem key={index}>
+          <ArchiveItem
+            {...item}
+            hideTimeDetails={hideTimeDetails}
+            showTimeDetails={showTimeDetails}
+            removeArchiveItem={removeArchiveItem}
+            onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
+          />
+        </ArchiveListItem>
       )}
     </ArchiveList>
   </div>
@@ -47,6 +48,20 @@ const ArchiveTitle = styled.h2`
 const ArchiveList = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+const ArchiveListItem = styled.div`
+  width: 100%;
+  margin-bottom: ${props => props.theme.sizes.xs};
+
+  @media screen and (min-width: 700px) {
+    width: 49%;
+    margin-right: 2%;
+
+    &:nth-child(n + 2) {
+      margin-right: 0;
+    }
+  }
 `;
 
 export default Archive;

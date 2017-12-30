@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import { formatTime } from '../helpers/formatting';
 
-const Time = ({ ms, fontSize }) => {
+const Time = ({ ms, fontSize, decimals }) => {
   return (
     <span style={{ fontSize: fontSize ? (fontSize.toFixed(1) + 'rem') : 'inherit' }}>
-      {formatTime(ms)
+      {formatTime(ms, decimals)
         .split('')
         .map((char, i) => char === '.' ? char : <TimeNumber key={i}>{char}</TimeNumber>)}
       <Unit>s</Unit>
@@ -17,6 +17,7 @@ const Time = ({ ms, fontSize }) => {
 
 Time.propTypes = {
   ms: PropTypes.number.isRequired,
+  decimals: PropTypes.number,
   fontSize: PropTypes.number
 };
 

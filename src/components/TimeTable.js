@@ -34,7 +34,7 @@ const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, s
             <Modal title="Details" isOpen={showDetails}>
               <Section>
                   <FontAwesome icon={faStopwatch} /> &nbsp;
-                  {ms}ms
+                  <Time ms={ms} decimals={4} />
               </Section>
               <Section margin="md">
                   <FontAwesome icon={faCalendarAlt} /> &nbsp;

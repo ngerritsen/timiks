@@ -62,6 +62,7 @@ const ModalBox = styled.div`
 
   @media (min-width: 420px) {
     min-width: 370px;
+    max-width: 440px;
     width: auto;
   }
 `;
