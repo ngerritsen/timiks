@@ -15,7 +15,7 @@ const App = () => (
 )
 
 const Container = styled.div`
-  max-width: 80rem;
+  max-width: 72rem;
   margin: ${props => props.theme.sizes.md} auto;
   padding: 0 ${props => props.theme.sizes.sm};
 `;

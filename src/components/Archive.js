@@ -43,23 +43,14 @@ Archive.propTypes = {
   showTimeDetails: PropTypes.func.isRequired
 }
 
-const ArchiveList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+const ArchiveList = styled.ul`
+  list-style: none;
+  padding: 0;
 `;
 
-const ArchiveListItem = styled.div`
-  width: 100%;
-  margin-bottom: ${props => props.theme.sizes.xs};
-
-  @media screen and (min-width: 700px) {
-    width: 49%;
-    margin-right: 2%;
-
-    &:nth-child(n + 2) {
-      margin-right: 0;
-    }
-  }
+const ArchiveListItem = styled.li`
+  padding: 0;
+  margin: 0 0 ${props => props.theme.sizes.xs};
 `;
 
 export default Archive;
