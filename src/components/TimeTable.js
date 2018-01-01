@@ -2,15 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faTimes, faThumbsUp, faInfoCircle, faCalendarAlt, faStopwatch } from '@fortawesome/fontawesome-pro-solid';
+import { faTimes, faThumbsUp, faInfoCircle } from '@fortawesome/fontawesome-pro-solid';
 
 import theme from '../theme';
 import Time from './Time';
 import Modal from './Modal';
-import Button from './Button';
-import Section from './Section';
 import IconButton from './IconButton';
-import Scramble from './Scramble';
+import TimeDetails from './TimeDetails';
 
 const { colors: { green, red, blue } } = theme;
 
@@ -32,18 +30,7 @@ const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, s
               <FontAwesome style={{ color: blue }} icon={faInfoCircle} size="lg" />
             </IconButton>
             <Modal title="Details" isOpen={showDetails}>
-              <Section>
-                  <FontAwesome icon={faStopwatch} /> &nbsp;
-                  <Time ms={ms} decimals={4} />
-              </Section>
-              <Section margin="md">
-                  <FontAwesome icon={faCalendarAlt} /> &nbsp;
-                  {date.toLocaleString()}
-              </Section>
-              <Section margin="md">
-                <Scramble scramble={scramble} small />
-              </Section>
-              <Button onClick={hideTimeDetails}>Close</Button>
+              <TimeDetails date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
             </Modal>
           </TimeActionCell>
           {
@@ -63,6 +50,7 @@ const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, s
             <TimeInfo>(avg.)</TimeInfo>
           </TimeBoardCell>
           <TimeActionCell/>
+          {removeTime && <TimeActionCell/>}
         </tr>
         {
           times.length >= 5 &&
@@ -72,6 +60,7 @@ const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, s
               <strong><Time ms={averageOfBestThree}/></strong>
               <TimeInfo>(avg. best 3)</TimeInfo>
             </TimeBoardCell>
+            <TimeActionCell/>
             {removeTime && <TimeActionCell/>}
           </tr>
         }
