@@ -2,6 +2,7 @@ import { ThemeProvider, injectGlobal } from 'styled-components';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter as Router } from 'react-router-dom'
 
 import { APP_ROOT_SELECTOR } from './constants/app';
 import App from './components/App';
@@ -31,7 +32,9 @@ injectGlobal`
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
-      <App/>
+      <Router>
+        <App/>
+      </Router>
     </Provider>
   </ThemeProvider>,
   rootEl
