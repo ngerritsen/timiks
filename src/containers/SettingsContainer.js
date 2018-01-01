@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Settings from '../components/Settings';
-import { openSettings, closeSettings, changePuzzle } from '../actions';
+import { changePuzzle } from '../actions';
 
 function mapStateToProps(state) {
   return {
@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ openSettings, closeSettings, changePuzzle }, dispatch);
+  return bindActionCreators({ changePuzzle }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

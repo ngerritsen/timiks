@@ -34,8 +34,7 @@ export const archive = (id, times, puzzle) => ({ type: actionTypes.ARCHIVE, id, 
 export const expandArchiveItem = id => ({ type: actionTypes.EXPAND_ARCHIVE_ITEM, id });
 export const collapseArchiveItem = id => ({ type: actionTypes.COLLAPSE_ARCHIVE_ITEM, id });
 export const removeArchiveItem = id => ({ type: actionTypes.REMOVE_ARCHIVE_ITEM, id });
+export const sortArchive = sortBy => ({ type: actionTypes.SORT_ARCHIVE, sortBy });
 
 // Settings
-export const openSettings = () => ({ type: actionTypes.OPEN_SETTINGS });
-export const closeSettings = () => ({ type: actionTypes.CLOSE_SETTINGS });
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });

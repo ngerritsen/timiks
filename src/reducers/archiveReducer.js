@@ -4,7 +4,8 @@ const initialState = {
   items: [],
   expanded: '',
   isModalOpen: false,
-  titleInput: ''
+  titleInput: '',
+  sortBy: 'date'
 };
 
 function archiveReducer(state = initialState, action) {
@@ -65,6 +66,11 @@ function archiveReducer(state = initialState, action) {
       return {
         ...state,
         titleInput: action.title
+      }
+    case actionTypes.SORT_ARCHIVE:
+      return {
+        ...state,
+        sortBy: action.sortBy
       }
     default:
       return state;

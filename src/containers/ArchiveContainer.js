@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as times from '../helpers/times';
+import { sortArchive } from '../helpers/archive';
+
 import Archive from '../components/Archive';
 import {
   expandArchiveItem,
@@ -13,7 +15,7 @@ import {
 
 function mapStateToProps(state) {
   return {
-    archive: state.archive.items
+    archive: sortArchive(state.archive.items
       .map(item => ({
         ...item,
         collapsed: state.archive.expanded !== item.id,
@@ -21,8 +23,7 @@ function mapStateToProps(state) {
         average: times.calculateAverageTime(item.times),
         averageOfBestThree: times.calculateAverageTimeOfBestThree(item.times),
         date: times.getFirstDate(item.times)
-      }))
-      .sort((a, b) => a.date - b.date)
+      })), state.archive.sortBy)
   }
 }
 

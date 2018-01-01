@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ArchiveItem from './ArchiveItem';
+import ArchiveRefinementContainer from '../containers/ArchiveRefinementContainer';
+import Section from './Section';
 
 const Archive = ({
   archive,
@@ -13,6 +15,9 @@ const Archive = ({
   showTimeDetails
 }) => (
   <div>
+    <Section>
+      <ArchiveRefinementContainer/>
+    </Section>
     <ArchiveList>
       {archive.map((item, index) =>
         <ArchiveListItem key={index}>
