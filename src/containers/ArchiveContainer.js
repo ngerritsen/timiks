@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as times from '../helpers/times';
-import { sortArchive } from '../helpers/archive';
+import { decorateArchive, sortArchive, filterArchive } from '../helpers/archive';
 
 import Archive from '../components/Archive';
 import {
@@ -14,16 +13,14 @@ import {
 } from '../actions';
 
 function mapStateToProps(state) {
+  const { archive, times } = state;
+  const { items, puzzle, sortBy, expanded } = archive;
+
+  const filteredItems = filterArchive(items, puzzle);
+  const sortedItems = sortArchive(filteredItems, sortBy);
+
   return {
-    archive: sortArchive(state.archive.items
-      .map(item => ({
-        ...item,
-        collapsed: state.archive.expanded !== item.id,
-        times: times.markShowDetails(times.markBestTime(item.times), state.times.timeDetailsShown),
-        average: times.calculateAverageTime(item.times),
-        averageOfBestThree: times.calculateAverageTimeOfBestThree(item.times),
-        date: times.getFirstDate(item.times)
-      })), state.archive.sortBy)
+    archive: decorateArchive(sortedItems, expanded, times.timeDetailsShown)
   }
 }
 

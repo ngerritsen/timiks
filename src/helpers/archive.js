@@ -1,5 +1,18 @@
 import { ARCHIVE_SORT_OPTIONS } from '../constants/app';
 
+import * as times from '../helpers/times';
+
+export function decorateArchive(archive, expanded, timeDetailsShown) {
+  return archive.map(item => ({
+    ...item,
+    collapsed: expanded !== item.id,
+    times: times.markShowDetails(times.markBestTime(item.times), timeDetailsShown),
+    average: times.calculateAverageTime(item.times),
+    averageOfBestThree: times.calculateAverageTimeOfBestThree(item.times),
+    date: times.getFirstDate(item.times)
+  }));
+}
+
 export function sortArchive(archive, sortBy) {
   const { value, reversed } = ARCHIVE_SORT_OPTIONS.find(option => sortBy === option.value);
 
@@ -18,4 +31,12 @@ export function sortArchive(archive, sortBy) {
   }
 
   return sortedArchive;
+}
+
+export function filterArchive(archive, puzzle) {
+  if (!puzzle) {
+    return archive;
+  }
+
+  return archive.filter(item => item.puzzle === puzzle);
 }

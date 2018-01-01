@@ -5,7 +5,8 @@ const initialState = {
   expanded: '',
   isModalOpen: false,
   titleInput: '',
-  sortBy: 'date'
+  sortBy: 'date',
+  puzzle: ''
 };
 
 function archiveReducer(state = initialState, action) {
@@ -71,6 +72,11 @@ function archiveReducer(state = initialState, action) {
       return {
         ...state,
         sortBy: action.sortBy
+      }
+    case actionTypes.FILTER_ARCHIVE:
+      return {
+        ...state,
+        puzzle: action.puzzle
       }
     default:
       return state;
