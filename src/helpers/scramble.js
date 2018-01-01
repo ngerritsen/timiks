@@ -1,5 +1,6 @@
 import * as constants from '../constants/app';
 import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE, CLOCK } from '../constants/puzzles';
+import { generateArr } from './general';
 
 const scrambleGeneratorMap = {
   [CUBE]: generateCubeScramble,
@@ -130,16 +131,6 @@ function pickMultipleRandom(array, amount, items = []) {
 
 function randomNumber(min, max) {
   return pickRandom(generateArr(max - min + 1)) + min;
-}
-
-function generateArr(n) {
-  let arr = [];
-
-  for (let i = 0; i < n; i++) {
-    arr = [...arr, i];
-  }
-
-  return arr;
 }
 
 function charIf(bool, a, b = '') {
