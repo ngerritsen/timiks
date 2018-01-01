@@ -20,7 +20,8 @@ function mapStateToProps(state) {
   const sortedItems = sortArchive(filteredItems, sortBy);
 
   return {
-    archive: decorateArchive(sortedItems, expanded, times.timeDetailsShown)
+    archive: decorateArchive(sortedItems, expanded, times.timeDetailsShown),
+    isEmpty: items.length === 0
   }
 }
 

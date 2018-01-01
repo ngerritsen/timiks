@@ -12,27 +12,38 @@ const Archive = ({
   expandArchiveItem,
   hideTimeDetails,
   removeArchiveItem,
-  showTimeDetails
-}) => (
-  <div>
+  showTimeDetails,
+  isEmpty
+}) => {
+  if (isEmpty) {
+    return <Message>The archive is empty!</Message>
+  }
+
+  return <div>
     <Section>
       <ArchiveRefinementContainer/>
     </Section>
-    <ArchiveList>
-      {archive.map((item, index) =>
-        <ArchiveListItem key={index}>
-          <ArchiveItem
-            {...item}
-            hideTimeDetails={hideTimeDetails}
-            showTimeDetails={showTimeDetails}
-            removeArchiveItem={removeArchiveItem}
-            onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
-          />
-        </ArchiveListItem>
-      )}
-    </ArchiveList>
+    {(() => {
+        if (archive.length === 0) {
+          return <Message>No items found.</Message>
+        }
+
+        return <ArchiveList>
+          {archive.map((item, index) =>
+            <ArchiveListItem key={index}>
+              <ArchiveItem
+                {...item}
+                hideTimeDetails={hideTimeDetails}
+                showTimeDetails={showTimeDetails}
+                removeArchiveItem={removeArchiveItem}
+                onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
+              />
+            </ArchiveListItem>
+          )}
+        </ArchiveList>
+    })()}
   </div>
-);
+};
 
 Archive.propTypes = {
   archive: PropTypes.arrayOf(PropTypes.object),
@@ -40,7 +51,8 @@ Archive.propTypes = {
   expandArchiveItem: PropTypes.func.isRequired,
   hideTimeDetails: PropTypes.func.isRequired,
   removeArchiveItem: PropTypes.func.isRequired,
-  showTimeDetails: PropTypes.func.isRequired
+  showTimeDetails: PropTypes.func.isRequired,
+  isEmpty: PropTypes.bool.isRequired
 }
 
 const ArchiveList = styled.ul`
@@ -52,5 +64,11 @@ const ArchiveListItem = styled.li`
   padding: 0;
   margin: 0 0 ${props => props.theme.sizes.xs};
 `;
+
+const Message = styled.p`
+  margin: ${props => props.theme.sizes.xl} 0;
+  text-align: center;
+  color: ${props => props.theme.colors.subtleFg};
+`
 
 export default Archive;
