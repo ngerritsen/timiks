@@ -16,6 +16,6 @@ export const ARCHIVED_TIMES_STORAGE_KEY = 'archivedTimes';
 export const ARCHIVE_SORT_OPTIONS = [
   { label: 'Newest', value: 'date', reversed: true },
   { label: 'Title', value: 'title' },
-  { label: 'Average time', value: 'averageTime' },
+  { label: 'Average time', value: 'average' },
   { label: 'Average of best 3', value: 'averageOfBestThree' }
 ];
