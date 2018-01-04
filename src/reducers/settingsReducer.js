@@ -1,9 +1,9 @@
-import { CHANGE_PUZZLE } from '../constants/actionTypes';
+import { CHANGE_PUZZLE, CHANGE_THEME } from '../constants/actionTypes';
 import { DEFAULT_PUZZLE } from '../constants/app';
 
 const initialState = {
-  isOpen: false,
-  puzzle: DEFAULT_PUZZLE
+  puzzle: DEFAULT_PUZZLE,
+  theme: 'light'
 };
 
 export default function settingsReducer(state = initialState, action) {
@@ -13,6 +13,12 @@ export default function settingsReducer(state = initialState, action) {
         ...state,
         puzzle: action.puzzle
       }
+    case CHANGE_THEME: {
+      return {
+        ...state,
+        theme: action.theme
+      }
+    }
     default:
       return state;
   }

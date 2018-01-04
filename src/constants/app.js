@@ -12,6 +12,7 @@ export const DEFAULT_PUZZLE = '3x3x3';
 export const PUZZLE_STORAGE_KEY = 'puzzle';
 export const CURRENT_TIMES_STORAGE_KEY = 'currentTimes';
 export const ARCHIVED_TIMES_STORAGE_KEY = 'archivedTimes';
+export const THEME_STORAGE_KEY = 'theme';
 
 export const ARCHIVE_SORT_OPTIONS = [
   { label: 'Newest', value: 'date', reversed: true },

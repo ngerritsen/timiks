@@ -38,3 +38,4 @@ export const filterArchive = puzzle => ({ type: actionTypes.FILTER_ARCHIVE, puzz
 
 // Settings
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
+export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });

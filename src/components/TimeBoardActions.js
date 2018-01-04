@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid'
+import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid';
 
 import IconButton from './IconButton';
 import Modal from './Modal';

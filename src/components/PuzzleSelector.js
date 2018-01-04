@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Selector from './Selector';
 import puzzles from '../constants/puzzles';
 
-const Settings = ({ changePuzzle, puzzle }) => (
+const PuzzleSelector = ({ changePuzzle, puzzle }) => (
   <Selector
     label="Puzzle"
     onChange={changePuzzle}
@@ -13,10 +13,9 @@ const Settings = ({ changePuzzle, puzzle }) => (
   />
 );
 
-Settings.propTypes = {
+PuzzleSelector.propTypes = {
   changePuzzle: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
   puzzle: PropTypes.string.isRequired
 };
 
-export default Settings;
+export default PuzzleSelector;

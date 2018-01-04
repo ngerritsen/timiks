@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { darken } from 'polished';
+import { darken, lighten, getLuminance } from 'polished';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/fontawesome-pro-solid'
@@ -82,7 +82,11 @@ const ArchiveItemBox = styled.div`
 
   &:hover {
     cursor: pointer;
-    border: 1px solid ${props => darken(0.15, props.theme.colors.grey)};
+    border: 1px solid ${props => {
+      const color = props.theme.colors.grey;
+
+      return getLuminance(color) > 0.5 ? darken(0.1, color) : lighten(0.1, color);
+    }};
   }
 `;
 

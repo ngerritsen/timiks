@@ -1,12 +1,10 @@
-import { ThemeProvider, injectGlobal } from 'styled-components';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router } from 'react-router-dom'
+import { injectGlobal } from 'styled-components';
 
 import { APP_ROOT_SELECTOR } from './constants/app';
-import App from './components/App';
-import theme from './theme';
+import AppContainer from './containers/AppContainer';
 import store from './store';
 
 const rootEl = document.querySelector(APP_ROOT_SELECTOR);
@@ -24,18 +22,12 @@ injectGlobal`
 
   body {
     font-size: 1.6rem;
-    font-family: ${theme.font};
-    color: ${theme.colors.fg};
   }
 `;
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <Provider store={store}>
-      <Router>
-        <App/>
-      </Router>
-    </Provider>
-  </ThemeProvider>,
+  <Provider store={store}>
+      <AppContainer/>
+  </Provider>,
   rootEl
 );

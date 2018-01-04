@@ -4,13 +4,10 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes, faThumbsUp, faInfoCircle } from '@fortawesome/fontawesome-pro-solid';
 
-import theme from '../theme';
 import Time from './Time';
 import Modal from './Modal';
 import IconButton from './IconButton';
 import TimeDetails from './TimeDetails';
-
-const { colors: { green, red, blue } } = theme;
 
 const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, showTimeDetails, times }) => (
   <div>
@@ -21,20 +18,22 @@ const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, s
             <Time ms={ms}/>
             {
               (best && times.length > 1) &&
-              <TimeInfo><FontAwesome style={{ color: green }} icon={faThumbsUp}/></TimeInfo>
+              <TimeInfo>
+                <BestTimeIcon><FontAwesome icon={faThumbsUp}/></BestTimeIcon>
+              </TimeInfo>
             }
         </div>
         <div>
-          <IconButton onClick={() => showTimeDetails(id)}>
-            <FontAwesome style={{ color: blue }} icon={faInfoCircle} size="sm" />
-          </IconButton>
+          <InfoIconButton onClick={() => showTimeDetails(id)}>
+            <FontAwesome icon={faInfoCircle} size="sm" />
+          </InfoIconButton>
           <Modal title="Details" isOpen={showDetails}>
             <TimeDetails date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
           </Modal>
           {
             removeTime &&
             <RemoveItemIconButton onClick={() => removeTime(id)}>
-              <FontAwesome style={{ color: red }} icon={faTimes} size="sm" />
+              <FontAwesome icon={faTimes} size="sm" />
             </RemoveItemIconButton>
           }
         </div>
@@ -89,8 +88,17 @@ const TimeIndex = styled.span`
   color: ${props => props.theme.colors.subtleFg};
 `;
 
+const BestTimeIcon = styled.span`
+  color: ${props => props.theme.colors.green};
+`;
+
+const InfoIconButton = IconButton.extend`
+  color: ${props => props.theme.colors.blue};
+`;
+
 const RemoveItemIconButton = IconButton.extend`
-  margin-left: ${props => props.theme.sizes.xs};
+  margin-left: ${props => props.theme.sizes.sm};
+  color: ${props => props.theme.colors.red};
 `;
 
 export default TimeTable;
