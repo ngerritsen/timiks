@@ -29,28 +29,41 @@ class TimerContainer extends React.Component {
 
   _updateTime() {
     this.setState({
-      time: new Date().getTime() - this.props.startTime
+      time: Date.now() - this.props.startTime
     });
   }
 
-  render() {
-    const { scramble, startTime } = this.props;
-    const time = startTime === 0 ? startTime : this.state.time;
+  _getDisplayTime() {
+    const { finalTime, startTime } = this.props;
 
-    return <Timer time={time} scramble={scramble}/>
+    if (finalTime > 0) {
+      return finalTime;
+    }
+
+    if (startTime > 0) {
+      return this.state.time;
+    }
+
+    return 0;
+  }
+
+  render() {
+    return <Timer time={this._getDisplayTime()} scramble={this.props.scramble}/>
   }
 }
 
 TimerContainer.propTypes = {
   startTime: PropTypes.number.isRequired,
+  finalTime: PropTypes.number.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
   stopped: PropTypes.bool.isRequired
 };
 
 function mapStateToProps ({ timer, scramble }) {
-  const { stopped, startTime } = timer;
+  const { stopped, startTime, finalTime } = timer;
 
   return {
+    finalTime,
     startTime,
     stopped,
     scramble: stopped ? scramble : obfuscateScramble(scramble)

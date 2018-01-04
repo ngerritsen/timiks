@@ -1,7 +1,7 @@
 export const APP_ROOT_SELECTOR = '#app-root';
 export const MODAL_ROOT_SELECTOR = '#modal-root';
 
-export const TIMER_INTERVAL = 25;
+export const TIMER_INTERVAL = 42;
 export const SPACEBAR_KEYCODE = 32;
 
 export const SCRAMBLE_OBFUSCATION_CHAR = '*';

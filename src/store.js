@@ -1,14 +1,17 @@
+/* global process */
+
 import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 
-import { INCREMENT_TIME } from './constants/actionTypes';
 import middlewares from './middlewares';
 import reducer from './reducers';
 
-const loggerMiddleware = createLogger({
-  predicate: (_, action) => action.type !== INCREMENT_TIME
-});
+let allMiddlewares = middlewares;
 
-const store = createStore(reducer, applyMiddleware(...middlewares, loggerMiddleware));
+if (process.env.NODE_ENV === 'production') {
+  allMiddlewares = [...allMiddlewares, createLogger()];
+}
+
+const store = createStore(reducer, applyMiddleware(...allMiddlewares));
 
 export default store;
