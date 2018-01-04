@@ -28,6 +28,12 @@ const activationMiddleware = store => next => {
 
 function onSpacebarPress(store, callback) {
   window.addEventListener('keydown', (event) => {
+    // Prevent scrolling while holding spacebar.
+    if (isSpacebarEvent(event) && event.repeat) {
+      event.preventDefault();
+      return;
+    }
+
     if (isActivationSpacebarEvent(store, event)) {
       event.preventDefault();
       callback();
@@ -47,9 +53,13 @@ function onSpacebarRelease(store, callback) {
 function isActivationSpacebarEvent(store, event) {
   return (
     !store.getState().archive.isModalOpen &&
-    event.keyCode === SPACEBAR_KEYCODE &&
+    isSpacebarEvent(event) &&
     !event.repeat
   );
+}
+
+function isSpacebarEvent(event) {
+  return event.keyCode === SPACEBAR_KEYCODE;
 }
 
 export default activationMiddleware;
