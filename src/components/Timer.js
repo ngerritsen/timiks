@@ -11,7 +11,7 @@ const Timer = ({ scramble, time }) => (
   <div>
     <Section>
       <TimerTime>
-        <Time ms={time} fontSize={6} />
+        <Time ms={time} />
       </TimerTime>
     </Section>
     <Section>
@@ -31,6 +31,11 @@ Timer.propTypes = {
 const TimerTime = styled.div`
   text-align: center;
   padding: ${props => props.theme.sizes.lg} 0;
+  font-size: 5rem;
+
+  @media screen and (min-width: 420px) {
+    font-size: 6rem;
+  }
 `;
 
 export default Timer

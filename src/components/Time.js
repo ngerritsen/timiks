@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { fillZeroes } from '../helpers/formatting';
 import { breakUpTime } from '../helpers/time';
 
-const Time = ({ ms, fontSize }) => {
+const Time = ({ ms }) => {
   const { minutes, seconds, milliseconds } = breakUpTime(ms);
   return (
-    <span style={{ fontSize: fontSize ? (fontSize.toFixed(1) + 'rem') : 'inherit' }}>
+    <span>
       {formatPart(minutes, 2)}:{formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}<Unit>m</Unit>
     </span>
   );
