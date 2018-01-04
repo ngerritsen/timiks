@@ -12,7 +12,7 @@ export function formatTime(ms) {
     .join(':');
 }
 
-function fillZeroes(stringNumber, length) {
+export function fillZeroes(stringNumber, length) {
   const zeroes = generateArr(length - stringNumber.length)
     .map(() => '0')
     .join('');
