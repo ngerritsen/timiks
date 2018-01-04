@@ -13,59 +13,51 @@ import TimeDetails from './TimeDetails';
 const { colors: { green, red, blue } } = theme;
 
 const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, showTimeDetails, times }) => (
-  <TimeBoardTable>
-    <tbody>
-      {times.map(({ ms, id, best, date, scramble, showDetails }, index) => (
-        <tr key={index}>
-          <TimeIndexCell>{index + 1}.</TimeIndexCell>
-          <TimeBoardCell>
+  <div>
+    {times.map(({ ms, id, best, date, scramble, showDetails }, index) => (
+      <TimeBoardRow key={index}>
+        <div>
+          <TimeIndex>{index + 1}.</TimeIndex>
             <Time ms={ms}/>
             {
               (best && times.length > 1) &&
               <TimeInfo><FontAwesome style={{ color: green }} icon={faThumbsUp}/></TimeInfo>
             }
-          </TimeBoardCell>
-          <TimeActionCell>
-            <IconButton onClick={() => showTimeDetails(id)}>
-              <FontAwesome style={{ color: blue }} icon={faInfoCircle} size="lg" />
-            </IconButton>
-            <Modal title="Details" isOpen={showDetails}>
-              <TimeDetails date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
-            </Modal>
-          </TimeActionCell>
+        </div>
+        <div>
+          <IconButton onClick={() => showTimeDetails(id)}>
+            <FontAwesome style={{ color: blue }} icon={faInfoCircle} size="sm" />
+          </IconButton>
+          <Modal title="Details" isOpen={showDetails}>
+            <TimeDetails date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
+          </Modal>
           {
             removeTime &&
-            <TimeActionCell >
-              <IconButton onClick={() => removeTime(id)}>
-                <FontAwesome style={{ color: red }} icon={faTimes} size="lg" />
-              </IconButton>
-            </TimeActionCell>
+            <RemoveItemIconButton onClick={() => removeTime(id)}>
+              <FontAwesome style={{ color: red }} icon={faTimes} size="sm" />
+            </RemoveItemIconButton>
           }
-        </tr>
-      ))}
-        <tr>
-          <TimeIndexCell></TimeIndexCell>
-          <TimeBoardCell>
-            <strong><Time ms={average}/></strong>
-            <TimeInfo>(avg.)</TimeInfo>
-          </TimeBoardCell>
-          <TimeActionCell/>
-          {removeTime && <TimeActionCell/>}
-        </tr>
-        {
-          times.length >= 5 &&
-          <tr>
-            <TimeIndexCell></TimeIndexCell>
-            <TimeBoardCell>
-              <strong><Time ms={averageOfBestThree}/></strong>
-              <TimeInfo>(avg. best 3)</TimeInfo>
-            </TimeBoardCell>
-            <TimeActionCell/>
-            {removeTime && <TimeActionCell/>}
-          </tr>
-        }
-    </tbody>
-  </TimeBoardTable>
+        </div>
+      </TimeBoardRow>
+    ))}
+      <TimeBoardRow>
+        <div>
+          <TimeIndex></TimeIndex>
+          <strong><Time ms={average}/></strong>
+          <TimeInfo>(avg.)</TimeInfo>
+        </div>
+      </TimeBoardRow>
+      {
+        times.length >= 5 &&
+        <TimeBoardRow>
+          <div>
+            <TimeIndex></TimeIndex>
+            <strong><Time ms={averageOfBestThree}/></strong>
+            <TimeInfo>(avg. best 3)</TimeInfo>
+          </div>
+        </TimeBoardRow>
+      }
+  </div>
 )
 
 TimeTable.propTypes = {
@@ -77,9 +69,13 @@ TimeTable.propTypes = {
   times: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-const TimeBoardTable = styled.table`
+const TimeBoardRow = styled.div`
   width: 100%;
-  border-collapse: collapse;
+  display: flex;
+  border-bottom: 1px solid ${props => props.theme.colors.grey};
+  justify-content: space-between;
+  align-items: center;
+  height: 3.6rem;
 `;
 
 const TimeInfo = styled.small`
@@ -87,22 +83,14 @@ const TimeInfo = styled.small`
   color: ${props => props.theme.colors.subtleFg};
 `;
 
-const TimeBoardCell = styled.td`
-  font-size: 1.6rem;
-  padding: ${props => props.theme.sizes.xs} 0;
-  border-bottom: 1px solid ${props => props.theme.colors.grey};
-`;
-
-const TimeIndexCell = TimeBoardCell.extend`
+const TimeIndex = styled.span`
+  display: inline-block;
   width: 2em;
   color: ${props => props.theme.colors.subtleFg};
 `;
 
-const TimeActionCell = TimeBoardCell.extend`
-  font-size: 1rem;
-  width: 2em;
-  padding-left: ${props => props.theme.sizes.xxs};
-  padding-right: ${props => props.theme.sizes.xxs};
+const RemoveItemIconButton = IconButton.extend`
+  margin-left: ${props => props.theme.sizes.xs};
 `;
 
 export default TimeTable;

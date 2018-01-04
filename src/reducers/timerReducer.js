@@ -1,7 +1,7 @@
-import { INCREMENT_TIME, RESET_TIME, START_TIMER, STOP_TIMER } from '../constants/actionTypes';
+import { RESET_TIME, START_TIMER, STOP_TIMER } from '../constants/actionTypes';
 
 const initialState = {
-  time: 0,
+  startTime: 0,
   stopped: true
 }
 
@@ -10,6 +10,7 @@ export default function timerReducer(state = initialState, action) {
     case START_TIMER:
       return {
         ...state,
+        startTime: action.startTime,
         stopped: false
       }
     case STOP_TIMER:
@@ -17,15 +18,10 @@ export default function timerReducer(state = initialState, action) {
         ...state,
         stopped: true
       }
-    case INCREMENT_TIME:
-      return {
-        ...state,
-        time: state.time += action.ms
-      }
     case RESET_TIME:
       return {
         ...state,
-        time: 0
+        startTime: 0
       }
     default:
       return state

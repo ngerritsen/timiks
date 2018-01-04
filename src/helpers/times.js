@@ -5,7 +5,7 @@ export function calculateAverageTime(times) {
 }
 
 export function calculateAverageTimeOfBestThree(times) {
-  const bestThreeTimes = times
+  const bestThreeTimes = [...times]
     .sort((a, b) => a.ms - b.ms)
     .slice(0, 3);
 

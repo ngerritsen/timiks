@@ -1,9 +1,8 @@
 import * as actionTypes from './constants/actionTypes';
 
 // Timer
-export const incrementTime = ms => ({ type: actionTypes.INCREMENT_TIME, ms });
 export const resetTime = () => ({ type: actionTypes.RESET_TIME });
-export const startTimer = () => ({ type: actionTypes.START_TIMER });
+export const startTimer = startTime => ({ type: actionTypes.START_TIMER, startTime });
 export const stopTimer = () => ({ type: actionTypes.STOP_TIMER });
 
 // Activation
