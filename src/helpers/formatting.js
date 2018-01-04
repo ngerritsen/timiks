@@ -4,11 +4,11 @@ export function formatTime(ms) {
   const time = new Date(ms);
 
   return [
-    time.getMinutes(),
-    time.getSeconds(),
-    Math.round(time.getMilliseconds() / 10)
+    [time.getMinutes(), 2],
+    [time.getSeconds(), 2],
+    [time.getMilliseconds(), 3]
   ]
-    .map(number => fillZeroes(number.toString(), 2))
+    .map((number, length) => fillZeroes(number.toString(), length))
     .join(':');
 }
 
