@@ -1,5 +1,5 @@
 import * as constants from '../constants/app';
-import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE, CLOCK } from '../constants/puzzles';
+import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE, CLOCK, CUBE_OPPOSITES } from '../constants/puzzles';
 import { generateArr } from './general';
 
 const scrambleGeneratorMap = {
@@ -25,7 +25,8 @@ function generateCubeScramble(scrambleOptions) {
 
   return generateArr(length).reduce(moves => {
     const previousDirection = extractLastDirection(moves, directions);
-    const direction = pickRandomDirection(directions, previousDirection);
+    const relevantOpposites = CUBE_OPPOSITES.find(arr => arr.includes(previousDirection));
+    const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
     const twice = pickRandom([false, false, true]);
     const reversed = twice ? false : randomBoolean();
     const outerLayers = extraLayers ? randomBoolean() : false;
@@ -108,8 +109,10 @@ function randomBoolean() {
   return pickRandom([false, true]);
 }
 
-function pickRandomDirection(directions, previousDirection) {
- return pickRandom(directions.filter(direction => direction !== previousDirection));
+function pickRandomDirection(directions, previousDirection, opposites = []) {
+  return pickRandom(directions.filter(direction =>
+    ![...opposites, previousDirection].includes(direction)
+  ));
 }
 
 function pickRandom(array) {

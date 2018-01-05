@@ -9,6 +9,8 @@ const FULL_CUBE_DIRECTIONS = [UP, RIGHT, DOWN, LEFT, FRONT, BACK];
 const DODECAHEDRON_DIRECTIONS = [RIGHT, DOWN];
 const DODECAHEDRON_END_DIRECTION = UP;
 
+export const CUBE_OPPOSITES = [[UP, DOWN], [RIGHT, LEFT], [FRONT, BACK]];
+
 export const CUBE = 'CUBE';
 export const CLOCK = 'CLOCK';
 export const SQUARE_ONE = 'SQUARE_ONE';
@@ -29,7 +31,7 @@ const puzzles = [
     type: CUBE,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
-      length: 23
+      length: 20
     }
   },
   {
