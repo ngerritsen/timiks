@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Button from './Button';
+import FullScreenButton from './FullScreenButton';
 
 const Activation = ({ stopped, preparing, startTimer, stopTimer, resetTime }) => (
   <div>
@@ -10,17 +11,22 @@ const Activation = ({ stopped, preparing, startTimer, stopTimer, resetTime }) =>
       if (stopped) {
         return preparing ?
           <Button big primary>Ready</Button> :
-          <Button big primary onClick={() => (resetTime() && startTimer())}>Start</Button>
+          <Button big primary onClick={() => { resetTime(); startTimer(); }}>Start</Button>
       }
 
-      return <Button big primary onClick={stopTimer}>Stop</Button>
+      return (
+        <span>
+          <Button big primary onClick={stopTimer}>Stop</Button>
+          <FullScreenButton onClick={stopTimer}/>
+        </span>
+      );
     })()}
 
     <Explain>
       {stopped && !preparing && 'Press and release '}
       {stopped && preparing && 'Release '}
       {!stopped && 'Press '}
-      spacebar <Spacebar/> to {stopped ? 'start' : 'stop'}.
+      spacebar <Spacebar/> {!stopped ? 'or tap anywhere' : ''} to {stopped ? 'start' : 'stop'}.
     </Explain>
   </div>
 );

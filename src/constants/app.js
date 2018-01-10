@@ -1,5 +1,8 @@
 export const APP_ROOT_SELECTOR = '#app-root';
 export const MODAL_ROOT_SELECTOR = '#modal-root';
+export const FULL_SCREEN_BUTTON_ROOT_SELECTOR = '#full-screen-button';
+
+export const ACTIVATION_THROTTLE = 1000;
 
 export const TIMER_INTERVAL = 42;
 export const SPACEBAR_KEYCODE = 32;

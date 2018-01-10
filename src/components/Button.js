@@ -13,7 +13,7 @@ const Button = styled.button.attrs({
       .reduce((color, key) => (propColorMap[key] || color), 'blue')
   ),
   fontSize: props => props.big ? '1.8rem': '1.4rem',
-  height: props => props.big ? '6.2rem' : '3.6rem',
+  height: props => props.big ? '6.4rem' : '4.2rem',
   sidepadding: props => props.big ? 'lg' : 'md',
   radius: props => props.big ? '0.5rem' : '0.3rem'
 })`
