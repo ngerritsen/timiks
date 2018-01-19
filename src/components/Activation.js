@@ -60,7 +60,7 @@ const PrepartionCircle = styled.span`
   line-height: 1.6rem;
   background-color: white;
   opacity: ${props => props.active ? 1 : 0.3};
-  margin-right: ${props => props.theme.sizes.md};
+  margin: 0 ${props => props.theme.sizes.sm};
 `;
 
 const Explain = styled.p`

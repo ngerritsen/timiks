@@ -18,10 +18,17 @@ const Selector = ({ label, onChange, options, value }) => (
 const Select = styled.select`
   font-size: 1.4rem;
   height: 1.8em;
+  border-radius: 0.4rem;
   margin-left: ${props => props.theme.sizes.xs};
+  border: 1px solid ${props => props.theme.colors.grey};
 
   &:hover {
     cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid ${props => props.theme.colors.subtleFg};
   }
 `;
 

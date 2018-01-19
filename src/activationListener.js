@@ -47,8 +47,8 @@ function listenFor(initiateEvent, fireEvent, validator, onInitiate, onFire) {
 
       window.removeEventListener(initiateEvent, initiateListener);
 
-      window.addEventListener(fireEvent, fireListener);
-      window.addEventListener(initiateEvent, preventDefaultListener);
+      window.addEventListener(fireEvent, fireListener, { passive: false });
+      window.addEventListener(initiateEvent, preventDefaultListener, { passive: false });
 
       onInitiate();
     }
@@ -67,7 +67,7 @@ function listenFor(initiateEvent, fireEvent, validator, onInitiate, onFire) {
     }
   };
 
-  window.addEventListener(initiateEvent, initiateListener);
+  window.addEventListener(initiateEvent, initiateListener, { passive: false });
 }
 
 function isActivationSpacebarEvent(event) {
