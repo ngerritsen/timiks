@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import TimeTable from '../components/TimeTable';
 import { removeTime, showTimeDetails, hideTimeDetails } from '../actions';
@@ -13,8 +12,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ removeTime, showTimeDetails, hideTimeDetails }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimeTable);
+export default connect(
+  mapStateToProps,
+  { removeTime, showTimeDetails, hideTimeDetails }
+)(TimeTable);

@@ -1,20 +1,25 @@
-import { PREPARE_ACTIVATION, FIRE_ACTIVATION } from '../constants/actionTypes';
+import { PREPARE_ACTIVATION, RESET_ACTIVATION, INCREMENT_PREPARATION_STAGE } from '../constants/actionTypes';
 
 const initialState = {
-  preparing: false
+  preparationStage: -1
 }
 
 export default function activationReducer(state = initialState, action) {
   switch (action.type) {
+    case INCREMENT_PREPARATION_STAGE:
+      return {
+        ...state,
+        preparationStage: state.preparationStage + 1
+      }
     case PREPARE_ACTIVATION:
       return {
         ...state,
-        preparing: true
+        preparationStage: 0
       }
-    case FIRE_ACTIVATION:
+    case RESET_ACTIVATION:
       return {
         ...state,
-        preparing: false
+        preparationStage: -1
       }
     default:
       return state

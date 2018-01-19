@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import { decorateArchive, sortArchive, filterArchive } from '../helpers/archive';
 
@@ -25,14 +24,13 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
+export default connect(
+  mapStateToProps,
+  {
     expandArchiveItem,
     collapseArchiveItem,
     hideTimeDetails,
     removeArchiveItem,
     showTimeDetails
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Archive);
+  }
+)(Archive);

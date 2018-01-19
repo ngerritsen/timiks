@@ -1,22 +1,24 @@
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { startTimer, stopTimer, resetTime } from '../actions';
 import Activation from '../components/Activation';
+import { isReady, isPreparing } from '../selectors/activationSelectors';
 
-function mapStateToProps ({ timer, activation }) {
+function mapStateToProps (state) {
+  const { timer, activation } = state;
   const { stopped, time } = timer;
-  const { preparing } = activation;
+  const { preparationStage } = activation;
 
   return {
     time,
     stopped,
-    preparing
+    preparationStage,
+    preparing: isPreparing(state),
+    ready: isReady(state)
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ startTimer, stopTimer, resetTime }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Activation);
+export default connect(
+  mapStateToProps,
+  { startTimer, stopTimer, resetTime }
+)(Activation);

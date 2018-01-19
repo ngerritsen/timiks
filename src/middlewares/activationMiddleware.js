@@ -1,65 +1,52 @@
-import { SPACEBAR_KEYCODE } from '../constants/app';
-import { resetTime, stopTimer, startTimer, prepareActivation, fireActivation } from '../actions';
+import { PREPARATION_STAGES, ACTIVATION_DURATION } from '../constants/app';
+import * as actions from '../actions';
+import { isReady, isPreparing } from '../selectors/activationSelectors';
+import listenForActivations from '../activationListener';
 
 const activationMiddleware = store => next => {
   const { dispatch, getState } = store;
 
-  onSpacebarPress(store, () => {
-    if (getState().timer.stopped) {
-      dispatch(resetTime());
-      dispatch(prepareActivation());
-      return;
-    }
+  let interval = null;
 
-    dispatch(stopTimer());
-  });
+  listenForActivations({
+    onInitiate() {
+      if (!getState().timer.stopped) {
+        dispatch(actions.stopTimer());
+        return;
+      }
 
-  onSpacebarRelease(store, () => {
-    const { timer, activation } = getState();
+      dispatch(actions.resetTime());
+      dispatch(actions.prepareActivation());
 
-    if (timer.stopped && activation.preparing) {
-      dispatch(startTimer());
-      dispatch(fireActivation());
+      interval = countDown(() => {
+        if (!isReady(getState())) {
+          dispatch(actions.incrementPreparationStage())
+        }
+      });
+    },
+    onFire() {
+      clearInterval(interval);
+
+      if (!isPreparing(getState())) {
+        return;
+      }
+
+      if (isReady(getState())) {
+        dispatch(actions.startTimer());
+      }
+
+      dispatch(actions.resetActivation());
     }
   });
 
   return action => next(action);
 }
 
-function onSpacebarPress(store, callback) {
-  window.addEventListener('keydown', (event) => {
-    // Prevent scrolling while holding spacebar.
-    if (isSpacebarEvent(event) && event.repeat) {
-      event.preventDefault();
-      return;
-    }
-
-    if (isActivationSpacebarEvent(store, event)) {
-      event.preventDefault();
-      callback();
-    }
-  });
-}
-
-function onSpacebarRelease(store, callback) {
-  window.addEventListener('keyup', (event) => {
-    if (isActivationSpacebarEvent(store, event)) {
-      event.preventDefault();
-      callback();
-    }
-  });
-}
-
-function isActivationSpacebarEvent(store, event) {
-  return (
-    !store.getState().archive.isModalOpen &&
-    isSpacebarEvent(event) &&
-    !event.repeat
+function countDown(onIncrement) {
+  return setInterval(
+    onIncrement,
+    ACTIVATION_DURATION / PREPARATION_STAGES
   );
-}
-
-function isSpacebarEvent(event) {
-  return event.keyCode === SPACEBAR_KEYCODE;
 }
 
 export default activationMiddleware;

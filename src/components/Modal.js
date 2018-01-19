@@ -21,7 +21,7 @@ class Modal extends React.Component {
     }
 
     return ReactDOM.createPortal(
-      <ModalOverlay>
+      <ModalOverlay data-modal>
         <ModalBox ref={el => this.modalBoxEl = el}>
           <ModalTitle>{title}</ModalTitle>
           {children}

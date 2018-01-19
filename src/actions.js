@@ -7,7 +7,8 @@ export const stopTimer = () => ({ type: actionTypes.STOP_TIMER });
 
 // Activation
 export const prepareActivation = () => ({ type: actionTypes.PREPARE_ACTIVATION });
-export const fireActivation = () => ({ type: actionTypes.FIRE_ACTIVATION });
+export const resetActivation = () => ({ type: actionTypes.RESET_ACTIVATION });
+export const incrementPreparationStage = () => ({ type: actionTypes.INCREMENT_PREPARATION_STAGE });
 
 // Scramble
 export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });

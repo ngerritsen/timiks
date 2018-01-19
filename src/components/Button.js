@@ -31,9 +31,11 @@ const Button = styled.button.attrs({
   text-transform: uppercase;
   transition: background-color 0.2s ease;
 
+  &:focus,
   &:hover {
     background-color: ${props => lighten(props.disabled ? 0 : 0.03, props.theme.colors[props.color])};
     cursor: ${props => props.disabled ? 'default' : 'pointer'};
+    outline: ${props => props.disabled ? 'none' : 'inherit'};
   }
 `;
 

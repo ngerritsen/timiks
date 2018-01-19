@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import TimeBoardActions from '../components/TimeBoardActions';
 import {
@@ -17,14 +16,13 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
+export default connect(
+  mapStateToProps,
+  {
     clearTimes,
     openArchiveModal,
     inputTimesTitle,
     closeArchiveModal,
     archiveCurrentTimes,
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimeBoardActions);
+  }
+)(TimeBoardActions);

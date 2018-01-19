@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import ThemeSelector from '../components/ThemeSelector';
 import { changeTheme } from '../actions';
@@ -10,8 +9,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changeTheme }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ThemeSelector);
+export default connect(mapStateToProps, { changeTheme })(ThemeSelector);

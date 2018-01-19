@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import ArchiveRefinement from '../components/ArchiveRefinement';
 import { sortArchive, filterArchive } from '../actions';
@@ -11,8 +10,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ sortArchive, filterArchive }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ArchiveRefinement);
+export default connect(
+  mapStateToProps,
+  { sortArchive, filterArchive }
+)(ArchiveRefinement);

@@ -8,7 +8,7 @@ import reducer from './reducers';
 
 let allMiddlewares = middlewares;
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'production') {
   allMiddlewares = [...allMiddlewares, createLogger()];
 }
 

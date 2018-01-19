@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import PuzzleSelector from '../components/PuzzleSelector';
 import { changePuzzle } from '../actions';
@@ -10,8 +9,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changePuzzle }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PuzzleSelector);
+export default connect(mapStateToProps, { changePuzzle })(PuzzleSelector);
