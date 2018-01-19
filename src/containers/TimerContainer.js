@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { TIMER_INTERVAL } from '../constants/app';
 import { obfuscateScramble } from '../helpers/scramble';
+import { getCubeSize } from '../selectors/settingsSelectors';
 import Timer from '../components/Timer';
 
 class TimerContainer extends React.Component {
@@ -48,25 +49,32 @@ class TimerContainer extends React.Component {
   }
 
   render() {
-    return <Timer time={this._getDisplayTime()} scramble={this.props.scramble}/>
+    return <Timer
+      time={this._getDisplayTime()}
+      scramble={this.props.scramble}
+      cubeSize={this.props.cubeSize}
+    />
   }
 }
 
 TimerContainer.propTypes = {
+  cubeSize: PropTypes.number,
   startTime: PropTypes.number.isRequired,
   finalTime: PropTypes.number.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
   stopped: PropTypes.bool.isRequired
 };
 
-function mapStateToProps ({ timer, scramble }) {
+function mapStateToProps (state) {
+  const { timer, scramble } = state;
   const { stopped, startTime, finalTime } = timer;
 
   return {
     finalTime,
     startTime,
     stopped,
-    scramble: stopped ? scramble : obfuscateScramble(scramble)
+    scramble: stopped ? scramble : obfuscateScramble(scramble),
+    cubeSize: getCubeSize(state)
   }
 }
 

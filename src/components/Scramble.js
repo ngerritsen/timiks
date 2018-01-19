@@ -2,13 +2,22 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Scramble = ({ scramble, small = false }) => (
-  <ScrambleBox small={small}>
-    {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
-  </ScrambleBox>
+import CubeLayout from './CubeLayout';
+
+const Scramble = ({ scramble, cubeSize, small = false }) => (
+  <div>
+    <ScrambleBox small={small}>
+      {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
+    </ScrambleBox>
+    {
+      false &&
+      <CubeLayout scramble={scramble} cubeSize={cubeSize}/>
+    }
+  </div>
 );
 
 Scramble.propTypes = {
+  cubeSize: PropTypes.number,
   scramble: PropTypes.arrayOf(PropTypes.string),
   small: PropTypes.bool
 };

@@ -7,7 +7,7 @@ import Section from './Section';
 import Scramble from './Scramble';
 import ActivationContainer from '../containers/ActivationContainer';
 
-const Timer = ({ scramble, time }) => (
+const Timer = ({ scramble, time, cubeSize }) => (
   <div>
     <Section>
       <TimerTime>
@@ -15,7 +15,7 @@ const Timer = ({ scramble, time }) => (
       </TimerTime>
     </Section>
     <Section>
-      <Scramble scramble={scramble} />
+      <Scramble scramble={scramble} cubeSize={cubeSize} />
     </Section>
     <Section>
       <ActivationContainer/>
@@ -24,6 +24,7 @@ const Timer = ({ scramble, time }) => (
 );
 
 Timer.propTypes = {
+  cubeSize: PropTypes.number,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
   time: PropTypes.number.isRequired
 };

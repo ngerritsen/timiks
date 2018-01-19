@@ -1,9 +1,7 @@
-const edges = {
-  top: { axis: 'y', end: false },
-  right: { axis: 'x', end: true },
-  bottom: { axis: 'y', end: true },
-  left: { axis: 'x', end: false }
-};
+const TOP = { axis: 'y', end: false };
+const RIGHT = { axis: 'x', end: true };
+const BOTTOM = { axis: 'y', end: true };
+const LEFT = { axis: 'x', end: false };
 
 const U = 'U';
 const D = 'D';
@@ -12,93 +10,121 @@ const L = 'L';
 const F = 'F';
 const B = 'B';
 
-const faceEdgeMap = {
+export const WHITE = 'WHITE';
+export const BLUE = 'BLUE';
+export const YELLOW = 'YELLOW';
+export const ORANGE = 'ORANGE';
+export const RED = 'RED';
+export const GREEN = 'GREEN';
+
+const FACE_EDGE_MAP = {
   [U]: [
-    { face: F, edge: edges.top },
-    { face: L, edge: edges.top },
-    { face: B, edge: edges.top },
-    { face: R, edge: edges.top }
+    { face: F, edge: TOP },
+    { face: L, edge: TOP },
+    { face: B, edge: TOP },
+    { face: R, edge: TOP }
   ],
   [D]: [
-    { face: R, edge: edges.bottom },
-    { face: B, edge: edges.bottom },
-    { face: L, edge: edges.bottom },
-    { face: F, edge: edges.bottom }
+    { face: B, edge: BOTTOM },
+    { face: L, edge: BOTTOM },
+    { face: F, edge: BOTTOM },
+    { face: R, edge: BOTTOM }
   ],
   [L]: [
-    { face: U, edge: edges.left },
-    { face: F, edge: edges.left },
-    { face: D, edge: edges.left },
-    { face: B, edge: edges.right }
+    { face: U, edge: LEFT },
+    { face: F, edge: LEFT },
+    { face: D, edge: LEFT },
+    { face: B, edge: RIGHT }
   ],
   [R]: [
-    { face: U, edge: edges.right },
-    { face: B, edge: edges.left },
-    { face: D, edge: edges.right },
-    { face: F, edge: edges.right }
+    { face: U, edge: RIGHT },
+    { face: B, edge: LEFT },
+    { face: D, edge: RIGHT },
+    { face: F, edge: RIGHT }
   ],
   [F]: [
-    { face: U, edge: edges.bottom },
-    { face: R, edge: edges.right },
-    { face: D, edge: edges.top },
-    { face: L, edge: edges.right }
+    { face: U, edge: BOTTOM },
+    { face: R, edge: RIGHT },
+    { face: D, edge: TOP },
+    { face: L, edge: RIGHT }
   ],
   [B]: [
-    { face: U, edge: edges.top },
-    { face: L, edge: edges.left },
-    { face: D, edge: edges.bottom },
-    { face: R, edge: edges.left }
+    { face: U, edge: TOP },
+    { face: L, edge: LEFT },
+    { face: D, edge: BOTTOM },
+    { face: R, edge: LEFT }
   ]
 };
 
-const printMap = [
-  ['', U],
-  [L, F, R, B],
-  ['', D]
-];
-
-const initialState = {
-  [U]: 'White',
-  [D]: 'Yellow',
-  [L]: 'Orange',
-  [R]: 'Red',
-  [F]: 'Green',
-  [B]: 'Blue'
+const INITIAL_FACES = {
+  [U]: WHITE,
+  [D]: YELLOW,
+  [L]: ORANGE,
+  [R]: RED,
+  [F]: GREEN,
+  [B]: BLUE
 };
 
-export function createCube(size) {
-  return Object.keys(initialState)
+export function layoutScramble(scramble, size) {
+  const cube = scramble.reduce((cube, move) => {
+    const { direction, times } = parseMove(move);
+
+    return generateArr(times)
+      .reduce((scrambledCube) => {
+        return rotate(scrambledCube, direction);
+      }, cube);
+  }, createCube(size));
+
+  return formatCube(cube);
+}
+
+function parseMove(move) {
+  const direction = move.slice(0, 1);
+  const reverse = move.indexOf('\'') === 1;
+  const twice = move.indexOf('2') === 1;
+
+  let times = reverse ? 3 : 1;
+
+  times = twice ? 2 : times;
+
+  return { direction, times };
+}
+
+function createCube(size) {
+  return Object.keys(INITIAL_FACES)
     .reduce((state, face) => ({
       ...state,
-      [face]: createFace(size, initialState[face])
+      [face]: createFace(size, INITIAL_FACES[face])
     }), {})
 }
 
-export function getLayout(cube) {
-  const size = getSize(cube.U);
-
-  return printMap.map(row =>
-    generateArr(size)
-      .map((yIndex) =>
-        row.map(face =>
-          !face
-            ? generateArr(size).map(() => ' ')
-            : sortTilesBy(
-              cube[face].filter(({ y }) => y === yIndex),
-              'x'
-            )
-              .map(({ color }) => color.slice(0, 1))
-        )
-      )
-    )
+function formatCube(cube) {
+  return Object.keys(cube)
+    .reduce((sortedCube, face) => ({
+      ...sortedCube,
+      [face]: formatFace(sortFace(cube[face]))
+    }), cube);
 }
 
-export function rotate(cube, face) {
+function rotate(cube, face) {
   return {
     ...cube,
-    ...cycleEdges(faceEdgeMap[face], cube),
-    [face]: rotateFace(cube[face])
+    ...cycleEdges(FACE_EDGE_MAP[face], cube),
+    [face]: sortFace(rotateFace(cube[face]))
   }
+}
+
+function formatFace(face) {
+  return generateArr(getSize(face))
+    .map(y => getRow(face, 'y', y)
+      .map(tile => tile.color));
+}
+
+function sortFace(face) {
+  return face
+    .slice(0)
+    .sort((a, b) => a.x - b.x)
+    .sort((a, b) => a.y - b.y);
 }
 
 function createFace(size, color) {
@@ -111,23 +137,20 @@ function createFace(size, color) {
 }
 
 function cycleEdges(edgeMap, cube) {
-  let nextCube = cube;
-
-  edgeMap.forEach(({ edge, face }, index) => {
-    const donorEdge = index === 0
-      ? edgeMap[edgeMap.length - 1]
-      : edgeMap[index - 1];
-
-    const row = getEdge(cube[donorEdge.face], donorEdge.edge);
+  return edgeMap.reduce((nextCube, target, index) => {
+    const source = getPreviousItem(edgeMap, index);
+    const row = getEdge(cube[source.face], source.edge);
     const colors = getRowColors(row);
 
-    nextCube = {
+    return {
       ...nextCube,
-      [face]: replaceEdgeColors(cube[face], edge, colors)
+      [target.face]: sortFace(replaceEdgeColors(
+        cube[target.face],
+        target.edge,
+        colors
+      ))
     }
-  })
-
-  return nextCube;
+  }, {})
 }
 
 function getRow(face, axis, index) {
@@ -144,8 +167,8 @@ function getEdge(face, edge) {
 }
 
 function replaceEdgeColors(face, edge, colors) {
-  const colorQueue = [...colors];
-  const { axis, index } = getEdgeValues(edge);
+  const colorQueue = [...colors].reverse();
+  const { axis, index } = getEdgeValues(edge, getSize(face));
   return face.map(tile =>
     tile[axis] === index
       ? { ...tile, color: colorQueue.pop() }
@@ -160,7 +183,8 @@ function getEdgeValues(edge, size) {
 }
 
 function rotateFace(face) {
-  return face.map(({ color, x, y }) => ({
+  return face
+    .map(({ color, x, y }) => ({
       x: reverseIndex(y, getSize(face)),
       y: x,
       color
@@ -175,14 +199,14 @@ function getSize(face) {
   return Math.sqrt(face.length);
 }
 
-function sortTilesBy(tiles, axis) {
-  return tiles
-    .slice(0)
-    .sort((a, b) => a[axis] - b[axis]);
-}
-
 function generateArr(size, arr = []) {
   return arr.length < size
     ? generateArr(size, [...arr, arr.length])
     : arr;
+}
+
+function getPreviousItem(array, index) {
+  return index === 0
+    ? array[array.length - 1]
+    : array[index - 1]
 }
