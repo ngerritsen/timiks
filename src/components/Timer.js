@@ -8,7 +8,7 @@ import Scramble from './Scramble';
 import ActivationContainer from '../containers/ActivationContainer';
 
 const Timer = ({ scramble, time, cubeSize }) => (
-  <div>
+  <div data-activation>
     <Section>
       <TimerTime>
         <Time ms={time} />

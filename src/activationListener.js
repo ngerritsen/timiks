@@ -76,7 +76,7 @@ function isActivationSpacebarEvent(event) {
 
 function isActivationEvent(event) {
   return (
-    !!document.querySelector('[data-activation]') &&
+    !!event.target.closest('[data-activation]') &&
     !document.querySelector('[data-modal]') &&
     !interactiveElements.includes(String(event.target.tagName).toLowerCase()) &&
     !event.target.closest(interactiveElements.join(',')) &&
