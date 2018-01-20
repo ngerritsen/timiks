@@ -10,6 +10,7 @@ const Scramble = ({ scramble, cubeSize, small = false }) => (
       {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
     </ScrambleBox>
     {
+      cubeSize &&
       false &&
       <CubeLayout scramble={scramble} cubeSize={cubeSize}/>
     }

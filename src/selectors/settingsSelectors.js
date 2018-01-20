@@ -1,9 +1,11 @@
-export function getCubeSize(state) {
-  const dimensions = state.settings.puzzle.split('x');
+import puzzles, { CUBE } from '../constants/puzzles';
 
-  if (dimensions.length !== 3) {
+export function getCubeSize(state) {
+  const puzzle = puzzles.find(puzzle => puzzle.name === state.settings.puzzle);
+
+  if (puzzle.type !== CUBE) {
     return undefined;
   }
 
-  return Number(dimensions[0]);
+  return puzzle.size;
 }

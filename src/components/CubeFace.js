@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 import { WHITE, YELLOW, GREEN, BLUE, RED, ORANGE } from '../helpers/cube';
 
@@ -13,17 +14,18 @@ const TILE_COLOR_MAP = {
   [ORANGE]: '#ff9c3f'
 }
 
-const CubeFace = ({ face = [] }) => (
+const CubeFace = ({ face = [], cubeSize }) => (
   <Face>
     {face.map((row, y) =>
       <Row key={y}>
-        {row.map((color, x) => <Tile key={x} color={color}/>)}
+        {row.map((color, x) => <Tile key={x} color={color} cubeSize={cubeSize}/>)}
       </Row>
     )}
   </Face>
 );
 
 CubeFace.propTypes = {
+  cubeSize: PropTypes.number.isRequired,
   face: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
 }
 
@@ -42,13 +44,19 @@ const Row = styled.div`
 `;
 
 const Tile = styled.span`
-  border-radius: 0.4rem;
+  border-radius: ${props => scale(props.cubeSize, 0.2, 0.4)}rem;
   display: inline-block;
   flex-grow: 1;
   background-color: ${props => TILE_COLOR_MAP[props.color]};
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${props => darken(0.3, TILE_COLOR_MAP[props.color])};
   width: 100%;
-  border: 2px solid ${props => props.theme.colors.subtleFg};
-  margin: 0.15rem;
+  margin: ${props => scale(props.cubeSize, 0.1, 0.3)}rem;
 `;
+
+function scale(cubeSize, min, max) {
+  return min + ((max - min) * ((7 - cubeSize) / 5));
+}
 
 export default CubeFace;

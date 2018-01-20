@@ -21,6 +21,7 @@ const puzzles = [
   {
     name: '2x2x2',
     type: CUBE,
+    size: 2,
     scrambleOptions: {
       directions: [UP, RIGHT, FRONT],
       length: 11
@@ -29,6 +30,7 @@ const puzzles = [
   {
     name: '3x3x3',
     type: CUBE,
+    size: 3,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       length: 20
@@ -37,6 +39,7 @@ const puzzles = [
   {
     name: '4x4x4',
     type: CUBE,
+    size: 4,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 1,
@@ -46,6 +49,7 @@ const puzzles = [
   {
     name: '5x5x5',
     type: CUBE,
+    size: 5,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 1,
@@ -55,6 +59,7 @@ const puzzles = [
   {
     name: '6x6x6',
     type: CUBE,
+    size: 6,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 2,
@@ -64,6 +69,7 @@ const puzzles = [
   {
     name: '7x7x7',
     type: CUBE,
+    size: 7,
     scrambleOptions: {
       directions: FULL_CUBE_DIRECTIONS,
       extraLayers: 2,
@@ -125,4 +131,3 @@ const puzzles = [
 export const DEFAULT_PUZZLE = puzzles[1];
 
 export default puzzles;
-
