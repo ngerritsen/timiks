@@ -12,37 +12,53 @@ const listeners = [
   {
     initiateEvent: 'keydown',
     fireEvent: 'keyup',
-    validator: isActivationSpacebarEvent
+    initiateValidator: isSpacebarEvent,
+    releaseValidator: isSpacebarEvent
   },
   {
     initiateEvent: 'touchstart',
     fireEvent: 'touchend',
-    validator: isActivationEvent
+    initiateValidator: isValidTouchClickEvent,
+    releaseValidator: () => true
   },
   {
     initiateEvent: 'mousedown',
     fireEvent: 'mouseup',
-    validator: isActivationEvent
+    initiateValidator: isValidTouchClickEvent,
+    releaseValidator: () => true
   }
 ];
 
 export default function listenForActivations({ onInitiate, onFire }) {
-  listeners.forEach(({ initiateEvent, fireEvent, validator }) => listenFor(
+  listeners.forEach(({
     initiateEvent,
     fireEvent,
-    validator,
+    initiateValidator,
+    releaseValidator
+  }) => listenFor(
+    initiateEvent,
+    fireEvent,
+    initiateValidator,
+    releaseValidator,
     onInitiate,
     onFire
   ));
 }
 
-function listenFor(initiateEvent, fireEvent, validator, onInitiate, onFire) {
+function listenFor(
+  initiateEvent,
+  fireEvent,
+  initiateValidator,
+  releaseValidator,
+  onInitiate,
+  onFire
+) {
   const preventDefaultListener = event => {
     event.preventDefault();
   }
 
   const initiateListener = (event) => {
-    if (validator(event)) {
+    if (isValidActivationEvent(event) && initiateValidator(event)) {
       event.preventDefault();
 
       window.removeEventListener(initiateEvent, initiateListener);
@@ -55,7 +71,7 @@ function listenFor(initiateEvent, fireEvent, validator, onInitiate, onFire) {
   };
 
   const fireListener = (event) => {
-    if (validator(event)) {
+    if (releaseValidator(event)) {
       event.preventDefault();
 
       onFire();
@@ -63,23 +79,34 @@ function listenFor(initiateEvent, fireEvent, validator, onInitiate, onFire) {
       window.removeEventListener(fireEvent, fireListener);
       window.removeEventListener(initiateEvent, preventDefaultListener);
 
-      listenFor(initiateEvent, fireEvent, validator, onInitiate, onFire);
+      listenFor(
+        initiateEvent,
+        fireEvent,
+        initiateValidator,
+        releaseValidator,
+        onInitiate,
+        onFire
+      );
     }
   };
 
   window.addEventListener(initiateEvent, initiateListener, { passive: false });
 }
 
-function isActivationSpacebarEvent(event) {
-  return isActivationEvent(event) && event.keyCode === SPACEBAR_KEYCODE;
+function isValidActivationEvent(event) {
+  return (
+    !!document.querySelector('[data-activation]') &&
+    !document.querySelector('[data-modal]') &&
+    !event.repeat &&
+    !interactiveElements.includes(String(event.target.tagName).toLowerCase()) &&
+    !event.target.closest(interactiveElements.join(','))
+  );
 }
 
-function isActivationEvent(event) {
-  return (
-    !!event.target.closest('[data-activation]') &&
-    !document.querySelector('[data-modal]') &&
-    !interactiveElements.includes(String(event.target.tagName).toLowerCase()) &&
-    !event.target.closest(interactiveElements.join(',')) &&
-    !event.repeat
-  )
+function isValidTouchClickEvent(event) {
+  return !!event.target.closest('[data-activation]');
+}
+
+function isSpacebarEvent(event) {
+  return event.keyCode === SPACEBAR_KEYCODE;
 }
