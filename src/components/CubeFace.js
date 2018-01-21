@@ -1,18 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { darken } from 'polished';
-
-import { WHITE, YELLOW, GREEN, BLUE, RED, ORANGE } from '../helpers/cube';
-
-const TILE_COLOR_MAP = {
-  [WHITE]: '#fff',
-  [YELLOW]: '#fff544',
-  [GREEN]: '#3fff52',
-  [BLUE]: '#3fafff',
-  [RED]: '#f22951',
-  [ORANGE]: '#ff9c3f'
-}
+import { darken, lighten } from 'polished';
 
 const CubeFace = ({ face = [], cubeSize }) => (
   <Face>
@@ -47,10 +36,15 @@ const Tile = styled.span`
   border-radius: ${props => scale(props.cubeSize, 0.2, 0.4)}rem;
   display: inline-block;
   flex-grow: 1;
-  background-color: ${props => TILE_COLOR_MAP[props.color]};
+  background-color: ${props => props.theme.puzzleColors[props.color]};
   border-width: 1px;
   border-style: solid;
-  border-color: ${props => darken(0.3, TILE_COLOR_MAP[props.color])};
+  border-color: ${props => (
+    props.theme.dark
+      ? lighten(0.15, props.theme.puzzleColors[props.color])
+      : darken(0.25, props.theme.puzzleColors[props.color])
+
+  )};
   width: 100%;
   margin: ${props => scale(props.cubeSize, 0.1, 0.3)}rem;
 `;

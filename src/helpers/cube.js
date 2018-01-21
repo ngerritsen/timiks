@@ -1,70 +1,59 @@
-const TOP = { axis: 'y', opposite: false };
-const RIGHT = { axis: 'x', opposite: true };
-const BOTTOM = { axis: 'y', opposite: true };
-const LEFT = { axis: 'x', opposite: false };
+import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzle';
+import { WHITE, BLUE, YELLOW, ORANGE, RED, GREEN } from '../constants/puzzle';
 
-export const U = 'U';
-export const D = 'D';
-export const R = 'R';
-export const L = 'L';
-export const F = 'F';
-export const B = 'B';
+const TOP_EDGE = { axis: 'y', opposite: false };
+const RIGHT_EDGE = { axis: 'x', opposite: true };
+const BOTTOM_EDGE = { axis: 'y', opposite: true };
+const LEFT_EDGE = { axis: 'x', opposite: false };
 
-const DIRECTIONS = [U, D, R, L, F, B];
-
-export const WHITE = 'WHITE';
-export const BLUE = 'BLUE';
-export const YELLOW = 'YELLOW';
-export const ORANGE = 'ORANGE';
-export const RED = 'RED';
-export const GREEN = 'GREEN';
+const DIRECTIONS = [UP, DOWN, RIGHT, LEFT, FRONT, BACK];
 
 const FACE_EDGE_MAP = {
-  [U]: [
-    { face: F, edge: TOP },
-    { face: L, edge: TOP },
-    { face: B, edge: TOP },
-    { face: R, edge: TOP }
+  [UP]: [
+    { face: FRONT, edge: TOP_EDGE },
+    { face: LEFT, edge: TOP_EDGE },
+    { face: BACK, edge: TOP_EDGE },
+    { face: RIGHT, edge: TOP_EDGE }
   ],
-  [D]: [
-    { face: B, edge: BOTTOM },
-    { face: L, edge: BOTTOM },
-    { face: F, edge: BOTTOM },
-    { face: R, edge: BOTTOM }
+  [DOWN]: [
+    { face: BACK, edge: BOTTOM_EDGE },
+    { face: LEFT, edge: BOTTOM_EDGE },
+    { face: FRONT, edge: BOTTOM_EDGE },
+    { face: RIGHT, edge: BOTTOM_EDGE }
   ],
-  [L]: [
-    { face: U, edge: LEFT, reversed: true },
-    { face: F, edge: LEFT },
-    { face: D, edge: LEFT },
-    { face: B, edge: RIGHT, reversed: true }
+  [LEFT]: [
+    { face: UP, edge: LEFT_EDGE, reversed: true },
+    { face: FRONT, edge: LEFT_EDGE },
+    { face: DOWN, edge: LEFT_EDGE },
+    { face: BACK, edge: RIGHT_EDGE, reversed: true }
   ],
-  [R]: [
-    { face: U, edge: RIGHT },
-    { face: B, edge: LEFT, reversed: true },
-    { face: D, edge: RIGHT, reversed: true },
-    { face: F, edge: RIGHT }
+  [RIGHT]: [
+    { face: UP, edge: RIGHT_EDGE },
+    { face: BACK, edge: LEFT_EDGE, reversed: true },
+    { face: DOWN, edge: RIGHT_EDGE, reversed: true },
+    { face: FRONT, edge: RIGHT_EDGE }
   ],
-  [F]: [
-    { face: U, edge: BOTTOM, reversed: true },
-    { face: R, edge: LEFT },
-    { face: D, edge: TOP, reversed: true },
-    { face: L, edge: RIGHT }
+  [FRONT]: [
+    { face: UP, edge: BOTTOM_EDGE, reversed: true },
+    { face: RIGHT, edge: LEFT_EDGE },
+    { face: DOWN, edge: TOP_EDGE, reversed: true },
+    { face: LEFT, edge: RIGHT_EDGE }
   ],
-  [B]: [
-    { face: U, edge: TOP },
-    { face: L, edge: LEFT, reversed: true },
-    { face: D, edge: BOTTOM },
-    { face: R, edge: RIGHT, reversed: true }
+  [BACK]: [
+    { face: UP, edge: TOP_EDGE },
+    { face: LEFT, edge: LEFT_EDGE, reversed: true },
+    { face: DOWN, edge: BOTTOM_EDGE },
+    { face: RIGHT, edge: RIGHT_EDGE, reversed: true }
   ]
 };
 
 const INITIAL_FACES = {
-  [U]: WHITE,
-  [D]: YELLOW,
-  [L]: ORANGE,
-  [R]: RED,
-  [F]: GREEN,
-  [B]: BLUE
+  [UP]: WHITE,
+  [DOWN]: YELLOW,
+  [LEFT]: ORANGE,
+  [RIGHT]: RED,
+  [FRONT]: GREEN,
+  [BACK]: BLUE
 };
 
 export function layoutScramble(scramble, size) {
@@ -74,6 +63,7 @@ export function layoutScramble(scramble, size) {
     return generateArr(twice ? 2 : (reversed ? 3 : 1))
       .reduce((scrambledCube) => rotate(scrambledCube, direction, depth), cube);
   }, createCube(size));
+
   return formatCube(cube);
 }
 

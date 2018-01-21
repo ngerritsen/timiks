@@ -4,6 +4,8 @@ import * as actionTypes from './constants/actionTypes';
 export const resetTime = () => ({ type: actionTypes.RESET_TIME });
 export const startTimer = startTime => ({ type: actionTypes.START_TIMER, startTime });
 export const stopTimer = () => ({ type: actionTypes.STOP_TIMER });
+export const showScrambleDetails = () => ({ type: actionTypes.SHOW_SCRAMBLE_DETAILS });
+export const hideScrambleDetails = () => ({ type: actionTypes.HIDE_SCRAMBLE_DETAILS });
 
 // Activation
 export const prepareActivation = () => ({ type: actionTypes.PREPARE_ACTIVATION });

@@ -1,21 +1,9 @@
-const UP = 'U';
-const RIGHT = 'R';
-const DOWN = 'D';
-const LEFT = 'L';
-const FRONT = 'F';
-const BACK = 'B';
+import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzle';
+import { CUBE, CLOCK, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE } from '../constants/puzzle';
 
 const FULL_CUBE_DIRECTIONS = [UP, RIGHT, DOWN, LEFT, FRONT, BACK];
 const DODECAHEDRON_DIRECTIONS = [RIGHT, DOWN];
 const DODECAHEDRON_END_DIRECTION = UP;
-
-export const CUBE_OPPOSITES = [[UP, DOWN], [RIGHT, LEFT], [FRONT, BACK]];
-
-export const CUBE = 'CUBE';
-export const CLOCK = 'CLOCK';
-export const SQUARE_ONE = 'SQUARE_ONE';
-export const TETRAHEDRON = 'TETRAHEDRON';
-export const DODECAHEDRON = 'DODECAHEDRON';
 
 const puzzles = [
   {

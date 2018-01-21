@@ -28,6 +28,7 @@ function parseTimes(rawTimes) {
   return rawTimes.map(raw => ({
     id: shortid.generate(),
     ms: raw.ms,
+    puzzle: raw.puzzle,
     scramble: parseScramble(raw.scramble),
     date: new Date(raw.date)
   }));
@@ -36,6 +37,7 @@ function parseTimes(rawTimes) {
 function serializeTimes(times) {
   return times.map(time => ({
     ms: time.ms,
+    puzzle: time.puzzle,
     scramble: serializeScramble(time.scramble),
     date: time.date.toISOString()
   }));

@@ -1,5 +1,6 @@
 import * as constants from '../constants/app';
-import puzzles, { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE, CLOCK, CUBE_OPPOSITES } from '../constants/puzzles';
+import puzzles from '../constants/puzzles';
+import { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE, CLOCK, CUBE_OPPOSITES } from '../constants/puzzle';
 import { generateArr } from './general';
 
 const scrambleGeneratorMap = {

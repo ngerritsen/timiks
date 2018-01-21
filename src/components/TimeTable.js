@@ -11,7 +11,7 @@ import TimeDetails from './TimeDetails';
 
 const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, showTimeDetails, times }) => (
   <div>
-    {times.map(({ ms, id, best, date, scramble, showDetails }, index) => (
+    {times.map(({ ms, id, best, date, scramble, showDetails, puzzle }, index) => (
       <TimeBoardRow key={index}>
         <div>
           <TimeIndex>{index + 1}.</TimeIndex>
@@ -28,7 +28,7 @@ const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, s
             <FontAwesome icon={faInfoCircle} size="sm" />
           </InfoIconButton>
           <Modal title="Details" isOpen={showDetails}>
-            <TimeDetails date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
+            <TimeDetails puzzle={puzzle} date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
           </Modal>
           {
             removeTime &&

@@ -12,11 +12,11 @@ const timerMiddleware = store => next => action => {
       });
     }
     case STOP_TIMER: {
-      const { timer, scramble } = store.getState();
+      const { timer, scramble, settings } = store.getState();
       const now = new Date();
       const finalTime = now.getTime() - timer.startTime;
 
-      store.dispatch(saveTime(shortid.generate(), finalTime, now, scramble));
+      store.dispatch(saveTime(shortid.generate(), finalTime, now, scramble, settings.puzzle));
 
       return next({ ...action, finalTime });
     }

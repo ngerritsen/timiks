@@ -1,24 +1,29 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import React from 'react';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/fontawesome-pro-solid';
 
-import CubeLayout from './CubeLayout';
+import IconButton from './IconButton';
 
-const Scramble = ({ scramble, cubeSize, small = false }) => (
+const Scramble = ({ scramble, small, onClick }) => (
   <div>
     <ScrambleBox small={small}>
+      {
+        onClick &&
+        <ScrambleIconButtonContainer>
+          <IconButton onClick={onClick}>
+            <FontAwesome icon={faEye}/>
+          </IconButton>
+        </ScrambleIconButtonContainer>
+      }
       {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
     </ScrambleBox>
-    {
-      cubeSize &&
-      false &&
-      <CubeLayout scramble={scramble} cubeSize={cubeSize}/>
-    }
   </div>
 );
 
 Scramble.propTypes = {
-  cubeSize: PropTypes.number,
+  onClick: PropTypes.func,
   scramble: PropTypes.arrayOf(PropTypes.string),
   small: PropTypes.bool
 };
@@ -42,6 +47,14 @@ const Move = styled.span`
   &:last-child {
     margin-right: 0;
   }
+`;
+
+const ScrambleIconButtonContainer = styled.span`
+  float: right;
+  display: inline-block;
+  font-size: 1.8rem;
+  margin: 0 ${props => props.theme.sizes.xxs} ${props => props.theme.sizes.xxs};
+  color: ${props => props.theme.colors.blue};
 `;
 
 export default Scramble;

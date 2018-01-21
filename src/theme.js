@@ -1,4 +1,5 @@
 import { lighten, darken } from 'polished';
+import * as puzzleColors from './constants/puzzle';
 
 const WHITE = '#fff';
 const BLACK = '#000';
@@ -20,6 +21,14 @@ export const light = {
     blue: '#0366d6',
     red: '#d73a49'
   },
+  puzzleColors: {
+    [puzzleColors.WHITE]: '#fff',
+    [puzzleColors.YELLOW]: '#fff244',
+    [puzzleColors.GREEN]: '#3fff78',
+    [puzzleColors.BLUE]: '#3fb8ff',
+    [puzzleColors.RED]: '#fc355c',
+    [puzzleColors.ORANGE]: '#ff943d'
+  },
   sizes: {
     xxs: getSize(0.5),
     xs: getSize(1),
@@ -32,6 +41,7 @@ export const light = {
 
 export const dark = {
   ...light,
+  dark: true,
   colors: {
     ...light.colors,
     bg: lighten(0.02, BLACK),
@@ -39,6 +49,7 @@ export const dark = {
     subtleBg: lighten(0.2, BLACK),
     subtleFg: darken(0.4, WHITE),
     grey: lighten(0.3, BLACK),
-    primary: '#fc7f0a'
+    primary: '#fc7f0a',
+    blue: lighten(0.1, '#0366d6'),
   }
 }

@@ -59,12 +59,7 @@ const ModalBox = styled.div`
   border-radius: 0.5rem;
   padding: ${props => props.theme.sizes.sm};
   width: 100%;
-
-  @media (min-width: 420px) {
-    min-width: 370px;
-    max-width: 440px;
-    width: auto;
-  }
+  max-width: 540px;
 `;
 
 const ModalTitle = styled.h2`
