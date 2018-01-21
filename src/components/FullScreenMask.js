@@ -18,6 +18,9 @@ const StyledFullScreenMask = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  background-color: ${props => props.theme.colors.bg};
+  opacity: 0.6;
+  z-index: 100;
 `;
 
 export default FullScreenMask;

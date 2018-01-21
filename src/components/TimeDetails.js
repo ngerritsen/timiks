@@ -20,7 +20,7 @@ const TimeDetails = ({ puzzle, date, ms, scramble, hideTimeDetails }) => (
     </Section>
     <Section margin="md">
         <FontAwesome icon={faCube} /> &nbsp;
-        {puzzle}
+        {puzzle || 'unknown'}
     </Section>
     <Section margin="md">
       <ScrambleDetails scramble={scramble} puzzle={puzzle} />
