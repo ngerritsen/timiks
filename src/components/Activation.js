@@ -10,17 +10,19 @@ import Button from './Button';
 const Activation = ({ stopped, preparationStage, preparing, ready }) => {
   return (
     <div>
-      <Button big primary data-activation>
-        {stopped && !(preparing || ready) && 'Start'}
-        {preparing && generateArr(PREPARATION_STAGES)
-          .map(index =>
-            <PrepartionCircle key={index} active={index < preparationStage} />
-          )
-        }
-        {!stopped && 'Stop'}
-      </Button>
+      <ActivationButtonContainer>
+        <Button big primary data-activation>
+          {stopped && !(preparing || ready) && 'Start'}
+          {preparing && generateArr(PREPARATION_STAGES)
+            .map(index =>
+              <PrepartionCircle key={index} active={index < preparationStage} />
+            )
+          }
+          {!stopped && 'Stop'}
+        </Button>
+      </ActivationButtonContainer>
 
-      <Explain>
+      <Explain {...(stopped ? {} : { 'data-activation': true })}>
         {(() => {
           if (preparing && ready) {
             return 'Release to start!'
@@ -40,7 +42,8 @@ const Activation = ({ stopped, preparationStage, preparing, ready }) => {
         })()}
       </Explain>
 
-      {!stopped && <FullScreenMask/>}
+      {stopped && preparationStage > -1 && <FullScreenMask level={0}/>}
+      {!stopped && preparationStage === -1 && <FullScreenMask level={2}/>}
     </div>
   )
 };
@@ -51,6 +54,11 @@ Activation.propTypes = {
   preparing: PropTypes.bool.isRequired,
   ready: PropTypes.bool.isRequired
 };
+
+const ActivationButtonContainer = styled.div`
+  position: relative;
+  z-index: 100;
+`;
 
 const PrepartionCircle = styled.span`
   display: inline-block;
@@ -68,6 +76,8 @@ const Explain = styled.p`
   font-size: 1.6rem;
   text-align: center;
   margin: ${props => props.theme.sizes.sm} 0 0;
+  position: relative;
+  z-index: 102;
 `;
 
 const Spacebar = styled.span`

@@ -13,15 +13,16 @@ import { isCube } from '../helpers/puzzle';
 
 const Timer = ({
   scramble,
+  stopped,
   time,
   puzzle,
   showScrambleDetails,
   scrambleDetailsOpen,
   hideScrambleDetails
 }) => (
-  <div data-activation>
+  <div>
     <Section>
-      <TimerTime>
+      <TimerTime {...(stopped ? {} : { 'data-activation': true })}>
         <Time ms={time} />
       </TimerTime>
     </Section>
@@ -43,6 +44,7 @@ const Timer = ({
 Timer.propTypes = {
   puzzle: PropTypes.string.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stopped: PropTypes.bool.isRequired,
   time: PropTypes.number.isRequired,
   showScrambleDetails: PropTypes.func.isRequired,
   scrambleDetailsOpen: PropTypes.bool.isRequired,
@@ -53,7 +55,7 @@ const TimerTime = styled.div`
   text-align: center;
   padding: ${props => props.theme.sizes.lg} 0;
   font-size: 5rem;
-  z-index: 101;
+  z-index: 102;
   position: relative;
 
   @media screen and (min-width: 420px) {
