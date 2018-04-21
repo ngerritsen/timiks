@@ -63,7 +63,7 @@ function listenFor(
 
       window.removeEventListener(initiateEvent, initiateListener);
 
-      window.addEventListener(fireEvent, fireListener, { passive: false });
+      window.addEventListener(fireEvent, fireListener);
       window.addEventListener(initiateEvent, preventDefaultListener, { passive: false });
 
       onInitiate();
