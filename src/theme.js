@@ -36,6 +36,11 @@ export const light = {
     md: getSize(3),
     lg: getSize(4),
     xl: getSize(5)
+  },
+  zIndices: {
+    fullScreenMask: 1,
+    onFullScreenMask: 2,
+    modal: 3
   }
 }
 

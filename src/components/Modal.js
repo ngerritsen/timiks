@@ -52,7 +52,7 @@ const ModalOverlay = styled.div`
   background-color: ${props => transparentize(0.6, props.theme.colors.fg)};
   justify-content: center;
   align-items: center;
-  z-index: 102;
+  z-index: ${props => props.theme.zIndices.modal};
 `;
 
 const ModalBox = styled.div`

@@ -10,7 +10,7 @@ import Button from './Button';
 const Activation = ({ stopped, preparationStage, preparing, ready }) => {
   return (
     <div>
-      <ActivationButtonContainer>
+      <ActivationContainer>
         <Button big primary data-activation>
           {stopped && !(preparing || ready) && 'Start'}
           {preparing && generateArr(PREPARATION_STAGES)
@@ -20,30 +20,29 @@ const Activation = ({ stopped, preparationStage, preparing, ready }) => {
           }
           {!stopped && 'Stop'}
         </Button>
-      </ActivationButtonContainer>
 
-      <Explain {...(stopped ? {} : { 'data-activation': true })}>
-        {(() => {
-          if (preparing && ready) {
-            return 'Release to start!'
-          }
+        <Explain {...(stopped ? {} : { 'data-activation': true })}>
+          {(() => {
+            if (preparing && ready) {
+              return 'Release to start!'
+            }
 
-          if (preparing && !ready) {
-            return 'Hold on...'
-          }
+            if (preparing && !ready) {
+              return 'Hold on...'
+            }
 
-          if (!stopped) {
-            return <span>Click, tap or smash <Spacebar/> spacebar to stop</span>
-          }
+            if (!stopped) {
+              return <span>Click, tap or smash <Spacebar/> spacebar to stop</span>
+            }
 
-          if (!preparing && !ready) {
-            return <span>Click, touch or press <Spacebar/> spacebar. Hold and release to start</span>
-          }
-        })()}
-      </Explain>
+            if (!preparing && !ready) {
+              return <span>Click, touch or press <Spacebar/> spacebar. Hold and release to start</span>
+            }
+          })()}
+        </Explain>
+      </ActivationContainer>
 
-      {stopped && preparationStage > -1 && <FullScreenMask level={0}/>}
-      {!stopped && preparationStage === -1 && <FullScreenMask level={2}/>}
+      {(!stopped || preparing) && <FullScreenMask/>}
     </div>
   )
 };
@@ -55,9 +54,9 @@ Activation.propTypes = {
   ready: PropTypes.bool.isRequired
 };
 
-const ActivationButtonContainer = styled.div`
+const ActivationContainer = styled.div`
   position: relative;
-  z-index: 100;
+  z-index: ${props => props.theme.zIndices.onFullScreenMask};
 `;
 
 const PrepartionCircle = styled.span`

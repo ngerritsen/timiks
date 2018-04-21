@@ -55,7 +55,7 @@ const TimerTime = styled.div`
   text-align: center;
   padding: ${props => props.theme.sizes.lg} 0;
   font-size: 5rem;
-  z-index: 102;
+  z-index: ${props => props.theme.zIndices.onFullScreenMask};
   position: relative;
 
   @media screen and (min-width: 420px) {

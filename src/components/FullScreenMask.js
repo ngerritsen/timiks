@@ -18,13 +18,12 @@ FullScreenMask.propTypes = {
 
 const StyledFullScreenMask = styled.div`
   position: fixed;
-  z-index: ${props => props.level + 99};
+  z-index: ${props => props.theme.zIndices.fullScreenMask};
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: ${props => props.theme.colors.bg};
-  opacity: 0.75;
 `;
 
 export default FullScreenMask;
