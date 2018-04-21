@@ -1,4 +1,5 @@
-import NoSleep from 'nosleep.js/dist/NoSleep.js';
+/* global NoSleep */
+//import NoSleep from 'nosleep.js/dist/NoSleep.js';
 
 import { START_TIMER, STOP_TIMER } from '../constants/actionTypes';
 
