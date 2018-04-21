@@ -8,5 +8,8 @@ script:
   - npm run build
 after_success:
   - curl -3 -T public/favicon.png ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
+  - curl -3 -T public/android-icon.png ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
+  - curl -3 -T public/apple-icon.png ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
+  - curl -3 -T public/timiks.webmanifest ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
   - curl -3 -T public/index.html ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
   - curl -3 -T public/bundle.js ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;

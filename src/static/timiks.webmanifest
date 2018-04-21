@@ -1,0 +1,13 @@
+{
+  "name": "Timiks",
+  "short_name": "Timiks",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A cube timer.",
+  "icons": [{
+    "src": "images/touch/android-icon.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }]
+}
