@@ -13,5 +13,11 @@
     <div id="app-root"></div>
     <div id="modal-root"></div>
     <div id="full-screen-mask"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.6.0/NoSleep.js"></script>
+    <button id="x">XXX</button>
+    <script>
+      var noSleep = new NoSleep();
+      document.getElementById('x').addEventListener('click', function() { noSleep.enable(); });
+    </script>
 </body>
 </html>
