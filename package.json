@@ -4,10 +4,10 @@
   "description": "Rubik's cube timer",
   "main": "index.js",
   "scripts": {
-    "favicon": "mkdir -p public; cp src/favicon.png public/",
-    "watch": "npm run favicon; webpack-dev-server",
+    "copy-static": "mkdir -p public; cp src/copy-static/* public/",
+    "watch": "npm run copy-static; webpack-dev-server",
     "test": "eslint src",
-    "build": "npm run favicon; NODE_ENV=production webpack",
+    "build": "npm run copy-static; NODE_ENV=production webpack",
     "precommit": "npm run test"
   },
   "repository": {
