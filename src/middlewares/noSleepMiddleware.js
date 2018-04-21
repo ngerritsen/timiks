@@ -1,4 +1,4 @@
-import NoSleep from 'nosleep.js/dist/NoSleep';
+import NoSleep from 'nosleep.js';
 import { START_TIMER, STOP_TIMER } from '../constants/actionTypes';
 
 const noSleep = new NoSleep();

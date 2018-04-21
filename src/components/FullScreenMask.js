@@ -1,20 +1,15 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { FULL_SCREEN_MASK_ROOT_SELECTOR } from '../constants/app';
 
-const FullScreenMask = ({ level }) => (
+const FullScreenMask = () => (
   ReactDOM.createPortal(
-    <StyledFullScreenMask level={level} data-activation/>,
+    <StyledFullScreenMask data-activation/>,
     document.querySelector(FULL_SCREEN_MASK_ROOT_SELECTOR)
   )
 );
-
-FullScreenMask.propTypes = {
-  level: PropTypes.number.isRequired
-};
 
 const StyledFullScreenMask = styled.div`
   position: fixed;
