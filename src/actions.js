@@ -42,3 +42,7 @@ export const filterArchive = puzzle => ({ type: actionTypes.FILTER_ARCHIVE, puzz
 // Settings
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
+
+// Stats info
+export const showStatsInfo = () => ({ type: actionTypes.SHOW_STATS_INFO });
+export const hideStatsInfo = () => ({ type: actionTypes.HIDE_STATS_INFO });

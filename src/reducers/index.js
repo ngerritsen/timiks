@@ -6,6 +6,7 @@ import scrambleReducer from './scrambleReducer';
 import settingsReducer from './settingsReducer';
 import timerReducer from './timerReducer';
 import timesReducer from './timesReducer';
+import statsReducer from './statsReducer';
 
 export default combineReducers({
   activation: activationReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   scramble: scrambleReducer,
   settings: settingsReducer,
   timer: timerReducer,
-  times: timesReducer
+  times: timesReducer,
+  stats: statsReducer
 });

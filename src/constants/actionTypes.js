@@ -30,3 +30,6 @@ export const FILTER_ARCHIVE = 'FILTER_ARCHIVE';
 
 export const CHANGE_PUZZLE = 'CHANGE_PUZZLE';
 export const CHANGE_THEME = 'CHANGE_THEME';
+
+export const SHOW_STATS_INFO = 'SHOW_STATS_INFO';
+export const HIDE_STATS_INFO = 'HIDE_STATS_INFO';
