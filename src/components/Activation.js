@@ -10,7 +10,7 @@ import Button from './Button';
 const Activation = ({ stopped, preparationStage, preparing, ready }) => {
   return (
     <div>
-      <ActivationContainer>
+      <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
         <Button big primary data-activation>
           {stopped && !(preparing || ready) && 'Start'}
           {preparing && generateArr(PREPARATION_STAGES)
@@ -21,7 +21,7 @@ const Activation = ({ stopped, preparationStage, preparing, ready }) => {
           {!stopped && 'Stop'}
         </Button>
 
-        <Explain {...(stopped ? {} : { 'data-activation': true })}>
+        <Explain>
           {(() => {
             if (preparing && ready) {
               return 'Release to start!'

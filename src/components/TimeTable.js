@@ -9,7 +9,9 @@ import Modal from './Modal';
 import IconButton from './IconButton';
 import TimeDetails from './TimeDetails';
 
-const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, showTimeDetails, times }) => (
+const STATS = ['ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'mo3'];
+
+const TimeTable = ({ stats, hideTimeDetails, removeTime, showTimeDetails, times }) => (
   <div>
     {times.map(({ ms, id, best, date, scramble, showDetails, puzzle }, index) => (
       <TimeBoardRow key={index}>
@@ -39,29 +41,24 @@ const TimeTable = ({ average, averageOfBestThree, hideTimeDetails, removeTime, s
         </div>
       </TimeBoardRow>
     ))}
-      <TimeBoardRow>
-        <div>
-          <TimeIndex></TimeIndex>
-          <strong><Time ms={average}/></strong>
-          <TimeInfo>(avg.)</TimeInfo>
-        </div>
-      </TimeBoardRow>
-      {
-        times.length >= 5 &&
-        <TimeBoardRow>
-          <div>
-            <TimeIndex></TimeIndex>
-            <strong><Time ms={averageOfBestThree}/></strong>
-            <TimeInfo>(avg. best 3)</TimeInfo>
-          </div>
-        </TimeBoardRow>
-      }
+    {
+      STATS
+        .filter(stat => stats[stat])
+        .map(stat => (
+          <TimeBoardRow key={stat}>
+            <div>
+              <TimeIndex></TimeIndex>
+              <strong><Time ms={stats[stat]}/></strong>
+              <TimeInfo>({stat})</TimeInfo>
+            </div>
+          </TimeBoardRow>
+        ))
+    }
   </div>
 )
 
 TimeTable.propTypes = {
-  average: PropTypes.number.isRequired,
-  averageOfBestThree: PropTypes.number.isRequired,
+  stats: PropTypes.object.isRequired,
   hideTimeDetails: PropTypes.func.isRequired,
   removeTime: PropTypes.func,
   showTimeDetails: PropTypes.func.isRequired,
@@ -80,6 +77,7 @@ const TimeBoardRow = styled.div`
 const TimeInfo = styled.small`
   padding-left: ${props => props.theme.sizes.xs};
   color: ${props => props.theme.colors.subtleFg};
+  font-size: 1.5rem;
 `;
 
 const TimeIndex = styled.span`

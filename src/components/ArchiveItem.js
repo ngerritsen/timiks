@@ -11,8 +11,7 @@ import Button from './Button';
 import Section from './Section';
 
 const ArchiveItem = ({
-  averageOfBestThree,
-  average,
+  stats,
   collapsed,
   date,
   hideTimeDetails,
@@ -46,8 +45,7 @@ const ArchiveItem = ({
       <ArchiveItemContent>
         <Section>
           <TimeTable
-            average={average}
-            averageOfBestThree={averageOfBestThree}
+            stats={stats}
             hideTimeDetails={hideTimeDetails}
             showTimeDetails={showTimeDetails}
             times={times}
@@ -60,8 +58,7 @@ const ArchiveItem = ({
 );
 
 ArchiveItem.propTypes = {
-  averageOfBestThree: PropTypes.number.isRequired,
-  average: PropTypes.number.isRequired,
+  stats: PropTypes.object.isRequired,
   collapsed: PropTypes.bool.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
   hideTimeDetails: PropTypes.func.isRequired,

@@ -10,11 +10,6 @@ const activationMiddleware = store => next => {
 
   listenForActivations({
     onInitiate() {
-      if (!getState().timer.stopped) {
-        dispatch(actions.stopTimer());
-        return;
-      }
-
       dispatch(actions.resetTime());
       dispatch(actions.prepareActivation());
 
@@ -36,6 +31,13 @@ const activationMiddleware = store => next => {
       }
 
       dispatch(actions.resetActivation());
+    },
+    onStop() {
+      if (getState().timer.stopped) {
+        return;
+      }
+
+      dispatch(actions.stopTimer());
     }
   });
 

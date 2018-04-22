@@ -15,11 +15,12 @@ function mapStateToProps(state) {
   const { archive, times } = state;
   const { items, puzzle, sortBy, expanded } = archive;
 
-  const filteredItems = filterArchive(items, puzzle);
+  const decoratedArchive = decorateArchive(items, expanded, times.timeDetailsShown);
+  const filteredItems = filterArchive(decoratedArchive, puzzle);
   const sortedItems = sortArchive(filteredItems, sortBy);
 
   return {
-    archive: decorateArchive(sortedItems, expanded, times.timeDetailsShown),
+    archive: sortedItems,
     isEmpty: items.length === 0
   }
 }

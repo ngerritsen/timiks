@@ -6,7 +6,7 @@ import { FULL_SCREEN_MASK_ROOT_SELECTOR } from '../constants/app';
 
 const FullScreenMask = () => (
   ReactDOM.createPortal(
-    <StyledFullScreenMask data-activation/>,
+    <StyledFullScreenMask/>,
     document.querySelector(FULL_SCREEN_MASK_ROOT_SELECTOR)
   )
 );

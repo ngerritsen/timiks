@@ -13,7 +13,6 @@ import { isCube } from '../helpers/puzzle';
 
 const Timer = ({
   scramble,
-  stopped,
   time,
   puzzle,
   showScrambleDetails,
@@ -22,7 +21,7 @@ const Timer = ({
 }) => (
   <div>
     <Section>
-      <TimerTime {...(stopped ? {} : { 'data-activation': true })}>
+      <TimerTime>
         <Time ms={time} />
       </TimerTime>
     </Section>
@@ -44,7 +43,6 @@ const Timer = ({
 Timer.propTypes = {
   puzzle: PropTypes.string.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
-  stopped: PropTypes.bool.isRequired,
   time: PropTypes.number.isRequired,
   showScrambleDetails: PropTypes.func.isRequired,
   scrambleDetailsOpen: PropTypes.bool.isRequired,
