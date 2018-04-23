@@ -7,11 +7,11 @@ import TimeTableContainer from '../containers/TimeTableContainer';
 const TimeBoard = () => {
   return (
     <div>
-      <Section>
+      <Section margin="sm">
         <TimeTableContainer/>
       </Section>
 
-      <Section>
+      <Section margin="sm">
         <TimeBoardActionsContainer/>
       </Section>
     </div>

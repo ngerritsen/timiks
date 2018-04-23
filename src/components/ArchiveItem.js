@@ -43,7 +43,7 @@ const ArchiveItem = ({
     {
       !collapsed &&
       <ArchiveItemContent>
-        <Section>
+        <Section margin="sm">
           <TimeTable
             stats={stats}
             hideTimeDetails={hideTimeDetails}

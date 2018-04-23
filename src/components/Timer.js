@@ -20,21 +20,21 @@ const Timer = ({
   hideScrambleDetails
 }) => (
   <div>
-    <Section>
+    <Section margin="sm">
       <TimerTime>
         <Time ms={time} />
       </TimerTime>
     </Section>
-    <Section>
+    <Section margin="sm">
       <Scramble scramble={scramble} onClick={isCube(puzzle) ? showScrambleDetails : undefined} />
       <Modal isOpen={scrambleDetailsOpen} title="Scramble details">
-        <Section>
+        <Section margin="sm">
           <ScrambleDetails scramble={scramble} puzzle={puzzle} />
         </Section>
         <Button onClick={hideScrambleDetails}>Close</Button>
       </Modal>
     </Section>
-    <Section>
+    <Section margin="sm">
       <ActivationContainer/>
     </Section>
   </div>

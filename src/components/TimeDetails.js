@@ -10,11 +10,11 @@ import ScrambleDetails from './ScrambleDetails';
 
 const TimeDetails = ({ puzzle, date, ms, scramble, hideTimeDetails }) => (
   <div>
-    <Section>
+    <Section margin="sm">
         <FontAwesome icon={faStopwatch} /> &nbsp;
         <Time ms={ms} decimals={4} />
     </Section>
-    <Section>
+    <Section margin="sm">
         <FontAwesome icon={faCalendarAlt} /> &nbsp;
         {date.toLocaleString()}
     </Section>

@@ -20,7 +20,7 @@ const Archive = ({
   }
 
   return <div>
-    <Section>
+    <Section margin="sm">
       <ArchiveRefinementContainer/>
     </Section>
     {(() => {

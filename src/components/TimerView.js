@@ -10,10 +10,10 @@ const TimerView = () => (
     <Section margin="lg">
       <TimerContainer/>
     </Section>
-    <Section>
+    <Section margin="sm">
       <PuzzleSelectorContainer/>
     </Section>
-    <Section margin="0">
+    <Section>
       <TimeBoardContainer/>
     </Section>
   </div>
