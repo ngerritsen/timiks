@@ -13,7 +13,7 @@ const TimerView = () => (
     <Section>
       <PuzzleSelectorContainer/>
     </Section>
-    <Section>
+    <Section margin="0">
       <TimeBoardContainer/>
     </Section>
   </div>

@@ -3,16 +3,27 @@ import React from 'react';
 import { Route } from 'react-router-dom'
 
 import Header from './Header';
+import Footer from './Footer';
 import TimerView from './TimerView';
 import ArchiveContainer from '../containers/ArchiveContainer';
 import ThemeSelectorContainer from '../containers/ThemeSelectorContainer';
+import Section from './Section';
 
 const App = () => (
     <Container>
-      <Header/>
-      <Route exact path="/" component={TimerView}/>
-      <Route path="/archive" component={ArchiveContainer}/>
-      <ThemeSelectorContainer/>
+      <Section margin="md">
+        <Header/>
+      </Section>
+      <Section margin="md">
+        <Route exact path="/" component={TimerView}/>
+        <Route path="/archive" component={ArchiveContainer}/>
+      </Section>
+      <Section margin="lg">
+        <ThemeSelectorContainer/>
+      </Section>
+      <Section margin="md">
+        <Footer/>
+      </Section>
     </Container>
 );
 

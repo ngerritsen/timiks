@@ -21,7 +21,6 @@ ThemeSelector.propTypes = {
 };
 
 const ThemeSelectorContainer = styled.div`
-  padding: ${props => props.theme.sizes.sm} 0 ${props => props.theme.sizes.lg};
   color: ${props => props.theme.colors.subtleFg};
   text-align: center;
 `;

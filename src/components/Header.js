@@ -17,7 +17,6 @@ const HeaderBar = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${props => props.theme.sizes.md};
 `;
 
 const Title = styled.h1`

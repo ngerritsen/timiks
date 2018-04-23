@@ -58,7 +58,7 @@ const TimeTable = ({
       <TimeBoardRow>
         <div>
           <TimeIndex></TimeIndex>
-          <strong>Stats</strong>
+          Stats
         </div>
         <div>
           <QuestionIconButton onClick={showStatsInfo}>
