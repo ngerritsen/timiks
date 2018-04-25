@@ -8,6 +8,7 @@ export const showScrambleDetails = () => ({ type: actionTypes.SHOW_SCRAMBLE_DETA
 export const hideScrambleDetails = () => ({ type: actionTypes.HIDE_SCRAMBLE_DETAILS });
 export const prepareInspection = () => ({ type: actionTypes.PREPARE_INSPECTION });
 export const startInspection = startTime => ({ type: actionTypes.START_INSPECTION, startTime });
+export const failInspection = () => ({ type: actionTypes.FAIL_INSPECTION });
 
 // Activation
 export const prepareActivation = () => ({ type: actionTypes.PREPARE_ACTIVATION });

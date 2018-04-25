@@ -16,8 +16,11 @@ export default function timerReducer(state = initialState, action) {
         ...state,
         startTime: action.startTime,
         stopped: false,
-        inspectionMode: false
+        inspectionMode: false,
+        inspectionStartTime: 0
       }
+    case actionTypes.FAIL_INSPECTION:
+      return initialState
     case actionTypes.START_INSPECTION:
       return {
         ...state,

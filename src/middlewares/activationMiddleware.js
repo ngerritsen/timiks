@@ -1,4 +1,4 @@
-import { PREPARATION_STAGES, ACTIVATION_DURATION } from '../constants/app';
+import { PREPARATION_STAGES, ACTIVATION_DURATION, INSPECTION_TIME } from '../constants/app';
 import * as actions from '../actions';
 import { isReady, isPreparing } from '../selectors/activationSelectors';
 import listenForActivations from '../activationListener';
@@ -7,6 +7,7 @@ const activationMiddleware = store => next => {
   const { dispatch, getState } = store;
 
   let interval = null;
+  let timeout = null;
 
   listenForActivations({
     onInitiate() {
@@ -16,6 +17,11 @@ const activationMiddleware = store => next => {
 
       if (useInspectionTime && !inspectionMode) {
         dispatch(actions.prepareInspection());
+
+        timeout = setTimeout(() => {
+          dispatch(actions.failInspection());
+        }, INSPECTION_TIME);
+
         return;
       }
 
@@ -28,10 +34,7 @@ const activationMiddleware = store => next => {
       });
     },
     onFire() {
-      const { useInspectionTime } = getState().settings;
-      const { inspectionMode } = getState().timer;
-
-      if (useInspectionTime && !inspectionMode) {
+      if (getState().activation.preparingForInspection) {
         dispatch(actions.startInspection());
         return;
       }
@@ -43,6 +46,7 @@ const activationMiddleware = store => next => {
       }
 
       if (isReady(getState())) {
+        clearTimeout(timeout);
         dispatch(actions.startTimer());
       }
 

@@ -17,6 +17,8 @@ export default function activationReducer(state = initialState, action) {
         ...state,
         preparingForInspection: false
       }
+    case actionTypes.FAIL_INSPECTION:
+      return initialState
     case actionTypes.INCREMENT_PREPARATION_STAGE:
       return {
         ...state,
