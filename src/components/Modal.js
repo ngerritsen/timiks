@@ -46,7 +46,7 @@ const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
-  padding: ${props => props.theme.sizes.sm};
+  padding: ${props => props.theme.sizes.xs};
   left: 0;
   right: 0;
   background-color: ${props => transparentize(0.6, props.theme.colors.fg)};
@@ -61,6 +61,8 @@ const ModalBox = styled.div`
   padding: ${props => props.theme.sizes.sm};
   width: 100%;
   max-width: 540px;
+  max-height: calc(100vh - ${props => props.theme.sizes.sm});
+  overflow: auto;
 `;
 
 const ModalTitle = styled.h2`
