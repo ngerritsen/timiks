@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PuzzleSelectorContainer from '../containers/PuzzleSelectorContainer';
+import TimerOptionsContainer from '../containers/TimerOptionsContainer';
 import TimerContainer from '../containers/TimerContainer';
 import TimeBoardContainer from '../containers/TimeBoardContainer';
 import Section from './Section';
@@ -11,7 +11,7 @@ const TimerView = () => (
       <TimerContainer/>
     </Section>
     <Section margin="sm">
-      <PuzzleSelectorContainer/>
+      <TimerOptionsContainer/>
     </Section>
     <Section>
       <TimeBoardContainer/>

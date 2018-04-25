@@ -21,7 +21,7 @@ ThemeSelector.propTypes = {
 };
 
 const ThemeSelectorContainer = styled.div`
-  color: ${props => props.theme.colors.subtleFg};
+  color: ${props => props.theme.colors.fg};
   text-align: center;
 `;
 
@@ -29,7 +29,7 @@ const Toggle = IconButton.extend`
   position: relative;
   top: 0.35rem;
   font-size: 2.3rem;
-  color: ${props => props.theme.colors.subtleFg};
+  color: ${props => props.theme.colors.fg};
   margin-left: ${props => props.theme.sizes.xs};
 
 `;

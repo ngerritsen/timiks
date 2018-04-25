@@ -3,6 +3,8 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = {
   startTime: 0,
   stopped: true,
+  inspectionStartTime: 0,
+  inspectionMode: false,
   finalTime: 0,
   scrambleDetailsOpen: false
 }
@@ -13,7 +15,14 @@ export default function timerReducer(state = initialState, action) {
       return {
         ...state,
         startTime: action.startTime,
-        stopped: false
+        stopped: false,
+        inspectionMode: false
+      }
+    case actionTypes.START_INSPECTION:
+      return {
+        ...state,
+        inspectionStartTime: action.startTime,
+        inspectionMode: true
       }
     case actionTypes.STOP_TIMER:
       return {

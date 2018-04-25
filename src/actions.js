@@ -6,6 +6,8 @@ export const startTimer = startTime => ({ type: actionTypes.START_TIMER, startTi
 export const stopTimer = () => ({ type: actionTypes.STOP_TIMER });
 export const showScrambleDetails = () => ({ type: actionTypes.SHOW_SCRAMBLE_DETAILS });
 export const hideScrambleDetails = () => ({ type: actionTypes.HIDE_SCRAMBLE_DETAILS });
+export const prepareInspection = () => ({ type: actionTypes.PREPARE_INSPECTION });
+export const startInspection = startTime => ({ type: actionTypes.START_INSPECTION, startTime });
 
 // Activation
 export const prepareActivation = () => ({ type: actionTypes.PREPARE_ACTIVATION });
@@ -42,6 +44,7 @@ export const filterArchive = puzzle => ({ type: actionTypes.FILTER_ARCHIVE, puzz
 // Settings
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
+export const toggleInspectionTime = theme => ({ type: actionTypes.TOGGLE_INSPECTION_TIME, theme });
 
 // Stats info
 export const showStatsInfo = () => ({ type: actionTypes.SHOW_STATS_INFO });

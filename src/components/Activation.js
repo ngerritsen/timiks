@@ -7,42 +7,69 @@ import { PREPARATION_STAGES } from '../constants/app';
 import { generateArr } from '../helpers/general';
 import Button from './Button';
 
-const Activation = ({ stopped, preparationStage, preparing, ready }) => {
+const Activation = ({
+  stopped,
+  preparationStage,
+  preparing,
+  ready,
+  preparingForInspection,
+  inspectionMode,
+  useInspectionTime
+}) => {
   return (
     <div>
       <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
         <Button big primary data-activation>
-          {stopped && !(preparing || ready) && 'Start'}
-          {preparing && generateArr(PREPARATION_STAGES)
-            .map(index =>
-              <PrepartionCircle key={index} active={index < preparationStage} />
-            )
-          }
-          {!stopped && 'Stop'}
+          {(() => {
+            if (!stopped) {
+              return 'Stop';
+            }
+
+            if (preparingForInspection) {
+              return 'Ready';
+            }
+
+            if (preparing || ready) {
+              return generateArr(PREPARATION_STAGES)
+                .map(index =>
+                  <PrepartionCircle key={index} active={index < preparationStage} />
+                );
+            }
+
+            if (useInspectionTime && !inspectionMode) {
+              return 'Start inspection';
+            }
+
+            return 'Start';
+          })()}
         </Button>
 
         <Explain>
           {(() => {
-            if (preparing && ready) {
-              return 'Release to start!'
+            if (preparingForInspection) {
+              return 'Release to start inspection';
+            }
+
+            if ((preparing && ready)) {
+              return 'Release to start!';
             }
 
             if (preparing && !ready) {
-              return 'Hold on...'
+              return 'Hold on...';
             }
 
             if (!stopped) {
-              return <span>Click, tap or smash <Spacebar/> spacebar to stop</span>
+              return <span>Click, tap or smash <Spacebar/> spacebar to stop</span>;
             }
 
             if (!preparing && !ready) {
-              return <span>Click, touch or press <Spacebar/> spacebar. Hold and release to start</span>
+              return <span>Click, touch or press <Spacebar/> spacebar. Hold and release to start{useInspectionTime ? ' inspection' : ''}</span>;
             }
           })()}
         </Explain>
       </ActivationContainer>
 
-      {(!stopped || preparing) && <FullScreenMask/>}
+      {(!stopped || preparing || preparingForInspection || inspectionMode) && <FullScreenMask/>}
     </div>
   )
 };
@@ -50,8 +77,11 @@ const Activation = ({ stopped, preparationStage, preparing, ready }) => {
 Activation.propTypes = {
   stopped: PropTypes.bool.isRequired,
   preparationStage: PropTypes.number.isRequired,
+  preparingForInspection: PropTypes.bool.isRequired,
   preparing: PropTypes.bool.isRequired,
-  ready: PropTypes.bool.isRequired
+  ready: PropTypes.bool.isRequired,
+  useInspectionTime: PropTypes.bool.isRequired,
+  inspectionMode: PropTypes.bool.isRequired
 };
 
 const ActivationContainer = styled.div`

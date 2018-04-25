@@ -9,7 +9,7 @@ const Footer = () => (
   <Section margin="md">
     <center>
       <FooterMessage href="https://github.com/ngerritsen/timiks/issues" target="_blank">
-         <GithubIcon><FontAwesome icon={faGithub} size="md" /></GithubIcon>Report bugs or suggestions.
+         <GithubIcon><FontAwesome icon={faGithub} size="sm" /></GithubIcon>Report bugs or suggestions.
       </FooterMessage>
     </center>
   </Section>

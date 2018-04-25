@@ -5,15 +5,18 @@ import Activation from '../components/Activation';
 import { isReady, isPreparing } from '../selectors/activationSelectors';
 
 function mapStateToProps (state) {
-  const { timer, activation } = state;
-  const { stopped, time } = timer;
-  const { preparationStage } = activation;
+  const { timer, activation, settings } = state;
+  const { stopped, time, inspectionMode } = timer;
+  const { preparationStage, preparingForInspection } = activation;
 
   return {
     time,
     stopped,
     preparationStage,
     preparing: isPreparing(state),
+    preparingForInspection: preparingForInspection,
+    inspectionMode,
+    useInspectionTime: settings.useInspectionTime,
     ready: isReady(state)
   }
 }

@@ -1,10 +1,11 @@
 import shortid from 'shortid';
 
-import { STOP_TIMER, START_TIMER } from '../constants/actionTypes';
+import { STOP_TIMER, START_TIMER, START_INSPECTION } from '../constants/actionTypes';
 import { saveTime } from '../actions';
 
 const timerMiddleware = store => next => action => {
   switch (action.type) {
+    case START_INSPECTION:
     case START_TIMER: {
       return next({
         ...action,

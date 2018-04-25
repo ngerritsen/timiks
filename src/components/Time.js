@@ -5,7 +5,11 @@ import styled from 'styled-components';
 import { fillZeroes } from '../helpers/formatting';
 import { breakUpTime } from '../helpers/time';
 
-const Time = ({ ms }) => {
+const Time = ({ ms, secondsOnly }) => {
+  if (secondsOnly) {
+    return <span>{formatPart(Math.round(ms / 1000))}<Unit>s</Unit></span>
+  }
+
   const { minutes, seconds, milliseconds } = breakUpTime(ms);
   return (
     <span>
@@ -26,8 +30,7 @@ function monospace(string) {
 
 Time.propTypes = {
   ms: PropTypes.number.isRequired,
-  decimals: PropTypes.number,
-  fontSize: PropTypes.number
+  secondsOnly: PropTypes.bool
 };
 
 const TimeNumber = styled.span`

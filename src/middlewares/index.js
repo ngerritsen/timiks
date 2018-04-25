@@ -1,7 +1,7 @@
 import activationMiddleware from './activationMiddleware';
 import archiveMiddleware from './archiveMiddleware';
 import noSleepMiddleware from './noSleepMiddleware';
-import puzzleMiddleware from './puzzleMiddleware';
+import settingsMiddleware from './settingsMiddleware';
 import scrambleMiddleware from './scrambleMiddleware';
 import themeMiddleware from './themeMiddleware';
 import timerMiddleware from './timerMiddleware';
@@ -11,7 +11,7 @@ export default [
   activationMiddleware,
   archiveMiddleware,
   noSleepMiddleware,
-  puzzleMiddleware,
+  settingsMiddleware,
   scrambleMiddleware,
   themeMiddleware,
   timerMiddleware,
