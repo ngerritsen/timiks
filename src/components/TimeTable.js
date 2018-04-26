@@ -43,7 +43,14 @@ const TimeTable = ({
               <FontAwesome icon={faInfoCircle} size="sm" />
             </InfoIconButton>
             <Modal title="Details" isOpen={showDetails}>
-              <TimeDetails puzzle={puzzle} date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
+              <TimeDetails
+                puzzle={puzzle}
+                dnf={dnf}
+                date={date}
+                ms={ms}
+                scramble={scramble}
+                hideTimeDetails={hideTimeDetails}
+              />
             </Modal>
             {
               editable &&
