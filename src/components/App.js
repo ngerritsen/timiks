@@ -6,7 +6,6 @@ import Header from './Header';
 import Footer from './Footer';
 import TimerView from './TimerView';
 import ArchiveContainer from '../containers/ArchiveContainer';
-import ThemeSelectorContainer from '../containers/ThemeSelectorContainer';
 import Section from './Section';
 
 const App = () => (
@@ -17,9 +16,6 @@ const App = () => (
       <Section margin="md">
         <Route exact path="/" component={TimerView}/>
         <Route path="/archive" component={ArchiveContainer}/>
-      </Section>
-      <Section margin="lg">
-        <ThemeSelectorContainer/>
       </Section>
       <Section margin="md">
         <Footer/>

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { NavLink } from 'react-router-dom'
+
+import SettingsContainer from '../containers/SettingsContainer';
 
 const Header = () => (
   <HeaderBar>
@@ -9,6 +10,7 @@ const Header = () => (
     <nav>
       <StyledNavLink activeClassName="selected" exact to="/">Timer</StyledNavLink>
       <StyledNavLink activeClassName="selected" to="/archive">Archive</StyledNavLink>
+      <SettingsContainer/>
     </nav>
   </HeaderBar>
 );
@@ -28,7 +30,7 @@ const Title = styled.h1`
 `;
 
 const StyledNavLink = styled(NavLink)`
-  margin-left: ${props => props.theme.sizes.sm};
+  margin-right: ${props => props.theme.sizes.sm};
   color: ${props => props.theme.colors.fg};
   font-weight: bold;
   text-decoration: none;

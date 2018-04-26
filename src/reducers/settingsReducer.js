@@ -1,26 +1,37 @@
-import { CHANGE_PUZZLE, CHANGE_THEME, TOGGLE_INSPECTION_TIME } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import { DEFAULT_PUZZLE } from '../constants/app';
 
 const initialState = {
   puzzle: DEFAULT_PUZZLE,
   useInspectionTime: false,
-  theme: 'light'
+  theme: 'light',
+  settingsOpen: false
 };
 
 export default function settingsReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_PUZZLE:
+    case actionTypes.OPEN_SETTINGS:
+      return {
+        ...state,
+        settingsOpen: true
+      }
+    case actionTypes.CLOSE_SETTINGS:
+      return {
+        ...state,
+        settingsOpen: false
+      }
+    case actionTypes.CHANGE_PUZZLE:
       return {
         ...state,
         puzzle: action.puzzle
       }
-    case CHANGE_THEME: {
+    case actionTypes.CHANGE_THEME: {
       return {
         ...state,
         theme: action.theme
       }
     }
-    case TOGGLE_INSPECTION_TIME:
+    case actionTypes.TOGGLE_INSPECTION_TIME:
       return {
         ...state,
         useInspectionTime: !state.useInspectionTime

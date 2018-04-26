@@ -46,6 +46,8 @@ export const filterArchive = puzzle => ({ type: actionTypes.FILTER_ARCHIVE, puzz
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
 export const toggleInspectionTime = theme => ({ type: actionTypes.TOGGLE_INSPECTION_TIME, theme });
+export const openSettings = () => ({ type: actionTypes.OPEN_SETTINGS });
+export const closeSettings = () => ({ type: actionTypes.CLOSE_SETTINGS });
 
 // Stats info
 export const showStatsInfo = () => ({ type: actionTypes.SHOW_STATS_INFO });
