@@ -5,7 +5,7 @@ export const FULL_SCREEN_MASK_ROOT_SELECTOR = '#full-screen-mask';
 export const PREPARATION_STAGES = 3;
 export const ACTIVATION_DURATION = 750;
 
-export const INSPECTION_TIME = 3000;
+export const INSPECTION_TIME = 15000;
 export const TIMER_INTERVAL = 42;
 
 export const SPACEBAR_KEYCODE = 32;
