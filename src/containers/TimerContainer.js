@@ -11,7 +11,7 @@ class TimerContainer extends React.Component {
   constructor() {
     super();
 
-    this.state = { time: 0, inspectionTime: 0 };
+    this.state = { time: 0, inspectionTime: INSPECTION_TIME };
     this._interval = null;
     this._inpectionInterval = null;
     this._updateTime = this._updateTime.bind(this);
@@ -22,6 +22,7 @@ class TimerContainer extends React.Component {
     const { stopped, inspectionMode } = this.props;
 
     if (!inspectionMode && nextProps.inspectionMode) {
+      this.setState({ inspectionTime: INSPECTION_TIME });
       this._inpectionInterval = setInterval(this._updateInspectionTime, TIMER_INTERVAL);
     }
 
