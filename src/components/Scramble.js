@@ -4,7 +4,7 @@ import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/fontawesome-pro-solid';
 
-import IconButton from './IconButton';
+import IconButton from './shared/IconButton';
 
 const Scramble = ({ scramble, small, onClick }) => (
   <div>

@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/fontawesome-pro-solid'
 
-import Info, { InfoItem, InfoIcon } from './Info';
-import TimeTableContainer from '../containers/TimeTableContainer';
-import Button from './Button';
-import Section from './Section';
+import Info, { InfoItem, InfoIcon } from '../shared/Info';
+import TimeTableContainer from '../../containers/TimeTableContainer';
+import Button from '../shared/Button';
+import Section from '../shared/Section';
 
 const ArchiveItem = ({
   collapsed,

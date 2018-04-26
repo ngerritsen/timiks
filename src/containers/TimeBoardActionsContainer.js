@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import TimeBoardActions from '../components/TimeBoardActions';
+import TimeBoardActions from '../components/timer/TimeBoardActions';
 import {
   clearTimes,
   archiveCurrentTimes,

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { startTimer, stopTimer, resetTime } from '../actions';
-import Activation from '../components/Activation';
+import Activation from '../components/timer/Activation';
 import { isReady, isPreparing } from '../selectors/activationSelectors';
 
 function mapStateToProps (state) {

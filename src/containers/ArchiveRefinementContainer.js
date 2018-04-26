@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ArchiveRefinement from '../components/ArchiveRefinement';
+import ArchiveRefinement from '../components/archive/ArchiveRefinement';
 import { sortArchive, filterArchive } from '../actions';
 
 function mapStateToProps(state) {

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Button from './Button';
-import Section from './Section';
+import Button from '../shared/Button';
+import Section from '../shared/Section';
 
 const ArchiveForm = ({ archiveCurrentTimes, inputTimesTitle, onCancel, titleInput,  }) => {
   const canSubmit = titleInput.trim().length > 0;

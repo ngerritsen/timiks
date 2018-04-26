@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ArchiveItem from './ArchiveItem';
-import ArchiveRefinementContainer from '../containers/ArchiveRefinementContainer';
-import Section from './Section';
+import ArchiveRefinementContainer from '../../containers/ArchiveRefinementContainer';
+import Section from '../shared/Section';
 
 const Archive = ({
   archive,

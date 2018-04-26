@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { decorateArchive, sortArchive, filterArchive } from '../helpers/archive';
 
-import Archive from '../components/Archive';
+import Archive from '../components/archive/Archive';
 import {
   expandArchiveItem,
   collapseArchiveItem,

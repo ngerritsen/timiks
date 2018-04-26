@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import FullScreenMask from './FullScreenMask';
-import { PREPARATION_STAGES } from '../constants/app';
-import { generateArr } from '../helpers/general';
-import Button from './Button';
+import { PREPARATION_STAGES } from '../../constants/app';
+import { generateArr } from '../../helpers/general';
+import Button from '../shared/Button';
 
 const Activation = ({
   stopped,

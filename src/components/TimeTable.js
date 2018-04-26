@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes, faThumbsUp, faInfoCircle, faQuestionCircle } from '@fortawesome/fontawesome-pro-solid';
 
-import Time from './Time';
-import Modal from './Modal';
-import IconButton from './IconButton';
+import Time from './shared/Time';
+import Modal from './shared/Modal';
+import IconButton from './shared/IconButton';
 import TimeDetails from './TimeDetails';
-import Button from './Button';
-import Section from './Section';
+import Button from './shared/Button';
+import Section from './shared/Section';
 
 const STATS = ['ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'mo3'];
 

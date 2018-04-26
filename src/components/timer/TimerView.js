@@ -1,9 +1,9 @@
 import React from 'react';
 
-import TimerOptionsContainer from '../containers/TimerOptionsContainer';
-import TimerContainer from '../containers/TimerContainer';
-import TimeBoardContainer from '../containers/TimeBoardContainer';
-import Section from './Section';
+import TimerOptionsContainer from '../../containers/TimerOptionsContainer';
+import TimerContainer from '../../containers/TimerContainer';
+import TimeBoardContainer from '../../containers/TimeBoardContainer';
+import Section from '../shared/Section';
 
 const TimerView = () => (
   <div>

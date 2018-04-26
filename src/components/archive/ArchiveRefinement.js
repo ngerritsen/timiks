@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Selector from './Selector';
 
-import { ARCHIVE_SORT_OPTIONS } from '../constants/app';
-import puzzles from '../constants/puzzles';
+import Selector from '../shared/Selector';
+import { ARCHIVE_SORT_OPTIONS } from '../../constants/app';
+import puzzles from '../../constants/puzzles';
 
 const puzzleSortOptions = [
   { label: 'all', value: '' },

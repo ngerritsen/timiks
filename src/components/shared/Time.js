@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { fillZeroes } from '../helpers/formatting';
-import { breakUpTime } from '../helpers/time';
+import { fillZeroes } from '../../helpers/formatting';
+import { breakUpTime } from '../../helpers/time';
 
 const Time = ({ ms, secondsOnly, dnf }) => {
   if (dnf) {

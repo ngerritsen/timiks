@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { MODAL_ROOT_SELECTOR } from '../constants/app';
+import { MODAL_ROOT_SELECTOR } from '../../constants/app';
 
 class Modal extends React.Component {
   componentDidUpdate(prevProps) {

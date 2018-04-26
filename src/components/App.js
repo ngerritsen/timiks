@@ -4,9 +4,9 @@ import { Route } from 'react-router-dom'
 
 import Header from './Header';
 import Footer from './Footer';
-import TimerView from './TimerView';
+import TimerView from './timer/TimerView';
 import ArchiveContainer from '../containers/ArchiveContainer';
-import Section from './Section';
+import Section from './shared/Section';
 
 const App = () => (
     <Container>

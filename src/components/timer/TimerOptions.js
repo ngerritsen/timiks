@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Selector from './Selector';
-import puzzles from '../constants/puzzles';
+import Selector from '../shared/Selector';
+import puzzles from '../../constants/puzzles';
 
 const TimerOptions = ({ changePuzzle, puzzle }) => (
   <div>

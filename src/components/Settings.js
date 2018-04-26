@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/fontawesome-pro-solid'
 
-import IconButton from './IconButton';
-import Modal from './Modal';
-import Section from './Section';
-import Button from './Button';
+import IconButton from './shared/IconButton';
+import Modal from './shared/Modal';
+import Section from './shared/Section';
+import Button from './shared/Button';
 
 const Settings = ({
   openSettings,

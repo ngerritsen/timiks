@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
 
-import Section from './Section';
+import Section from './shared/Section';
 
 const Footer = () => (
   <Section margin="md">

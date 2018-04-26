@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { TIMER_INTERVAL, INSPECTION_TIME } from '../constants/app';
 import { obfuscateScramble } from '../helpers/scramble';
 import { showScrambleDetails, hideScrambleDetails } from '../actions';
-import Timer from '../components/Timer';
+import Timer from '../components/timer/Timer';
 
 class TimerContainer extends React.Component {
   constructor() {

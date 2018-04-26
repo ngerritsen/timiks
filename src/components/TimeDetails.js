@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faStopwatch, faCube } from '@fortawesome/fontawesome-pro-solid';
 
-import Button from './Button';
-import Time from './Time';
-import Section from './Section';
+import Button from './shared/Button';
+import Time from './shared/Time';
+import Section from './shared/Section';
 import ScrambleDetails from './ScrambleDetails';
 
 const TimeDetails = ({ puzzle, date, ms, scramble, hideTimeDetails }) => (

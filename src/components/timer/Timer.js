@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-import Time from './Time';
-import Section from './Section';
-import Scramble from './Scramble';
-import ActivationContainer from '../containers/ActivationContainer';
-import ScrambleDetails from './ScrambleDetails';
-import Modal from './Modal';
-import Button from './Button';
-import { isCube } from '../helpers/puzzle';
+import Time from '../shared/Time';
+import Section from '../shared/Section';
+import Scramble from '../Scramble';
+import ActivationContainer from '../../containers/ActivationContainer';
+import ScrambleDetails from '../ScrambleDetails';
+import Modal from '../shared/Modal';
+import Button from '../shared/Button';
+import { isCube } from '../../helpers/puzzle';
 
 const Timer = ({
   scramble,

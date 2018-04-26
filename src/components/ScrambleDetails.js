@@ -6,7 +6,7 @@ import { getPuzzleSize, isCube } from '../helpers/puzzle';
 
 import CubePreview from './CubePreview';
 import Scramble from './Scramble';
-import Section from './Section';
+import Section from './shared/Section';
 
 const ScrambleDetails = ({ puzzle, scramble }) => (
   <div>
