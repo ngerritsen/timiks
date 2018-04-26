@@ -6,20 +6,17 @@ import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/fontawesome-pro-solid'
 
 import Info, { InfoItem, InfoIcon } from './Info';
-import TimeTable from './TimeTable';
+import TimeTableContainer from '../containers/TimeTableContainer';
 import Button from './Button';
 import Section from './Section';
 
 const ArchiveItem = ({
-  stats,
   collapsed,
   date,
-  hideTimeDetails,
   id,
   onClick,
   puzzle,
   removeArchiveItem,
-  showTimeDetails,
   times,
   title
 }) => (
@@ -44,11 +41,9 @@ const ArchiveItem = ({
       !collapsed &&
       <ArchiveItemContent>
         <Section margin="sm">
-          <TimeTable
-            stats={stats}
-            hideTimeDetails={hideTimeDetails}
-            showTimeDetails={showTimeDetails}
+          <TimeTableContainer
             times={times}
+            editable={false}
           />
         </Section>
         <Button danger onClick={() => removeArchiveItem(id)}>Remove</Button>
@@ -58,15 +53,12 @@ const ArchiveItem = ({
 );
 
 ArchiveItem.propTypes = {
-  stats: PropTypes.object.isRequired,
   collapsed: PropTypes.bool.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
-  hideTimeDetails: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
   removeArchiveItem: PropTypes.func.isRequired,
-  showTimeDetails: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired
 };

@@ -15,6 +15,7 @@ const STATS = ['ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'mo3'];
 
 const TimeTable = ({
   stats,
+  editable = true,
   showStatsInfo,
   hideStatsInfo,
   statsInfoOpen,
@@ -25,11 +26,11 @@ const TimeTable = ({
 }) => (
   <TimeTableContainer>
     <TimeTableColumn>
-      {times.map(({ ms, id, best, date, scramble, showDetails, puzzle }, index) => (
+      {times.map(({ ms, id, best, date, scramble, showDetails, puzzle, dnf }, index) => (
         <TimeBoardRow key={index}>
           <div>
             <TimeIndex>{index + 1}.</TimeIndex>
-              <Time ms={ms}/>
+              <Time ms={ms} dnf={dnf}/>
               {
                 (best && times.length > 1) &&
                 <TimeInfo>
@@ -45,7 +46,7 @@ const TimeTable = ({
               <TimeDetails puzzle={puzzle} date={date} ms={ms} scramble={scramble} hideTimeDetails={hideTimeDetails}/>
             </Modal>
             {
-              removeTime &&
+              editable &&
               <RemoveItemIconButton onClick={() => removeTime(id)}>
                 <FontAwesome icon={faTimes} size="sm" />
               </RemoveItemIconButton>
@@ -80,10 +81,15 @@ const TimeTable = ({
         STATS
           .filter(stat => stats[stat])
           .map(stat => (
-            <TimeBoardRow key={stat}>
+            <TimeBoardRow key={stat} x={stats[stat] === 'DNF' ? Infinity : stats[stats]}>
               <div>
                 <TimeIndex></TimeIndex>
-                <strong><Time ms={stats[stat]}/></strong>
+                <strong>
+                  <Time
+                    ms={stats[stat] === 'DNF' ? Infinity : stats[stat]}
+                    dnf={stats[stat] === 'DNF'}
+                  />
+                </strong>
                 <TimeInfo>({stat})</TimeInfo>
               </div>
             </TimeBoardRow>
@@ -96,6 +102,7 @@ const TimeTable = ({
 TimeTable.propTypes = {
   stats: PropTypes.object.isRequired,
   showStatsInfo: PropTypes.func.isRequired,
+  editable: PropTypes.bool,
   hideStatsInfo: PropTypes.func.isRequired,
   statsInfoOpen: PropTypes.bool.isRequired,
   hideTimeDetails: PropTypes.func.isRequired,

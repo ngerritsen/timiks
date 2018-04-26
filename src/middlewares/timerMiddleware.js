@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 
-import { STOP_TIMER, START_TIMER, START_INSPECTION } from '../constants/actionTypes';
+import { STOP_TIMER, START_TIMER, START_INSPECTION, FAIL_INSPECTION } from '../constants/actionTypes';
 import { saveTime } from '../actions';
 
 const timerMiddleware = store => next => action => {
@@ -11,6 +11,12 @@ const timerMiddleware = store => next => action => {
         ...action,
         startTime: Date.now()
       });
+    }
+    case FAIL_INSPECTION: {
+      const { scramble, settings } = store.getState();
+      const now = new Date();
+      store.dispatch(saveTime(shortid.generate(), 0, now, scramble, settings.puzzle, true));
+      break;
     }
     case STOP_TIMER: {
       const { timer, scramble, settings } = store.getState();

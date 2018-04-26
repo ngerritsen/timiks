@@ -13,7 +13,9 @@ export function calculateStats(times) {
 }
 
 function calculateAverageTime(times) {
-  const total = times.reduce((totalTimes, time) => totalTimes + time.ms, 0);
+  const total = times
+    .filter(time => !time.dnf)
+    .reduce((totalTimes, time) => totalTimes + getMs(time), 0);
 
   return total / times.length;
 }
@@ -23,8 +25,12 @@ function calculateAverageOf(times, amount, deviation = 1) {
     return undefined;
   }
 
+  if (times.filter(time => time.dnf).length > deviation) {
+    return 'DNF';
+  }
+
   const middleTimes = times.slice(-1 * amount)
-    .sort((a, b) => a.ms - b.ms)
+    .sort((a, b) => getMs(a) - getMs(b))
     .slice(deviation, -1 * deviation);
 
   return calculateAverageTime(middleTimes);
@@ -32,19 +38,29 @@ function calculateAverageOf(times, amount, deviation = 1) {
 
 function calculateMean(times, series) {
   if (times.length < series) {
-    return undefined;
+    return;
   }
 
   return generateArr(times.length - (series - 1))
     .reduce((mean, _, index) => {
-      const average = calculateAverageTime(times.slice(index, index + series))
+      const chunk = times.slice(index, index + series);
+
+      if (chunk.find(time => time.dnf)) {
+        return mean;
+      }
+
+      const average = calculateAverageTime(chunk);
+
+      if (!mean) {
+        return average;
+      }
 
       return average < mean ? average : mean;
-    }, Infinity);
+    }, undefined);
 }
 
 export function markBestTime(times) {
-  const bestTime = Math.min(...times.map(time => time.ms));
+  const bestTime = Math.min(...times.map(time => getMs(time)));
 
   return times.map(time => (
     time.ms === bestTime ? { ...time, best: true } : time
@@ -60,4 +76,16 @@ export function markShowDetails(times, id) {
 
 export function getFirstDate(times) {
   return new Date(Math.min(...times.map(time => time.date.getTime())));
+}
+
+export function getMs(time) {
+  if (time.dnf) {
+    return Infinity;
+  }
+
+  if (time.plus2) {
+    return time.ms + 2000;
+  }
+
+  return time.ms;
 }

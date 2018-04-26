@@ -5,7 +5,11 @@ import styled from 'styled-components';
 import { fillZeroes } from '../helpers/formatting';
 import { breakUpTime } from '../helpers/time';
 
-const Time = ({ ms, secondsOnly }) => {
+const Time = ({ ms, secondsOnly, dnf }) => {
+  if (dnf) {
+    return monospace('DNF');
+  }
+
   if (secondsOnly) {
     return <span>{formatPart(Math.round(ms / 1000))}<Unit>s</Unit></span>
   }
@@ -30,6 +34,7 @@ function monospace(string) {
 
 Time.propTypes = {
   ms: PropTypes.number.isRequired,
+  dnf: PropTypes.bool,
   secondsOnly: PropTypes.bool
 };
 

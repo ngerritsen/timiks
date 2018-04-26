@@ -93,7 +93,7 @@ TimerContainer.propTypes = {
 
 function mapStateToProps (state) {
   const { activation, timer, scramble } = state;
-  const { stopped, startTime, finalTime, inspectionStartTime, inspectionMode } = timer;
+  const { stopped, startTime, finalTime, inspectionStartTime, inspectionMode, dnf } = timer;
   const { preparingForInspection, preparationStage } = activation;
   const preparing = preparationStage > -1;
 
@@ -103,6 +103,7 @@ function mapStateToProps (state) {
     stopped,
     inspectionStartTime,
     inspectionMode,
+    dnf,
     preparingForInspection,
     scramble: (stopped && !preparing && !preparingForInspection && !inspectionMode) ? scramble : obfuscateScramble(scramble),
     puzzle: state.settings.puzzle,

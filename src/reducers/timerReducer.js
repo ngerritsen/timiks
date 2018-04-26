@@ -6,6 +6,7 @@ const initialState = {
   inspectionStartTime: 0,
   inspectionMode: false,
   finalTime: 0,
+  dnf: false,
   scrambleDetailsOpen: false
 }
 
@@ -20,7 +21,10 @@ export default function timerReducer(state = initialState, action) {
         inspectionStartTime: 0
       }
     case actionTypes.FAIL_INSPECTION:
-      return initialState
+      return {
+        ...initialState,
+        dnf: true
+      }
     case actionTypes.START_INSPECTION:
       return {
         ...state,
@@ -37,7 +41,8 @@ export default function timerReducer(state = initialState, action) {
       return {
         ...state,
         finalTime: 0,
-        startTime: 0
+        startTime: 0,
+        dnf: false
       }
     case actionTypes.SHOW_SCRAMBLE_DETAILS:
       return {

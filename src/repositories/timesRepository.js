@@ -30,7 +30,9 @@ function parseTimes(rawTimes) {
     ms: raw.ms,
     puzzle: raw.puzzle,
     scramble: parseScramble(raw.scramble),
-    date: new Date(raw.date)
+    date: new Date(raw.date),
+    dnf: Boolean(raw.dnf),
+    plus2: Boolean(raw.plus2)
   }));
 }
 
@@ -39,7 +41,9 @@ function serializeTimes(times) {
     ms: time.ms,
     puzzle: time.puzzle,
     scramble: serializeScramble(time.scramble),
-    date: time.date.toISOString()
+    date: time.date.toISOString(),
+    dnf: Boolean(time.dnf),
+    plus2: Boolean(time.plus2)
   }));
 }
 

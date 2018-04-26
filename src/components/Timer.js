@@ -15,6 +15,7 @@ const Timer = ({
   scramble,
   time,
   puzzle,
+  dnf,
   inspectionMode,
   showScrambleDetails,
   preparingForInspection,
@@ -24,7 +25,7 @@ const Timer = ({
   <div>
     <Section margin="sm">
       <TimerTime>
-        <Time ms={time} secondsOnly={inspectionMode || preparingForInspection}/>
+        <Time ms={time} secondsOnly={inspectionMode || preparingForInspection} dnf={dnf}/>
       </TimerTime>
     </Section>
     <Section margin="sm">
@@ -46,6 +47,7 @@ Timer.propTypes = {
   puzzle: PropTypes.string.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
   time: PropTypes.number.isRequired,
+  dnf: PropTypes.bool.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
   showScrambleDetails: PropTypes.func.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,

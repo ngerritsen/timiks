@@ -10,9 +10,7 @@ const Archive = ({
   archive,
   collapseArchiveItem,
   expandArchiveItem,
-  hideTimeDetails,
   removeArchiveItem,
-  showTimeDetails,
   isEmpty
 }) => {
   if (isEmpty) {
@@ -33,8 +31,6 @@ const Archive = ({
             <ArchiveListItem key={index}>
               <ArchiveItem
                 {...item}
-                hideTimeDetails={hideTimeDetails}
-                showTimeDetails={showTimeDetails}
                 removeArchiveItem={removeArchiveItem}
                 onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
               />
