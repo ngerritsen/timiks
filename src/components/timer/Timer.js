@@ -65,7 +65,7 @@ const TimerTime = styled.div`
   font-size: 5rem;
   z-index: ${props => props.theme.zIndices.onFullScreenMask};
   position: relative;
-  opacity: ${props => props.disabled ? 0.6 : 1};
+  opacity: ${props => props.disabled ? 0.5 : 1};
 
   @media screen and (min-width: 420px) {
     font-size: 6rem;
