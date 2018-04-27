@@ -20,6 +20,20 @@ export default function timesReducer(state = initialState, action) {
         ...state,
         current: state.current.filter(time => time.id !== action.id)
       };
+    case actionTypes.UPDATE_TIME:
+      return {
+        ...state,
+        current: state.current.map((time) => {
+          if (time.id !== action.id) {
+            return time;
+          }
+
+          return {
+            ...time,
+            ...action.fields
+          }
+        })
+      }
     case actionTypes.CLEAR_TIMES:
       return {
         ...state,

@@ -23,6 +23,7 @@ export const saveTime = (id, ms, date, scramble, puzzle, dnf = false) => ({
   type: actionTypes.SAVE_TIME,
   id, ms, date, scramble, puzzle, dnf
 });
+export const updateTime = (id, fields) => ({ type: actionTypes.UPDATE_TIME, id, fields });
 export const loadTimes = (current = [], archive = []) => ({ type: actionTypes.LOAD_TIMES, current, archive });
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });

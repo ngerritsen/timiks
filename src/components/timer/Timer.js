@@ -18,6 +18,8 @@ const Timer = ({
   dnf,
   inspectionMode,
   showScrambleDetails,
+  removeLastTime,
+  toggleDnfLastTime,
   showTimeActions,
   preparingForInspection,
   preparing,
@@ -41,13 +43,10 @@ const Timer = ({
             showTimeActions &&
             <span>
               <TimeAction>
-                <Button tiny tag empty>DNF</Button>
+                <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>DNF</Button>
               </TimeAction>
               <TimeAction>
-                <Button tiny tag empty>+2</Button>
-              </TimeAction>
-              <TimeAction>
-                <Button tiny tag danger>Remove</Button>
+                <Button tiny tag danger onClick={removeLastTime}>Remove</Button>
               </TimeAction>
             </span>
           }
@@ -78,6 +77,8 @@ Timer.propTypes = {
   showScrambleDetails: PropTypes.func.isRequired,
   showTimeActions: PropTypes.bool.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,
+  removeLastTime: PropTypes.func.isRequired,
+  toggleDnfLastTime: PropTypes.func.isRequired,
   preparing: PropTypes.bool.isRequired,
   ready: PropTypes.bool.isRequired,
   scrambleDetailsOpen: PropTypes.bool.isRequired,
