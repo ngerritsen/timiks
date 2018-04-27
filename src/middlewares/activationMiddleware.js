@@ -11,7 +11,6 @@ const activationMiddleware = store => next => {
 
   listenForActivations({
     onInitiate() {
-      dispatch(actions.resetTime());
       const { useInspectionTime } = getState().settings;
       const { inspectionMode } = getState().timer;
 
@@ -32,7 +31,10 @@ const activationMiddleware = store => next => {
       interval = countDown(() => {
         if (!isReady(getState())) {
           dispatch(actions.incrementPreparationStage())
+          return;
         }
+
+        dispatch(actions.resetTime());
       });
     },
     onFire() {
