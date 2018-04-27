@@ -21,11 +21,12 @@ const timerMiddleware = store => next => action => {
     case STOP_TIMER: {
       const { timer, scramble, settings } = store.getState();
       const now = new Date();
+      const id = shortid.generate();
       const finalTime = now.getTime() - timer.startTime;
 
-      store.dispatch(saveTime(shortid.generate(), finalTime, now, scramble, settings.puzzle));
+      store.dispatch(saveTime(id, finalTime, now, scramble, settings.puzzle));
 
-      return next({ ...action, finalTime });
+      return next({ ...action, lastTimeId: id });
     }
   }
 

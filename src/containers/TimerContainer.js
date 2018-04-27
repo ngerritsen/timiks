@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../constants/app';
 import { obfuscateScramble } from '../helpers/scramble';
+import { getMs } from '../helpers/times';
 import { showScrambleDetails, hideScrambleDetails } from '../actions';
 import Timer from '../components/timer/Timer';
 
@@ -53,7 +54,7 @@ class TimerContainer extends React.Component {
   }
 
   _getDisplayTime() {
-    const { finalTime, startTime, inspectionMode, preparingForInspection } = this.props;
+    const { lastTime, startTime, inspectionMode, preparingForInspection } = this.props;
 
     if (inspectionMode) {
       return this.state.inspectionTime;
@@ -63,8 +64,8 @@ class TimerContainer extends React.Component {
       return INSPECTION_TIME;
     }
 
-    if (finalTime > 0) {
-      return finalTime;
+    if (lastTime > 0) {
+      return lastTime;
     }
 
     if (startTime > 0) {
@@ -81,7 +82,7 @@ class TimerContainer extends React.Component {
 
 TimerContainer.propTypes = {
   startTime: PropTypes.number.isRequired,
-  finalTime: PropTypes.number.isRequired,
+  lastTime: PropTypes.number.isRequired,
   inspectionStartTime: PropTypes.number.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
   showScrambleDetails: PropTypes.func.isRequired,
@@ -94,19 +95,21 @@ TimerContainer.propTypes = {
 };
 
 function mapStateToProps (state) {
-  const { activation, timer, scramble } = state;
-  const { stopped, startTime, finalTime, inspectionStartTime, inspectionMode, dnf } = timer;
+  const { activation, timer, scramble, times } = state;
+  const { stopped, startTime, lastTimeId, inspectionStartTime, inspectionMode, dnf } = timer;
   const { preparingForInspection, preparationStage } = activation;
   const preparing = preparationStage > -1;
 
+  const lastTime = times.current.find(time => time.id === lastTimeId);
+
   return {
-    finalTime,
+    lastTime: lastTime ? getMs(lastTime) : 0,
     startTime,
     stopped,
     inspectionStartTime,
     inspectionMode,
     showTimeActions: false,
-    dnf,
+    dnf: lastTime ? lastTime.dnf : dnf,
     ready: preparationStage === PREPARATION_STAGES,
     preparingForInspection,
     scramble: (stopped && !preparing && !preparingForInspection && !inspectionMode) ? scramble : obfuscateScramble(scramble),
