@@ -19,12 +19,14 @@ const Timer = ({
   inspectionMode,
   showScrambleDetails,
   preparingForInspection,
+  preparing,
+  ready,
   scrambleDetailsOpen,
   hideScrambleDetails
 }) => (
   <div>
     <Section margin="sm">
-      <TimerTime>
+      <TimerTime disabled={preparing && !ready}>
         <Time ms={time} secondsOnly={inspectionMode || preparingForInspection} dnf={dnf}/>
       </TimerTime>
     </Section>
@@ -51,6 +53,8 @@ Timer.propTypes = {
   inspectionMode: PropTypes.bool.isRequired,
   showScrambleDetails: PropTypes.func.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,
+  preparing: PropTypes.bool.isRequired,
+  ready: PropTypes.bool.isRequired,
   scrambleDetailsOpen: PropTypes.bool.isRequired,
   hideScrambleDetails: PropTypes.func.isRequired
 };
@@ -61,6 +65,7 @@ const TimerTime = styled.div`
   font-size: 5rem;
   z-index: ${props => props.theme.zIndices.onFullScreenMask};
   position: relative;
+  color: ${props => props.disabled ? props.theme.colors.subtleFg : props.theme.colors.fg};
 
   @media screen and (min-width: 420px) {
     font-size: 6rem;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { TIMER_INTERVAL, INSPECTION_TIME } from '../constants/app';
+import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../constants/app';
 import { obfuscateScramble } from '../helpers/scramble';
 import { showScrambleDetails, hideScrambleDetails } from '../actions';
 import Timer from '../components/timer/Timer';
@@ -22,12 +22,12 @@ class TimerContainer extends React.Component {
     const { stopped, inspectionMode } = this.props;
 
     if (!inspectionMode && nextProps.inspectionMode) {
-      this.setState({ inspectionTime: INSPECTION_TIME });
       this._inpectionInterval = setInterval(this._updateInspectionTime, TIMER_INTERVAL);
     }
 
     if (inspectionMode && !nextProps.inspectionMode) {
       clearInterval(this._inpectionInterval);
+      this.setState({ inspectionTime: INSPECTION_TIME });
     }
 
     if (stopped && !nextProps.stopped) {
@@ -36,6 +36,7 @@ class TimerContainer extends React.Component {
 
     if (!stopped && nextProps.stopped) {
       clearInterval(this._interval);
+      this.setState({ time: 0 });
     }
   }
 
@@ -105,6 +106,7 @@ function mapStateToProps (state) {
     inspectionStartTime,
     inspectionMode,
     dnf,
+    ready: preparationStage === PREPARATION_STAGES,
     preparingForInspection,
     scramble: (stopped && !preparing && !preparingForInspection && !inspectionMode) ? scramble : obfuscateScramble(scramble),
     puzzle: state.settings.puzzle,
