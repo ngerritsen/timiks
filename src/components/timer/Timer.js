@@ -18,6 +18,7 @@ const Timer = ({
   dnf,
   inspectionMode,
   showScrambleDetails,
+  showTimeActions,
   preparingForInspection,
   preparing,
   ready,
@@ -26,9 +27,32 @@ const Timer = ({
 }) => (
   <div>
     <Section margin="sm">
-      <TimerTime disabled={preparing && !ready}>
-        <Time ms={time} secondsOnly={inspectionMode || preparingForInspection} dnf={dnf}/>
-      </TimerTime>
+      <TimerTimeContainer>
+        <TimerTime>
+          <Time
+            ms={time}
+            secondsOnly={inspectionMode || preparingForInspection}
+            dnf={dnf}
+            disabled={preparing && !ready}
+          />
+        </TimerTime>
+        <TimeActions>
+          {
+            showTimeActions &&
+            <span>
+              <TimeAction>
+                <Button tiny tag empty>DNF</Button>
+              </TimeAction>
+              <TimeAction>
+                <Button tiny tag empty>+2</Button>
+              </TimeAction>
+              <TimeAction>
+                <Button tiny tag danger>Remove</Button>
+              </TimeAction>
+            </span>
+          }
+        </TimeActions>
+      </TimerTimeContainer>
     </Section>
     <Section margin="sm">
       <Scramble scramble={scramble} onClick={isCube(puzzle) ? showScrambleDetails : undefined} />
@@ -52,6 +76,7 @@ Timer.propTypes = {
   dnf: PropTypes.bool.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
   showScrambleDetails: PropTypes.func.isRequired,
+  showTimeActions: PropTypes.bool.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,
   preparing: PropTypes.bool.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -59,13 +84,28 @@ Timer.propTypes = {
   hideScrambleDetails: PropTypes.func.isRequired
 };
 
-const TimerTime = styled.div`
+const TimeActions = styled.div`
+  position: absolute;
+  bottom: ${props => props.theme.sizes.lg};
+  width: 100%;
   text-align: center;
-  padding: ${props => props.theme.sizes.lg} 0;
-  font-size: 5rem;
-  z-index: ${props => props.theme.zIndices.onFullScreenMask};
+`;
+
+const TimeAction = styled.span`
+  margin-right: ${props => props.theme.sizes.xs};
+`;
+
+const TimerTime = styled.span`
   position: relative;
   opacity: ${props => props.disabled ? 0.5 : 1};
+  z-index: ${props => props.theme.zIndices.onFullScreenMask};
+`;
+
+const TimerTimeContainer = styled.div`
+  text-align: center;
+  padding: ${props => props.theme.sizes.lg} 0 8rem;
+  font-size: 5rem;
+  position: relative;
 
   @media screen and (min-width: 420px) {
     font-size: 6rem;

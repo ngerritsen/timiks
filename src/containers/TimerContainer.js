@@ -105,6 +105,7 @@ function mapStateToProps (state) {
     stopped,
     inspectionStartTime,
     inspectionMode,
+    showTimeActions: false,
     dnf,
     ready: preparationStage === PREPARATION_STAGES,
     preparingForInspection,

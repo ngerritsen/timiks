@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, transparentize } from 'polished';
 
 const propColorMap = {
   primary: 'primary',
@@ -7,34 +7,37 @@ const propColorMap = {
 }
 
 const Button = styled.button.attrs({
-  color: props => (
+  color: props => props.theme.colors[(
     (props.disabled && 'grey') ||
     Object.keys(props)
       .reduce((color, key) => (propColorMap[key] || color), 'blue')
-  ),
-  fontSize: props => props.big ? '1.8rem': '1.4rem',
-  height: props => props.big ? '6.4rem' : '4.2rem',
-  sidepadding: props => props.big ? 'lg' : 'md',
+  )],
+  height: props => props.big ? '6.4rem' : (props.tiny ? '2.4rem' : '4.2rem'),
+  sidepadding: props => props.big ? 'lg' : (props.tiny ? 'sm' : 'md'),
   radius: props => props.big ? '0.5rem' : '0.3rem'
 })`
+  cursor: ${props => props.disabled ? 'default' : 'pointer'};
   margin: 0;
   height: ${props => props.height};
   line-height: ${props => props.height};
-  width: 100%;
-  background-color: ${props => props.theme.colors[props.color]};
+  width: ${props => props.tag ? 'auto' : '100%'};
+  background-color: ${props => props.empty ? 'transparent' : props.color};
   padding: 0 ${props => props.theme.sizes[props.sidepadding]};
-  font-size: ${props => props.fontSize};
-  border: none;
+  font-size: ${props => props.big ? '1.8rem' : (props.tiny ? '1.2rem' : '1.4rem')};
+  border: ${props => props.empty ? `1px solid ${props.color}` : 'none'};
   border-radius: ${props => props.radius};
-  color: white;
+  color: ${props => props.empty ? props.theme.colors.fg : 'white'};
   font-weight: normal;
   text-transform: uppercase;
   transition: background-color 0.2s ease;
 
   &:focus,
   &:hover {
-    background-color: ${props => lighten(props.disabled ? 0 : 0.03, props.theme.colors[props.color])};
-    cursor: ${props => props.disabled ? 'default' : 'pointer'};
+    background-color: ${props => (
+      props.empty ?
+        transparentize(0.8, props.color) :
+        lighten(props.disabled ? 0 : 0.03, props.color)
+    )};
     outline: ${props => props.disabled ? 'none' : 'inherit'};
   }
 `;
