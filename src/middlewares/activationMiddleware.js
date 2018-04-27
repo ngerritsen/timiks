@@ -15,6 +15,8 @@ const activationMiddleware = store => next => {
       const { useInspectionTime } = getState().settings;
       const { inspectionMode } = getState().timer;
 
+      scrollToTop();
+
       if (useInspectionTime && !inspectionMode) {
         dispatch(actions.prepareInspection());
 
@@ -62,6 +64,10 @@ const activationMiddleware = store => next => {
   });
 
   return action => next(action);
+}
+
+function scrollToTop() {
+  window.scrollTo(0, 0);
 }
 
 function countDown(onIncrement) {
