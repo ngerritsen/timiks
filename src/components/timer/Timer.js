@@ -104,7 +104,7 @@ const TimerTime = styled.span`
 
 const TimerTimeContainer = styled.div`
   text-align: center;
-  padding: ${props => props.theme.sizes.lg} 0 8rem;
+  padding: ${props => props.theme.sizes.lg} 0 7rem;
   font-size: 5rem;
   position: relative;
 
