@@ -64,12 +64,12 @@ class TimerContainer extends React.Component {
       return INSPECTION_TIME;
     }
 
-    if (lastTime > 0) {
-      return lastTime;
-    }
-
     if (startTime > 0) {
       return this.state.time;
+    }
+
+    if (lastTime > 0) {
+      return lastTime;
     }
 
     return 0;
