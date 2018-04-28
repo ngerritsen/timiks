@@ -8,11 +8,11 @@ import Time from './shared/Time';
 import Section from './shared/Section';
 import ScrambleDetails from './ScrambleDetails';
 
-const TimeDetails = ({ puzzle, date, ms, dnf, scramble, hideTimeDetails }) => (
+const TimeDetails = ({ puzzle, date, ms, dnf, plus2, scramble, hideTimeDetails }) => (
   <div>
     <Section margin="sm">
         <FontAwesome icon={faStopwatch} /> &nbsp;
-        <Time ms={ms} dnf={dnf} decimals={4} />
+        <Time ms={ms} dnf={dnf} plus2={plus2} decimals={4} />
     </Section>
     <Section margin="sm">
         <FontAwesome icon={faCalendarAlt} /> &nbsp;
@@ -33,6 +33,7 @@ TimeDetails.propTypes = {
   dnf: PropTypes.bool,
   date: PropTypes.instanceOf(Date),
   ms: PropTypes.number.isRequired,
+  plus2: PropTypes.bool,
   puzzle: PropTypes.string.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
   hideTimeDetails: PropTypes.func.isRequired

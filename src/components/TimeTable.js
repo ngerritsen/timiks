@@ -46,6 +46,7 @@ const TimeTable = ({
               <TimeDetails
                 puzzle={puzzle}
                 dnf={dnf}
+                plus2={plus2}
                 date={date}
                 ms={ms}
                 scramble={scramble}
@@ -119,13 +120,13 @@ TimeTable.propTypes = {
 };
 
 const TimeTableContainer = styled.div`
-  @media screen and (min-width: 414px) {
+  @media screen and (min-width: 512px) {
     display: flex;
   }
 `;
 
 const TimeTableColumn = styled.div`
-  @media screen and (min-width: 414px) {
+  @media screen and (min-width: 512px) {
     width: 50%;
   }
 }
