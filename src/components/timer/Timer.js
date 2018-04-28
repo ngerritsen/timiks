@@ -16,10 +16,12 @@ const Timer = ({
   time,
   puzzle,
   dnf,
+  plus2,
   inspectionMode,
   showScrambleDetails,
   removeLastTime,
   toggleDnfLastTime,
+  togglePlus2LastTime,
   showTimeActions,
   preparingForInspection,
   preparing,
@@ -30,18 +32,21 @@ const Timer = ({
   <div>
     <Section margin="sm">
       <TimerTimeContainer>
-        <TimerTime>
+        <TimerTime disabled={preparing && !ready}>
           <Time
             ms={time}
             secondsOnly={inspectionMode || preparingForInspection}
             dnf={dnf}
-            disabled={preparing && !ready}
+            plus2={plus2}
           />
         </TimerTime>
         <TimeActions>
           {
             showTimeActions &&
             <span>
+              <TimeAction>
+                <Button tiny tag empty={!plus2} onClick={togglePlus2LastTime}>+2</Button>
+              </TimeAction>
               <TimeAction>
                 <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>DNF</Button>
               </TimeAction>
@@ -73,12 +78,14 @@ Timer.propTypes = {
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
   time: PropTypes.number.isRequired,
   dnf: PropTypes.bool.isRequired,
+  plus2: PropTypes.bool.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
   showScrambleDetails: PropTypes.func.isRequired,
   showTimeActions: PropTypes.bool.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,
   removeLastTime: PropTypes.func.isRequired,
   toggleDnfLastTime: PropTypes.func.isRequired,
+  togglePlus2LastTime: PropTypes.func.isRequired,
   preparing: PropTypes.bool.isRequired,
   ready: PropTypes.bool.isRequired,
   scrambleDetailsOpen: PropTypes.bool.isRequired,

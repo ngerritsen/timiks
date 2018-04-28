@@ -26,11 +26,11 @@ const TimeTable = ({
 }) => (
   <TimeTableContainer>
     <TimeTableColumn>
-      {times.map(({ ms, id, best, date, scramble, showDetails, puzzle, dnf }, index) => (
+      {times.map(({ ms, id, best, date, scramble, showDetails, puzzle, dnf, plus2 }, index) => (
         <TimeBoardRow key={index}>
           <div>
             <TimeIndex>{index + 1}.</TimeIndex>
-              <Time ms={ms} dnf={dnf}/>
+              <Time ms={ms} dnf={dnf} plus2={plus2}/>
               {
                 (best && times.length > 1) &&
                 <TimeInfo>

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../constants/app';
 import { obfuscateScramble } from '../helpers/scramble';
-import { getMs } from '../helpers/times';
 import { showScrambleDetails, hideScrambleDetails, removeTime, updateTime } from '../actions';
 import Timer from '../components/timer/Timer';
 
@@ -100,18 +99,21 @@ function mapStateToProps (state) {
   const { preparingForInspection, preparationStage } = activation;
   const preparing = preparationStage > -1;
 
+  const ready = preparationStage === PREPARATION_STAGES;
   const lastTime = times.current.find(time => time.id === lastTimeId);
+  const showLastTime = Boolean(lastTime && startTime === 0 && !ready);
 
   return {
     _lastTime: lastTime,
-    lastTime: lastTime ? getMs(lastTime) : 0,
+    lastTime: showLastTime ? lastTime.ms : 0,
     startTime,
     stopped,
     inspectionStartTime,
     inspectionMode,
-    showTimeActions: Boolean(lastTime),
-    dnf: lastTime ? lastTime.dnf : false,
-    ready: preparationStage === PREPARATION_STAGES,
+    showTimeActions: showLastTime,
+    dnf: showLastTime ? Boolean(lastTime.dnf) : false,
+    plus2: showLastTime ? Boolean(lastTime.plus2) : false,
+    ready,
     preparingForInspection,
     scramble: (stopped && !preparing && !preparingForInspection && !inspectionMode) ? scramble : obfuscateScramble(scramble),
     puzzle: state.settings.puzzle,
@@ -127,15 +129,22 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    removeLastTime: () =>
-      lastTime ?
+    removeLastTime() {
+      return lastTime ?
         dispatchProps.removeTime(lastTime.id) :
-        null,
-    toggleDnfLastTime: () =>
-      lastTime ?
+        null
+    },
+    toggleDnfLastTime() {
+      return lastTime ?
         dispatchProps.updateTime(lastTime.id, { dnf: !lastTime.dnf }) :
         null
+    },
+    togglePlus2LastTime() {
+      return lastTime ?
+        dispatchProps.updateTime(lastTime.id, { plus2: !lastTime.plus2 }) :
+        null
     }
+  }
 }
 
 export default connect(

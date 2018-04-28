@@ -19,9 +19,9 @@ export const incrementPreparationStage = () => ({ type: actionTypes.INCREMENT_PR
 export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });
 
 // Times
-export const saveTime = (id, ms, date, scramble, puzzle, dnf = false) => ({
+export const saveTime = (id, ms, date, scramble, puzzle, dnf = false, plus2 = false) => ({
   type: actionTypes.SAVE_TIME,
-  id, ms, date, scramble, puzzle, dnf
+  id, ms, date, scramble, puzzle, dnf, plus2
 });
 export const updateTime = (id, fields) => ({ type: actionTypes.UPDATE_TIME, id, fields });
 export const loadTimes = (current = [], archive = []) => ({ type: actionTypes.LOAD_TIMES, current, archive });
