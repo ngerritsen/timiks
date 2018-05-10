@@ -26,6 +26,54 @@ const TimeTable = ({
 }) => (
   <TimeTableContainer>
     <TimeTableColumn>
+      <TimeBoardRowHeading>
+        <div>
+          <strong>Stats</strong>
+        </div>
+        <div>
+          <QuestionIconButton onClick={showStatsInfo}>
+            <FontAwesome icon={faQuestionCircle} size="sm" />
+          </QuestionIconButton>
+          <Modal title="Stats" isOpen={statsInfoOpen}>
+            <Section margin="md">
+              <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
+
+              <p>After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve) will be shown (<strong>ao5</strong>). After that it will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.</p>
+
+              <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
+            </Section>
+            <Button onClick={hideStatsInfo}>Close</Button>
+          </Modal>
+        </div>
+      </TimeBoardRowHeading>
+      {
+        STATS.filter(stat => stats[stat]).length === 0 &&
+        <TimeBoardRow>
+          <i>Not enough solves yet.</i>
+        </TimeBoardRow>
+      }
+      {
+        STATS
+          .filter(stat => stats[stat])
+          .map(stat => (
+            <TimeBoardRow key={stat}>
+              <div>
+                <TimeIndex>{stat}</TimeIndex>
+                <strong>
+                  <Time
+                    ms={stats[stat] === 'DNF' ? Infinity : stats[stat]}
+                    dnf={stats[stat] === 'DNF'}
+                  />
+                </strong>
+              </div>
+            </TimeBoardRow>
+          ))
+      }
+    </TimeTableColumn>
+    <TimeTableColumn>
+      <TimeBoardRowHeading>
+        Times
+      </TimeBoardRowHeading>
       {times.map(({ ms, id, best, date, scramble, showDetails, puzzle, dnf, plus2 }, index) => (
         <TimeBoardRow key={index}>
           <div>
@@ -63,47 +111,6 @@ const TimeTable = ({
         </TimeBoardRow>
       ))}
     </TimeTableColumn>
-    <TimeTableColumn>
-      <TimeBoardRow>
-        <div>
-          <TimeIndex></TimeIndex>
-          Stats
-        </div>
-        <div>
-          <QuestionIconButton onClick={showStatsInfo}>
-            <FontAwesome icon={faQuestionCircle} size="sm" />
-          </QuestionIconButton>
-          <Modal title="Stats" isOpen={statsInfoOpen}>
-            <Section margin="md">
-              <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
-
-              <p>After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve) will be shown (<strong>ao5</strong>). After that it will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.</p>
-
-              <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
-            </Section>
-            <Button onClick={hideStatsInfo}>Close</Button>
-          </Modal>
-        </div>
-      </TimeBoardRow>
-      {
-        STATS
-          .filter(stat => stats[stat])
-          .map(stat => (
-            <TimeBoardRow key={stat} x={stats[stat] === 'DNF' ? Infinity : stats[stats]}>
-              <div>
-                <TimeIndex></TimeIndex>
-                <strong>
-                  <Time
-                    ms={stats[stat] === 'DNF' ? Infinity : stats[stat]}
-                    dnf={stats[stat] === 'DNF'}
-                  />
-                </strong>
-                <TimeInfo>({stat})</TimeInfo>
-              </div>
-            </TimeBoardRow>
-          ))
-      }
-    </TimeTableColumn>
   </TimeTableContainer>
 )
 
@@ -120,14 +127,29 @@ TimeTable.propTypes = {
 };
 
 const TimeTableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
   @media screen and (min-width: 512px) {
-    display: flex;
+    flex-direction: row;
   }
 `;
 
 const TimeTableColumn = styled.div`
+  margin-bottom: ${props => props.theme.sizes.sm};
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   @media screen and (min-width: 512px) {
     width: 50%;
+    margin-right: ${props => props.theme.sizes.md};
+    margin-bottom: 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 `;
@@ -141,6 +163,11 @@ const TimeBoardRow = styled.div`
   height: 3.6rem;
 `;
 
+const TimeBoardRowHeading = TimeBoardRow.extend`
+  border-bottom: 2px solid ${props => props.theme.colors.grey};
+  font-weight: bold;
+`;
+
 const TimeInfo = styled.small`
   padding-left: ${props => props.theme.sizes.xs};
   color: ${props => props.theme.colors.subtleFg};
@@ -149,7 +176,7 @@ const TimeInfo = styled.small`
 
 const TimeIndex = styled.span`
   display: inline-block;
-  width: 2em;
+  width: 3.1em;
   color: ${props => props.theme.colors.subtleFg};
 `;
 

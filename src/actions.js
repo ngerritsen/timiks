@@ -12,6 +12,7 @@ export const failInspection = () => ({ type: actionTypes.FAIL_INSPECTION });
 
 // Activation
 export const prepareActivation = () => ({ type: actionTypes.PREPARE_ACTIVATION });
+export const skipPreparationStage = () => ({ type: actionTypes.SKIP_PREPARATION_STAGE });
 export const resetActivation = () => ({ type: actionTypes.RESET_ACTIVATION });
 export const incrementPreparationStage = () => ({ type: actionTypes.INCREMENT_PREPARATION_STAGE });
 
@@ -50,6 +51,10 @@ export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
 export const toggleInspectionTime = theme => ({ type: actionTypes.TOGGLE_INSPECTION_TIME, theme });
 export const openSettings = () => ({ type: actionTypes.OPEN_SETTINGS });
 export const closeSettings = () => ({ type: actionTypes.CLOSE_SETTINGS });
+export const changeActivationDuration = activationDuration => ({
+  type: actionTypes.CHANGE_ACTIVATION_DURATION,
+  activationDuration
+});
 
 // Stats info
 export const showStatsInfo = () => ({ type: actionTypes.SHOW_STATS_INFO });

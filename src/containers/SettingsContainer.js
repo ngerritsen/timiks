@@ -1,18 +1,31 @@
 import { connect } from 'react-redux';
 
-import { toggleInspectionTime, changeTheme, openSettings, closeSettings } from '../actions';
+import * as actions from '../actions';
 import Settings from '../components/Settings'
 
 function mapStateToProps(state) {
-  const { settingsOpen, theme, useInspectionTime } = state.settings;
+  const {
+    settingsOpen,
+    theme,
+    useInspectionTime,
+    activationDuration
+  } = state.settings;
+
   return {
     settingsOpen,
     theme,
-    useInspectionTime
+    useInspectionTime,
+    activationDuration
   }
 }
 
 export default connect(
   mapStateToProps,
-  { toggleInspectionTime, changeTheme, openSettings, closeSettings }
+  {
+    toggleInspectionTime: actions.toggleInspectionTime,
+    changeTheme: actions.changeTheme,
+    openSettings: actions.openSettings,
+    closeSettings: actions.closeSettings,
+    changeActivationDuration: actions.changeActivationDuration
+  }
 )(Settings);

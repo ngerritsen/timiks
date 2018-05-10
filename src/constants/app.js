@@ -3,10 +3,19 @@ export const MODAL_ROOT_SELECTOR = '#modal-root';
 export const FULL_SCREEN_MASK_ROOT_SELECTOR = '#full-screen-mask';
 
 export const PREPARATION_STAGES = 3;
-export const ACTIVATION_DURATION = 500;
+
+export const ACTIVATION_DURATION_OPTIONS = [
+  { label: 'none', value: 0 },
+  { label: '300ms', value: 300 },
+  { label: '550ms', value: 550 },
+  { label: '1s', value: 1000 },
+];
+
+export const DEFAULT_ACTIVATION_DURATION = 300;
 
 export const INSPECTION_TIME = 15000;
-export const TIMER_INTERVAL = 42;
+
+export const TIMER_INTERVAL = 63;
 
 export const SPACEBAR_KEYCODE = 32;
 
@@ -19,6 +28,8 @@ export const PUZZLE_STORAGE_KEY = 'puzzle';
 export const CURRENT_TIMES_STORAGE_KEY = 'currentTimes';
 export const ARCHIVED_TIMES_STORAGE_KEY = 'archivedTimes';
 export const THEME_STORAGE_KEY = 'theme';
+export const ACTIVATION_DURATION_STORAGE_KEY = 'activationDuration';
+export const USE_INSPECTION_TIME_STORAGE_KEY = 'useInspectionTime';
 
 export const ARCHIVE_SORT_OPTIONS = [
   { label: 'Newest', value: 'date', reversed: true },

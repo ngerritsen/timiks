@@ -1,4 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
+import { PREPARATION_STAGES } from '../constants/app';
 
 const initialState = {
   preparationStage: -1,
@@ -23,6 +24,11 @@ export default function activationReducer(state = initialState, action) {
       return {
         ...state,
         preparationStage: state.preparationStage + 1
+      }
+    case actionTypes.SKIP_PREPARATION_STAGE:
+      return {
+        ...state,
+        preparationStage: PREPARATION_STAGES
       }
     case actionTypes.PREPARE_ACTIVATION:
       return {

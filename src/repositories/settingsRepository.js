@@ -1,4 +1,8 @@
-import { PUZZLE_STORAGE_KEY, USE_INSPECTION_TIME_STORAGE_KEY } from '../constants/app';
+import {
+  PUZZLE_STORAGE_KEY,
+  USE_INSPECTION_TIME_STORAGE_KEY,
+  ACTIVATION_DURATION_STORAGE_KEY
+} from '../constants/app';
 
 export function storePuzzle(puzzle) {
   localStorage.setItem(PUZZLE_STORAGE_KEY, puzzle);
@@ -6,6 +10,16 @@ export function storePuzzle(puzzle) {
 
 export function getPuzzle() {
   return localStorage.getItem(PUZZLE_STORAGE_KEY) || null;
+}
+
+export function storeActivationDuration(activationDuration) {
+  localStorage.setItem(ACTIVATION_DURATION_STORAGE_KEY, activationDuration);
+}
+
+export function getActivationDuration() {
+  const activationDuration = localStorage.getItem(ACTIVATION_DURATION_STORAGE_KEY);
+
+  return activationDuration ? Number(activationDuration) : null;
 }
 
 export function storeUseInspectionTime(useInspectionTime) {

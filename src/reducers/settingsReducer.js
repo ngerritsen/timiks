@@ -1,11 +1,13 @@
 import * as actionTypes from '../constants/actionTypes';
 import { DEFAULT_PUZZLE } from '../constants/app';
+import { DEFAULT_ACTIVATION_DURATION } from '../constants/app';
 
 const initialState = {
   puzzle: DEFAULT_PUZZLE,
   useInspectionTime: false,
   theme: 'light',
-  settingsOpen: false
+  settingsOpen: false,
+  activationDuration: DEFAULT_ACTIVATION_DURATION
 };
 
 export default function settingsReducer(state = initialState, action) {
@@ -35,6 +37,11 @@ export default function settingsReducer(state = initialState, action) {
       return {
         ...state,
         useInspectionTime: !state.useInspectionTime
+      }
+    case actionTypes.CHANGE_ACTIVATION_DURATION:
+      return {
+        ...state,
+        activationDuration: action.activationDuration
       }
     default:
       return state;

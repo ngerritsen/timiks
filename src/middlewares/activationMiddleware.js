@@ -1,4 +1,4 @@
-import { PREPARATION_STAGES, ACTIVATION_DURATION, INSPECTION_TIME } from '../constants/app';
+import { PREPARATION_STAGES, INSPECTION_TIME } from '../constants/app';
 import * as actions from '../actions';
 import { isReady, isPreparing } from '../selectors/activationSelectors';
 import listenForActivations from '../activationListener';
@@ -11,7 +11,7 @@ const activationMiddleware = store => next => {
 
   listenForActivations({
     onInitiate() {
-      const { useInspectionTime } = getState().settings;
+      const { useInspectionTime, activationDuration } = getState().settings;
       const { inspectionMode } = getState().timer;
 
       scrollToTop();
@@ -26,6 +26,11 @@ const activationMiddleware = store => next => {
         return;
       }
 
+      if (activationDuration === 0) {
+        dispatch(actions.skipPreparationStage());
+        return;
+      }
+
       dispatch(actions.prepareActivation());
 
       interval = countDown(() => {
@@ -35,7 +40,7 @@ const activationMiddleware = store => next => {
         }
 
         dispatch(actions.resetTime());
-      });
+      }, activationDuration);
     },
     onFire() {
       if (getState().activation.preparingForInspection) {
@@ -72,10 +77,10 @@ function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
-function countDown(onIncrement) {
+function countDown(onIncrement, duration) {
   return setInterval(
     onIncrement,
-    ACTIVATION_DURATION / PREPARATION_STAGES
+    duration / PREPARATION_STAGES
   );
 }
 
