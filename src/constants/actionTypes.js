@@ -12,7 +12,7 @@ export const PREPARE_INSPECTION = 'PREPARE_INSPECTION';
 export const FAIL_INSPECTION = 'FAIL_INSPECTION';
 
 export const SET_SCRAMBLE = 'SET_SCRAMBLE';
-
+export const REFRESH_SCRAMBLE = 'REFRESH_SCRAMBLE';
 export const SAVE_TIME = 'SAVE_TIME';
 export const REMOVE_TIME = 'REMOVE_TIME';
 export const UPDATE_TIME = 'UPDATE_TIME';

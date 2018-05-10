@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
 
 import TimerOptions from '../components/timer/TimerOptions';
-import { changePuzzle, toggleInspectionTime } from '../actions';
+import { changePuzzle, refreshScramble } from '../actions';
 
 function mapStateToProps(state) {
   return {
-    puzzle: state.settings.puzzle,
-    useInspectionTime: state.settings.useInspectionTime
+    puzzle: state.settings.puzzle
   };
 }
 
 export default connect(
   mapStateToProps,
-  { changePuzzle, toggleInspectionTime }
+  { changePuzzle, refreshScramble }
 )(TimerOptions);

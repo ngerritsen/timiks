@@ -17,6 +17,7 @@ export const incrementPreparationStage = () => ({ type: actionTypes.INCREMENT_PR
 
 // Scramble
 export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });
+export const refreshScramble = () => ({ type: actionTypes.REFRESH_SCRAMBLE });
 
 // Times
 export const saveTime = (id, ms, date, scramble, puzzle, dnf = false, plus2 = false) => ({
