@@ -61,6 +61,7 @@ const ButtonDuoItem = styled.div`
 
 const TitleInput = styled.input`
   background: transparent;
+  color: ${props => props.theme.colors.fg};
   border: 1px solid ${props => props.theme.colors.subtleBg};
   font-size: 1.6rem;
   width: 100%;
