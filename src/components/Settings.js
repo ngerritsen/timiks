@@ -9,6 +9,7 @@ import IconButton from './shared/IconButton';
 import ModalContainer from '../containers/ModalContainer';
 import Section from './shared/Section';
 import Selector from './shared/Selector';
+import Button from './shared/Button';
 
 const Settings = ({
   changeActivationDuration,
@@ -25,7 +26,7 @@ const Settings = ({
       toggle={openModal => (
         <IconButton onClick={openModal}><FontAwesome icon={faCog}/></IconButton>
       )}
-      content={() => (
+      content={closeModal => (
         <div>
           <Section margin="sm">
               <Selector
@@ -54,6 +55,7 @@ const Settings = ({
           <Section margin="md">
             <i>*For how long you have to hold spacebar, mouse or touch before starting the timer.</i>
           </Section>
+          <Button onClick={closeModal}>Close</Button>
         </div>
       )}
     />

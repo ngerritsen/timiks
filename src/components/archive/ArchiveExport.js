@@ -14,7 +14,7 @@ const ArchiveExport = ({ exportData }) => (
     title="Export archive"
     id="exportArchive"
     toggle={openModal => (
-      <IconButton onClick={openModal} color="blue">
+      <IconButton onClick={openModal}>
         <FontAwesome icon={faDownload}/>
       </IconButton>
     )}

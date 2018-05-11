@@ -34,7 +34,7 @@ const TimeTable = ({ stats, editable = true, removeTime, times }) => {
                 </QuestionIconButton>
               )}
               content={() => (
-                <Section margin="md">
+                <Section margin="sm">
                   <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
 
                   <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
