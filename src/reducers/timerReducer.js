@@ -5,8 +5,7 @@ const initialState = {
   stopped: true,
   inspectionStartTime: 0,
   inspectionMode: false,
-  lastTimeId: '',
-  scrambleDetailsOpen: false
+  lastTimeId: ''
 }
 
 export default function timerReducer(state = initialState, action) {
@@ -41,17 +40,7 @@ export default function timerReducer(state = initialState, action) {
         ...state,
         startTime: 0
       }
-    case actionTypes.SHOW_SCRAMBLE_DETAILS:
-      return {
-        ...state,
-        scrambleDetailsOpen: true
-      }
-    case actionTypes.HIDE_SCRAMBLE_DETAILS:
-      return {
-        ...state,
-        scrambleDetailsOpen: false
-      }
-      default:
+    default:
       return state
   }
 }

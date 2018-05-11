@@ -1,42 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid';
 
 import IconButton from '../shared/IconButton';
-import Modal from '../shared/Modal';
+import ModalContainer from '../../containers/ModalContainer';
 import ArchiveForm from '../archive/ArchiveForm';
+import Section from '../shared/Section';
+import Button from '../shared/Button';
+import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
+import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 
 const TimeBoardActions = ({
-    clearTimes,
-    closeArchiveModal,
-    inputTimesTitle,
-    isModalOpen,
-    openArchiveModal,
-    archiveCurrentTimes,
-    titleInput
+  inputTimesTitle,
+  archiveCurrentTimes,
+  clearTimes,
+  titleInput
 }) => (
   <Toolbar>
     <ToolbarItem>
-      <IconButton color="blue" onClick={openArchiveModal}>
-        <FontAwesome icon={faArchive} />
-      </IconButton>
+      <ModalContainer
+        title="Archive times"
+        id="archiveTimes"
+        showCloseButton={false}
+        toggle={(openModal) => (
+          <IconButton color="blue" onClick={openModal}>
+            <FontAwesome icon={faArchive} />
+          </IconButton>
+        )}
+        content={(closeModal) => (
+          <ArchiveForm
+            archiveCurrentTimes={() => archiveCurrentTimes() && closeModal()}
+            inputTimesTitle={inputTimesTitle}
+            titleInput={titleInput}
+            onCancel={closeModal}
+          />
+        )}
+      />
     </ToolbarItem>
 
     <ToolbarItem>
-      <IconButton color="red" onClick={clearTimes}>
-        <FontAwesome icon={faTrash} />
-      </IconButton>
-
-      <Modal isOpen={isModalOpen} title="Archive times">
-        <ArchiveForm
-          archiveCurrentTimes={archiveCurrentTimes}
-          onCancel={closeArchiveModal}
-          inputTimesTitle={inputTimesTitle}
-          titleInput={titleInput}
-        />
-      </Modal>
+      <ModalContainer
+        title="Clear current times"
+        id="clearCurrentTimes"
+        toggle={openModal => (
+          <IconButton color="red" onClick={openModal}>
+            <FontAwesome icon={faTrash} />
+          </IconButton>
+        )}
+        content={closeModal => (
+          <div>
+            <Section margin="md">
+              <p>Are you sure you want to clear the current times?</p>
+            </Section>
+            <ButtonDuo>
+              <ButtonDuoItem>
+                <Button danger onClick={() => closeModal() && clearTimes()}>Remove</Button>
+              </ButtonDuoItem>
+              <ButtonDuoItem>
+                <Button fg empty onClick={closeModal}>Cancel</Button>
+              </ButtonDuoItem>
+            </ButtonDuo>
+          </div>
+        )}
+      />
     </ToolbarItem>
   </Toolbar>
 );
@@ -44,21 +71,8 @@ const TimeBoardActions = ({
 TimeBoardActions.propTypes = {
   archiveCurrentTimes: PropTypes.func.isRequired,
   clearTimes: PropTypes.func.isRequired,
-  closeArchiveModal: PropTypes.func.isRequired,
   inputTimesTitle: PropTypes.func.isRequired,
-  isModalOpen: PropTypes.bool.isRequired,
-  openArchiveModal: PropTypes.func.isRequired,
   titleInput: PropTypes.string.isRequired
 }
-
-const Toolbar = styled.p`
-  text-align: right;
-  font-size: 1.75rem;
-  margin: 0;
-`;
-
-const ToolbarItem = styled.span`
-  margin-left: ${props => props.theme.sizes.sm};
-`;
 
 export default TimeBoardActions;

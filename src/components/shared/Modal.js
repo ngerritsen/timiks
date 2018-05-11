@@ -3,7 +3,10 @@ import { transparentize } from 'polished';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/fontawesome-pro-solid';
 
+import IconButton from './IconButton';
 import { MODAL_ROOT_SELECTOR } from '../../constants/app';
 
 class Modal extends React.Component {
@@ -15,30 +18,48 @@ class Modal extends React.Component {
   }
 
   render () {
-    const { isOpen, title, children } = this.props;
-    if (!isOpen) {
-      return null
-    }
+    const {
+      isOpen,
+      title,
+      toggle,
+      content,
+      openModal,
+      closeModal,
+    } = this.props;
 
-    return ReactDOM.createPortal(
-      <ModalOverlay data-modal>
-        <ModalBox ref={el => this.modalBoxEl = el}>
-          <ModalTitle>{title}</ModalTitle>
-          {children}
-        </ModalBox>
-      </ModalOverlay>,
-      document.querySelector(MODAL_ROOT_SELECTOR)
+    return (
+      <span>
+      {toggle && toggle(openModal)}
+      {
+        isOpen &&
+        ReactDOM.createPortal(
+          <ModalOverlay data-modal>
+            <ModalBox ref={el => this.modalBoxEl = el}>
+              <ModalHeader>
+                <ModalTitle>{title}</ModalTitle>
+                <IconButton color="subtleFg" onClick={closeModal}>
+                  <FontAwesome icon={faTimes}/>
+                </IconButton>
+              </ModalHeader>
+              {content(closeModal)}
+            </ModalBox>
+          </ModalOverlay>,
+          document.querySelector(MODAL_ROOT_SELECTOR)
+        )
+      }
+      </span>
     )
   }
 }
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-  title: PropTypes.string.isRequired
+  content: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
+  toggle: PropTypes.func,
+  showCloseButton: PropTypes.bool
 };
 
 const ModalOverlay = styled.div`
@@ -65,9 +86,15 @@ const ModalBox = styled.div`
   overflow: auto;
 `;
 
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 ${props => props.theme.sizes.md};
+`;
+
 const ModalTitle = styled.h2`
   font-size: 2rem;
-  margin: 0 0 ${props => props.theme.sizes.md};
+  margin: 0 ${props => props.theme.sizes.sm} 0 0;
 `;
 
 export default Modal;

@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faStopwatch, faCube } from '@fortawesome/fontawesome-pro-solid';
 
-import Button from './shared/Button';
-import Time from './shared/Time';
-import Section from './shared/Section';
-import ScrambleDetails from './ScrambleDetails';
+import Time from '../shared/Time';
+import Section from '../shared/Section';
+import ScrambleDetails from '../ScrambleDetails';
 
-const TimeDetails = ({ puzzle, date, ms, dnf, plus2, scramble, hideTimeDetails }) => (
+const TimeDetails = ({ puzzle, date, ms, dnf, plus2, scramble }) => (
   <div>
     <Section margin="sm">
         <FontAwesome icon={faStopwatch} /> &nbsp;
@@ -25,7 +24,6 @@ const TimeDetails = ({ puzzle, date, ms, dnf, plus2, scramble, hideTimeDetails }
     <Section margin="md">
       <ScrambleDetails scramble={scramble} puzzle={puzzle} />
     </Section>
-    <Button onClick={hideTimeDetails}>Close</Button>
   </div>
 );
 
@@ -35,8 +33,7 @@ TimeDetails.propTypes = {
   ms: PropTypes.number.isRequired,
   plus2: PropTypes.bool,
   puzzle: PropTypes.string.isRequired,
-  scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
-  hideTimeDetails: PropTypes.func.isRequired
+  scramble: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default TimeDetails;

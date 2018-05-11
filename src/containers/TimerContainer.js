@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../constants/app';
 import { obfuscateScramble } from '../helpers/scramble';
-import { showScrambleDetails, hideScrambleDetails, removeTime, updateTime } from '../actions';
+import { removeTime, updateTime } from '../actions';
 import Timer from '../components/timer/Timer';
 
 class TimerContainer extends React.Component {
@@ -84,10 +84,7 @@ TimerContainer.propTypes = {
   lastTime: PropTypes.number.isRequired,
   inspectionStartTime: PropTypes.number.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
-  showScrambleDetails: PropTypes.func.isRequired,
-  scrambleDetailsOpen: PropTypes.bool.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,
-  hideScrambleDetails: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
   scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
   stopped: PropTypes.bool.isRequired
@@ -117,8 +114,7 @@ function mapStateToProps (state) {
     preparingForInspection,
     scramble: (stopped && !preparing && !preparingForInspection && !inspectionMode) ? scramble : obfuscateScramble(scramble),
     puzzle: state.settings.puzzle,
-    preparing,
-    scrambleDetailsOpen: state.timer.scrambleDetailsOpen
+    preparing
   }
 }
 
@@ -147,8 +143,4 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { showScrambleDetails, hideScrambleDetails, updateTime, removeTime },
-  mergeProps
-)(TimerContainer);
+export default connect(mapStateToProps, { updateTime, removeTime }, mergeProps)(TimerContainer);

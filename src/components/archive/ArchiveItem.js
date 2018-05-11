@@ -5,10 +5,12 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/fontawesome-pro-solid'
 
+import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import Info, { InfoItem, InfoIcon } from '../shared/Info';
 import TimeTableContainer from '../../containers/TimeTableContainer';
 import Button from '../shared/Button';
 import Section from '../shared/Section';
+import ModalContainer from '../../containers/ModalContainer';
 
 const ArchiveItem = ({
   collapsed,
@@ -46,7 +48,26 @@ const ArchiveItem = ({
             editable={false}
           />
         </Section>
-        <Button danger onClick={() => removeArchiveItem(id)}>Remove</Button>
+        <ModalContainer
+          title={`Remove ${title}`}
+          id={`removeArchiveItem.${id}`}
+          toggle={openModal => <Button danger onClick={openModal}>Remove</Button>}
+          content={closeModal => (
+            <div>
+              <Section margin="md">
+                <p>Are you sure you want to remove {title}?</p>
+              </Section>
+              <ButtonDuo>
+                <ButtonDuoItem>
+                  <Button danger onClick={() => closeModal() && removeArchiveItem(id)}>Remove</Button>
+                </ButtonDuoItem>
+                <ButtonDuoItem>
+                  <Button fg empty onClick={closeModal}>Cancel</Button>
+                </ButtonDuoItem>
+              </ButtonDuo>
+            </div>
+          )}
+        />
       </ArchiveItemContent>
     }
   </ArchiveItemBox>

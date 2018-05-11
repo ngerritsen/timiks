@@ -6,22 +6,11 @@ const initialState = {
   puzzle: DEFAULT_PUZZLE,
   useInspectionTime: false,
   theme: 'light',
-  settingsOpen: false,
   activationDuration: DEFAULT_ACTIVATION_DURATION
 };
 
 export default function settingsReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.OPEN_SETTINGS:
-      return {
-        ...state,
-        settingsOpen: true
-      }
-    case actionTypes.CLOSE_SETTINGS:
-      return {
-        ...state,
-        settingsOpen: false
-      }
     case actionTypes.CHANGE_PUZZLE:
       return {
         ...state,

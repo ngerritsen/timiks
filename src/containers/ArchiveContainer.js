@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import { decorateArchive, sortArchive, filterArchive } from '../helpers/archive';
 
 import Archive from '../components/archive/Archive';
-import {
-  expandArchiveItem,
-  collapseArchiveItem,
-  hideTimeDetails,
-  removeArchiveItem,
-  showTimeDetails
-} from '../actions';
+import { expandArchiveItem, collapseArchiveItem, removeArchiveItem } from '../actions';
 
 function mapStateToProps(state) {
   const { archive, times } = state;
@@ -27,11 +21,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  {
-    expandArchiveItem,
-    collapseArchiveItem,
-    hideTimeDetails,
-    removeArchiveItem,
-    showTimeDetails
-  }
+  { expandArchiveItem, collapseArchiveItem, removeArchiveItem }
 )(Archive);

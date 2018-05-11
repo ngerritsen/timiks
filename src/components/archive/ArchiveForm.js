@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import Button from '../shared/Button';
+import Input from '../shared/Input';
 import Section from '../shared/Section';
+import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 
-const ArchiveForm = ({ archiveCurrentTimes, inputTimesTitle, onCancel, titleInput,  }) => {
+const ArchiveForm = ({ archiveCurrentTimes, inputTimesTitle, onCancel, titleInput }) => {
   const canSubmit = titleInput.trim().length > 0;
   const onSubmit = event => {
     event.preventDefault();
@@ -18,7 +19,7 @@ const ArchiveForm = ({ archiveCurrentTimes, inputTimesTitle, onCancel, titleInpu
   return (
     <form onSubmit={onSubmit}>
       <Section margin="md">
-        <TitleInput
+        <Input
           value={titleInput}
           placeholder="Title"
           type="text"
@@ -31,7 +32,7 @@ const ArchiveForm = ({ archiveCurrentTimes, inputTimesTitle, onCancel, titleInpu
           <Button disabled={!canSubmit} type="submit">Archive</Button>
         </ButtonDuoItem>
         <ButtonDuoItem>
-          <Button danger type="button" onClick={onCancel}>Cancel</Button>
+          <Button empty fg type="button" onClick={onCancel}>Cancel</Button>
         </ButtonDuoItem>
       </ButtonDuo>
     </form>
@@ -44,29 +45,5 @@ ArchiveForm.propTypes = {
   onCancel: PropTypes.func.isRequired,
   titleInput: PropTypes.string.isRequired
 };
-
-
-const ButtonDuo = styled.div`
-  display: flex;
-`;
-
-const ButtonDuoItem = styled.div`
-  flex-grow: 1;
-  margin-right: ${props => props.theme.sizes.xs};
-
-  &:last-child {
-    margin-right: 0;
-  }
-`;
-
-const TitleInput = styled.input`
-  background: transparent;
-  color: ${props => props.theme.colors.fg};
-  border: 1px solid ${props => props.theme.colors.subtleBg};
-  font-size: 1.6rem;
-  width: 100%;
-  border-radius: 0.3rem;
-  padding: ${props => props.theme.sizes.xs};
-`;
 
 export default ArchiveForm;

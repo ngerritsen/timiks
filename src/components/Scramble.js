@@ -5,16 +5,31 @@ import FontAwesome from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/fontawesome-pro-solid';
 
 import IconButton from './shared/IconButton';
+import ScrambleDetails from './ScrambleDetails';
+import { isCube } from '../helpers/puzzle';
+import Section from './shared/Section';
+import ModalContainer from '../containers/ModalContainer';
 
-const Scramble = ({ scramble, small, onClick }) => (
+const Scramble = ({ scramble, small, withDetails, puzzle }) => (
   <div>
     <ScrambleBox small={small}>
       {
-        onClick &&
+        (withDetails && isCube(puzzle)) &&
         <ScrambleIconButtonContainer>
-          <IconButton onClick={onClick}>
-            <FontAwesome icon={faEye}/>
-          </IconButton>
+          <ModalContainer
+            id="scrambleDetails"
+            title="Scramble details"
+            toggle={openModal => (
+              <IconButton onClick={openModal}>
+                <FontAwesome icon={faEye}/>
+              </IconButton>
+            )}
+            content={() => (
+              <Section margin="sm">
+                <ScrambleDetails scramble={scramble} puzzle={puzzle} />
+              </Section>
+            )}
+          />
         </ScrambleIconButtonContainer>
       }
       {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
@@ -23,9 +38,10 @@ const Scramble = ({ scramble, small, onClick }) => (
 );
 
 Scramble.propTypes = {
-  onClick: PropTypes.func,
+  withDetails: PropTypes.bool,
   scramble: PropTypes.arrayOf(PropTypes.string),
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  puzzle: PropTypes.string
 };
 
 const ScrambleBox = styled.p`

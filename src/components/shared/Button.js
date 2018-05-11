@@ -3,7 +3,8 @@ import { lighten, transparentize } from 'polished';
 
 const propColorMap = {
   primary: 'primary',
-  danger: 'red'
+  danger: 'red',
+  fg: 'fg'
 }
 
 const Button = styled.button.attrs({

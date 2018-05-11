@@ -3,7 +3,6 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = {
   items: [],
   expanded: '',
-  isModalOpen: false,
   titleInput: '',
   sortBy: 'date',
   puzzle: ''
@@ -45,17 +44,6 @@ function archiveReducer(state = initialState, action) {
       return {
         ...state,
         expanded: ''
-      }
-    case actionTypes.OPEN_ARCHIVE_MODAL:
-      return {
-        ...state,
-        isModalOpen: true
-      }
-    case actionTypes.CLOSE_ARCHIVE_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-        titleInput: ''
       }
     case actionTypes.ARCHIVE_CURRENT_TIMES:
       return {

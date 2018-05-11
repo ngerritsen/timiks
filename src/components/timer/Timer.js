@@ -6,10 +6,7 @@ import Time from '../shared/Time';
 import Section from '../shared/Section';
 import Scramble from '../Scramble';
 import ActivationContainer from '../../containers/ActivationContainer';
-import ScrambleDetails from '../ScrambleDetails';
-import Modal from '../shared/Modal';
 import Button from '../shared/Button';
-import { isCube } from '../../helpers/puzzle';
 
 const Timer = ({
   scramble,
@@ -18,16 +15,13 @@ const Timer = ({
   dnf,
   plus2,
   inspectionMode,
-  showScrambleDetails,
   removeLastTime,
   toggleDnfLastTime,
   togglePlus2LastTime,
   showTimeActions,
   preparingForInspection,
   preparing,
-  ready,
-  scrambleDetailsOpen,
-  hideScrambleDetails
+  ready
 }) => (
   <div>
     <Section margin="sm">
@@ -59,13 +53,7 @@ const Timer = ({
       </TimerTimeContainer>
     </Section>
     <Section margin="sm">
-      <Scramble scramble={scramble} onClick={isCube(puzzle) ? showScrambleDetails : undefined} />
-      <Modal isOpen={scrambleDetailsOpen} title="Scramble details">
-        <Section margin="sm">
-          <ScrambleDetails scramble={scramble} puzzle={puzzle} />
-        </Section>
-        <Button onClick={hideScrambleDetails}>Close</Button>
-      </Modal>
+      <Scramble scramble={scramble} puzzle={puzzle} withDetails />
     </Section>
     <Section margin="sm">
       <ActivationContainer/>
@@ -80,16 +68,13 @@ Timer.propTypes = {
   dnf: PropTypes.bool.isRequired,
   plus2: PropTypes.bool.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
-  showScrambleDetails: PropTypes.func.isRequired,
   showTimeActions: PropTypes.bool.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,
   removeLastTime: PropTypes.func.isRequired,
   toggleDnfLastTime: PropTypes.func.isRequired,
   togglePlus2LastTime: PropTypes.func.isRequired,
   preparing: PropTypes.bool.isRequired,
-  ready: PropTypes.bool.isRequired,
-  scrambleDetailsOpen: PropTypes.bool.isRequired,
-  hideScrambleDetails: PropTypes.func.isRequired
+  ready: PropTypes.bool.isRequired
 };
 
 const TimeActions = styled.div`

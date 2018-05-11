@@ -4,7 +4,7 @@ import { withTheme } from 'styled-components';
 import { transparentize } from 'polished';
 import { Line } from 'react-chartjs-2';
 
-import { getMs } from '../helpers/times';
+import { getMs } from '../../helpers/times';
 
 const TimeGraph = ({ times, theme }) => {
   const data = {

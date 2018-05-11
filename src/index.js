@@ -29,7 +29,7 @@ injectGlobal`
 
 ReactDOM.render(
   <Provider store={store}>
-      <AppContainer/>
+    <AppContainer/>
   </Provider>,
   rootEl
 );

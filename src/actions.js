@@ -4,8 +4,6 @@ import * as actionTypes from './constants/actionTypes';
 export const resetTime = () => ({ type: actionTypes.RESET_TIME });
 export const startTimer = startTime => ({ type: actionTypes.START_TIMER, startTime });
 export const stopTimer = () => ({ type: actionTypes.STOP_TIMER });
-export const showScrambleDetails = () => ({ type: actionTypes.SHOW_SCRAMBLE_DETAILS });
-export const hideScrambleDetails = () => ({ type: actionTypes.HIDE_SCRAMBLE_DETAILS });
 export const prepareInspection = () => ({ type: actionTypes.PREPARE_INSPECTION });
 export const startInspection = startTime => ({ type: actionTypes.START_INSPECTION, startTime });
 export const failInspection = () => ({ type: actionTypes.FAIL_INSPECTION });
@@ -30,12 +28,7 @@ export const loadTimes = (current = [], archive = []) => ({ type: actionTypes.LO
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
 
-export const showTimeDetails = id => ({ type: actionTypes.SHOW_TIME_DETAILS, id });
-export const hideTimeDetails = id => ({ type: actionTypes.HIDE_TIME_DETAILS, id });
-
 // Archive
-export const openArchiveModal = () => ({ type: actionTypes.OPEN_ARCHIVE_MODAL });
-export const closeArchiveModal = () => ({ type: actionTypes.CLOSE_ARCHIVE_MODAL });
 export const archiveCurrentTimes = () => ({ type: actionTypes.ARCHIVE_CURRENT_TIMES });
 export const inputTimesTitle = title => ({ type: actionTypes.INPUT_ARCHIVE_TITLE, title });
 export const archive = (id, times, puzzle) => ({ type: actionTypes.ARCHIVE, id, times, puzzle });
@@ -49,13 +42,11 @@ export const filterArchive = puzzle => ({ type: actionTypes.FILTER_ARCHIVE, puzz
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
 export const toggleInspectionTime = theme => ({ type: actionTypes.TOGGLE_INSPECTION_TIME, theme });
-export const openSettings = () => ({ type: actionTypes.OPEN_SETTINGS });
-export const closeSettings = () => ({ type: actionTypes.CLOSE_SETTINGS });
 export const changeActivationDuration = activationDuration => ({
   type: actionTypes.CHANGE_ACTIVATION_DURATION,
   activationDuration
 });
 
-// Stats info
-export const showStatsInfo = () => ({ type: actionTypes.SHOW_STATS_INFO });
-export const hideStatsInfo = () => ({ type: actionTypes.HIDE_STATS_INFO });
+// Modal
+export const openModal = id => ({ type: actionTypes.OPEN_MODAL, id });
+export const closeModal = () => ({ type: actionTypes.CLOSE_MODAL });

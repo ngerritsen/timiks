@@ -5,14 +5,10 @@ import styled from 'styled-components';
 import ArchiveItem from './ArchiveItem';
 import ArchiveRefinementContainer from '../../containers/ArchiveRefinementContainer';
 import Section from '../shared/Section';
+import ArchiveExportContainer from '../../containers/ArchiveExportContainer';
+import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 
-const Archive = ({
-  archive,
-  collapseArchiveItem,
-  expandArchiveItem,
-  removeArchiveItem,
-  isEmpty
-}) => {
+const Archive = ({ archive, collapseArchiveItem, expandArchiveItem, removeArchiveItem, isEmpty }) => {
   if (isEmpty) {
     return <Message>The archive is empty!</Message>
   }
@@ -26,18 +22,25 @@ const Archive = ({
           return <Message>No items found.</Message>
         }
 
-        return <ArchiveList>
-          {archive.map((item, index) =>
-            <ArchiveListItem key={index}>
-              <ArchiveItem
-                {...item}
-                removeArchiveItem={removeArchiveItem}
-                onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
-              />
-            </ArchiveListItem>
-          )}
-        </ArchiveList>
+        return (
+          <ArchiveList>
+            {archive.map((item, index) =>
+              <ArchiveListItem key={index}>
+                <ArchiveItem
+                  {...item}
+                  removeArchiveItem={removeArchiveItem}
+                  onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
+                />
+              </ArchiveListItem>
+            )}
+          </ArchiveList>
+        )
     })()}
+    <Toolbar>
+      <ToolbarItem>
+        <ArchiveExportContainer/>
+      </ToolbarItem>
+    </Toolbar>
   </div>
 };
 
@@ -45,9 +48,7 @@ Archive.propTypes = {
   archive: PropTypes.arrayOf(PropTypes.object),
   collapseArchiveItem: PropTypes.func.isRequired,
   expandArchiveItem: PropTypes.func.isRequired,
-  hideTimeDetails: PropTypes.func.isRequired,
   removeArchiveItem: PropTypes.func.isRequired,
-  showTimeDetails: PropTypes.func.isRequired,
   isEmpty: PropTypes.bool.isRequired
 }
 
