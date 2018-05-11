@@ -3,17 +3,15 @@ import { transparentize } from 'polished';
 
 const Input = styled.input`
   background: transparent;
+  box-shadow: none;
+  -webkit-appearance: none;
   width: 100%;
   font-size: 1.5rem;
   color: ${props => props.theme.colors.fg};
-  border: 1px solid ${props => props.theme.colors.subtleBg};
+  border: 1px solid ${props => props.theme.colors.grey};
   border-radius: 0.3rem;
   padding: ${props => props.theme.sizes.xs};
   margin: 0;
-
-  &:hover {
-    border: 1px solid ${props => props.theme.colors.grey};
-  }
 
   &:focus {
     outline: none;

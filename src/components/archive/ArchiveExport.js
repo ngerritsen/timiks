@@ -24,7 +24,7 @@ const ArchiveExport = ({ exportData }) => (
           Click download or copy the following code and keep it somewhere safe.
         </p>
         <Section margin="sm">
-          <CodeTextarea readOnly value={exportData}></CodeTextarea>
+          <CodeTextarea onChange={e => e.preventDefault()} value={exportData}></CodeTextarea>
         </Section>
         <LinkButton
           href={'data:text/plain;charset=utf-8,' + encodeURIComponent(exportData)}
