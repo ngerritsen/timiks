@@ -111,13 +111,9 @@ const TimerTime = styled.span`
 
 const TimerTimeContainer = styled.div`
   text-align: center;
-  padding: ${props => props.theme.sizes.lg} 0 7rem;
-  font-size: 5rem;
+  padding: ${props => props.theme.sizes.lg} 0 6rem;
+  font-size: 5.4rem;
   position: relative;
-
-  @media screen and (min-width: 420px) {
-    font-size: 6rem;
-  }
 `;
 
 export default Timer
