@@ -5,7 +5,8 @@ const initialState = {
   expanded: '',
   titleInput: '',
   sortBy: 'date',
-  puzzle: ''
+  puzzle: '',
+  importInput: ''
 };
 
 function archiveReducer(state = initialState, action) {
@@ -15,6 +16,11 @@ function archiveReducer(state = initialState, action) {
         ...state,
         items: action.archive
       };
+    case actionTypes.CHANGE_IMPORT_INPUT:
+      return {
+        ...state,
+        importInput: action.value
+      }
     case actionTypes.ARCHIVE:
       return {
         ...state,
@@ -65,6 +71,20 @@ function archiveReducer(state = initialState, action) {
       return {
         ...state,
         puzzle: action.puzzle
+      }
+    case actionTypes.IMPORT_ARCHIVE:
+      return {
+        ...state,
+        importInput: '',
+        items: [
+          ...state.items.filter(item => !action.archive.find(i => i.id === item.id)),
+          ...action.archive
+        ]
+      }
+    case actionTypes.LOAD_ARCHIVE:
+      return {
+        ...state,
+        items: action.archive
       }
     default:
       return state;

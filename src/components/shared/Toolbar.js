@@ -7,5 +7,5 @@ export const Toolbar = styled.p`
 `;
 
 export const ToolbarItem = styled.span`
-  margin-left: ${props => props.theme.sizes.sm};
+  margin-left: ${props => props.theme.sizes.xs};
 `;

@@ -1,5 +1,6 @@
 import { ARCHIVE_SORT_OPTIONS } from '../constants/app';
 
+import { parseArchive } from './serialization';
 import * as times from './times';
 import { sortBy } from './general';
 
@@ -28,6 +29,14 @@ export function sortArchive(archive, sortByProperty) {
   }
 
   return sortedArchive;
+}
+
+export function validateArchiveImport(importString) {
+  try {
+    return Boolean(parseArchive(JSON.parse(importString)));
+  } catch(e) {
+    return false;
+  }
 }
 
 export function filterArchive(archive, puzzle) {

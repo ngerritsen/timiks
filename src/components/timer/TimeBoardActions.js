@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from '@fortawesome/react-fontawesome';
 import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid';
 
-import IconButton from '../shared/IconButton';
+import InlineFontawesome from '../shared/InlineFontawesome';
+import Button from '../shared/Button';
 import ModalContainer from '../../containers/ModalContainer';
 import ArchiveForm from '../archive/ArchiveForm';
 import Section from '../shared/Section';
-import Button from '../shared/Button';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 
@@ -24,9 +23,9 @@ const TimeBoardActions = ({
         id="archiveTimes"
         showCloseButton={false}
         toggle={(openModal) => (
-          <IconButton color="blue" onClick={openModal}>
-            <FontAwesome icon={faArchive} />
-          </IconButton>
+          <Button tiny tag onClick={openModal}>
+            <InlineFontawesome icon={faArchive} /> Archive
+          </Button>
         )}
         content={(closeModal) => (
           <ArchiveForm
@@ -44,9 +43,9 @@ const TimeBoardActions = ({
         title="Clear current times"
         id="clearCurrentTimes"
         toggle={openModal => (
-          <IconButton color="red" onClick={openModal}>
-            <FontAwesome icon={faTrash} />
-          </IconButton>
+          <Button tiny tag danger onClick={openModal}>
+            <InlineFontawesome icon={faTrash} /> Clear
+          </Button>
         )}
         content={closeModal => (
           <div>

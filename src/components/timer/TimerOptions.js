@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { faSyncAlt } from '@fortawesome/fontawesome-pro-solid';
 
+import InlineFontawesome from '../shared/InlineFontawesome';
 import Selector from '../shared/Selector';
 import Button from '../shared/Button';
 import puzzles from '../../constants/puzzles';
@@ -15,7 +17,9 @@ const TimerOptions = ({ changePuzzle, puzzle, refreshScramble }) => (
     />
     &nbsp;
     &nbsp;
-    <Button tiny tag onClick={refreshScramble}>New scramble</Button>
+    <Button tiny tag onClick={refreshScramble}>
+      <InlineFontawesome fixedWidth icon={faSyncAlt}/>scramble
+    </Button>
   </div>
 );
 

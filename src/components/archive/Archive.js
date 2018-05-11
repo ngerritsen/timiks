@@ -6,6 +6,8 @@ import ArchiveItem from './ArchiveItem';
 import ArchiveRefinementContainer from '../../containers/ArchiveRefinementContainer';
 import Section from '../shared/Section';
 import ArchiveExportContainer from '../../containers/ArchiveExportContainer';
+import ArchiveImportContainer from '../../containers/ArchiveImportContainer';
+
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 
 const Archive = ({ archive, collapseArchiveItem, expandArchiveItem, removeArchiveItem, isEmpty }) => {
@@ -39,6 +41,9 @@ const Archive = ({ archive, collapseArchiveItem, expandArchiveItem, removeArchiv
     <Toolbar>
       <ToolbarItem>
         <ArchiveExportContainer/>
+      </ToolbarItem>
+      <ToolbarItem>
+        <ArchiveImportContainer/>
       </ToolbarItem>
     </Toolbar>
   </div>

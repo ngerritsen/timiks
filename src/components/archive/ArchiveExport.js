@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from '@fortawesome/react-fontawesome';
+import InlineFontawesome from '../shared/InlineFontawesome';
 import { faDownload } from '@fortawesome/fontawesome-pro-solid';
 
 import ModalContainer from '../../containers/ModalContainer';
-import IconButton from '../shared/IconButton';
+import Button from '../shared/Button';
 import CodeTextarea from '../shared/CodeTextarea';
 import LinkButton from '../shared/LinkButton';
 import Section from '../shared/Section';
@@ -14,9 +14,9 @@ const ArchiveExport = ({ exportData }) => (
     title="Export archive"
     id="exportArchive"
     toggle={openModal => (
-      <IconButton onClick={openModal}>
-        <FontAwesome icon={faDownload}/>
-      </IconButton>
+      <Button tiny tag onClick={openModal}>
+        <InlineFontawesome icon={faDownload}/>Export
+      </Button>
     )}
     content={() => (
       <div>

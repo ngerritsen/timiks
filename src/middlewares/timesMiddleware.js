@@ -6,9 +6,8 @@ const storeActions = [SAVE_TIME, REMOVE_TIME, CLEAR_TIMES];
 
 const timesMiddleware = store => next => {
   const current = timesRepository.getCurrent();
-  const archive = timesRepository.getArchive();
 
-  store.dispatch(loadTimes(current, archive));
+  store.dispatch(loadTimes(current));
 
   return action => {
     const result = next(action);
