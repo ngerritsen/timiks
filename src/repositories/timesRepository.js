@@ -48,17 +48,37 @@ function serializeTimes(times) {
 }
 
 function parseArchive(rawArchive) {
-  return rawArchive.map(item => ({
-    title: item.title,
-    times: parseTimes(item.times),
-    id: shortid.generate(),
-    puzzle: item.puzzle
-  }));
+  let shouldUpdateIds = false;
+
+  const parsedArchive = rawArchive.map(item => {
+    if (!item.id) {
+      shouldUpdateIds = true;
+    }
+
+    return {
+      title: item.title,
+      times: parseTimes(item.times),
+      id: item.id || shortid.generate(),
+      puzzle: item.puzzle
+    }
+  });
+
+  /**
+   * This is for backwards compatibility for people that had an archive before
+   * id's where stored in localStorage. We make sure they have consistent id's,
+   * to prevent problems with merging imports later.
+   */
+  if (shouldUpdateIds) {
+    storeArchive(parsedArchive);
+  }
+
+  return parsedArchive;
 }
 
 function serializeArchive(archive) {
   return archive.map(item => ({
     title: item.title,
+    id: item.id,
     times: serializeTimes(item.times),
     puzzle: item.puzzle
   }));

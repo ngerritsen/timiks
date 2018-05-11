@@ -1,9 +1,9 @@
 import { ARCHIVE_SORT_OPTIONS } from '../constants/app';
 
-import * as times from '../helpers/times';
+import * as times from './times';
+import { sortBy } from './general';
 
 export function decorateArchive(archive, expanded, timeDetailsShown) {
-
   return archive.map(item => {
     const stats = times.calculateStats(item.times);
 
@@ -18,18 +18,10 @@ export function decorateArchive(archive, expanded, timeDetailsShown) {
   });
 }
 
-export function sortArchive(archive, sortBy) {
-  const { value, reversed } = ARCHIVE_SORT_OPTIONS.find(option => sortBy === option.value);
+export function sortArchive(archive, sortByProperty) {
+  const { value, reversed } = ARCHIVE_SORT_OPTIONS.find(option => sortByProperty === option.value);
 
-  const sortedArchive = [...archive].sort((a, b) => {
-    if (a[value] < b[value]) {
-      return -1
-    } else if (a[value] > b[value]) {
-      return 1;
-    }
-
-    return 0;
-  });
+  const sortedArchive = sortBy(archive, value);
 
   if (reversed) {
     sortedArchive.reverse();
