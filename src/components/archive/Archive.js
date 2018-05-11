@@ -11,42 +11,52 @@ import ArchiveImportContainer from '../../containers/ArchiveImportContainer';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 
 const Archive = ({ archive, collapseArchiveItem, expandArchiveItem, removeArchiveItem, isEmpty }) => {
-  if (isEmpty) {
-    return <Message>The archive is empty!</Message>
-  }
+  return (
+    <div>
+      {
+        isEmpty &&
+        <Message>The archive is empty!</Message>
+      }
+      {
+        !isEmpty &&
+        <div>
+          <Section margin="sm">
+            <ArchiveRefinementContainer/>
+          </Section>
+            {(() => {
+              if (archive.length === 0) {
+                return <Message>No items found.</Message>
+              }
 
-  return <div>
-    <Section margin="sm">
-      <ArchiveRefinementContainer/>
-    </Section>
-    {(() => {
-        if (archive.length === 0) {
-          return <Message>No items found.</Message>
+              return (
+                <ArchiveList>
+                  {archive.map((item, index) =>
+                    <ArchiveListItem key={index}>
+                      <ArchiveItem
+                        {...item}
+                        removeArchiveItem={removeArchiveItem}
+                        onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
+                      />
+                    </ArchiveListItem>
+                  )}
+                </ArchiveList>
+              )
+            })()}
+          </div>
         }
-
-        return (
-          <ArchiveList>
-            {archive.map((item, index) =>
-              <ArchiveListItem key={index}>
-                <ArchiveItem
-                  {...item}
-                  removeArchiveItem={removeArchiveItem}
-                  onClick={() => item.collapsed ? expandArchiveItem(item.id) : collapseArchiveItem(item.id)}
-                />
-              </ArchiveListItem>
-            )}
-          </ArchiveList>
-        )
-    })()}
-    <Toolbar>
-      <ToolbarItem>
-        <ArchiveExportContainer/>
-      </ToolbarItem>
-      <ToolbarItem>
-        <ArchiveImportContainer/>
-      </ToolbarItem>
-    </Toolbar>
-  </div>
+      <Toolbar>
+        {
+          archive.length !== 0 &&
+          <ToolbarItem>
+            <ArchiveExportContainer/>
+          </ToolbarItem>
+        }
+        <ToolbarItem>
+          <ArchiveImportContainer/>
+        </ToolbarItem>
+      </Toolbar>
+    </div>
+  )
 };
 
 Archive.propTypes = {
