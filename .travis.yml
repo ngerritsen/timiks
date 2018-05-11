@@ -3,13 +3,9 @@ node_js:
   - "8"
 before_install:
   - npm config set @fortawesome:registry https://npm.fontawesome.com/$FONTAWESOME_NPM_TOKEN
+  - npm install netlify-cli -g
 script:
   - npm run test
   - npm run build
 after_success:
-  - curl -3 -T public/favicon.png ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
-  - curl -3 -T public/android-icon.png ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
-  - curl -3 -T public/apple-icon.png ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
-  - curl -3 -T public/timiks.webmanifest ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
-  - curl -3 -T public/index.html ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
-  - curl -3 -T public/bundle.js ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
+  - netlify deploy -p ./public -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN
