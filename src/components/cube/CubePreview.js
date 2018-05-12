@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzle';
-import { layoutScramble } from '../helpers/cube';
+import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../../constants/puzzle';
+import { layoutScramble } from '../../helpers/cube';
 import CubeFace from './CubeFace';
 
 const CUBE_LAYOUT = [

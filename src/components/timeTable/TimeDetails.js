@@ -5,7 +5,7 @@ import { faCalendarAlt, faStopwatch, faCube } from '@fortawesome/fontawesome-pro
 
 import Time from '../shared/Time';
 import Section from '../shared/Section';
-import ScrambleDetails from '../ScrambleDetails';
+import ScrambleDetails from '../scramble/ScrambleDetails';
 
 const TimeDetails = ({ puzzle, date, ms, dnf, plus2, scramble }) => (
   <div>

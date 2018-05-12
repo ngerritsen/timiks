@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getPuzzleSize, isCube } from '../helpers/puzzle';
-
-import CubePreview from './CubePreview';
+import { getPuzzleSize, isCube } from '../../helpers/puzzle';
+import CubePreview from '../cube/CubePreview';
 import Scramble from './Scramble';
-import Section from './shared/Section';
+import Section from '../shared/Section';
 
 const ScrambleDetails = ({ puzzle, scramble }) => (
   <div>

@@ -4,11 +4,11 @@ import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/fontawesome-pro-solid';
 
-import IconButton from './shared/IconButton';
+import IconButton from '../shared/IconButton';
 import ScrambleDetails from './ScrambleDetails';
-import { isCube } from '../helpers/puzzle';
-import Section from './shared/Section';
-import ModalContainer from '../containers/ModalContainer';
+import { isCube } from '../../helpers/puzzle';
+import Section from '../shared/Section';
+import ModalContainer from '../../containers/ModalContainer';
 
 const Scramble = ({ scramble, small, withDetails, puzzle }) => (
   <div>
