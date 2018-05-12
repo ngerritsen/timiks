@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import ArchiveExport from '../components/archive/ArchiveExport';
-import { serializeArchive } from '../helpers/serialization';
+import ArchiveExport from '../../components/archive/ArchiveExport';
+import { serializeArchive } from '../../helpers/serialization';
 
 function mapStateToProps(state) {
   return {

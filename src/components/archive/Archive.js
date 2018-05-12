@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ArchiveItem from './ArchiveItem';
-import ArchiveRefinementContainer from '../../containers/ArchiveRefinementContainer';
+import ArchiveRefinementContainer from '../../containers/archive/ArchiveRefinementContainer';
 import Section from '../shared/Section';
-import ArchiveExportContainer from '../../containers/ArchiveExportContainer';
-import ArchiveImportContainer from '../../containers/ArchiveImportContainer';
+import ArchiveExportContainer from '../../containers/archive/ArchiveExportContainer';
+import ArchiveImportContainer from '../../containers/archive/ArchiveImportContainer';
 
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 

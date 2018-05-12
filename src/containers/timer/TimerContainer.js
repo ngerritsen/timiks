@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../constants/app';
-import { obfuscateScramble } from '../helpers/scramble';
-import { removeTime, updateTime, submitTimeInput, updateTimeInput } from '../actions';
-import Timer from '../components/timer/Timer';
+import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../../constants/app';
+import { obfuscateScramble } from '../../helpers/scramble';
+import { removeTime, updateTime, submitTimeInput, updateTimeInput } from '../../actions';
+import Timer from '../../components/timer/Timer';
 
 class TimerContainer extends React.Component {
   constructor() {

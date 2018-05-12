@@ -6,7 +6,7 @@ import Input from '../shared/Input';
 import Time from '../shared/Time';
 import Section from '../shared/Section';
 import Scramble from '../scramble/Scramble';
-import ActivationContainer from '../../containers/ActivationContainer';
+import ActivationContainer from '../../containers/timer/ActivationContainer';
 import Button from '../shared/Button';
 import { parseTimeInput } from '../../helpers/time';
 

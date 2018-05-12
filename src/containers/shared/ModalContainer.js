@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { closeModal, openModal } from '../actions';
 
-import Modal from '../components/shared/Modal';
+import { closeModal, openModal } from '../../actions';
+import Modal from '../../components/shared/Modal';
 
 function mapStateToProps(state, ownProps) {
   return {

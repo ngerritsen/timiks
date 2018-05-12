@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import { startTimer, stopTimer, resetTime, submitTimeInput } from '../actions';
-import { parseTimeInput } from '../helpers/time';
-import Activation from '../components/timer/Activation';
-import { isReady, isPreparing } from '../selectors/activationSelectors';
+import { startTimer, stopTimer, resetTime, submitTimeInput } from '../../actions';
+import { parseTimeInput } from '../../helpers/time';
+import Activation from '../../components/timer/Activation';
+import { isReady, isPreparing } from '../../selectors/activationSelectors';
 
 function mapStateToProps (state) {
   const { timer, activation, settings } = state;

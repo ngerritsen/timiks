@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 import Header from './Header';
 import Footer from './Footer';
 import TimerView from './timer/TimerView';
-import ArchiveContainer from '../containers/ArchiveContainer';
+import ArchiveContainer from '../containers/archive/ArchiveContainer';
 import Section from './shared/Section';
 
 const App = () => (

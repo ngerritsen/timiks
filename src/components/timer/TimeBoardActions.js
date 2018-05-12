@@ -4,7 +4,7 @@ import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid';
 
 import InlineFontawesome from '../shared/InlineFontawesome';
 import Button from '../shared/Button';
-import ModalContainer from '../../containers/ModalContainer';
+import ModalContainer from '../../containers/shared/ModalContainer';
 import ArchiveForm from '../archive/ArchiveForm';
 import Section from '../shared/Section';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import TimeBoard from '../components/timer/TimeBoard';
+import TimeBoard from '../../components/timer/TimeBoard';
 
 const TimeBoardContainer = ({ hasTimes }) => hasTimes ? <TimeBoard/> : null;
 

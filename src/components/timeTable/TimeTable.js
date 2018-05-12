@@ -6,7 +6,7 @@ import { faTimes, faThumbsUp, faInfoCircle, faQuestionCircle } from '@fortawesom
 
 import Time from '../shared/Time';
 import TimeGraph from './TimeGraph';
-import ModalContainer from '../../containers/ModalContainer';
+import ModalContainer from '../../containers/shared/ModalContainer';
 import IconButton from '../shared/IconButton';
 import TimeDetails from './TimeDetails';
 import Section from '../shared/Section';

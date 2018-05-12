@@ -8,7 +8,7 @@ import IconButton from '../shared/IconButton';
 import ScrambleDetails from './ScrambleDetails';
 import { isCube } from '../../helpers/puzzle';
 import Section from '../shared/Section';
-import ModalContainer from '../../containers/ModalContainer';
+import ModalContainer from '../../containers/shared/ModalContainer';
 
 const Scramble = ({ scramble, small, withDetails, puzzle }) => (
   <div>

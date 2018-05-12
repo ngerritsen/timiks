@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import InlineFontawesome from '../shared/InlineFontawesome';
 import { faUpload } from '@fortawesome/fontawesome-pro-solid';
 
-import ModalContainer from '../../containers/ModalContainer';
+import ModalContainer from '../../containers/shared/ModalContainer';
 import Button from '../shared/Button';
 import CodeTextarea from '../shared/CodeTextarea';
 import Section from '../shared/Section';

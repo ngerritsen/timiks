@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import { changeImportInput, importArchive } from '../actions';
-import { validateArchiveImport } from '../helpers/archive';
-import { parseArchive } from '../helpers/serialization';
-import ArchiveImport from '../components/archive/ArchiveImport';
+import { changeImportInput, importArchive } from '../../actions';
+import { validateArchiveImport } from '../../helpers/archive';
+import { parseArchive } from '../../helpers/serialization';
+import ArchiveImport from '../../components/archive/ArchiveImport';
 
 function mapStateToProps(state) {
   return {

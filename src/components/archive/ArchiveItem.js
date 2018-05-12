@@ -7,10 +7,10 @@ import { faCaretRight, faCaretDown, faCalendarAlt, faCube } from '@fortawesome/f
 
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import Info, { InfoItem, InfoIcon } from '../shared/Info';
-import TimeTableContainer from '../../containers/TimeTableContainer';
+import TimeTableContainer from '../../containers/timeTable/TimeTableContainer';
 import Button from '../shared/Button';
 import Section from '../shared/Section';
-import ModalContainer from '../../containers/ModalContainer';
+import ModalContainer from '../../containers/shared/ModalContainer';
 
 const ArchiveItem = ({
   collapsed,

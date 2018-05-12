@@ -6,7 +6,7 @@ import { faCog } from '@fortawesome/fontawesome-pro-solid'
 
 import { ACTIVATION_DURATION_OPTIONS } from '../constants/app';
 import IconButton from './shared/IconButton';
-import ModalContainer from '../containers/ModalContainer';
+import ModalContainer from '../containers/shared/ModalContainer';
 import Section from './shared/Section';
 import Selector from './shared/Selector';
 import Button from './shared/Button';
