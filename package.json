@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "copy-static": "mkdir -p public; cp -r src/static/* public/",
-    "watch": "npm run copy-static; webpack-dev-server",
+    "watch": "npm run copy-static; webpack-dev-server --host 192.168.2.9",
     "test": "eslint src",
     "build": "npm run copy-static; NODE_ENV=production webpack",
     "precommit": "npm run test"
@@ -32,6 +32,8 @@
     "@fortawesome/react-fontawesome": "0.0.17",
     "chart.js": "^2.7.2",
     "element-closest": "^2.0.2",
+    "moment": "^2.22.1",
+    "moment-duration-format": "^2.2.2",
     "nosleep.js": "^0.7.0",
     "polished": "^1.9.2",
     "prop-types": "^15.6.0",

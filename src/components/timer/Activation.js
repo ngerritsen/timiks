@@ -14,13 +14,24 @@ const Activation = ({
   ready,
   preparingForInspection,
   inspectionMode,
-  useInspectionTime
+  useInspectionTime,
+  useManualTimeEntry,
+  submitTimeInput,
+  validTimeInput
 }) => {
   return (
     <div>
       <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
-        <Button big primary data-activation>
+        <Button
+          big primary data-activation
+          disabled={useManualTimeEntry && !validTimeInput}
+          onClick={() => useManualTimeEntry && validTimeInput && submitTimeInput()}
+        >
           {(() => {
+            if (useManualTimeEntry) {
+              return 'Submit';
+            }
+
             if (!stopped) {
               return 'Stop';
             }
@@ -81,7 +92,10 @@ Activation.propTypes = {
   preparing: PropTypes.bool.isRequired,
   ready: PropTypes.bool.isRequired,
   useInspectionTime: PropTypes.bool.isRequired,
-  inspectionMode: PropTypes.bool.isRequired
+  inspectionMode: PropTypes.bool.isRequired,
+  useManualTimeEntry: PropTypes.bool.isRequired,
+  submitTimeInput: PropTypes.func.isRequired,
+  validTimeInput: PropTypes.bool.isRequired
 };
 
 const ActivationContainer = styled.div`

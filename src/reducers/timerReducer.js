@@ -4,6 +4,7 @@ const initialState = {
   startTime: 0,
   stopped: true,
   inspectionStartTime: 0,
+  timeInput: '',
   inspectionMode: false,
   lastTimeId: ''
 }
@@ -39,6 +40,17 @@ export default function timerReducer(state = initialState, action) {
       return {
         ...state,
         startTime: 0
+      }
+    case actionTypes.SUBMIT_TIME_INPUT:
+      return {
+        ...state,
+        lastTimeId: action.lastTimeId,
+        timeInput: ''
+      }
+    case actionTypes.UPDATE_TIME_INPUT:
+      return {
+        ...state,
+        timeInput: action.timeInput
       }
     default:
       return state

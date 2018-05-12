@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../constants/app';
 import { obfuscateScramble } from '../helpers/scramble';
-import { removeTime, updateTime } from '../actions';
+import { removeTime, updateTime, submitTimeInput, updateTimeInput } from '../actions';
 import Timer from '../components/timer/Timer';
 
 class TimerContainer extends React.Component {
@@ -91,17 +91,19 @@ TimerContainer.propTypes = {
 };
 
 function mapStateToProps (state) {
-  const { activation, timer, scramble, times } = state;
-  const { stopped, startTime, lastTimeId, inspectionStartTime, inspectionMode } = timer;
+  const { activation, timer, scramble, times, settings } = state;
+  const { stopped, startTime, lastTimeId, inspectionStartTime, inspectionMode, timeInput } = timer;
   const { preparingForInspection, preparationStage } = activation;
   const preparing = preparationStage > -1;
 
   const ready = preparationStage === PREPARATION_STAGES;
+  const useManualTimeEntry = settings.useManualTimeEntry;
   const lastTime = times.current.find(time => time.id === lastTimeId);
-  const showLastTime = Boolean(lastTime && startTime === 0 && !ready);
+  const showLastTime = Boolean(lastTime && startTime === 0 && !ready && !useManualTimeEntry);
 
   return {
     _lastTime: lastTime,
+    useManualTimeEntry,
     lastTime: showLastTime ? lastTime.ms : 0,
     startTime,
     stopped,
@@ -111,6 +113,7 @@ function mapStateToProps (state) {
     dnf: showLastTime ? Boolean(lastTime.dnf) : false,
     plus2: showLastTime ? Boolean(lastTime.plus2) : false,
     ready,
+    timeInput,
     preparingForInspection,
     scramble: (stopped && !preparing && !preparingForInspection && !inspectionMode) ? scramble : obfuscateScramble(scramble),
     puzzle: state.settings.puzzle,
@@ -143,4 +146,13 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, { updateTime, removeTime }, mergeProps)(TimerContainer);
+export default connect(
+  mapStateToProps,
+  {
+    updateTime,
+    removeTime,
+    submitTimeInput,
+    updateTimeInput
+  },
+  mergeProps
+)(TimerContainer);

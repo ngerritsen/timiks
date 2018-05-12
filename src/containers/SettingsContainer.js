@@ -7,13 +7,15 @@ function mapStateToProps(state) {
   const {
     theme,
     useInspectionTime,
-    activationDuration
+    activationDuration,
+    useManualTimeEntry
   } = state.settings;
 
   return {
     theme,
     useInspectionTime,
-    activationDuration
+    activationDuration,
+    useManualTimeEntry
   }
 }
 
@@ -22,6 +24,7 @@ export default connect(
   {
     toggleInspectionTime: actions.toggleInspectionTime,
     changeTheme: actions.changeTheme,
-    changeActivationDuration: actions.changeActivationDuration
+    changeActivationDuration: actions.changeActivationDuration,
+    toggleManualTimeEntry: actions.toggleManualTimeEntry
   }
 )(Settings);

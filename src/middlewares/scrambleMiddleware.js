@@ -1,6 +1,13 @@
-import { STOP_TIMER, CHANGE_PUZZLE, REFRESH_SCRAMBLE } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import { setScramble } from '../actions';
 import { generateScramble } from '../helpers/scramble';
+
+const RESCRAMBLE_ON = [
+  actionTypes.STOP_TIMER,
+  actionTypes.CHANGE_PUZZLE,
+  actionTypes.REFRESH_SCRAMBLE,
+  actionTypes.SUBMIT_TIME_INPUT
+];
 
 const scrambleMiddleware = store => next => {
   dispatchScramble(store)
@@ -8,7 +15,7 @@ const scrambleMiddleware = store => next => {
   return action => {
     const result = next(action);
 
-    if ([STOP_TIMER, CHANGE_PUZZLE, REFRESH_SCRAMBLE].includes(action.type)) {
+    if (RESCRAMBLE_ON.includes(action.type)) {
       dispatchScramble(store)
     }
 

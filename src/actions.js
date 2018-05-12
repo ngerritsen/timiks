@@ -7,6 +7,8 @@ export const stopTimer = () => ({ type: actionTypes.STOP_TIMER });
 export const prepareInspection = () => ({ type: actionTypes.PREPARE_INSPECTION });
 export const startInspection = startTime => ({ type: actionTypes.START_INSPECTION, startTime });
 export const failInspection = () => ({ type: actionTypes.FAIL_INSPECTION });
+export const submitTimeInput = () => ({ type: actionTypes.SUBMIT_TIME_INPUT });
+export const updateTimeInput = timeInput => ({ type: actionTypes.UPDATE_TIME_INPUT, timeInput });
 
 // Activation
 export const prepareActivation = () => ({ type: actionTypes.PREPARE_ACTIVATION });
@@ -42,6 +44,8 @@ export const importArchive = archive => ({ type: actionTypes.IMPORT_ARCHIVE, arc
 export const loadArchive = (archive = []) => ({ type: actionTypes.LOAD_ARCHIVE, archive });
 
 // Settings
+export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });
+export const toggleManualTimeEntry = () => ({ type: actionTypes.TOGGLE_MANUAL_TIME_ENTRY });
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
 export const toggleInspectionTime = theme => ({ type: actionTypes.TOGGLE_INSPECTION_TIME, theme });

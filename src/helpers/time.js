@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const MS_IN_SECONDS = 1000;
 const SECONDS_IN_MINUTES = 60;
 const MS_IN_MINUTES = SECONDS_IN_MINUTES * MS_IN_SECONDS;
@@ -14,4 +16,49 @@ export function breakUpTime(ms) {
   milliseconds -= seconds * MS_IN_SECONDS;
 
   return { minutes, seconds, milliseconds };
+}
+
+export function parseTimeInput(input) {
+  if (!input) {
+    return null;
+  }
+
+  let timeInput = input.trim();
+  let plus2 = false;
+
+  if (timeInput.toLowerCase() === 'dnf') {
+    return {
+      ms: 0,
+      dnf: true,
+      plus2: false
+    }
+  }
+
+  if (timeInput.indexOf('+2') > 0 && timeInput.indexOf('+2') === (timeInput.length - 2)) {
+    timeInput = timeInput.slice(0, -2);
+    plus2 = true;
+  }
+
+  const time = moment(
+    timeInput,
+    [
+      'H:m:s.SSS', 'H:m:s.SS', 'H:m:s.S', 'H:m:s',
+      'm:s.SSS', 'm:s.SS', 'm:s.S', 'm:s',
+      's.SSS', 's.SS', 's.S', 's'
+    ],
+    true
+  );
+
+  const ms = (
+    (time.hour() * 3600000) +
+    (time.minute() * 60000) +
+    (time.second() * 1000) +
+    time.millisecond()
+  );
+
+  if (!ms || ms <= 0 || isNaN(ms)) {
+    return null;
+  }
+
+  return { ms, plus2, dnf: false };
 }

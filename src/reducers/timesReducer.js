@@ -7,11 +7,11 @@ const initialState = {
 export default function timesReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SAVE_TIME: {
-      const { id, ms, date, scramble, puzzle, dnf } = action;
+      const { id, ms, date, scramble, puzzle, dnf, plus2 } = action;
 
       return {
         ...state,
-        current: [...state.current, { id, ms, date, scramble, puzzle, dnf }]
+        current: [...state.current, { id, ms, date, scramble, puzzle, dnf, plus2 }]
       };
     }
     case actionTypes.REMOVE_TIME:

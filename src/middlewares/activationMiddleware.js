@@ -11,8 +11,13 @@ const activationMiddleware = store => next => {
 
   listenForActivations({
     onInitiate() {
-      const { useInspectionTime, activationDuration } = getState().settings;
-      const { inspectionMode } = getState().timer;
+      const { settings, timer } = getState();
+      const { useInspectionTime, activationDuration, useManualTimeEntry } = settings;
+      const { inspectionMode } = timer;
+
+      if (useManualTimeEntry) {
+        return;
+      }
 
       scrollToTop();
 
@@ -43,18 +48,25 @@ const activationMiddleware = store => next => {
       }, activationDuration);
     },
     onFire() {
-      if (getState().activation.preparingForInspection) {
+      const state = getState();
+      const { activation, settings } = state;
+
+      if (settings.useManualTimeEntry) {
+        return;
+      }
+
+      if (activation.preparingForInspection) {
         dispatch(actions.startInspection());
         return;
       }
 
       clearInterval(interval);
 
-      if (!isPreparing(getState())) {
+      if (!isPreparing(state)) {
         return;
       }
 
-      if (isReady(getState())) {
+      if (isReady(state)) {
         clearTimeout(timeout);
         dispatch(actions.startTimer());
       }

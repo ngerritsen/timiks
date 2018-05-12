@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Selector = ({ label, onChange, options, value, numeric }) => (
-  <span>
+const Selector = ({ label, onChange, options, value, numeric, fullWidth }) => (
+  <SelectContainer fullWidth={fullWidth}>
     <label>{label}:</label>
     <Select value={value} onChange={event => {
       const value = event.target.value;
@@ -15,8 +15,13 @@ const Selector = ({ label, onChange, options, value, numeric }) => (
         </option>
       )}
     </Select>
-  </span>
+  </SelectContainer>
 );
+
+const SelectContainer = styled.span`
+  display: ${props => props.fullWidth ? 'flex' : 'inline-block'};
+  justify-content: space-between;
+`;
 
 const Select = styled.select`
   font-size: 1.4rem;
@@ -37,6 +42,7 @@ const Select = styled.select`
 
 Selector.propTypes = {
   label: PropTypes.string.isRequired,
+  fullWidth: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,

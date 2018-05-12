@@ -1,37 +1,25 @@
 import * as actionTypes from '../constants/actionTypes';
-import { changePuzzle, toggleInspectionTime, changeActivationDuration } from '../actions';
+import { loadSettings } from '../actions';
 import * as settingsRepository from '../repositories/settingsRepository';
 
+const STORE_SETTINGS_ON = [
+  actionTypes.CHANGE_PUZZLE,
+  actionTypes.CHANGE_THEME,
+  actionTypes.CHANGE_ACTIVATION_DURATION,
+  actionTypes.TOGGLE_INSPECTION_TIME,
+  actionTypes.TOGGLE_MANUAL_TIME_ENTRY,
+]
+
 const settingsMiddleware = store => {
-  const puzzle = settingsRepository.getPuzzle();
-  const activationDuration = settingsRepository.getActivationDuration();
-  const useInspectionTime = settingsRepository.getUseInspectionTime();
+  const settings = settingsRepository.get();
 
-  if (puzzle) {
-    store.dispatch(changePuzzle(puzzle));
-  }
-
-  if (typeof activationDuration === 'number') {
-    store.dispatch(changeActivationDuration(activationDuration));
-  }
-
-  if (useInspectionTime !== store.getState().settings.useInspectionTime) {
-    store.dispatch((toggleInspectionTime()));
-  }
+  store.dispatch(loadSettings(settings));
 
   return next => action => {
-    if (action.type === actionTypes.CHANGE_PUZZLE) {
-      settingsRepository.storePuzzle(action.puzzle);
-    }
-
-    if (action.type === actionTypes.CHANGE_ACTIVATION_DURATION) {
-      settingsRepository.storeActivationDuration(action.activationDuration);
-    }
-
     const result = next(action);
 
-    if (action.type === actionTypes.TOGGLE_INSPECTION_TIME) {
-      settingsRepository.storeUseInspectionTime(store.getState().settings.useInspectionTime);
+    if (STORE_SETTINGS_ON.includes(action.type)) {
+      settingsRepository.store(store.getState().settings)
     }
 
     return result;

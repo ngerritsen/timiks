@@ -17,6 +17,8 @@ const Settings = ({
   toggleInspectionTime,
   useInspectionTime,
   changeTheme,
+  toggleManualTimeEntry,
+  useManualTimeEntry,
   theme
 }) => (
   <span>
@@ -35,23 +37,30 @@ const Settings = ({
                 options={ACTIVATION_DURATION_OPTIONS}
                 value={activationDuration}
                 numeric
+                fullWidth
               />
           </Section>
           <Section margin="sm">
-            <label>
+            <Setting>
+              <span>Manual time entry</span>
+              <Checkbox type="checkbox" onChange={toggleManualTimeEntry} checked={useManualTimeEntry}/>
+            </Setting>
+          </Section>
+          <Section margin="sm">
+            <Setting>
+              <span>Use inspection time</span>
               <Checkbox type="checkbox" onChange={toggleInspectionTime} checked={useInspectionTime}/>
-              Use inspection time
-            </label>
+            </Setting>
           </Section>
           <Section margin="md">
-            <label>
+            <Setting>
+              <span>Night mode</span>
               <Checkbox
                 type="checkbox"
                 onChange={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}
                 checked={theme === 'dark'}
               />
-              Night mode
-            </label>
+            </Setting>
           </Section>
           <Section margin="md">
             <i>*For how long you have to hold spacebar, mouse or touch before starting the timer.</i>
@@ -63,6 +72,11 @@ const Settings = ({
   </span>
 );
 
+const Setting = styled.label`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Checkbox = styled.input`
   margin-right: ${props => props.theme.sizes.xs};
   cursor: pointer;
@@ -72,6 +86,8 @@ Settings.propTypes = {
   activationDuration: PropTypes.number.isRequired,
   changeActivationDuration: PropTypes.func.isRequired,
   toggleInspectionTime: PropTypes.func.isRequired,
+  toggleManualTimeEntry: PropTypes.func.isRequired,
+  useManualTimeEntry: PropTypes.bool.isRequired,
   useInspectionTime: PropTypes.bool.isRequired,
   changeTheme: PropTypes.func.isRequired,
   theme: PropTypes.string.isRequired
