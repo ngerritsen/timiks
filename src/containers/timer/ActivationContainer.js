@@ -17,7 +17,7 @@ function mapStateToProps (state) {
     preparationStage,
     useManualTimeEntry,
     preparing: isPreparing(state),
-    preparingForInspection: preparingForInspection,
+    preparingForInspection,
     inspectionMode,
     validTimeInput: Boolean(parseTimeInput(timeInput)),
     useInspectionTime,

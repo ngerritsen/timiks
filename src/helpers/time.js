@@ -62,3 +62,15 @@ export function parseTimeInput(input) {
 
   return { ms, plus2, dnf: false };
 }
+
+export function getMs(time) {
+  if (time.dnf) {
+    return Infinity;
+  }
+
+  if (time.plus2) {
+    return time.ms + 2000;
+  }
+
+  return time.ms;
+}

@@ -6,7 +6,6 @@ import * as actions from '../../actions';
 function mapStateToProps(state) {
   return {
     titleInput: state.archive.titleInput,
-    isModalOpen: state.archive.isModalOpen
   };
 }
 

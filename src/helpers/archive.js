@@ -21,7 +21,6 @@ export function decorateArchive(archive, expanded, timeDetailsShown) {
 
 export function sortArchive(archive, sortByProperty) {
   const { value, reversed } = ARCHIVE_SORT_OPTIONS.find(option => sortByProperty === option.value);
-
   const sortedArchive = sortBy(archive, value);
 
   if (reversed) {

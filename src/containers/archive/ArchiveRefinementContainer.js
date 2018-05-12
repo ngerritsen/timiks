@@ -4,10 +4,8 @@ import ArchiveRefinement from '../../components/archive/ArchiveRefinement';
 import { sortArchive, filterArchive } from '../../actions';
 
 function mapStateToProps(state) {
-  return {
-    sortBy: state.archive.sortBy,
-    puzzle: state.archive.puzzle
-  };
+  const { sortBy, puzzle } = state.archive;
+  return { sortBy, puzzle };
 }
 
 export default connect(

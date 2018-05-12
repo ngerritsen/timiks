@@ -1,4 +1,5 @@
 import { generateArr } from './general';
+import { getMs } from './time';
 
 export function calculateStats(times) {
   return {
@@ -76,16 +77,4 @@ export function markShowDetails(times, id) {
 
 export function getFirstDate(times) {
   return new Date(Math.min(...times.map(time => time.date.getTime())));
-}
-
-export function getMs(time) {
-  if (time.dnf) {
-    return Infinity;
-  }
-
-  if (time.plus2) {
-    return time.ms + 2000;
-  }
-
-  return time.ms;
 }

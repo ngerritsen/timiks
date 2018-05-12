@@ -2,32 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-import Input from '../shared/Input';
-import Time from '../shared/Time';
-import Section from '../shared/Section';
-import Scramble from '../scramble/Scramble';
-import ActivationContainer from '../../containers/timer/ActivationContainer';
-import Button from '../shared/Button';
 import { parseTimeInput } from '../../helpers/time';
+import ActivationContainer from '../../containers/timer/ActivationContainer';
+import Input from '../shared/Input';
+import Scramble from '../scramble/Scramble';
+import Section from '../shared/Section';
+import Time from '../shared/Time';
+import TimeActionsContainer from '../../containers/timer/TimeActionsContainer';
 
 const Timer = ({
-  scramble,
-  time,
-  puzzle,
-  timeInput,
-  submitTimeInput,
-  updateTimeInput,
   dnf,
-  plus2,
   inspectionMode,
-  removeLastTime,
-  toggleDnfLastTime,
-  togglePlus2LastTime,
-  showTimeActions,
-  preparingForInspection,
-  useManualTimeEntry,
+  plus2,
   preparing,
-  ready
+  preparingForInspection,
+  puzzle,
+  ready,
+  scramble,
+  showTimeActions,
+  submitTimeInput,
+  time,
+  timeInput,
+  updateTimeInput,
+  useManualTimeEntry
 }) => (
   <div>
     <Section margin="sm">
@@ -67,17 +64,7 @@ const Timer = ({
       }
       {
         showTimeActions &&
-        <TimeActions>
-          <TimeAction>
-            <Button tiny tag empty={!plus2} onClick={togglePlus2LastTime}>+2</Button>
-          </TimeAction>
-          <TimeAction>
-            <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>DNF</Button>
-          </TimeAction>
-          <TimeAction>
-            <Button tiny tag danger onClick={removeLastTime}>Remove</Button>
-          </TimeAction>
-        </TimeActions>
+        <TimeActionsContainer/>
       }
     </TimeFooter>
     <Section margin="sm">
@@ -90,23 +77,20 @@ const Timer = ({
 );
 
 Timer.propTypes = {
-  puzzle: PropTypes.string.isRequired,
-  scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
-  time: PropTypes.number.isRequired,
   dnf: PropTypes.bool.isRequired,
-  plus2: PropTypes.bool.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
-  showTimeActions: PropTypes.bool.isRequired,
-  preparingForInspection: PropTypes.bool.isRequired,
-  useManualTimeEntry: PropTypes.bool.isRequired,
-  removeLastTime: PropTypes.func.isRequired,
-  toggleDnfLastTime: PropTypes.func.isRequired,
-  togglePlus2LastTime: PropTypes.func.isRequired,
+  plus2: PropTypes.bool.isRequired,
   preparing: PropTypes.bool.isRequired,
+  preparingForInspection: PropTypes.bool.isRequired,
+  puzzle: PropTypes.string.isRequired,
   ready: PropTypes.bool.isRequired,
-  timeInput: PropTypes.string.isRequired,
+  scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showTimeActions: PropTypes.bool.isRequired,
   submitTimeInput: PropTypes.func.isRequired,
+  time: PropTypes.number.isRequired,
+  timeInput: PropTypes.string.isRequired,
   updateTimeInput: PropTypes.func.isRequired,
+  useManualTimeEntry: PropTypes.bool.isRequired
 };
 
 const TimeEntry = Input.extend`
@@ -123,14 +107,6 @@ const TimeFooter = styled.div`
   text-align: center;
 `;
 
-const TimeActions = styled.div`
-  position: relative;
-  top: 0;
-`;
-
-const TimeAction = styled.span`
-  margin-right: ${props => props.theme.sizes.xs};
-`;
 
 const TimerTime = styled.span`
   position: relative;
