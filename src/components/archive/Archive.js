@@ -45,8 +45,8 @@ Archive.propTypes = {
   archive: PropTypes.arrayOf(PropTypes.object),
   collapseArchiveItem: PropTypes.func.isRequired,
   expandArchiveItem: PropTypes.func.isRequired,
-  removeArchiveItem: PropTypes.func.isRequired,
-  isEmpty: PropTypes.bool.isRequired
+  isEmpty: PropTypes.bool.isRequired,
+  removeArchiveItem: PropTypes.func.isRequired
 }
 
 export default Archive;

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import * as CustomPropTypes from '../../propTypes';
 import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../../constants/app';
-import { obfuscateScramble } from '../../helpers/scramble';
 import { submitTimeInput, updateTimeInput } from '../../actions';
 import { getLastTime } from '../../selectors/timesSelectors';
 import Timer from '../../components/timer/Timer';
@@ -54,25 +54,20 @@ class TimerContainer extends React.Component {
   }
 
   _getDisplayTime() {
-    const { lastTime, startTime, inspectionMode, preparingForInspection } = this.props;
+    const { lastTime, showLastTime, startTime, inspectionMode, preparingForInspection } = this.props;
 
-    if (inspectionMode) {
-      return this.state.inspectionTime;
+    switch(true) {
+      case inspectionMode:
+        return { ms: this.state.inspectionTime };
+      case preparingForInspection:
+        return { ms: INSPECTION_TIME };
+      case startTime > 0:
+        return { ms: this.state.time };
+      case showLastTime:
+        return lastTime;
+      default:
+        return { ms: 0 };
     }
-
-    if (preparingForInspection) {
-      return INSPECTION_TIME;
-    }
-
-    if (startTime > 0) {
-      return this.state.time;
-    }
-
-    if (lastTime > 0) {
-      return lastTime;
-    }
-
-    return 0;
   }
 
   render() {
@@ -83,40 +78,34 @@ class TimerContainer extends React.Component {
 TimerContainer.propTypes = {
   inspectionMode: PropTypes.bool.isRequired,
   inspectionStartTime: PropTypes.number.isRequired,
-  lastTime: PropTypes.number.isRequired,
+  lastTime: CustomPropTypes.Time,
   preparingForInspection: PropTypes.bool.isRequired,
-  puzzle: PropTypes.string.isRequired,
-  scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showLastTime: PropTypes.bool.isRequired,
   startTime: PropTypes.number.isRequired,
   stopped: PropTypes.bool.isRequired
 };
 
 function mapStateToProps (state) {
-  const { activation, timer, scramble, settings } = state;
-  const { stopped, startTime, inspectionStartTime, inspectionMode, timeInput } = timer;
+  const { activation, timer, settings } = state;
+  const { stopped, startTime, inspectionStartTime, inspectionMode } = timer;
   const { preparingForInspection, preparationStage } = activation;
   const preparing = preparationStage > -1;
 
   const ready = preparationStage === PREPARATION_STAGES;
   const useManualTimeEntry = settings.useManualTimeEntry;
   const lastTime = getLastTime(state);
-  const showLastTime = Boolean(lastTime && startTime === 0 && !ready && !useManualTimeEntry);
+  const showLastTime = startTime === 0 && !ready && !useManualTimeEntry && Boolean(lastTime);
 
   return {
-    dnf: showLastTime ? Boolean(lastTime.dnf) : false,
     inspectionMode,
     inspectionStartTime,
-    lastTime: showLastTime ? lastTime.ms : 0,
-    plus2: showLastTime ? Boolean(lastTime.plus2) : false,
+    lastTime,
     preparing,
     preparingForInspection,
-    puzzle: state.settings.puzzle,
     ready,
-    scramble: (stopped && !preparing && !preparingForInspection && !inspectionMode) ? scramble : obfuscateScramble(scramble),
-    showTimeActions: showLastTime,
+    showLastTime,
     startTime,
     stopped,
-    timeInput,
     useManualTimeEntry
   }
 }

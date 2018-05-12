@@ -4,6 +4,7 @@ import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/fontawesome-pro-solid';
 
+import * as CustomPropTypes from '../../propTypes';
 import IconButton from '../shared/IconButton';
 import ScrambleDetails from './ScrambleDetails';
 import { isCube } from '../../helpers/puzzle';
@@ -39,7 +40,7 @@ const Scramble = ({ scramble, small, withDetails, puzzle }) => (
 
 Scramble.propTypes = {
   withDetails: PropTypes.bool,
-  scramble: PropTypes.arrayOf(PropTypes.string),
+  scramble: CustomPropTypes.Scramble,
   small: PropTypes.bool,
   puzzle: PropTypes.string
 };

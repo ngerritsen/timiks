@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes, faThumbsUp, faInfoCircle, faQuestionCircle } from '@fortawesome/fontawesome-pro-solid';
 
+import * as CustomPropTypes from '../../propTypes';
 import Time from '../shared/Time';
 import TimeGraph from './TimeGraph';
 import ModalContainer from '../../containers/shared/ModalContainer';
@@ -62,8 +63,10 @@ const TimeTable = ({ stats, editable = true, removeTime, times }) => {
                   <TimeIndex>{stat}</TimeIndex>
                   <strong>
                     <Time
-                      ms={stats[stat] === 'DNF' ? Infinity : stats[stat]}
-                      dnf={stats[stat] === 'DNF'}
+                      time={{
+                        ms: stats[stat] === 'DNF' ? Infinity : stats[stat],
+                        dnf: stats[stat] === 'DNF'
+                      }}
                     />
                   </strong>
                 </div>
@@ -81,13 +84,13 @@ const TimeTable = ({ stats, editable = true, removeTime, times }) => {
         <TimeBoardRowHeading>
           Times
         </TimeBoardRowHeading>
-        {times.map(({ ms, id, best, date, scramble, puzzle, dnf, plus2 }, index) => (
+        {times.map((time, index) => (
           <TimeBoardRow key={index}>
             <div>
               <TimeIndex>{index + 1}.</TimeIndex>
-                <Time ms={ms} dnf={dnf} plus2={plus2}/>
+                <Time time={time}/>
                 {
-                  (best && times.length > 1) &&
+                  (time.best && times.length > 1) &&
                   <TimeInfo>
                     <BestTimeIcon><FontAwesome icon={faThumbsUp}/></BestTimeIcon>
                   </TimeInfo>
@@ -96,26 +99,17 @@ const TimeTable = ({ stats, editable = true, removeTime, times }) => {
             <div>
               <ModalContainer
                 title="Details"
-                id={'timeDetails.' + id}
+                id={'timeDetails.' + time.id}
                 toggle={openModal => (
                   <InfoIconButton onClick={openModal}>
                     <FontAwesome icon={faInfoCircle} size="sm" />
                   </InfoIconButton>
                 )}
-                content={() => (
-                  <TimeDetails
-                    puzzle={puzzle}
-                    dnf={dnf}
-                    plus2={plus2}
-                    date={date}
-                    ms={ms}
-                    scramble={scramble}
-                  />
-                )}
+                content={() => <TimeDetails time={time}/>}
               />
               {
                 editable &&
-                <RemoveItemIconButton onClick={() => removeTime(id)}>
+                <RemoveItemIconButton onClick={() => removeTime(time.id)}>
                   <FontAwesome icon={faTimes} size="sm" />
                 </RemoveItemIconButton>
               }
@@ -131,7 +125,7 @@ TimeTable.propTypes = {
   stats: PropTypes.object.isRequired,
   editable: PropTypes.bool,
   removeTime: PropTypes.func,
-  times: PropTypes.arrayOf(PropTypes.object).isRequired
+  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
 };
 
 const TimeTableContainer = styled.div`

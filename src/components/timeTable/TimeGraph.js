@@ -4,6 +4,7 @@ import { withTheme } from 'styled-components';
 import { transparentize } from 'polished';
 import { Line } from 'react-chartjs-2';
 
+import * as CustomPropTypes from '../../propTypes';
 import { getMs } from '../../helpers/time';
 
 const TimeGraph = ({ times, theme }) => {
@@ -42,7 +43,7 @@ const TimeGraph = ({ times, theme }) => {
 };
 
 TimeGraph.propTypes = {
-  times: PropTypes.arrayOf(PropTypes.object).isRequired,
+  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   theme: PropTypes.object
 }
 

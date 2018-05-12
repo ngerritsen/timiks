@@ -17,10 +17,6 @@ export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
   return scrambleGeneratorMap[type](scrambleOptions);
 }
 
-export function obfuscateScramble(scramble) {
-  return scramble.map(move => generateString(move.length, constants.SCRAMBLE_OBFUSCATION_CHAR));
-}
-
 function generateCubeScramble(scrambleOptions) {
   const { directions, length, extraLayers } = scrambleOptions;
 
@@ -96,10 +92,6 @@ function generateSquareOneScramble(scrambleOptions) {
   return generateArr(scrambleOptions.length).map(() => {
     return `${randomNumber(-6, 6)},${randomNumber(-6, 6)} /`;
   });
-}
-
-function generateString(amount, char) {
-  return generateArr(amount).reduce(string => string + char, '');
 }
 
 function getPuzzle(puzzle) {

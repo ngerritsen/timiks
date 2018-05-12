@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import * as CustomPropTypes from '../../propTypes';
 import { fillZeroes } from '../../helpers/formatting';
 import { breakUpTime, getMs } from '../../helpers/time';
 
-const Time = ({ ms, secondsOnly, dnf, plus2 }) => {
+const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
   if (dnf) {
     return monospace('DNF');
   }
@@ -34,9 +35,7 @@ function monospace(string) {
 }
 
 Time.propTypes = {
-  ms: PropTypes.number.isRequired,
-  dnf: PropTypes.bool,
-  plus2: PropTypes.bool,
+  time: CustomPropTypes.Time.isRequired,
   secondsOnly: PropTypes.bool
 };
 

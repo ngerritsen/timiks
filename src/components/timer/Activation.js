@@ -3,115 +3,83 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import FullScreenMask from './FullScreenMask';
-import { PREPARATION_STAGES } from '../../constants/app';
-import { generateArr } from '../../helpers/general';
+import PrepartionCircles from './PreparationCircles';
 import Button from '../shared/Button';
+import ManualTimeEntryExplanation from './ManualTimeEntryExplanation';
 
 const Activation = ({
-  stopped,
+  inspectionMode,
   preparationStage,
   preparing,
-  ready,
   preparingForInspection,
-  inspectionMode,
+  ready,
+  stopped,
+  submitTimeInput,
   useInspectionTime,
   useManualTimeEntry,
-  submitTimeInput,
   validTimeInput
-}) => {
-  return (
-    <div>
-      <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
-        <Button
-          big primary data-activation
-          disabled={useManualTimeEntry && !validTimeInput}
-          onClick={() => useManualTimeEntry && validTimeInput && submitTimeInput()}
-        >
-          {(() => {
-            if (useManualTimeEntry) {
-              return 'Submit';
-            }
+}) => (
+  <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
+    <Button
+      big primary data-activation
+      disabled={useManualTimeEntry && !validTimeInput}
+      onClick={() => useManualTimeEntry && validTimeInput && submitTimeInput()}
+    >
+      {(() => {
+        switch(true) {
+          case useManualTimeEntry:
+            return 'Submit';
+          case !stopped:
+            return 'Stop';
+          case preparingForInspection:
+            return 'Ready';
+          case preparing || ready:
+            return <PrepartionCircles preparationStage={preparationStage}/>
+          default:
+            return 'Start' + (useInspectionTime ? ' inspection' : '');
+        }
+      })()}
+    </Button>
 
-            if (!stopped) {
-              return 'Stop';
-            }
+    <Explain>
+      {(() => {
+        switch(true) {
+          case useManualTimeEntry:
+            return <ManualTimeEntryExplanation/>;
+          case preparingForInspection:
+            return 'Release to start inspection';
+          case preparing && ready:
+            return 'Release to start!';
+          case preparing && !ready:
+            return 'Hold on...';
+          case !stopped:
+            return <span>Click, tap or smash <Spacebar/> spacebar to stop</span>;
+          default:
+            return <span>Click, touch or press <Spacebar/> spacebar. Hold and release to start{useInspectionTime ? ' inspection' : ''}</span>;
+        }
+      })()}
+    </Explain>
 
-            if (preparingForInspection) {
-              return 'Ready';
-            }
-
-            if (preparing || ready) {
-              return generateArr(PREPARATION_STAGES)
-                .map(index =>
-                  <PrepartionCircle key={index} active={index < preparationStage} />
-                );
-            }
-
-            if (useInspectionTime && !inspectionMode) {
-              return 'Start inspection';
-            }
-
-            return 'Start';
-          })()}
-        </Button>
-
-        <Explain>
-          {(() => {
-            if (preparingForInspection) {
-              return 'Release to start inspection';
-            }
-
-            if ((preparing && ready)) {
-              return 'Release to start!';
-            }
-
-            if (preparing && !ready) {
-              return 'Hold on...';
-            }
-
-            if (!stopped) {
-              return <span>Click, tap or smash <Spacebar/> spacebar to stop</span>;
-            }
-
-            if (!preparing && !ready) {
-              return <span>Click, touch or press <Spacebar/> spacebar. Hold and release to start{useInspectionTime ? ' inspection' : ''}</span>;
-            }
-          })()}
-        </Explain>
-      </ActivationContainer>
-
-      {(!stopped || preparing || preparingForInspection || inspectionMode) && <FullScreenMask/>}
-    </div>
-  )
-};
+    {(!stopped || preparing || preparingForInspection || inspectionMode) && <FullScreenMask/>}
+  </ActivationContainer>
+);
 
 Activation.propTypes = {
-  stopped: PropTypes.bool.isRequired,
-  preparationStage: PropTypes.number.isRequired,
-  preparingForInspection: PropTypes.bool.isRequired,
-  preparing: PropTypes.bool.isRequired,
-  ready: PropTypes.bool.isRequired,
-  useInspectionTime: PropTypes.bool.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
-  useManualTimeEntry: PropTypes.bool.isRequired,
+  preparationStage: PropTypes.number.isRequired,
+  preparing: PropTypes.bool.isRequired,
+  preparingForInspection: PropTypes.bool.isRequired,
+  ready: PropTypes.bool.isRequired,
+  stopped: PropTypes.bool.isRequired,
   submitTimeInput: PropTypes.func.isRequired,
+  useInspectionTime: PropTypes.bool.isRequired,
+  useManualTimeEntry: PropTypes.bool.isRequired,
   validTimeInput: PropTypes.bool.isRequired
 };
 
 const ActivationContainer = styled.div`
   position: relative;
   z-index: ${props => props.theme.zIndices.onFullScreenMask};
-`;
-
-const PrepartionCircle = styled.span`
-  display: inline-block;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 0.6rem;
-  line-height: 1.6rem;
-  background-color: white;
-  opacity: ${props => props.active ? 1 : 0.3};
-  margin: 0 ${props => props.theme.sizes.sm};
 `;
 
 const Explain = styled.p`

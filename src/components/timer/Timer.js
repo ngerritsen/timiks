@@ -1,29 +1,22 @@
-import React from 'react'
 import PropTypes from 'prop-types';
+import React from 'react'
 import styled from 'styled-components'
 
-import { parseTimeInput } from '../../helpers/time';
+import * as CustomPropTypes from '../../propTypes';
 import ActivationContainer from '../../containers/timer/ActivationContainer';
-import Input from '../shared/Input';
-import Scramble from '../scramble/Scramble';
+import ScrambleContainer from '../../containers/timer/ScrambleContainer';
 import Section from '../shared/Section';
 import Time from '../shared/Time';
 import TimeActionsContainer from '../../containers/timer/TimeActionsContainer';
+import TimeEntryContainer from '../../containers/timer/TimeEntryContainer';
 
 const Timer = ({
-  dnf,
   inspectionMode,
-  plus2,
   preparing,
   preparingForInspection,
-  puzzle,
   ready,
-  scramble,
-  showTimeActions,
-  submitTimeInput,
+  showLastTime,
   time,
-  timeInput,
-  updateTimeInput,
   useManualTimeEntry
 }) => (
   <div>
@@ -32,24 +25,13 @@ const Timer = ({
         <TimerTime disabled={preparing && !ready}>
           {
             useManualTimeEntry &&
-            <TimeEntry
-              type="text"
-              value={timeInput}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter' && parseTimeInput(timeInput)) {
-                  submitTimeInput();
-                }
-              }}
-              onInput={e => updateTimeInput(e.target.value)}
-            />
+            <TimeEntryContainer/>
           }
           {
             !useManualTimeEntry &&
             <Time
-              ms={time}
+              time={time}
               secondsOnly={inspectionMode || preparingForInspection}
-              dnf={dnf}
-              plus2={plus2}
             />
           }
         </TimerTime>
@@ -57,18 +39,12 @@ const Timer = ({
     </Section>
     <TimeFooter>
       {
-        useManualTimeEntry &&
-        <Explanation>
-          Format: <strong>{`'`}HH:mm:ss.SSS{`'`}</strong>, for +2 add <strong>{`'`}+2{`'`}</strong> at the end, for DNF enter <strong>{`'`}dnf{`'`}</strong>.
-        </Explanation>
-      }
-      {
-        showTimeActions &&
+        showLastTime &&
         <TimeActionsContainer/>
       }
     </TimeFooter>
     <Section margin="sm">
-      <Scramble scramble={scramble} puzzle={puzzle} withDetails />
+      <ScrambleContainer />
     </Section>
     <Section margin="sm">
       <ActivationContainer/>
@@ -77,30 +53,14 @@ const Timer = ({
 );
 
 Timer.propTypes = {
-  dnf: PropTypes.bool.isRequired,
   inspectionMode: PropTypes.bool.isRequired,
-  plus2: PropTypes.bool.isRequired,
   preparing: PropTypes.bool.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,
-  puzzle: PropTypes.string.isRequired,
   ready: PropTypes.bool.isRequired,
-  scramble: PropTypes.arrayOf(PropTypes.string).isRequired,
-  showTimeActions: PropTypes.bool.isRequired,
-  submitTimeInput: PropTypes.func.isRequired,
-  time: PropTypes.number.isRequired,
-  timeInput: PropTypes.string.isRequired,
-  updateTimeInput: PropTypes.func.isRequired,
+  showLastTime: PropTypes.bool.isRequired,
+  time: CustomPropTypes.Time,
   useManualTimeEntry: PropTypes.bool.isRequired
 };
-
-const TimeEntry = Input.extend`
-  display: block;
-  font-size: 5.4rem;
-  text-align: center;
-  height: 6.2rem;
-  font-family: ${props => props.theme.font};
-  padding: ${props => props.theme.sizes.xs};
-`;
 
 const TimeFooter = styled.div`
   height: 6rem;
@@ -119,13 +79,6 @@ const TimerTimeContainer = styled.div`
   padding: 3.5rem 0 0;
   font-size: 5.4rem;
   position: relative;
-`;
-
-const Explanation = styled.span`
-  display: block;
-  font-size: 1.6rem;
-  text-align: center;
-  color: ${props => props.theme.colors.subtleFg};
 `;
 
 export default Timer
