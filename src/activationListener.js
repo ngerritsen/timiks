@@ -1,4 +1,4 @@
-import { SPACEBAR_KEYCODE } from './constants/app';
+import keycode from 'keycode';
 
 const interactiveElements = [
   'input',
@@ -137,7 +137,7 @@ function isValidTouchClickEvent(event) {
 }
 
 function isSpacebarEvent(event) {
-  return event.keyCode === SPACEBAR_KEYCODE;
+  return keycode(event.keyCode) === 'space';
 }
 
 function isValidStopEvent() {

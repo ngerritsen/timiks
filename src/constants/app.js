@@ -17,8 +17,6 @@ export const INSPECTION_TIME = 15000;
 
 export const TIMER_INTERVAL = 63;
 
-export const SPACEBAR_KEYCODE = 32;
-
 export const SCRAMBLE_OBFUSCATION_CHAR = '*';
 export const SCRAMBLE_DELIMITER = ' ';
 

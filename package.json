@@ -32,6 +32,7 @@
     "@fortawesome/react-fontawesome": "0.0.17",
     "chart.js": "^2.7.2",
     "element-closest": "^2.0.2",
+    "keycode": "^2.2.0",
     "moment": "^2.22.1",
     "moment-duration-format": "^2.2.2",
     "nosleep.js": "^0.7.0",

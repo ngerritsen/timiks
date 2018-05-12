@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/fontawesome-pro-solid';
 
+import shortcut from '../../helpers/shortcut';
 import IconButton from './IconButton';
 import { MODAL_ROOT_SELECTOR } from '../../constants/app';
 
@@ -37,7 +38,11 @@ class Modal extends React.Component {
             <ModalBox ref={el => this.modalBoxEl = el}>
               <ModalHeader>
                 <ModalTitle>{title}</ModalTitle>
-                <IconButton color="subtleFg" onClick={closeModal}>
+                <IconButton
+                  color="subtleFg"
+                  onClick={closeModal}
+                  data-shortcut={shortcut('esc', 'closeModal')}
+                >
                   <FontAwesome icon={faTimes}/>
                 </IconButton>
               </ModalHeader>
