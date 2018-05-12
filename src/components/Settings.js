@@ -34,6 +34,7 @@ const Settings = ({
                 onChange={changeActivationDuration}
                 options={ACTIVATION_DURATION_OPTIONS}
                 value={activationDuration}
+                numeric
               />
           </Section>
           <Section margin="sm">

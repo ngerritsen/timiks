@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Selector = ({ label, onChange, options, value }) => (
+const Selector = ({ label, onChange, options, value, numeric }) => (
   <span>
     <label>{label}:</label>
-    <Select value={value} onChange={event => onChange(event.target.value)}>
+    <Select value={value} onChange={event => {
+      const value = event.target.value;
+      onChange(numeric ? Number(value) : value);
+    }}>
       {options.map(({ label, value }, index) =>
         <option key={index} value={value}>
           {label}
@@ -39,8 +42,8 @@ Selector.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
   })).isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  numeric: PropTypes.bool
 };
 
 export default Selector;
