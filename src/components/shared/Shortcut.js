@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import ShortcutContext from '../../containers/ShortcutContext';
 
 class Shortcut extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.token = context.registerShortcut(props.command, props.action);
+  constructor(props) {
+    super(props);
+    const { registerShortcut, command, action } = props;
+    this.token = registerShortcut(command, action);
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    nextContext.updateShortcut(this.token, nextProps.command, nextProps.action);
+  componentWillReceiveProps(nextProps) {
+    const { updateShortcut, command, action } = nextProps;
+    updateShortcut(this.token, command, action);
   }
 
   componentWillUnmount() {
-    this.context.unregisterShortcut(this.token);
+    this.props.unregisterShortcut(this.token);
   }
 
   render() {
@@ -22,18 +25,21 @@ class Shortcut extends Component {
 }
 
 Shortcut.propTypes = {
+  registerShortcut: PropTypes.func.isRequired,
+  unregisterShortcut: PropTypes.func.isRequired,
+  updateShortcut: PropTypes.func.isRequired,
   command: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired
 }
-
-Shortcut.contextTypes = {
-  registerShortcut: PropTypes.func.isRequired,
-  unregisterShortcut: PropTypes.func.isRequired,
-  updateShortcut: PropTypes.func.isRequired
-};
 
 const ShortcutAnchor = styled.span`
   display: none;
 `;
 
-export default Shortcut;
+const WrappedShortcut = props => (
+  <ShortcutContext.Consumer>
+    {context => <Shortcut {...props} {...context} />}
+  </ShortcutContext.Consumer>
+);
+
+export default WrappedShortcut;

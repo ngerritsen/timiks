@@ -1,7 +1,9 @@
 import shortid from 'shortid';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
+
+import ShortcutContext from './ShortcutContext';
 
 class ShortcutProvider extends Component {
   constructor(...args) {
@@ -10,7 +12,7 @@ class ShortcutProvider extends Component {
     window.addEventListener('keydown', event => this._handleKeyDown(event));
   }
 
-  getChildContext() {
+  _getChildContext() {
     return {
       registerShortcut: this._registerShortcut.bind(this),
       unregisterShortcut: this._unregisterShortcut.bind(this),
@@ -55,7 +57,11 @@ class ShortcutProvider extends Component {
   }
 
   render() {
-    return this.props.children;
+    return (
+      <ShortcutContext.Provider value={this._getChildContext()}>
+        {this.props.children}
+      </ShortcutContext.Provider>
+    );
   }
 }
 
@@ -66,11 +72,5 @@ ShortcutProvider.propTypes = {
   ]).isRequired,
   keymap: PropTypes.arrayOf(PropTypes.object).isRequired
 }
-
-ShortcutProvider.childContextTypes = {
-  registerShortcut: PropTypes.func.isRequired,
-  unregisterShortcut: PropTypes.func.isRequired,
-  updateShortcut: PropTypes.func.isRequired
-};
 
 export default ShortcutProvider;
