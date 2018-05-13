@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/fontawesome-pro-solid'
 
-import shortcut from '../helpers/shortcut';
+import Shortcut from './shared/Shortcut';
 import { ACTIVATION_DURATION_OPTIONS } from '../constants/app';
 import IconButton from './shared/IconButton';
 import ModalContainer from '../containers/shared/ModalContainer';
@@ -26,8 +26,9 @@ const Settings = ({
     <ModalContainer
       title="Settings"
       id="settings"
-      toggle={openModal => (
-        <IconButton onClick={openModal} data-shortcut={shortcut(',', 'openModal', ['settings'])}>
+      toggle={(openModal) => (
+        <IconButton onClick={openModal}>
+          <Shortcut command="openSettings" action={openModal}/>
           <FontAwesome icon={faCog}/>
         </IconButton>
       )}

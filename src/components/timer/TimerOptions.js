@@ -6,6 +6,7 @@ import InlineFontawesome from '../shared/InlineFontawesome';
 import Selector from '../shared/Selector';
 import Button from '../shared/Button';
 import puzzles from '../../constants/puzzles';
+import Shortcut from '../shared/Shortcut';
 
 const TimerOptions = ({ changePuzzle, puzzle, refreshScramble }) => (
   <div>
@@ -18,6 +19,7 @@ const TimerOptions = ({ changePuzzle, puzzle, refreshScramble }) => (
     &nbsp;
     &nbsp;
     <Button tiny tag onClick={refreshScramble}>
+      <Shortcut command="refreshScramble" action={refreshScramble} />
       <InlineFontawesome fixedWidth icon={faSyncAlt}/>scramble
     </Button>
   </div>

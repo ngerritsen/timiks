@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/fontawesome-pro-solid';
 
-import shortcut from '../../helpers/shortcut';
+import Shortcut from './Shortcut';
 import IconButton from './IconButton';
 import { MODAL_ROOT_SELECTOR } from '../../constants/app';
 
@@ -30,7 +30,7 @@ class Modal extends React.Component {
 
     return (
       <span>
-      {toggle && toggle(openModal)}
+      {toggle && toggle(openModal, isOpen)}
       {
         isOpen &&
         ReactDOM.createPortal(
@@ -41,8 +41,8 @@ class Modal extends React.Component {
                 <IconButton
                   color="subtleFg"
                   onClick={closeModal}
-                  data-shortcut={shortcut('esc', 'closeModal')}
                 >
+                  <Shortcut command="closeModal" action={closeModal}/>
                   <FontAwesome icon={faTimes}/>
                 </IconButton>
               </ModalHeader>

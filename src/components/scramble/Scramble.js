@@ -10,6 +10,7 @@ import ScrambleDetails from './ScrambleDetails';
 import { isCube } from '../../helpers/puzzle';
 import Section from '../shared/Section';
 import ModalContainer from '../../containers/shared/ModalContainer';
+import Shortcut from '../shared/Shortcut';
 
 const Scramble = ({ scramble, small, withDetails, puzzle }) => (
   <div>
@@ -22,6 +23,7 @@ const Scramble = ({ scramble, small, withDetails, puzzle }) => (
             title="Scramble details"
             toggle={openModal => (
               <IconButton onClick={openModal}>
+                <Shortcut command="showScramble" action={openModal} />
                 <FontAwesome icon={faEye}/>
               </IconButton>
             )}

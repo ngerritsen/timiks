@@ -5,9 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { injectGlobal } from 'styled-components';
 
+import keymap from './constants/keymap';
 import { APP_ROOT_SELECTOR } from './constants/app';
 import AppContainer from './containers/AppContainer';
 import store from './store';
+import ShortcutProvider from './containers/ShortcutProvider';
 
 const rootEl = document.querySelector(APP_ROOT_SELECTOR);
 
@@ -29,7 +31,9 @@ injectGlobal`
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer/>
+    <ShortcutProvider keymap={keymap}>
+      <AppContainer/>
+    </ShortcutProvider>
   </Provider>,
   rootEl
 );

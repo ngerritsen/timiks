@@ -9,6 +9,7 @@ import ArchiveForm from '../archive/ArchiveForm';
 import Section from '../shared/Section';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
+import Shortcut from '../shared/Shortcut';
 
 const TimeBoardActions = ({
   inputTimesTitle,
@@ -24,6 +25,7 @@ const TimeBoardActions = ({
         showCloseButton={false}
         toggle={(openModal) => (
           <Button tiny tag onClick={openModal}>
+            <Shortcut command="archiveTimes" action={openModal} />
             <InlineFontawesome icon={faArchive} /> Archive
           </Button>
         )}
@@ -44,6 +46,7 @@ const TimeBoardActions = ({
         id="clearCurrentTimes"
         toggle={openModal => (
           <Button tiny tag danger onClick={openModal}>
+            <Shortcut command="clearTimes" action={openModal} />
             <InlineFontawesome icon={faTrash} /> Clear
           </Button>
         )}
@@ -54,7 +57,7 @@ const TimeBoardActions = ({
             </Section>
             <ButtonDuo>
               <ButtonDuoItem>
-                <Button danger onClick={() => closeModal() && clearTimes()}>Remove</Button>
+                <Button danger onClick={() => { closeModal(); clearTimes(); }}>Remove</Button>
               </ButtonDuoItem>
               <ButtonDuoItem>
                 <Button fg empty onClick={closeModal}>Cancel</Button>

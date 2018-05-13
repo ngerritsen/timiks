@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 import Button from '../shared/Button';
+import Shortcut from '../shared/Shortcut';
 
 const TimeActions = ({
   plus2,
@@ -13,11 +14,22 @@ const TimeActions = ({
 }) => (
   <StyledTimeActions>
     <TimeAction>
-      <Button tiny tag empty={!plus2} onClick={togglePlus2LastTime}>+2</Button>
+      <Shortcut command="plus2LastTime" action={togglePlus2LastTime} />
+      <Button
+        tiny tag
+        empty={!plus2}
+        onClick={togglePlus2LastTime}
+      >
+        +2
+      </Button>
     </TimeAction>
+
+    <Shortcut command="dnfLastTime" action={toggleDnfLastTime} />
     <TimeAction>
       <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>DNF</Button>
     </TimeAction>
+
+    <Shortcut command="removeLastTime" action={removeLastTime} />
     <TimeAction>
       <Button tiny tag danger onClick={removeLastTime}>Remove</Button>
     </TimeAction>

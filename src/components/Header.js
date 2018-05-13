@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom'
 
 import SettingsContainer from '../containers/SettingsContainer';
+import KeyboardShortcuts from './KeyboardShortcuts';
 
 const Header = () => (
   <HeaderBar>
@@ -10,7 +11,11 @@ const Header = () => (
     <nav>
       <StyledNavLink activeClassName="selected" exact to="/">Timer</StyledNavLink>
       <StyledNavLink activeClassName="selected" to="/archive">Archive</StyledNavLink>
+      <IconContainer>
+        <KeyboardShortcuts/>
+      </IconContainer>
       <SettingsContainer/>
+
     </nav>
   </HeaderBar>
 );
@@ -27,6 +32,10 @@ const Title = styled.h1`
   font-size: 2.6rem;
   font-weight: bold;
   z-index: ${props => props.theme.zIndices.onFullScreenMask}
+`;
+
+const IconContainer = styled.span`
+  margin-right: ${props => props.theme.sizes.sm};
 `;
 
 const StyledNavLink = styled(NavLink)`
