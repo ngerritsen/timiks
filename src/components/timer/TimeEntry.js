@@ -4,9 +4,10 @@ const TimeEntry = Input.extend`
   display: block;
   font-size: 5.4rem;
   text-align: center;
+  -webkit-appearance: none;
   height: 6.2rem;
   font-family: ${props => props.theme.font};
-  padding: ${props => props.theme.sizes.xs};
+  padding: 0 ${props => props.theme.sizes.xs};
 `;
 
 export default TimeEntry;
