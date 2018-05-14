@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "copy-static": "mkdir -p public; cp -r src/static/* public/",
-    "watch": "npm run copy-static; webpack-dev-server --host 192.168.2.9",
+    "watch": "npm run copy-static; webpack-dev-server",
     "test": "eslint src",
     "build": "npm run copy-static; NODE_ENV=production webpack",
     "precommit": "npm run test"

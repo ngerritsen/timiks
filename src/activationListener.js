@@ -1,11 +1,8 @@
 import keycode from 'keycode';
 
-const interactiveElements = [
+const inputElements = [
   'input',
-  'button:not([data-activation])',
-  'textarea',
-  'a',
-  'select'
+  'textarea'
 ];
 
 const listeners = [
@@ -74,6 +71,7 @@ function listenFor(
   const stopListener = (event) => {
     if (isValidStopEvent() && stopValidator(event)) {
       event.preventDefault();
+      event.target.blur();
 
       onStop();
     }
@@ -82,6 +80,7 @@ function listenFor(
   const initiateListener = (event) => {
     if (isValidActivationEvent(event) && initiateValidator(event)) {
       event.preventDefault();
+      event.target.blur();
 
       window.removeEventListener(initiateEvent, initiateListener);
       window.removeEventListener(stopEvent, stopListener);
@@ -96,6 +95,7 @@ function listenFor(
   const fireListener = (event) => {
     if (releaseValidator(event)) {
       event.preventDefault();
+      event.target.blur();
 
       onFire();
 
@@ -127,8 +127,8 @@ function isValidActivationEvent(event) {
     !document.querySelector('[data-stop]') &&
     !document.querySelector('[data-modal]') &&
     !event.repeat &&
-    !interactiveElements.includes(String(event.target.tagName).toLowerCase()) &&
-    !event.target.closest(interactiveElements.join(','))
+    !inputElements.includes(String(event.target.tagName).toLowerCase()) &&
+    !event.target.closest(inputElements.join(','))
   );
 }
 
