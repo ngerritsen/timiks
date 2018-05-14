@@ -11,10 +11,14 @@ import IconButton from './IconButton';
 import { MODAL_ROOT_SELECTOR } from '../../constants/app';
 
 class Modal extends React.Component {
+  constructor(...args) {
+    super(...args);
+    this.modal = React.createRef();
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.isOpen && !prevProps.isOpen) {
-      document.activeElement.blur();
-      document.querySelector(MODAL_ROOT_SELECTOR).focus();
+      this.modal.current.focus();
     }
   }
 
@@ -35,7 +39,7 @@ class Modal extends React.Component {
         isOpen &&
         ReactDOM.createPortal(
           <ModalOverlay data-modal>
-            <ModalBox ref={el => this.modalBoxEl = el}>
+            <ModalBox innerRef={this.modal} tabIndex={-1}>
               <ModalHeader>
                 <ModalTitle>{title}</ModalTitle>
                 <IconButton
@@ -89,6 +93,10 @@ const ModalBox = styled.div`
   max-width: 540px;
   max-height: calc(100vh - ${props => props.theme.sizes.sm});
   overflow: auto;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const ModalHeader = styled.div`

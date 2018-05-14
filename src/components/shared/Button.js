@@ -38,8 +38,7 @@ const Button = styled.button.attrs({
       props.empty ?
         transparentize(0.8, props.color) :
         lighten(props.disabled ? 0 : 0.03, props.color)
-    )};
-    outline: ${props => props.disabled ? 'none' : 'inherit'};
+    )}
   }
 `;
 

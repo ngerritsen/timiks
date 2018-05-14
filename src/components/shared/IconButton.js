@@ -9,7 +9,6 @@ export default styled.button`
 
   &:focus,
   &:hover {
-    outline: none;
     opacity: 1;
     cursor: pointer;
   }

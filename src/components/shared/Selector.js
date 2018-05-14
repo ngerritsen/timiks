@@ -33,11 +33,6 @@ const Select = styled.select`
   &:hover {
     cursor: pointer;
   }
-
-  &:focus {
-    outline: none;
-    border: 1px solid ${props => props.theme.colors.subtleFg};
-  }
 `;
 
 Selector.propTypes = {
