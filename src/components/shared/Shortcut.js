@@ -6,21 +6,23 @@ import ShortcutContext from '../../containers/ShortcutContext';
 class Shortcut extends Component {
   constructor(props) {
     super(props);
+
     const { registerShortcut, command, action } = props;
-    this.token = registerShortcut(command, action);
+
+    this._token = registerShortcut(command, action);
   }
 
   componentWillReceiveProps(nextProps) {
     const { updateShortcut, command, action } = nextProps;
-    updateShortcut(this.token, command, action);
+    updateShortcut(this._token, command, action);
   }
 
   componentWillUnmount() {
-    this.props.unregisterShortcut(this.token);
+    this.props.unregisterShortcut(this._token);
   }
 
   render() {
-    return <ShortcutAnchor data-shortcut={this.token} />;
+    return <ShortcutAnchor data-shortcut={this._token} />;
   }
 }
 

@@ -28,9 +28,22 @@ class ShortcutProvider extends Component {
     }
 
     this.shortcuts.forEach(shortcut => {
-      if (mapping.commands.includes(shortcut.command)) {
-        shortcut.action();
+      if (!mapping.commands.includes(shortcut.command)) {
+        return
       }
+
+      const modalEl = document.querySelector('[data-modal]');
+      const shortcutEl = document.querySelector(`[data-shortcut="${shortcut.token}"]`);
+
+      if (!shortcutEl) {
+        return;
+      }
+
+      if (modalEl && !shortcutEl.closest('[data-modal]')) {
+        return;
+      }
+
+      shortcut.action();
     });
   }
 
