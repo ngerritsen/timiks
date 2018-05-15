@@ -83,7 +83,7 @@ const TimeTable = ({ stats, editable = true, removeTime, times }) => {
       </TimeTableColumn>
       <TimeTableColumn>
         <TimeBoardRowHeading>
-          <span>Times &nbsp; <Tag>{times.length}</Tag></span>
+          <span>Times <Tag>{times.length}</Tag></span>
         </TimeBoardRowHeading>
         {times.map((time, index) => (
           <TimeBoardRow key={index}>

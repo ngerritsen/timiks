@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 const Tag = styled.span`
-  background-color: ${props => props.theme.colors[props.color || 'blue']};
+  position: relative;
+  top: -0.1rem;
+  left: ${props => props.theme.sizes.xxs};
+  background-color: ${props => props.theme.colors[props.color || 'darkGrey']};
   color: white;
-  padding: 0.2rem ${props => props.theme.sizes.xs};
+  padding: 0.15rem ${props => props.theme.sizes.xs};
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
   border-radius: 99rem;
 `;
