@@ -11,6 +11,7 @@ import ModalContainer from '../../containers/shared/ModalContainer';
 import IconButton from '../shared/IconButton';
 import TimeDetails from './TimeDetails';
 import Section from '../shared/Section';
+import Tag from '../shared/Tag';
 
 const STATS = ['ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'mo3'];
 
@@ -82,7 +83,7 @@ const TimeTable = ({ stats, editable = true, removeTime, times }) => {
       </TimeTableColumn>
       <TimeTableColumn>
         <TimeBoardRowHeading>
-          Times
+          <span>Times &nbsp; <Tag>{times.length}</Tag></span>
         </TimeBoardRowHeading>
         {times.map((time, index) => (
           <TimeBoardRow key={index}>
