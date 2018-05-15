@@ -21,8 +21,10 @@ const Activation = ({
 }) => (
   <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
     <Button
-      big primary data-activation
+      big primary
+      {...(!useManualTimeEntry ? {} : { 'data-activation': true })}
       disabled={useManualTimeEntry && !validTimeInput}
+      type="button"
       onClick={() => useManualTimeEntry && validTimeInput && submitTimeInput()}
     >
       {(() => {
