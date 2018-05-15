@@ -9,7 +9,8 @@ function mapStateToProps(state, ownProps) {
 
   return {
     times: times.markShowDetails(times.markBestTime(usedTimes), state.times.timeDetailsShown),
-    stats: times.calculateStats(usedTimes)
+    stats: times.calculateStats(usedTimes),
+    zeroBasedGraph: state.settings.zeroBasedGraph
   };
 }
 

@@ -7,7 +7,8 @@ const initialState = {
   useInspectionTime: false,
   useManualTimeEntry: false,
   theme: 'light',
-  activationDuration: DEFAULT_ACTIVATION_DURATION
+  activationDuration: DEFAULT_ACTIVATION_DURATION,
+  zeroBasedGraph: false
 };
 
 export default function settingsReducer(state = initialState, action) {
@@ -42,6 +43,11 @@ export default function settingsReducer(state = initialState, action) {
       return {
         ...state,
         activationDuration: action.activationDuration
+      }
+    case actionTypes.TOGGLE_ZERO_BASED_GRAPH:
+      return {
+        ...state,
+        zeroBasedGraph: !state.zeroBasedGraph
       }
     default:
       return state;

@@ -15,7 +15,7 @@ import Tag from '../shared/Tag';
 
 const STATS = ['ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'mo3'];
 
-const TimeTable = ({ stats, editable = true, removeTime, times }) => {
+const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }) => {
   const noDnfTimes = times.filter(time => !time.dnf);
   const showGraph = noDnfTimes.length > 1;
 
@@ -77,7 +77,7 @@ const TimeTable = ({ stats, editable = true, removeTime, times }) => {
         {
           showGraph &&
           <TimeBoardGraphRow>
-            <TimeGraph times={noDnfTimes}/>
+            <TimeGraph times={noDnfTimes} zeroBased={zeroBasedGraph}/>
           </TimeBoardGraphRow>
         }
       </TimeTableColumn>
@@ -126,6 +126,7 @@ TimeTable.propTypes = {
   stats: PropTypes.object.isRequired,
   editable: PropTypes.bool,
   removeTime: PropTypes.func,
+  zeroBasedGraph: PropTypes.bool,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
 };
 

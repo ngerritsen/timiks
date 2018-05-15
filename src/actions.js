@@ -46,6 +46,7 @@ export const loadArchive = (archive = []) => ({ type: actionTypes.LOAD_ARCHIVE, 
 // Settings
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });
 export const toggleManualTimeEntry = () => ({ type: actionTypes.TOGGLE_MANUAL_TIME_ENTRY });
+export const toggleZeroBasedGraph = () => ({ type: actionTypes.TOGGLE_ZERO_BASED_GRAPH });
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
 export const toggleInspectionTime = theme => ({ type: actionTypes.TOGGLE_INSPECTION_TIME, theme });

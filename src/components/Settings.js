@@ -13,14 +13,12 @@ import Selector from './shared/Selector';
 import Button from './shared/Button';
 
 const Settings = ({
+  settings,
   changeActivationDuration,
-  activationDuration,
   toggleInspectionTime,
-  useInspectionTime,
   changeTheme,
   toggleManualTimeEntry,
-  useManualTimeEntry,
-  theme
+  toggleZeroBasedGraph
 }) => (
   <span>
     <ModalContainer
@@ -39,7 +37,7 @@ const Settings = ({
                 label="Activation delay*"
                 onChange={changeActivationDuration}
                 options={ACTIVATION_DURATION_OPTIONS}
-                value={activationDuration}
+                value={settings.activationDuration}
                 numeric
                 fullWidth
               />
@@ -47,13 +45,19 @@ const Settings = ({
           <Section margin="sm">
             <Setting>
               <span>Manual time entry</span>
-              <Checkbox type="checkbox" onChange={toggleManualTimeEntry} checked={useManualTimeEntry}/>
+              <Checkbox type="checkbox" onChange={toggleManualTimeEntry} checked={settings.useManualTimeEntry}/>
             </Setting>
           </Section>
           <Section margin="sm">
             <Setting>
               <span>Use inspection time</span>
-              <Checkbox type="checkbox" onChange={toggleInspectionTime} checked={useInspectionTime}/>
+              <Checkbox type="checkbox" onChange={toggleInspectionTime} checked={settings.useInspectionTime}/>
+            </Setting>
+          </Section>
+          <Section margin="sm">
+            <Setting>
+              <span>Zero based graph</span>
+              <Checkbox type="checkbox" onChange={toggleZeroBasedGraph} checked={settings.zeroBasedGraph}/>
             </Setting>
           </Section>
           <Section margin="md">
@@ -61,8 +65,8 @@ const Settings = ({
               <span>Night mode</span>
               <Checkbox
                 type="checkbox"
-                onChange={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}
-                checked={theme === 'dark'}
+                onChange={() => changeTheme(settings.theme === 'dark' ? 'light' : 'dark')}
+                checked={settings.theme === 'dark'}
               />
             </Setting>
           </Section>
@@ -87,14 +91,12 @@ const Checkbox = styled.input`
 `;
 
 Settings.propTypes = {
-  activationDuration: PropTypes.number.isRequired,
+  settings: PropTypes.object.isRequired,
   changeActivationDuration: PropTypes.func.isRequired,
   toggleInspectionTime: PropTypes.func.isRequired,
   toggleManualTimeEntry: PropTypes.func.isRequired,
-  useManualTimeEntry: PropTypes.bool.isRequired,
-  useInspectionTime: PropTypes.bool.isRequired,
-  changeTheme: PropTypes.func.isRequired,
-  theme: PropTypes.string.isRequired
+  toggleZeroBasedGraph: PropTypes.func.isRequired,
+  changeTheme: PropTypes.func.isRequired
 };
 
 export default Settings;

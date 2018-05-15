@@ -4,18 +4,8 @@ import * as actions from '../actions';
 import Settings from '../components/Settings'
 
 function mapStateToProps(state) {
-  const {
-    theme,
-    useInspectionTime,
-    activationDuration,
-    useManualTimeEntry
-  } = state.settings;
-
   return {
-    theme,
-    useInspectionTime,
-    activationDuration,
-    useManualTimeEntry
+    settings: state.settings
   }
 }
 
@@ -25,6 +15,7 @@ export default connect(
     toggleInspectionTime: actions.toggleInspectionTime,
     changeTheme: actions.changeTheme,
     changeActivationDuration: actions.changeActivationDuration,
-    toggleManualTimeEntry: actions.toggleManualTimeEntry
+    toggleManualTimeEntry: actions.toggleManualTimeEntry,
+    toggleZeroBasedGraph: actions.toggleZeroBasedGraph
   }
 )(Settings);

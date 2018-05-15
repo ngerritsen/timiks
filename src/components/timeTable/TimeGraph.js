@@ -7,7 +7,7 @@ import { Line } from 'react-chartjs-2';
 import * as CustomPropTypes from '../../propTypes';
 import { getMs } from '../../helpers/time';
 
-const TimeGraph = ({ times, theme }) => {
+const TimeGraph = ({ times, theme, zeroBased }) => {
   const data = {
     labels: times.map((_, i) => i),
     datasets: [
@@ -34,7 +34,10 @@ const TimeGraph = ({ times, theme }) => {
         display: false
       }],
       yAxes: [{
-        display: false
+        display: false,
+        ticks: {
+          beginAtZero: Boolean(zeroBased)
+        }
       }]
     }
   }
@@ -44,7 +47,8 @@ const TimeGraph = ({ times, theme }) => {
 
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  theme: PropTypes.object
+  theme: PropTypes.object,
+  zeroBased: PropTypes.bool
 }
 
 export default withTheme(TimeGraph);
