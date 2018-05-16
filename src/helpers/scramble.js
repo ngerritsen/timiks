@@ -1,81 +1,90 @@
 import * as constants from '../constants/app';
 import puzzles from '../constants/puzzles';
-import { CUBE, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE, CLOCK, CUBE_OPPOSITES } from '../constants/puzzle';
-import { generateArr } from './general';
+import { CUBE, SQUARE_ONE, CLOCK, SKEWB, CUBE_OPPOSITES, DODECAHEDRON } from '../constants/puzzle';
+import scramblers from '../vendor/jsss';
 
-const scrambleGeneratorMap = {
-  [CUBE]: generateCubeScramble,
-  [CLOCK]: generateClockScamble,
-  [DODECAHEDRON]: generateDodecahedronScramble,
-  [TETRAHEDRON]: generateTetrahedronScramble,
-  [SQUARE_ONE]: generateSquareOneScramble
-}
+import { generateArr } from './general';
 
 export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
   const { scrambleOptions, type } = getPuzzle(puzzle);
+  const { jsssScrambler } = scrambleOptions;
 
-  return scrambleGeneratorMap[type](scrambleOptions);
+  if (jsssScrambler) {
+    return getJsssScramble(jsssScrambler, type);
+  }
+
+  if (type === SKEWB) {
+    return generateSkewbScramble(scrambleOptions);
+  }
+
+  if (type === CLOCK) {
+    return generateClockScamble(scrambleOptions);
+  }
+
+  return [];
 }
 
-function generateCubeScramble(scrambleOptions) {
-  const { directions, length, extraLayers } = scrambleOptions;
+function getJsssScramble(jsssScrambler, type) {
+  const result = scramblers[jsssScrambler].getRandomScramble();
+
+  const scrambleString = result.scramble_string;
+
+  if (type === CUBE) {
+    return formatJsssCubeScramble(scrambleString);
+  }
+
+  if (type === DODECAHEDRON) {
+    return formatJsssDodecahedronScramble(scrambleString);
+  }
+
+  if (type === SQUARE_ONE) {
+    return formatJsssSquareOneScramble(scrambleString);
+  }
+
+  return scrambleString.split(' ');
+}
+
+function formatJsssCubeScramble(scramble) {
+  return splitScramble(scramble, ' ')
+    .map((move) => {
+      const firstChar = Number(move.charAt(0));
+
+      if (isNaN(firstChar)) {
+        return move;
+      }
+
+      const prefix = firstChar > 2 ? move.substr(0, 2) : move.substr(1, 1);
+
+      return prefix + 'w' + move.substr(2);
+  });
+}
+
+function formatJsssDodecahedronScramble(scramble) {
+  return splitScramble(scramble.replace(/<br>/g, ' '), ' ');
+}
+
+function formatJsssSquareOneScramble(scramble) {
+  return splitScramble(scramble, '/')
+    .reduce((moves, move, index) => (
+      index === 0
+        ? [...moves, move]
+        : [...moves, '/', move]
+    ), []);
+}
+
+function generateSkewbScramble(scrambleOptions) {
+  const { directions, length } = scrambleOptions;
 
   return generateArr(length).reduce(moves => {
     const previousDirection = extractLastDirection(moves, directions);
     const relevantOpposites = CUBE_OPPOSITES.find(arr => arr.includes(previousDirection));
     const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
-    const twice = pickRandom([false, false, true]);
-    const reversed = twice ? false : randomBoolean();
-    const outerLayers = extraLayers ? randomBoolean() : false;
-    const threeOuterLayers = (outerLayers && extraLayers > 1) ? randomBoolean(): false;
+    const reversed = randomBoolean();
 
-    const move = (
-      charIf(threeOuterLayers, '3') +
-      direction +
-      charIf(outerLayers, 'w') +
-      charIf(twice, '2') +
-      charIf(reversed, `'`)
-    );
+    const move = direction + charIf(reversed, `'`);
 
     return [...moves, move];
   }, []);
-}
-
-function generateDodecahedronScramble(scrambleOptions) {
-  const { directions, endDirection, lineLength, lines } = scrambleOptions;
-
-  return generateArr(lines * lineLength).reduce((moves, index) => {
-    const isEndMove = (index + 1) % lineLength === 0;
-
-    if (isEndMove) {
-      const endMove = endDirection + charIf(randomBoolean(), `'`);
-      return [...moves, endMove]
-    }
-
-    const previousDirection = extractLastDirection(moves, directions);
-    const direction = pickRandomDirection(directions, previousDirection);
-    const move = direction + charIf(randomBoolean(), '--', '++');
-
-    return [...moves, move];
-  }, []);
-}
-
-function generateTetrahedronScramble(scrambleOptions) {
-  const { directions, length } = scrambleOptions;
-  const lowerCaseAmount = pickRandom(generateArr(directions.length).map(i => i + 1));
-  const lowerCaseDirections = pickMultipleRandom(directions, lowerCaseAmount);
-
-  const moves = generateArr(length).reduce((moves) => {
-    const previousDirection = extractLastDirection(moves, directions);
-    const move = pickRandomDirection(directions, previousDirection) + charIf(randomBoolean(), `'`);
-
-    return [...moves, move];
-  }, [])
-
-  const endMoves = lowerCaseDirections
-    .map(direction => direction.toLowerCase() + charIf(randomBoolean(), `'`))
-
-  return [...moves, ...endMoves];
 }
 
 function generateClockScamble(scrambleOptions) {
@@ -85,12 +94,6 @@ function generateClockScamble(scrambleOptions) {
     const turns = pickRandom([randomNumber(-6, -1), randomNumber(1, 6)]);
 
     return `(${pins}, ${wheel}, ${turns})`;
-  });
-}
-
-function generateSquareOneScramble(scrambleOptions) {
-  return generateArr(scrambleOptions.length).map(() => {
-    return `${randomNumber(-6, 6)},${randomNumber(-6, 6)} /`;
   });
 }
 
@@ -112,29 +115,23 @@ function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-function pickMultipleRandom(array, amount, items = []) {
-  const pickedItem = pickRandom(array);
-  const nextItems = [...items, pickedItem];
-
-  if (amount === 1) {
-    return nextItems;
-  }
-
-  const nextArray = array.filter(item => item !== pickedItem)
-
-  return pickMultipleRandom(nextArray, amount - 1, nextItems);
-}
-
-function randomNumber(min, max) {
-  return pickRandom(generateArr(max - min + 1)) + min;
-}
-
 function charIf(bool, a, b = '') {
   return bool ? a : b;
 }
 
 function getLastMove(moves) {
   return moves[moves.length - 1] || '';
+}
+
+function splitScramble(str, splitOn) {
+  return str
+    .split(splitOn)
+    .map(str => str.trim())
+    .filter(Boolean);
+}
+
+function randomNumber(min, max) {
+  return pickRandom(generateArr(max - min + 1)) + min;
 }
 
 function extractLastDirection(moves, directions) {

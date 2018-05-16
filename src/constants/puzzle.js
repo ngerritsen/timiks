@@ -10,6 +10,7 @@ export const CLOCK = 'CLOCK';
 export const SQUARE_ONE = 'SQUARE_ONE';
 export const TETRAHEDRON = 'TETRAHEDRON';
 export const DODECAHEDRON = 'DODECAHEDRON';
+export const SKEWB = 'SKEWB';
 
 export const CUBE_OPPOSITES = [[UP, DOWN], [RIGHT, LEFT], [FRONT, BACK]];
 

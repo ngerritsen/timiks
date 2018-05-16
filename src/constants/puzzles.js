@@ -1,115 +1,98 @@
-import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzle';
-import { CUBE, CLOCK, DODECAHEDRON, TETRAHEDRON, SQUARE_ONE } from '../constants/puzzle';
-
-const FULL_CUBE_DIRECTIONS = [UP, RIGHT, DOWN, LEFT, FRONT, BACK];
-const DODECAHEDRON_DIRECTIONS = [RIGHT, DOWN];
-const DODECAHEDRON_END_DIRECTION = UP;
+import * as puzzleConstants from '../constants/puzzle';
 
 const puzzles = [
   {
     name: '2x2x2',
-    type: CUBE,
+    type: puzzleConstants.CUBE,
     size: 2,
     scrambleOptions: {
-      directions: [UP, RIGHT, FRONT],
-      length: 11
+      jsssScrambler: '222'
     }
   },
   {
     name: '3x3x3',
-    type: CUBE,
+    type: puzzleConstants.CUBE,
     size: 3,
     scrambleOptions: {
-      directions: FULL_CUBE_DIRECTIONS,
-      length: 20
+      jsssScrambler: '333'
     }
   },
   {
     name: '4x4x4',
-    type: CUBE,
+    type: puzzleConstants.CUBE,
     size: 4,
     scrambleOptions: {
-      directions: FULL_CUBE_DIRECTIONS,
-      extraLayers: 1,
-      length: 45
+      jsssScrambler: '444'
     }
   },
   {
     name: '5x5x5',
-    type: CUBE,
+    type: puzzleConstants.CUBE,
     size: 5,
     scrambleOptions: {
-      directions: FULL_CUBE_DIRECTIONS,
-      extraLayers: 1,
-      length: 50
+      jsssScrambler: '555'
     }
   },
   {
     name: '6x6x6',
-    type: CUBE,
+    type: puzzleConstants.CUBE,
     size: 6,
     scrambleOptions: {
-      directions: FULL_CUBE_DIRECTIONS,
-      extraLayers: 2,
-      length: 80
+      jsssScrambler: '666'
     }
   },
   {
     name: '7x7x7',
-    type: CUBE,
+    type: puzzleConstants.CUBE,
     size: 7,
     scrambleOptions: {
-      directions: FULL_CUBE_DIRECTIONS,
-      extraLayers: 2,
-      length: 100
+      jsssScrambler: '777'
     }
   },
   {
     name: 'megaminx',
-    type: DODECAHEDRON,
+    type: puzzleConstants.DODECAHEDRON,
     scrambleOptions: {
-      directions: DODECAHEDRON_DIRECTIONS,
-      endDirection: DODECAHEDRON_END_DIRECTION,
-      lineLength: 11,
-      lines: 7
+      jsssScrambler: 'minx'
     }
   },
   {
     name: 'kilominx',
-    type: DODECAHEDRON,
+    type: puzzleConstants.DODECAHEDRON,
     scrambleOptions: {
-      directions: DODECAHEDRON_DIRECTIONS,
-      endDirection: DODECAHEDRON_END_DIRECTION,
-      lineLength: 11,
-      lines: 7
+      jsssScrambler: 'minx'
     }
   },
   {
     name: 'pyraminx',
-    type: TETRAHEDRON,
+    type: puzzleConstants.TETRAHEDRON,
     scrambleOptions: {
-      directions: [UP, RIGHT, LEFT, BACK],
-      length: 11
+      jsssScrambler: 'pyram'
     }
   },
   {
     name: 'skewb',
-    type: CUBE,
+    type: puzzleConstants.SKEWB,
     scrambleOptions: {
-      directions: [RIGHT, LEFT, FRONT, BACK],
-      length: 11
+      length: 11,
+      directions: [
+        puzzleConstants.UP,
+        puzzleConstants.BACK,
+        puzzleConstants.LEFT,
+        puzzleConstants.RIGHT
+      ]
     }
   },
   {
     name: 'square-1',
-    type: SQUARE_ONE,
+    type: puzzleConstants.SQUARE_ONE,
     scrambleOptions: {
-      length: 16
+      jsssScrambler: 'sq1'
     }
   },
   {
     name: 'clock',
-    type: CLOCK,
+    type: puzzleConstants.CLOCK,
     scrambleOptions: {
       length: 12
     }
