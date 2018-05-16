@@ -1,18 +1,19 @@
 import NoSleep from 'nosleep.js/dist/NoSleep.js';
 
-import { PREPARE_ACTIVATION, RESET_ACTIVATION, STOP_TIMER } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 
 const noSleep = new NoSleep();
 
 const noSleepMiddleware = store => next => action => {
   switch (action.type) {
-    case PREPARE_ACTIVATION:
+    case actionTypes.PREPARE_ACTIVATION:
+    case actionTypes.SKIP_PREPARATION_STAGE:
       noSleep.enable();
       break;
-    case STOP_TIMER:
+    case actionTypes.STOP_TIMER:
       noSleep.disable();
       break;
-    case RESET_ACTIVATION: {
+    case actionTypes.RESET_ACTIVATION: {
       const { stopped } = store.getState().timer;
 
       if (stopped) {
