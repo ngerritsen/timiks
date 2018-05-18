@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/fontawesome-pro-solid';
@@ -33,30 +33,30 @@ class Modal extends React.Component {
     } = this.props;
 
     return (
-      <span>
-      {toggle && toggle(openModal, isOpen)}
-      {
-        isOpen &&
-        ReactDOM.createPortal(
-          <ModalOverlay data-modal>
-            <ModalBox innerRef={this.modal} tabIndex={-1}>
-              <ModalHeader>
-                <ModalTitle>{title}</ModalTitle>
-                <IconButton
-                  color="subtleFg"
-                  onClick={closeModal}
-                >
-                  <Shortcut command="closeModal" action={closeModal}/>
-                  <FontAwesome icon={faTimes}/>
-                </IconButton>
-              </ModalHeader>
-              {content(closeModal)}
-            </ModalBox>
-          </ModalOverlay>,
-          document.querySelector(MODAL_ROOT_SELECTOR)
-        )
-      }
-      </span>
+      <Fragment>
+        {toggle && toggle(openModal, isOpen)}
+        {
+          isOpen &&
+          ReactDOM.createPortal(
+            <ModalOverlay data-modal>
+              <ModalBox innerRef={this.modal} tabIndex={-1}>
+                <ModalHeader>
+                  <ModalTitle>{title}</ModalTitle>
+                  <IconButton
+                    color="subtleFg"
+                    onClick={closeModal}
+                  >
+                    <Shortcut command="closeModal" action={closeModal}/>
+                    <FontAwesome icon={faTimes}/>
+                  </IconButton>
+                </ModalHeader>
+                {content(closeModal)}
+              </ModalBox>
+            </ModalOverlay>,
+            document.querySelector(MODAL_ROOT_SELECTOR)
+          )
+        }
+      </Fragment>
     )
   }
 }
