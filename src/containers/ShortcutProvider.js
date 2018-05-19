@@ -1,5 +1,6 @@
 import shortid from 'shortid';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
@@ -21,6 +22,10 @@ class ShortcutProvider extends Component {
   }
 
   _handleKeyDown(event) {
+    if (!this.props.stopped) {
+      return;
+    }
+
     const mapping = this.props.keymap.find(m => keycode.isEventKey(event, m.key));
 
     if (!mapping || !mapping.commands) {
@@ -83,7 +88,14 @@ ShortcutProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
-  keymap: PropTypes.arrayOf(PropTypes.object).isRequired
+  keymap: PropTypes.arrayOf(PropTypes.object).isRequired,
+  stopped: PropTypes.bool.isRequired
 }
 
-export default ShortcutProvider;
+function mapStateToProps(state) {
+  return {
+    stopped: state.timer.stopped
+  }
+}
+
+export default connect(mapStateToProps)(ShortcutProvider);
