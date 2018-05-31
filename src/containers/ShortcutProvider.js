@@ -22,7 +22,9 @@ class ShortcutProvider extends Component {
   }
 
   _handleKeyDown(event) {
-    if (!this.props.stopped) {
+    const { ctrlKey, metaKey, shiftKey, altKey } = event;
+
+    if (!this.props.stopped || ctrlKey || metaKey || shiftKey || altKey) {
       return;
     }
 
