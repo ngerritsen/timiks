@@ -26,11 +26,14 @@ function calculateAverageOf(times, amount, deviation = 1) {
     return undefined;
   }
 
-  if (times.filter(time => time.dnf).length > deviation) {
+  const relevantTimes = times.slice(-1 * amount);
+  const dnfs = relevantTimes.reduce((dnfs, time) => time.dnf ? dnfs + 1 : dnfs, 0);
+
+  if (dnfs > deviation) {
     return 'DNF';
   }
 
-  const middleTimes = times.slice(-1 * amount)
+  const middleTimes = relevantTimes
     .sort((a, b) => getMs(a) - getMs(b))
     .slice(deviation, -1 * deviation);
 
