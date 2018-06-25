@@ -3,9 +3,8 @@ node_js:
   - "8"
 before_install:
   - npm config set @fortawesome:registry https://npm.fontawesome.com/$FONTAWESOME_NPM_TOKEN
-  - npm install netlify-cli -g
 script:
   - npm run test
   - npm run build
 after_success:
-  - netlify deploy -p ./public -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN
+  - find public -type f -exec curl -3 --ftp-create-dirs -T {} ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
