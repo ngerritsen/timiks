@@ -6,7 +6,7 @@ export function calculateStats(times) {
     average: calculateAverageTime(times),
     ao5: calculateAverageOf(times, 5, 1),
     ao12: calculateAverageOf(times, 12, 1),
-    ao25: calculateAverageOf(times, 25, 1),
+    ao25: calculateAverageOf(times, 25, 2),
     ao50: calculateAverageOf(times, 50, 3),
     ao100: calculateAverageOf(times, 100, 5),
     mo3: calculateMean(times, 3)
