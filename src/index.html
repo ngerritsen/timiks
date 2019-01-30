@@ -20,6 +20,82 @@
     <link rel="manifest" href="/timiks.webmanifest">
 
     <title>Timiks - Cube timer made for speedsolvers</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      body {
+        font-family: 'Barlow', Arial, sans-serif;
+        font-size: 1.6rem;
+      }
+
+      body.is-dark {
+        background-color: #050505;
+        color: #fafafa;
+      }
+
+      .container {
+        max-width: 72rem;
+        margin: 2.4rem auto;
+        padding: 0 1.6rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2.6rem;
+        font-weight: bold;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loader {
+        display: block;
+        height: 4rem;
+        color: #4d4d4d;
+        width: 4rem;
+        margin: 20% auto 25%;
+        animation: spin 2s infinite linear;
+      }
+
+      .footer-link,
+      .footer-link:visited {
+        color: #4d4d4d;
+      }
+
+      .footer-link:hover,
+      .footer-link:focus {
+        color: #000;
+      }
+
+      .footer-link-icon-container {
+        position: relative;
+        top: 0.05rem;
+        text-decoration: none;
+        margin-right: 0.5em;
+      }
+
+      .footer-link-icon {
+        display: inline-block;
+        width: 1em;
+        font-size: 0.875em;
+        vertical-align: -0.125em;
+        height: 1em;
+      }
+    </style>
 </head>
 <body>
     <!--[if lt IE 11]>
@@ -51,77 +127,6 @@
         </center>
         </footer>
       </div>
-
-      <style>
-        * {
-          box-sizing: border-box;
-        }
-
-        html {
-          font-size: 62.5%;
-        }
-
-        body {
-          font-family: 'Barlow', Arial, sans-serif;
-          font-size: 1.6rem;
-        }
-
-        .container {
-          max-width: 72rem;
-          margin: 2.4rem auto;
-          padding: 0 1.6rem;
-        }
-
-        h1 {
-          margin: 0;
-          font-size: 2.6rem;
-          font-weight: bold;
-        }
-
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-
-        .loader {
-          display: block;
-          height: 4rem;
-          color: #4d4d4d;
-          width: 4rem;
-          margin: 20% auto 25%;
-          animation: spin 2s infinite linear;
-        }
-
-        .footer-link,
-        .footer-link:visited {
-          color: #4d4d4d;
-        }
-
-        .footer-link:hover,
-        .footer-link:focus {
-          color: #000;
-        }
-
-        .footer-link-icon-container {
-          position: relative;
-          top: 0.05rem;
-          text-decoration: none;
-          margin-right: 0.5em;
-        }
-
-        .footer-link-icon {
-          display: inline-block;
-          width: 1em;
-          font-size: 0.875em;
-          vertical-align: -0.125em;
-          height: 1em;
-        }
-      </style>
     </div>
     <div id="modal-root"></div>
     <div id="full-screen-mask"></div>
@@ -136,5 +141,12 @@
       gtag('config', 'UA-39696629-4');
     </script>
 
+  <script>
+    const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+
+    if (settings.theme === 'dark') {
+      document.body.classList.add('is-dark');
+    }
+  </script>
 </body>
 </html>

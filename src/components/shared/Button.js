@@ -36,7 +36,7 @@ const Button = styled.button.attrs({
   &:hover {
     background-color: ${props => (
       props.empty ?
-        transparentize(0.8, props.color) :
+        transparentize(0.75, props.color) :
         lighten(props.disabled ? 0 : 0.03, props.color)
     )}
   }

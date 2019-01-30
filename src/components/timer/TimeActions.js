@@ -28,8 +28,6 @@ const TimeActions = ({
     <TimeAction>
       <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>DNF</Button>
     </TimeAction>
-
-    <Shortcut command="removeLastTime" action={removeLastTime} />
     <TimeAction>
       <Button tiny tag danger onClick={removeLastTime}>Remove</Button>
     </TimeAction>

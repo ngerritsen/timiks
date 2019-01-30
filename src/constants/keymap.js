@@ -10,11 +10,6 @@ const keymap = [
     description: 'Archive the current times'
   },
   {
-    key: 'backspace',
-    commands: ['removeLastTime'],
-    description: 'Remove the last time'
-  },
-  {
     key: 'c',
     commands: ['clearTimes'],
     description: 'Clear the current times'
