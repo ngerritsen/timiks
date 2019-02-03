@@ -8,3 +8,5 @@ const script = files
   .join('\n');
 
 fs.writeFileSync('./upload.sh', script, 'utf-8');
+
+console.log('Generated upload.sh'); // eslint-disable-line no-console
