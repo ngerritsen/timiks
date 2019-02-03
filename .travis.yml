@@ -7,4 +7,4 @@ script:
   - npm run test
   - npm run build
 after_success:
-  - "curl -H 'X-Key: $UPLOAD_KEY' -H 'X-Filepath: timiks/android-icon.png' -F 'data=@public/android-icon.png' https://carehr.nl/http-upload"
+  - "curl -H 'X-Key: $UPLOAD_KEY' -H 'X-Filepath: timiks/android-icon.png' -F 'data=@public/android-icon.png' https://carehr.nl/http-upload/"
