@@ -7,4 +7,4 @@ script:
   - npm run test
   - npm run build
 after_success:
-  - find public -type f -exec curl -3 --ftp-create-dirs -T {} ftp://$FTP_USER:$FTP_PASSWORD@ftp.carehr.nl/public_html/timiks/ \;
+  - "curl -H 'X-Key: $UPLOAD_KEY' -H 'X-Filepath: timiks/android-icon.png' -F 'data=@public/android-icon.png' https://carehr.nl/http-upload";
