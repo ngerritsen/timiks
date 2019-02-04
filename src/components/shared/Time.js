@@ -12,13 +12,13 @@ const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
   }
 
   if (secondsOnly) {
-    return <span>{formatPart(Math.round(ms / 1000))}<Unit>s</Unit></span>
+    return <span>{formatPart(Math.round(ms / 1000))}</span>
   }
 
   const { minutes, seconds, milliseconds } = breakUpTime(getMs({ ms, plus2 }));
   return (
     <span>
-      {formatPart(minutes, 2)}:{formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}<Unit>m</Unit>
+      {formatPart(minutes, 2)}:{formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}
       {plus2 && <Plus2>(+2)</Plus2>}
     </span>
   );
@@ -36,7 +36,8 @@ function monospace(string) {
 
 Time.propTypes = {
   time: CustomPropTypes.Time.isRequired,
-  secondsOnly: PropTypes.bool
+  secondsOnly: PropTypes.bool,
+  showUnit: PropTypes.bool
 };
 
 const Plus2 = styled.span`
@@ -52,10 +53,6 @@ const TimeNumber = styled.span`
   display: inline-block;
   width: 0.55em;
   text-align: center;
-`;
-
-const Unit = styled.small`
-  padding-left: 0.1em;
 `;
 
 export default Time;

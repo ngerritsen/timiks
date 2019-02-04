@@ -3,64 +3,48 @@ import { getMs } from './time';
 
 export function calculateStats(times) {
   return {
-    average: calculateAverageTime(times),
-    ao5: calculateAverageOf(times, 5, 1),
-    ao12: calculateAverageOf(times, 12, 1),
-    ao25: calculateAverageOf(times, 25, 2),
-    ao50: calculateAverageOf(times, 50, 3),
-    ao100: calculateAverageOf(times, 100, 5),
-    mo3: calculateMean(times, 3)
+    ao5: calculateAveragesOf(times, 5, 1),
+    ao12: calculateAveragesOf(times, 12, 1),
+    ao25: calculateAveragesOf(times, 25, 2),
+    ao50: calculateAveragesOf(times, 50, 3),
+    ao100: calculateAveragesOf(times, 100, 5),
+    mo3: calculateAveragesOf(times, 3, 0)
   }
 }
 
-function calculateAverageTime(times) {
-  const total = times
-    .filter(time => !time.dnf)
-    .reduce((totalTimes, time) => totalTimes + getMs(time), 0);
-
-  return total / times.length;
-}
-
-function calculateAverageOf(times, amount, deviation = 1) {
+function calculateAveragesOf(times, amount, deviation = 1) {
   if (times.length < amount) {
-    return undefined;
+    return null;
   }
 
-  const relevantTimes = times.slice(-1 * amount);
-  const dnfs = relevantTimes.reduce((dnfs, time) => time.dnf ? dnfs + 1 : dnfs, 0);
+  const result = generateArr(times.length + 1 - amount)
+    .map(index => calculateAverageOf(times.slice(index, index + amount), deviation))
+
+  const best = result.reduce((total, current) =>
+      (total === current || total < current)
+        ? total
+        : current);
+
+  return {
+    current: result[result.length - 1],
+    best
+  }
+}
+
+function calculateAverageOf(times, deviation = 1) {
+  const dnfs = times.reduce((dnfs, time) => time.dnf ? dnfs + 1 : dnfs, 0);
 
   if (dnfs > deviation) {
     return 'DNF';
   }
 
-  const middleTimes = relevantTimes
+  const totalTime = times
     .sort((a, b) => getMs(a) - getMs(b))
-    .slice(deviation, -1 * deviation);
+    .slice(deviation, deviation === 0 ? undefined : (-1 * deviation))
+    .filter(time => !time.dnf)
+    .reduce((totalTimes, time) => totalTimes + getMs(time), 0);
 
-  return calculateAverageTime(middleTimes);
-}
-
-function calculateMean(times, series) {
-  if (times.length < series) {
-    return;
-  }
-
-  return generateArr(times.length - (series - 1))
-    .reduce((mean, _, index) => {
-      const chunk = times.slice(index, index + series);
-
-      if (chunk.find(time => time.dnf)) {
-        return mean;
-      }
-
-      const average = calculateAverageTime(chunk);
-
-      if (!mean) {
-        return average;
-      }
-
-      return average < mean ? average : mean;
-    }, undefined);
+  return totalTime / times.length;
 }
 
 export function markBestTime(times) {

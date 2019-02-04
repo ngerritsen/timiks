@@ -22,101 +22,143 @@ const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }
   return (
     <TimeTableContainer>
       <TimeTableColumn>
-        <TimeBoardRowHeading>
-          <div>
-            <strong>Stats</strong>
-          </div>
-          <div>
-            <ModalContainer
-              title="Stats"
-              id="statsInfo"
-              toggle={openModal => (
-                <QuestionIconButton onClick={openModal}>
-                  <FontAwesome icon={faQuestionCircle} size="sm" />
-                </QuestionIconButton>
-              )}
-              content={() => (
-                <Section margin="sm">
-                  <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
+        <Table>
+          <thead>
+            <tr>
+              <HeadingCell>
+                Stats
+              </HeadingCell>
+              <SubtleHeadingCell>
+                Current
+              </SubtleHeadingCell>
+              <SubtleHeadingCell>
+                Best
+              </SubtleHeadingCell>
+              <HeadingCell rightAlign>
+                <ModalContainer
+                  title="Stats"
+                  id="statsInfo"
+                  toggle={openModal => (
+                    <QuestionIconButton onClick={openModal}>
+                      <FontAwesome icon={faQuestionCircle} size="sm" />
+                    </QuestionIconButton>
+                  )}
+                  content={() => (
+                    <Section margin="sm">
+                      <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
 
-                  <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
+                      <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
 
-                  <p>After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve) will be shown (<strong>ao5</strong>). After that it will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.</p>
+                      <p>After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve) will be shown (<strong>ao5</strong>). After that it will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.</p>
 
-                  <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
-                </Section>
-              )}
-            />
-          </div>
-        </TimeBoardRowHeading>
-        {
-          (STATS.filter(stat => stats[stat]).length === 0 && !showGraph) &&
-          <TimeBoardRow>
-            <i>Not enough solves yet.</i>
-          </TimeBoardRow>
-        }
-        {
-          STATS
-            .filter(stat => stats[stat])
-            .map(stat => (
-              <TimeBoardRow key={stat}>
-                <div>
-                  <TimeIndex>{stat}</TimeIndex>
-                  <strong>
-                    <Time
-                      time={{
-                        ms: stats[stat] === 'DNF' ? Infinity : stats[stat],
-                        dnf: stats[stat] === 'DNF'
-                      }}
-                    />
-                  </strong>
-                </div>
-              </TimeBoardRow>
-            ))
-        }
+                      <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
+                    </Section>
+                  )}
+                />
+              </HeadingCell>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              (STATS.filter(stat => stats[stat]).length === 0 && !showGraph) &&
+              <tr>
+                <Cell colSpan="2">
+                  <i>Not enough solves yet.</i>
+                </Cell>
+              </tr>
+            }
+            {
+              STATS
+                .filter(stat => stats[stat])
+                .map(stat => {
+                  const { current, best } = stats[stat];
+
+                  return (
+                    <tr key={stat}>
+                      <Cell>
+                        <TimeIndex>{stat}</TimeIndex>
+                      </Cell>
+                      <Cell>
+                        <strong>
+                          <Time
+                            time={{
+                              ms: current === 'DNF' ? Infinity : current,
+                              dnf: current === 'DNF'
+                            }}
+                          />
+                        </strong>
+                      </Cell>
+                      <Cell colSpan="2">
+                        <strong>
+                          <Time
+                            time={{
+                              ms: best === 'DNF' ? Infinity : best,
+                              dnf: best === 'DNF'
+                            }}
+                          />
+                        </strong>
+                      </Cell>
+                    </tr>
+                  );
+                })
+            }
+          </tbody>
+        </Table>
         {
           showGraph &&
-          <TimeBoardGraphRow>
-            <TimeGraph times={noDnfTimes} zeroBased={zeroBasedGraph}/>
-          </TimeBoardGraphRow>
+          <Section margin="xs">
+            <GraphContainer>
+              <TimeGraph times={noDnfTimes} zeroBased={zeroBasedGraph}/>
+            </GraphContainer>
+          </Section>
         }
       </TimeTableColumn>
       <TimeTableColumn>
-        <TimeBoardRowHeading>
-          <span>Times <Tag>{times.length}</Tag></span>
-        </TimeBoardRowHeading>
-        {times.map((time, index) => (
-          <TimeBoardRow key={index}>
-            <div>
-              <TimeIndex>{index + 1}.</TimeIndex>
-                <Time time={time}/>
-                {
-                  (time.best && times.length > 1) &&
-                  <TimeInfo>
-                    <BestTimeIcon><FontAwesome icon={faThumbsUp}/></BestTimeIcon>
-                  </TimeInfo>
-                }
-            </div>
-            <div>
-              <ModalContainer
-                title="Details"
-                id={'timeDetails.' + time.id}
-                toggle={openModal => (
-                  <InfoIconButton onClick={openModal}>
-                    <FontAwesome icon={faInfoCircle} size="sm" />
-                  </InfoIconButton>
-                )}
-                content={() => <TimeDetails time={time}/>}
-              />
-              {
-                editable &&
-                <RemoveItemIconButton onClick={() => removeTime(time.id)}>
-                  <FontAwesome icon={faTimes} size="sm" />
-                </RemoveItemIconButton>
-              }
-            </div>
-          </TimeBoardRow>
-        ))}
+        <Table>
+          <thead>
+            <tr>
+              <HeadingCell colSpan="3">
+                Times <Tag>{times.length}</Tag>
+              </HeadingCell>
+            </tr>
+          </thead>
+          <tbody>
+            {times.map((time, index) => (
+              <tr key={index}>
+                <Cell>
+                  <TimeIndex>{index + 1}.</TimeIndex>
+                </Cell>
+                <Cell>
+                  <Time time={time}/>
+                  {
+                    (time.best && times.length > 1) &&
+                    <TimeInfo>
+                      <BestTimeIcon><FontAwesome icon={faThumbsUp}/></BestTimeIcon>
+                    </TimeInfo>
+                  }
+                </Cell>
+                <Cell rightAlign>
+                  <ModalContainer
+                    title="Details"
+                    id={'timeDetails.' + time.id}
+                    toggle={openModal => (
+                      <InfoIconButton onClick={openModal}>
+                        <FontAwesome icon={faInfoCircle} size="sm" />
+                      </InfoIconButton>
+                    )}
+                    content={() => <TimeDetails time={time}/>}
+                  />
+                  {
+                    editable &&
+                    <RemoveItemIconButton onClick={() => removeTime(time.id)}>
+                      <FontAwesome icon={faTimes} size="sm" />
+                    </RemoveItemIconButton>
+                  }
+                </Cell>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </TimeTableColumn>
     </TimeTableContainer>
   )
@@ -141,6 +183,7 @@ const TimeTableContainer = styled.div`
 
 const TimeTableColumn = styled.div`
   margin-bottom: ${props => props.theme.sizes.sm};
+  overflow: auto;
 
   &:last-child {
     margin-bottom: 0;
@@ -158,26 +201,33 @@ const TimeTableColumn = styled.div`
 }
 `;
 
-const TimeBoardRow = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
+const GraphContainer = styled.div`
+  padding-top: ${props => props.theme.sizes.sm};
   border-bottom: 1px solid ${props => props.theme.colors.grey};
-  justify-content: space-between;
-  align-items: center;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  overflow: auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+`;
+
+const Cell = styled.td`
+  text-align: ${props => props.rightAlign ? 'right' : 'left'};
+  border-bottom: 1px solid ${props => props.theme.colors.grey};
   height: 3.6rem;
 `;
 
-const TimeBoardRowHeading = TimeBoardRow.extend`
+const HeadingCell = styled.th`
+  text-align: ${props => props.rightAlign ? 'right' : 'left'};
   border-bottom: 2px solid ${props => props.theme.colors.grey};
+  height: 3.6rem;
   font-weight: bold;
 `;
 
-const TimeBoardGraphRow = TimeBoardRow.extend`
-  display: block;
-  height: auto;
-  padding-top: ${props => props.theme.sizes.xs};
-  font-weight: bold;
+const SubtleHeadingCell = HeadingCell.extend`
+  font-weight: normal;
 `;
 
 const TimeInfo = styled.small`
@@ -187,8 +237,6 @@ const TimeInfo = styled.small`
 `;
 
 const TimeIndex = styled.span`
-  display: inline-block;
-  width: 3.1em;
   color: ${props => props.theme.colors.subtleFg};
 `;
 
@@ -206,7 +254,7 @@ const QuestionIconButton = IconButton.extend`
 `;
 
 const RemoveItemIconButton = IconButton.extend`
-  margin-left: ${props => props.theme.sizes.sm};
+  margin-left: 1rem;
   color: ${props => props.theme.colors.red};
 `;
 
