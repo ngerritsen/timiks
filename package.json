@@ -8,8 +8,7 @@
     "watch": "npm run copy-static; webpack-dev-server",
     "test": "eslint src",
     "build": "npm run copy-static; NODE_ENV=production webpack",
-    "precommit": "npm run test",
-    "upload": "node ./generateUploadScript.js; sh upload.sh"
+    "precommit": "npm run test"
   },
   "repository": {
     "type": "git",

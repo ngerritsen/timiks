@@ -7,4 +7,5 @@ script:
   - npm run test
   - npm run build
 after_success:
-  - npm run upload
+  - cd public; zip ../timiks.zip *
+  - "curl -F 'data=@timiks.zip' -H 'X-Key: '$DEPLOY_KEY -H 'X-ExtractTo: timiks' https://carehr.nl/deploy/"
