@@ -44,7 +44,7 @@ function calculateAverageOf(times, deviation = 1) {
     .filter(time => !time.dnf)
     .reduce((totalTimes, time) => totalTimes + getMs(time), 0);
 
-  return totalTime / times.length;
+  return totalTime / (times.length - (deviation * 2));
 }
 
 export function markBestTime(times) {
