@@ -2,11 +2,11 @@ import * as constants from '../constants/app';
 import * as serialization from '../helpers/serialization';
 
 export function getCurrent() {
-  return getParsed(constants.CURRENT_TIMES_STORAGE_KEY, serialization.parseTimes);
+  return serialization.parseTimes(get(constants.CURRENT_TIMES_STORAGE_KEY));
 }
 
-export function getArchive() {
-  return getParsed(constants.ARCHIVED_TIMES_STORAGE_KEY, serialization.parseArchive);
+export function getArchived() {
+  return serialization.parseTimes(get(constants.ARCHIVED_TIMES_STORAGE_KEY));
 }
 
 export function storeCurrent(times) {
@@ -16,15 +16,25 @@ export function storeCurrent(times) {
   );
 }
 
-export function storeArchive(archive) {
+export function storeArchived(times) {
   localStorage.setItem(
     constants.ARCHIVED_TIMES_STORAGE_KEY,
-    JSON.stringify(serialization.serializeArchive(archive))
+    JSON.stringify(serialization.serializeTimes(times))
   );
 }
 
-function getParsed(storageKey, parser) {
+function get(storageKey) {
   const raw = localStorage.getItem(storageKey);
 
-  return raw ? parser(JSON.parse(raw)) : undefined;
+  if (!raw) {
+    return [];
+  }
+
+  const parsed = JSON.parse(raw);
+
+  if (!Array.isArray(parsed)) {
+    return [];
+  }
+  
+  return parsed;
 }

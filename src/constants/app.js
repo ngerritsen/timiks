@@ -25,14 +25,4 @@ export const DEFAULT_PUZZLE = '3x3x3';
 export const SETTINGS_STORAGE_KEY = 'settings';
 export const CURRENT_TIMES_STORAGE_KEY = 'currentTimes';
 export const ARCHIVED_TIMES_STORAGE_KEY = 'archivedTimes';
-
-export const ARCHIVE_SORT_OPTIONS = [
-  { label: 'Newest', value: 'date', reversed: true },
-  { label: 'Title', value: 'title' },
-  { label: 'ao5', value: 'ao5' },
-  { label: 'ao12', value: 'ao12' },
-  { label: 'ao25', value: 'ao25' },
-  { label: 'ao50', value: 'ao50' },
-  { label: 'ao100', value: 'ao100' },
-  { label: 'mo3', value: 'mo3' }
-];
+export const LEGACY_ARCHIVED_TIMES_STORAGE_KEY = 'legacyArchivedTimes';

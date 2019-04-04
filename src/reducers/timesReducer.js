@@ -1,7 +1,8 @@
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
-  current: []
+  current: [],
+  archived: []
 };
 
 export default function timesReducer(state = initialState, action) {
@@ -33,6 +34,12 @@ export default function timesReducer(state = initialState, action) {
           }
         })
       }
+    case actionTypes.ARCHIVE_TIMES:
+      return {
+        ...state,
+        current: [],
+        archived: [...state.current, ...state.archived]
+      }
     case actionTypes.CLEAR_TIMES:
       return {
         ...state,
@@ -41,7 +48,8 @@ export default function timesReducer(state = initialState, action) {
     case actionTypes.LOAD_TIMES:
       return {
         ...state,
-        current: action.current
+        current: action.current,
+        archived: action.archived
       };
     default:
       return state;

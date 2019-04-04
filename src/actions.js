@@ -26,22 +26,14 @@ export const saveTime = (id, ms, date, scramble, puzzle, dnf = false, plus2 = fa
   id, ms, date, scramble, puzzle, dnf, plus2
 });
 export const updateTime = (id, fields) => ({ type: actionTypes.UPDATE_TIME, id, fields });
-export const loadTimes = (current = []) => ({ type: actionTypes.LOAD_TIMES, current });
+export const loadTimes = (current = [], archived = []) => ({
+  type: actionTypes.LOAD_TIMES,
+  current,
+  archived
+});
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
-
-// Archive
-export const archiveCurrentTimes = () => ({ type: actionTypes.ARCHIVE_CURRENT_TIMES });
-export const inputTimesTitle = title => ({ type: actionTypes.INPUT_ARCHIVE_TITLE, title });
-export const archive = (id, times, puzzle) => ({ type: actionTypes.ARCHIVE, id, times, puzzle });
-export const expandArchiveItem = id => ({ type: actionTypes.EXPAND_ARCHIVE_ITEM, id });
-export const collapseArchiveItem = id => ({ type: actionTypes.COLLAPSE_ARCHIVE_ITEM, id });
-export const removeArchiveItem = id => ({ type: actionTypes.REMOVE_ARCHIVE_ITEM, id });
-export const sortArchive = sortBy => ({ type: actionTypes.SORT_ARCHIVE, sortBy });
-export const filterArchive = puzzle => ({ type: actionTypes.FILTER_ARCHIVE, puzzle });
-export const changeImportInput = value => ({ type: actionTypes.CHANGE_IMPORT_INPUT, value });
-export const importArchive = archive => ({ type: actionTypes.IMPORT_ARCHIVE, archive });
-export const loadArchive = (archive = []) => ({ type: actionTypes.LOAD_ARCHIVE, archive });
+export const archiveTimes = () => ({ type: actionTypes.ARCHIVE_TIMES });
 
 // Settings
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });

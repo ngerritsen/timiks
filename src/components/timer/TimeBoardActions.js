@@ -5,18 +5,12 @@ import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid';
 import InlineFontawesome from '../shared/InlineFontawesome';
 import Button from '../shared/Button';
 import ModalContainer from '../../containers/shared/ModalContainer';
-import ArchiveForm from '../archive/ArchiveForm';
 import Section from '../shared/Section';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 import Shortcut from '../shared/Shortcut';
 
-const TimeBoardActions = ({
-  inputTimesTitle,
-  archiveCurrentTimes,
-  clearTimes,
-  titleInput
-}) => (
+const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
   <Toolbar>
     <ToolbarItem>
       <ModalContainer
@@ -30,12 +24,19 @@ const TimeBoardActions = ({
           </Button>
         )}
         content={(closeModal) => (
-          <ArchiveForm
-            archiveCurrentTimes={() => archiveCurrentTimes() && closeModal()}
-            inputTimesTitle={inputTimesTitle}
-            titleInput={titleInput}
-            onCancel={closeModal}
-          />
+          <div>
+            <Section margin="md">
+              <p>Move the current times to the archive?</p>
+            </Section>
+            <ButtonDuo>
+              <ButtonDuoItem>
+                <Button onClick={() => { closeModal(); archiveTimes(); }}>Archive</Button>
+              </ButtonDuoItem>
+              <ButtonDuoItem>
+                <Button fg empty onClick={closeModal}>Cancel</Button>
+              </ButtonDuoItem>
+            </ButtonDuo>
+          </div>
         )}
       />
     </ToolbarItem>
@@ -71,10 +72,8 @@ const TimeBoardActions = ({
 );
 
 TimeBoardActions.propTypes = {
-  archiveCurrentTimes: PropTypes.func.isRequired,
-  clearTimes: PropTypes.func.isRequired,
-  inputTimesTitle: PropTypes.func.isRequired,
-  titleInput: PropTypes.string.isRequired
+  archiveTimes: PropTypes.func.isRequired,
+  clearTimes: PropTypes.func.isRequired
 }
 
 export default TimeBoardActions;
