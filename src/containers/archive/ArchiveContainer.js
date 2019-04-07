@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import TimeTableContainer from '../../containers/timeTable/TimeTableContainer';
+import Archive from '../../components/archive/Archive';
 
 function mapStateToProps(state) {
   return {
@@ -10,4 +10,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps
-)(TimeTableContainer);
+)(Archive);

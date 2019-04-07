@@ -16,9 +16,11 @@ const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
   }
 
   const { minutes, seconds, milliseconds } = breakUpTime(getMs({ ms, plus2 }));
+  const showMinute = minutes > 0;
+
   return (
     <span>
-      {formatPart(minutes, 2)}:{formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}
+      {showMinute && formatPart(minutes, 2)}{showMinute && ':'}{formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}
       {plus2 && <Plus2>(+2)</Plus2>}
     </span>
   );
@@ -36,8 +38,7 @@ function monospace(string) {
 
 Time.propTypes = {
   time: CustomPropTypes.Time.isRequired,
-  secondsOnly: PropTypes.bool,
-  showUnit: PropTypes.bool
+  secondsOnly: PropTypes.bool
 };
 
 const Plus2 = styled.span`
