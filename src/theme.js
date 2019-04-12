@@ -4,6 +4,7 @@ import * as puzzleColors from './constants/puzzle';
 const WHITE = '#fff';
 const BLACK = '#000';
 const BASE_SIZE = 0.8;
+const ORANGE = '#fc7f0a';
 
 const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
@@ -17,6 +18,7 @@ export const light = {
     subtleFg: lighten(0.3, BLACK),
     darkGrey: darken(0.4, WHITE),
     grey: darken(0.25, WHITE),
+    orange: ORANGE,
     primary: '#6f42c1',
     green: '#28a745',
     blue: '#0366d6',

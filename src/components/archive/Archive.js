@@ -11,14 +11,14 @@ import ModalContainer from '../../containers/shared/ModalContainer';
 import { fillZeroes } from '../../helpers/formatting';
 import Time from '../shared/Time';
 
-const Archive = ({ times }) => (
+const Archive = ({ times, ao5s, ao12s }) => (
   <div>
     <Section margin="xs">
-      <TimeGraph times={times}/>
+      <TimeGraph times={times} ao5s={ao5s} ao12s={ao12s}/>
     </Section>
     <Section>
       <TimeTiles>
-        {times.reverse().map((time, index) =>
+        {times.map((time, index) =>
           <ModalContainer
             key={index}
             title="Details"
@@ -38,7 +38,9 @@ const Archive = ({ times }) => (
 );
 
 Archive.propTypes = {
-  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
+  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
+  ao5s: PropTypes.arrayOf(PropTypes.number).isRequired,
+  ao12s: PropTypes.arrayOf(PropTypes.number).isRequired
 }
 
 const DateTag = styled.div`

@@ -27,6 +27,7 @@ function calculateAveragesOf(times, amount, deviation = 1) {
 
   return {
     current: result[result.length - 1],
+    all: result,
     best
   }
 }
