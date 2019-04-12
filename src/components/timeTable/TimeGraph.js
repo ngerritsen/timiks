@@ -7,16 +7,17 @@ import { Line } from 'react-chartjs-2';
 import * as CustomPropTypes from '../../propTypes';
 import { getMs } from '../../helpers/time';
 
-const TimeGraph = ({ times, theme, zeroBased }) => {
+const TimeGraph = ({ times, theme, zeroBased, forSession }) => {
   const data = {
-    labels: times.map((_, i) => i),
+    labels: times.map((time, i) => forSession ? i : time.date),
     datasets: [
       {
-        lineTension: 0,
+        lineTension: 0.1,
         backgroundColor: transparentize(0.7, theme.colors.blue),
         borderColor: theme.colors.blue,
         pointBackgroundColor: theme.colors.blue,
         pointHitRadius: 10,
+        pointRadius: times.length > 25 ? 1 : 3,
         data: times.map(getMs)
       }
     ]
@@ -48,7 +49,8 @@ const TimeGraph = ({ times, theme, zeroBased }) => {
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   theme: PropTypes.object,
-  zeroBased: PropTypes.bool
+  zeroBased: PropTypes.bool,
+  forSession: PropTypes.bool
 }
 
 export default withTheme(TimeGraph);

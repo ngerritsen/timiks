@@ -108,7 +108,7 @@ const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }
           showGraph &&
           <Section margin="xs">
             <GraphContainer>
-              <TimeGraph times={noDnfTimes} zeroBased={zeroBasedGraph}/>
+              <TimeGraph times={noDnfTimes} zeroBased={zeroBasedGraph} forSession/>
             </GraphContainer>
           </Section>
         }

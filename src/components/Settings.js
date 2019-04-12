@@ -73,7 +73,7 @@ const Settings = ({
           <Section margin="md">
             <i>*For how long you have to hold spacebar, mouse or touch before starting the timer.</i>
           </Section>
-          <Button onClick={closeModal}>Close</Button>
+          <Button onClick={closeModal}>Close</Button> 
         </div>
       )}
     />
