@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes, faThumbsUp, faInfoCircle, faQuestionCircle } from '@fortawesome/fontawesome-pro-solid';
 
+import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';
 import Time from '../shared/Time';
 import TimeGraph from './TimeGraph';
@@ -12,8 +13,6 @@ import IconButton from '../shared/IconButton';
 import TimeDetails from './TimeDetails';
 import Section from '../shared/Section';
 import Tag from '../shared/Tag';
-
-const STATS = ['ao5', 'ao12', 'ao25', 'ao50', 'ao100', 'mo3'];
 
 const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }) => {
   const noDnfTimes = times.filter(time => !time.dnf);
@@ -60,7 +59,7 @@ const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }
           </thead>
           <tbody>
             {
-              (STATS.filter(stat => stats[stat]).length === 0 && !showGraph) &&
+              (AVAILABLE_STATS.filter(stat => stats[stat.name]).length === 0 && !showGraph) &&
               <tr>
                 <Cell colSpan="2">
                   <i>Not enough solves yet.</i>
@@ -68,15 +67,15 @@ const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }
               </tr>
             }
             {
-              STATS
-                .filter(stat => stats[stat])
+              AVAILABLE_STATS
+                .filter(stat => stats[stat.name])
                 .map(stat => {
-                  const { current, best } = stats[stat];
+                  const { current, best } = stats[stat.name];
 
                   return (
-                    <tr key={stat}>
+                    <tr key={stat.name}>
                       <Cell>
-                        <TimeIndex>{stat}</TimeIndex>
+                        <TimeIndex>{stat.name}</TimeIndex>
                       </Cell>
                       <Cell>
                         <strong>

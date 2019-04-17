@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import { transparentize } from 'polished';
 import { Line } from 'react-chartjs-2';
+import moment from 'moment';
 
 import * as CustomPropTypes from '../../propTypes';
 import { getMs } from '../../helpers/time';
 
-const TimeGraph = ({ times, ao5s, ao12s, theme, zeroBased, forSession }) => {
-  const getLineConfig = (color, data) => ({
+import { AVAILABLE_STATS } from '../../constants/app';
+
+const TimeGraph = ({ times, stats, theme, zeroBased, forSession }) => {
+  const getLineConfig = (label, color, data) => ({
+    label,
     borderWidth: forSession ? 3 : 2,
     lineTension: 0.1,
     backgroundColor: transparentize(forSession ? 0.7 : 1, color),
@@ -21,18 +25,24 @@ const TimeGraph = ({ times, ao5s, ao12s, theme, zeroBased, forSession }) => {
   });
 
   const data = {
-    labels: times.map((time, i) => forSession ? i : time.date),
+    labels: times.map((time, i) => forSession ? i : moment(time.date).format('D/MM/YY\'')),
     datasets: [
-      getLineConfig(theme.colors.blue, times.map(getMs))
+      getLineConfig('single', theme.colors.blue, times.map(getMs))
     ]
   }
 
-  if (ao5s.length > 1) {
-    data.datasets.push(getLineConfig(theme.colors.orange, ao5s.map(ms => getMs({ ms }))));
-  }
+  if (!forSession) {
+    const statLines = AVAILABLE_STATS
+      .filter(stat => stat.name !== 'mo3' && stats[stat.name] && stats[stat.name].all.length > 1)
+      .map(stat => {
+        const times = stats[stat.name].all.map(ms => getMs({ ms }));
+        const offset = data.labels.length - times.length;
+        const paddedTimes = [...(new Array(offset)), ...times];
 
-  if (ao12s.length > 1) {
-    data.datasets.push(getLineConfig(theme.colors.red, ao12s.map(ms => getMs({ ms }))));
+        return getLineConfig(stat.name, theme.colors[stat.color], paddedTimes)
+      })
+
+    data.datasets.push(...statLines);
   }
 
   const options = {
@@ -40,7 +50,11 @@ const TimeGraph = ({ times, ao5s, ao12s, theme, zeroBased, forSession }) => {
       duration: 700
     },
     legend: {
-      display: false
+      display: !forSession,
+      labels: {
+        boxWidth: 30
+      },
+      position: 'bottom'
     },
     scales: {
       xAxes: [{
@@ -60,8 +74,7 @@ const TimeGraph = ({ times, ao5s, ao12s, theme, zeroBased, forSession }) => {
 
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  ao5s: PropTypes.arrayOf(PropTypes.number),
-  ao12s: PropTypes.arrayOf(PropTypes.number),
+  stats: PropTypes.object.isRequired,
   theme: PropTypes.object,
   zeroBased: PropTypes.bool,
   forSession: PropTypes.bool

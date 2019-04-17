@@ -5,6 +5,8 @@ const WHITE = '#fff';
 const BLACK = '#000';
 const BASE_SIZE = 0.8;
 const ORANGE = '#fc7f0a';
+const PURPLE = '#6f42c1';
+const YELLOW = '#fed330';
 
 const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
@@ -19,7 +21,9 @@ export const light = {
     darkGrey: darken(0.4, WHITE),
     grey: darken(0.25, WHITE),
     orange: ORANGE,
-    primary: '#6f42c1',
+    purple: PURPLE,
+    primary: PURPLE,
+    yellow: YELLOW,
     green: '#28a745',
     blue: '#0366d6',
     red: '#d73a49'

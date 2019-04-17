@@ -11,10 +11,10 @@ import ModalContainer from '../../containers/shared/ModalContainer';
 import { fillZeroes } from '../../helpers/formatting';
 import Time from '../shared/Time';
 
-const Archive = ({ times, ao5s, ao12s }) => (
+const Archive = ({ times, stats }) => (
   <div>
     <Section margin="xs">
-      <TimeGraph times={times} ao5s={ao5s} ao12s={ao12s}/>
+      <TimeGraph times={times} stats={stats} />
     </Section>
     <Section>
       <TimeTiles>
@@ -39,8 +39,7 @@ const Archive = ({ times, ao5s, ao12s }) => (
 
 Archive.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  ao5s: PropTypes.arrayOf(PropTypes.number).isRequired,
-  ao12s: PropTypes.arrayOf(PropTypes.number).isRequired
+  stats: PropTypes.object.isRequired
 }
 
 const DateTag = styled.div`
