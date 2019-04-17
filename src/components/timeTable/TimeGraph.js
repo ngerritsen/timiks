@@ -27,11 +27,11 @@ const TimeGraph = ({ times, ao5s, ao12s, theme, zeroBased, forSession }) => {
     ]
   }
 
-  if (ao5s && ao5s.length > 1) {
+  if (ao5s.length > 1) {
     data.datasets.push(getLineConfig(theme.colors.orange, ao5s.map(ms => getMs({ ms }))));
   }
 
-  if (ao12s && ao12s.length > 1) {
+  if (ao12s.length > 1) {
     data.datasets.push(getLineConfig(theme.colors.red, ao12s.map(ms => getMs({ ms }))));
   }
 

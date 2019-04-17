@@ -14,7 +14,7 @@ export function calculateStats(times) {
 
 function calculateAveragesOf(times, amount, deviation = 1) {
   if (times.length < amount) {
-    return null;
+    return { all: [] };
   }
 
   const result = generateArr(times.length + 1 - amount)
