@@ -9,7 +9,7 @@ export function calculateStats(times) {
     ao50: calculateAveragesOf(times, 50, 3),
     ao100: calculateAveragesOf(times, 100, 5),
     mo3: calculateAveragesOf(times, 3, 0)
-  }
+  };
 }
 
 function calculateAveragesOf(times, amount, deviation = 1) {

@@ -15,7 +15,7 @@ export const DEFAULT_ACTIVATION_DURATION = 300;
 
 export const INSPECTION_TIME = 15000;
 
-export const TIMER_INTERVAL = 63;
+export const TIMER_INTERVAL = 67;
 
 export const SCRAMBLE_OBFUSCATION_CHAR = '*';
 export const SCRAMBLE_DELIMITER = ' ';

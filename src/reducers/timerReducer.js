@@ -6,7 +6,8 @@ const initialState = {
   inspectionStartTime: 0,
   timeInput: '',
   inspectionMode: false,
-  lastTimeId: ''
+  lastTimeId: '',
+  stopTime: 0
 }
 
 export default function timerReducer(state = initialState, action) {
@@ -29,11 +30,17 @@ export default function timerReducer(state = initialState, action) {
         inspectionStartTime: action.startTime,
         inspectionMode: true
       }
-    case actionTypes.STOP_TIMER:
+    case actionTypes.SAVE_TIME:
       return {
         ...state,
         startTime: 0,
-        lastTimeId: action.lastTimeId,
+        stopTime: 0,
+        lastTimeId: action.id
+      }
+    case actionTypes.STOP_TIMER:
+      return {
+        ...state,
+        stopTime: action.stopTime,
         stopped: true
       }
     case actionTypes.RESET_TIME:
@@ -44,7 +51,6 @@ export default function timerReducer(state = initialState, action) {
     case actionTypes.SUBMIT_TIME_INPUT:
       return {
         ...state,
-        lastTimeId: action.lastTimeId,
         timeInput: ''
       }
     case actionTypes.UPDATE_TIME_INPUT:

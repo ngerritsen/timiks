@@ -3,7 +3,7 @@ import * as actionTypes from './constants/actionTypes';
 // Timer
 export const resetTime = () => ({ type: actionTypes.RESET_TIME });
 export const startTimer = startTime => ({ type: actionTypes.START_TIMER, startTime });
-export const stopTimer = () => ({ type: actionTypes.STOP_TIMER });
+export const stopTimer = stopTime => ({ type: actionTypes.STOP_TIMER, stopTime });
 export const prepareInspection = () => ({ type: actionTypes.PREPARE_INSPECTION });
 export const startInspection = startTime => ({ type: actionTypes.START_INSPECTION, startTime });
 export const failInspection = () => ({ type: actionTypes.FAIL_INSPECTION });

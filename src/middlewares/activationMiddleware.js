@@ -56,7 +56,7 @@ const activationMiddleware = store => next => {
       }
 
       if (activation.preparingForInspection) {
-        dispatch(actions.startInspection());
+        dispatch(actions.startInspection(Date.now()));
         return;
       }
 
@@ -68,17 +68,19 @@ const activationMiddleware = store => next => {
 
       if (isReady(state)) {
         clearTimeout(timeout);
-        dispatch(actions.startTimer());
+        dispatch(actions.startTimer(Date.now()));
       }
 
       dispatch(actions.resetActivation());
     },
     onStop() {
-      if (getState().timer.stopped) {
+      const { timer } = getState();
+
+      if (timer.stopped) {
         return;
       }
 
-      dispatch(actions.stopTimer());
+      dispatch(actions.stopTimer(Date.now()));
     }
   });
 

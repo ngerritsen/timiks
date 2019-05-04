@@ -14,10 +14,12 @@ const timesMiddleware = store => next => {
     const result = next(action);
 
     if (storeActions.includes(action.type)) {
-      const { times } = store.getState();
+      window.requestAnimationFrame(() => {
+        const { times } = store.getState();
 
-      timesRepository.storeCurrent(times.current);
-      timesRepository.storeArchived(times.archived);
+        timesRepository.storeCurrent(times.current);
+        timesRepository.storeArchived(times.archived);
+      });
     }
 
     return result;

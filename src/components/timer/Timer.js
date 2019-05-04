@@ -76,7 +76,7 @@ const TimerTime = styled.span`
 
 const TimerTimeContainer = styled.div`
   text-align: center;
-  padding: 3.5rem 0 0;
+  padding: 4.5rem 0 0;
   font-size: 5.4rem;
   position: relative;
 `;

@@ -54,13 +54,15 @@ class TimerContainer extends React.Component {
   }
 
   _getDisplayTime() {
-    const { lastTime, showLastTime, startTime, inspectionMode, preparingForInspection } = this.props;
+    const { lastTime, showLastTime, startTime, stopTime, inspectionMode, preparingForInspection } = this.props;
 
     switch(true) {
       case inspectionMode:
         return { ms: this.state.inspectionTime };
       case preparingForInspection:
         return { ms: INSPECTION_TIME };
+      case startTime > 0 && stopTime > 0:
+        return { ms: stopTime - startTime };
       case startTime > 0:
         return { ms: this.state.time };
       case showLastTime:
@@ -82,12 +84,13 @@ TimerContainer.propTypes = {
   preparingForInspection: PropTypes.bool.isRequired,
   showLastTime: PropTypes.bool.isRequired,
   startTime: PropTypes.number.isRequired,
+  stopTime: PropTypes.number.isRequired,
   stopped: PropTypes.bool.isRequired
 };
 
 function mapStateToProps (state) {
   const { activation, timer, settings } = state;
-  const { stopped, startTime, inspectionStartTime, inspectionMode } = timer;
+  const { stopped, startTime, inspectionStartTime, inspectionMode, stopTime } = timer;
   const { preparingForInspection, preparationStage } = activation;
   const preparing = preparationStage > -1;
 
@@ -105,6 +108,7 @@ function mapStateToProps (state) {
     ready,
     showLastTime,
     startTime,
+    stopTime,
     stopped,
     useManualTimeEntry
   }

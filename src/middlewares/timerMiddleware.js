@@ -6,13 +6,6 @@ import { parseTimeInput } from '../helpers/time';
 
 const timerMiddleware = store => next => action => {
   switch (action.type) {
-    case actionTypes.START_INSPECTION:
-    case actionTypes.START_TIMER: {
-      return next({
-        ...action,
-        startTime: Date.now()
-      });
-    }
     case actionTypes.FAIL_INSPECTION: {
       const { scramble, settings } = store.getState();
       const now = new Date();
@@ -31,11 +24,13 @@ const timerMiddleware = store => next => action => {
     }
     case actionTypes.STOP_TIMER: {
       const { timer, scramble, settings } = store.getState();
-      const now = new Date();
       const id = shortid.generate();
-      const finalTime = now.getTime() - timer.startTime;
+      const now = new Date();
+      const finalTime = action.stopTime - timer.startTime;
 
-      store.dispatch(saveTime(id, finalTime, now, scramble, settings.puzzle));
+      window.requestAnimationFrame(() => {
+        store.dispatch(saveTime(id, finalTime, now, scramble, settings.puzzle));
+      });
 
       return next({ ...action, lastTimeId: id });
     }

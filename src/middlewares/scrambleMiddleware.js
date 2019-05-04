@@ -16,7 +16,9 @@ const scrambleMiddleware = store => next => {
     const result = next(action);
 
     if (RESCRAMBLE_ON.includes(action.type)) {
-      dispatchScramble(store)
+      window.requestAnimationFrame(() => {
+        dispatchScramble(store)
+      });
     }
 
     return result;

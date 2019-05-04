@@ -17,7 +17,9 @@ const noSleepMiddleware = store => next => action => {
       const { stopped } = store.getState().timer;
 
       if (stopped) {
-        noSleep.disable();
+        window.requestAnimationFrame(() => {
+          noSleep.disable();
+        });
       }
 
       break;

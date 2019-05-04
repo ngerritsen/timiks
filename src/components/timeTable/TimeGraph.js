@@ -74,10 +74,10 @@ const TimeGraph = ({ times, stats, theme, zeroBased, forSession }) => {
 
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  stats: PropTypes.object.isRequired,
+  stats: PropTypes.object,
   theme: PropTypes.object,
   zeroBased: PropTypes.bool,
   forSession: PropTypes.bool
 }
 
-export default withTheme(TimeGraph);
+export default withTheme(React.memo(TimeGraph));
