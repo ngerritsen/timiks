@@ -46,6 +46,7 @@ export default function timerReducer(state = initialState, action) {
     case actionTypes.RESET_TIME:
       return {
         ...state,
+        stopTime: 0,
         startTime: 0
       }
     case actionTypes.SUBMIT_TIME_INPUT:

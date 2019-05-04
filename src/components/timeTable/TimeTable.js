@@ -14,7 +14,7 @@ import TimeDetails from './TimeDetails';
 import Section from '../shared/Section';
 import Tag from '../shared/Tag';
 
-const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }) => {
+const TimeTable = ({ stats, removeTime, times, zeroBasedGraph }) => {
   const noDnfTimes = times.filter(time => !time.dnf);
   const showGraph = noDnfTimes.length > 1;
 
@@ -148,7 +148,6 @@ const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }
                     content={() => <TimeDetails time={time}/>}
                   />
                   {
-                    editable &&
                     <RemoveItemIconButton onClick={() => removeTime(time.id)}>
                       <FontAwesome icon={faTimes} size="sm" />
                     </RemoveItemIconButton>
@@ -165,7 +164,6 @@ const TimeTable = ({ stats, editable = true, removeTime, times, zeroBasedGraph }
 
 TimeTable.propTypes = {
   stats: PropTypes.object.isRequired,
-  editable: PropTypes.bool,
   removeTime: PropTypes.func,
   zeroBasedGraph: PropTypes.bool,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired

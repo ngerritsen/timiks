@@ -25,14 +25,17 @@ const timerMiddleware = store => next => action => {
     case actionTypes.STOP_TIMER: {
       const { timer, scramble, settings } = store.getState();
       const id = shortid.generate();
-      const now = new Date();
-      const finalTime = action.stopTime - timer.startTime;
 
-      window.requestAnimationFrame(() => {
+      const result = next({ ...action, lastTimeId: id });
+
+      window.setTimeout(() => {
+        const now = new Date();
+        const finalTime = action.stopTime - timer.startTime;
+
         store.dispatch(saveTime(id, finalTime, now, scramble, settings.puzzle));
       });
 
-      return next({ ...action, lastTimeId: id });
+      return result;
     }
   }
 

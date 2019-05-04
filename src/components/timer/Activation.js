@@ -103,4 +103,4 @@ const Spacebar = styled.span`
   width: 4rem;
 `;
 
-export default Activation;
+export default React.memo(Activation);

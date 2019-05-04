@@ -1,6 +1,7 @@
 import { PREPARATION_STAGES, INSPECTION_TIME } from '../constants/app';
 import * as actions from '../actions';
 import { isReady, isPreparing } from '../selectors/activationSelectors';
+import { canReset } from '../selectors/timerSelectors';
 import listenForActivations from '../activationListener';
 
 const activationMiddleware = store => next => {
@@ -44,7 +45,9 @@ const activationMiddleware = store => next => {
           return;
         }
 
-        dispatch(actions.resetTime());
+        if (canReset(getState())) {
+          dispatch(actions.resetTime());
+        }
       }, activationDuration);
     },
     onFire() {

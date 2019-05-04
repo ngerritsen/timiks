@@ -81,4 +81,4 @@ const TimerTimeContainer = styled.div`
   position: relative;
 `;
 
-export default Timer
+export default Timer;

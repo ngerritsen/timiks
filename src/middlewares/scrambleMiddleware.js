@@ -16,7 +16,7 @@ const scrambleMiddleware = store => next => {
     const result = next(action);
 
     if (RESCRAMBLE_ON.includes(action.type)) {
-      window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
         dispatchScramble(store)
       });
     }

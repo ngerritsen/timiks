@@ -14,7 +14,7 @@ const timesMiddleware = store => next => {
     const result = next(action);
 
     if (storeActions.includes(action.type)) {
-      window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
         const { times } = store.getState();
 
         timesRepository.storeCurrent(times.current);
