@@ -5,13 +5,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 const config = {
-  entry: [
-    'element-closest',
-    path.join(__dirname, 'src/index.js')
-  ],
+  entry: {
+    main: [
+      'element-closest',
+      path.join(__dirname, 'src/index.js')
+    ],
+    scrambleWorker: path.join(__dirname, 'src/scrambleWorker.js')
+  },
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -25,6 +28,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      inject: false,
       hash: true
     }),
     new webpack.DefinePlugin({

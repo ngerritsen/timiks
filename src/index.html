@@ -72,7 +72,7 @@
       }
     </style>
 </head>
-<body>
+<body data-scramble-worker-path="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>">
     <!--[if lt IE 11]>
         <div style="
             text-align: center;
@@ -113,12 +113,14 @@
       gtag('config', 'UA-39696629-4');
     </script>
 
-  <script>
-    const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+    <script>
+      const settings = JSON.parse(localStorage.getItem('settings') || '{}');
 
-    if (settings.theme === 'dark') {
-      document.body.classList.add('is-dark');
-    }
-  </script>
+      if (settings.theme === 'dark') {
+        document.body.classList.add('is-dark');
+      }
+    </script>
+
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 </html>

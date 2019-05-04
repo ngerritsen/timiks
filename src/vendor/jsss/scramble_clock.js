@@ -1,3 +1,4 @@
+var window = self;
 
 "use strict";
 if (typeof scramblers === "undefined") {

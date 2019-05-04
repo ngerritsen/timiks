@@ -1,3 +1,5 @@
+var window = self;
+
 /*
 
 scramble_NNN.js
