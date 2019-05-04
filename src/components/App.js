@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+
 import React from 'react';
 import { Route } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ import ArchiveContainer from '../containers/archive/ArchiveContainer';
 import Section from './shared/Section';
 
 const App = () => (
-    <Container>
+    <div className="container">
       <Section margin="md">
         <Header/>
       </Section>
@@ -20,13 +20,7 @@ const App = () => (
       <Section margin="md">
         <Footer/>
       </Section>
-    </Container>
+    </div>
 );
-
-const Container = styled.div`
-  max-width: 72rem;
-  margin: ${props => props.theme.sizes.md} auto;
-  padding: 0 ${props => props.theme.sizes.sm};
-`;
 
 export default App;
