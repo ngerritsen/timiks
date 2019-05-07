@@ -145,7 +145,10 @@ const TimeTable = ({ stats, removeTime, times, zeroBasedGraph }) => {
                         <FontAwesome icon={faInfoCircle} size="sm" />
                       </InfoIconButton>
                     )}
-                    content={() => <TimeDetails time={time}/>}
+                    content={(close) => <TimeDetails time={time} onRemoveTime={() => {
+                      close();
+                      removeTime(time.id);
+                    }}/>}
                   />
                   {
                     <RemoveItemIconButton onClick={() => removeTime(time.id)}>

@@ -19,6 +19,7 @@ export const SET_SCRAMBLE = 'SET_SCRAMBLE';
 export const REFRESH_SCRAMBLE = 'REFRESH_SCRAMBLE';
 export const SAVE_TIME = 'SAVE_TIME';
 export const REMOVE_TIME = 'REMOVE_TIME';
+export const REMOVE_ARCHIVED_TIME = 'REMOVE_ARCHIVED_TIME';
 export const UPDATE_TIME = 'UPDATE_TIME';
 export const CLEAR_TIMES = 'CLEAR_TIMES';
 export const LOAD_TIMES = 'LOAD_TIMES';

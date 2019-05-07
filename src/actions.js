@@ -32,6 +32,7 @@ export const loadTimes = (current = [], archived = []) => ({
   archived
 });
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
+export const removeArchivedTime = id => ({ type: actionTypes.REMOVE_ARCHIVED_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
 export const archiveTimes = () => ({ type: actionTypes.ARCHIVE_TIMES });
 

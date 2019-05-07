@@ -1,8 +1,8 @@
-import { SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES } from '../constants/actionTypes';
+import { SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES, REMOVE_ARCHIVED_TIME } from '../constants/actionTypes';
 import { loadTimes } from '../actions';
 import * as timesRepository from '../repositories/timesRepository';
 
-const storeActions = [SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES];
+const storeActions = [SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES, REMOVE_ARCHIVED_TIME];
 
 const timesMiddleware = store => next => {
   const current = timesRepository.getCurrent();

@@ -20,6 +20,11 @@ export default function timesReducer(state = initialState, action) {
         ...state,
         current: state.current.filter(time => time.id !== action.id)
       };
+      case actionTypes.REMOVE_ARCHIVED_TIME:
+      return {
+        ...state,
+        archived: state.archived.filter(time => time.id !== action.id)
+      };
     case actionTypes.UPDATE_TIME:
       return {
         ...state,
