@@ -35,7 +35,7 @@
     "keycode": "^2.2.0",
     "moment": "^2.22.1",
     "moment-duration-format": "^2.2.2",
-    "nosleep.js": "^0.7.0",
+    "nosleep.js": "^0.9.0",
     "polished": "^1.9.2",
     "prop-types": "^15.6.0",
     "react": "^16.8.6",
