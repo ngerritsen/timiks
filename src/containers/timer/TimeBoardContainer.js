@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import TimeBoard from '../../components/timer/TimeBoard';
+import { hasCurrentTimes } from '../../selectors/times';
 
 const TimeBoardContainer = ({ hasTimes }) => hasTimes ? <TimeBoard/> : null;
 
@@ -12,7 +13,7 @@ TimeBoardContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    hasTimes: state.times.current.length > 0
+    hasTimes: hasCurrentTimes(state)
   };
 }
 

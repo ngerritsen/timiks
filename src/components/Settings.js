@@ -17,8 +17,7 @@ const Settings = ({
   changeActivationDuration,
   toggleInspectionTime,
   changeTheme,
-  toggleManualTimeEntry,
-  toggleZeroBasedGraph
+  toggleManualTimeEntry
 }) => (
   <span>
     <ModalContainer
@@ -52,12 +51,6 @@ const Settings = ({
             <Setting>
               <span>Use inspection time</span>
               <Checkbox type="checkbox" onChange={toggleInspectionTime} checked={settings.useInspectionTime}/>
-            </Setting>
-          </Section>
-          <Section margin="sm">
-            <Setting>
-              <span>Zero based graph</span>
-              <Checkbox type="checkbox" onChange={toggleZeroBasedGraph} checked={settings.zeroBasedGraph}/>
             </Setting>
           </Section>
           <Section margin="md">
@@ -95,8 +88,7 @@ Settings.propTypes = {
   changeActivationDuration: PropTypes.func.isRequired,
   toggleInspectionTime: PropTypes.func.isRequired,
   toggleManualTimeEntry: PropTypes.func.isRequired,
-  toggleZeroBasedGraph: PropTypes.func.isRequired,
   changeTheme: PropTypes.func.isRequired
 };
 
-export default Settings;
+export default React.memo(Settings);

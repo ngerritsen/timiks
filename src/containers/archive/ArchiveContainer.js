@@ -2,16 +2,13 @@ import { connect } from 'react-redux';
 
 import Archive from '../../components/archive/Archive';
 import { changePuzzle, removeArchivedTime } from '../../actions';
-import { calculateStats } from '../../helpers/times';
-import { getPuzzle } from '../../selectors/settingsSelector';
-import { getArchivedTimesForPuzzle } from '../../selectors/timesSelectors';
+import { getPuzzle } from '../../selectors/settings';
+import { getArchivedTimesForPuzzle, getStatsForArchivedTimesForPuzzle } from '../../selectors/times';
 
 function mapStateToProps(state) {
-  const times = getArchivedTimesForPuzzle(state);
-
   return {
-    times,
-    stats: calculateStats(times),
+    times: getArchivedTimesForPuzzle(state),
+    stats: getStatsForArchivedTimesForPuzzle(state),
     puzzle: getPuzzle(state)
   }
 }

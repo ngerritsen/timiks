@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import TimeActions from '../../components/timer/TimeActions';
 import { removeTime, updateTime } from '../../actions';
-import { getLastTime } from '../../selectors/timesSelectors';
+import { getLastTime } from '../../selectors/times';
 
 function mapStateToProps(state) {
   return { lastTime: getLastTime(state) }

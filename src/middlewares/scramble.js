@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 import { setScramble } from '../actions';
 import { generateScramble } from '../helpers/scramble';
+import { getPuzzle } from '../selectors/settings';
 
 const workerPathEl = document.querySelector('[data-scramble-worker-path]');
 const workerPath = workerPathEl.getAttribute('data-scramble-worker-path');
@@ -13,19 +14,19 @@ const RESCRAMBLE_ON = [
   actionTypes.SUBMIT_TIME_INPUT
 ];
 
-const scrambleMiddleware = store => next => {
+const scramble = store => next => {
   scrambleWorker.addEventListener('message', (event) => {
     store.dispatch(setScramble(event.data.scramble));
   });
 
-  store.dispatch(setScramble(generateScramble(store.getState().settings.puzzle)));
+  store.dispatch(setScramble(generateScramble(getPuzzle(store.getState()))));
 
   return action => {
     const result = next(action);
 
     if (RESCRAMBLE_ON.includes(action.type)) {
       scrambleWorker.postMessage({
-        puzzle: store.getState().settings.puzzle
+        puzzle: getPuzzle(store.getState())
       });
     }
 
@@ -33,4 +34,4 @@ const scrambleMiddleware = store => next => {
   }
 }
 
-export default scrambleMiddleware;
+export default scramble;

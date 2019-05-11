@@ -4,7 +4,7 @@ import * as actionTypes from '../constants/actionTypes';
 import { saveTime } from '../actions';
 import { parseTimeInput } from '../helpers/time';
 
-const timerMiddleware = store => next => action => {
+const timer = store => next => action => {
   switch (action.type) {
     case actionTypes.FAIL_INSPECTION: {
       const { scramble, settings } = store.getState();
@@ -42,4 +42,4 @@ const timerMiddleware = store => next => action => {
   return next(action);
 }
 
-export default timerMiddleware;
+export default timer;

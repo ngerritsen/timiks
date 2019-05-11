@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as CustomPropTypes from '../../propTypes';
-import { TIMER_INTERVAL, INSPECTION_TIME, PREPARATION_STAGES } from '../../constants/app';
+import { TIMER_INTERVAL, INSPECTION_TIME } from '../../constants/app';
 import { submitTimeInput, updateTimeInput } from '../../actions';
-import { getLastTime } from '../../selectors/timesSelectors';
+import { getLastTime } from '../../selectors/times';
 import Timer from '../../components/timer/Timer';
+import { shouldUseManualTimeEntry } from '../../selectors/settings';
+import { isPreparing, isPreparingForInspection, isReady } from '../../selectors/activation';
+import { isInInspectionMode } from '../../selectors/timer';
 
 class TimerContainer extends React.Component {
   constructor() {
@@ -89,22 +92,19 @@ TimerContainer.propTypes = {
 };
 
 function mapStateToProps (state) {
-  const { activation, timer, settings } = state;
-  const { stopped, startTime, inspectionStartTime, inspectionMode, stopTime } = timer;
-  const { preparingForInspection, preparationStage } = activation;
-  const preparing = preparationStage > -1;
+  const { stopped, startTime, inspectionStartTime, stopTime } = state.timer;
 
-  const ready = preparationStage === PREPARATION_STAGES;
-  const useManualTimeEntry = settings.useManualTimeEntry;
+  const ready = isReady(state);
+  const useManualTimeEntry = shouldUseManualTimeEntry(state);
   const lastTime = getLastTime(state);
   const showLastTime = startTime === 0 && !ready && !useManualTimeEntry && Boolean(lastTime);
 
   return {
-    inspectionMode,
+    inspectionMode: isInInspectionMode(state),
     inspectionStartTime,
     lastTime,
-    preparing,
-    preparingForInspection,
+    preparing: isPreparing(state),
+    preparingForInspection: isPreparingForInspection(state),
     ready,
     showLastTime,
     startTime,

@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 import { loadSettings } from '../actions';
 import * as settingsRepository from '../repositories/settingsRepository';
+import { getSettings } from '../selectors/settings';
 
 const STORE_SETTINGS_ON = [
   actionTypes.CHANGE_PUZZLE,
@@ -10,7 +11,7 @@ const STORE_SETTINGS_ON = [
   actionTypes.TOGGLE_MANUAL_TIME_ENTRY,
 ]
 
-const settingsMiddleware = store => {
+const settings = store => {
   const settings = settingsRepository.get();
 
   store.dispatch(loadSettings(settings));
@@ -19,11 +20,11 @@ const settingsMiddleware = store => {
     const result = next(action);
 
     if (STORE_SETTINGS_ON.includes(action.type)) {
-      settingsRepository.store(store.getState().settings)
+      settingsRepository.store(getSettings(store.getState()))
     }
 
     return result;
   }
 }
 
-export default settingsMiddleware;
+export default settings;

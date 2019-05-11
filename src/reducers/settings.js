@@ -7,8 +7,7 @@ const initialState = {
   useInspectionTime: false,
   useManualTimeEntry: false,
   theme: 'light',
-  activationDuration: DEFAULT_ACTIVATION_DURATION,
-  zeroBasedGraph: false
+  activationDuration: DEFAULT_ACTIVATION_DURATION
 };
 
 export default function settingsReducer(state = initialState, action) {
@@ -17,12 +16,12 @@ export default function settingsReducer(state = initialState, action) {
       return {
         ...state,
         ...action.settings
-      }
+      };
     case actionTypes.CHANGE_PUZZLE:
       return {
         ...state,
         puzzle: action.puzzle
-      }
+      };
     case actionTypes.CHANGE_THEME: {
       return {
         ...state,
@@ -33,22 +32,17 @@ export default function settingsReducer(state = initialState, action) {
       return {
         ...state,
         useManualTimeEntry: !state.useManualTimeEntry
-      }
+      };
     case actionTypes.TOGGLE_INSPECTION_TIME:
       return {
         ...state,
         useInspectionTime: !state.useInspectionTime
-      }
+      };
     case actionTypes.CHANGE_ACTIVATION_DURATION:
       return {
         ...state,
         activationDuration: action.activationDuration
-      }
-    case actionTypes.TOGGLE_ZERO_BASED_GRAPH:
-      return {
-        ...state,
-        zeroBasedGraph: !state.zeroBasedGraph
-      }
+      };
     default:
       return state;
   }

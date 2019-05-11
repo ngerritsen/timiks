@@ -31,4 +31,4 @@ TimerOptions.propTypes = {
   refreshScramble: PropTypes.func.isRequired
 };
 
-export default TimerOptions;
+export default React.memo(TimerOptions);

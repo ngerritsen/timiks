@@ -1,10 +1,11 @@
 import { SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES, REMOVE_ARCHIVED_TIME } from '../constants/actionTypes';
 import { loadTimes } from '../actions';
 import * as timesRepository from '../repositories/timesRepository';
+import { getArchivedTimes, getCurrentTimes } from '../selectors/times';
 
 const storeActions = [SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES, REMOVE_ARCHIVED_TIME];
 
-const timesMiddleware = store => next => {
+const times = store => next => {
   const current = timesRepository.getCurrent();
   const archived = timesRepository.getArchived();
 
@@ -15,10 +16,8 @@ const timesMiddleware = store => next => {
 
     if (storeActions.includes(action.type)) {
       window.setTimeout(() => {
-        const { times } = store.getState();
-
-        timesRepository.storeCurrent(times.current);
-        timesRepository.storeArchived(times.archived);
+        timesRepository.storeCurrent(getCurrentTimes(store.getState()));
+        timesRepository.storeArchived(getArchivedTimes(store.getState()));
       });
     }
 
@@ -26,4 +25,4 @@ const timesMiddleware = store => next => {
   }
 };
 
-export default timesMiddleware;
+export default times;

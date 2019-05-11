@@ -55,14 +55,3 @@ export function markBestTime(times) {
     time.ms === bestTime ? { ...time, best: true } : time
   ));
 }
-
-export function markShowDetails(times, id) {
-  return times.map(time => ({
-    ...time,
-    showDetails: time.id === id
-  }));
-}
-
-export function getFirstDate(times) {
-  return new Date(Math.min(...times.map(time => time.date.getTime())));
-}

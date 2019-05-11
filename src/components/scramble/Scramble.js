@@ -7,16 +7,15 @@ import { faEye } from '@fortawesome/fontawesome-pro-solid';
 import * as CustomPropTypes from '../../propTypes';
 import IconButton from '../shared/IconButton';
 import ScrambleDetails from './ScrambleDetails';
-import { isCube } from '../../helpers/puzzle';
 import Section from '../shared/Section';
 import ModalContainer from '../../containers/shared/ModalContainer';
 import Shortcut from '../shared/Shortcut';
 
-const Scramble = ({ scramble, small, withDetails, puzzle }) => (
+const Scramble = ({ scramble, small, withDetails, puzzle, isPuzzleCube }) => (
   <div>
     <ScrambleBox small={small}>
       {
-        (withDetails && isCube(puzzle)) &&
+        (withDetails && isPuzzleCube) &&
         <ScrambleIconButtonContainer>
           <ModalContainer
             id="scrambleDetails"
@@ -42,6 +41,7 @@ const Scramble = ({ scramble, small, withDetails, puzzle }) => (
 
 Scramble.propTypes = {
   withDetails: PropTypes.bool,
+  isPuzzleCube: PropTypes.bool,
   scramble: CustomPropTypes.Scramble,
   small: PropTypes.bool,
   puzzle: PropTypes.string
@@ -76,4 +76,4 @@ const ScrambleIconButtonContainer = styled.span`
   color: ${props => props.theme.colors.blue};
 `;
 
-export default Scramble;
+export default React.memo(Scramble);

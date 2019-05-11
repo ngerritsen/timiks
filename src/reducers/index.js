@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 
-import activationReducer from './activationReducer';
-import modalReducer from './modalReducer';
-import scrambleReducer from './scrambleReducer';
-import settingsReducer from './settingsReducer';
-import timerReducer from './timerReducer';
-import timesReducer from './timesReducer';
+import activationReducer from './activation';
+import modal from './modal';
+import scrambleReducer from './scramble';
+import settingsReducer from './settings';
+import timerReducer from './timer';
+import timesReducer from './times';
 
 export default combineReducers({
   activation: activationReducer,
-  modal: modalReducer,
+  modal: modal,
   scramble: scrambleReducer,
   settings: settingsReducer,
   timer: timerReducer,

@@ -1,10 +1,10 @@
 import { PREPARATION_STAGES, INSPECTION_TIME } from '../constants/app';
 import * as actions from '../actions';
-import { isReady, isPreparing } from '../selectors/activationSelectors';
-import { canReset } from '../selectors/timerSelectors';
+import { isReady, isPreparing } from '../selectors/activation';
+import { canReset } from '../selectors/timer';
 import listenForActivations from '../activationListener';
 
-const activationMiddleware = store => next => {
+const activation = store => next => {
   const { dispatch, getState } = store;
 
   let interval = null;
@@ -101,4 +101,4 @@ function countDown(onIncrement, duration) {
   );
 }
 
-export default activationMiddleware;
+export default activation;

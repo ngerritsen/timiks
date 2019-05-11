@@ -50,4 +50,4 @@ const Key = styled.span`
   padding: 0.15rem 0.4rem;
 `;
 
-export default KeyboardShortcuts;
+export default React.memo(KeyboardShortcuts);

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import { light, dark } from '../theme';
 import App from '../components/App';
+import { getTheme } from '../selectors/settings';
 
 class AppContainer extends React.Component {
   constructor(...args) {
@@ -55,7 +56,7 @@ function renderGlobalTheme(theme) {
 
 function mapStateToProps(state) {
   return {
-    theme: state.settings.theme
+    theme: getTheme(state)
   };
 }
 

@@ -14,7 +14,7 @@ import TimeDetails from './TimeDetails';
 import Section from '../shared/Section';
 import Tag from '../shared/Tag';
 
-const TimeTable = ({ stats, removeTime, times, zeroBasedGraph }) => {
+const TimeTable = ({ stats, removeTime, times }) => {
   const noDnfTimes = times.filter(time => !time.dnf);
   const showGraph = noDnfTimes.length > 1;
 
@@ -107,7 +107,7 @@ const TimeTable = ({ stats, removeTime, times, zeroBasedGraph }) => {
           showGraph &&
           <Section margin="xs">
             <GraphContainer>
-              <TimeGraph times={noDnfTimes} zeroBased={zeroBasedGraph} forSession/>
+              <TimeGraph times={noDnfTimes} forSession/>
             </GraphContainer>
           </Section>
         }
@@ -168,7 +168,6 @@ const TimeTable = ({ stats, removeTime, times, zeroBasedGraph }) => {
 TimeTable.propTypes = {
   stats: PropTypes.object.isRequired,
   removeTime: PropTypes.func,
-  zeroBasedGraph: PropTypes.bool,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
 };
 

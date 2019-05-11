@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { submitTimeInput, updateTimeInput } from '../../actions';
 import { parseTimeInput } from '../../helpers/time';
 import TimeEntry from '../../components/timer/TimeEntry';
+import { getTimeInput } from '../../selectors/timer';
 
 function mapStateToProps(state) {
   return {
-    timeInput: state.timer.timeInput
+    timeInput: getTimeInput(state)
   };
 }
 

@@ -4,7 +4,7 @@ const initialState = {
   current: ''
 }
 
-function modalReducer(state = initialState, action) {
+function modal(state = initialState, action) {
   switch(action.type) {
     case OPEN_MODAL:
       return {
@@ -21,4 +21,4 @@ function modalReducer(state = initialState, action) {
   }
 }
 
-export default modalReducer;
+export default modal;

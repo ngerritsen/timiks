@@ -1,15 +1,15 @@
-import activationMiddleware from './activationMiddleware';
-import noSleepMiddleware from './noSleepMiddleware';
-import settingsMiddleware from './settingsMiddleware';
-import scrambleMiddleware from './scrambleMiddleware';
-import timerMiddleware from './timerMiddleware';
-import timesMiddleware from './timesMiddleware';
+import activation from './activation';
+import noSleep from './noSleep';
+import settings from './settings';
+import scramble from './scramble';
+import timer from './timer';
+import times from './times';
 
 export default [
-  activationMiddleware,
-  noSleepMiddleware,
-  settingsMiddleware,
-  scrambleMiddleware,
-  timerMiddleware,
-  timesMiddleware
+  activation,
+  noSleep,
+  settings,
+  scramble,
+  timer,
+  times
 ];
