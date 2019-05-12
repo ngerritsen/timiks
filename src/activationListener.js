@@ -1,7 +1,5 @@
 import keycode from 'keycode';
 
-let startTime = 0;
-
 const inputElements = [
   'input',
   'textarea'
@@ -75,7 +73,6 @@ function listenFor(
       event.preventDefault();
       event.target.blur();
 
-      console.log(Date.now() - startTime);
       onStop();
     }
   }
@@ -100,7 +97,6 @@ function listenFor(
       event.preventDefault();
       event.target.blur();
 
-      startTime = Date.now();
       onFire();
 
       window.removeEventListener(fireEvent, fireListener);
