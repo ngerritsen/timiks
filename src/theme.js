@@ -4,9 +4,14 @@ import * as puzzleColors from './constants/puzzle';
 const WHITE = '#fff';
 const BLACK = '#000';
 const BASE_SIZE = 0.8;
-const ORANGE = '#fc7f0a';
+const FLUO_ORANGE = '#fca344';
 const PURPLE = '#6f42c1';
-const YELLOW = '#fed330';
+const FLUO_YELLOW = '#fff244';
+const FLUO_RED = '#fc355c';
+const LIGHT_BLUE = '#3fb8ff';
+const BLUE = '#1f93e0';
+const GREEN = '#22e24b';
+const FLUO_GREEN = '#3fff78';
 
 const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
@@ -20,21 +25,21 @@ export const light = {
     subtleFg: lighten(0.3, BLACK),
     darkGrey: darken(0.4, WHITE),
     grey: darken(0.25, WHITE),
-    orange: ORANGE,
+    orange: FLUO_ORANGE,
     purple: PURPLE,
     primary: PURPLE,
-    yellow: YELLOW,
-    green: '#28a745',
-    blue: '#0366d6',
-    red: '#d73a49'
+    yellow: FLUO_YELLOW,
+    green: GREEN,
+    blue: BLUE,
+    red: FLUO_RED
   },
   puzzleColors: {
-    [puzzleColors.WHITE]: '#fff',
-    [puzzleColors.YELLOW]: '#fff244',
-    [puzzleColors.GREEN]: '#3fff78',
-    [puzzleColors.BLUE]: '#3fb8ff',
-    [puzzleColors.RED]: '#fc355c',
-    [puzzleColors.ORANGE]: '#ff943d'
+    [puzzleColors.WHITE]: WHITE,
+    [puzzleColors.YELLOW]: FLUO_YELLOW,
+    [puzzleColors.GREEN]: FLUO_GREEN,
+    [puzzleColors.BLUE]: LIGHT_BLUE,
+    [puzzleColors.RED]: FLUO_RED,
+    [puzzleColors.ORANGE]: FLUO_ORANGE
   },
   sizes: {
     xxs: getSize(0.5),
@@ -56,13 +61,13 @@ export const dark = {
   dark: true,
   colors: {
     ...light.colors,
-    bg: lighten(0.02, BLACK),
+    bg: BLACK,
     fg: darken(0.02, WHITE),
     subtleBg: lighten(0.2, BLACK),
     subtleFg: darken(0.4, WHITE),
     darkGrey: darken(0.5, WHITE),
     grey: lighten(0.3, BLACK),
     primary: '#fc7f0a',
-    blue: lighten(0.1, '#0366d6')
+    blue: BLUE
   }
 };
