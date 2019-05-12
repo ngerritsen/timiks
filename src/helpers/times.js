@@ -1,5 +1,6 @@
 import { generateArr } from './general';
 import { getMs } from './time';
+import moment from 'moment';
 
 export function calculateStats(times) {
   return {
@@ -10,6 +11,10 @@ export function calculateStats(times) {
     ao100: calculateAveragesOf(times, 100, 5),
     mo3: calculateAveragesOf(times, 3, 0)
   };
+}
+
+export function getFormattedDay(time) {
+  return moment(time.date).format('D/MM/YYYY');
 }
 
 function calculateAveragesOf(times, amount, deviation = 1) {
@@ -39,8 +44,8 @@ function calculateAverageOf(times, deviation = 1) {
     return 'DNF';
   }
 
-  const totalTime = times
-    .sort((a, b) => getMs(a) - getMs(b))
+  const totalTime = [...times]
+    .sort((a, b) => Math.sign(getMs(a) - getMs(b)))
     .slice(deviation, deviation === 0 ? undefined : -1 * deviation)
     .filter(time => !time.dnf)
     .reduce((totalTimes, time) => totalTimes + getMs(time), 0);

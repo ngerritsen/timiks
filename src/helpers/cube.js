@@ -1,5 +1,6 @@
 import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzle';
 import { WHITE, BLUE, YELLOW, ORANGE, RED, GREEN } from '../constants/puzzle';
+import { createAscSorter } from './general';
 
 const TOP_EDGE = { axis: 'y', opposite: false };
 const RIGHT_EDGE = { axis: 'x', opposite: true };
@@ -176,7 +177,7 @@ function getRowColors(row) {
 }
 
 function sortRowBy(row, axis) {
-  return [...row].sort((a, b) => a[axis] - b[axis]);
+  return [...row].sort(createAscSorter(axis));
 }
 
 function getEdge(face, edge, offset) {

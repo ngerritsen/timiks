@@ -8,14 +8,30 @@ export function generateArr(n) {
   return arr;
 }
 
-export function sortBy(array, value) {
-  return [...array].sort((a, b) => {
-    if (a[value] < b[value]) {
+export function createAscSorter(property) {
+  return (a, b) => {
+    if (a[property] < b[property]) {
       return -1;
-    } else if (a[value] > b[value]) {
+    }
+
+    if (a[property] > b[property]) {
       return 1;
     }
 
     return 0;
-  });
+  };
+}
+
+export function createDescSorter(property) {
+  return (a, b) => {
+    if (a[property] < b[property]) {
+      return 1;
+    }
+
+    if (a[property] > b[property]) {
+      return -1;
+    }
+
+    return 0;
+  };
 }

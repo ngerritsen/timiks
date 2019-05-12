@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { darken, lighten } from 'polished';
+import moment from 'moment';
 
 import * as CustomPropTypes from '../../propTypes';
 import styled from 'styled-components';
 import TimeDetails from '../timeTable/TimeDetails';
 import TimeGraph from '../timeTable/TimeGraph';
 import Section from '../shared/Section';
-import { fillZeroes } from '../../helpers/formatting';
 import Time from '../shared/Time';
 import ArchiveOptions from './ArchiveOptions';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
 
-const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime }) => (
+const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime, timesPerDay }) => (
   <div>
     <Section margin="sm">
       <ArchiveOptions changePuzzle={changePuzzle} puzzle={puzzle} />
@@ -24,38 +24,40 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime }) => 
         <TimeGraph times={times} stats={stats} />
       </Section>
     )}
-    {times.length > 0 && (
+    {timesPerDay.length > 0 && (
       <Section>
-        <TimeTiles>
-          {times.map(time => (
-            <ToggleContent
-              key={time.id}
-              toggle={({ show }) => (
-                <TimeTile onClick={show}>
-                  <DateTag>
-                    {fillZeroes(String(time.date.getMonth()), 2)}/
-                    {fillZeroes(String(time.date.getDate()), 2)}
-                  </DateTag>
-                  <strong>
-                    <Time time={time} />
-                  </strong>
-                </TimeTile>
-              )}
-              content={({ hide }) => (
-                <Modal title="Details" onClose={hide}>
-                  <TimeDetails
-                    time={time}
-                    onClose={hide}
-                    onRemoveTime={() => {
-                      hide();
-                      removeArchivedTime(time.id);
-                    }}
-                  />
-                </Modal>
-              )}
-            />
-          ))}
-        </TimeTiles>
+        {timesPerDay.map(({ date, times }) => (
+          <div key={date.toISOString()}>
+            <h3>{moment(date).format('LL')}</h3>
+            <TimeTiles>
+              {times.map(time => (
+                <ToggleContent
+                  key={time.id}
+                  toggle={({ show }) => (
+                    <TimeTile onClick={show}>
+                      <strong>
+                        <Time time={time} />
+                      </strong>
+                      <DateTag>{moment(time.date).format('LT')}</DateTag>
+                    </TimeTile>
+                  )}
+                  content={({ hide }) => (
+                    <Modal title="Details" onClose={hide}>
+                      <TimeDetails
+                        time={time}
+                        onClose={hide}
+                        onRemoveTime={() => {
+                          hide();
+                          removeArchivedTime(time.id);
+                        }}
+                      />
+                    </Modal>
+                  )}
+                />
+              ))}
+            </TimeTiles>
+          </div>
+        ))}
       </Section>
     )}
   </div>
@@ -63,6 +65,12 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime }) => 
 
 Archive.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
+  timesPerDay: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.instanceOf(Date),
+      times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
+    })
+  ).isRequired,
   stats: PropTypes.object.isRequired,
   changePuzzle: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
@@ -77,10 +85,9 @@ const Message = styled.p`
 `;
 
 const DateTag = styled.div`
-  position: absolute;
-  top: ${props => props.theme.sizes.xs};
-  left: ${props => props.theme.sizes.xs};
-  font-size: 0.8em;
+  font-size: 0.7em;
+  opacity: 0.7;
+  margin-top: 0.4rem;
 `;
 
 const TimeTiles = styled.div`
@@ -98,7 +105,7 @@ const TimeTile = styled.div`
   position: relative;
   text-align: center;
   border: 1px solid ${props => props.theme.colors.grey};
-  padding: ${props => props.theme.sizes.md} ${props => props.theme.sizes.sm};
+  padding: ${props => props.theme.sizes.sm} ${props => props.theme.sizes.sm};
   border-radius: 3px;
   cursor: pointer;
 
