@@ -25,17 +25,12 @@ const timer = store => next => action => {
     case actionTypes.STOP_TIMER: {
       const { timer, scramble, settings } = store.getState();
       const id = shortid.generate();
+      const now = new Date();
+      const finalTime = action.stopTime - timer.startTime;
 
-      const result = next({ ...action, lastTimeId: id });
+      store.dispatch(saveTime(id, finalTime, now, scramble, settings.puzzle));
 
-      window.setTimeout(() => {
-        const now = new Date();
-        const finalTime = action.stopTime - timer.startTime;
-
-        store.dispatch(saveTime(id, finalTime, now, scramble, settings.puzzle));
-      });
-
-      return result;
+      return next({ ...action, lastTimeId: id });
     }
   }
 

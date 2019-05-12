@@ -2,23 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import {
-  faTimes,
-  faThumbsUp,
-  faInfoCircle,
-  faQuestionCircle
-} from '@fortawesome/fontawesome-pro-solid';
+import { faQuestionCircle } from '@fortawesome/fontawesome-pro-solid';
 
 import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';
-import Time from '../shared/Time';
 import TimeGraph from './TimeGraph';
 import ToggleContent from '../ToggleContent';
 import IconButton from '../shared/IconButton';
-import TimeDetails from './TimeDetails';
 import Section from '../shared/Section';
 import Tag from '../shared/Tag';
 import Modal from '../shared/Modal';
+import TimeTableTimeRow from './TimeTableTimeRow';
+import { Cell, Tables } from '../shared/Tables';
+import TimeTableStatRow from './TimeTableStatRow';
 
 const TimeTable = ({ stats, removeTime, times }) => {
   const noDnfTimes = times.filter(time => !time.dnf);
@@ -27,7 +23,7 @@ const TimeTable = ({ stats, removeTime, times }) => {
   return (
     <TimeTableContainer>
       <TimeTableColumn>
-        <Table>
+        <Tables>
           <thead>
             <tr>
               <HeadingCell>Stats</HeadingCell>
@@ -79,37 +75,12 @@ const TimeTable = ({ stats, removeTime, times }) => {
             )}
             {AVAILABLE_STATS.filter(stat => stats[stat.name]).map(stat => {
               const { current, best } = stats[stat.name];
-
               return (
-                <tr key={stat.name}>
-                  <Cell>
-                    <TimeIndex>{stat.name}</TimeIndex>
-                  </Cell>
-                  <Cell>
-                    <strong>
-                      <Time
-                        time={{
-                          ms: current === 'DNF' ? Infinity : current,
-                          dnf: current === 'DNF'
-                        }}
-                      />
-                    </strong>
-                  </Cell>
-                  <Cell colSpan="2">
-                    <strong>
-                      <Time
-                        time={{
-                          ms: best === 'DNF' ? Infinity : best,
-                          dnf: best === 'DNF'
-                        }}
-                      />
-                    </strong>
-                  </Cell>
-                </tr>
+                <TimeTableStatRow key={stat.name} name={stat.name} current={current} best={best} />
               );
             })}
           </tbody>
-        </Table>
+        </Tables>
         {showGraph && (
           <Section margin="xs">
             <GraphContainer>
@@ -119,7 +90,7 @@ const TimeTable = ({ stats, removeTime, times }) => {
         )}
       </TimeTableColumn>
       <TimeTableColumn>
-        <Table>
+        <Tables>
           <thead>
             <tr>
               <HeadingCell colSpan="3">
@@ -129,48 +100,10 @@ const TimeTable = ({ stats, removeTime, times }) => {
           </thead>
           <tbody>
             {times.map((time, index) => (
-              <tr key={index}>
-                <Cell>
-                  <TimeIndex>{index + 1}.</TimeIndex>
-                </Cell>
-                <Cell>
-                  <Time time={time} />
-                  {time.best && times.length > 1 && (
-                    <TimeInfo>
-                      <BestTimeIcon>
-                        <FontAwesome icon={faThumbsUp} />
-                      </BestTimeIcon>
-                    </TimeInfo>
-                  )}
-                </Cell>
-                <Cell rightAlign>
-                  <ToggleContent
-                    toggle={({ show }) => (
-                      <InfoIconButton onClick={show}>
-                        <FontAwesome icon={faInfoCircle} size="sm" />
-                      </InfoIconButton>
-                    )}
-                    content={({ hide }) => (
-                      <Modal title="Details" onClose={hide}>
-                        <TimeDetails
-                          time={time}
-                          onClose={hide}
-                          onRemoveTime={() => {
-                            hide();
-                            removeTime(time.id);
-                          }}
-                        />
-                      </Modal>
-                    )}
-                  />
-                  <RemoveItemIconButton onClick={() => removeTime(time.id)}>
-                    <FontAwesome icon={faTimes} size="sm" />
-                  </RemoveItemIconButton>
-                </Cell>
-              </tr>
+              <TimeTableTimeRow key={time.id} time={time} index={index} removeTime={removeTime} />
             ))}
           </tbody>
-        </Table>
+        </Tables>
       </TimeTableColumn>
     </TimeTableContainer>
   );
@@ -216,19 +149,6 @@ const GraphContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.grey};
 `;
 
-const Table = styled.table`
-  width: 100%;
-  overflow: auto;
-  border-spacing: 0;
-  border-collapse: collapse;
-`;
-
-const Cell = styled.td`
-  text-align: ${props => (props.rightAlign ? 'right' : 'left')};
-  border-bottom: 1px solid ${props => props.theme.colors.grey};
-  height: 3.6rem;
-`;
-
 const HeadingCell = styled.th`
   text-align: ${props => (props.rightAlign ? 'right' : 'left')};
   border-bottom: 2px solid ${props => props.theme.colors.grey};
@@ -240,32 +160,9 @@ const SubtleHeadingCell = HeadingCell.extend`
   font-weight: normal;
 `;
 
-const TimeInfo = styled.small`
-  padding-left: ${props => props.theme.sizes.xs};
-  color: ${props => props.theme.colors.subtleFg};
-  font-size: 1.5rem;
-`;
-
-const TimeIndex = styled.span`
-  color: ${props => props.theme.colors.subtleFg};
-`;
-
-const BestTimeIcon = styled.span`
-  color: ${props => props.theme.colors.green};
-`;
-
-const InfoIconButton = IconButton.extend`
-  color: ${props => props.theme.colors.blue};
-`;
-
 const QuestionIconButton = IconButton.extend`
   color: ${props => props.theme.colors.blue};
   margin-left: ${props => props.theme.sizes.xs};
-`;
-
-const RemoveItemIconButton = IconButton.extend`
-  margin-left: 1rem;
-  color: ${props => props.theme.colors.red};
 `;
 
 export default React.memo(TimeTable);

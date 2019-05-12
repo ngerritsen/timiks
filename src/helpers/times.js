@@ -49,6 +49,10 @@ function calculateAverageOf(times, deviation = 1) {
 }
 
 export function markBestTime(times) {
+  if (times.length < 2) {
+    return times;
+  }
+
   const bestTime = Math.min(...times.map(time => getMs(time)));
 
   return times.map(time => (time.ms === bestTime ? { ...time, best: true } : time));

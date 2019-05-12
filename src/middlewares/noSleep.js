@@ -16,9 +16,7 @@ const noSleep = store => next => action => {
       break;
     case actionTypes.RESET_ACTIVATION: {
       if (isStopped(store.getState())) {
-        window.setTimeout(() => {
-          noSleepInstance.disable();
-        });
+        noSleepInstance.disable();
       }
 
       break;
