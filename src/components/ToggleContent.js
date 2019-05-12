@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const ToggleContent = ({ toggle, content }) => {
@@ -7,10 +7,10 @@ const ToggleContent = ({ toggle, content }) => {
   const show = () => setIsShown(true);
 
   return (
-    <Fragment>
+    <>
       {toggle({ show })}
       {isShown && content({ hide })}
-    </Fragment>
+    </>
   );
 };
 

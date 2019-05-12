@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const StatsExplanation = () => (
-  <Fragment>
+  <>
     <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
 
     <p>
@@ -16,7 +16,7 @@ const StatsExplanation = () => (
     </p>
 
     <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
-  </Fragment>
+  </>
 );
 
 export default StatsExplanation;

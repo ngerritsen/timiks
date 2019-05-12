@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid';
 
@@ -23,7 +23,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
         )}
         content={({ hide }) => (
           <Modal title="Archive times" onClose={hide}>
-            <Fragment>
+            <>
               <Section margin="md">
                 <p>Move the current times to the archive?</p>
               </Section>
@@ -44,7 +44,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                   </Button>
                 </ButtonDuoItem>
               </ButtonDuo>
-            </Fragment>
+            </>
           </Modal>
         )}
       />
@@ -60,7 +60,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
         )}
         content={({ hide }) => (
           <Modal title="Clear current times" onClose={hide}>
-            <Fragment>
+            <>
               <Section margin="md">
                 <p>Are you sure you want to clear the current times?</p>
               </Section>
@@ -82,7 +82,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                   </Button>
                 </ButtonDuoItem>
               </ButtonDuo>
-            </Fragment>
+            </>
           </Modal>
         )}
       />

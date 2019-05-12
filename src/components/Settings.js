@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/fontawesome-pro-solid';
@@ -30,7 +30,7 @@ const Settings = ({
       )}
       content={({ hide }) => (
         <Modal title="Settings" onClose={hide}>
-          <Fragment>
+          <>
             <Section margin="sm">
               <Selector
                 label="Activation delay*"
@@ -77,7 +77,7 @@ const Settings = ({
               </i>
             </Section>
             <Button onClick={hide}>Close</Button>
-          </Fragment>
+          </>
         </Modal>
       )}
     />

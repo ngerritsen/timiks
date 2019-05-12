@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/fontawesome-pro-solid';
@@ -20,7 +20,7 @@ const KeyboardShortcuts = () => (
     )}
     content={({ hide }) => (
       <Modal title="Keyboard shortcuts" onClose={hide}>
-        <Fragment>
+        <>
           {keymap.map(mapping => (
             <Section margin="sm" key={mapping.key}>
               <KeyContainer>
@@ -29,7 +29,7 @@ const KeyboardShortcuts = () => (
               </KeyContainer>
             </Section>
           ))}
-        </Fragment>
+        </>
       </Modal>
     )}
   />
