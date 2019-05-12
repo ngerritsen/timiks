@@ -29,7 +29,7 @@ const createConfig = (env, argv) => {
         hash: true
       })
     ]
-  }
+  };
 
   if (argv.mode === 'development') {
     config.devtool = 'inline-source-map';

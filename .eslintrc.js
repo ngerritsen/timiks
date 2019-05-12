@@ -12,6 +12,11 @@ module.exports = {
     browser: true,
     node: true
   },
+  settings: {
+    react: {
+      version: '16.8'
+    },
+  },
   rules: {
     'prettier/prettier': [
       'error',
