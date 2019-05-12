@@ -18,10 +18,16 @@ export const getCurrentMarkedTimes = createSelector(
   markBestTime
 );
 
+export const getCurrentNoDnfTimes = createSelector(
+  getCurrentTimes,
+  times => times.filter(time => !time.dnf)
+);
+
 export const getStatsForCurrentTimes = createSelector(
   getCurrentTimes,
   calculateStats
 );
+
 export const getArchivedTimesForPuzzle = createSelector(
   getArchivedTimes,
   getPuzzle,
