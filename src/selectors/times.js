@@ -18,7 +18,7 @@ export const getCurrentMarkedTimes = createSelector(
   markBestTime
 );
 
-export const getStatsForCurrentTimes =createSelector(
+export const getStatsForCurrentTimes = createSelector(
   getCurrentTimes,
   calculateStats
 );

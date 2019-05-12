@@ -8,33 +8,44 @@ import Time from '../shared/Time';
 import Section from '../shared/Section';
 import ScrambleDetails from '../scramble/ScrambleDetails';
 import Button from '../shared/Button';
+import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 
-const TimeDetails = ({ time, onRemoveTime }) => (
+const TimeDetails = ({ time, onRemoveTime, onClose }) => (
   <div>
     <Section margin="sm">
-        <FontAwesome icon={faStopwatch} /> &nbsp;
-        <Time time={time} decimals={4} />
+      <FontAwesome icon={faStopwatch} /> &nbsp;
+      <Time time={time} decimals={4} />
     </Section>
     <Section margin="sm">
-        <FontAwesome icon={faCalendarAlt} /> &nbsp;
-        {time.date.toLocaleString()}
+      <FontAwesome icon={faCalendarAlt} /> &nbsp;
+      {time.date.toLocaleString()}
     </Section>
     <Section margin="md">
-        <FontAwesome icon={faCube} /> &nbsp;
-        {time.puzzle || 'unknown'}
+      <FontAwesome icon={faCube} /> &nbsp;
+      {time.puzzle || 'unknown'}
     </Section>
     <Section margin="md">
       <ScrambleDetails scramble={time.scramble} puzzle={time.puzzle} />
     </Section>
     <Section>
-      <Button onClick={onRemoveTime} danger>Remove</Button>
+      <ButtonDuo>
+        <ButtonDuoItem>
+          <Button onClick={onRemoveTime} danger>
+            Remove
+          </Button>
+        </ButtonDuoItem>
+        <ButtonDuoItem>
+          <Button onClick={onClose}>Close</Button>
+        </ButtonDuoItem>
+      </ButtonDuo>
     </Section>
   </div>
 );
 
 TimeDetails.propTypes = {
   time: CustomPropTypes.Time.isRequired,
-  onRemoveTime: PropTypes.func.isRequired
+  onRemoveTime: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
 };
 
 export default TimeDetails;

@@ -6,7 +6,9 @@ export const getTime = state => state.timer.time;
 export const getLastTimeId = state => state.timer.lastTimeId;
 export const isStopped = state => state.timer.stopped;
 export const getTimeInput = state => state.timer.timeInput;
-export const isInInspectionMode = state => state.timer.inspectionMode;
+export const isInInspecting = state => state.timer.inspecting;
+export const getInspectionStartTime = state => state.timer.inspectionStartTime;
+export const getStartTime = state => state.timer.startTime;
 
 export const isValidTimeInput = createSelector(
   getTimeInput,

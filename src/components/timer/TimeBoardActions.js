@@ -22,20 +22,26 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
           </Button>
         )}
         content={({ hide }) => (
-          <Modal
-            title="Archive times"
-            onClose={hide}
-          >
+          <Modal title="Archive times" onClose={hide}>
             <Fragment>
               <Section margin="md">
                 <p>Move the current times to the archive?</p>
               </Section>
               <ButtonDuo>
                 <ButtonDuoItem>
-                  <Button onClick={() => { hide(); archiveTimes(); }}>Archive</Button>
+                  <Button
+                    onClick={() => {
+                      hide();
+                      archiveTimes();
+                    }}
+                  >
+                    Archive
+                  </Button>
                 </ButtonDuoItem>
                 <ButtonDuoItem>
-                  <Button fg empty onClick={hide}>Cancel</Button>
+                  <Button fg empty onClick={hide}>
+                    Cancel
+                  </Button>
                 </ButtonDuoItem>
               </ButtonDuo>
             </Fragment>
@@ -53,20 +59,27 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
           </Button>
         )}
         content={({ hide }) => (
-          <Modal
-            title="Clear current times"
-            onClose={hide}
-          >
+          <Modal title="Clear current times" onClose={hide}>
             <Fragment>
               <Section margin="md">
                 <p>Are you sure you want to clear the current times?</p>
               </Section>
               <ButtonDuo>
                 <ButtonDuoItem>
-                  <Button danger onClick={() => { hide(); clearTimes(); }}>Remove</Button>
+                  <Button
+                    danger
+                    onClick={() => {
+                      hide();
+                      clearTimes();
+                    }}
+                  >
+                    Remove
+                  </Button>
                 </ButtonDuoItem>
                 <ButtonDuoItem>
-                  <Button fg empty onClick={hide}>Cancel</Button>
+                  <Button fg empty onClick={hide}>
+                    Cancel
+                  </Button>
                 </ButtonDuoItem>
               </ButtonDuo>
             </Fragment>
@@ -80,6 +93,6 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
 TimeBoardActions.propTypes = {
   archiveTimes: PropTypes.func.isRequired,
   clearTimes: PropTypes.func.isRequired
-}
+};
 
 export default TimeBoardActions;

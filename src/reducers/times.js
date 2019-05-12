@@ -20,7 +20,7 @@ export default function timesReducer(state = initialState, action) {
         ...state,
         current: state.current.filter(time => time.id !== action.id)
       };
-      case actionTypes.REMOVE_ARCHIVED_TIME:
+    case actionTypes.REMOVE_ARCHIVED_TIME:
       return {
         ...state,
         archived: state.archived.filter(time => time.id !== action.id)
@@ -28,7 +28,7 @@ export default function timesReducer(state = initialState, action) {
     case actionTypes.UPDATE_TIME:
       return {
         ...state,
-        current: state.current.map((time) => {
+        current: state.current.map(time => {
           if (time.id !== action.id) {
             return time;
           }
@@ -36,15 +36,15 @@ export default function timesReducer(state = initialState, action) {
           return {
             ...time,
             ...action.fields
-          }
+          };
         })
-      }
+      };
     case actionTypes.ARCHIVE_TIMES:
       return {
         ...state,
         current: [],
         archived: [...state.current, ...state.archived]
-      }
+      };
     case actionTypes.CLEAR_TIMES:
       return {
         ...state,

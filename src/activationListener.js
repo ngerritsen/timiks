@@ -1,9 +1,6 @@
 import keycode from 'keycode';
 
-const inputElements = [
-  'input',
-  'textarea'
-];
+const inputElements = ['input', 'textarea'];
 
 const listeners = [
   {
@@ -33,24 +30,20 @@ const listeners = [
 ];
 
 export default function listenForActivations({ onInitiate, onFire, onStop }) {
-  listeners.forEach(({
-    initiateEvent,
-    fireEvent,
-    stopEvent,
-    initiateValidator,
-    releaseValidator,
-    stopValidator
-  }) => listenFor(
-    initiateEvent,
-    fireEvent,
-    stopEvent,
-    initiateValidator,
-    releaseValidator,
-    stopValidator,
-    onInitiate,
-    onFire,
-    onStop
-  ));
+  listeners.forEach(
+    ({ initiateEvent, fireEvent, stopEvent, initiateValidator, releaseValidator, stopValidator }) =>
+      listenFor(
+        initiateEvent,
+        fireEvent,
+        stopEvent,
+        initiateValidator,
+        releaseValidator,
+        stopValidator,
+        onInitiate,
+        onFire,
+        onStop
+      )
+  );
 }
 
 function listenFor(
@@ -68,7 +61,7 @@ function listenFor(
     event.preventDefault();
   };
 
-  const stopListener = (event) => {
+  const stopListener = event => {
     if (isValidStopEvent() && stopValidator(event)) {
       event.preventDefault();
       event.target.blur();
@@ -77,7 +70,7 @@ function listenFor(
     }
   };
 
-  const initiateListener = (event) => {
+  const initiateListener = event => {
     if (isValidActivationEvent(event) && initiateValidator(event)) {
       event.preventDefault();
       event.target.blur();
@@ -92,7 +85,7 @@ function listenFor(
     }
   };
 
-  const fireListener = (event) => {
+  const fireListener = event => {
     if (releaseValidator(event)) {
       event.preventDefault();
       event.target.blur();

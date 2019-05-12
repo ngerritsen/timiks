@@ -9,7 +9,7 @@ function mapStateToProps(state) {
     puzzle: getPuzzle(state),
     puzzleIsCube: isPuzzleCube(state),
     withDetails: true
-  }
+  };
 }
 
 export default connect(mapStateToProps)(Scramble);

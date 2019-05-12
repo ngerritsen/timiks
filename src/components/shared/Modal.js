@@ -30,29 +30,35 @@ class Modal extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { title, children, onClose } = this.props;
 
-    return (
-      ReactDOM.createPortal(
-        <ModalOverlay data-modal innerRef={el => { this.overlay = el }} onClick={this.onClickOverlay}>
-          <ModalBox innerRef={el => { this.modal = el }} tabIndex={-1}>
-            <ModalHeader>
-              <ModalTitle>{title}</ModalTitle>
-              <IconButton
-                color="subtleFg"
-                onClick={onClose}
-              >
-                <Shortcut command="closeModal" action={onClose}/>
-                <FontAwesome icon={faTimes}/>
-              </IconButton>
-            </ModalHeader>
-            {children}
-          </ModalBox>
-        </ModalOverlay>,
-        document.querySelector(MODAL_ROOT_SELECTOR)
-      )
-    )
+    return ReactDOM.createPortal(
+      <ModalOverlay
+        data-modal
+        innerRef={el => {
+          this.overlay = el;
+        }}
+        onClick={this.onClickOverlay}
+      >
+        <ModalBox
+          innerRef={el => {
+            this.modal = el;
+          }}
+          tabIndex={-1}
+        >
+          <ModalHeader>
+            <ModalTitle>{title}</ModalTitle>
+            <IconButton color="subtleFg" onClick={onClose}>
+              <Shortcut command="closeModal" action={onClose} />
+              <FontAwesome icon={faTimes} />
+            </IconButton>
+          </ModalHeader>
+          {children}
+        </ModalBox>
+      </ModalOverlay>,
+      document.querySelector(MODAL_ROOT_SELECTOR)
+    );
   }
 }
 

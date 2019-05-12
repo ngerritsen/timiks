@@ -7,7 +7,7 @@ const Info = styled.span`
 
 export const InfoItem = styled.span`
   margin-right: ${props => props.theme.sizes.sm};
-`
+`;
 
 export const InfoIcon = styled.span`
   margin-right: ${props => props.theme.sizes.xxs};

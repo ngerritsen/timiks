@@ -18,7 +18,7 @@ class ShortcutProvider extends Component {
       registerShortcut: this._registerShortcut.bind(this),
       unregisterShortcut: this._unregisterShortcut.bind(this),
       updateShortcut: this._updateShortcut.bind(this)
-    }
+    };
   }
 
   _handleKeyDown(event) {
@@ -36,7 +36,7 @@ class ShortcutProvider extends Component {
 
     this.shortcuts.forEach(shortcut => {
       if (!mapping.commands.includes(shortcut.command)) {
-        return
+        return;
       }
 
       const modalEl = document.querySelector('[data-modal]');
@@ -73,7 +73,7 @@ class ShortcutProvider extends Component {
       }
 
       return { token, command, action };
-    })
+    });
   }
 
   render() {
@@ -86,18 +86,15 @@ class ShortcutProvider extends Component {
 }
 
 ShortcutProvider.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   keymap: PropTypes.arrayOf(PropTypes.object).isRequired,
   stopped: PropTypes.bool.isRequired
-}
+};
 
 function mapStateToProps(state) {
   return {
     stopped: state.timer.stopped
-  }
+  };
 }
 
 export default connect(mapStateToProps)(ShortcutProvider);

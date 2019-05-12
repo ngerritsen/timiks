@@ -6,10 +6,7 @@ const webpack = require('webpack');
 
 const config = {
   entry: {
-    main: [
-      'element-closest',
-      path.join(__dirname, 'src/index.js')
-    ],
+    main: ['element-closest', path.join(__dirname, 'src/index.js')],
     scrambleWorker: path.join(__dirname, 'src/scrambleWorker.js')
   },
   output: {
@@ -35,7 +32,7 @@ const config = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ]
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
   delete config.devtool;

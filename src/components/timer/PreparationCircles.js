@@ -5,12 +5,10 @@ import PropTypes from 'prop-types';
 import { PREPARATION_STAGES } from '../../constants/app';
 import { generateArr } from '../../helpers/general';
 
-const PrepartionCircles = ({ preparationStage }) => (
-  generateArr(PREPARATION_STAGES)
-    .map(index =>
-      <PrepartionCircle key={index} active={index < preparationStage} />
-    )
-);
+const PrepartionCircles = ({ preparationStage }) =>
+  generateArr(PREPARATION_STAGES).map(index => (
+    <PrepartionCircle key={index} active={index < preparationStage} />
+  ));
 
 PrepartionCircles.propTypes = {
   preparationStage: PropTypes.number.isRequired
@@ -23,7 +21,7 @@ const PrepartionCircle = styled.span`
   border-radius: 0.6rem;
   line-height: 1.6rem;
   background-color: white;
-  opacity: ${props => props.active ? 1 : 0.3};
+  opacity: ${props => (props.active ? 1 : 0.3)};
   margin: 0 ${props => props.theme.sizes.sm};
 `;
 

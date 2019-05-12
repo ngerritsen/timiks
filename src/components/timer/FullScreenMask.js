@@ -4,12 +4,11 @@ import ReactDOM from 'react-dom';
 
 import { FULL_SCREEN_MASK_ROOT_SELECTOR } from '../../constants/app';
 
-const FullScreenMask = () => (
+const FullScreenMask = () =>
   ReactDOM.createPortal(
-    <StyledFullScreenMask/>,
+    <StyledFullScreenMask />,
     document.querySelector(FULL_SCREEN_MASK_ROOT_SELECTOR)
-  )
-);
+  );
 
 const StyledFullScreenMask = styled.div`
   position: fixed;

@@ -35,6 +35,6 @@ function get(storageKey) {
   if (!Array.isArray(parsed)) {
     return [];
   }
-  
+
   return parsed;
 }

@@ -17,23 +17,23 @@ function calculateAveragesOf(times, amount, deviation = 1) {
     return null;
   }
 
-  const result = generateArr(times.length + 1 - amount)
-    .map(index => calculateAverageOf(times.slice(index, index + amount), deviation))
+  const result = generateArr(times.length + 1 - amount).map(index =>
+    calculateAverageOf(times.slice(index, index + amount), deviation)
+  );
 
   const best = result.reduce((total, current) =>
-      (total === current || total < current)
-        ? total
-        : current);
+    total === current || total < current ? total : current
+  );
 
   return {
     current: result[result.length - 1],
     all: result,
     best
-  }
+  };
 }
 
 function calculateAverageOf(times, deviation = 1) {
-  const dnfs = times.reduce((dnfs, time) => time.dnf ? dnfs + 1 : dnfs, 0);
+  const dnfs = times.reduce((dnfs, time) => (time.dnf ? dnfs + 1 : dnfs), 0);
 
   if (dnfs > deviation) {
     return 'DNF';
@@ -41,17 +41,15 @@ function calculateAverageOf(times, deviation = 1) {
 
   const totalTime = times
     .sort((a, b) => getMs(a) - getMs(b))
-    .slice(deviation, deviation === 0 ? undefined : (-1 * deviation))
+    .slice(deviation, deviation === 0 ? undefined : -1 * deviation)
     .filter(time => !time.dnf)
     .reduce((totalTimes, time) => totalTimes + getMs(time), 0);
 
-  return totalTime / (times.length - (deviation * 2));
+  return totalTime / (times.length - deviation * 2);
 }
 
 export function markBestTime(times) {
   const bestTime = Math.min(...times.map(time => getMs(time)));
 
-  return times.map(time => (
-    time.ms === bestTime ? { ...time, best: true } : time
-  ));
+  return times.map(time => (time.ms === bestTime ? { ...time, best: true } : time));
 }

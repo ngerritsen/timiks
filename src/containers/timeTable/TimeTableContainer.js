@@ -11,4 +11,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { removeTime })(TimeTable);
+export default connect(
+  mapStateToProps,
+  { removeTime }
+)(TimeTable);

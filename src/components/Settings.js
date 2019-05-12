@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/fontawesome-pro-solid'
+import { faCog } from '@fortawesome/fontawesome-pro-solid';
 
 import Shortcut from './shared/Shortcut';
 import { ACTIVATION_DURATION_OPTIONS } from '../constants/app';
@@ -24,15 +24,12 @@ const Settings = ({
     <ToggleContent
       toggle={({ show }) => (
         <IconButton onClick={show}>
-          <Shortcut command="openSettings" action={show}/>
-          <FontAwesome icon={faCog}/>
+          <Shortcut command="openSettings" action={show} />
+          <FontAwesome icon={faCog} />
         </IconButton>
       )}
       content={({ hide }) => (
-        <Modal
-          title="Settings"
-          onClose={hide}
-        >
+        <Modal title="Settings" onClose={hide}>
           <Fragment>
             <Section margin="sm">
               <Selector
@@ -47,13 +44,21 @@ const Settings = ({
             <Section margin="sm">
               <Setting>
                 <span>Manual time entry</span>
-                <Checkbox type="checkbox" onChange={toggleManualTimeEntry} checked={settings.useManualTimeEntry}/>
+                <Checkbox
+                  type="checkbox"
+                  onChange={toggleManualTimeEntry}
+                  checked={settings.useManualTimeEntry}
+                />
               </Setting>
             </Section>
             <Section margin="sm">
               <Setting>
                 <span>Use inspection time</span>
-                <Checkbox type="checkbox" onChange={toggleInspectionTime} checked={settings.useInspectionTime}/>
+                <Checkbox
+                  type="checkbox"
+                  onChange={toggleInspectionTime}
+                  checked={settings.useInspectionTime}
+                />
               </Setting>
             </Section>
             <Section margin="md">
@@ -67,7 +72,9 @@ const Settings = ({
               </Setting>
             </Section>
             <Section margin="md">
-              <i>*For how long you have to hold spacebar, mouse or touch before starting the timer.</i>
+              <i>
+                *For how long you have to hold spacebar, mouse or touch before starting the timer.
+              </i>
             </Section>
             <Button onClick={hide}>Close</Button>
           </Fragment>

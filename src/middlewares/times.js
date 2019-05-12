@@ -1,4 +1,10 @@
-import { SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES, REMOVE_ARCHIVED_TIME } from '../constants/actionTypes';
+import {
+  SAVE_TIME,
+  REMOVE_TIME,
+  CLEAR_TIMES,
+  ARCHIVE_TIMES,
+  REMOVE_ARCHIVED_TIME
+} from '../constants/actionTypes';
 import { loadTimes } from '../actions';
 import * as timesRepository from '../repositories/timesRepository';
 import { getArchivedTimes, getCurrentTimes } from '../selectors/times';
@@ -22,7 +28,7 @@ const times = store => next => {
     }
 
     return result;
-  }
+  };
 };
 
 export default times;

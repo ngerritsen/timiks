@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faTimes, faThumbsUp, faInfoCircle, faQuestionCircle } from '@fortawesome/fontawesome-pro-solid';
+import {
+  faTimes,
+  faThumbsUp,
+  faInfoCircle,
+  faQuestionCircle
+} from '@fortawesome/fontawesome-pro-solid';
 
 import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';
@@ -25,33 +30,38 @@ const TimeTable = ({ stats, removeTime, times }) => {
         <Table>
           <thead>
             <tr>
-              <HeadingCell>
-                Stats
-              </HeadingCell>
-              <SubtleHeadingCell>
-                Current
-              </SubtleHeadingCell>
-              <SubtleHeadingCell>
-                Best
-              </SubtleHeadingCell>
+              <HeadingCell>Stats</HeadingCell>
+              <SubtleHeadingCell>Current</SubtleHeadingCell>
+              <SubtleHeadingCell>Best</SubtleHeadingCell>
               <HeadingCell rightAlign>
                 <ToggleContent
                   toggle={({ show }) => (
                     <QuestionIconButton onClick={show}>
                       <FontAwesome icon={faQuestionCircle} size="sm" />
                     </QuestionIconButton>
-
                   )}
                   content={({ hide }) => (
                     <Modal title="Stats" onClose={hide}>
                       <Section margin="sm">
-                        <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
+                        <p>
+                          After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.
+                        </p>
 
-                        <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
+                        <p>
+                          When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>
+                          ) will be shown (best average of 3 consecutive solves).
+                        </p>
 
-                        <p>After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve) will be shown (<strong>ao5</strong>). After that it will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.</p>
+                        <p>
+                          After 5 solves the average of the <i>last</i> 5 solves (without the best
+                          and the worst solve) will be shown (<strong>ao5</strong>). After that it
+                          will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.
+                        </p>
 
-                        <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
+                        <i>
+                          *The a50 will exclude the best and worst 3 solves, the ao100 will exclude
+                          5.
+                        </i>
                       </Section>
                     </Modal>
                   )}
@@ -60,59 +70,53 @@ const TimeTable = ({ stats, removeTime, times }) => {
             </tr>
           </thead>
           <tbody>
-            {
-              (AVAILABLE_STATS.filter(stat => stats[stat.name]).length === 0 && !showGraph) &&
+            {AVAILABLE_STATS.filter(stat => stats[stat.name]).length === 0 && !showGraph && (
               <tr>
                 <Cell colSpan="2">
                   <i>Not enough solves yet.</i>
                 </Cell>
               </tr>
-            }
-            {
-              AVAILABLE_STATS
-                .filter(stat => stats[stat.name])
-                .map(stat => {
-                  const { current, best } = stats[stat.name];
+            )}
+            {AVAILABLE_STATS.filter(stat => stats[stat.name]).map(stat => {
+              const { current, best } = stats[stat.name];
 
-                  return (
-                    <tr key={stat.name}>
-                      <Cell>
-                        <TimeIndex>{stat.name}</TimeIndex>
-                      </Cell>
-                      <Cell>
-                        <strong>
-                          <Time
-                            time={{
-                              ms: current === 'DNF' ? Infinity : current,
-                              dnf: current === 'DNF'
-                            }}
-                          />
-                        </strong>
-                      </Cell>
-                      <Cell colSpan="2">
-                        <strong>
-                          <Time
-                            time={{
-                              ms: best === 'DNF' ? Infinity : best,
-                              dnf: best === 'DNF'
-                            }}
-                          />
-                        </strong>
-                      </Cell>
-                    </tr>
-                  );
-                })
-            }
+              return (
+                <tr key={stat.name}>
+                  <Cell>
+                    <TimeIndex>{stat.name}</TimeIndex>
+                  </Cell>
+                  <Cell>
+                    <strong>
+                      <Time
+                        time={{
+                          ms: current === 'DNF' ? Infinity : current,
+                          dnf: current === 'DNF'
+                        }}
+                      />
+                    </strong>
+                  </Cell>
+                  <Cell colSpan="2">
+                    <strong>
+                      <Time
+                        time={{
+                          ms: best === 'DNF' ? Infinity : best,
+                          dnf: best === 'DNF'
+                        }}
+                      />
+                    </strong>
+                  </Cell>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
-        {
-          showGraph &&
+        {showGraph && (
           <Section margin="xs">
             <GraphContainer>
-              <TimeGraph times={noDnfTimes} forSession/>
+              <TimeGraph times={noDnfTimes} forSession />
             </GraphContainer>
           </Section>
-        }
+        )}
       </TimeTableColumn>
       <TimeTableColumn>
         <Table>
@@ -130,13 +134,14 @@ const TimeTable = ({ stats, removeTime, times }) => {
                   <TimeIndex>{index + 1}.</TimeIndex>
                 </Cell>
                 <Cell>
-                  <Time time={time}/>
-                  {
-                    (time.best && times.length > 1) &&
+                  <Time time={time} />
+                  {time.best && times.length > 1 && (
                     <TimeInfo>
-                      <BestTimeIcon><FontAwesome icon={faThumbsUp}/></BestTimeIcon>
+                      <BestTimeIcon>
+                        <FontAwesome icon={faThumbsUp} />
+                      </BestTimeIcon>
                     </TimeInfo>
-                  }
+                  )}
                 </Cell>
                 <Cell rightAlign>
                   <ToggleContent
@@ -146,21 +151,21 @@ const TimeTable = ({ stats, removeTime, times }) => {
                       </InfoIconButton>
                     )}
                     content={({ hide }) => (
-                      <Modal
-                        title="Details"
-                        onClose={hide}
-                      >
-                        <TimeDetails time={time} onRemoveTime={() => {
-                          hide();
-                          removeTime(time.id);
-                        }}/>
+                      <Modal title="Details" onClose={hide}>
+                        <TimeDetails
+                          time={time}
+                          onClose={hide}
+                          onRemoveTime={() => {
+                            hide();
+                            removeTime(time.id);
+                          }}
+                        />
                       </Modal>
                     )}
                   />
                   <RemoveItemIconButton onClick={() => removeTime(time.id)}>
                     <FontAwesome icon={faTimes} size="sm" />
                   </RemoveItemIconButton>
-
                 </Cell>
               </tr>
             ))}
@@ -168,8 +173,8 @@ const TimeTable = ({ stats, removeTime, times }) => {
         </Table>
       </TimeTableColumn>
     </TimeTableContainer>
-  )
-}
+  );
+};
 
 TimeTable.propTypes = {
   stats: PropTypes.object.isRequired,
@@ -219,13 +224,13 @@ const Table = styled.table`
 `;
 
 const Cell = styled.td`
-  text-align: ${props => props.rightAlign ? 'right' : 'left'};
+  text-align: ${props => (props.rightAlign ? 'right' : 'left')};
   border-bottom: 1px solid ${props => props.theme.colors.grey};
   height: 3.6rem;
 `;
 
 const HeadingCell = styled.th`
-  text-align: ${props => props.rightAlign ? 'right' : 'left'};
+  text-align: ${props => (props.rightAlign ? 'right' : 'left')};
   border-bottom: 2px solid ${props => props.theme.colors.grey};
   height: 3.6rem;
   font-weight: bold;
@@ -263,4 +268,4 @@ const RemoveItemIconButton = IconButton.extend`
   color: ${props => props.theme.colors.red};
 `;
 
-export default TimeTable;
+export default React.memo(TimeTable);

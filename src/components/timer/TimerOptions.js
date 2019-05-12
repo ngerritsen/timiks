@@ -16,11 +16,11 @@ const TimerOptions = ({ changePuzzle, puzzle, refreshScramble }) => (
       options={puzzles.map(({ name }) => ({ label: name, value: name }))}
       value={puzzle}
     />
-    &nbsp;
-    &nbsp;
+    &nbsp; &nbsp;
     <Button tiny tag onClick={refreshScramble}>
       <Shortcut command="refreshScramble" action={refreshScramble} />
-      <InlineFontawesome fixedWidth icon={faSyncAlt}/>scramble
+      <InlineFontawesome fixedWidth icon={faSyncAlt} />
+      scramble
     </Button>
   </div>
 );

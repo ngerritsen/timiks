@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { HashRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -37,7 +37,7 @@ class AppContainer extends React.Component {
     return (
       <ThemeProvider theme={this.state.theme}>
         <Router>
-          <App/>
+          <App />
         </Router>
       </ThemeProvider>
     );

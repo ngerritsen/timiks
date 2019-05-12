@@ -5,7 +5,7 @@ import { removeTime, updateTime } from '../../actions';
 import { getLastTime } from '../../selectors/times';
 
 function mapStateToProps(state) {
-  return { lastTime: getLastTime(state) }
+  return { lastTime: getLastTime(state) };
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {
@@ -20,7 +20,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     removeLastTime: () => lastTime && removeTime(id),
     toggleDnfLastTime: () => lastTime && updateTime(id, { dnf: !dnf }),
     togglePlus2LastTime: () => lastTime && updateTime(id, { plus2: !plus2 })
-  }
+  };
 }
 
 export default connect(

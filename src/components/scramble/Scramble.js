@@ -15,21 +15,17 @@ import ToggleContent from '../ToggleContent';
 const Scramble = ({ scramble, small, withDetails, puzzle, isPuzzleCube }) => (
   <div>
     <ScrambleBox small={small}>
-      {
-        (withDetails && isPuzzleCube) &&
+      {withDetails && isPuzzleCube && (
         <ScrambleIconButtonContainer>
           <ToggleContent
             toggle={({ show }) => (
               <IconButton onClick={show}>
                 <Shortcut command="showScramble" action={show} />
-                <FontAwesome icon={faEye}/>
+                <FontAwesome icon={faEye} />
               </IconButton>
             )}
             content={({ hide }) => (
-              <Modal
-                title="Scramble details"
-                onClose={hide}
-              >
+              <Modal title="Scramble details" onClose={hide}>
                 <Section margin="sm">
                   <ScrambleDetails scramble={scramble} puzzle={puzzle} />
                 </Section>
@@ -37,8 +33,10 @@ const Scramble = ({ scramble, small, withDetails, puzzle, isPuzzleCube }) => (
             )}
           />
         </ScrambleIconButtonContainer>
-      }
-      {scramble.map((move, i) => <Move key={i}>{move}</Move>)}
+      )}
+      {scramble.map((move, i) => (
+        <Move key={i}>{move}</Move>
+      ))}
     </ScrambleBox>
   </div>
 );
@@ -52,7 +50,7 @@ Scramble.propTypes = {
 };
 
 const ScrambleBox = styled.p`
-  font-size: ${props => props.small ? '1.4rem' : '1.6rem'};
+  font-size: ${props => (props.small ? '1.4rem' : '1.6rem')};
   text-align: center;
   font-family: ${props => props.theme.monoFont};
   background-color: ${props => props.theme.colors.subtleBg};

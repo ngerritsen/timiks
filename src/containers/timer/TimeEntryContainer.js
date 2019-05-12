@@ -19,7 +19,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     type: 'text',
     value: stateProps.timeInput,
     placeholder: '00:00.000',
-    onKeyPress: (e) => {
+    onKeyPress: e => {
       if (e.key === 'Enter' && parseTimeInput(stateProps.timeInput)) {
         submitTimeInput();
       }

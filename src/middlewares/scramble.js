@@ -15,7 +15,7 @@ const RESCRAMBLE_ON = [
 ];
 
 const scramble = store => next => {
-  scrambleWorker.addEventListener('message', (event) => {
+  scrambleWorker.addEventListener('message', event => {
     store.dispatch(setScramble(event.data.scramble));
   });
 
@@ -31,7 +31,7 @@ const scramble = store => next => {
     }
 
     return result;
-  }
-}
+  };
+};
 
 export default scramble;

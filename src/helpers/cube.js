@@ -60,8 +60,10 @@ export function layoutScramble(scramble, size) {
   const cube = scramble.reduce((cube, move) => {
     const { direction, depth, reversed, twice } = parseMove(move);
 
-    return generateArr(twice ? 2 : (reversed ? 3 : 1))
-      .reduce((scrambledCube) => rotate(scrambledCube, direction, depth), cube);
+    return generateArr(twice ? 2 : reversed ? 3 : 1).reduce(
+      scrambledCube => rotate(scrambledCube, direction, depth),
+      cube
+    );
   }, createCube(size));
 
   return formatCube(cube);
@@ -70,7 +72,7 @@ export function layoutScramble(scramble, size) {
 function parseMove(move) {
   const direction = parseDirection(move);
   const depth = parseDepth(move);
-  const reversed = move.indexOf('\'') > 0;
+  const reversed = move.indexOf("'") > 0;
   const twice = move.indexOf('2') > 0;
 
   return { direction, reversed, depth, twice };
@@ -91,19 +93,23 @@ function parseDepth(move) {
 }
 
 function createCube(size) {
-  return Object.keys(INITIAL_FACES)
-    .reduce((state, face) => ({
+  return Object.keys(INITIAL_FACES).reduce(
+    (state, face) => ({
       ...state,
       [face]: createFace(size, INITIAL_FACES[face])
-    }), {})
+    }),
+    {}
+  );
 }
 
 function formatCube(cube) {
-  return Object.keys(cube)
-    .reduce((formattedCube, face) => ({
+  return Object.keys(cube).reduce(
+    (formattedCube, face) => ({
       ...formattedCube,
       [face]: formatFace(cube[face])
-    }), cube);
+    }),
+    cube
+  );
 }
 
 function rotate(cube, face, depth) {
@@ -111,19 +117,17 @@ function rotate(cube, face, depth) {
     ...cube,
     ...cycleEdges(FACE_EDGE_MAP[face], cube, depth),
     [face]: rotateFace(cube[face])
-  }
+  };
 }
 
 function formatFace(face) {
-  return generateArr(getSize(face))
-    .reduce((rows, y) => [
+  return generateArr(getSize(face)).reduce(
+    (rows, y) => [
       ...rows,
-      generateArr(getSize(face))
-        .reduce((row, x) => [
-          ...row,
-          getTile(face, x, y).color
-        ], [])
-    ], [])
+      generateArr(getSize(face)).reduce((row, x) => [...row, getTile(face, x, y).color], [])
+    ],
+    []
+  );
 }
 
 function getTile(face, x, y) {
@@ -131,12 +135,10 @@ function getTile(face, x, y) {
 }
 
 function createFace(size, color) {
-  return generateArr(size)
-    .reduce((cube, y) => [
-      ...cube,
-      ...generateArr(size)
-        .map(x => ({ x, y, color }))
-      ], []);
+  return generateArr(size).reduce(
+    (cube, y) => [...cube, ...generateArr(size).map(x => ({ x, y, color }))],
+    []
+  );
 }
 
 function cycleEdges(edgeMap, cube, depth) {
@@ -145,21 +147,14 @@ function cycleEdges(edgeMap, cube, depth) {
 
     return {
       ...nextCube,
-      [target.face]: generateArr(depth)
-        .reduce((nextFace, offset) => {
-          const row = getEdge(cube[source.face], source.edge, offset);
-          const colors = getRowColors(sortRowBy(row, getOppositeAxis(source.edge.axis)));
+      [target.face]: generateArr(depth).reduce((nextFace, offset) => {
+        const row = getEdge(cube[source.face], source.edge, offset);
+        const colors = getRowColors(sortRowBy(row, getOppositeAxis(source.edge.axis)));
 
-          return replaceEdgeColors(
-            nextFace,
-            target.edge,
-            colors,
-            offset,
-            target.reversed
-          )
-        }, cube[target.face])
-    }
-  }, {})
+        return replaceEdgeColors(nextFace, target.edge, colors, offset, target.reversed);
+      }, cube[target.face])
+    };
+  }, {});
 }
 
 function replaceEdgeColors(face, edge, colors, offset, reversed = false) {
@@ -168,9 +163,7 @@ function replaceEdgeColors(face, edge, colors, offset, reversed = false) {
   const oppositeAxis = getOppositeAxis(axis);
 
   return face.map(tile =>
-    tile[axis] === index
-      ? { ...tile, color: colorQueue[tile[oppositeAxis]] }
-      : tile
+    tile[axis] === index ? { ...tile, color: colorQueue[tile[oppositeAxis]] } : tile
   );
 }
 
@@ -183,8 +176,7 @@ function getRowColors(row) {
 }
 
 function sortRowBy(row, axis) {
-  return [...row]
-    .sort((a, b) => a[axis] - b[axis]);
+  return [...row].sort((a, b) => a[axis] - b[axis]);
 }
 
 function getEdge(face, edge, offset) {
@@ -194,21 +186,20 @@ function getEdge(face, edge, offset) {
 
 function getEdgeValues(edge, size, offset) {
   const { axis, opposite } = edge;
-  const index = opposite ? (size - 1 - offset) : offset;
+  const index = opposite ? size - 1 - offset : offset;
   return { axis, index };
 }
 
 function rotateFace(face) {
-  return face
-    .map(({ color, x, y }) => ({
-      x: reverseIndex(y, getSize(face)),
-      y: x,
-      color
-    }));
+  return face.map(({ color, x, y }) => ({
+    x: reverseIndex(y, getSize(face)),
+    y: x,
+    color
+  }));
 }
 
 function reverseIndex(index, size) {
-  return ((index - size) * -1) - 1;
+  return (index - size) * -1 - 1;
 }
 
 function getSize(face) {
@@ -216,15 +207,11 @@ function getSize(face) {
 }
 
 function generateArr(size, arr = []) {
-  return arr.length < size
-    ? generateArr(size, [...arr, arr.length])
-    : arr;
+  return arr.length < size ? generateArr(size, [...arr, arr.length]) : arr;
 }
 
 function getPreviousItem(array, index) {
-  return index === 0
-    ? array[array.length - 1]
-    : array[index - 1]
+  return index === 0 ? array[array.length - 1] : array[index - 1];
 }
 
 function getOppositeAxis(axis) {

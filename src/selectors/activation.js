@@ -13,5 +13,5 @@ export function getPreparationStage(state) {
 }
 
 export function isPreparingForInspection(state) {
-  return state.activation.preparingForInspection
+  return state.activation.preparingForInspection;
 }

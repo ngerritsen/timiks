@@ -25,22 +25,20 @@ const TimeGraph = ({ times, stats, theme, zeroBased, forSession }) => {
   });
 
   const data = {
-    labels: times.map((time, i) => forSession ? i : moment(time.date).format('D/MM/YY\'')),
-    datasets: [
-      getLineConfig('single', theme.colors.blue, times.map(getMs))
-    ]
-  }
+    labels: times.map((time, i) => (forSession ? i : moment(time.date).format("D/MM/YY'"))),
+    datasets: [getLineConfig('single', theme.colors.blue, times.map(getMs))]
+  };
 
   if (!forSession) {
-    const statLines = AVAILABLE_STATS
-      .filter(stat => stat.name !== 'mo3' && stats[stat.name] && stats[stat.name].all.length > 1)
-      .map(stat => {
-        const times = stats[stat.name].all.map(ms => getMs({ ms }));
-        const offset = data.labels.length - times.length;
-        const paddedTimes = [...(new Array(offset)), ...times];
+    const statLines = AVAILABLE_STATS.filter(
+      stat => stat.name !== 'mo3' && stats[stat.name] && stats[stat.name].all.length > 1
+    ).map(stat => {
+      const times = stats[stat.name].all.map(ms => getMs({ ms }));
+      const offset = data.labels.length - times.length;
+      const paddedTimes = [...new Array(offset), ...times];
 
-        return getLineConfig(stat.name, theme.colors[stat.color], paddedTimes)
-      })
+      return getLineConfig(stat.name, theme.colors[stat.color], paddedTimes);
+    });
 
     data.datasets.push(...statLines);
   }
@@ -57,19 +55,23 @@ const TimeGraph = ({ times, stats, theme, zeroBased, forSession }) => {
       position: 'bottom'
     },
     scales: {
-      xAxes: [{
-        display: false
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          beginAtZero: Boolean(zeroBased)
+      xAxes: [
+        {
+          display: false
         }
-      }]
+      ],
+      yAxes: [
+        {
+          display: false,
+          ticks: {
+            beginAtZero: Boolean(zeroBased)
+          }
+        }
+      ]
     }
-  }
+  };
 
-  return <Line data={data} options={options}/>
+  return <Line data={data} options={options} />;
 };
 
 TimeGraph.propTypes = {
@@ -78,6 +80,6 @@ TimeGraph.propTypes = {
   theme: PropTypes.object,
   zeroBased: PropTypes.bool,
   forSession: PropTypes.bool
-}
+};
 
 export default withTheme(React.memo(TimeGraph));

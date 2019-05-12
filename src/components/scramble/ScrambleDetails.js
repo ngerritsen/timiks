@@ -12,11 +12,11 @@ const ScrambleDetails = ({ puzzle, scramble }) => (
     <Section margin="md">
       <Scramble scramble={scramble} small />
     </Section>
-      {
-        isCube(puzzle)
-          ? <CubePreview cubeSize={getPuzzleSize(puzzle)} scramble={scramble}/>
-          : <Message>Scramble previews are only available for cubic puzzles.</Message>
-      }
+    {isCube(puzzle) ? (
+      <CubePreview cubeSize={getPuzzleSize(puzzle)} scramble={scramble} />
+    ) : (
+      <Message>Scramble previews are only available for cubic puzzles.</Message>
+    )}
   </div>
 );
 

@@ -12,7 +12,7 @@ const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
   }
 
   if (secondsOnly) {
-    return <span>{formatPart(Math.round(ms / 1000))}</span>
+    return <span>{formatPart(Math.round(ms / 1000))}</span>;
   }
 
   const { minutes, seconds, milliseconds } = breakUpTime(getMs({ ms, plus2 }));
@@ -20,20 +20,20 @@ const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
 
   return (
     <span>
-      {showMinute && formatPart(minutes, 2)}{showMinute && ':'}{formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}
+      {showMinute && formatPart(minutes, 2)}
+      {showMinute && ':'}
+      {formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}
       {plus2 && <Plus2>(+2)</Plus2>}
     </span>
   );
-}
+};
 
 function formatPart(number, minChars) {
   return monospace(fillZeroes(String(number), minChars));
 }
 
 function monospace(string) {
-  return string
-    .split('')
-    .map((char, i) => <TimeNumber key={i}>{char}</TimeNumber>);
+  return string.split('').map((char, i) => <TimeNumber key={i}>{char}</TimeNumber>);
 }
 
 Time.propTypes = {

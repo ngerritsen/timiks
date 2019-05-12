@@ -5,11 +5,4 @@ import scramble from './scramble';
 import timer from './timer';
 import times from './times';
 
-export default [
-  activation,
-  noSleep,
-  settings,
-  scramble,
-  timer,
-  times
-];
+export default [activation, noSleep, settings, scramble, timer, times];

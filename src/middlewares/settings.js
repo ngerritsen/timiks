@@ -8,8 +8,8 @@ const STORE_SETTINGS_ON = [
   actionTypes.CHANGE_THEME,
   actionTypes.CHANGE_ACTIVATION_DURATION,
   actionTypes.TOGGLE_INSPECTION_TIME,
-  actionTypes.TOGGLE_MANUAL_TIME_ENTRY,
-]
+  actionTypes.TOGGLE_MANUAL_TIME_ENTRY
+];
 
 const settings = store => {
   const settings = settingsRepository.get();
@@ -20,11 +20,11 @@ const settings = store => {
     const result = next(action);
 
     if (STORE_SETTINGS_ON.includes(action.type)) {
-      settingsRepository.store(getSettings(store.getState()))
+      settingsRepository.store(getSettings(store.getState()));
     }
 
     return result;
-  }
-}
+  };
+};
 
 export default settings;

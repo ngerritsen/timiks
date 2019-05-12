@@ -49,7 +49,7 @@ export const light = {
     onFullScreenMask: 2,
     modal: 3
   }
-}
+};
 
 export const dark = {
   ...light,
@@ -63,6 +63,6 @@ export const dark = {
     darkGrey: darken(0.5, WHITE),
     grey: lighten(0.3, BLACK),
     primary: '#fc7f0a',
-    blue: lighten(0.1, '#0366d6'),
+    blue: lighten(0.1, '#0366d6')
   }
-}
+};

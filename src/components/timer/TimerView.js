@@ -8,13 +8,13 @@ import Section from '../shared/Section';
 const TimerView = () => (
   <div>
     <Section margin="lg">
-      <TimerContainer/>
+      <TimerContainer />
     </Section>
     <Section margin="sm">
-      <TimerOptionsContainer/>
+      <TimerOptionsContainer />
     </Section>
     <Section>
-      <TimeBoardContainer/>
+      <TimeBoardContainer />
     </Section>
   </div>
 );

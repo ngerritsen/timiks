@@ -45,17 +45,16 @@ function getJsssScramble(jsssScrambler, type) {
 }
 
 function formatJsssCubeScramble(scramble) {
-  return splitScramble(scramble, ' ')
-    .map((move) => {
-      const firstChar = Number(move.charAt(0));
+  return splitScramble(scramble, ' ').map(move => {
+    const firstChar = Number(move.charAt(0));
 
-      if (isNaN(firstChar)) {
-        return move;
-      }
+    if (isNaN(firstChar)) {
+      return move;
+    }
 
-      const prefix = firstChar > 2 ? move.substr(0, 2) : move.substr(1, 1);
+    const prefix = firstChar > 2 ? move.substr(0, 2) : move.substr(1, 1);
 
-      return prefix + 'w' + move.substr(2);
+    return prefix + 'w' + move.substr(2);
   });
 }
 
@@ -64,12 +63,10 @@ function formatJsssDodecahedronScramble(scramble) {
 }
 
 function formatJsssSquareOneScramble(scramble) {
-  return splitScramble(scramble, '/')
-    .reduce((moves, move, index) => (
-      index === 0
-        ? [...moves, move]
-        : [...moves, '/', move]
-    ), []);
+  return splitScramble(scramble, '/').reduce(
+    (moves, move, index) => (index === 0 ? [...moves, move] : [...moves, '/', move]),
+    []
+  );
 }
 
 function generateSkewbScramble(scrambleOptions) {
@@ -89,7 +86,9 @@ function generateSkewbScramble(scrambleOptions) {
 
 function generateClockScamble(scrambleOptions) {
   return generateArr(scrambleOptions.length).map(() => {
-    const pins = generateArr(4).map(() => pickRandom(['d', 'U'])).join('');
+    const pins = generateArr(4)
+      .map(() => pickRandom(['d', 'U']))
+      .join('');
     const wheel = randomNumber(1, 4);
     const turns = pickRandom([randomNumber(-6, -1), randomNumber(1, 6)]);
 
@@ -106,9 +105,9 @@ function randomBoolean() {
 }
 
 function pickRandomDirection(directions, previousDirection, opposites = []) {
-  return pickRandom(directions.filter(direction =>
-    ![...opposites, previousDirection].includes(direction)
-  ));
+  return pickRandom(
+    directions.filter(direction => ![...opposites, previousDirection].includes(direction))
+  );
 }
 
 function pickRandom(array) {

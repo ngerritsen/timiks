@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faKeyboard } from '@fortawesome/fontawesome-pro-solid'
+import { faKeyboard } from '@fortawesome/fontawesome-pro-solid';
 
 import keymap from '../constants/keymap';
 import Section from './shared/Section';
@@ -15,7 +15,7 @@ const KeyboardShortcuts = () => (
     toggle={({ show }) => (
       <IconButton onClick={show}>
         <Shortcut command="showKeyboardShortcuts" action={show} />
-        <FontAwesome icon={faKeyboard}/>
+        <FontAwesome icon={faKeyboard} />
       </IconButton>
     )}
     content={({ hide }) => (

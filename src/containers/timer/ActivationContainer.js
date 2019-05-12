@@ -2,11 +2,16 @@ import { connect } from 'react-redux';
 
 import { startTimer, stopTimer, resetTime, submitTimeInput } from '../../actions';
 import Activation from '../../components/timer/Activation';
-import { isReady, isPreparing, isPreparingForInspection, getPreparationStage } from '../../selectors/activation';
-import { getTime, isInInspectionMode, isStopped, isValidTimeInput } from '../../selectors/timer';
+import {
+  isReady,
+  isPreparing,
+  isPreparingForInspection,
+  getPreparationStage
+} from '../../selectors/activation';
+import { getTime, isInInspecting, isStopped, isValidTimeInput } from '../../selectors/timer';
 import { shouldUseManualTimeEntry, shouldUseInspectionTime } from '../../selectors/settings';
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     time: getTime(state),
     stopped: isStopped(state),
@@ -14,11 +19,11 @@ function mapStateToProps (state) {
     useManualTimeEntry: shouldUseManualTimeEntry(state),
     preparing: isPreparing(state),
     preparingForInspection: isPreparingForInspection(state),
-    inspectionMode: isInInspectionMode(state),
+    inspecting: isInInspecting(state),
     validTimeInput: isValidTimeInput(state),
     useInspectionTime: shouldUseInspectionTime(state),
     ready: isReady(state)
-  }
+  };
 }
 
 export default connect(

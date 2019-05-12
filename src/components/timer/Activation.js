@@ -8,7 +8,7 @@ import Button from '../shared/Button';
 import ManualTimeEntryExplanation from './ManualTimeEntryExplanation';
 
 const Activation = ({
-  inspectionMode,
+  inspecting,
   preparationStage,
   preparing,
   preparingForInspection,
@@ -21,14 +21,15 @@ const Activation = ({
 }) => (
   <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
     <Button
-      big primary
+      big
+      primary
       {...(useManualTimeEntry ? {} : { 'data-activation': true })}
       disabled={useManualTimeEntry && !validTimeInput}
       type="button"
       onClick={() => useManualTimeEntry && validTimeInput && submitTimeInput()}
     >
       {(() => {
-        switch(true) {
+        switch (true) {
           case useManualTimeEntry:
             return 'Submit';
           case !stopped:
@@ -36,18 +37,18 @@ const Activation = ({
           case preparingForInspection:
             return 'Ready';
           case preparing || ready:
-            return <PrepartionCircles preparationStage={preparationStage}/>
+            return <PrepartionCircles preparationStage={preparationStage} />;
           default:
-            return 'Start' + (useInspectionTime ? ' inspection' : '');
+            return 'Start' + (useInspectionTime && !inspecting ? ' inspection' : '');
         }
       })()}
     </Button>
 
     <Explain>
       {(() => {
-        switch(true) {
+        switch (true) {
           case useManualTimeEntry:
-            return <ManualTimeEntryExplanation/>;
+            return <ManualTimeEntryExplanation />;
           case preparingForInspection:
             return 'Release to start inspection';
           case preparing && ready:
@@ -55,19 +56,28 @@ const Activation = ({
           case preparing && !ready:
             return 'Hold on...';
           case !stopped:
-            return <span>Click, tap or smash <Spacebar/> spacebar to stop</span>;
+            return (
+              <span>
+                Click, tap or smash <Spacebar /> spacebar to stop
+              </span>
+            );
           default:
-            return <span>Click, touch or press <Spacebar/> spacebar. Hold and release to start{useInspectionTime ? ' inspection' : ''}</span>;
+            return (
+              <span>
+                Click, touch or press <Spacebar /> spacebar. Hold and release to start
+                {useInspectionTime ? ' inspection' : ''}
+              </span>
+            );
         }
       })()}
     </Explain>
 
-    {(!stopped || preparing || preparingForInspection || inspectionMode) && <FullScreenMask/>}
+    {(!stopped || preparing || preparingForInspection || inspecting) && <FullScreenMask />}
   </ActivationContainer>
 );
 
 Activation.propTypes = {
-  inspectionMode: PropTypes.bool.isRequired,
+  inspecting: PropTypes.bool.isRequired,
   preparationStage: PropTypes.number.isRequired,
   preparing: PropTypes.bool.isRequired,
   preparingForInspection: PropTypes.bool.isRequired,

@@ -3,17 +3,22 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended'
   ],
-  plugins: ['react'],
-  parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-      experimentalObjectRestSpread: true
-    }
-  },
+  plugins: [
+    'prettier',
+    'react'
+  ],
+  parser: 'babel-eslint',
   env: {
     browser: true,
     node: true
+  },
+  rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        printWidth: 100
+      }
+    ]
   }
-}
+};

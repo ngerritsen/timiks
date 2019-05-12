@@ -31,10 +31,10 @@ export function parseTimeInput(input) {
       ms: 0,
       dnf: true,
       plus2: false
-    }
+    };
   }
 
-  if (timeInput.indexOf('+2') > 0 && timeInput.indexOf('+2') === (timeInput.length - 2)) {
+  if (timeInput.indexOf('+2') > 0 && timeInput.indexOf('+2') === timeInput.length - 2) {
     timeInput = timeInput.slice(0, -2);
     plus2 = true;
   }
@@ -42,19 +42,24 @@ export function parseTimeInput(input) {
   const time = moment(
     timeInput,
     [
-      'H:m:s.SSS', 'H:m:s.SS', 'H:m:s.S', 'H:m:s',
-      'm:s.SSS', 'm:s.SS', 'm:s.S', 'm:s',
-      's.SSS', 's.SS', 's.S', 's'
+      'H:m:s.SSS',
+      'H:m:s.SS',
+      'H:m:s.S',
+      'H:m:s',
+      'm:s.SSS',
+      'm:s.SS',
+      'm:s.S',
+      'm:s',
+      's.SSS',
+      's.SS',
+      's.S',
+      's'
     ],
     true
   );
 
-  const ms = (
-    (time.hour() * 3600000) +
-    (time.minute() * 60000) +
-    (time.second() * 1000) +
-    time.millisecond()
-  );
+  const ms =
+    time.hour() * 3600000 + time.minute() * 60000 + time.second() * 1000 + time.millisecond();
 
   if (!ms || ms <= 0 || isNaN(ms)) {
     return null;

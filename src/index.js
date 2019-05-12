@@ -15,7 +15,7 @@ const rootEl = document.querySelector(APP_ROOT_SELECTOR);
 ReactDOM.render(
   <Provider store={store}>
     <ShortcutProvider keymap={keymap}>
-      <AppContainer/>
+      <AppContainer />
     </ShortcutProvider>
   </Provider>,
   rootEl

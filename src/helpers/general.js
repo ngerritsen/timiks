@@ -11,7 +11,7 @@ export function generateArr(n) {
 export function sortBy(array, value) {
   return [...array].sort((a, b) => {
     if (a[value] < b[value]) {
-      return -1
+      return -1;
     } else if (a[value] > b[value]) {
       return 1;
     }

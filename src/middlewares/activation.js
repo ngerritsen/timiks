@@ -14,7 +14,7 @@ const activation = store => next => {
     onInitiate() {
       const { settings, timer } = getState();
       const { useInspectionTime, activationDuration, useManualTimeEntry } = settings;
-      const { inspectionMode } = timer;
+      const { inspecting } = timer;
 
       if (useManualTimeEntry) {
         return;
@@ -22,7 +22,7 @@ const activation = store => next => {
 
       scrollToTop();
 
-      if (useInspectionTime && !inspectionMode) {
+      if (useInspectionTime && !inspecting) {
         dispatch(actions.prepareInspection());
 
         timeout = setTimeout(() => {
@@ -41,7 +41,7 @@ const activation = store => next => {
 
       interval = countDown(() => {
         if (!isReady(getState())) {
-          dispatch(actions.incrementPreparationStage())
+          dispatch(actions.incrementPreparationStage());
           return;
         }
 
@@ -88,17 +88,14 @@ const activation = store => next => {
   });
 
   return action => next(action);
-}
+};
 
 function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
 function countDown(onIncrement, duration) {
-  return setInterval(
-    onIncrement,
-    duration / PREPARATION_STAGES
-  );
+  return setInterval(onIncrement, duration / PREPARATION_STAGES);
 }
 
 export default activation;

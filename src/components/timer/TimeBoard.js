@@ -8,11 +8,11 @@ const TimeBoard = () => {
   return (
     <div>
       <Section margin="sm">
-        <TimeTableContainer/>
+        <TimeTableContainer />
       </Section>
 
       <Section margin="sm">
-        <TimeBoardActionsContainer/>
+        <TimeBoardActionsContainer />
       </Section>
     </div>
   );

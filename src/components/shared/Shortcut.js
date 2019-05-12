@@ -32,7 +32,7 @@ Shortcut.propTypes = {
   updateShortcut: PropTypes.func.isRequired,
   command: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired
-}
+};
 
 const ShortcutAnchor = styled.span`
   display: none;

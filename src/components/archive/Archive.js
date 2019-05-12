@@ -18,45 +18,46 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime }) => 
     <Section margin="sm">
       <ArchiveOptions changePuzzle={changePuzzle} puzzle={puzzle} />
     </Section>
-    {
-      times.length === 0 &&
-      <Message>No {puzzle} solves in the archive.</Message>
-    }
-    {
-      times.length > 1 && 
+    {times.length === 0 && <Message>No {puzzle} solves in the archive.</Message>}
+    {times.length > 1 && (
       <Section margin="xs">
         <TimeGraph times={times} stats={stats} />
       </Section>
-    }
-    {
-      times.length > 0 &&
+    )}
+    {times.length > 0 && (
       <Section>
-      <TimeTiles>
-        {times.map(time =>
-          <ToggleContent
-            key={time.id}
-            toggle={({ show }) => (
-              <TimeTile onClick={show}>
-                <DateTag>{fillZeroes(String(time.date.getMonth()), 2)}/{fillZeroes(String(time.date.getDate()), 2)}</DateTag>
-                <strong><Time time={time}/></strong>
-              </TimeTile>
-            )}
-            content={({ hide }) => (
-              <Modal
-                title="Details"
-                onClose={hide}
-              >
-                <TimeDetails time={time} onRemoveTime={() => {
-                  hide();
-                  removeArchivedTime(time.id);
-                }}/>
-              </Modal>
-            )}
-          />
-        )}
-      </TimeTiles>
-    </Section>
-    }
+        <TimeTiles>
+          {times.map(time => (
+            <ToggleContent
+              key={time.id}
+              toggle={({ show }) => (
+                <TimeTile onClick={show}>
+                  <DateTag>
+                    {fillZeroes(String(time.date.getMonth()), 2)}/
+                    {fillZeroes(String(time.date.getDate()), 2)}
+                  </DateTag>
+                  <strong>
+                    <Time time={time} />
+                  </strong>
+                </TimeTile>
+              )}
+              content={({ hide }) => (
+                <Modal title="Details" onClose={hide}>
+                  <TimeDetails
+                    time={time}
+                    onClose={hide}
+                    onRemoveTime={() => {
+                      hide();
+                      removeArchivedTime(time.id);
+                    }}
+                  />
+                </Modal>
+              )}
+            />
+          ))}
+        </TimeTiles>
+      </Section>
+    )}
   </div>
 );
 
@@ -66,7 +67,7 @@ Archive.propTypes = {
   changePuzzle: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
   removeArchivedTime: PropTypes.func.isRequired
-}
+};
 
 const Message = styled.p`
   color: ${props => props.theme.colors.grey};

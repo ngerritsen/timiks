@@ -5,5 +5,5 @@ export function fillZeroes(stringNumber, length) {
     .map(() => '0')
     .join('');
 
-  return zeroes + stringNumber
+  return zeroes + stringNumber;
 }

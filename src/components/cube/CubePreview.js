@@ -6,11 +6,7 @@ import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../../constants/puzzle';
 import { layoutScramble } from '../../helpers/cube';
 import CubeFace from './CubeFace';
 
-const CUBE_LAYOUT = [
-  [null, UP, null, null],
-  [LEFT, FRONT, RIGHT, BACK],
-  [null, DOWN, null, null]
-]
+const CUBE_LAYOUT = [[null, UP, null, null], [LEFT, FRONT, RIGHT, BACK], [null, DOWN, null, null]];
 
 const CubePreview = ({ scramble, cubeSize }) => {
   const cube = layoutScramble(scramble, cubeSize);
@@ -22,19 +18,21 @@ const CubePreview = ({ scramble, cubeSize }) => {
             <Row key={y}>
               {row.map((face, x) => (
                 <CubeFace
-                key={x}
-                cubeSize={cubeSize}
-                face={face !== null ? cube[face] : undefined}
-              />
+                  key={x}
+                  cubeSize={cubeSize}
+                  face={face !== null ? cube[face] : undefined}
+                />
               ))}
             </Row>
           ))}
         </CubePreviewContainer>
       </CubePreviewScrollContainer>
-      <Note>* Scrambled <strong>white</strong> up, <strong>green</strong> front.</Note>
+      <Note>
+        * Scrambled <strong>white</strong> up, <strong>green</strong> front.
+      </Note>
     </div>
   );
-}
+};
 
 CubePreview.propTypes = {
   cubeSize: PropTypes.number,

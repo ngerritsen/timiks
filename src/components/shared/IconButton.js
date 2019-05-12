@@ -12,4 +12,4 @@ export default styled.button`
     opacity: 1;
     cursor: pointer;
   }
-`
+`;

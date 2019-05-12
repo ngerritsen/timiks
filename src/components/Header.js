@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 import SettingsContainer from '../containers/SettingsContainer';
 import KeyboardShortcuts from './KeyboardShortcuts';
@@ -9,13 +9,16 @@ const Header = () => (
   <HeaderBar>
     <Title>Timiks</Title>
     <nav>
-      <StyledNavLink activeClassName="selected" exact to="/">Timer</StyledNavLink>
-      <StyledNavLink activeClassName="selected" to="/archive">Archive</StyledNavLink>
+      <StyledNavLink activeClassName="selected" exact to="/">
+        Timer
+      </StyledNavLink>
+      <StyledNavLink activeClassName="selected" to="/archive">
+        Archive
+      </StyledNavLink>
       <IconContainer>
-        <KeyboardShortcuts/>
+        <KeyboardShortcuts />
       </IconContainer>
-      <SettingsContainer/>
-
+      <SettingsContainer />
     </nav>
   </HeaderBar>
 );
@@ -28,7 +31,7 @@ const HeaderBar = styled.header`
 
 const Title = styled.h1`
   position: relative;
-  z-index: ${props => props.theme.zIndices.onFullScreenMask}
+  z-index: ${props => props.theme.zIndices.onFullScreenMask};
 `;
 
 const IconContainer = styled.span`

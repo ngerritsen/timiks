@@ -1,35 +1,29 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 import Button from '../shared/Button';
 import Shortcut from '../shared/Shortcut';
 
-const TimeActions = ({
-  plus2,
-  togglePlus2LastTime,
-  dnf,
-  toggleDnfLastTime,
-  removeLastTime
-}) => (
+const TimeActions = ({ plus2, togglePlus2LastTime, dnf, toggleDnfLastTime, removeLastTime }) => (
   <StyledTimeActions>
     <TimeAction>
       <Shortcut command="plus2LastTime" action={togglePlus2LastTime} />
-      <Button
-        tiny tag
-        empty={!plus2}
-        onClick={togglePlus2LastTime}
-      >
+      <Button tiny tag empty={!plus2} onClick={togglePlus2LastTime}>
         +2
       </Button>
     </TimeAction>
 
     <Shortcut command="dnfLastTime" action={toggleDnfLastTime} />
     <TimeAction>
-      <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>DNF</Button>
+      <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>
+        DNF
+      </Button>
     </TimeAction>
     <TimeAction>
-      <Button tiny tag danger onClick={removeLastTime}>Remove</Button>
+      <Button tiny tag danger onClick={removeLastTime}>
+        Remove
+      </Button>
     </TimeAction>
   </StyledTimeActions>
 );

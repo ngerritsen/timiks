@@ -26,7 +26,7 @@ export default function settingsReducer(state = initialState, action) {
       return {
         ...state,
         theme: action.theme
-      }
+      };
     }
     case actionTypes.TOGGLE_MANUAL_TIME_ENTRY:
       return {

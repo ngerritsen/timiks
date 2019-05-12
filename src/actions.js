@@ -23,7 +23,13 @@ export const refreshScramble = () => ({ type: actionTypes.REFRESH_SCRAMBLE });
 // Times
 export const saveTime = (id, ms, date, scramble, puzzle, dnf = false, plus2 = false) => ({
   type: actionTypes.SAVE_TIME,
-  id, ms, date, scramble, puzzle, dnf, plus2
+  id,
+  ms,
+  date,
+  scramble,
+  puzzle,
+  dnf,
+  plus2
 });
 export const updateTime = (id, fields) => ({ type: actionTypes.UPDATE_TIME, id, fields });
 export const loadTimes = (current = [], archived = []) => ({

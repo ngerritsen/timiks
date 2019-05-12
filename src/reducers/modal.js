@@ -2,20 +2,20 @@ import { CLOSE_MODAL, OPEN_MODAL } from '../constants/actionTypes';
 
 const initialState = {
   current: ''
-}
+};
 
 function modal(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case OPEN_MODAL:
       return {
         ...state,
         current: action.id
-      }
+      };
     case CLOSE_MODAL:
       return {
         ...state,
         current: ''
-      }
+      };
     default:
       return state;
   }
