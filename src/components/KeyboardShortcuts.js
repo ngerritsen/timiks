@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/fontawesome-pro-solid'
@@ -6,30 +6,31 @@ import { faKeyboard } from '@fortawesome/fontawesome-pro-solid'
 import keymap from '../constants/keymap';
 import Section from './shared/Section';
 import IconButton from './shared/IconButton';
-import ModalContainer from '../containers/shared/ModalContainer';
+import ToggleContent from './ToggleContent';
 import Shortcut from './shared/Shortcut';
+import Modal from './shared/Modal';
 
 const KeyboardShortcuts = () => (
-  <ModalContainer
-    id="keyboardShortcuts"
-    title="Keyboard shortcuts"
-    toggle={openModal => (
-      <IconButton onClick={openModal}>
-        <Shortcut command="showKeyboardShortcuts" action={openModal} />
+  <ToggleContent
+    toggle={({ show }) => (
+      <IconButton onClick={show}>
+        <Shortcut command="showKeyboardShortcuts" action={show} />
         <FontAwesome icon={faKeyboard}/>
       </IconButton>
     )}
-    content={() => (
-      <div>
-        {keymap.map(mapping => (
-          <Section margin="sm" key={mapping.key}>
-            <KeyContainer>
-              <Key>{mapping.key}</Key>
-              <span>{mapping.description}</span>
-            </KeyContainer>
-          </Section>
-        ))}
-      </div>
+    content={({ hide }) => (
+      <Modal title="Keyboard shortcuts" onClose={hide}>
+        <Fragment>
+          {keymap.map(mapping => (
+            <Section margin="sm" key={mapping.key}>
+              <KeyContainer>
+                <Key>{mapping.key}</Key>
+                <span>{mapping.description}</span>
+              </KeyContainer>
+            </Section>
+          ))}
+        </Fragment>
+      </Modal>
     )}
   />
 );

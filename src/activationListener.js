@@ -66,7 +66,7 @@ function listenFor(
 ) {
   const preventDefaultListener = event => {
     event.preventDefault();
-  }
+  };
 
   const stopListener = (event) => {
     if (isValidStopEvent() && stopValidator(event)) {
@@ -75,7 +75,7 @@ function listenFor(
 
       onStop();
     }
-  }
+  };
 
   const initiateListener = (event) => {
     if (isValidActivationEvent(event) && initiateValidator(event)) {

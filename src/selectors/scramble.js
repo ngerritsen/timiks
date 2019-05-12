@@ -1,3 +1,1 @@
-export function getScramble(state) {
-  return state.scramble;
-}
+export const getScramble = state => state.scramble;

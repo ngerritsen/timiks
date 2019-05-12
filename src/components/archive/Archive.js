@@ -7,10 +7,11 @@ import styled from 'styled-components';
 import TimeDetails from '../timeTable/TimeDetails';
 import TimeGraph from '../timeTable/TimeGraph';
 import Section from '../shared/Section';
-import ModalContainer from '../../containers/shared/ModalContainer';
 import { fillZeroes } from '../../helpers/formatting';
 import Time from '../shared/Time';
 import ArchiveOptions from './ArchiveOptions';
+import Modal from '../shared/Modal';
+import ToggleContent from '../ToggleContent';
 
 const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime }) => (
   <div>
@@ -31,21 +32,26 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime }) => 
       times.length > 0 &&
       <Section>
       <TimeTiles>
-        {times.map((time, index) =>
-          <ModalContainer
-            key={index}
-            title="Details"
-            id={'timeDetails.' + time.id}
-            toggle={openModal => (
-              <TimeTile onClick={openModal}>
+        {times.map(time =>
+          <ToggleContent
+            key={time.id}
+            toggle={({ show }) => (
+              <TimeTile onClick={show}>
                 <DateTag>{fillZeroes(String(time.date.getMonth()), 2)}/{fillZeroes(String(time.date.getDate()), 2)}</DateTag>
                 <strong><Time time={time}/></strong>
               </TimeTile>
             )}
-            content={(close) => <TimeDetails time={time} onRemoveTime={() => {
-              close();
-              removeArchivedTime(time.id);
-            }}/>}
+            content={({ hide }) => (
+              <Modal
+                title="Details"
+                onClose={hide}
+              >
+                <TimeDetails time={time} onRemoveTime={() => {
+                  hide();
+                  removeArchivedTime(time.id);
+                }}/>
+              </Modal>
+            )}
           />
         )}
       </TimeTiles>

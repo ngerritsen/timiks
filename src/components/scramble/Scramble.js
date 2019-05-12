@@ -8,8 +8,9 @@ import * as CustomPropTypes from '../../propTypes';
 import IconButton from '../shared/IconButton';
 import ScrambleDetails from './ScrambleDetails';
 import Section from '../shared/Section';
-import ModalContainer from '../../containers/shared/ModalContainer';
 import Shortcut from '../shared/Shortcut';
+import Modal from '../shared/Modal';
+import ToggleContent from '../ToggleContent';
 
 const Scramble = ({ scramble, small, withDetails, puzzle, isPuzzleCube }) => (
   <div>
@@ -17,19 +18,22 @@ const Scramble = ({ scramble, small, withDetails, puzzle, isPuzzleCube }) => (
       {
         (withDetails && isPuzzleCube) &&
         <ScrambleIconButtonContainer>
-          <ModalContainer
-            id="scrambleDetails"
-            title="Scramble details"
-            toggle={openModal => (
-              <IconButton onClick={openModal}>
-                <Shortcut command="showScramble" action={openModal} />
+          <ToggleContent
+            toggle={({ show }) => (
+              <IconButton onClick={show}>
+                <Shortcut command="showScramble" action={show} />
                 <FontAwesome icon={faEye}/>
               </IconButton>
             )}
-            content={() => (
-              <Section margin="sm">
-                <ScrambleDetails scramble={scramble} puzzle={puzzle} />
-              </Section>
+            content={({ hide }) => (
+              <Modal
+                title="Scramble details"
+                onClose={hide}
+              >
+                <Section margin="sm">
+                  <ScrambleDetails scramble={scramble} puzzle={puzzle} />
+                </Section>
+              </Modal>
             )}
           />
         </ScrambleIconButtonContainer>

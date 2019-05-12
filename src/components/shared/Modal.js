@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/fontawesome-pro-solid';
@@ -13,62 +13,53 @@ import { MODAL_ROOT_SELECTOR } from '../../constants/app';
 class Modal extends React.Component {
   constructor(...args) {
     super(...args);
-    this.modal = React.createRef();
+    this.modal = null;
+    this.overlay = null;
+    this.onClickOverlay = this.onClickOverlay.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.isOpen && !prevProps.isOpen) {
-      this.modal.current.focus();
+  componentDidMount() {
+    if (this.modal) {
+      this.modal.focus();
+    }
+  }
+
+  onClickOverlay(event) {
+    if (event.target === this.overlay) {
+      this.props.onClose();
     }
   }
 
   render () {
-    const {
-      isOpen,
-      title,
-      toggle,
-      content,
-      openModal,
-      closeModal,
-    } = this.props;
+    const { title, children, onClose } = this.props;
 
     return (
-      <Fragment>
-        {toggle && toggle(openModal, isOpen)}
-        {
-          isOpen &&
-          ReactDOM.createPortal(
-            <ModalOverlay data-modal>
-              <ModalBox innerRef={this.modal} tabIndex={-1}>
-                <ModalHeader>
-                  <ModalTitle>{title}</ModalTitle>
-                  <IconButton
-                    color="subtleFg"
-                    onClick={closeModal}
-                  >
-                    <Shortcut command="closeModal" action={closeModal}/>
-                    <FontAwesome icon={faTimes}/>
-                  </IconButton>
-                </ModalHeader>
-                {content(closeModal)}
-              </ModalBox>
-            </ModalOverlay>,
-            document.querySelector(MODAL_ROOT_SELECTOR)
-          )
-        }
-      </Fragment>
+      ReactDOM.createPortal(
+        <ModalOverlay data-modal innerRef={el => { this.overlay = el }} onClick={this.onClickOverlay}>
+          <ModalBox innerRef={el => { this.modal = el }} tabIndex={-1}>
+            <ModalHeader>
+              <ModalTitle>{title}</ModalTitle>
+              <IconButton
+                color="subtleFg"
+                onClick={onClose}
+              >
+                <Shortcut command="closeModal" action={onClose}/>
+                <FontAwesome icon={faTimes}/>
+              </IconButton>
+            </ModalHeader>
+            {children}
+          </ModalBox>
+        </ModalOverlay>,
+        document.querySelector(MODAL_ROOT_SELECTOR)
+      )
     )
   }
 }
 
 Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  content: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  openModal: PropTypes.func.isRequired,
-  toggle: PropTypes.func,
-  showCloseButton: PropTypes.bool
+  onClose: PropTypes.func.isRequired
 };
 
 const ModalOverlay = styled.div`

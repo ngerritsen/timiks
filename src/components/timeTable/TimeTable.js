@@ -8,11 +8,12 @@ import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';
 import Time from '../shared/Time';
 import TimeGraph from './TimeGraph';
-import ModalContainer from '../../containers/shared/ModalContainer';
+import ToggleContent from '../ToggleContent';
 import IconButton from '../shared/IconButton';
 import TimeDetails from './TimeDetails';
 import Section from '../shared/Section';
 import Tag from '../shared/Tag';
+import Modal from '../shared/Modal';
 
 const TimeTable = ({ stats, removeTime, times }) => {
   const noDnfTimes = times.filter(time => !time.dnf);
@@ -34,24 +35,25 @@ const TimeTable = ({ stats, removeTime, times }) => {
                 Best
               </SubtleHeadingCell>
               <HeadingCell rightAlign>
-                <ModalContainer
-                  title="Stats"
-                  id="statsInfo"
-                  toggle={openModal => (
-                    <QuestionIconButton onClick={openModal}>
+                <ToggleContent
+                  toggle={({ show }) => (
+                    <QuestionIconButton onClick={show}>
                       <FontAwesome icon={faQuestionCircle} size="sm" />
                     </QuestionIconButton>
+
                   )}
-                  content={() => (
-                    <Section margin="sm">
-                      <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
+                  content={({ hide }) => (
+                    <Modal title="Stats" onClose={hide}>
+                      <Section margin="sm">
+                        <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
 
-                      <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
+                        <p>When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown (best average of 3 consecutive solves).</p>
 
-                      <p>After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve) will be shown (<strong>ao5</strong>). After that it will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.</p>
+                        <p>After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve) will be shown (<strong>ao5</strong>). After that it will continue with: <strong>ao12, ao25, ao50* and ao100*</strong>.</p>
 
-                      <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
-                    </Section>
+                        <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
+                      </Section>
+                    </Modal>
                   )}
                 />
               </HeadingCell>
@@ -137,24 +139,28 @@ const TimeTable = ({ stats, removeTime, times }) => {
                   }
                 </Cell>
                 <Cell rightAlign>
-                  <ModalContainer
-                    title="Details"
-                    id={'timeDetails.' + time.id}
-                    toggle={openModal => (
-                      <InfoIconButton onClick={openModal}>
+                  <ToggleContent
+                    toggle={({ show }) => (
+                      <InfoIconButton onClick={show}>
                         <FontAwesome icon={faInfoCircle} size="sm" />
                       </InfoIconButton>
                     )}
-                    content={(close) => <TimeDetails time={time} onRemoveTime={() => {
-                      close();
-                      removeTime(time.id);
-                    }}/>}
+                    content={({ hide }) => (
+                      <Modal
+                        title="Details"
+                        onClose={hide}
+                      >
+                        <TimeDetails time={time} onRemoveTime={() => {
+                          hide();
+                          removeTime(time.id);
+                        }}/>
+                      </Modal>
+                    )}
                   />
-                  {
-                    <RemoveItemIconButton onClick={() => removeTime(time.id)}>
-                      <FontAwesome icon={faTimes} size="sm" />
-                    </RemoveItemIconButton>
-                  }
+                  <RemoveItemIconButton onClick={() => removeTime(time.id)}>
+                    <FontAwesome icon={faTimes} size="sm" />
+                  </RemoveItemIconButton>
+
                 </Cell>
               </tr>
             ))}

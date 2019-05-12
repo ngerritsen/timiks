@@ -3,17 +3,9 @@ import { markBestTime, calculateStats } from '../helpers/times';
 import { createSelector } from 'reselect';
 import { getLastTimeId } from './timer';
 
-export function getCurrentTimes(state) {
-  return state.times.current;
-}
-
-export function getArchivedTimes(state) {
-  return state.times.archived;
-}
-
-export function hasCurrentTimes(state) {
-  return state.times.current.length > 0;
-}
+export const getCurrentTimes = state => state.times.current;
+export const getArchivedTimes = state => state.times.archived;
+export const hasCurrentTimes = state => state.times.current.length > 0;
 
 export const getLastTime = createSelector(
   getCurrentTimes,
