@@ -126,7 +126,6 @@ const TimeTableColumn = styled.div`
 
 const GraphContainer = styled.div`
   padding-top: ${props => props.theme.sizes.sm};
-  border-bottom: 1px solid ${props => props.theme.colors.grey};
 `;
 
 const HeadingCell = styled.th`

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 
 import * as CustomPropTypes from '../../propTypes';
 import styled from 'styled-components';
@@ -97,13 +97,14 @@ const TimeTiles = styled.div`
 const TimeTile = styled.div`
   position: relative;
   text-align: center;
+  border: 1px solid ${props => props.theme.colors.grey};
   padding: ${props => props.theme.sizes.md} ${props => props.theme.sizes.sm};
-  background-color: ${props => props.theme.colors.subtleBg};
   border-radius: 3px;
   cursor: pointer;
 
   :hover {
-    background-color: ${props => darken(0.1, props.theme.colors.subtleBg)};
+    background-color: ${props =>
+      (props.theme.dark ? lighten : darken)(0.075, props.theme.colors.bg)};
   }
 `;
 

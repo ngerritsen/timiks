@@ -6,7 +6,7 @@ import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 
 import * as CustomPropTypes from '../../propTypes';
-import { getMs } from '../../helpers/time';
+import { formatShortTime, formatTime, getMs } from '../../helpers/time';
 
 import { AVAILABLE_STATS } from '../../constants/app';
 
@@ -25,7 +25,7 @@ const TimeGraph = ({ times, stats, theme }) => {
   });
 
   const data = {
-    labels: times.map(time => moment(time.date).format("D/MM/YY'")),
+    labels: times.map(time => moment(time.date).format('D/MM/YYYY')),
     datasets: [getLineConfig('single', theme.colors.blue, times.map(getMs))]
   };
 
@@ -52,6 +52,15 @@ const TimeGraph = ({ times, stats, theme }) => {
       },
       position: 'bottom'
     },
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem, data) => {
+          const label = data.datasets[tooltipItem.datasetIndex].label;
+
+          return label + ': ' + formatTime(tooltipItem.yLabel);
+        }
+      }
+    },
     scales: {
       xAxes: [
         {
@@ -60,7 +69,9 @@ const TimeGraph = ({ times, stats, theme }) => {
       ],
       yAxes: [
         {
-          display: false
+          ticks: {
+            callback: formatShortTime
+          }
         }
       ]
     }

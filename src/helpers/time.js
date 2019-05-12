@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { fillZeroes } from './formatting';
 
 const MS_IN_SECONDS = 1000;
 const SECONDS_IN_MINUTES = 60;
@@ -16,6 +17,27 @@ export function breakUpTime(ms) {
   milliseconds -= seconds * MS_IN_SECONDS;
 
   return { minutes, seconds, milliseconds };
+}
+
+export function formatShortTime(ms) {
+  const { minutes, seconds, milliseconds } = breakUpTime(ms);
+  return (
+    (minutes > 0 ? minutes + ':' : '') +
+    fillZeroes(String(seconds), 2) +
+    '.' +
+    Math.round(milliseconds / 100)
+  );
+}
+
+export function formatTime(ms) {
+  const { minutes, seconds, milliseconds } = breakUpTime(ms);
+  return (
+    fillZeroes(String(minutes), 2) +
+    ':' +
+    fillZeroes(String(seconds), 2) +
+    '.' +
+    fillZeroes(String(milliseconds), 3)
+  );
 }
 
 export function parseTimeInput(input) {
