@@ -62,7 +62,7 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
         {showGraph && (
           <Section margin="xs">
             <GraphContainer>
-              <TimeGraph times={noDnfTimes} forSession />
+              <TimeGraph stats={stats} times={noDnfTimes} />
             </GraphContainer>
           </Section>
         )}
