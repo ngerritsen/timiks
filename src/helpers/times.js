@@ -1,6 +1,5 @@
 import { generateArr } from './general';
 import { getMs } from './time';
-import moment from 'moment';
 
 export function calculateStats(times) {
   return {
@@ -11,10 +10,6 @@ export function calculateStats(times) {
     ao100: calculateAveragesOf(times, 100, 5),
     mo3: calculateAveragesOf(times, 3, 0)
   };
-}
-
-export function getFormattedDay(time) {
-  return moment(time.date).format('D/MM/YYYY');
 }
 
 function calculateAveragesOf(times, amount, deviation = 1) {

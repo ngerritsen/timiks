@@ -9,7 +9,6 @@ import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, formatTime, getMs } from '../../helpers/time';
 
 import { AVAILABLE_STATS } from '../../constants/app';
-import { getFormattedDay } from '../../helpers/times';
 
 const TimeGraph = ({ times, stats, theme }) => {
   const getLineConfig = (label, color, data) => ({
@@ -26,7 +25,7 @@ const TimeGraph = ({ times, stats, theme }) => {
   });
 
   const data = {
-    labels: times.map(getFormattedDay),
+    labels: times.map(time => moment(time.date).format('lll')),
     datasets: [getLineConfig('single', theme.colors.blue, times.map(getMs))]
   };
 
