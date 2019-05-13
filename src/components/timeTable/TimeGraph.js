@@ -71,6 +71,11 @@ const TimeGraph = ({ times, stats, theme }) => {
         {
           ticks: {
             callback: formatShortTime
+          },
+          gridLines: {
+            color: theme.colors.subtleBg,
+            tickMarkLength: 7,
+            drawBorder: false
           }
         }
       ]
