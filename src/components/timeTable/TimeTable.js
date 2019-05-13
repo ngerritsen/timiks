@@ -13,7 +13,7 @@ import Section from '../shared/Section';
 import Tag from '../shared/Tag';
 import Modal from '../shared/Modal';
 import TimeTableTimeRow from './TimeTableTimeRow';
-import { Cell, Tables } from '../shared/Tables';
+import { Cell, HeadingCell, SubtleHeadingCell, Tables } from '../shared/Tables';
 import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
 
@@ -126,17 +126,6 @@ const TimeTableColumn = styled.div`
 
 const GraphContainer = styled.div`
   padding-top: ${props => props.theme.sizes.sm};
-`;
-
-const HeadingCell = styled.th`
-  text-align: ${props => (props.rightAlign ? 'right' : 'left')};
-  border-bottom: 2px solid ${props => props.theme.colors.grey};
-  height: 3.6rem;
-  font-weight: bold;
-`;
-
-const SubtleHeadingCell = HeadingCell.extend`
-  font-weight: normal;
 `;
 
 const QuestionIconButton = IconButton.extend`
