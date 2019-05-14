@@ -20,8 +20,8 @@ export function serializeTimes(times) {
     puzzle: time.puzzle,
     scramble: serializeScramble(time.scramble),
     date: time.date.toISOString(),
-    dnf: Boolean(time.dnf),
-    plus2: Boolean(time.plus2)
+    dnf: time.dnf || undefined,
+    plus2: time.plus2 || undefined
   }));
 }
 

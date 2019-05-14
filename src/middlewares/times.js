@@ -1,15 +1,16 @@
-import {
-  SAVE_TIME,
-  REMOVE_TIME,
-  CLEAR_TIMES,
-  ARCHIVE_TIMES,
-  REMOVE_ARCHIVED_TIME
-} from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import { loadTimes } from '../actions';
 import * as timesRepository from '../repositories/timesRepository';
 import { getArchivedTimes, getCurrentTimes } from '../selectors/times';
 
-const storeActions = [SAVE_TIME, REMOVE_TIME, CLEAR_TIMES, ARCHIVE_TIMES, REMOVE_ARCHIVED_TIME];
+const storeActions = [
+  actionTypes.SAVE_TIME,
+  actionTypes.REMOVE_TIME,
+  actionTypes.CLEAR_TIMES,
+  actionTypes.UPDATE_TIME,
+  actionTypes.ARCHIVE_TIMES,
+  actionTypes.REMOVE_ARCHIVED_TIME
+];
 
 const times = store => next => {
   const current = timesRepository.getCurrent();
