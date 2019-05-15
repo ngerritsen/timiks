@@ -1,6 +1,6 @@
 import * as actionTypes from '../constants/actionTypes';
 import { loadTimes } from '../actions';
-import * as timesRepository from '../repositories/timesRepository';
+import * as timesRepository from '../repositories/localTimes';
 import { getArchivedTimes, getCurrentTimes } from '../selectors/times';
 
 const storeActions = [

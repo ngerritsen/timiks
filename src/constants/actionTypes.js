@@ -25,6 +25,11 @@ export const CLEAR_TIMES = 'CLEAR_TIMES';
 export const LOAD_TIMES = 'LOAD_TIMES';
 export const ARCHIVE_TIMES = 'ARCHIVE_TIMES';
 
+// Authentication
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+
 // Settings
 export const TOGGLE_MANUAL_TIME_ENTRY = 'TOGGLE_MANUAL_TIME_ENTRY';
 export const CHANGE_ACTIVATION_DURATION = 'CHANGE_ACTIVATION_DURATION';

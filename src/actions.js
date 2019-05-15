@@ -16,6 +16,11 @@ export const skipPreparationStage = () => ({ type: actionTypes.SKIP_PREPARATION_
 export const resetActivation = () => ({ type: actionTypes.RESET_ACTIVATION });
 export const incrementPreparationStage = () => ({ type: actionTypes.INCREMENT_PREPARATION_STAGE });
 
+// Authentication
+export const login = () => ({ type: actionTypes.LOGIN });
+export const loginSucceeded = userId => ({ type: actionTypes.LOGIN_SUCCEEDED, userId });
+export const loginFailed = () => ({ type: actionTypes.LOGIN_FAILED });
+
 // Scramble
 export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });
 export const refreshScramble = () => ({ type: actionTypes.REFRESH_SCRAMBLE });

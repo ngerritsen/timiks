@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './firebase';
+
 import keymap from './constants/keymap';
 import { APP_ROOT_SELECTOR } from './constants/app';
 import AppContainer from './containers/AppContainer';

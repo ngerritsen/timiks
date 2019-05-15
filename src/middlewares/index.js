@@ -4,5 +4,6 @@ import settings from './settings';
 import scramble from './scramble';
 import timer from './timer';
 import times from './times';
+import authentication from './authentication';
 
-export default [activation, noSleep, settings, scramble, timer, times];
+export default [activation, authentication, noSleep, settings, scramble, timer, times];

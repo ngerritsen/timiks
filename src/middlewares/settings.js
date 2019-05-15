@@ -1,6 +1,6 @@
 import * as actionTypes from '../constants/actionTypes';
 import { loadSettings } from '../actions';
-import * as settingsRepository from '../repositories/settingsRepository';
+import * as settingsRepository from '../repositories/settings';
 import { getSettings } from '../selectors/settings';
 
 const STORE_SETTINGS_ON = [

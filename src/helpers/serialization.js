@@ -2,7 +2,11 @@ import shortid from 'shortid';
 import * as constants from '../constants/app';
 
 export function parseTimes(rawTimes) {
-  return rawTimes.map(raw => ({
+  return rawTimes.map(parseTime);
+}
+
+export function parseTime(raw) {
+  return {
     id: raw.id,
     ms: raw.ms,
     puzzle: raw.puzzle,
@@ -10,11 +14,15 @@ export function parseTimes(rawTimes) {
     date: new Date(raw.date),
     dnf: Boolean(raw.dnf),
     plus2: Boolean(raw.plus2)
-  }));
+  };
 }
 
 export function serializeTimes(times) {
-  return times.map(time => ({
+  return times.map(serializeTime);
+}
+
+export function serializeTime(time) {
+  return {
     id: time.id || shortid.generate(),
     ms: time.ms,
     puzzle: time.puzzle,
@@ -22,7 +30,7 @@ export function serializeTimes(times) {
     date: time.date.toISOString(),
     dnf: time.dnf || undefined,
     plus2: time.plus2 || undefined
-  }));
+  };
 }
 
 function serializeScramble(scramble) {
