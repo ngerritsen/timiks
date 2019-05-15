@@ -7,12 +7,15 @@ export function login() {
     handleCodeInApp: true
   };
 
+  alert('trying to login with: ' + 'window.location.origin');
+
   return firebase
     .auth()
     .sendSignInLinkToEmail(email, actionCodeSettings)
     .then(() => {
       window.localStorage.setItem('emailForSignIn', email);
-    });
+    })
+    .catch(error => alert(error.message));
 }
 
 export function verifyLogin() {
