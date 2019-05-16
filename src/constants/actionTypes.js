@@ -29,6 +29,12 @@ export const ARCHIVE_TIMES = 'ARCHIVE_TIMES';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const LOGOUT = 'LOGOUT';
+export const LOGOUT_SUCCEEDED = 'LOGOUT_SUCCEEDED';
+export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+export const SIGN_UP = 'SIGN_UP';
+export const SIGN_UP_SUCCEEDED = 'SIGN_UP_SUCCEEDED';
+export const SIGN_UP_FAILED = 'SIGN_UP_FAILED';
 
 // Settings
 export const TOGGLE_MANUAL_TIME_ENTRY = 'TOGGLE_MANUAL_TIME_ENTRY';

@@ -1,20 +1,24 @@
 import * as authenticationService from '../services/authentication';
-import { LOGIN } from '../constants/actionTypes';
-import { loginSucceeded } from '../actions';
+import { LOGIN, LOGOUT } from '../constants/actionTypes';
+import { loginSucceeded, logoutSucceeded, logoutFailed } from '../actions';
 
 const authentication = store => next => {
-  authenticationService.verifyLogin();
-
   authenticationService.onLoggedIn(user => {
     if (user) {
       store.dispatch(loginSucceeded(user));
-      alert('Logged in ' + user.uid);
     }
   });
 
   return action => {
     if (action.type === LOGIN) {
-      authenticationService.login();
+      authenticationService.login(action.user, action.password);
+    }
+
+    if (action.type === LOGOUT) {
+      authenticationService
+        .logout()
+        .then(() => store.dispatch(logoutSucceeded))
+        .catch(() => store.dispatch(logoutFailed));
     }
 
     return next(action);

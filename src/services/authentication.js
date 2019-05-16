@@ -1,38 +1,24 @@
 import * as firebase from 'firebase/app';
 
-export function login() {
-  const email = 'n.c.gerritsen@gmail.com';
-  const actionCodeSettings = {
-    url: window.location.origin,
-    handleCodeInApp: true
-  };
+firebase
+  .auth()
+  .getRedirectResult()
+  .then(function(result) {
+    if (result.credential) {
+      alert(result.credential.accessToken);
+    }
+  });
 
-  alert('trying to login with: ' + 'window.location.origin');
-
-  return firebase
-    .auth()
-    .sendSignInLinkToEmail(email, actionCodeSettings)
-    .then(() => {
-      window.localStorage.setItem('emailForSignIn', email);
-    })
-    .catch(error => alert(error.message));
+export function login(email, password) {
+  return firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
-export function verifyLogin() {
-  if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-    const email = window.localStorage.getItem('emailForSignIn');
+export function logout() {
+  return firebase.auth().signOut();
+}
 
-    if (!email) {
-      alert('Invalid login.');
-    }
-
-    firebase
-      .auth()
-      .signInWithEmailLink(email, window.location.href)
-      .then(() => {
-        window.localStorage.removeItem('emailForSignIn');
-      });
-  }
+export function signUp(email, password) {
+  return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
 
 export function onLoggedIn(callback) {

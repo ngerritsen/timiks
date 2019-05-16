@@ -18,8 +18,7 @@ const Settings = ({
   changeActivationDuration,
   toggleInspectionTime,
   changeTheme,
-  toggleManualTimeEntry,
-  login
+  toggleManualTimeEntry
 }) => (
   <span>
     <ToggleContent
@@ -77,12 +76,7 @@ const Settings = ({
                 *For how long you have to hold spacebar, mouse or touch before starting the timer.
               </i>
             </Section>
-            <Section margin="sm">
-              <Button onClick={hide}>Close</Button>
-            </Section>
-            <Button empty fg onClick={login}>
-              Login
-            </Button>
+            <Button onClick={hide}>Close</Button>
           </>
         </Modal>
       )}
@@ -103,7 +97,6 @@ const Checkbox = styled.input`
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
   changeActivationDuration: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
   toggleInspectionTime: PropTypes.func.isRequired,
   toggleManualTimeEntry: PropTypes.func.isRequired,
   changeTheme: PropTypes.func.isRequired

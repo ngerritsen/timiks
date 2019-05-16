@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import SettingsContainer from '../containers/SettingsContainer';
 import KeyboardShortcuts from './KeyboardShortcuts';
+import Sync from './Sync';
 
 const Header = () => (
   <HeaderBar>
@@ -18,7 +19,10 @@ const Header = () => (
       <IconContainer>
         <KeyboardShortcuts />
       </IconContainer>
-      <SettingsContainer />
+      <IconContainer>
+        <SettingsContainer />
+      </IconContainer>
+      <Sync />
     </nav>
   </HeaderBar>
 );
