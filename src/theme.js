@@ -8,10 +8,12 @@ const FLUO_ORANGE = '#fca344';
 const PURPLE = '#6f42c1';
 const FLUO_YELLOW = '#fff244';
 const FLUO_RED = '#fc355c';
+const RED = '#d2273d';
 const LIGHT_BLUE = '#3fb8ff';
 const BLUE = '#1f93e0';
 const GREEN = '#22e24b';
 const FLUO_GREEN = '#3fff78';
+const GOOGLE_RED = '#f95555';
 
 const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
@@ -31,7 +33,11 @@ export const light = {
     yellow: FLUO_YELLOW,
     green: GREEN,
     blue: BLUE,
-    red: FLUO_RED
+    red: RED,
+    fluoRed: FLUO_RED,
+    fluoGreen: FLUO_GREEN,
+    lightBlue: LIGHT_BLUE,
+    googleRed: GOOGLE_RED
   },
   puzzleColors: {
     [puzzleColors.WHITE]: WHITE,

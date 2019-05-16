@@ -4,7 +4,8 @@ import { lighten, transparentize } from 'polished';
 const propColorMap = {
   primary: 'primary',
   danger: 'red',
-  fg: 'fg'
+  neutral: 'subtleFg',
+  google: 'googleRed'
 };
 
 const Button = styled.button.attrs({
@@ -40,5 +41,11 @@ const Button = styled.button.attrs({
         : lighten(props.disabled ? 0 : 0.03, props.color)};
   }
 `;
+
+const ButtonIcon = styled.span`
+  margin-right: ${props => props.theme.sizes.sm};
+`;
+
+export { ButtonIcon };
 
 export default Button;

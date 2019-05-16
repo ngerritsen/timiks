@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import SettingsContainer from '../containers/SettingsContainer';
 import KeyboardShortcuts from './KeyboardShortcuts';
-import Sync from './Sync';
+import AccountContainer from '../containers/AccountContainer';
 
 const Header = () => (
   <HeaderBar>
@@ -22,7 +22,7 @@ const Header = () => (
       <IconContainer>
         <SettingsContainer />
       </IconContainer>
-      <Sync />
+      <AccountContainer />
     </nav>
   </HeaderBar>
 );

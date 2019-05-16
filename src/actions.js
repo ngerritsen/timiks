@@ -17,15 +17,17 @@ export const resetActivation = () => ({ type: actionTypes.RESET_ACTIVATION });
 export const incrementPreparationStage = () => ({ type: actionTypes.INCREMENT_PREPARATION_STAGE });
 
 // Authentication
-export const login = (email, password) => ({ type: actionTypes.LOGIN, email, password });
-export const loginSucceeded = userId => ({ type: actionTypes.LOGIN_SUCCEEDED, userId });
+export const login = () => ({ type: actionTypes.LOGIN });
+export const loginSucceeded = (userId, displayName, email) => ({
+  type: actionTypes.LOGIN_SUCCEEDED,
+  userId,
+  displayName,
+  email
+});
 export const loginFailed = () => ({ type: actionTypes.LOGIN_FAILED });
 export const logout = () => ({ type: actionTypes.LOGOUT });
 export const logoutSucceeded = () => ({ type: actionTypes.LOGOUT_SUCCEEDED });
 export const logoutFailed = () => ({ type: actionTypes.LOGOUT_FAILED });
-export const signUp = (email, password) => ({ type: actionTypes.SIGN_UP, email, password });
-export const signUpSucceeded = () => ({ type: actionTypes.SIGN_UP_SUCCEEDED });
-export const signUpFailed = () => ({ type: actionTypes.SIGN_UP_FAILED });
 
 // Scramble
 export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });

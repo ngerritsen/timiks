@@ -39,7 +39,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                   </Button>
                 </ButtonDuoItem>
                 <ButtonDuoItem>
-                  <Button fg empty onClick={hide}>
+                  <Button neutral empty onClick={hide}>
                     Cancel
                   </Button>
                 </ButtonDuoItem>
@@ -77,7 +77,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                   </Button>
                 </ButtonDuoItem>
                 <ButtonDuoItem>
-                  <Button fg empty onClick={hide}>
+                  <Button neutral empty onClick={hide}>
                     Cancel
                   </Button>
                 </ButtonDuoItem>

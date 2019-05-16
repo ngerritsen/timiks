@@ -4,8 +4,7 @@ import {
   toggleInspectionTime,
   changeTheme,
   changeActivationDuration,
-  toggleManualTimeEntry,
-  login
+  toggleManualTimeEntry
 } from '../actions';
 import Settings from '../components/Settings';
 import { getSettings } from '../selectors/settings';
@@ -22,7 +21,6 @@ export default connect(
     toggleInspectionTime,
     changeTheme,
     changeActivationDuration,
-    toggleManualTimeEntry,
-    login
+    toggleManualTimeEntry
   }
 )(Settings);
