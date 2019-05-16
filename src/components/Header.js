@@ -43,11 +43,11 @@ const IconContainer = styled.span`
 `;
 
 const StyledNavLink = styled(NavLink)`
-  margin-right: ${props => props.theme.sizes.sm};
+  margin-right: 1.2rem;
   color: ${props => props.theme.colors.fg};
   font-weight: bold;
   text-decoration: none;
-  padding-bottom: 2px;
+  padding-bottom: 1px;
 
   &:hover,
   &:focus,

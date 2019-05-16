@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/fontawesome-pro-solid';
@@ -10,57 +10,44 @@ import Shortcut from './Shortcut';
 import IconButton from './IconButton';
 import { MODAL_ROOT_SELECTOR } from '../../constants/app';
 
-class Modal extends React.Component {
-  constructor(...args) {
-    super(...args);
-    this.modal = null;
-    this.overlay = null;
-    this.onClickOverlay = this.onClickOverlay.bind(this);
-  }
+const Modal = ({ title, onClose, children }) => {
+  const modalRef = useRef(null);
+  const overlayRef = useRef(null);
 
-  componentDidMount() {
-    if (this.modal) {
-      this.modal.focus();
+  useEffect(() => {
+    if (modalRef) {
+      modalRef.current.focus();
     }
-  }
 
-  onClickOverlay(event) {
-    if (event.target === this.overlay) {
-      this.props.onClose();
+    document.body.classList.add('with-modal');
+
+    return () => {
+      document.body.classList.remove('with-modal');
+    };
+  });
+
+  const onClickOverlay = event => {
+    if (event.target === overlayRef.current) {
+      onClose();
     }
-  }
+  };
 
-  render() {
-    const { title, children, onClose } = this.props;
-
-    return ReactDOM.createPortal(
-      <ModalOverlay
-        data-modal
-        innerRef={el => {
-          this.overlay = el;
-        }}
-        onClick={this.onClickOverlay}
-      >
-        <ModalBox
-          innerRef={el => {
-            this.modal = el;
-          }}
-          tabIndex={-1}
-        >
-          <ModalHeader>
-            <ModalTitle>{title}</ModalTitle>
-            <IconButton color="subtleFg" onClick={onClose}>
-              <Shortcut command="closeModal" action={onClose} />
-              <FontAwesome icon={faTimes} />
-            </IconButton>
-          </ModalHeader>
-          {children}
-        </ModalBox>
-      </ModalOverlay>,
-      document.querySelector(MODAL_ROOT_SELECTOR)
-    );
-  }
-}
+  return ReactDOM.createPortal(
+    <ModalOverlay data-modal innerRef={overlayRef} onClick={onClickOverlay}>
+      <ModalBox innerRef={modalRef} tabIndex={-1}>
+        <ModalHeader>
+          <ModalTitle>{title}</ModalTitle>
+          <IconButton color="subtleFg" onClick={onClose}>
+            <Shortcut command="closeModal" action={onClose} />
+            <FontAwesome icon={faTimes} />
+          </IconButton>
+        </ModalHeader>
+        {children}
+      </ModalBox>
+    </ModalOverlay>,
+    document.querySelector(MODAL_ROOT_SELECTOR)
+  );
+};
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
@@ -88,7 +75,7 @@ const ModalBox = styled.div`
   padding: ${props => props.theme.sizes.sm};
   width: 100%;
   max-width: 540px;
-  max-height: calc(100vh - ${props => props.theme.sizes.sm});
+  max-height: calc(100vh - ${props => props.theme.sizes.xl});
   overflow: auto;
 
   &:focus {
