@@ -7,7 +7,7 @@ function mapStateToProps(state) {
   return {
     scramble: getScramble(state),
     puzzle: getPuzzle(state),
-    puzzleIsCube: isPuzzleCube(state),
+    isPuzzleCube: isPuzzleCube(state),
     withDetails: true
   };
 }
