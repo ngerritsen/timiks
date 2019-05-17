@@ -36,7 +36,8 @@
       body {
         font-family: 'Barlow', Arial, sans-serif;
         font-size: 1.6rem;
-        height: 100%;
+        min-height: 100%;
+        padding: 1.6rem 0 3.2rem;
       }
 
       body.is-dark {
@@ -51,7 +52,7 @@
       .container {
         max-width: 72rem;
         margin: 0 auto;
-        padding: 1.6rem 1.6rem 3.2rem;
+        padding: 0 1.6rem;
       }
 
       h1 {
@@ -70,12 +71,36 @@
         }
       }
 
+      footer {
+        color: #898989;
+        text-align: center;
+        font-size: 0.9em;
+        padding-top: 1.6rem;
+      }
+
+      footer p {
+        margin: 0 0 0.8rem;
+      }
+
+      footer a,
+      footer a:visited,
+      footer a:hover,
+      footer a:focus,
+      footer a:active {
+        color: #898989;
+        text-decoration: underline;
+      }
+
+      .separator {
+        margin: 0 0.8rem;
+      }
+
       .loader {
         display: block;
         height: 4rem;
-        color: #666;
+        color: #777;
         width: 4rem;
-        margin: 20% auto 25%;
+        margin: 25vh auto 30vh;
         animation: spin 2s infinite linear;
       }
     </style>
@@ -107,9 +132,19 @@
         </main>
       </div>
     </div>
+
     <div id="modal-root"></div>
     <div id="full-screen-mask"></div>
-    <p>Build <%= process.env.TRAVIS_BUILD_NUMBER || '0' %></p>
+
+    <footer>
+        <p><a href="https://github.com/ngerritsen/timiks/issues" target="_blank">Report bugs or suggestions</a></p>
+        <p>
+            <span class="build-number">Build <%= htmlWebpackPlugin.options.buildNumber %></span>
+            <span class="separator">|</span>
+            <a href="#" onclick="window.location.reload(true);">Reload</a>
+        </p>
+    </footer>
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39696629-4"></script>
@@ -118,7 +153,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'UA-39696629-4');
+      gtag('config', '<%= htmlWebpackPlugin.options.analytics %>');
     </script>
 
     <script>
