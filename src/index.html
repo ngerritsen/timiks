@@ -74,12 +74,8 @@
       footer {
         color: #898989;
         text-align: center;
-        font-size: 0.9em;
+        font-size: 0.85em;
         padding-top: 1.6rem;
-      }
-
-      footer p {
-        margin: 0 0 0.8rem;
       }
 
       footer a,
@@ -92,7 +88,7 @@
       }
 
       .separator {
-        margin: 0 0.8rem;
+        margin: 0 0.4rem;
       }
 
       .loader {
@@ -137,12 +133,11 @@
     <div id="full-screen-mask"></div>
 
     <footer>
-        <p><a href="https://github.com/ngerritsen/timiks/issues" target="_blank">Report bugs or suggestions</a></p>
-        <p>
-            <span class="build-number">Build <%= htmlWebpackPlugin.options.buildNumber %></span>
-            <span class="separator">|</span>
-            <a href="#" onclick="window.location.reload(true);">Reload</a>
-        </p>
+        <span class="build-number">Build <%= htmlWebpackPlugin.options.buildNumber %></span>
+        <span class="separator">|</span>
+        <a href="https://github.com/ngerritsen/timiks/issues" target="_blank">Report bugs or suggestions</a>
+        <span class="separator">|</span>
+        <a href="#" onclick="window.location.reload(true);">Reload</a>
     </footer>
 
 
