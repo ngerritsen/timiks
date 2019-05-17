@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten, transparentize } from 'polished';
+import { darken, transparentize, desaturate } from 'polished';
 
 const propColorMap = {
   primary: 'primary',
@@ -38,7 +38,7 @@ const Button = styled.button.attrs({
     background-color: ${props =>
       props.empty
         ? transparentize(0.75, props.color)
-        : lighten(props.disabled ? 0 : 0.03, props.color)};
+        : desaturate(props.disabled ? 0 : 0.06, darken(props.disabled ? 0 : 0.06, props.color))};
   }
 `;
 

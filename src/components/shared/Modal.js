@@ -75,7 +75,7 @@ const ModalBox = styled.div`
   padding: ${props => props.theme.sizes.sm};
   width: 100%;
   max-width: 540px;
-  max-height: calc(100vh - ${props => props.theme.sizes.xl});
+  max-height: calc(100% - ${props => props.theme.sizes.md});
   overflow: auto;
 
   &:focus {
