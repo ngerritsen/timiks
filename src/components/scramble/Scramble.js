@@ -58,6 +58,8 @@ const ScrambleBox = styled.p`
   margin: 0;
   font-weight: bold;
   border-radius: 3px;
+  max-height: ${props => (props.small ? '' : '16rem')};
+  overflow-y: auto;
 `;
 
 const Move = styled.span`
