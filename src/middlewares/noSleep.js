@@ -3,12 +3,14 @@ import NoSleep from 'nosleep.js/dist/NoSleep.js';
 import * as actionTypes from '../constants/actionTypes';
 import { isStopped } from '../selectors/timer';
 
-const noSleepInstance = new NoSleep();
+let noSleepInstance = new NoSleep();
 
 const noSleep = store => next => action => {
   switch (action.type) {
     case actionTypes.PREPARE_ACTIVATION:
     case actionTypes.SKIP_PREPARATION_STAGE:
+      noSleepInstance.disable();
+      noSleepInstance = new NoSleep();
       noSleepInstance.enable();
       break;
     case actionTypes.STOP_TIMER:
