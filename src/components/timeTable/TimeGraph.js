@@ -34,6 +34,8 @@ const TimeGraph = ({ times, stats, theme }) => {
   ).map(stat => {
     const times = stats[stat.name].all.map(ms => getMs({ ms: Math.round(ms) }));
     const offset = data.labels.length - times.length;
+
+    // TODO: amount of avg can exceed labels because DNF's are included in avg but not for labels, gives an error.
     const paddedTimes = [...new Array(offset), ...times];
 
     return getLineConfig(stat.name, theme.colors[stat.color], paddedTimes);

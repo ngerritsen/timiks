@@ -6,6 +6,14 @@ import { loadSettingsEpic, storeSettingsEpic } from './settings';
 import { loginEpic, loginStatusEpic, logoutEpic } from './authentication';
 import { loadTimesEpic, storeTimesEpic } from './times';
 import { failInspectionEpic, stopTimerEpic, submitTimeEpic } from './timer';
+import {
+  prepareActivationEpic,
+  fireActivationEpic,
+  stopActivationEpic,
+  initializeActivationEpic,
+  fireInspectionEpic,
+  runInspectionEpic
+} from './activation';
 
 const rootEpic = combineEpics(
   enableNoSleepEpic,
@@ -21,7 +29,13 @@ const rootEpic = combineEpics(
   storeTimesEpic,
   failInspectionEpic,
   submitTimeEpic,
-  stopTimerEpic
+  stopTimerEpic,
+  initializeActivationEpic,
+  prepareActivationEpic,
+  fireActivationEpic,
+  fireInspectionEpic,
+  stopActivationEpic,
+  runInspectionEpic
 );
 
 export default rootEpic;

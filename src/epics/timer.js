@@ -29,14 +29,5 @@ export const stopTimerEpic = (action$, state$) =>
     map(([action, state]) => createSaveTime(action.stopTime - getStartTime(state), state))
   );
 
-function createSaveTime(ms, state, dnf, plus2) {
-  return saveTime(
-    shortid.generate(),
-    ms,
-    new Date(),
-    getScramble(state),
-    getPuzzle(state),
-    dnf,
-    plus2
-  );
-}
+const createSaveTime = (ms, state, dnf, plus2) =>
+  saveTime(shortid.generate(), ms, new Date(), getScramble(state), getPuzzle(state), dnf, plus2);

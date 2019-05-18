@@ -8,7 +8,7 @@ import {
   isPreparingForInspection,
   getPreparationStage
 } from '../../selectors/activation';
-import { getTime, isInInspecting, isStopped, isValidTimeInput } from '../../selectors/timer';
+import { getTime, isInspecting, isStopped, isValidTimeInput } from '../../selectors/timer';
 import { shouldUseManualTimeEntry, shouldUseInspectionTime } from '../../selectors/settings';
 
 function mapStateToProps(state) {
@@ -19,7 +19,7 @@ function mapStateToProps(state) {
     useManualTimeEntry: shouldUseManualTimeEntry(state),
     preparing: isPreparing(state),
     preparingForInspection: isPreparingForInspection(state),
-    inspecting: isInInspecting(state),
+    inspecting: isInspecting(state),
     validTimeInput: isValidTimeInput(state),
     useInspectionTime: shouldUseInspectionTime(state),
     ready: isReady(state)

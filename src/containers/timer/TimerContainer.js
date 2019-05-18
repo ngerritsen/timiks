@@ -15,7 +15,7 @@ function mapStateToProps(state) {
   const showLastTime = startTime === 0 && !ready && !useManualTimeEntry && Boolean(lastTime);
 
   return {
-    inspecting: timerSelectors.isInInspecting(state),
+    inspecting: timerSelectors.isInspecting(state),
     inspectionStartTime: timerSelectors.getInspectionStartTime(state),
     lastTime,
     preparing: isPreparing(state),

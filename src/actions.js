@@ -1,9 +1,6 @@
 import * as actionTypes from './constants/actionTypes';
 import { SCRAMBLE_REQUESTED } from './constants/actionTypes';
 
-// Store
-export const initStore = () => ({ type: actionTypes.INIT_STORE });
-
 // Timer
 export const resetTime = () => ({ type: actionTypes.RESET_TIME });
 export const startTimer = startTime => ({ type: actionTypes.START_TIMER, startTime });

@@ -1,6 +1,3 @@
-// Store
-export const INIT_STORE = 'INIT_STORE';
-
 // Timer
 export const START_TIMER = 'START_TIMER';
 export const STOP_TIMER = 'STOP_TIMER';
