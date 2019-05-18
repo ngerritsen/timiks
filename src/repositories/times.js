@@ -10,7 +10,7 @@ export function getAll() {
     .then(parseTimes);
 }
 
-export function add(time, userId) {
+export function save(userId, time) {
   return db
     .collection('times')
     .doc(time.id)

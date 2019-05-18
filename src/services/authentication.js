@@ -1,4 +1,5 @@
 import * as firebase from 'firebase/app';
+import { Observable } from 'rxjs';
 
 export function login() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -10,6 +11,8 @@ export function logout() {
   return firebase.auth().signOut();
 }
 
-export function onLoggedIn(callback) {
-  firebase.auth().onAuthStateChanged(callback);
+export function onUserChanged() {
+  return new Observable(observer => {
+    firebase.auth().onAuthStateChanged(user => observer.next(user));
+  });
 }

@@ -20,11 +20,13 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     value: stateProps.timeInput,
     placeholder: '00:00.000',
     onKeyPress: e => {
-      if (e.key === 'Enter' && parseTimeInput(stateProps.timeInput)) {
-        submitTimeInput();
+      const inputData = parseTimeInput(stateProps.timeInput);
+
+      if (e.key === 'Enter' && inputData) {
+        submitTimeInput(inputData.ms, inputData.dnf, inputData.plus2);
       }
     },
-    onInput: e => updateTimeInput(e.target.value)
+    onChange: e => updateTimeInput(e.target.value)
   };
 }
 

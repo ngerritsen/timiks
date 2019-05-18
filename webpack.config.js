@@ -26,6 +26,7 @@ const createConfig = (env, argv) => {
     plugins: [
       new AppCachePlugin(),
       new HtmlWebpackPlugin({
+        mode: argv.mode,
         template: './src/index.html',
         analytics: 'UA-39696629-4',
         buildNumber: process.env.TRAVIS_BUILD_NUMBER || 0,

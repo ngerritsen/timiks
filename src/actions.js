@@ -1,4 +1,8 @@
 import * as actionTypes from './constants/actionTypes';
+import { SCRAMBLE_REQUESTED } from './constants/actionTypes';
+
+// Store
+export const initStore = () => ({ type: actionTypes.INIT_STORE });
 
 // Timer
 export const resetTime = () => ({ type: actionTypes.RESET_TIME });
@@ -7,7 +11,12 @@ export const stopTimer = stopTime => ({ type: actionTypes.STOP_TIMER, stopTime }
 export const prepareInspection = () => ({ type: actionTypes.PREPARE_INSPECTION });
 export const startInspection = startTime => ({ type: actionTypes.START_INSPECTION, startTime });
 export const failInspection = () => ({ type: actionTypes.FAIL_INSPECTION });
-export const submitTimeInput = () => ({ type: actionTypes.SUBMIT_TIME_INPUT });
+export const submitTimeInput = (ms, dnf, plus2) => ({
+  type: actionTypes.SUBMIT_TIME_INPUT,
+  ms,
+  dnf,
+  plus2
+});
 export const updateTimeInput = timeInput => ({ type: actionTypes.UPDATE_TIME_INPUT, timeInput });
 
 // Activation
@@ -30,8 +39,13 @@ export const logoutSucceeded = () => ({ type: actionTypes.LOGOUT_SUCCEEDED });
 export const logoutFailed = () => ({ type: actionTypes.LOGOUT_FAILED });
 
 // Scramble
+export const scrambleRequested = () => ({ type: SCRAMBLE_REQUESTED });
 export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });
 export const refreshScramble = () => ({ type: actionTypes.REFRESH_SCRAMBLE });
+
+// No Sleep
+export const noSleepEnabled = () => ({ type: actionTypes.NO_SLEEP_ENABLED });
+export const noSleepDisabled = () => ({ type: actionTypes.NO_SLEEP_DISABLED });
 
 // Times
 export const saveTime = (id, ms, date, scramble, puzzle, dnf = false, plus2 = false) => ({
@@ -54,9 +68,11 @@ export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
 export const removeArchivedTime = id => ({ type: actionTypes.REMOVE_ARCHIVED_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
 export const archiveTimes = () => ({ type: actionTypes.ARCHIVE_TIMES });
+export const timesStored = () => ({ type: actionTypes.TIMES_STORED });
 
 // Settings
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });
+export const settingsStored = () => ({ type: actionTypes.SETTINGS_STORED });
 export const toggleManualTimeEntry = () => ({ type: actionTypes.TOGGLE_MANUAL_TIME_ENTRY });
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });
