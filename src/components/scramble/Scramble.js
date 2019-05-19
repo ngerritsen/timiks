@@ -76,7 +76,7 @@ const ScrambleIconButtonContainer = styled.span`
   float: right;
   display: inline-block;
   font-size: 1.8rem;
-  margin: 0 ${props => props.theme.sizes.xxs} ${props => props.theme.sizes.xxs};
+  margin: 0 ${props => props.theme.sizes.xxs};
   color: ${props => props.theme.colors.blue};
 `;
 

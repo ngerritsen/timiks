@@ -1,23 +1,21 @@
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { withLatestFrom, filter, concatMap, map, pairwise } from 'rxjs/operators';
+import { withLatestFrom, filter, mergeMap, map, takeUntil, ignoreElements } from 'rxjs/operators';
 
 import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 import * as timesRepository from '../repositories/times';
 import { getUserId, isLoggedIn } from '../selectors/authentication';
 import { getCurrentTimeIds, getTime, getUnstoredTimes } from '../selectors/times';
+import { listenForChanges } from '../repositories/times';
 
-export const storeTimeEpic = (action$, state$) =>
+export const saveTimeEpic = (action$, state$) =>
   action$.pipe(
     ofType(actionTypes.SAVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    concatMap(([action, state]) =>
-      from(timesRepository.save(getUserId(state), action.time)).pipe(
-        map(() => actions.saveTimeSucceeded(action.time.id))
-      )
-    )
+    mergeMap(([action, state]) => from(timesRepository.save(getUserId(state), action.time))),
+    ignoreElements()
   );
 
 export const storeTimesEpic = (action$, state$) =>
@@ -25,12 +23,10 @@ export const storeTimesEpic = (action$, state$) =>
     ofType(actionTypes.LOGIN_SUCCEEDED),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    concatMap(([, state]) => {
-      const times = getUnstoredTimes(state);
-      return from(timesRepository.saveAll(getUserId(state), times)).pipe(
-        map(() => actions.storedTimes(times.map(time => time.id)))
-      );
-    })
+    mergeMap(([, state]) =>
+      from(timesRepository.saveAll(getUserId(state), getUnstoredTimes(state)))
+    ),
+    ignoreElements()
   );
 
 export const updateTimeEpic = (action$, state$) =>
@@ -38,11 +34,10 @@ export const updateTimeEpic = (action$, state$) =>
     ofType(actionTypes.UPDATE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    concatMap(([action, state]) =>
-      from(timesRepository.save(getUserId(state), getTime(state, action.id))).pipe(
-        map(() => actions.updateTimeSucceeded(action.id))
-      )
-    )
+    mergeMap(([action, state]) =>
+      from(timesRepository.save(getUserId(state), getTime(state, action.id)))
+    ),
+    ignoreElements()
   );
 
 export const removeTimeEpic = (action$, state$) =>
@@ -50,44 +45,44 @@ export const removeTimeEpic = (action$, state$) =>
     ofType(actionTypes.REMOVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    concatMap(([action, state]) =>
-      from(timesRepository.remove(getUserId(state), action.id)).pipe(
-        map(() => actions.removeTimeSucceeded(action.id))
-      )
-    )
+    mergeMap(([action, state]) => from(timesRepository.remove(getUserId(state), action.id))),
+    ignoreElements()
   );
 
 export const archiveTimesEpic = (action$, state$) =>
   action$.pipe(
     ofType(actionTypes.ARCHIVE_TIMES),
-    withLatestFrom(state$.pipe(pairwise())),
-    filter(([, [, newState]]) => isLoggedIn(newState)),
-    concatMap(([, [oldState, newState]]) => {
-      const currentTimeIds = getCurrentTimeIds(oldState);
-      return from(
-        timesRepository.updateAll(getUserId(newState), currentTimeIds, { current: false })
-      ).pipe(map(() => actions.archiveTimesSucceeded(currentTimeIds)));
-    })
+    withLatestFrom(state$),
+    filter(([, state]) => isLoggedIn(state)),
+    mergeMap(([, state]) =>
+      from(
+        timesRepository.updateAll(getUserId(state), getCurrentTimeIds(state), {
+          current: false
+        })
+      )
+    ),
+    ignoreElements()
   );
 
 export const clearTimesEpic = (action$, state$) =>
   action$.pipe(
     ofType(actionTypes.CLEAR_TIMES),
-    withLatestFrom(state$.pipe(pairwise())),
-    filter(([, [, newState]]) => isLoggedIn(newState)),
-    concatMap(([, [oldState, newState]]) => {
-      const currentTimeIds = getCurrentTimeIds(oldState);
-      return from(timesRepository.removeAll(getUserId(newState), currentTimeIds)).pipe(
-        map(() => actions.clearTimesSucceeded(currentTimeIds))
-      );
-    })
+    withLatestFrom(state$),
+    filter(([, state]) => isLoggedIn(state)),
+    mergeMap(([, state]) =>
+      from(timesRepository.removeAll(getUserId(state), getCurrentTimeIds(state)))
+    ),
+    ignoreElements()
   );
 
 export const loadTimesEpic = (action$, state$) =>
   action$.pipe(
     ofType(actionTypes.LOGIN_SUCCEEDED),
     withLatestFrom(state$),
-    concatMap(([, state]) =>
-      from(timesRepository.getAll(getUserId(state))).pipe(map(actions.loadTimes))
+    mergeMap(([, state]) =>
+      listenForChanges(getUserId(state)).pipe(
+        map(actions.loadTimes),
+        takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
+      )
     )
   );

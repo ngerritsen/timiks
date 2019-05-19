@@ -12,9 +12,8 @@ import Time from '../shared/Time';
 import ArchiveOptions from './ArchiveOptions';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import { faCloud, faCloudUpload } from '@fortawesome/fontawesome-pro-solid';
 import WithAuthentication from '../../containers/WithAuthentication';
+import CloudSyncIcon from '../shared/CloudSyncIcon';
 
 const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }) => (
   <div>
@@ -45,11 +44,8 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
                       <WithAuthentication>
                         {({ isLoggedIn }) =>
                           isLoggedIn ? (
-                            <SyncStatusIcon stored={time.stored}>
-                              <FontAwesome
-                                icon={time.stored && !time.dirty ? faCloud : faCloudUpload}
-                                size="xs"
-                              />
+                            <SyncStatusIcon>
+                              <CloudSyncIcon time={time} size="xs" />
                             </SyncStatusIcon>
                           ) : null
                         }
@@ -118,8 +114,8 @@ const TimeTiles = styled.div`
 
 const SyncStatusIcon = styled.span`
   position: absolute;
-  color: ${props => (props.stored ? props.theme.colors.cloudBlue : props.theme.colors.grey)};
-  top: 0.1rem;
+  font-size: 0.9em;
+  top: 0.2rem;
   right: 0.5rem;
 `;
 

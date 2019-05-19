@@ -30,7 +30,7 @@ const rootEpic = combineEpics(
   activationEpics.fireInspectionEpic,
   activationEpics.stopActivationEpic,
   activationEpics.runInspectionEpic,
-  timesEpics.storeTimeEpic,
+  timesEpics.saveTimeEpic,
   timesEpics.loadTimesEpic,
   timesEpics.updateTimeEpic,
   timesEpics.removeTimeEpic,

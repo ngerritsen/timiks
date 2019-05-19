@@ -14,7 +14,8 @@ export function parseTime(raw) {
     date: new Date(raw.date),
     dnf: Boolean(raw.dnf),
     plus2: Boolean(raw.plus2),
-    current: Boolean(raw.current)
+    current: Boolean(raw.current),
+    dirty: Boolean(raw.dirty)
   };
 }
 

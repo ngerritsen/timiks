@@ -1,14 +1,28 @@
 import * as firebase from 'firebase/app';
 import { serializeTime, parseTimes } from '../helpers/serialization';
+import { Observable } from 'rxjs';
 
 const db = firebase.firestore();
 
-export function getAll(userId) {
-  return db
-    .collection('times')
-    .where('userId', '==', userId)
-    .get()
-    .then(querySnapshot => parseTimes(querySnapshot.docs.map(snapshot => snapshot.data())));
+export function listenForChanges(userId) {
+  return new Observable(observer =>
+    db
+      .collection('times')
+      .where('userId', '==', userId)
+      .onSnapshot({ includeMetadataChanges: true }, querySnapshot => {
+        const data = [];
+
+        querySnapshot.forEach(snapshot =>
+          data.push(
+            snapshot.metadata.hasPendingWrites
+              ? { ...snapshot.data(), dirty: true }
+              : snapshot.data()
+          )
+        );
+
+        observer.next(parseTimes(data));
+      })
+  );
 }
 
 export function save(userId, time) {
