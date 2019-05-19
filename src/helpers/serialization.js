@@ -13,7 +13,8 @@ export function parseTime(raw) {
     scramble: parseScramble(raw.scramble),
     date: new Date(raw.date),
     dnf: Boolean(raw.dnf),
-    plus2: Boolean(raw.plus2)
+    plus2: Boolean(raw.plus2),
+    current: Boolean(raw.current)
   };
 }
 
@@ -29,7 +30,8 @@ export function serializeTime(time) {
     scramble: serializeScramble(time.scramble),
     date: time.date.toISOString(),
     dnf: time.dnf || undefined,
-    plus2: time.plus2 || undefined
+    plus2: time.plus2 || undefined,
+    current: time.current || undefined
   };
 }
 

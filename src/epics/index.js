@@ -1,41 +1,42 @@
 import { combineEpics } from 'redux-observable';
 
-import { enableNoSleepEpic, disableNoSleepEpic } from './noSleep';
-import { rescrambleEpic, scrambleEpic } from './scramble';
-import { loadSettingsEpic, storeSettingsEpic } from './settings';
-import { loginEpic, loginStatusEpic, logoutEpic } from './authentication';
-import { loadTimesEpic, storeTimesEpic } from './times';
-import { failInspectionEpic, stopTimerEpic, submitTimeEpic } from './timer';
-import {
-  prepareActivationEpic,
-  fireActivationEpic,
-  stopActivationEpic,
-  initializeActivationEpic,
-  fireInspectionEpic,
-  runInspectionEpic
-} from './activation';
+import * as noSleepEpics from './noSleep';
+import * as scrambleEpics from './scramble';
+import * as settingsEpics from './settings';
+import * as authenticationEpics from './authentication';
+import * as localTimesEpics from './localTimes';
+import * as timerEpics from './timer';
+import * as activationEpics from './activation';
+import * as timesEpics from './times';
 
 const rootEpic = combineEpics(
-  enableNoSleepEpic,
-  disableNoSleepEpic,
-  scrambleEpic,
-  rescrambleEpic,
-  loadSettingsEpic,
-  storeSettingsEpic,
-  loginStatusEpic,
-  loginEpic,
-  logoutEpic,
-  loadTimesEpic,
-  storeTimesEpic,
-  failInspectionEpic,
-  submitTimeEpic,
-  stopTimerEpic,
-  initializeActivationEpic,
-  prepareActivationEpic,
-  fireActivationEpic,
-  fireInspectionEpic,
-  stopActivationEpic,
-  runInspectionEpic
+  noSleepEpics.enableNoSleepEpic,
+  noSleepEpics.disableNoSleepEpic,
+  scrambleEpics.scrambleEpic,
+  scrambleEpics.rescrambleEpic,
+  settingsEpics.loadSettingsEpic,
+  settingsEpics.storeSettingsEpic,
+  authenticationEpics.loginStatusEpic,
+  authenticationEpics.loginEpic,
+  authenticationEpics.logoutEpic,
+  localTimesEpics.loadLocalTimesEpic,
+  localTimesEpics.storeLocalTimesEpic,
+  timerEpics.failInspectionEpic,
+  timerEpics.submitTimeEpic,
+  timerEpics.stopTimerEpic,
+  activationEpics.initializeActivationEpic,
+  activationEpics.prepareActivationEpic,
+  activationEpics.fireActivationEpic,
+  activationEpics.fireInspectionEpic,
+  activationEpics.stopActivationEpic,
+  activationEpics.runInspectionEpic,
+  timesEpics.storeTimeEpic,
+  timesEpics.loadTimesEpic,
+  timesEpics.updateTimeEpic,
+  timesEpics.removeTimeEpic,
+  timesEpics.archiveTimesEpic,
+  timesEpics.clearTimesEpic,
+  timesEpics.storeTimesEpic
 );
 
 export default rootEpic;

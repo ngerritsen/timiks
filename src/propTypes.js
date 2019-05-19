@@ -9,5 +9,7 @@ export const Time = PropTypes.shape({
   ms: PropTypes.number,
   plus2: PropTypes.bool,
   puzzle: PropTypes.string,
-  scramble: Scramble
+  scramble: Scramble,
+  stored: PropTypes.bool,
+  dirty: PropTypes.bool
 });

@@ -33,7 +33,7 @@ export default function timerReducer(state = initialState, action) {
       return {
         ...state,
         startTime: 0,
-        lastTimeId: action.id
+        lastTimeId: action.time.id
       };
     case actionTypes.STOP_TIMER:
       return {

@@ -26,12 +26,17 @@ export const SCRAMBLE_REQUESTED = 'SCRAMBLE_REQUESTED';
 // Times
 export const SAVE_TIME = 'SAVE_TIME';
 export const REMOVE_TIME = 'REMOVE_TIME';
-export const REMOVE_ARCHIVED_TIME = 'REMOVE_ARCHIVED_TIME';
 export const UPDATE_TIME = 'UPDATE_TIME';
 export const CLEAR_TIMES = 'CLEAR_TIMES';
 export const LOAD_TIMES = 'LOAD_TIMES';
+export const LOAD_LOCAL_TIMES = 'LOAD_LOCAL_TIMES';
 export const ARCHIVE_TIMES = 'ARCHIVE_TIMES';
-export const TIMES_STORED = 'TIMES_STORED';
+export const STORED_LOCAL_TIMES = 'STORED_LOCAL_TIMES';
+export const STORED_TIME = 'STORED_TIME';
+export const STORED_TIMES = 'STORED_TIMES';
+export const REMOVED_TIME = 'REMOVED_TIME';
+export const ARCHIVED_TIMES = 'ARCHIVED_TIMES';
+export const CLEARED_TIMES = 'CLEARED_TIMES';
 
 // Authentication
 export const LOGIN = 'LOGIN';
@@ -49,7 +54,3 @@ export const CHANGE_PUZZLE = 'CHANGE_PUZZLE';
 export const CHANGE_THEME = 'CHANGE_THEME';
 export const TOGGLE_INSPECTION_TIME = 'TOGGLE_INSPECTION_TIME';
 export const LOAD_SETTINGS = 'LOAD_SETTINGS';
-
-// Modal
-export const OPEN_MODAL = 'OPEN_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';

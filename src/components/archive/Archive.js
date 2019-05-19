@@ -12,8 +12,11 @@ import Time from '../shared/Time';
 import ArchiveOptions from './ArchiveOptions';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import { faCloud, faCloudUpload } from '@fortawesome/fontawesome-pro-solid';
+import WithAuthentication from '../../containers/WithAuthentication';
 
-const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime, timesPerDay }) => (
+const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }) => (
   <div>
     <Section margin="sm">
       <ArchiveOptions changePuzzle={changePuzzle} puzzle={puzzle} />
@@ -39,6 +42,18 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime, times
                         <Time time={time} />
                       </strong>
                       <DateTag>{moment(time.date).format('LT')}</DateTag>
+                      <WithAuthentication>
+                        {({ isLoggedIn }) =>
+                          isLoggedIn ? (
+                            <SyncStatusIcon stored={time.stored}>
+                              <FontAwesome
+                                icon={time.stored && !time.dirty ? faCloud : faCloudUpload}
+                                size="xs"
+                              />
+                            </SyncStatusIcon>
+                          ) : null
+                        }
+                      </WithAuthentication>
                     </TimeTile>
                   )}
                   content={({ hide }) => (
@@ -48,7 +63,7 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeArchivedTime, times
                         onClose={hide}
                         onRemoveTime={() => {
                           hide();
-                          removeArchivedTime(time.id);
+                          removeTime(time.id);
                         }}
                       />
                     </Modal>
@@ -74,7 +89,7 @@ Archive.propTypes = {
   stats: PropTypes.object.isRequired,
   changePuzzle: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
-  removeArchivedTime: PropTypes.func.isRequired
+  removeTime: PropTypes.func.isRequired
 };
 
 const Message = styled.p`
@@ -99,6 +114,13 @@ const TimeTiles = styled.div`
   @media screen and (min-width: 620px) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
+`;
+
+const SyncStatusIcon = styled.span`
+  position: absolute;
+  color: ${props => (props.stored ? props.theme.colors.lightBlue : props.theme.colors.grey)};
+  top: 0.1rem;
+  right: 0.5rem;
 `;
 
 const TimeTile = styled.div`

@@ -45,27 +45,19 @@ export const noSleepEnabled = () => ({ type: actionTypes.NO_SLEEP_ENABLED });
 export const noSleepDisabled = () => ({ type: actionTypes.NO_SLEEP_DISABLED });
 
 // Times
-export const saveTime = (id, ms, date, scramble, puzzle, dnf = false, plus2 = false) => ({
-  type: actionTypes.SAVE_TIME,
-  id,
-  ms,
-  date,
-  scramble,
-  puzzle,
-  dnf,
-  plus2
-});
+export const saveTime = time => ({ type: actionTypes.SAVE_TIME, time });
 export const updateTime = (id, fields) => ({ type: actionTypes.UPDATE_TIME, id, fields });
-export const loadTimes = (current = [], archived = []) => ({
-  type: actionTypes.LOAD_TIMES,
-  current,
-  archived
-});
+export const loadTimes = (times = []) => ({ type: actionTypes.LOAD_TIMES, times });
+export const loadLocalTimes = (times = []) => ({ type: actionTypes.LOAD_LOCAL_TIMES, times });
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
-export const removeArchivedTime = id => ({ type: actionTypes.REMOVE_ARCHIVED_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
 export const archiveTimes = () => ({ type: actionTypes.ARCHIVE_TIMES });
-export const timesStored = () => ({ type: actionTypes.TIMES_STORED });
+export const storedLocalTimes = () => ({ type: actionTypes.STORED_LOCAL_TIMES });
+export const storedTime = id => ({ type: actionTypes.STORED_TIME, id });
+export const storedTimes = ids => ({ type: actionTypes.STORED_TIMES, ids });
+export const removedTime = id => ({ type: actionTypes.REMOVED_TIME, id });
+export const archivedTimes = ids => ({ type: actionTypes.ARCHIVED_TIMES, ids });
+export const clearedTimes = ids => ({ type: actionTypes.CLEARED_TIMES, ids });
 
 // Settings
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });
@@ -78,7 +70,3 @@ export const changeActivationDuration = activationDuration => ({
   type: actionTypes.CHANGE_ACTIVATION_DURATION,
   activationDuration
 });
-
-// Modal
-export const openModal = id => ({ type: actionTypes.OPEN_MODAL, id });
-export const closeModal = () => ({ type: actionTypes.CLOSE_MODAL });

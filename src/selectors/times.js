@@ -5,9 +5,28 @@ import { getLastTimeId } from './timer';
 import { groupByDay } from '../helpers/archive';
 import { createAscSorter } from '../helpers/general';
 
-export const getCurrentTimes = state => state.times.current;
-export const getArchivedTimes = state => state.times.archived;
-export const hasCurrentTimes = state => state.times.current.length > 0;
+export const getTimes = state => state.times;
+
+export const getTime = (state, id) => state.times.find(time => time.id === id);
+
+export const getCurrentTimes = createSelector(
+  getTimes,
+  times => times.filter(time => Boolean(time.current))
+);
+
+export const getCurrentTimeIds = state =>
+  getTimes(state)
+    .filter(time => Boolean(time.current))
+    .map(time => time.id);
+
+export const getUnstoredTimes = state => getTimes(state).filter(time => !time.stored);
+
+export const getArchivedTimes = createSelector(
+  getTimes,
+  times => times.filter(time => !time.current)
+);
+
+export const hasCurrentTimes = state => getCurrentTimes(state).length > 0;
 
 export const getLastTime = createSelector(
   getCurrentTimes,
@@ -15,9 +34,9 @@ export const getLastTime = createSelector(
   (times, lastTimeId) => times.find(time => time.id === lastTimeId)
 );
 
-export const getCurrentMarkedTimes = createSelector(
+export const getCurrentMarkedSortedTimes = createSelector(
   getCurrentTimes,
-  markBestTime
+  times => markBestTime(times).sort(createAscSorter('date'))
 );
 
 export const getCurrentNoDnfTimes = createSelector(

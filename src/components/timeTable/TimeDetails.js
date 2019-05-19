@@ -1,6 +1,12 @@
 import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faStopwatch, faCube } from '@fortawesome/fontawesome-pro-solid';
+import {
+  faCalendarAlt,
+  faStopwatch,
+  faCube,
+  faCloud,
+  faCloudUpload
+} from '@fortawesome/fontawesome-pro-solid';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
@@ -10,6 +16,7 @@ import Section from '../shared/Section';
 import ScrambleDetails from '../scramble/ScrambleDetails';
 import Button from '../shared/Button';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
+import WithAuthentication from '../../containers/WithAuthentication';
 
 const TimeDetails = ({ time, onRemoveTime, onClose }) => (
   <div>
@@ -21,10 +28,21 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
       <FontAwesome icon={faCalendarAlt} /> &nbsp;
       {moment(time.date).format('LLL')}
     </Section>
-    <Section margin="md">
+    <Section margin="sm">
       <FontAwesome icon={faCube} /> &nbsp;
       {time.puzzle || 'unknown'}
     </Section>
+    <WithAuthentication>
+      {({ isLoggedIn }) =>
+        isLoggedIn ? (
+          <Section margin="sm">
+            <FontAwesome icon={time.stored ? faCloud : faCloudUpload} /> &nbsp;
+            {time.stored ? (time.dirty ? 'Out of date' : 'Stored') : 'Not stored'}
+          </Section>
+        ) : null
+      }
+    </WithAuthentication>
+    <Section margin="sm" />
     <Section margin="md">
       <ScrambleDetails scramble={time.scramble} puzzle={time.puzzle} />
     </Section>

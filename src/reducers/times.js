@@ -1,62 +1,46 @@
 import * as actionTypes from '../constants/actionTypes';
 
-const initialState = {
-  current: [],
-  archived: []
-};
+const initialState = [];
 
 export default function timesReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.SAVE_TIME: {
-      const { id, ms, date, scramble, puzzle, dnf, plus2 } = action;
-
-      return {
-        ...state,
-        current: [...state.current, { id, ms, date, scramble, puzzle, dnf, plus2 }]
-      };
-    }
+    case actionTypes.SAVE_TIME:
+      return [...state, action.time];
     case actionTypes.REMOVE_TIME:
-      return {
-        ...state,
-        current: state.current.filter(time => time.id !== action.id)
-      };
-    case actionTypes.REMOVE_ARCHIVED_TIME:
-      return {
-        ...state,
-        archived: state.archived.filter(time => time.id !== action.id)
-      };
+      return state.filter(time => time.id !== action.id);
     case actionTypes.UPDATE_TIME:
-      return {
-        ...state,
-        current: state.current.map(time => {
-          if (time.id !== action.id) {
-            return time;
-          }
-
-          return {
-            ...time,
-            ...action.fields
-          };
-        })
-      };
+      return state.map(time =>
+        time.id !== action.id ? time : { ...time, ...action.fields, dirty: true }
+      );
     case actionTypes.ARCHIVE_TIMES:
-      return {
-        ...state,
-        current: [],
-        archived: [...state.current, ...state.archived]
-      };
+      return state.map(time => (time.current ? { ...time, current: false, dirty: true } : time));
+    case actionTypes.ARCHIVED_TIMES:
+      return state.map(time =>
+        action.ids.includes(time.id)
+          ? { ...time, current: false, stored: true, dirty: false }
+          : time
+      );
     case actionTypes.CLEAR_TIMES:
-      return {
-        ...state,
-        current: []
-      };
+      return state.filter(time => !time.current);
     case actionTypes.LOAD_TIMES:
-      return {
-        ...state,
-        current: action.current,
-        archived: action.archived
-      };
+      return mergeTimes(state, action.times, true);
+    case actionTypes.LOAD_LOCAL_TIMES:
+      return mergeTimes(state, action.times, false);
+    case actionTypes.STORED_TIME:
+      return state.map(time =>
+        time.id === action.id ? { ...time, stored: true, dirty: false } : time
+      );
+    case actionTypes.STORED_TIMES:
+      return state.map(time =>
+        action.ids.includes(time.id) ? { ...time, stored: true, dirty: false } : time
+      );
     default:
       return state;
   }
+}
+
+function mergeTimes(currentTimes, newTimes, markAsStored) {
+  const newIds = newTimes.map(time => time.id);
+  const timesToKeep = currentTimes.filter(time => !newIds.includes(time.id));
+  return [...timesToKeep, ...newTimes.map(time => ({ ...time, stored: markAsStored }))];
 }

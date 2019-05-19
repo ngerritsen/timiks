@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Time from '../shared/Time';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faThumbsUp, faTimes } from '@fortawesome/fontawesome-pro-solid';
+import { faInfoCircle, faThumbsUp, faTimes, faCloud, faCloudUpload } from '@fortawesome/fontawesome-pro-solid';
 import ToggleContent from '../ToggleContent';
 import Modal from '../shared/Modal';
 import TimeDetails from './TimeDetails';
@@ -12,6 +12,7 @@ import * as CustomPropTypes from '../../propTypes';
 import IconButton from '../shared/IconButton';
 import { Cell } from '../shared/Tables';
 import { SubtleText } from '../shared/Typography';
+import WithAuthentication from '../../containers/WithAuthentication';
 
 const TimeTableTimeRow = ({ index, time, removeTime }) => (
   <tr>
@@ -29,6 +30,15 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
       )}
     </Cell>
     <Cell rightAlign>
+      <WithAuthentication>
+        {({ isLoggedIn }) =>
+          isLoggedIn ? (
+            <SyncStatusIcon stored={time.stored}>
+              <FontAwesome icon={time.stored && !time.dirty ? faCloud : faCloudUpload} size="sm" />
+            </SyncStatusIcon>
+          ) : null
+        }
+      </WithAuthentication>
       <ToggleContent
         toggle={({ show }) => (
           <InfoIconButton onClick={show}>
@@ -73,6 +83,11 @@ const BestTimeIcon = styled.span`
 
 const InfoIconButton = IconButton.extend`
   color: ${props => props.theme.colors.blue};
+`;
+
+const SyncStatusIcon = styled.span`
+  margin-right: 0.8rem;
+  color: ${props => (props.stored ? props.theme.colors.lightBlue : props.theme.colors.grey)};
 `;
 
 const RemoveItemIconButton = IconButton.extend`

@@ -29,8 +29,8 @@ const TimeActions = ({ plus2, togglePlus2LastTime, dnf, toggleDnfLastTime, remov
 );
 
 TimeActions.propTypes = {
-  dnf: PropTypes.bool.isRequired,
-  plus2: PropTypes.bool.isRequired,
+  dnf: PropTypes.bool,
+  plus2: PropTypes.bool,
   removeLastTime: PropTypes.func.isRequired,
   toggleDnfLastTime: PropTypes.func.isRequired,
   togglePlus2LastTime: PropTypes.func.isRequired
