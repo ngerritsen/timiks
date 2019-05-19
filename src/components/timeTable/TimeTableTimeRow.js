@@ -4,13 +4,7 @@ import styled from 'styled-components';
 
 import Time from '../shared/Time';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import {
-  faInfoCircle,
-  faThumbsUp,
-  faTimes,
-  faCloud,
-  faCloudUpload
-} from '@fortawesome/fontawesome-pro-solid';
+import { faInfoCircle, faThumbsUp, faTimes } from '@fortawesome/fontawesome-pro-solid';
 import ToggleContent from '../ToggleContent';
 import Modal from '../shared/Modal';
 import TimeDetails from './TimeDetails';
@@ -19,12 +13,13 @@ import IconButton from '../shared/IconButton';
 import { Cell } from '../shared/Tables';
 import { SubtleText } from '../shared/Typography';
 import WithAuthentication from '../../containers/WithAuthentication';
+import CloudSyncIcon from '../shared/CloudSyncIcon';
 
 const TimeTableTimeRow = ({ index, time, removeTime }) => (
   <tr>
-    <Cell>
+    <TimeIndexCell>
       <SubtleText>{index + 1}.</SubtleText>
-    </Cell>
+    </TimeIndexCell>
     <Cell>
       <Time time={time} />
       {time.best && (
@@ -39,8 +34,8 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
       <WithAuthentication>
         {({ isLoggedIn }) =>
           isLoggedIn ? (
-            <SyncStatusIcon stored={time.stored}>
-              <FontAwesome icon={time.stored && !time.dirty ? faCloud : faCloudUpload} size="sm" />
+            <SyncStatusIcon>
+              <CloudSyncIcon time={time} size="sm" />
             </SyncStatusIcon>
           ) : null
         }
@@ -77,6 +72,10 @@ TimeTableTimeRow.propTypes = {
   removeTime: PropTypes.func.isRequired
 };
 
+const TimeIndexCell = Cell.extend`
+  width: 3rem;
+`;
+
 const TimeInfo = styled.small`
   padding-left: ${props => props.theme.sizes.xs};
   color: ${props => props.theme.colors.subtleFg};
@@ -92,8 +91,7 @@ const InfoIconButton = IconButton.extend`
 `;
 
 const SyncStatusIcon = styled.span`
-  margin-right: 0.8rem;
-  color: ${props => (props.stored ? props.theme.colors.lightBlue : props.theme.colors.grey)};
+  margin-right: 1rem;
 `;
 
 const RemoveItemIconButton = IconButton.extend`

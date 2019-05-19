@@ -11,7 +11,8 @@ const FLUO_RED = '#fc355c';
 const RED = '#f83f3f';
 const LIGHT_BLUE = '#3fb8ff';
 const BLUE = '#1f93e0';
-const GREEN = '#22e24b';
+const CLOUD_BLUE = '#77c6ff';
+const GREEN = '#34db52';
 const FLUO_GREEN = '#3fff78';
 const GOOGLE_RED = '#f95555';
 
@@ -34,6 +35,7 @@ export const light = {
     green: GREEN,
     blue: BLUE,
     red: RED,
+    cloudBlue: CLOUD_BLUE,
     fluoRed: FLUO_RED,
     fluoGreen: FLUO_GREEN,
     lightBlue: LIGHT_BLUE,

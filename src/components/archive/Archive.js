@@ -118,7 +118,7 @@ const TimeTiles = styled.div`
 
 const SyncStatusIcon = styled.span`
   position: absolute;
-  color: ${props => (props.stored ? props.theme.colors.lightBlue : props.theme.colors.grey)};
+  color: ${props => (props.stored ? props.theme.colors.cloudBlue : props.theme.colors.grey)};
   top: 0.1rem;
   right: 0.5rem;
 `;

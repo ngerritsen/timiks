@@ -46,18 +46,19 @@ export const noSleepDisabled = () => ({ type: actionTypes.NO_SLEEP_DISABLED });
 
 // Times
 export const saveTime = time => ({ type: actionTypes.SAVE_TIME, time });
+export const saveTimeSucceeded = id => ({ type: actionTypes.SAVE_TIME_SUCCEEDED, id });
 export const updateTime = (id, fields) => ({ type: actionTypes.UPDATE_TIME, id, fields });
+export const updateTimeSucceeded = id => ({ type: actionTypes.UPDATE_TIME_SUCCEEDED, id });
 export const loadTimes = (times = []) => ({ type: actionTypes.LOAD_TIMES, times });
 export const loadLocalTimes = (times = []) => ({ type: actionTypes.LOAD_LOCAL_TIMES, times });
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
+export const removeTimeSucceeded = id => ({ type: actionTypes.REMOVE_TIME_SUCCEEDED, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
+export const clearTimesSucceeded = ids => ({ type: actionTypes.CLEAR_TIMES_SUCCEEDED, ids });
 export const archiveTimes = () => ({ type: actionTypes.ARCHIVE_TIMES });
+export const archiveTimesSucceeded = ids => ({ type: actionTypes.ARCHIVE_TIMES_SUCCEEDED, ids });
 export const storedLocalTimes = () => ({ type: actionTypes.STORED_LOCAL_TIMES });
-export const storedTime = id => ({ type: actionTypes.STORED_TIME, id });
-export const storedTimes = ids => ({ type: actionTypes.STORED_TIMES, ids });
-export const removedTime = id => ({ type: actionTypes.REMOVED_TIME, id });
-export const archivedTimes = ids => ({ type: actionTypes.ARCHIVED_TIMES, ids });
-export const clearedTimes = ids => ({ type: actionTypes.CLEARED_TIMES, ids });
+export const storedTimes = ids => ({ type: actionTypes.SAVE_TIMES_SUCCEEDED, ids });
 
 // Settings
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });

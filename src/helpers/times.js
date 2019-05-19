@@ -12,6 +12,18 @@ export function calculateStats(times) {
   };
 }
 
+export function isCurrent(time) {
+  return Boolean(time.current);
+}
+
+export function getId(time) {
+  return time.id;
+}
+
+export function isEligableForLocalStorage(time) {
+  return Boolean(time.current || !time.stored);
+}
+
 function calculateAveragesOf(times, amount, deviation = 1) {
   if (times.length < amount) {
     return null;

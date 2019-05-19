@@ -15,7 +15,7 @@ export const storeTimeEpic = (action$, state$) =>
     filter(([, state]) => isLoggedIn(state)),
     concatMap(([action, state]) =>
       from(timesRepository.save(getUserId(state), action.time)).pipe(
-        map(() => actions.storedTime(action.time.id))
+        map(() => actions.saveTimeSucceeded(action.time.id))
       )
     )
   );
@@ -40,7 +40,7 @@ export const updateTimeEpic = (action$, state$) =>
     filter(([, state]) => isLoggedIn(state)),
     concatMap(([action, state]) =>
       from(timesRepository.save(getUserId(state), getTime(state, action.id))).pipe(
-        map(() => actions.storedTime(action.id))
+        map(() => actions.updateTimeSucceeded(action.id))
       )
     )
   );
@@ -52,7 +52,7 @@ export const removeTimeEpic = (action$, state$) =>
     filter(([, state]) => isLoggedIn(state)),
     concatMap(([action, state]) =>
       from(timesRepository.remove(getUserId(state), action.id)).pipe(
-        map(() => actions.removedTime(action.id))
+        map(() => actions.removeTimeSucceeded(action.id))
       )
     )
   );
@@ -66,7 +66,7 @@ export const archiveTimesEpic = (action$, state$) =>
       const currentTimeIds = getCurrentTimeIds(oldState);
       return from(
         timesRepository.updateAll(getUserId(newState), currentTimeIds, { current: false })
-      ).pipe(map(() => actions.archivedTimes(currentTimeIds)));
+      ).pipe(map(() => actions.archiveTimesSucceeded(currentTimeIds)));
     })
   );
 
@@ -78,7 +78,7 @@ export const clearTimesEpic = (action$, state$) =>
     concatMap(([, [oldState, newState]]) => {
       const currentTimeIds = getCurrentTimeIds(oldState);
       return from(timesRepository.removeAll(getUserId(newState), currentTimeIds)).pipe(
-        map(() => actions.clearedTimes(currentTimeIds))
+        map(() => actions.clearTimesSucceeded(currentTimeIds))
       );
     })
   );
