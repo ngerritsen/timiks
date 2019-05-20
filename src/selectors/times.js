@@ -44,7 +44,7 @@ export const getCurrentMarkedSortedTimes = createSelector(
 
 export const getCurrentNoDnfTimes = createSelector(
   getCurrentTimes,
-  times => times.filter(time => !time.dnf)
+  times => times.filter(time => !time.dnf).sort(createAscSorter('date'))
 );
 
 export const getStatsForCurrentTimes = createSelector(
