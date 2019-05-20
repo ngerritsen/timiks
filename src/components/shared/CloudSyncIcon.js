@@ -6,17 +6,13 @@ import FontAwesome from '@fortawesome/react-fontawesome';
 import * as CustomPropTypes from '../../propTypes';
 
 const CloudSyncIcon = ({ time, size, fixedWidth }) => (
-  <IconWrapper stored={time.stored}>
-    <FontAwesome
-      fixedWidth={fixedWidth}
-      icon={time.stored && !time.dirty ? faCloud : faCloudUpload}
-      size={size}
-    />
+  <IconWrapper>
+    <FontAwesome fixedWidth={fixedWidth} icon={time.dirty ? faCloudUpload : faCloud} size={size} />
   </IconWrapper>
 );
 
 const IconWrapper = styled.span`
-  color: ${props => (props.stored ? props.theme.colors.cloudBlue : props.theme.colors.grey)};
+  color: ${props => props.theme.colors.cloudBlue};
 `;
 
 CloudSyncIcon.propTypes = {

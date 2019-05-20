@@ -12,7 +12,6 @@ import Time from '../shared/Time';
 import ArchiveOptions from './ArchiveOptions';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
-import WithAuthentication from '../../containers/WithAuthentication';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 
 const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }) => (
@@ -41,15 +40,11 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
                         <Time time={time} />
                       </strong>
                       <DateTag>{moment(time.date).format('LT')}</DateTag>
-                      <WithAuthentication>
-                        {({ isLoggedIn }) =>
-                          isLoggedIn ? (
-                            <SyncStatusIcon>
-                              <CloudSyncIcon time={time} size="xs" />
-                            </SyncStatusIcon>
-                          ) : null
-                        }
-                      </WithAuthentication>
+                      {time.stored && (
+                        <SyncStatusIcon>
+                          <CloudSyncIcon time={time} size="xs" />
+                        </SyncStatusIcon>
+                      )}
                     </TimeTile>
                   )}
                   content={({ hide }) => (

@@ -10,21 +10,16 @@ import Section from '../shared/Section';
 import ScrambleDetails from '../scramble/ScrambleDetails';
 import Button from '../shared/Button';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
-import WithAuthentication from '../../containers/WithAuthentication';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 
 const TimeDetails = ({ time, onRemoveTime, onClose }) => (
   <div>
-    <WithAuthentication>
-      {({ isLoggedIn }) =>
-        isLoggedIn ? (
-          <Section margin="sm">
-            <CloudSyncIcon fixedWidth time={time} /> &nbsp;
-            {time.stored ? (time.dirty ? 'Out of date' : 'Stored') : 'Not stored'}
-          </Section>
-        ) : null
-      }
-    </WithAuthentication>
+    {time.stored && (
+      <Section margin="sm">
+        <CloudSyncIcon fixedWidth time={time} /> &nbsp;
+        {time.dirty ? 'Out of date' : 'Stored'}
+      </Section>
+    )}
     <Section margin="sm">
       <FontAwesome fixedWidth icon={faStopwatch} /> &nbsp;
       <Time time={time} />

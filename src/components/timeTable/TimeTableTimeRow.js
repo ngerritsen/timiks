@@ -12,7 +12,6 @@ import * as CustomPropTypes from '../../propTypes';
 import IconButton from '../shared/IconButton';
 import { Cell } from '../shared/Tables';
 import { SubtleText } from '../shared/Typography';
-import WithAuthentication from '../../containers/WithAuthentication';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 
 const TimeTableTimeRow = ({ index, time, removeTime }) => (
@@ -31,15 +30,11 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
       )}
     </Cell>
     <Cell rightAlign>
-      <WithAuthentication>
-        {({ isLoggedIn }) =>
-          isLoggedIn ? (
-            <SyncStatusIcon>
-              <CloudSyncIcon time={time} size="sm" />
-            </SyncStatusIcon>
-          ) : null
-        }
-      </WithAuthentication>
+      {time.stored && (
+        <SyncStatusIcon>
+          <CloudSyncIcon time={time} size="sm" />
+        </SyncStatusIcon>
+      )}
       <ToggleContent
         toggle={({ show }) => (
           <InfoIconButton onClick={show}>

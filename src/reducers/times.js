@@ -2,23 +2,23 @@ import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
   times: [],
-  applyLocalChanges: true
+  useLocalTimes: true
 };
 
 export default function timesReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCEEDED:
-      return { ...state, applyLocalChanges: false };
+      return { ...state, useLocalTimes: false };
     case actionTypes.LOGOUT_SUCCEEDED:
-      return { ...state, applyLocalChanges: true };
+      return { ...state, useLocalTimes: true };
     default:
       break;
   }
 
-  if (!state.applyLocalChanges) {
+  if (!state.useLocalTimes) {
     switch (action.type) {
       case actionTypes.LOAD_TIMES:
-        return { ...state, times: action.times.map(markTimeAsStored) };
+        return { ...state, times: action.times.map(time => ({ ...time, stored: true })) };
       default:
         return state;
     }
@@ -33,13 +33,13 @@ export default function timesReducer(state = initialState, action) {
       return {
         ...state,
         times: state.times.map(time =>
-          time.id !== action.id ? time : updateTime(time, action.fields)
+          time.id !== action.id ? time : { ...time, ...action.fields }
         )
       };
     case actionTypes.ARCHIVE_TIMES:
       return {
         ...state,
-        times: state.times.map(time => (time.current ? archiveTime(time) : time))
+        times: state.times.map(time => (time.current ? { ...time, current: false } : time))
       };
     case actionTypes.CLEAR_TIMES:
       return { ...state, times: state.times.filter(time => !time.current) };
@@ -48,16 +48,4 @@ export default function timesReducer(state = initialState, action) {
     default:
       return state;
   }
-}
-
-function archiveTime(time) {
-  return { ...time, current: false, dirty: true };
-}
-
-function updateTime(time, fields) {
-  return { ...time, ...fields, dirty: true };
-}
-
-function markTimeAsStored(time) {
-  return { ...time, stored: true, dirty: false };
 }
