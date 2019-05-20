@@ -4,6 +4,7 @@ import * as puzzleColors from './constants/puzzle';
 const WHITE = '#fff';
 const BLACK = '#000';
 const BASE_SIZE = 0.8;
+const ORANGE = '#fc7f0a';
 const FLUO_ORANGE = '#fca344';
 const PURPLE = '#6f42c1';
 const FLUO_YELLOW = '#fff244';
@@ -22,9 +23,10 @@ export const light = {
   font: 'Barlow, Arial, sans-serif',
   monoFont: '"Roboto Mono", monospace',
   colors: {
-    bg: '#fff',
+    bg: WHITE,
+    white: WHITE,
     subtleBg: darken(0.1, WHITE),
-    fg: '#000',
+    fg: BLACK,
     subtleFg: lighten(0.3, BLACK),
     darkGrey: darken(0.4, WHITE),
     grey: darken(0.25, WHITE),
@@ -75,7 +77,7 @@ export const dark = {
     subtleFg: darken(0.4, WHITE),
     darkGrey: darken(0.5, WHITE),
     grey: lighten(0.3, BLACK),
-    primary: '#fc7f0a',
+    primary: ORANGE,
     blue: BLUE
   }
 };

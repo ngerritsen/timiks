@@ -6,6 +6,7 @@ import scramble from './scramble';
 import settings from './settings';
 import timer from './timer';
 import times from './times';
+import notifications from './notifications';
 
 export default combineReducers({
   activation,
@@ -13,5 +14,6 @@ export default combineReducers({
   scramble,
   settings,
   timer,
-  times
+  times,
+  notifications
 });

@@ -61,7 +61,7 @@ const Account = ({
                     Hi {displayName}, you are logged in with your Google account ({email}).
                   </p>
                 </Section>
-                <Button type="button" red onClick={() => !isLoggingOut && logout()}>
+                <Button type="button" red onClick={() => !isLoggingOut && logout() && hide()}>
                   <ButtonIcon>
                     <FontAwesome
                       spin={isLoggingIn}

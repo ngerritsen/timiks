@@ -8,6 +8,7 @@ import * as localTimesEpics from './localTimes';
 import * as timerEpics from './timer';
 import * as activationEpics from './activation';
 import * as timesEpics from './times';
+import * as notificationEpics from './notifications';
 
 const rootEpic = combineEpics(
   noSleepEpics.enableNoSleepEpic,
@@ -19,6 +20,7 @@ const rootEpic = combineEpics(
   authenticationEpics.loginStatusEpic,
   authenticationEpics.loginEpic,
   authenticationEpics.logoutEpic,
+  authenticationEpics.redirectStatusEpic,
   localTimesEpics.loadLocalTimesEpic,
   localTimesEpics.storeLocalTimesEpic,
   timerEpics.failInspectionEpic,
@@ -36,7 +38,8 @@ const rootEpic = combineEpics(
   timesEpics.removeTimeEpic,
   timesEpics.archiveTimesEpic,
   timesEpics.clearTimesEpic,
-  timesEpics.storeTimesEpic
+  timesEpics.storeTimesEpic,
+  notificationEpics.notificationEpic
 );
 
 export default rootEpic;

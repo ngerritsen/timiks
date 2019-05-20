@@ -1,6 +1,9 @@
 export const APP_ROOT_SELECTOR = '#app-root';
 export const MODAL_ROOT_SELECTOR = '#modal-root';
-export const FULL_SCREEN_MASK_ROOT_SELECTOR = '#full-screen-mask';
+export const NOTIFICATION_ROOT_SELECTOR = '#notification-root';
+export const FULL_SCREEN_MASK_ROOT_SELECTOR = '#full-screen-mask-root';
+
+export const NOTIFICATION_DURATION = 4000;
 
 export const INSPECTION_TIME = 15000;
 export const TIMER_UPDATE_RATE = 10;

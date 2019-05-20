@@ -1,6 +1,15 @@
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 
+export function onRedirectError() {
+  return new Observable(observer => {
+    firebase
+      .auth()
+      .getRedirectResult()
+      .catch(error => observer.next(error));
+  });
+}
+
 export function login() {
   const provider = new firebase.auth.GoogleAuthProvider();
 

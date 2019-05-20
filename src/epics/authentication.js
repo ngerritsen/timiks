@@ -1,32 +1,42 @@
 import { ofType } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { catchError, tap, map, ignoreElements, mergeMap } from 'rxjs/operators';
+import { catchError, tap, map, ignoreElements, mergeMap, takeUntil } from 'rxjs/operators';
 
 import * as authenticationService from '../services/authentication';
-import { LOGIN, LOGOUT } from '../constants/actionTypes';
-import { loginSucceeded, logoutSucceeded, logoutFailed, loginFailed } from '../actions';
+import { LOGIN, LOGIN_SUCCEEDED, LOGOUT } from '../constants/actionTypes';
+import * as actions from '../actions';
 
 export const loginStatusEpic = () =>
   authenticationService
     .onUserChanged()
     .pipe(
-      map(user =>
-        user ? loginSucceeded(user.uid, user.displayName, user.email) : logoutSucceeded()
+      mergeMap(user =>
+        user
+          ? of(
+              actions.loginSucceeded(user.uid, user.displayName, user.email),
+              actions.showNotification('Logged in')
+            )
+          : of(actions.logoutSucceeded())
       )
     );
+
+export const redirectStatusEpic = action$ =>
+  authenticationService.onRedirectError().pipe(
+    takeUntil(action$.pipe(ofType(LOGIN_SUCCEEDED))),
+    mergeMap(() => of(actions.loginFailed(), actions.showNotification('Login failed', true)))
+  );
 
 export const loginEpic = action$ =>
   action$.pipe(
     ofType(LOGIN),
     tap(authenticationService.login),
-    ignoreElements(),
-    catchError(() => of(loginFailed()))
+    ignoreElements()
   );
 
 export const logoutEpic = action$ =>
   action$.pipe(
     ofType(LOGOUT),
     mergeMap(() => from(authenticationService.logout())),
-    ignoreElements(),
-    catchError(() => of(logoutFailed()))
+    map(() => actions.showNotification('Logged out')),
+    catchError(() => of(actions.logoutFailed(), actions.showNotification('Logout failed', true)))
   );

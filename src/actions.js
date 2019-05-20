@@ -65,3 +65,11 @@ export const changeActivationDuration = activationDuration => ({
   type: actionTypes.CHANGE_ACTIVATION_DURATION,
   activationDuration
 });
+
+// Notifications
+export const showNotification = (message, isError = false) => ({
+  type: actionTypes.SHOW_NOTIFICATION,
+  message,
+  isError
+});
+export const hideNotification = () => ({ type: actionTypes.HIDE_NOTIFICATION });
