@@ -28,7 +28,7 @@ export const light = {
     subtleBg: darken(0.1, WHITE),
     fg: BLACK,
     subtleFg: lighten(0.3, BLACK),
-    darkGrey: darken(0.4, WHITE),
+    dark: lighten(0.2, BLACK),
     grey: darken(0.25, WHITE),
     orange: FLUO_ORANGE,
     purple: PURPLE,

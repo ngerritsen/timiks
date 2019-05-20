@@ -43,8 +43,7 @@ const NotificationContainer = styled.div`
 
 const NotificationMessage = styled.div`
   text-align: center;
-  background-color: ${props =>
-    props.error ? props.theme.colors.red : props.theme.colors.subtleFg};
+  background-color: ${props => (props.error ? props.theme.colors.red : props.theme.colors.dark)};
   color: ${props => props.theme.colors.white};
   border-radius: 0.5rem;
   padding: ${props => props.theme.sizes.sm};

@@ -4,7 +4,7 @@ const Tag = styled.span`
   position: relative;
   top: -0.1rem;
   left: ${props => props.theme.sizes.xxs};
-  background-color: ${props => props.theme.colors[props.color || 'darkGrey']};
+  background-color: ${props => props.theme.colors.grey};
   color: white;
   padding: 0.15rem ${props => props.theme.sizes.xs};
   text-align: center;
