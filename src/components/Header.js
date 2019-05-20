@@ -39,7 +39,7 @@ const Title = styled.h1`
 `;
 
 const IconContainer = styled.span`
-  margin-right: ${props => props.theme.sizes.sm};
+  margin-right: 1rem;
 `;
 
 const StyledNavLink = styled(NavLink)`

@@ -25,7 +25,7 @@ const Settings = ({
       toggle={({ show }) => (
         <IconButton onClick={show}>
           <Shortcut command="openSettings" action={show} />
-          <FontAwesome icon={faCog} />
+          <FontAwesome icon={faCog} fixedWidth />
         </IconButton>
       )}
       content={({ hide }) => (

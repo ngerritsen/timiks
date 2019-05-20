@@ -15,7 +15,7 @@ const KeyboardShortcuts = () => (
     toggle={({ show }) => (
       <IconButton onClick={show}>
         <Shortcut command="showKeyboardShortcuts" action={show} />
-        <FontAwesome icon={faKeyboard} />
+        <FontAwesome fixedWidth icon={faKeyboard} />
       </IconButton>
     )}
     content={({ hide }) => (

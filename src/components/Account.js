@@ -15,12 +15,24 @@ import Section from './shared/Section';
 import Button, { ButtonIcon } from './shared/Button';
 import Modal from './shared/Modal';
 
-const Account = ({ isLoggedIn, login, logout, displayName, email, isLoggingIn, isLoggingOut }) => (
+const Account = ({
+  isLoggedIn,
+  login,
+  logout,
+  displayName,
+  email,
+  isLoggingIn,
+  isLoggingOut,
+  isInitialized
+}) => (
   <span>
     <ToggleContent
       toggle={({ show }) => (
         <IconButton onClick={show}>
-          <FontAwesome icon={isLoggedIn ? faUserAstronaut : faSignInAlt} />
+          {isInitialized && (
+            <FontAwesome fixedWidth icon={isLoggedIn ? faUserAstronaut : faSignInAlt} />
+          )}
+          {!isInitialized && <FontAwesome fixedWidth icon={faSpinnerThird} spin />}
         </IconButton>
       )}
       content={({ hide }) => (
@@ -72,6 +84,7 @@ Account.propTypes = {
   isLoggingIn: PropTypes.bool,
   isLoggingOut: PropTypes.bool,
   displayName: PropTypes.string,
+  isInitialized: PropTypes.bool,
   email: PropTypes.string,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired

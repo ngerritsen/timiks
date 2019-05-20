@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
+  isInitialized: false,
   isLoggedIn: false,
   isLoggingIn: false,
   isLoggingOut: false,
@@ -27,6 +28,7 @@ export default function activationReducer(state = initialState, action) {
         ...state,
         isLoggedIn: true,
         isLoggingIn: false,
+        isInitialized: true,
         displayName: action.displayName,
         email: action.email,
         userId: action.userId
@@ -47,6 +49,7 @@ export default function activationReducer(state = initialState, action) {
         ...state,
         isLoggingOut: false,
         isLoggedIn: false,
+        isInitialized: true,
         displayName: '',
         email: '',
         userId: ''

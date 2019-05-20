@@ -10,6 +10,7 @@ function mapStateToProps(state) {
     isLoggingIn: authenticationSelectors.isLoggingIn(state),
     isLoggingOut: authenticationSelectors.isLoggingOut(state),
     displayName: authenticationSelectors.getDisplayName(state),
+    isInitialized: authenticationSelectors.isInitialized(state),
     email: authenticationSelectors.getEmail(state)
   };
 }
