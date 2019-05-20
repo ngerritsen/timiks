@@ -18,8 +18,6 @@ export default function notificationReducer(state = initialState, action) {
     case HIDE_NOTIFICATION:
       return {
         ...state,
-        message: '',
-        isError: false,
         show: false
       };
     default:
