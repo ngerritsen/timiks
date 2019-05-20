@@ -1,10 +1,5 @@
 <!DOCTYPE html>
-<html
-    lang="en"
-    <% if (htmlWebpackPlugin.mode === 'production') { %>
-        manifest="manifest.appcache"
-    <% } %>
->
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -142,7 +137,7 @@
         <span class="separator">|</span>
         <a href="https://github.com/ngerritsen/timiks/issues" target="_blank">Report bugs or suggestions</a>
         <span class="separator">|</span>
-        <a href="#" onclick="window.location.reload(true);">Reload</a>
+        <a href="#" data-reload>Reload</a>
     </footer>
 
 
@@ -162,6 +157,11 @@
       if (settings.theme === 'dark') {
         document.body.classList.add('is-dark');
       }
+
+      document.querySelector('[data-reload]').addEventListener('click', function (event) {
+        event.preventDefault();
+        window.location.reload(true);
+      });
     </script>
 
     <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>

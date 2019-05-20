@@ -3,3 +3,5 @@
 # Timiks
 
 A cube timer made for speedsolvers.
+
+[timiks.nielsgerritsen.com](https://timiks.nielsgerritsen.com)

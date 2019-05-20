@@ -1,7 +1,6 @@
 /* global require, __dirname, process, module */
 
 const path = require('path');
-const AppCachePlugin = require('appcache-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const createConfig = (env, argv) => {
@@ -28,7 +27,6 @@ const createConfig = (env, argv) => {
       ]
     },
     plugins: [
-      new AppCachePlugin(),
       new HtmlWebpackPlugin({
         mode: argv.mode,
         template: './src/index.html',
