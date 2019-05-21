@@ -5,15 +5,15 @@ import FontAwesome from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/fontawesome-pro-solid';
 import IconButton from './shared/IconButton';
 
-const Message = ({ message, dismiss }) => (
+const Message = ({ message, dismiss, withPointer }) => (
   <MessageBox>
     <div className="container">
       <MessageContent>
-        <MessagePointer />
+        {withPointer && <MessagePointer />}
         <MessageText>{message}</MessageText>
         <MessageClose>
           <IconButton onClick={dismiss}>
-            <FontAwesome icon={faTimes} size="md" />
+            <FontAwesome icon={faTimes} />
           </IconButton>
         </MessageClose>
       </MessageContent>
@@ -23,7 +23,8 @@ const Message = ({ message, dismiss }) => (
 
 Message.propTypes = {
   message: PropTypes.oneOfType(PropTypes.string, PropTypes.node),
-  dismiss: PropTypes.func.isRequired
+  dismiss: PropTypes.func.isRequired,
+  withPointer: PropTypes.bool
 };
 
 const MessageBox = styled.div`

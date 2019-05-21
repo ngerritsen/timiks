@@ -1,5 +1,4 @@
 import * as actionTypes from './constants/actionTypes';
-import { SCRAMBLE_REQUESTED } from './constants/actionTypes';
 
 // Timer
 export const resetTime = () => ({ type: actionTypes.RESET_TIME });
@@ -36,7 +35,7 @@ export const logoutSucceeded = () => ({ type: actionTypes.LOGOUT_SUCCEEDED });
 export const logoutFailed = () => ({ type: actionTypes.LOGOUT_FAILED });
 
 // Scramble
-export const scrambleRequested = () => ({ type: SCRAMBLE_REQUESTED });
+export const scrambleRequested = () => ({ type: actionTypes.SCRAMBLE_REQUESTED });
 export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });
 export const refreshScramble = () => ({ type: actionTypes.REFRESH_SCRAMBLE });
 
@@ -65,6 +64,10 @@ export const changeActivationDuration = activationDuration => ({
   type: actionTypes.CHANGE_ACTIVATION_DURATION,
   activationDuration
 });
+
+// Version
+export const newVersionAvailable = () => ({ type: actionTypes.NEW_VERSION_AVAILABLE });
+export const dismissNewVersion = () => ({ type: actionTypes.DISMISS_NEW_VERSION });
 
 // Login promotion
 export const promoteLogin = () => ({ type: actionTypes.PROMOTE_LOGIN });

@@ -8,6 +8,7 @@ import timer from './timer';
 import times from './times';
 import notifications from './notifications';
 import loginPromotion from './loginPromotion';
+import version from './version';
 
 export default combineReducers({
   activation,
@@ -17,5 +18,6 @@ export default combineReducers({
   timer,
   times,
   notifications,
-  loginPromotion
+  loginPromotion,
+  version
 });

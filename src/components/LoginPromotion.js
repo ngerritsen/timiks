@@ -7,6 +7,7 @@ export const LoginPromotion = ({ dismissLoginPromotion, shouldPromoteLogin }) =>
     <Message
       message="Login to save your times to the cloud and sync them between your devices!"
       dismiss={dismissLoginPromotion}
+      withPointer
     />
   ) : null;
 

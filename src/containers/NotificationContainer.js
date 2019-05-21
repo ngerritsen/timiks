@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Notification from '../components/Notification';
-import { getMessage, isError, shouldShow } from '../selectors/notifcations';
+import { getMessage, isError, shouldShow } from '../selectors/notifications';
 import { hideNotification } from '../actions';
 
 function mapStateToProps(state) {

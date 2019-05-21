@@ -7,9 +7,11 @@ import ArchiveContainer from '../containers/archive/ArchiveContainer';
 import Section from './shared/Section';
 import NotificationContainer from '../containers/NotificationContainer';
 import LoginPromotionContainer from '../containers/LoginPromotionContainer';
+import NewVersionPromptContainer from '../containers/NewVersionPromptContainer';
 
 const App = () => (
   <>
+    <NewVersionPromptContainer />
     <LoginPromotionContainer />
     <div className="container">
       <Section margin="md">

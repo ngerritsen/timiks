@@ -33,6 +33,9 @@ export const AVAILABLE_STATS = [
   { name: 'mo3', size: 3, deviation: 0, color: 'grey' }
 ];
 
+// Version
+export const POLL_VERSION_INTERVAL = 30000;
+
 // Storage
 export const LOGIN_PROMOTED = 'loginPromoted';
 export const SETTINGS_STORAGE_KEY = 'settings';
