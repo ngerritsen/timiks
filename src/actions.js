@@ -66,6 +66,10 @@ export const changeActivationDuration = activationDuration => ({
   activationDuration
 });
 
+// Login promotion
+export const promoteLogin = () => ({ type: actionTypes.PROMOTE_LOGIN });
+export const dismissLoginPromotion = () => ({ type: actionTypes.DISMISS_LOGIN_PROMOTION });
+
 // Notifications
 export const showNotification = (message, isError = false) => ({
   type: actionTypes.SHOW_NOTIFICATION,

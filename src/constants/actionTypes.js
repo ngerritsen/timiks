@@ -41,6 +41,10 @@ export const LOGOUT = 'LOGOUT';
 export const LOGOUT_SUCCEEDED = 'LOGOUT_SUCCEEDED';
 export const LOGOUT_FAILED = 'LOGOUT_FAILED';
 
+// Login promotion
+export const PROMOTE_LOGIN = 'PROMOTE_LOGIN';
+export const DISMISS_LOGIN_PROMOTION = 'DISMISS_LOGIN_PROMOTION';
+
 // Settings
 export const TOGGLE_MANUAL_TIME_ENTRY = 'TOGGLE_MANUAL_TIME_ENTRY';
 export const SETTINGS_STORED = 'SETTINGS_STORED';

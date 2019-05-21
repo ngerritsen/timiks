@@ -7,6 +7,7 @@ import settings from './settings';
 import timer from './timer';
 import times from './times';
 import notifications from './notifications';
+import loginPromotion from './loginPromotion';
 
 export default combineReducers({
   activation,
@@ -15,5 +16,6 @@ export default combineReducers({
   settings,
   timer,
   times,
-  notifications
+  notifications,
+  loginPromotion
 });

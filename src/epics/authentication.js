@@ -1,10 +1,11 @@
 import { ofType } from 'redux-observable';
 import { from, of } from 'rxjs';
-import { catchError, tap, map, ignoreElements, mergeMap, takeUntil } from 'rxjs/operators';
+import { catchError, tap, map, mergeMap, takeUntil } from 'rxjs/operators';
 
 import * as authenticationService from '../services/authentication';
 import { LOGIN, LOGIN_SUCCEEDED, LOGOUT } from '../constants/actionTypes';
 import * as actions from '../actions';
+import { dismissLoginPromotion } from '../actions';
 
 export const loginStatusEpic = () =>
   authenticationService
@@ -14,6 +15,7 @@ export const loginStatusEpic = () =>
         user
           ? of(
               actions.loginSucceeded(user.uid, user.displayName, user.email),
+              dismissLoginPromotion(),
               actions.showNotification('Logged in')
             )
           : of(actions.logoutSucceeded())
@@ -30,7 +32,7 @@ export const loginEpic = action$ =>
   action$.pipe(
     ofType(LOGIN),
     tap(authenticationService.login),
-    ignoreElements()
+    map(dismissLoginPromotion)
   );
 
 export const logoutEpic = action$ =>

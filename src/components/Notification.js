@@ -8,7 +8,7 @@ import { NOTIFICATION_ROOT_SELECTOR } from '../constants/app';
 const Notification = ({ message, isError, show, hideNotification }) => {
   return ReactDOM.createPortal(
     <NotificationContainer show={show}>
-      <NotificationMessage onClick={hideNotification} error={isError}>
+      <NotificationMessage error={isError} onClick={hideNotification}>
         {message}
       </NotificationMessage>
     </NotificationContainer>,
@@ -27,8 +27,8 @@ const NotificationContainer = styled.div`
   transition: bottom 0.5s ease;
   display: flex;
   position: fixed;
-  bottom: ${props => (props.show ? '0' : '-6rem')};
-  padding: 0 ${props => props.theme.sizes.xs} ${props => props.theme.sizes.xs};
+  bottom: ${props => (props.show ? '0' : '-7rem')};
+  padding: 0 ${props => props.theme.sizes.sm} ${props => props.theme.sizes.xs};
   left: 0;
   right: 0;
   justify-content: center;
@@ -42,7 +42,6 @@ const NotificationContainer = styled.div`
 `;
 
 const NotificationMessage = styled.div`
-  text-align: center;
   background-color: ${props => (props.error ? props.theme.colors.red : props.theme.colors.dark)};
   color: ${props => props.theme.colors.white};
   border-radius: 0.5rem;
@@ -50,6 +49,8 @@ const NotificationMessage = styled.div`
   width: 100%;
   pointer-events: auto;
   max-width: 540px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default Notification;
