@@ -2,6 +2,7 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const buildNumber = require('./src/static/build');
 
 const createConfig = (env, argv) => {
   const config = {
@@ -31,8 +32,8 @@ const createConfig = (env, argv) => {
         mode: argv.mode,
         template: './src/index.html',
         analytics: 'UA-39696629-4',
-        buildNumber: process.env.TRAVIS_BUILD_NUMBER || 0,
-        inject: false
+        inject: false,
+        buildNumber
       })
     ]
   };

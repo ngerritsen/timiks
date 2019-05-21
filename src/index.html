@@ -101,7 +101,10 @@
       }
     </style>
 </head>
-<body data-scramble-worker-path="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>">
+<body
+    data-scramble-worker-path="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>"
+    data-build-number="<%= htmlWebpackPlugin.options.buildNumber %>"
+>
     <!--[if lt IE 11]>
         <div style="
             text-align: center;

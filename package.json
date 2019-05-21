@@ -8,7 +8,8 @@
     "watch": "npm run copy-static; webpack-dev-server --mode=development --content-base ./public",
     "test": "eslint .",
     "build": "npm run copy-static; webpack --mode=production",
-    "precommit": "npm run test"
+    "precommit": "npm run test",
+    "write-build-number": "echo \"$TRAVIS_BUILD_NUMBER\" > src/static/build.json"
   },
   "repository": {
     "type": "git",
