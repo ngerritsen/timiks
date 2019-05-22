@@ -16,9 +16,9 @@ const Header = () => (
       <StyledNavLink activeClassName="selected" to="/archive">
         Archive
       </StyledNavLink>
-      <IconContainer>
+      <KeyboardShortcutsIconContainer>
         <KeyboardShortcuts />
-      </IconContainer>
+      </KeyboardShortcutsIconContainer>
       <IconContainer>
         <SettingsContainer />
       </IconContainer>
@@ -40,6 +40,14 @@ const Title = styled.h1`
 
 const IconContainer = styled.span`
   margin-right: 1rem;
+`;
+
+const KeyboardShortcutsIconContainer = IconContainer.extend`
+  display: none;
+
+  @media screen and (min-width: 540px) {
+    display: inline;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
