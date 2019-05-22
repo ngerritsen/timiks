@@ -2,31 +2,42 @@ import { connect } from 'react-redux';
 
 import { startTimer, stopTimer, resetTime, submitTimeInput } from '../../actions';
 import Activation from '../../components/timer/Activation';
-import {
-  isReady,
-  isPreparing,
-  isPreparingForInspection,
-  getPreparationStage
-} from '../../selectors/activation';
-import { getTime, isInspecting, isStopped, isValidTimeInput } from '../../selectors/timer';
+import * as activationSelectors from '../../selectors/activation';
+import * as timerSelectors from '../../selectors/timer';
 import { shouldUseManualTimeEntry, shouldUseInspectionTime } from '../../selectors/settings';
+import { parseTimeInput } from '../../helpers/time';
 
 function mapStateToProps(state) {
   return {
-    time: getTime(state),
-    stopped: isStopped(state),
-    preparationStage: getPreparationStage(state),
+    time: timerSelectors.getTime(state),
+    stopped: timerSelectors.isStopped(state),
+    preparationStage: activationSelectors.getPreparationStage(state),
     useManualTimeEntry: shouldUseManualTimeEntry(state),
-    preparing: isPreparing(state),
-    preparingForInspection: isPreparingForInspection(state),
-    inspecting: isInspecting(state),
-    validTimeInput: isValidTimeInput(state),
+    preparing: activationSelectors.isPreparing(state),
+    preparingForInspection: activationSelectors.isPreparingForInspection(state),
+    inspecting: timerSelectors.isInspecting(state),
+    validTimeInput: timerSelectors.isValidTimeInput(state),
+    timeInput: timerSelectors.getTimeInput(state),
     useInspectionTime: shouldUseInspectionTime(state),
-    ready: isReady(state)
+    ready: activationSelectors.isReady(state)
+  };
+}
+
+function mergeProps(stateProps, dispatchProps, ownProps) {
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    submitTimeInput: () => {
+      const inputData = parseTimeInput(stateProps.timeInput);
+
+      dispatchProps.submitTimeInput(inputData.ms, inputData.dnf, inputData.plus2);
+    }
   };
 }
 
 export default connect(
   mapStateToProps,
-  { startTimer, stopTimer, resetTime, submitTimeInput }
+  { startTimer, stopTimer, resetTime, submitTimeInput },
+  mergeProps
 )(Activation);
