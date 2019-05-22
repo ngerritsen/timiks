@@ -6,7 +6,7 @@ import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 import * as timesRepository from '../repositories/times';
 import { getUserId, isLoggedIn } from '../selectors/authentication';
-import { getCurrentTimeIds, getTime, getUnstoredTimes } from '../selectors/times';
+import { getCurrentTimeIds, getUnstoredTimes } from '../selectors/times';
 import { listenForChanges } from '../repositories/times';
 
 export const saveTimeEpic = (action$, state$) =>
@@ -35,7 +35,7 @@ export const updateTimeEpic = (action$, state$) =>
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
     mergeMap(([action, state]) =>
-      from(timesRepository.save(getUserId(state), getTime(state, action.id)))
+      from(timesRepository.update(getUserId(state), action.id, action.fields))
     ),
     ignoreElements()
   );

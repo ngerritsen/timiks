@@ -32,13 +32,6 @@ export function save(userId, time) {
     .set({ ...stripUndefined(serializeTime(time)), userId });
 }
 
-export function remove(userId, timeId) {
-  return db
-    .collection('times')
-    .doc(timeId)
-    .delete();
-}
-
 export function saveAll(userId, times) {
   const batch = db.batch();
 
@@ -50,15 +43,11 @@ export function saveAll(userId, times) {
   return batch.commit();
 }
 
-export function removeAll(userId, timeIds) {
-  const batch = db.batch();
-
-  timeIds.forEach(id => {
-    const timeRef = db.collection('times').doc(id);
-    batch.delete(timeRef);
-  });
-
-  return batch.commit();
+export function update(userId, timeId, fields) {
+  return db
+    .collection('times')
+    .doc(timeId)
+    .set(fields, { merge: true });
 }
 
 export function updateAll(userId, timeIds, fields) {
@@ -67,6 +56,24 @@ export function updateAll(userId, timeIds, fields) {
   timeIds.forEach(id => {
     const timeRef = db.collection('times').doc(id);
     batch.set(timeRef, fields, { merge: true });
+  });
+
+  return batch.commit();
+}
+
+export function remove(userId, timeId) {
+  return db
+    .collection('times')
+    .doc(timeId)
+    .delete();
+}
+
+export function removeAll(userId, timeIds) {
+  const batch = db.batch();
+
+  timeIds.forEach(id => {
+    const timeRef = db.collection('times').doc(id);
+    batch.delete(timeRef);
   });
 
   return batch.commit();
