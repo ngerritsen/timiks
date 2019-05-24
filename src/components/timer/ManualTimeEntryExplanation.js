@@ -17,7 +17,7 @@ const ManualTimeEntryExplanation = () => (
         </IconButton>
       )}
       content={({ hide }) => (
-        <Modal title="Stats information" onClose={hide}>
+        <Modal title="Manual time entry" onClose={hide}>
           <Section margin="sm">
             <p>
               The format for entering a time is <strong>HH:mm:ss.SSS</strong> where only the seconds
