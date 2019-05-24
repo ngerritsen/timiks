@@ -46,7 +46,7 @@ const Tile = styled.span`
       ? lighten(0.15, props.theme.puzzleColors[props.color])
       : darken(0.25, props.theme.puzzleColors[props.color])};
   width: 100%;
-  margin: ${props => scale(props.cubeSize, 0.1, 0.3)}rem;
+  margin: ${props => scale(props.cubeSize, 0.1, 0.25)}rem;
 `;
 
 function scale(cubeSize, min, max) {

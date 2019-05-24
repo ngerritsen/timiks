@@ -32,7 +32,6 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
       <FontAwesome fixedWidth icon={faCube} /> &nbsp;
       {time.puzzle || 'unknown'}
     </Section>
-    <Section margin="sm" />
     <Section margin="md">
       <ScrambleDetails scramble={time.scramble} puzzle={time.puzzle} />
     </Section>
