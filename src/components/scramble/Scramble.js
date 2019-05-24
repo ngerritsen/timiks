@@ -50,15 +50,16 @@ Scramble.propTypes = {
 };
 
 const ScrambleBox = styled.p`
-  font-size: ${props => (props.small ? '1.4rem' : '1.6rem')};
+  font-size: ${props => (props.small ? '1.5rem' : '1.7rem')};
   text-align: center;
   font-family: ${props => props.theme.monoFont};
+  line-height: 1.3;
   background-color: ${props => props.theme.colors.subtleBg};
   padding: ${props => props.theme.sizes.xs};
   margin: 0;
   font-weight: bold;
   border-radius: 3px;
-  max-height: ${props => (props.small ? '' : '16rem')};
+  max-height: ${props => (props.small ? '' : '15rem')};
   overflow-y: auto;
 `;
 
