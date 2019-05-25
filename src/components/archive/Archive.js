@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { darken, lighten } from 'polished';
 import moment from 'moment';
 
+import puzzles from '../../constants/puzzles';
 import * as CustomPropTypes from '../../propTypes';
 import styled from 'styled-components';
 import TimeDetails from '../timeTable/TimeDetails';
@@ -19,7 +20,9 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
     <Section margin="sm">
       <ArchiveOptions changePuzzle={changePuzzle} puzzle={puzzle} />
     </Section>
-    {times.length === 0 && <Message>No {puzzle} solves in the archive.</Message>}
+    {times.length === 0 && (
+      <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
+    )}
     {times.length > 1 && (
       <Section margin="xs">
         <TimeGraph times={times} stats={stats} />
@@ -86,7 +89,7 @@ Archive.propTypes = {
 const Message = styled.p`
   color: ${props => props.theme.colors.grey};
   font-weight: bold;
-  padding: ${props => props.theme.sizes.lg} 0;
+  padding: 15vh 0;
   text-align: center;
 `;
 

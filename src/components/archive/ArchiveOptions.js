@@ -8,7 +8,7 @@ const ArchiveOptions = ({ changePuzzle, puzzle }) => (
   <Select
     label="Puzzle"
     onChange={changePuzzle}
-    options={puzzles.map(({ name }) => ({ label: name, value: name }))}
+    options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
     value={puzzle}
   />
 );
