@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { faCaretDown } from '@fortawesome/fontawesome-pro-solid';
+import FontAwesome from '@fortawesome/react-fontawesome';
 
-const Selector = ({ label, onChange, options, value, numeric, fullWidth }) => (
-  <SelectContainer fullWidth={fullWidth}>
-    <label>{label}:</label>
+const Selector = ({ onChange, options, value, numeric }) => (
+  <SelectContainer>
+    <SelectIcon>
+      <FontAwesome icon={faCaretDown} />
+    </SelectIcon>
     <Select
       value={value}
       onChange={event => {
@@ -22,20 +26,52 @@ const Selector = ({ label, onChange, options, value, numeric, fullWidth }) => (
 );
 
 const SelectContainer = styled.span`
-  display: ${props => (props.fullWidth ? 'flex' : 'inline-block')};
-  justify-content: space-between;
+  display: inline-block;
+  position: relative;
 `;
 
 const Select = styled.select`
+  display: inline-block;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
   font-size: 1.4rem;
-  height: 1.8em;
+  height: 2.6rem;
   border-radius: 0.4rem;
+  box-sizing: border-box;
   margin-left: ${props => props.theme.sizes.xs};
+  padding: 0 ${props => props.theme.sizes.lg} 0 ${props => props.theme.sizes.xs};
   border: 1px solid ${props => props.theme.colors.grey};
+  color: ${props => props.theme.colors.fg};
+  background-color: ${props => props.theme.colors.bg};
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:hover {
+    border-color: ${props => props.theme.colors.subtleFg};
+  }
+
+  &:focus {
+    border-color: ${props => props.theme.colors.blue};
+    box-shadow: 0 0 0 1px ${props => props.theme.colors.blue};
+    box-shadow: 0 0 0 1px -moz-mac-focusring;
+    color: ${props => props.theme.colors.fg};
+    outline: none !important;
+  }
 
   &:hover {
     cursor: pointer;
   }
+`;
+
+const SelectIcon = styled.div`
+  pointer-events: none;
+  position: absolute;
+  font-size: 0.9em;
+  right: 1rem;
+  top: 0.5rem;
 `;
 
 Selector.propTypes = {

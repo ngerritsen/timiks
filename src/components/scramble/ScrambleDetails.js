@@ -10,7 +10,7 @@ import Section from '../shared/Section';
 const ScrambleDetails = ({ puzzle, scramble }) => (
   <div>
     <Section margin="md">
-      <Scramble scramble={scramble} small />
+      <Scramble scramble={scramble} expand />
     </Section>
     {isCube(puzzle) ? (
       <CubePreview cubeSize={getPuzzleSize(puzzle)} scramble={scramble} />

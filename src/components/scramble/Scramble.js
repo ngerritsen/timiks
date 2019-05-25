@@ -12,9 +12,9 @@ import Shortcut from '../shared/Shortcut';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
 
-const Scramble = ({ scramble, small, withDetails, puzzle, isPuzzleCube }) => (
+const Scramble = ({ scramble, withDetails, puzzle, isPuzzleCube, expand }) => (
   <div>
-    <ScrambleBox small={small}>
+    <ScrambleBox expand={expand}>
       {withDetails && isPuzzleCube && (
         <ScrambleIconButtonContainer>
           <ToggleContent
@@ -46,11 +46,12 @@ Scramble.propTypes = {
   isPuzzleCube: PropTypes.bool,
   scramble: CustomPropTypes.Scramble,
   small: PropTypes.bool,
-  puzzle: PropTypes.string
+  puzzle: PropTypes.string,
+  expand: PropTypes.bool
 };
 
 const ScrambleBox = styled.p`
-  font-size: ${props => (props.small ? '1.5rem' : '1.7rem')};
+  font-size: 1.65rem;
   text-align: center;
   font-family: ${props => props.theme.monoFont};
   line-height: 1.3;
@@ -59,7 +60,7 @@ const ScrambleBox = styled.p`
   margin: 0;
   font-weight: bold;
   border-radius: 3px;
-  max-height: ${props => (props.small ? '' : '15rem')};
+  max-height: ${props => (props.expand ? '' : '14.5rem')};
   overflow-y: auto;
 `;
 

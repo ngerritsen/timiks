@@ -14,7 +14,7 @@ const Button = styled.button.attrs({
       (props.disabled && 'grey') ||
         Object.keys(props).reduce((color, key) => propColorMap[key] || color, 'blue')
     ],
-  height: props => (props.big ? '6.2rem' : props.tiny ? '2.4rem' : '4.2rem'),
+  height: props => (props.big ? '6.2rem' : props.tiny ? '2.6rem' : '4.2rem'),
   sidepadding: props => (props.big ? 'lg' : props.tiny ? 'sm' : 'md'),
   radius: props => (props.big ? '0.5rem' : '0.3rem')
 })`

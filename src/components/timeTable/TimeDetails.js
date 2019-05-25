@@ -1,6 +1,12 @@
 import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faStopwatch, faCube } from '@fortawesome/fontawesome-pro-solid';
+import {
+  faCalendarAlt,
+  faStopwatch,
+  faCube,
+  faEye,
+  faEyeSlash
+} from '@fortawesome/fontawesome-pro-solid';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
@@ -11,6 +17,7 @@ import ScrambleDetails from '../scramble/ScrambleDetails';
 import Button from '../shared/Button';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
+import ToggleContent from '../ToggleContent';
 
 const TimeDetails = ({ time, onRemoveTime, onClose }) => (
   <div>
@@ -32,8 +39,18 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
       <FontAwesome fixedWidth icon={faCube} /> &nbsp;
       {time.puzzle || 'unknown'}
     </Section>
-    <Section margin="md">
-      <ScrambleDetails scramble={time.scramble} puzzle={time.puzzle} />
+    <Section margin="sm">
+      <ToggleContent
+        toggle={({ show, hide, isShown }) => (
+          <Section margin={isShown ? 'sm' : ''}>
+            <Button empty neutral onClick={isShown ? hide : show}>
+              <FontAwesome fixedWidth icon={isShown ? faEyeSlash : faEye} /> &nbsp;
+              {isShown ? 'Hide' : 'Show'} scramble
+            </Button>
+          </Section>
+        )}
+        content={() => <ScrambleDetails small scramble={time.scramble} puzzle={time.puzzle} />}
+      />
     </Section>
     <Section>
       <ButtonDuo>

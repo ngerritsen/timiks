@@ -8,7 +8,7 @@ const ToggleContent = ({ toggle, content }) => {
 
   return (
     <>
-      {toggle({ show })}
+      {toggle({ show, hide, isShown })}
       {isShown && content({ hide })}
     </>
   );

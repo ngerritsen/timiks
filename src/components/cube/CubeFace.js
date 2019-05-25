@@ -8,7 +8,13 @@ const CubeFace = ({ face = [], cubeSize }) => (
     {face.map((row, y) => (
       <Row key={y}>
         {row.map((color, x) => (
-          <Tile key={x} color={color} cubeSize={cubeSize} />
+          <Tile
+            key={x}
+            isLastColumn={x + 1 === cubeSize}
+            isLastRow={y + 1 === cubeSize}
+            color={color}
+            cubeSize={cubeSize}
+          />
         ))}
       </Row>
     ))}
@@ -23,9 +29,9 @@ CubeFace.propTypes = {
 const Face = styled.div`
   display: inline-flex;
   flex-direction: column;
-  min-width: 9rem;
-  width: 9rem;
-  height: 9rem;
+  min-width: 8.6rem;
+  width: 8.6rem;
+  height: 8.6rem;
   margin-right: ${props => props.theme.sizes.xs};
 `;
 
@@ -46,7 +52,8 @@ const Tile = styled.span`
       ? lighten(0.15, props.theme.puzzleColors[props.color])
       : darken(0.25, props.theme.puzzleColors[props.color])};
   width: 100%;
-  margin: ${props => scale(props.cubeSize, 0.1, 0.25)}rem;
+  margin-right: ${props => (props.isLastColumn ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
+  margin-bottom: ${props => (props.isLastRow ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
 `;
 
 function scale(cubeSize, min, max) {

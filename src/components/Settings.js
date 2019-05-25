@@ -20,7 +20,7 @@ const Settings = ({
   changeTheme,
   toggleManualTimeEntry
 }) => (
-  <span>
+  <>
     <ToggleContent
       toggle={({ show }) => (
         <IconButton onClick={show}>
@@ -32,18 +32,21 @@ const Settings = ({
         <Modal title="Settings" onClose={hide}>
           <>
             <Section margin="sm">
-              <Selector
-                label="Activation delay*"
-                onChange={changeActivationDuration}
-                options={ACTIVATION_DURATION_OPTIONS}
-                value={settings.activationDuration}
-                numeric
-                fullWidth
-              />
+              <Setting>
+                <label>Activation delay</label>
+                <Selector
+                  label="Activation delay*"
+                  onChange={changeActivationDuration}
+                  options={ACTIVATION_DURATION_OPTIONS}
+                  value={settings.activationDuration}
+                  numeric
+                  fullWidth
+                />
+              </Setting>
             </Section>
             <Section margin="sm">
               <Setting>
-                <span>Manual time entry</span>
+                <label>Manual time entry</label>
                 <Checkbox
                   type="checkbox"
                   onChange={toggleManualTimeEntry}
@@ -53,7 +56,7 @@ const Settings = ({
             </Section>
             <Section margin="sm">
               <Setting>
-                <span>Use inspection time</span>
+                <label>Use inspection time</label>
                 <Checkbox
                   type="checkbox"
                   onChange={toggleInspectionTime}
@@ -63,7 +66,7 @@ const Settings = ({
             </Section>
             <Section margin="md">
               <Setting>
-                <span>Night mode</span>
+                <label>Night mode</label>
                 <Checkbox
                   type="checkbox"
                   onChange={() => changeTheme(settings.theme === 'dark' ? 'light' : 'dark')}
@@ -72,21 +75,25 @@ const Settings = ({
               </Setting>
             </Section>
             <Section margin="md">
-              <i>
-                *For how long you have to hold spacebar, mouse or touch before starting the timer.
-              </i>
+              <p>
+                <i>
+                  *For how long you have to hold spacebar, mouse or touch before starting the timer.
+                </i>
+              </p>
             </Section>
             <Button onClick={hide}>Close</Button>
           </>
         </Modal>
       )}
     />
-  </span>
+  </>
 );
 
 const Setting = styled.label`
   display: flex;
   justify-content: space-between;
+  height: 2.4rem;
+  align-items: center;
 `;
 
 const Checkbox = styled.input`
