@@ -128,6 +128,15 @@ const puzzles = [
     }
   },
   {
+    name: '2x2x2-bld',
+    title: '2x2x2 Blindfolded',
+    type: puzzleConstants.CUBE,
+    size: 2,
+    scrambleOptions: {
+      jsssScrambler: '222'
+    }
+  },
+  {
     name: '3x3x3-bld',
     title: '3x3x3 Blindfolded',
     type: puzzleConstants.CUBE,
