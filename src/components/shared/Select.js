@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import { faCaretDown } from '@fortawesome/fontawesome-pro-solid';
 import FontAwesome from '@fortawesome/react-fontawesome';
 
-const Selector = ({ onChange, options, value, numeric }) => (
+const Select = ({ onChange, options, value, numeric, label }) => (
   <SelectContainer>
+    {label && <Label>{label}:</Label>}
     <SelectIcon>
       <FontAwesome icon={faCaretDown} />
     </SelectIcon>
-    <Select
+    <SelectInput
       value={value}
       onChange={event => {
         const value = event.target.value;
@@ -21,7 +22,7 @@ const Selector = ({ onChange, options, value, numeric }) => (
           {label}
         </option>
       ))}
-    </Select>
+    </SelectInput>
   </SelectContainer>
 );
 
@@ -30,8 +31,13 @@ const SelectContainer = styled.span`
   position: relative;
 `;
 
-const Select = styled.select`
-  display: inline-block;
+const Label = styled.label`
+  margin-right: ${props => props.theme.sizes.xs};
+`;
+
+const SelectInput = styled.select`
+  display: inline-flex;
+  align-items: center;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -39,7 +45,6 @@ const Select = styled.select`
   height: 2.6rem;
   border-radius: 0.4rem;
   box-sizing: border-box;
-  margin-left: ${props => props.theme.sizes.xs};
   padding: 0 ${props => props.theme.sizes.lg} 0 ${props => props.theme.sizes.xs};
   border: 1px solid ${props => props.theme.colors.grey};
   color: ${props => props.theme.colors.fg};
@@ -74,7 +79,7 @@ const SelectIcon = styled.div`
   top: 0.5rem;
 `;
 
-Selector.propTypes = {
+Select.propTypes = {
   label: PropTypes.string.isRequired,
   fullWidth: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
@@ -88,4 +93,4 @@ Selector.propTypes = {
   numeric: PropTypes.bool
 };
 
-export default Selector;
+export default Select;

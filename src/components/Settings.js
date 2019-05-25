@@ -9,7 +9,7 @@ import { ACTIVATION_DURATION_OPTIONS } from '../constants/app';
 import IconButton from './shared/IconButton';
 import ToggleContent from './ToggleContent';
 import Section from './shared/Section';
-import Selector from './shared/Selector';
+import Select from './shared/Select';
 import Button from './shared/Button';
 import Modal from './shared/Modal';
 
@@ -33,9 +33,8 @@ const Settings = ({
           <>
             <Section margin="sm">
               <Setting>
-                <label>Activation delay</label>
-                <Selector
-                  label="Activation delay*"
+                <label>Activation delay*</label>
+                <Select
                   onChange={changeActivationDuration}
                   options={ACTIVATION_DURATION_OPTIONS}
                   value={settings.activationDuration}

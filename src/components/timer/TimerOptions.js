@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { faSyncAlt } from '@fortawesome/fontawesome-pro-solid';
 
 import InlineFontawesome from '../shared/InlineFontawesome';
-import Selector from '../shared/Selector';
+import Select from '../shared/Select';
 import Button from '../shared/Button';
 import puzzles from '../../constants/puzzles';
 import Shortcut from '../shared/Shortcut';
 
 const TimerOptions = ({ changePuzzle, puzzle, refreshScramble }) => (
   <div>
-    <Selector
+    <Select
       label="Puzzle"
       onChange={changePuzzle}
       options={puzzles.map(({ name }) => ({ label: name, value: name }))}
