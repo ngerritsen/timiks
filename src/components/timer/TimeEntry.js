@@ -1,11 +1,52 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Input from '../shared/Input';
+import ManualTimeEntryExplanation from './ManualTimeEntryExplanation';
 
-const TimeEntry = Input.extend`
+const TimeEntry = ({ value, onKeyPress, onChange }) => (
+  <TimeInputContainer>
+    <TimeInput
+      type="text"
+      placeholder="00:00.000"
+      value={value}
+      onKeyPress={onKeyPress}
+      onChange={onChange}
+    />
+    <HelperText>
+      Append <strong>+2</strong> for plus 2; enter <strong>dnf</strong> for a DNF &nbsp;
+      <ManualTimeEntryExplanation />
+    </HelperText>
+  </TimeInputContainer>
+);
+
+TimeEntry.propTypes = {
+  value: PropTypes.string.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+const TimeInputContainer = styled.div`
+  position: relative;
+`;
+
+const HelperText = styled.p`
+  position: absolute;
+  font-size: 1.5rem;
+  top: 7.2rem;
+  margin: 0;
+  color: ${props => props.theme.colors.subtleFg};
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+`;
+
+const TimeInput = Input.extend`
   display: block;
   font-size: 5.4rem;
   text-align: center;
   -webkit-appearance: none;
-  height: 6.3rem;
+  height: 6rem;
   font-family: ${props => props.theme.font};
   padding: 0 ${props => props.theme.sizes.xs};
 `;

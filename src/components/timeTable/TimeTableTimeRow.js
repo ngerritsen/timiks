@@ -30,15 +30,11 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
       )}
     </Cell>
     <Cell rightAlign>
-      {time.stored && (
-        <SyncStatusIcon>
-          <CloudSyncIcon time={time} size="sm" />
-        </SyncStatusIcon>
-      )}
+      {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
       <ToggleContent
         toggle={({ show }) => (
           <InfoIconButton onClick={show}>
-            <FontAwesome icon={faInfoCircle} size="sm" />
+            <FontAwesome icon={faInfoCircle} fixedWidth size="sm" />
           </InfoIconButton>
         )}
         content={({ hide }) => (
@@ -55,7 +51,7 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
         )}
       />
       <RemoveItemIconButton onClick={() => removeTime(time.id)}>
-        <FontAwesome icon={faTimes} size="sm" />
+        <FontAwesome icon={faTimes} fixedWidth size="sm" />
       </RemoveItemIconButton>
     </Cell>
   </tr>
@@ -71,8 +67,8 @@ const TimeIndexCell = Cell.extend`
   width: 3rem;
 `;
 
-const TimeInfo = styled.small`
-  padding-left: ${props => props.theme.sizes.xs};
+const TimeInfo = styled.span`
+  padding-left: 1rem;
   color: ${props => props.theme.colors.subtleFg};
   font-size: 1.5rem;
 `;
@@ -82,15 +78,12 @@ const BestTimeIcon = styled.span`
 `;
 
 const InfoIconButton = IconButton.extend`
+  margin-left: 1rem;
   color: ${props => props.theme.colors.blue};
 `;
 
-const SyncStatusIcon = styled.span`
-  margin-right: 1rem;
-`;
-
 const RemoveItemIconButton = IconButton.extend`
-  margin-left: 1rem;
+  margin-left: ${props => props.theme.sizes.xxs};
   color: ${props => props.theme.colors.red};
 `;
 

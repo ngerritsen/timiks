@@ -36,9 +36,9 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
                   key={time.id}
                   toggle={({ show }) => (
                     <TimeTile onClick={show}>
-                      <strong>
+                      <TimeTileTime>
                         <Time time={time} />
-                      </strong>
+                      </TimeTileTime>
                       <DateTag>{moment(time.date).format('LT')}</DateTag>
                       {time.stored && (
                         <SyncStatusIcon>
@@ -90,10 +90,15 @@ const Message = styled.p`
   text-align: center;
 `;
 
+const TimeTileTime = styled.strong`
+  position: relative;
+  top: 0.3rem;
+`;
+
 const DateTag = styled.div`
   font-size: 0.7em;
   opacity: 0.7;
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
 `;
 
 const TimeTiles = styled.div`
@@ -118,7 +123,7 @@ const TimeTile = styled.div`
   position: relative;
   text-align: center;
   border: 1px solid ${props => props.theme.colors.grey};
-  padding: ${props => props.theme.sizes.sm} ${props => props.theme.sizes.sm};
+  padding: ${props => props.theme.sizes.sm};
   border-radius: 3px;
   cursor: pointer;
 

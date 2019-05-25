@@ -26,7 +26,7 @@ const Timer = ({
 }) => (
   <div>
     <Section margin="sm">
-      <TimerTimeContainer>
+      <TimerTimeContainer withManualEntry={useManualTimeEntry}>
         <TimerTime disabled={preparing && !ready}>
           {(() => {
             switch (true) {
@@ -53,7 +53,9 @@ const Timer = ({
         </TimerTime>
       </TimerTimeContainer>
     </Section>
-    <TimeFooter>{showLastTime && <TimeActionsContainer />}</TimeFooter>
+    <TimeFooter withManualEntry={useManualTimeEntry}>
+      {showLastTime && <TimeActionsContainer />}
+    </TimeFooter>
     <Section margin="sm">
       <ScrambleContainer />
     </Section>
@@ -76,7 +78,7 @@ Timer.propTypes = {
 };
 
 const TimeFooter = styled.div`
-  height: 6.4rem;
+  height: ${props => (props.withManualEntry ? '9.3rem' : '6.4rem')};
   text-align: center;
 `;
 
@@ -88,7 +90,7 @@ const TimerTime = styled.span`
 
 const TimerTimeContainer = styled.div`
   text-align: center;
-  padding: 5.2rem 0 0;
+  padding: ${props => (props.withManualEntry ? '6rem' : '5.2rem')} 0 0;
   font-size: 5.6rem;
   position: relative;
 `;

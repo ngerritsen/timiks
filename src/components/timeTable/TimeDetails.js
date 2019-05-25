@@ -35,7 +35,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
       <FontAwesome fixedWidth icon={faCalendarAlt} /> &nbsp;
       {moment(time.date).format('LLL')}
     </Section>
-    <Section margin="sm">
+    <Section margin="md">
       <FontAwesome fixedWidth icon={faCube} /> &nbsp;
       {time.puzzle || 'unknown'}
     </Section>

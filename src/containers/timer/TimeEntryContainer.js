@@ -16,9 +16,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 
   return {
     ...ownProps,
-    type: 'text',
     value: stateProps.timeInput,
-    placeholder: '00:00.000',
     onKeyPress: e => {
       const inputData = parseTimeInput(stateProps.timeInput);
 

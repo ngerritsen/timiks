@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import FullScreenMask from './FullScreenMask';
 import PrepartionCircles from './PreparationCircles';
 import Button from '../shared/Button';
-import ManualTimeEntryExplanation from './ManualTimeEntryExplanation';
 
 const Activation = ({
   inspecting,
@@ -48,9 +47,9 @@ const Activation = ({
       {(() => {
         switch (true) {
           case useManualTimeEntry:
-            return <ManualTimeEntryExplanation />;
+            return 'Enter a time and press enter or click submit.';
           case preparingForInspection:
-            return 'Release to start inspection';
+            return 'Release to start inspection.';
           case preparing && ready:
             return 'Release to start!';
           case preparing && !ready:
@@ -95,11 +94,12 @@ const ActivationContainer = styled.div`
 `;
 
 const Explain = styled.p`
+  font-size: 1.5rem;
   color: ${props => props.theme.colors.subtleFg};
-  font-size: 1.6rem;
   text-align: center;
   margin: ${props => props.theme.sizes.sm} 0 0;
   position: relative;
+  top: -${props => props.theme.sizes.xxs};
   z-index: 102;
 `;
 

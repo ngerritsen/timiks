@@ -10,6 +10,7 @@ import IconButton from './shared/IconButton';
 import ToggleContent from './ToggleContent';
 import Section from './shared/Section';
 import Select from './shared/Select';
+import Checkbox from './shared/Checkbox';
 import Button from './shared/Button';
 import Modal from './shared/Modal';
 
@@ -91,13 +92,9 @@ const Settings = ({
 const Setting = styled.label`
   display: flex;
   justify-content: space-between;
-  height: 2.4rem;
+  height: 2.2rem;
   align-items: center;
-`;
-
-const Checkbox = styled.input`
-  margin-right: ${props => props.theme.sizes.xs};
-  cursor: pointer;
+  padding-right: ${props => props.theme.sizes.xxs};
 `;
 
 Settings.propTypes = {
