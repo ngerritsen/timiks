@@ -6,6 +6,7 @@ const puzzles = [
     title: '2x2x2',
     type: puzzleConstants.CUBE,
     size: 2,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '222'
     }
@@ -15,6 +16,7 @@ const puzzles = [
     title: '3x3x3',
     type: puzzleConstants.CUBE,
     size: 3,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '333'
     }
@@ -24,6 +26,7 @@ const puzzles = [
     title: '4x4x4',
     type: puzzleConstants.CUBE,
     size: 4,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '444'
     }
@@ -33,6 +36,7 @@ const puzzles = [
     title: '5x5x5',
     type: puzzleConstants.CUBE,
     size: 5,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '555'
     }
@@ -42,6 +46,7 @@ const puzzles = [
     title: '6x6x6',
     type: puzzleConstants.CUBE,
     size: 6,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '666'
     }
@@ -51,6 +56,7 @@ const puzzles = [
     title: '7x7x7',
     type: puzzleConstants.CUBE,
     size: 7,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '777'
     }
@@ -59,6 +65,7 @@ const puzzles = [
     name: 'megaminx',
     title: 'Megaminx',
     type: puzzleConstants.DODECAHEDRON,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: 'minx'
     }
@@ -67,6 +74,7 @@ const puzzles = [
     name: 'kilominx',
     title: 'Kilominx',
     type: puzzleConstants.DODECAHEDRON,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: 'minx'
     }
@@ -75,6 +83,7 @@ const puzzles = [
     name: 'pyraminx',
     title: 'Pyraminx',
     type: puzzleConstants.TETRAHEDRON,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: 'pyram'
     }
@@ -83,6 +92,7 @@ const puzzles = [
     name: 'skewb',
     title: 'Skewb',
     type: puzzleConstants.SKEWB,
+    allowInspectionTime: true,
     scrambleOptions: {
       length: 11,
       directions: [
@@ -97,6 +107,7 @@ const puzzles = [
     name: 'square-1',
     title: 'Square-1',
     type: puzzleConstants.SQUARE_ONE,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: 'sq1'
     }
@@ -105,6 +116,7 @@ const puzzles = [
     name: 'clock',
     title: 'Clock',
     type: puzzleConstants.CLOCK,
+    allowInspectionTime: true,
     scrambleOptions: {
       length: 12
     }
@@ -114,6 +126,7 @@ const puzzles = [
     title: '3x3x3 One-Handed',
     type: puzzleConstants.CUBE,
     size: 3,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '333'
     }
@@ -123,6 +136,7 @@ const puzzles = [
     title: '3x3x3 With Feet',
     type: puzzleConstants.CUBE,
     size: 3,
+    allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '333'
     }
@@ -132,6 +146,7 @@ const puzzles = [
     title: '2x2x2 Blindfolded',
     type: puzzleConstants.CUBE,
     size: 2,
+    allowInspectionTime: false,
     scrambleOptions: {
       jsssScrambler: '222'
     }
@@ -141,6 +156,7 @@ const puzzles = [
     title: '3x3x3 Blindfolded',
     type: puzzleConstants.CUBE,
     size: 3,
+    allowInspectionTime: false,
     scrambleOptions: {
       jsssScrambler: '333'
     }
@@ -150,6 +166,7 @@ const puzzles = [
     title: '4x4x4 Blindfolded',
     type: puzzleConstants.CUBE,
     size: 4,
+    allowInspectionTime: false,
     scrambleOptions: {
       jsssScrambler: '444'
     }
@@ -159,6 +176,7 @@ const puzzles = [
     title: '5x5x5 Blindfolded',
     type: puzzleConstants.CUBE,
     size: 5,
+    allowInspectionTime: false,
     scrambleOptions: {
       jsssScrambler: '555'
     }
