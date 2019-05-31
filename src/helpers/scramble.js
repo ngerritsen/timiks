@@ -6,11 +6,15 @@ import scramblers from '../vendor/jsss';
 import { generateArr } from './general';
 
 export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
-  const { scrambleOptions, type } = getPuzzle(puzzle);
+  const { scrambleOptions, type, size } = getPuzzle(puzzle);
   const { jsssScrambler, puzzles: relayPuzzles } = scrambleOptions;
 
   if (jsssScrambler) {
     return getJsssScramble(jsssScrambler, type);
+  }
+
+  if (type === puzzleConstants.CUBE) {
+    return generateCubeScramble(scrambleOptions, size);
   }
 
   if (type === puzzleConstants.RELAY) {
@@ -92,6 +96,26 @@ function generateSkewbScramble(scrambleOptions) {
     const reversed = randomBoolean();
 
     const move = direction + charIf(reversed, `'`);
+
+    return [...moves, move];
+  }, []);
+}
+
+function generateCubeScramble(scrambleOptions, size) {
+  const { directions, length } = scrambleOptions;
+  const wideLayerAmount = Math.max(Math.floor(size / 2), 1);
+  const wideLayerOptions = generateArr(wideLayerAmount).map(i => (i === 0 ? '' : i + 1));
+
+  return generateArr(length).reduce(moves => {
+    const previousDirection = extractLastDirection(moves, directions);
+    const relevantOpposites = puzzleConstants.CUBE_OPPOSITES.find(arr =>
+      arr.includes(previousDirection)
+    );
+    const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
+    const wideLayers = pickRandom(wideLayerOptions);
+    const reversed = randomBoolean();
+
+    const move = wideLayers + direction + charIf(wideLayers, 'w') + charIf(reversed, `'`);
 
     return [...moves, move];
   }, []);

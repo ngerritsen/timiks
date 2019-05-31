@@ -4,6 +4,9 @@ export const DOWN = 'D';
 export const LEFT = 'L';
 export const FRONT = 'F';
 export const BACK = 'B';
+export const X = 'x';
+export const Y = 'y';
+export const Z = 'z';
 
 export const CUBE = 'CUBE';
 export const CLOCK = 'CLOCK';

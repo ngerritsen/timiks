@@ -1,5 +1,14 @@
 import * as puzzleConstants from '../constants/puzzle';
 
+const CUBE_DIRECTIONS = [
+  puzzleConstants.UP,
+  puzzleConstants.DOWN,
+  puzzleConstants.FRONT,
+  puzzleConstants.BACK,
+  puzzleConstants.LEFT,
+  puzzleConstants.RIGHT
+];
+
 const puzzles = [
   {
     name: '2x2x2',
@@ -59,6 +68,50 @@ const puzzles = [
     allowInspectionTime: true,
     scrambleOptions: {
       jsssScrambler: '777'
+    }
+  },
+  {
+    name: '8x8x8',
+    title: '8x8x8',
+    type: puzzleConstants.CUBE,
+    size: 8,
+    allowInspectionTime: true,
+    scrambleOptions: {
+      length: 120,
+      directions: CUBE_DIRECTIONS
+    }
+  },
+  {
+    name: '9x9x9',
+    title: '9x9x9',
+    type: puzzleConstants.CUBE,
+    size: 9,
+    allowInspectionTime: true,
+    scrambleOptions: {
+      length: 140,
+      directions: CUBE_DIRECTIONS
+    }
+  },
+  {
+    name: '10x10x10',
+    title: '10x10x10',
+    type: puzzleConstants.CUBE,
+    size: 10,
+    allowInspectionTime: true,
+    scrambleOptions: {
+      length: 160,
+      directions: CUBE_DIRECTIONS
+    }
+  },
+  {
+    name: '11x11x11',
+    title: '11x11x11',
+    type: puzzleConstants.CUBE,
+    size: 11,
+    allowInspectionTime: true,
+    scrambleOptions: {
+      length: 180,
+      directions: CUBE_DIRECTIONS
     }
   },
   {
