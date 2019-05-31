@@ -13,23 +13,20 @@ export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
     return getJsssScramble(jsssScrambler, type);
   }
 
-  if (type === puzzleConstants.CUBE) {
-    return generateCubeScramble(scrambleOptions, size);
+  switch (type) {
+    case puzzleConstants.STATIC:
+      return generateStaticScramble(scrambleOptions);
+    case puzzleConstants.CUBE:
+      return generateCubeScramble(scrambleOptions, size);
+    case puzzleConstants.RELAY:
+      return generateRelayScramble(relayPuzzles);
+    case puzzleConstants.SKEWB:
+      return generateSkewbScramble(scrambleOptions);
+    case puzzleConstants.CLOCK:
+      return generateClockScamble(scrambleOptions);
+    default:
+      return [];
   }
-
-  if (type === puzzleConstants.RELAY) {
-    return generateRelayScramble(relayPuzzles);
-  }
-
-  if (type === puzzleConstants.SKEWB) {
-    return generateSkewbScramble(scrambleOptions);
-  }
-
-  if (type === puzzleConstants.CLOCK) {
-    return generateClockScamble(scrambleOptions);
-  }
-
-  return [];
 }
 
 function getJsssScramble(jsssScrambler, type) {
@@ -113,9 +110,30 @@ function generateCubeScramble(scrambleOptions, size) {
     );
     const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
     const wideLayers = pickRandom(wideLayerOptions);
-    const reversed = randomBoolean();
+    const double = pickRandom([true, false, false]);
+    const reversed = randomBoolean() && !double;
 
-    const move = wideLayers + direction + charIf(wideLayers, 'w') + charIf(reversed, `'`);
+    const move =
+      wideLayers +
+      direction +
+      charIf(wideLayers, 'w') +
+      charIf(reversed, `'`) +
+      charIf(double, '2');
+
+    return [...moves, move];
+  }, []);
+}
+
+function generateStaticScramble(scrambleOptions) {
+  const { directions, length } = scrambleOptions;
+
+  return generateArr(length).reduce(moves => {
+    const previousDirection = extractLastDirection(moves, directions);
+    const direction = pickRandomDirection(directions, previousDirection);
+    const double = pickRandom([true, false, false]);
+    const reversed = randomBoolean() && !double;
+
+    const move = direction + charIf(reversed, `'`) + charIf(double, '2');
 
     return [...moves, move];
   }, []);
@@ -174,9 +192,8 @@ function extractLastDirection(moves, directions) {
   const lastMove = getLastMove(moves);
 
   return directions.reduce((foundDirection, direction) => {
-    const uppercaseDirection = direction.toUpperCase();
-    const found = lastMove.toUpperCase().indexOf(uppercaseDirection) > -1;
+    const found = lastMove.indexOf(direction) > -1;
 
-    return found ? uppercaseDirection : foundDirection;
+    return found ? direction : foundDirection;
   }, null);
 }

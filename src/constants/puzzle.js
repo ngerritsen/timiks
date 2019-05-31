@@ -8,6 +8,7 @@ export const X = 'x';
 export const Y = 'y';
 export const Z = 'z';
 
+export const STATIC = 'STATIC';
 export const CUBE = 'CUBE';
 export const CLOCK = 'CLOCK';
 export const SQUARE_ONE = 'SQUARE_ONE';
@@ -17,6 +18,8 @@ export const SKEWB = 'SKEWB';
 export const RELAY = 'RELAY';
 
 export const CUBE_OPPOSITES = [[UP, DOWN], [RIGHT, LEFT], [FRONT, BACK]];
+export const CUBE_DIRECTIONS = [UP, DOWN, FRONT, BACK, LEFT, RIGHT];
+export const STATIC_DIRECTIONS = [X, Y, Z];
 
 export const WHITE = 'WHITE';
 export const BLUE = 'BLUE';
