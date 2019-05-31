@@ -11,11 +11,13 @@ import Section from '../shared/Section';
 import Shortcut from '../shared/Shortcut';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
+import { CUBE } from '../../constants/puzzle';
+import { getPuzzle } from '../../helpers/puzzle';
 
-const Scramble = ({ scramble, withDetails, puzzle, isPuzzleCube, expand }) => (
+const Scramble = ({ scramble, withDetails, puzzle, expand }) => (
   <div>
     <ScrambleBox expand={expand}>
-      {withDetails && isPuzzleCube && (
+      {withDetails && getPuzzle(puzzle).type === CUBE && (
         <ScrambleIconButtonContainer>
           <ToggleContent
             toggle={({ show }) => (
@@ -34,23 +36,29 @@ const Scramble = ({ scramble, withDetails, puzzle, isPuzzleCube, expand }) => (
           />
         </ScrambleIconButtonContainer>
       )}
-      {scramble.map((move, i) => (
-        <Move key={i}>{move}</Move>
-      ))}
+      {scramble.map((move, i) =>
+        getPuzzle(move) ? (
+          <span key={i}>
+            {i > 0 && <Separator />}
+            <Title>{getPuzzle(move).title}:</Title>
+          </span>
+        ) : (
+          <Move key={i}>{move}</Move>
+        )
+      )}
     </ScrambleBox>
   </div>
 );
 
 Scramble.propTypes = {
   withDetails: PropTypes.bool,
-  isPuzzleCube: PropTypes.bool,
   scramble: CustomPropTypes.Scramble,
   small: PropTypes.bool,
   puzzle: PropTypes.string,
   expand: PropTypes.bool
 };
 
-const ScrambleBox = styled.p`
+const ScrambleBox = styled.div`
   font-size: 1.65rem;
   text-align: center;
   font-family: ${props => props.theme.monoFont};
@@ -64,6 +72,10 @@ const ScrambleBox = styled.p`
   overflow-y: auto;
 `;
 
+const Separator = styled.div`
+  margin-top: ${props => props.theme.sizes.xs};
+`;
+
 const Move = styled.span`
   display: inline-block;
   whitespace: nowrap;
@@ -72,6 +84,12 @@ const Move = styled.span`
   &:last-child {
     margin-right: 0;
   }
+`;
+
+const Title = styled.span`
+  display: inline-block;
+  color: ${props => props.theme.colors.subtleFg};
+  margin-right: ${props => props.theme.sizes.xs};
 `;
 
 const ScrambleIconButtonContainer = styled.span`

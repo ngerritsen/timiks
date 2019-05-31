@@ -2,18 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getPuzzleSize, isCube } from '../../helpers/puzzle';
 import CubePreview from '../cube/CubePreview';
 import Scramble from './Scramble';
 import Section from '../shared/Section';
+import { CUBE } from '../../constants/puzzle';
+import { getPuzzle } from '../../helpers/puzzle';
 
 const ScrambleDetails = ({ puzzle, scramble }) => (
   <div>
     <Section margin="md">
       <Scramble scramble={scramble} expand />
     </Section>
-    {isCube(puzzle) ? (
-      <CubePreview cubeSize={getPuzzleSize(puzzle)} scramble={scramble} />
+    {getPuzzle(puzzle).type === CUBE ? (
+      <CubePreview cubeSize={getPuzzle(puzzle).size} scramble={scramble} />
     ) : (
       <Message>Scramble previews are only available for cubic puzzles.</Message>
     )}

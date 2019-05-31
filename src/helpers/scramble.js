@@ -1,23 +1,27 @@
 import * as constants from '../constants/app';
 import puzzles from '../constants/puzzles';
-import { CUBE, SQUARE_ONE, CLOCK, SKEWB, CUBE_OPPOSITES, DODECAHEDRON } from '../constants/puzzle';
+import * as puzzleConstants from '../constants/puzzle';
 import scramblers from '../vendor/jsss';
 
 import { generateArr } from './general';
 
 export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
   const { scrambleOptions, type } = getPuzzle(puzzle);
-  const { jsssScrambler } = scrambleOptions;
+  const { jsssScrambler, puzzles: relayPuzzles } = scrambleOptions;
 
   if (jsssScrambler) {
     return getJsssScramble(jsssScrambler, type);
   }
 
-  if (type === SKEWB) {
+  if (type === puzzleConstants.RELAY) {
+    return generateRelayScramble(relayPuzzles);
+  }
+
+  if (type === puzzleConstants.SKEWB) {
     return generateSkewbScramble(scrambleOptions);
   }
 
-  if (type === CLOCK) {
+  if (type === puzzleConstants.CLOCK) {
     return generateClockScamble(scrambleOptions);
   }
 
@@ -29,15 +33,15 @@ function getJsssScramble(jsssScrambler, type) {
 
   const scrambleString = result.scramble_string;
 
-  if (type === CUBE) {
+  if (type === puzzleConstants.CUBE) {
     return formatJsssCubeScramble(scrambleString);
   }
 
-  if (type === DODECAHEDRON) {
+  if (type === puzzleConstants.DODECAHEDRON) {
     return formatJsssDodecahedronScramble(scrambleString);
   }
 
-  if (type === SQUARE_ONE) {
+  if (type === puzzleConstants.SQUARE_ONE) {
     return formatJsssSquareOneScramble(scrambleString);
   }
 
@@ -69,12 +73,21 @@ function formatJsssSquareOneScramble(scramble) {
   );
 }
 
+function generateRelayScramble(relayPuzzles) {
+  return relayPuzzles.reduce(
+    (relayScramble, puzzle) => [...relayScramble, puzzle, ...generateScramble(puzzle)],
+    []
+  );
+}
+
 function generateSkewbScramble(scrambleOptions) {
   const { directions, length } = scrambleOptions;
 
   return generateArr(length).reduce(moves => {
     const previousDirection = extractLastDirection(moves, directions);
-    const relevantOpposites = CUBE_OPPOSITES.find(arr => arr.includes(previousDirection));
+    const relevantOpposites = puzzleConstants.CUBE_OPPOSITES.find(arr =>
+      arr.includes(previousDirection)
+    );
     const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
     const reversed = randomBoolean();
 

@@ -180,6 +180,38 @@ const puzzles = [
     scrambleOptions: {
       jsssScrambler: '555'
     }
+  },
+  {
+    name: '2-7-relay',
+    title: '2-7 Relay',
+    type: puzzleConstants.RELAY,
+    scrambleOptions: {
+      puzzles: ['2x2x2', '3x3x3', '4x4x4', '5x5x5', '6x6x6', '7x7x7']
+    }
+  },
+  {
+    name: '2-6-relay',
+    title: '2-6 Relay',
+    type: puzzleConstants.RELAY,
+    scrambleOptions: {
+      puzzles: ['2x2x2', '3x3x3', '4x4x4', '5x5x5', '6x6x6']
+    }
+  },
+  {
+    name: '2-5-relay',
+    title: '2-5 Relay',
+    type: puzzleConstants.RELAY,
+    scrambleOptions: {
+      puzzles: ['2x2x2', '3x3x3', '4x4x4', '5x5x5']
+    }
+  },
+  {
+    name: '2-4-relay',
+    title: '2-4 Relay',
+    type: puzzleConstants.RELAY,
+    scrambleOptions: {
+      puzzles: ['2x2x2', '3x3x3', '4x4x4']
+    }
   }
 ];
 
