@@ -80,7 +80,7 @@ const SelectIcon = styled.div`
 `;
 
 Select.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   fullWidth: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
