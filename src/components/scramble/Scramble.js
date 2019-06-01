@@ -1,62 +1,100 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import React from 'react';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/fontawesome-pro-solid';
+import React, { useState, useEffect } from 'react';
 
 import * as CustomPropTypes from '../../propTypes';
-import IconButton from '../shared/IconButton';
-import ScrambleDetails from './ScrambleDetails';
 import Section from '../shared/Section';
-import Shortcut from '../shared/Shortcut';
-import Modal from '../shared/Modal';
-import ToggleContent from '../ToggleContent';
-import { CUBE } from '../../constants/puzzle';
+import { CUBE, RELAY } from '../../constants/puzzle';
 import { getPuzzle } from '../../helpers/puzzle';
+import { splitRelayScramble } from '../../helpers/scramble';
+import CubePreview from '../cube/CubePreview';
+import ScrambleDetails from './ScrambleDetails';
 
-const Scramble = ({ scramble, withDetails, puzzle, expand }) => (
-  <div>
-    <ScrambleBox expand={expand}>
-      {withDetails && getPuzzle(puzzle).type === CUBE && (
-        <ScrambleIconButtonContainer>
-          <ToggleContent
-            toggle={({ show }) => (
-              <IconButton onClick={show}>
-                <Shortcut command="showScramble" action={show} />
-                <FontAwesome icon={faEye} />
-              </IconButton>
-            )}
-            content={({ hide }) => (
-              <Modal title="Scramble details" onClose={hide}>
-                <Section margin="sm">
-                  <ScrambleDetails scramble={scramble} puzzle={puzzle} />
-                </Section>
-              </Modal>
-            )}
-          />
-        </ScrambleIconButtonContainer>
-      )}
-      {scramble.map((move, i) =>
-        getPuzzle(move) ? (
-          <span key={i}>
-            {i > 0 && <Separator />}
-            <Title>{getPuzzle(move).title}:</Title>
-          </span>
-        ) : (
-          <Move key={i}>{move}</Move>
-        )
-      )}
-    </ScrambleBox>
-  </div>
-);
+const Scramble = ({ scramble, withDetails, withPreview, puzzle, expand }) => {
+  const isRelay = getPuzzle(puzzle).type === RELAY;
+  const splitScrambles = isRelay ? splitRelayScramble(puzzle, scramble) : [{ scramble, puzzle }];
+
+  const [activePuzzle, setActivePuzzle] = useState(splitScrambles[0].puzzle);
+  const [scrambles, setScrambles] = useState(splitScrambles);
+
+  useEffect(() => {
+    setActivePuzzle(splitScrambles[0].puzzle);
+    setScrambles(splitScrambles);
+  }, [scramble, puzzle]);
+
+  const { type, size } = getPuzzle(activePuzzle);
+  const activeScramble = scrambles.find(s => s.puzzle === activePuzzle).scramble;
+  const showPreview = withPreview && type === CUBE;
+  const showDetails = withDetails && type === CUBE;
+
+  return (
+    <>
+      <Section margin={showPreview ? 'md' : ''}>
+        {isRelay && (
+          <ScrambleTabs>
+            {scrambles.map(({ puzzle }) => (
+              <ScrambleTab
+                onClick={() => setActivePuzzle(puzzle)}
+                active={puzzle === activePuzzle}
+                key={puzzle}
+              >
+                {getPuzzle(puzzle).title}
+              </ScrambleTab>
+            ))}
+          </ScrambleTabs>
+        )}
+        <ScrambleBox withTabs={isRelay} expand={expand}>
+          {showDetails && (
+            <ScrambleIconButtonContainer>
+              <ScrambleDetails scramble={activeScramble} puzzle={activePuzzle} />
+            </ScrambleIconButtonContainer>
+          )}
+          {activeScramble.map((move, i) => (
+            <Move key={i}>{move}</Move>
+          ))}
+        </ScrambleBox>
+      </Section>
+      {showPreview && <CubePreview cubeSize={size} scramble={activeScramble} />}
+    </>
+  );
+};
 
 Scramble.propTypes = {
   withDetails: PropTypes.bool,
+  withPreview: PropTypes.bool,
   scramble: CustomPropTypes.Scramble,
   small: PropTypes.bool,
   puzzle: PropTypes.string,
   expand: PropTypes.bool
 };
+
+const ScrambleTabs = styled.div`
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: auto;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+`;
+
+const ScrambleTab = styled.div`
+  background-color: ${props => props.theme.colors.subtleBg};
+  opacity: ${props => (props.active ? 1 : 0.4)};
+  padding: 0.6rem 1.2rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: ${props => (props.active ? 1 : 0.6)};
+  }
+
+  &:first-of-type {
+    border-top-left-radius: 0.3rem;
+  }
+
+  &:last-of-type {
+    border-top-right-radius: 0.3rem;
+  }
+`;
 
 const ScrambleBox = styled.div`
   font-size: 1.65rem;
@@ -67,13 +105,12 @@ const ScrambleBox = styled.div`
   padding: ${props => props.theme.sizes.xs};
   margin: 0;
   font-weight: bold;
-  border-radius: 3px;
+  border-bottom-right-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+  border-top-right-radius: ${props => (props.withTabs ? '0' : '0.3rem')};
+  border-top-left-radius: ${props => (props.withTabs ? '0' : '0.3rem')};
   max-height: ${props => (props.expand ? '' : '14.5rem')};
   overflow-y: auto;
-`;
-
-const Separator = styled.div`
-  margin-top: ${props => props.theme.sizes.xs};
 `;
 
 const Move = styled.span`
@@ -84,12 +121,6 @@ const Move = styled.span`
   &:last-child {
     margin-right: 0;
   }
-`;
-
-const Title = styled.span`
-  display: inline-block;
-  color: ${props => props.theme.colors.subtleFg};
-  margin-right: ${props => props.theme.sizes.xs};
 `;
 
 const ScrambleIconButtonContainer = styled.span`

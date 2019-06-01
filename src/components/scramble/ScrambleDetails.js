@@ -1,34 +1,37 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/fontawesome-pro-solid';
 
-import CubePreview from '../cube/CubePreview';
+import IconButton from '../shared/IconButton';
+import Shortcut from '../shared/Shortcut';
+import Modal from '../shared/Modal';
+import ToggleContent from '../ToggleContent';
 import Scramble from './Scramble';
 import Section from '../shared/Section';
-import { CUBE } from '../../constants/puzzle';
-import { getPuzzle } from '../../helpers/puzzle';
+import * as CustomPropTypes from '../../propTypes';
 
-const ScrambleDetails = ({ puzzle, scramble }) => (
-  <div>
-    <Section margin="md">
-      <Scramble scramble={scramble} expand />
-    </Section>
-    {getPuzzle(puzzle).type === CUBE ? (
-      <CubePreview cubeSize={getPuzzle(puzzle).size} scramble={scramble} />
-    ) : (
-      <Message>Scramble previews are only available for cubic puzzles.</Message>
+const ScrambleDetails = ({ scramble, puzzle }) => (
+  <ToggleContent
+    toggle={({ show }) => (
+      <IconButton onClick={show}>
+        <Shortcut command="showScramble" action={show} />
+        <FontAwesome icon={faEye} />
+      </IconButton>
     )}
-  </div>
+    content={({ hide }) => (
+      <Modal title="Scramble details" onClose={hide}>
+        <Section margin="sm">
+          <Scramble scramble={scramble} puzzle={puzzle} withPreview />
+        </Section>
+      </Modal>
+    )}
+  />
 );
 
 ScrambleDetails.propTypes = {
-  puzzle: PropTypes.string.isRequired,
-  scramble: PropTypes.arrayOf(PropTypes.string).isRequired
+  scramble: CustomPropTypes.Scramble,
+  puzzle: PropTypes.string
 };
-
-const Message = styled.p`
-  text-align: center;
-  color: ${props => props.theme.colors.subtleFg};
-`;
 
 export default ScrambleDetails;

@@ -13,11 +13,12 @@ import moment from 'moment';
 import * as CustomPropTypes from '../../propTypes';
 import Time from '../shared/Time';
 import Section from '../shared/Section';
-import ScrambleDetails from '../scramble/ScrambleDetails';
+import Scramble from '../scramble/Scramble';
 import Button from '../shared/Button';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import ToggleContent from '../ToggleContent';
+import { getPuzzle } from '../../helpers/puzzle';
 
 const TimeDetails = ({ time, onRemoveTime, onClose }) => (
   <div>
@@ -37,7 +38,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
     </Section>
     <Section margin="md">
       <FontAwesome fixedWidth icon={faCube} /> &nbsp;
-      {time.puzzle || 'unknown'}
+      {getPuzzle(time.puzzle).title || 'Unknown'}
     </Section>
     <Section margin="sm">
       <ToggleContent
@@ -49,7 +50,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
             </Button>
           </Section>
         )}
-        content={() => <ScrambleDetails small scramble={time.scramble} puzzle={time.puzzle} />}
+        content={() => <Scramble small scramble={time.scramble} puzzle={time.puzzle} withPreview />}
       />
     </Section>
     <Section>

@@ -1,1 +1,2 @@
-export const getScramble = state => state.scramble;
+export const getScramble = state => state.scramble.scramble;
+export const getPuzzleForScramble = state => state.scramble.puzzle;

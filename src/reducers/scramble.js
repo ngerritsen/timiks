@@ -1,8 +1,18 @@
 import { SET_SCRAMBLE } from '../constants/actionTypes';
+import { DEFAULT_PUZZLE } from '../constants/app';
 
-export default function scrambleReducer(state = [], action) {
+const initialState = {
+  scramble: [],
+  puzzle: DEFAULT_PUZZLE
+};
+
+export default function scrambleReducer(state = initialState, action) {
   if (action.type === SET_SCRAMBLE) {
-    return action.scramble;
+    return {
+      ...state,
+      scramble: action.scramble,
+      puzzle: action.puzzle
+    };
   }
 
   return state;

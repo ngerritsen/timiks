@@ -35,8 +35,12 @@ export const logoutSucceeded = () => ({ type: actionTypes.LOGOUT_SUCCEEDED });
 export const logoutFailed = () => ({ type: actionTypes.LOGOUT_FAILED });
 
 // Scramble
-export const scrambleRequested = () => ({ type: actionTypes.SCRAMBLE_REQUESTED });
-export const setScramble = scramble => ({ type: actionTypes.SET_SCRAMBLE, scramble });
+export const scrambleRequested = puzzle => ({ type: actionTypes.SCRAMBLE_REQUESTED, puzzle });
+export const setScramble = (scramble, puzzle) => ({
+  type: actionTypes.SET_SCRAMBLE,
+  scramble,
+  puzzle
+});
 export const refreshScramble = () => ({ type: actionTypes.REFRESH_SCRAMBLE });
 
 // No Sleep

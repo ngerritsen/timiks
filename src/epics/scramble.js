@@ -14,13 +14,16 @@ const scrambleWorker = new Worker(workerPath);
 
 export const scrambleEpic = (action$, state$) =>
   merge(
-    fromEvent(scrambleWorker, 'message').pipe(map(event => event.data.scramble)),
+    fromEvent(scrambleWorker, 'message').pipe(map(event => event.data)),
     action$.pipe(
       ofType(LOAD_SETTINGS),
       withLatestFrom(state$),
-      map(([, state]) => generateScramble(getPuzzle(state)))
+      map(([, state]) => ({
+        scramble: generateScramble(getPuzzle(state)),
+        puzzle: getPuzzle(state)
+      }))
     )
-  ).pipe(map(setScramble));
+  ).pipe(map(({ scramble, puzzle }) => setScramble(scramble, puzzle)));
 
 export const rescrambleEpic = (action$, state$) =>
   action$.pipe(
@@ -36,5 +39,5 @@ export const rescrambleEpic = (action$, state$) =>
         puzzle: getPuzzle(state)
       })
     ),
-    map(scrambleRequested)
+    map(([, state]) => scrambleRequested(getPuzzle(state)))
   );

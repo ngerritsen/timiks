@@ -1,9 +1,30 @@
 import * as constants from '../constants/app';
-import puzzles from '../constants/puzzles';
 import * as puzzleConstants from '../constants/puzzle';
+import { getPuzzle } from './puzzle';
 import scramblers from '../vendor/jsss';
 
 import { generateArr } from './general';
+
+export function splitRelayScramble(puzzle, scramble) {
+  const relayPuzzle = getPuzzle(puzzle);
+  const puzzles = relayPuzzle.scrambleOptions.puzzles || [];
+
+  if (scramble[0] !== puzzles[0]) {
+    return [];
+  }
+
+  return scramble.reduce(
+    (splitScrambles, token) =>
+      puzzles.includes(token)
+        ? [...splitScrambles, { puzzle: token, scramble: [] }]
+        : splitScrambles.map((scramble, i) =>
+            i === splitScrambles.length - 1
+              ? { ...scramble, scramble: [...scramble.scramble, token] }
+              : scramble
+          ),
+    []
+  );
+}
 
 export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
   const { scrambleOptions, type, size } = getPuzzle(puzzle);
@@ -149,10 +170,6 @@ function generateClockScamble(scrambleOptions) {
 
     return `(${pins}, ${wheel}, ${turns})`;
   });
-}
-
-function getPuzzle(puzzle) {
-  return puzzles.find(({ name }) => name === puzzle);
 }
 
 function randomBoolean() {
