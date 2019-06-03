@@ -41,7 +41,7 @@ const createConfig = (env, argv) => {
       splitChunks: {
         cacheGroups: {
           vendor: {
-            test: /node_modules/,
+            test: /node_modules|vendor/,
             chunks: 'initial',
             name: 'vendor',
             enforce: true
