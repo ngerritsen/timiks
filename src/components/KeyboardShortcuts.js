@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faKeyboard } from '@fortawesome/fontawesome-pro-solid';
+import faKeyboard from '@fortawesome/fontawesome-pro-solid/faKeyboard';
 
 import keymap from '../constants/keymap';
 import Section from './shared/Section';

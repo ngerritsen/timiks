@@ -35,7 +35,6 @@ export const logoutSucceeded = () => ({ type: actionTypes.LOGOUT_SUCCEEDED });
 export const logoutFailed = () => ({ type: actionTypes.LOGOUT_FAILED });
 
 // Scramble
-export const scrambleRequested = puzzle => ({ type: actionTypes.SCRAMBLE_REQUESTED, puzzle });
 export const setScramble = (scramble, puzzle) => ({
   type: actionTypes.SET_SCRAMBLE,
   scramble,

@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import {
-  faUserAstronaut,
-  faSignInAlt,
-  faSignOutAlt,
-  faSpinnerThird
-} from '@fortawesome/fontawesome-pro-solid';
-import { faGoogle } from '@fortawesome/fontawesome-free-brands';
+
+import faUserAstronaut from '@fortawesome/fontawesome-pro-solid/faUserAstronaut';
+import faSignInAlt from '@fortawesome/fontawesome-pro-solid/faSignInAlt';
+import faSignOutAlt from '@fortawesome/fontawesome-pro-solid/faSignOutAlt';
+import faSpinnerThird from '@fortawesome/fontawesome-pro-solid/faSpinnerThird';
+import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 
 import IconButton from './shared/IconButton';
 import ToggleContent from './ToggleContent';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/fontawesome-pro-solid';
+import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 import IconButton from './shared/IconButton';
 
 const Message = ({ message, dismiss, withPointer }) => (
@@ -22,7 +22,7 @@ const Message = ({ message, dismiss, withPointer }) => (
 );
 
 Message.propTypes = {
-  message: PropTypes.oneOfType(PropTypes.string, PropTypes.node),
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   dismiss: PropTypes.func.isRequired,
   withPointer: PropTypes.bool
 };

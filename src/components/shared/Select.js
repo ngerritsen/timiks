@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { faCaretDown } from '@fortawesome/fontawesome-pro-solid';
+import faCaretDown from '@fortawesome/fontawesome-pro-solid/faCaretDown';
 import FontAwesome from '@fortawesome/react-fontawesome';
 
 const Select = ({ onChange, options, value, numeric, label }) => (

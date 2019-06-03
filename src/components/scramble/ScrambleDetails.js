@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/fontawesome-pro-solid';
+import faEye from '@fortawesome/fontawesome-pro-solid/faEye';
 
 import IconButton from '../shared/IconButton';
 import Shortcut from '../shared/Shortcut';

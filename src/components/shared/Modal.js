@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/fontawesome-pro-solid';
+import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 
 import Shortcut from './Shortcut';
 import IconButton from './IconButton';

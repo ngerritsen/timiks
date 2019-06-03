@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { faSyncAlt } from '@fortawesome/fontawesome-pro-solid';
+import faSyncAlt from '@fortawesome/fontawesome-pro-solid/faSyncAlt';
 import styled from 'styled-components';
 
 import InlineFontawesome from '../shared/InlineFontawesome';

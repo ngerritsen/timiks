@@ -15,14 +15,16 @@
     <link rel="shortcut icon" href="/favicon.png">
     <link rel="manifest" href="/timiks.webmanifest">
 
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.main.entry %>" as="script">
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>" as="script">
+    <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" as="script">
+    <link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=UA-39696629-4" as="script">
+
     <title>Timiks - Cube timer made for speedsolvers</title>
 
     <%= `<style>${require('fs').readFileSync('./src/critical/style.css')}</style>` %>
 </head>
-<body
-    data-scramble-worker-path="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>"
-    data-build-number="<%= htmlWebpackPlugin.options.buildNumber %>"
->
+<body data-build-number="<%= htmlWebpackPlugin.options.buildNumber %>">
     <!--[if lt IE 11]>
         <div class="no-ie-box">
             Sorry, but I do not support your browser.
@@ -52,10 +54,7 @@
         <a href="#" data-reload>Reload</a>
     </footer>
 
-    <script async src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
-    <script>
-      <%= require('fs').readFileSync('./src/critical/script.js') %>
-    </script>
+    <script><%= require('fs').readFileSync('./src/critical/script.js') %></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39696629-4"></script>
     <script>
@@ -72,5 +71,7 @@
         }
       });
     </script>
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+    <script src="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"></script>
 </body>
 </html>

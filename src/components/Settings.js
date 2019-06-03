@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/fontawesome-pro-solid';
+import faCog from '@fortawesome/fontawesome-pro-solid/faCog';
 
 import Shortcut from './shared/Shortcut';
 import { ACTIVATION_DURATION_OPTIONS } from '../constants/app';

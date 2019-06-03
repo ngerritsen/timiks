@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/fontawesome-pro-solid';
+import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircle';
 
 import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';

@@ -21,7 +21,6 @@ export const NO_SLEEP_DISABLED = 'NO_SLEEP_DISABLED';
 // Scramble
 export const SET_SCRAMBLE = 'SET_SCRAMBLE';
 export const REFRESH_SCRAMBLE = 'REFRESH_SCRAMBLE';
-export const SCRAMBLE_REQUESTED = 'SCRAMBLE_REQUESTED';
 
 // Times
 export const SAVE_TIME = 'SAVE_TIME';

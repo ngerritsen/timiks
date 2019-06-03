@@ -1,12 +1,10 @@
 import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import {
-  faCalendarAlt,
-  faStopwatch,
-  faCube,
-  faEye,
-  faEyeSlash
-} from '@fortawesome/fontawesome-pro-solid';
+import faCalendarAlt from '@fortawesome/fontawesome-pro-solid/faCalendarAlt';
+import faStopwatch from '@fortawesome/fontawesome-pro-solid/faStopwatch';
+import faCube from '@fortawesome/fontawesome-pro-solid/faCube';
+import faEye from '@fortawesome/fontawesome-pro-solid/faEye';
+import faEyeSlash from '@fortawesome/fontawesome-pro-solid/faEyeSlash';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 

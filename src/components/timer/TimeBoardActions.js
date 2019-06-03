@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { faArchive, faTrash } from '@fortawesome/fontawesome-pro-solid';
+import faTrash from '@fortawesome/fontawesome-pro-solid/faTrash';
+import faArchive from '@fortawesome/fontawesome-pro-solid/faArchive';
 
 import InlineFontawesome from '../shared/InlineFontawesome';
 import Button from '../shared/Button';

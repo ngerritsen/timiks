@@ -1,6 +1,6 @@
 import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/fontawesome-pro-solid';
+import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircle';
 
 import ToggleContent from '../ToggleContent';
 import IconButton from '../shared/IconButton';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { faCheck } from '@fortawesome/fontawesome-pro-solid';
+import faCheck from '@fortawesome/fontawesome-pro-solid/faCheck';
 import FontAwesome from '@fortawesome/react-fontawesome';
 
 const Checkbox = ({ onChange, checked }) => (

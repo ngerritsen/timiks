@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 import Time from '../shared/Time';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faThumbsUp, faTimes } from '@fortawesome/fontawesome-pro-solid';
+import faInfoCircle from '@fortawesome/fontawesome-pro-solid/faInfoCircle';
+import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
+import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 import ToggleContent from '../ToggleContent';
 import Modal from '../shared/Modal';
 import TimeDetails from './TimeDetails';

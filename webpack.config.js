@@ -1,6 +1,7 @@
 /* global require, __dirname, process, module */
 
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const buildNumber = require('./src/static/build');
@@ -8,8 +9,7 @@ const buildNumber = require('./src/static/build');
 const createConfig = (env, argv) => {
   const config = {
     entry: {
-      main: ['element-closest', path.join(__dirname, 'src/index.js')],
-      scrambleWorker: path.join(__dirname, 'src/scrambleWorker.js')
+      main: ['element-closest', path.join(__dirname, 'src/index.js')]
     },
     output: {
       path: path.join(__dirname, 'public'),
@@ -34,8 +34,21 @@ const createConfig = (env, argv) => {
         template: './src/index.html',
         inject: false,
         buildNumber
-      })
-    ]
+      }),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    ],
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /node_modules/,
+            chunks: 'initial',
+            name: 'vendor',
+            enforce: true
+          }
+        }
+      }
+    }
   };
 
   if (argv.mode === 'development') {

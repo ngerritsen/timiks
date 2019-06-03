@@ -16,7 +16,6 @@ const rootEpic = combineEpics(
   noSleepEpics.enableNoSleepEpic,
   noSleepEpics.disableNoSleepEpic,
   scrambleEpics.scrambleEpic,
-  scrambleEpics.rescrambleEpic,
   settingsEpics.loadSettingsEpic,
   settingsEpics.storeSettingsEpic,
   authenticationEpics.loginStatusEpic,
