@@ -13,6 +13,7 @@ const Activation = ({
   preparingForInspection,
   ready,
   stopped,
+  showHelpText,
   submitTimeInput,
   useInspectionTime,
   useManualTimeEntry,
@@ -43,33 +44,35 @@ const Activation = ({
       })()}
     </Button>
 
-    <Explain>
-      {(() => {
-        switch (true) {
-          case useManualTimeEntry:
-            return 'Enter a time and press enter or click submit.';
-          case preparingForInspection:
-            return 'Release to start inspection.';
-          case preparing && ready:
-            return 'Release to start!';
-          case preparing && !ready:
-            return 'Hold on...';
-          case !stopped:
-            return (
-              <span>
-                Click, tap or smash <Spacebar /> spacebar to stop
-              </span>
-            );
-          default:
-            return (
-              <span>
-                Click, touch or press <Spacebar /> spacebar. Hold and release to start
-                {useInspectionTime ? ' inspection' : ''}
-              </span>
-            );
-        }
-      })()}
-    </Explain>
+    {showHelpText && (
+      <Explain>
+        {(() => {
+          switch (true) {
+            case useManualTimeEntry:
+              return 'Enter a time and press enter or click submit.';
+            case preparingForInspection:
+              return 'Release to start inspection.';
+            case preparing && ready:
+              return 'Release to start!';
+            case preparing && !ready:
+              return 'Hold on...';
+            case !stopped:
+              return (
+                <span>
+                  Click, tap or smash <Spacebar /> spacebar to stop
+                </span>
+              );
+            default:
+              return (
+                <span>
+                  Click, touch or press <Spacebar /> spacebar. Hold and release to start
+                  {useInspectionTime ? ' inspection' : ''}
+                </span>
+              );
+          }
+        })()}
+      </Explain>
+    )}
 
     {(!stopped || preparing || preparingForInspection || inspecting) && <FullScreenMask />}
   </ActivationContainer>
@@ -85,7 +88,8 @@ Activation.propTypes = {
   submitTimeInput: PropTypes.func.isRequired,
   useInspectionTime: PropTypes.bool.isRequired,
   useManualTimeEntry: PropTypes.bool.isRequired,
-  validTimeInput: PropTypes.bool.isRequired
+  validTimeInput: PropTypes.bool.isRequired,
+  showHelpText: PropTypes.bool.isRequired
 };
 
 const ActivationContainer = styled.div`

@@ -4,7 +4,7 @@ import { startTimer, stopTimer, resetTime, submitTimeInput } from '../../actions
 import Activation from '../../components/timer/Activation';
 import * as activationSelectors from '../../selectors/activation';
 import * as timerSelectors from '../../selectors/timer';
-import { shouldUseManualTimeEntry, shouldUseInspectionTime } from '../../selectors/settings';
+import * as settingsSelectors from '../../selectors/settings';
 import { parseTimeInput } from '../../helpers/time';
 
 function mapStateToProps(state) {
@@ -12,13 +12,14 @@ function mapStateToProps(state) {
     time: timerSelectors.getTime(state),
     stopped: timerSelectors.isStopped(state),
     preparationStage: activationSelectors.getPreparationStage(state),
-    useManualTimeEntry: shouldUseManualTimeEntry(state),
+    useManualTimeEntry: settingsSelectors.shouldUseManualTimeEntry(state),
+    showHelpText: settingsSelectors.shouldShowHelpText(state),
     preparing: activationSelectors.isPreparing(state),
     preparingForInspection: activationSelectors.isPreparingForInspection(state),
     inspecting: timerSelectors.isInspecting(state),
     validTimeInput: timerSelectors.isValidTimeInput(state),
     timeInput: timerSelectors.getTimeInput(state),
-    useInspectionTime: shouldUseInspectionTime(state),
+    useInspectionTime: settingsSelectors.shouldUseInspectionTime(state),
     ready: activationSelectors.isReady(state)
   };
 }

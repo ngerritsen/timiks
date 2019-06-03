@@ -19,7 +19,8 @@ const Settings = ({
   changeActivationDuration,
   toggleInspectionTime,
   changeTheme,
-  toggleManualTimeEntry
+  toggleManualTimeEntry,
+  toggleShowHelpText
 }) => (
   <>
     <ToggleContent
@@ -32,6 +33,7 @@ const Settings = ({
       content={({ hide }) => (
         <Modal title="Settings" onClose={hide}>
           <>
+            <SectionTitle>Timer</SectionTitle>
             <Section margin="sm">
               <Setting>
                 <label>Activation delay*</label>
@@ -54,7 +56,7 @@ const Settings = ({
                 />
               </Setting>
             </Section>
-            <Section margin="sm">
+            <Section margin="md">
               <Setting>
                 <label>Use inspection time</label>
                 <Checkbox
@@ -64,9 +66,20 @@ const Settings = ({
                 />
               </Setting>
             </Section>
+            <SectionTitle>User interface</SectionTitle>
+            <Section margin="sm">
+              <Setting>
+                <label>Show help text</label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={toggleShowHelpText}
+                  checked={settings.showHelpText}
+                />
+              </Setting>
+            </Section>
             <Section margin="md">
               <Setting>
-                <label>Night mode</label>
+                <label>Dark mode</label>
                 <Checkbox
                   type="checkbox"
                   onChange={() => changeTheme(settings.theme === 'dark' ? 'light' : 'dark')}
@@ -75,11 +88,9 @@ const Settings = ({
               </Setting>
             </Section>
             <Section margin="md">
-              <p>
-                <i>
-                  *For how long you have to hold spacebar, mouse or touch before starting the timer.
-                </i>
-              </p>
+              <Explanation>
+                *For how long you have to hold spacebar, mouse or touch before starting the timer.
+              </Explanation>
             </Section>
             <Button onClick={hide}>Close</Button>
           </>
@@ -97,10 +108,26 @@ const Setting = styled.label`
   padding-right: ${props => props.theme.sizes.xxs};
 `;
 
+const Explanation = styled.span`
+  margin: 0;
+  padding: 0;
+  color: ${props => props.theme.colors.subtleFg};
+  font-style: italic;
+`;
+
+const SectionTitle = styled.p`
+  display: block;
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0 0 ${props => props.theme.sizes.sm};
+`;
+
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
   changeActivationDuration: PropTypes.func.isRequired,
   toggleInspectionTime: PropTypes.func.isRequired,
+  toggleShowHelpText: PropTypes.func.isRequired,
   toggleManualTimeEntry: PropTypes.func.isRequired,
   changeTheme: PropTypes.func.isRequired
 };

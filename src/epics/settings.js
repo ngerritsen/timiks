@@ -16,7 +16,8 @@ export const storeSettingsEpic = (action$, state$) =>
       actionTypes.CHANGE_THEME,
       actionTypes.CHANGE_ACTIVATION_DURATION,
       actionTypes.TOGGLE_INSPECTION_TIME,
-      actionTypes.TOGGLE_MANUAL_TIME_ENTRY
+      actionTypes.TOGGLE_MANUAL_TIME_ENTRY,
+      actionTypes.TOGGLE_SHOW_HELP_TEXT
     ),
     withLatestFrom(state$),
     tap(([, state]) => settingsRepository.store(getSettings(state))),
