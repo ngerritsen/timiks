@@ -1,6 +1,5 @@
 /* global process */
 
-import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 
@@ -12,6 +11,7 @@ const epicMiddleware = createEpicMiddleware();
 let allMiddlewares = [epicMiddleware];
 
 if (process.env.NODE_ENV !== 'production') {
+  const { createLogger } = require('redux-logger');
   allMiddlewares = [...allMiddlewares, createLogger({ collapsed: true })];
 }
 

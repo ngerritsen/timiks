@@ -10,36 +10,25 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Timiks">
-    <link rel="apple-touch-icon" href="/apple-icon.png">
 
-    <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>" as="script" />
+    <link rel="apple-touch-icon" href="/apple-icon.png">
     <link rel="shortcut icon" href="/favicon.png">
     <link rel="manifest" href="/timiks.webmanifest">
 
     <title>Timiks - Cube timer made for speedsolvers</title>
 
-    <%= `<style>${htmlWebpackPlugin.options.css}</style>` %>
+    <%= `<style>${require('fs').readFileSync('./src/critical/style.css')}</style>` %>
 </head>
 <body
     data-scramble-worker-path="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>"
     data-build-number="<%= htmlWebpackPlugin.options.buildNumber %>"
 >
     <!--[if lt IE 11]>
-        <div style="
-            text-align: center;
-            z-index: 9999;
-            background-color: #f7b731;
-            padding: 24px;
-            position: fixed;
-            width: 100%;
-            color: #000;
-            top: 0;
-        ">
+        <div class="no-ie-box">
             Sorry, but I do not support your browser.
             <a href="http://browsehappy.com/" target="_blank">Click here to upgrade.</a>
         </div>
     <![endif]-->
-
     <div id="app-root">
       <div class="container">
         <header>
@@ -63,42 +52,25 @@
         <a href="#" data-reload>Reload</a>
     </footer>
 
+    <script async src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+    <script>
+      <%= require('fs').readFileSync('./src/critical/script.js') %>
+    </script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39696629-4"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', '<%= htmlWebpackPlugin.options.analytics %>');
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push(['js', new Date()]);
+        dataLayer.push(['config', 'UA-39696629-4']);
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
       WebFont.load({
         google: {
-          families: [
-            'Roboto Mono:500',
-            'Barlow'
-          ]
+          families: ['Roboto Mono:500', 'Barlow:400,600']
         }
       });
     </script>
-
-    <script>
-      const settings = JSON.parse(localStorage.getItem('settings') || '{}');
-
-      if (settings.theme === 'dark') {
-        document.body.classList.add('is-dark');
-      }
-
-      document.querySelector('[data-reload]').addEventListener('click', function (event) {
-        event.preventDefault();
-        window.location.reload(true);
-      });
-    </script>
-
-    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 </html>

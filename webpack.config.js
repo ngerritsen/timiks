@@ -1,9 +1,8 @@
 /* global require, __dirname, process, module */
 
 const path = require('path');
-const fs = require('fs');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const buildNumber = require('./src/static/build');
 
 const createConfig = (env, argv) => {
@@ -33,10 +32,8 @@ const createConfig = (env, argv) => {
       new HtmlWebpackPlugin({
         mode: argv.mode,
         template: './src/index.html',
-        analytics: 'UA-39696629-4',
         inject: false,
-        buildNumber,
-        css: fs.readFileSync('./src/style.css', 'utf8')
+        buildNumber
       })
     ]
   };
