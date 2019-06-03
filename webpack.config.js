@@ -1,6 +1,8 @@
 /* global require, __dirname, process, module */
 
 const path = require('path');
+const fs = require('fs');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const buildNumber = require('./src/static/build');
 
@@ -33,7 +35,8 @@ const createConfig = (env, argv) => {
         template: './src/index.html',
         analytics: 'UA-39696629-4',
         inject: false,
-        buildNumber
+        buildNumber,
+        css: fs.readFileSync('./src/style.css', 'utf8')
       })
     ]
   };

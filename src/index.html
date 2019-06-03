@@ -6,119 +6,19 @@
     <meta name="description" content="A cube timer made for speedsolvers. Stats, scramble previews and an archive in an elegant, mobile friendly interface.">
     <meta name="keywords" content="timiks, timer, cube timer, rubiks cube timer, speedsolving, speedsolve timer">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Barlow:400,600&display=swap" rel="stylesheet">
-
     <!-- Apple metadata -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Timiks">
     <link rel="apple-touch-icon" href="/apple-icon.png">
 
+    <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>" as="script" />
     <link rel="shortcut icon" href="/favicon.png">
     <link rel="manifest" href="/timiks.webmanifest">
 
     <title>Timiks - Cube timer made for speedsolvers</title>
 
-    <style>
-      *,
-      *:before,
-      *:after {
-        box-sizing: border-box;
-      }
-
-      html {
-        font-size: 62.5%;
-        height: 100%;
-      }
-
-      body {
-        font-family: 'Barlow', Arial, sans-serif;
-        font-size: 1.6rem;
-        min-height: 100%;
-        line-height: 1.4;
-        margin: 0;
-        padding: 0;
-      }
-
-      ul {
-        padding-left: 2rem;
-      }
-
-      li {
-        margin-bottom: 0.4rem;
-      }
-
-      header {
-        padding-top: 1.6rem;
-      }
-
-      body.is-dark {
-        background-color: #000;
-        color: #fafafa;
-      }
-
-      body.with-modal {
-        overflow: hidden;
-      }
-
-      .container {
-        max-width: 72rem;
-        margin: 0 auto;
-        padding: 0 1.6rem;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: 2.6rem;
-        font-weight: bold;
-      }
-
-      p {
-        line-height: 1.3;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      footer {
-        color: #898989;
-        text-align: center;
-        font-size: 0.85em;
-        padding-top: 1.6rem;
-        padding-bottom: 3.2rem;
-      }
-
-      footer a,
-      footer a:visited,
-      footer a:hover,
-      footer a:focus,
-      footer a:active {
-        color: #898989;
-        text-decoration: underline;
-      }
-
-      .separator {
-        margin: 0 0.4rem;
-      }
-
-      .loader {
-        display: block;
-        height: 4rem;
-        color: #777;
-        width: 4rem;
-        margin: 25vh auto 30vh;
-        animation: spin 2s infinite linear;
-      }
-    </style>
+    <%= `<style>${htmlWebpackPlugin.options.css}</style>` %>
 </head>
 <body
     data-scramble-worker-path="<%= htmlWebpackPlugin.files.chunks.scrambleWorker.entry %>"
@@ -172,6 +72,18 @@
       gtag('js', new Date());
 
       gtag('config', '<%= htmlWebpackPlugin.options.analytics %>');
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: [
+            'Roboto Mono:500',
+            'Barlow'
+          ]
+        }
+      });
     </script>
 
     <script>
