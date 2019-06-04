@@ -13,8 +13,7 @@ import ArchiveOptions from './ArchiveOptions';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
-import { formatTime } from '../../helpers/time';
-import { formatDate } from '../../helpers/dateTime';
+import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
 
 const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }) => (
   <div>
@@ -33,7 +32,7 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
       <Section>
         {timesPerDay.map(({ date, times }) => (
           <div key={date.toISOString()}>
-            <h3>{formatDate(date)}</h3>
+            <h3>{formatLocalDate(date)}</h3>
             <TimeTiles>
               {times.map(time => (
                 <ToggleContent
@@ -43,7 +42,7 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
                       <TimeTileTime>
                         <Time time={time} />
                       </TimeTileTime>
-                      <DateTag>{formatTime(time.date)}</DateTag>
+                      <DateTag>{formatLocalTime(time.date)}</DateTag>
                       {time.stored && (
                         <SyncStatusIcon>
                           <CloudSyncIcon time={time} size="xs" />

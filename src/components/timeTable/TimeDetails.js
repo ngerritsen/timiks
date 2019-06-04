@@ -16,7 +16,7 @@ import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import ToggleContent from '../ToggleContent';
 import { getPuzzle } from '../../helpers/puzzle';
-import { formatDateTime } from '../../helpers/dateTime';
+import { formatLocalDateTime } from '../../helpers/dateTime';
 
 const TimeDetails = ({ time, onRemoveTime, onClose }) => (
   <div>
@@ -32,7 +32,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
     </Section>
     <Section margin="sm">
       <FontAwesome fixedWidth icon={faCalendarAlt} /> &nbsp;
-      {formatDateTime(time.date)}
+      {formatLocalDateTime(time.date)}
     </Section>
     <Section margin="md">
       <FontAwesome fixedWidth icon={faCube} /> &nbsp;

@@ -34,7 +34,7 @@ export const AVAILABLE_STATS = [
 ];
 
 // Version
-export const POLL_VERSION_INTERVAL = 10000;
+export const POLL_VERSION_INTERVAL = 60000;
 
 // Storage
 export const LOGIN_PROMOTED = 'loginPromoted';
