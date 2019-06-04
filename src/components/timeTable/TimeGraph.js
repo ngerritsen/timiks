@@ -1,32 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTheme } from 'styled-components';
-import { transparentize } from 'polished';
-import { Line } from 'react-chartjs-2';
-import moment from 'moment';
+import styled from 'styled-components';
+import ChartistGraph from 'react-chartist';
 
 import * as CustomPropTypes from '../../propTypes';
-import { formatShortTime, formatTime, getMs } from '../../helpers/time';
+import { formatShortTime, getMs } from '../../helpers/time';
 
 import { AVAILABLE_STATS } from '../../constants/app';
 
-const TimeGraph = ({ times, stats, theme }) => {
-  const getLineConfig = (label, color, data) => ({
-    label,
-    borderWidth: 2,
-    lineTension: 0.1,
-    backgroundColor: transparentize(1, color),
-    borderColor: color,
-    pointBackgroundColor: color,
-    pointHitRadius: 8,
-    pointHoverRadius: 2,
-    pointRadius: 0,
-    data
-  });
-
+const TimeGraph = ({ times, stats }) => {
   const data = {
-    labels: times.map(time => moment(time.date).format('lll')),
-    datasets: [getLineConfig('single', theme.colors.blue, times.map(getMs))]
+    labels: times.map(time => time.date.toISOString()),
+    series: [
+      {
+        name: 'single',
+        data: times.map(getMs)
+      }
+    ]
   };
 
   const statLines = AVAILABLE_STATS.filter(
@@ -35,57 +25,71 @@ const TimeGraph = ({ times, stats, theme }) => {
     const times = stats[stat.name].all.map(ms => getMs({ ms: Math.round(ms) }));
     const offset = data.labels.length - times.length;
 
-    // TODO: amount of avg can exceed labels because DNF's are included in avg but not for labels, gives an error.
-    const paddedTimes = [...new Array(offset), ...times];
-
-    return getLineConfig(stat.name, theme.colors[stat.color], paddedTimes);
+    return {
+      name: stat.name,
+      data: [...new Array(offset), ...times]
+    };
   });
 
-  data.datasets.push(...statLines);
+  data.series.push(...statLines);
 
   const options = {
-    animation: {
-      duration: 700
+    showPoint: false,
+    axisX: {
+      showLabel: false,
+      showGrid: false
     },
-    legend: {
-      display: true,
-      labels: {
-        boxWidth: 30
-      },
-      position: 'bottom'
-    },
-    tooltips: {
-      callbacks: {
-        label: (tooltipItem, data) => {
-          const label = data.datasets[tooltipItem.datasetIndex].label;
-
-          return label + ': ' + formatTime(tooltipItem.yLabel);
-        }
-      }
-    },
-    scales: {
-      xAxes: [
-        {
-          display: false
-        }
-      ],
-      yAxes: [
-        {
-          ticks: {
-            callback: formatShortTime
-          },
-          gridLines: {
-            color: theme.colors.subtleBg,
-            tickMarkLength: 7,
-            drawBorder: false
-          }
-        }
-      ]
+    axisY: {
+      labelInterpolationFnc: formatShortTime
     }
   };
 
-  return <Line data={data} options={options} />;
+  return (
+    <StyledChartistGraph className="ct-perfect-fifth" data={data} options={options} type="Line" />
+  );
 };
+
+const StyledChartistGraph = styled(ChartistGraph)`
+  .ct-line {
+    stroke-width: 2px;
+  }
+
+  .ct-series-a .ct-line {
+    stroke: ${props => props.theme.colors.lightBlue};
+  }
+
+  .ct-series-b .ct-line {
+    stroke: ${props => props.theme.colors.green};
+  }
+
+  .ct-series-c .ct-line {
+    stroke: ${props => props.theme.colors.yellow};
+  }
+
+  .ct-series-d .ct-line {
+    stroke: ${props => props.theme.colors.orange};
+  }
+
+  .ct-series-e .ct-line {
+    stroke: ${props => props.theme.colors.fluoRed};
+  }
+
+  .ct-series-f .ct-line {
+    stroke: ${props => props.theme.colors.purple};
+  }
+
+  .ct-grid {
+    stroke: ${props => props.theme.colors.grey};
+  }
+
+  .ct-label {
+    position: relative;
+    font-size: 1.3rem;
+    color: ${props => props.theme.colors.grey};
+    left: -${props => props.theme.sizes.xs};
+    top: ${props => props.theme.sizes.xxs};
+  }
+`;
 
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
@@ -94,4 +98,4 @@ TimeGraph.propTypes = {
   showDateLabels: PropTypes.bool
 };
 
-export default withTheme(React.memo(TimeGraph));
+export default React.memo(TimeGraph);

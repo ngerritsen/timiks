@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { darken, lighten } from 'polished';
-import moment from 'moment';
 
 import puzzles from '../../constants/puzzles';
 import * as CustomPropTypes from '../../propTypes';
@@ -14,6 +13,8 @@ import ArchiveOptions from './ArchiveOptions';
 import Modal from '../shared/Modal';
 import ToggleContent from '../ToggleContent';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
+import { formatTime } from '../../helpers/time';
+import { formatDate } from '../../helpers/dateTime';
 
 const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }) => (
   <div>
@@ -32,7 +33,7 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
       <Section>
         {timesPerDay.map(({ date, times }) => (
           <div key={date.toISOString()}>
-            <h3>{moment(date).format('LL')}</h3>
+            <h3>{formatDate(date)}</h3>
             <TimeTiles>
               {times.map(time => (
                 <ToggleContent
@@ -42,7 +43,7 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
                       <TimeTileTime>
                         <Time time={time} />
                       </TimeTileTime>
-                      <DateTag>{moment(time.date).format('LT')}</DateTag>
+                      <DateTag>{formatTime(time.date)}</DateTag>
                       {time.stored && (
                         <SyncStatusIcon>
                           <CloudSyncIcon time={time} size="xs" />

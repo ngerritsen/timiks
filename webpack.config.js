@@ -1,7 +1,6 @@
 /* global require, __dirname, process, module */
 
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const buildNumber = require('./src/static/build');
@@ -32,10 +31,9 @@ const createConfig = (env, argv) => {
       new HtmlWebpackPlugin({
         mode: argv.mode,
         template: './src/index.html',
-        inject: false,
+        inject: true,
         buildNumber
-      }),
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+      })
     ],
     optimization: {
       splitChunks: {

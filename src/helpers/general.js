@@ -35,3 +35,22 @@ export function createDescSorter(property) {
     return 0;
   };
 }
+
+export function multiMatch(patterns, inputString) {
+  for (let i = 0; i < patterns.length; i++) {
+    const pattern = patterns[i];
+    const match = inputString.match(pattern.regex);
+
+    if (!match) continue;
+
+    return pattern.fields.reduce(
+      (fields, key, idx) => ({
+        ...fields,
+        [key]: match[idx + 1]
+      }),
+      {}
+    );
+  }
+
+  return null;
+}

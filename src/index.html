@@ -15,6 +15,8 @@
     <link rel="shortcut icon" href="/favicon.png">
     <link rel="manifest" href="/timiks.webmanifest">
 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+
     <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.main.entry %>" as="script">
     <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>" as="script">
     <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" as="script">
@@ -71,7 +73,5 @@
         }
       });
     </script>
-    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
-    <script src="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"></script>
 </body>
 </html>

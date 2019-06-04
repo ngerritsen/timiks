@@ -6,7 +6,6 @@ import faCube from '@fortawesome/fontawesome-pro-solid/faCube';
 import faEye from '@fortawesome/fontawesome-pro-solid/faEye';
 import faEyeSlash from '@fortawesome/fontawesome-pro-solid/faEyeSlash';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import * as CustomPropTypes from '../../propTypes';
 import Time from '../shared/Time';
@@ -17,6 +16,7 @@ import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import ToggleContent from '../ToggleContent';
 import { getPuzzle } from '../../helpers/puzzle';
+import { formatDateTime } from '../../helpers/dateTime';
 
 const TimeDetails = ({ time, onRemoveTime, onClose }) => (
   <div>
@@ -32,7 +32,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
     </Section>
     <Section margin="sm">
       <FontAwesome fixedWidth icon={faCalendarAlt} /> &nbsp;
-      {moment(time.date).format('LLL')}
+      {formatDateTime(time.date)}
     </Section>
     <Section margin="md">
       <FontAwesome fixedWidth icon={faCube} /> &nbsp;
