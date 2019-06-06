@@ -21,10 +21,10 @@ const Showcase = () => {
             and exports.
           </p>
           <p>
-            Your current session will be synced too, so you can time on your phone, and see your
-            stats update live, on your laptop screen!
+            Your current session will be synced too. You can time on your phone, and see your stats
+            update live, on your laptop&apos;s screen.
           </p>
-          <p>With Google login it&apos;s a matter of seconds to start syncing!</p>
+          <p>With Google login it&apos;s a matter of seconds to start syncing.</p>
           <Image src="/images/cloud-sync.png" />
         </>
       )
@@ -62,8 +62,8 @@ const Showcase = () => {
         <>
           <p>
             Keep track of all your times using the archive. In combination with cloud sync you can
-            can track your progress everywhere! Have your times nicely organized by date and event
-            and even preview the scramble you had in that one PB solve!
+            can track your progress on all devices. The times are nicely organized by date and
+            event. You can even preview the scrambles of any solve in history.
           </p>
           <Image src="/images/archive-graph.png" />
           <Image src="/images/archive-times.png" />
@@ -76,7 +76,7 @@ const Showcase = () => {
         <>
           <p>
             Stunning true dark mode. Look&apos;s great on all devices. Easy on the eyes at night,
-            and might save you some batteries!
+            and might save you some battery on an OLED screen.
           </p>
           <Image src="/images/dark-mode.png" />
         </>
@@ -102,7 +102,7 @@ const Showcase = () => {
         <>
           <p>Relays with nice, tabbed scrambles and previews.</p>
           <Image src="/images/relay-timer.png" />
-          <p>You can even view all the scrambles of relays you have in your archive!</p>
+          <p>You can even view all the scrambles the relays of any time in history</p>
           <Image src="/images/relay-details.png" />
         </>
       )
