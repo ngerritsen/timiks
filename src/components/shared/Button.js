@@ -5,7 +5,8 @@ const propColorMap = {
   primary: 'primary',
   danger: 'red',
   neutral: 'subtleFg',
-  google: 'googleRed'
+  google: 'googleRed',
+  subtle: 'subtleBg'
 };
 
 const Button = styled.button.attrs({

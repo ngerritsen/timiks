@@ -8,6 +8,7 @@ import Section from './shared/Section';
 import NotificationContainer from '../containers/NotificationContainer';
 import LoginPromotionContainer from '../containers/LoginPromotionContainer';
 import NewVersionPromptContainer from '../containers/NewVersionPromptContainer';
+import Showcase from './Showcase';
 
 const App = () => (
   <>
@@ -17,9 +18,12 @@ const App = () => (
       <Section margin="md">
         <Header />
       </Section>
-      <Section margin="md">
+      <Section margin="xl">
         <Route exact path="/" component={TimerView} />
         <Route path="/archive" component={ArchiveContainer} />
+      </Section>
+      <Section center>
+        <Showcase />
       </Section>
       <NotificationContainer />
     </div>

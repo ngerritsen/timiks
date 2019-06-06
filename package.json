@@ -4,12 +4,13 @@
   "description": "Rubik's cube timer",
   "main": "index.js",
   "scripts": {
-    "copy-static": "mkdir -p public; cp -r src/static/* public/",
-    "watch": "npm run copy-static; webpack-dev-server --mode=development --content-base ./public",
+    "static": "mkdir -p public; cp -r src/static/* public/",
+    "images": "mkdir -p public/images; imagemin src/images/* --out-dir public/images",
+    "watch": "npm run static; npm run images; webpack-dev-server --mode=development --content-base ./public",
     "test": "eslint .",
-    "build": "npm run copy-static; webpack --mode=production",
+    "build": "npm run static; npm run images; webpack --mode=production",
     "precommit": "npm run test",
-    "write-build-number": "echo \"$TRAVIS_BUILD_NUMBER\" > src/static/build.json"
+    "build-number": "echo \"$TRAVIS_BUILD_NUMBER\" > src/static/build.json"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,8 @@
     "chartist": "^0.11.2",
     "element-closest": "^2.0.2",
     "firebase": "^6.0.2",
+    "imagemin": "^6.1.0",
+    "imagemin-cli": "^4.0.1",
     "keycode": "^2.2.0",
     "nosleep.js": "^0.9.0",
     "polished": "^1.9.2",

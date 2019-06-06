@@ -24,10 +24,10 @@ Notification.propTypes = {
 };
 
 const NotificationContainer = styled.div`
-  transition: bottom 0.5s ease;
+  transition: bottom 1.2s ease;
   display: flex;
   position: fixed;
-  bottom: ${props => (props.show ? '0' : '-7rem')};
+  bottom: ${props => (props.show ? '0' : '-16rem')};
   padding: 0 ${props => props.theme.sizes.sm} ${props => props.theme.sizes.xs};
   left: 0;
   right: 0;
