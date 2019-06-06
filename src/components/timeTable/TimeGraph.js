@@ -86,7 +86,6 @@ const StyledChartistGraph = styled(ChartistGraph)`
     position: relative;
     font-size: 1.3rem;
     color: ${props => props.theme.colors.grey};
-    left: -${props => props.theme.sizes.xs};
     top: ${props => props.theme.sizes.xxs};
   }
 `;

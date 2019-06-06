@@ -23,11 +23,7 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
     {times.length === 0 && (
       <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
     )}
-    {times.length > 1 && (
-      <Section margin="xs">
-        <TimeGraph times={times} stats={stats} />
-      </Section>
-    )}
+    {times.length > 1 && <TimeGraph times={times} stats={stats} />}
     {timesPerDay.length > 0 && (
       <Section>
         {timesPerDay.map(({ date, times }) => (

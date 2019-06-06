@@ -59,13 +59,7 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
             })}
           </tbody>
         </Tables>
-        {showGraph && (
-          <Section margin="xs">
-            <GraphContainer>
-              <TimeGraph stats={stats} times={noDnfTimes} />
-            </GraphContainer>
-          </Section>
-        )}
+        {showGraph && <TimeGraph stats={stats} times={noDnfTimes} />}
       </TimeTableColumn>
       <TimeTableColumn>
         <Tables>
@@ -122,10 +116,6 @@ const TimeTableColumn = styled.div`
     }
   }
 }
-`;
-
-const GraphContainer = styled.div`
-  padding-top: ${props => props.theme.sizes.sm};
 `;
 
 const QuestionIconButton = IconButton.extend`
