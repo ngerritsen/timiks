@@ -6,7 +6,7 @@ import faKeyboard from '@fortawesome/fontawesome-pro-solid/faKeyboard';
 import keymap from '../constants/keymap';
 import Section from './shared/Section';
 import IconButton from './shared/IconButton';
-import ToggleContent from './ToggleContent';
+import ToggleContent from './shared/ToggleContent';
 import Shortcut from './shared/Shortcut';
 import Modal from './shared/Modal';
 

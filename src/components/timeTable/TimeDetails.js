@@ -14,7 +14,7 @@ import Scramble from '../scramble/Scramble';
 import Button from '../shared/Button';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
-import ToggleContent from '../ToggleContent';
+import ToggleContent from '../shared/ToggleContent';
 import { getPuzzle } from '../../helpers/puzzle';
 import { formatLocalDateTime } from '../../helpers/dateTime';
 

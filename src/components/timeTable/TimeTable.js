@@ -7,9 +7,8 @@ import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircl
 import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';
 import TimeGraph from './TimeGraph';
-import ToggleContent from '../ToggleContent';
+import ToggleContent from '../shared/ToggleContent';
 import IconButton from '../shared/IconButton';
-import Section from '../shared/Section';
 import Tag from '../shared/Tag';
 import Modal from '../shared/Modal';
 import TimeTableTimeRow from './TimeTableTimeRow';

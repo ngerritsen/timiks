@@ -7,7 +7,7 @@ import faCog from '@fortawesome/fontawesome-pro-solid/faCog';
 import Shortcut from './shared/Shortcut';
 import { ACTIVATION_DURATION_OPTIONS } from '../constants/app';
 import IconButton from './shared/IconButton';
-import ToggleContent from './ToggleContent';
+import ToggleContent from './shared/ToggleContent';
 import Section from './shared/Section';
 import Select from './shared/Select';
 import Checkbox from './shared/Checkbox';

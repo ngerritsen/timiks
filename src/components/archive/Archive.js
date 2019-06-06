@@ -11,7 +11,7 @@ import Section from '../shared/Section';
 import Time from '../shared/Time';
 import ArchiveOptions from './ArchiveOptions';
 import Modal from '../shared/Modal';
-import ToggleContent from '../ToggleContent';
+import ToggleContent from '../shared/ToggleContent';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
 

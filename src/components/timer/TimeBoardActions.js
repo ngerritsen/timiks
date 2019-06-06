@@ -5,7 +5,7 @@ import faArchive from '@fortawesome/fontawesome-pro-solid/faArchive';
 
 import InlineFontawesome from '../shared/InlineFontawesome';
 import Button from '../shared/Button';
-import ToggleContent from '../ToggleContent';
+import ToggleContent from '../shared/ToggleContent';
 import Section from '../shared/Section';
 import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';

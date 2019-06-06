@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import ToggleContent from './ToggleContent';
+import ToggleContent from './shared/ToggleContent';
 import Button from './shared/Button';
 import Modal from './shared/Modal';
 import FontAwesome from '@fortawesome/react-fontawesome';

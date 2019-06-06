@@ -9,7 +9,7 @@ import faSpinnerThird from '@fortawesome/fontawesome-pro-solid/faSpinnerThird';
 import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 
 import IconButton from './shared/IconButton';
-import ToggleContent from './ToggleContent';
+import ToggleContent from './shared/ToggleContent';
 import Section from './shared/Section';
 import Button, { ButtonIcon } from './shared/Button';
 import Modal from './shared/Modal';

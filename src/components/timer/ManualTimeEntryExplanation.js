@@ -2,7 +2,7 @@ import React from 'react';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircle';
 
-import ToggleContent from '../ToggleContent';
+import ToggleContent from '../shared/ToggleContent';
 import IconButton from '../shared/IconButton';
 import Section from '../shared/Section';
 import Modal from '../shared/Modal';

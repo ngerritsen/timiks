@@ -6,7 +6,7 @@ import faEye from '@fortawesome/fontawesome-pro-solid/faEye';
 import IconButton from '../shared/IconButton';
 import Shortcut from '../shared/Shortcut';
 import Modal from '../shared/Modal';
-import ToggleContent from '../ToggleContent';
+import ToggleContent from '../shared/ToggleContent';
 import Scramble from './Scramble';
 import Section from '../shared/Section';
 import * as CustomPropTypes from '../../propTypes';
