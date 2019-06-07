@@ -11,7 +11,7 @@ export function parseTime(raw) {
     ms: raw.ms,
     puzzle: raw.puzzle,
     scramble: parseScramble(raw.scramble),
-    date: new Date(raw.date),
+    date: parseDate(raw),
     dnf: Boolean(raw.dnf),
     plus2: Boolean(raw.plus2),
     current: Boolean(raw.current),
@@ -30,10 +30,15 @@ export function serializeTime(time) {
     puzzle: time.puzzle,
     scramble: serializeScramble(time.scramble),
     date: time.date.toISOString(),
+    timestamp: time.date,
     dnf: time.dnf || undefined,
     plus2: time.plus2 || undefined,
     current: time.current || undefined
   };
+}
+
+function parseDate(rawTime) {
+  return rawTime.timestamp ? rawTime.timestamp.toDate() : new Date(rawTime.date);
 }
 
 function serializeScramble(scramble) {
