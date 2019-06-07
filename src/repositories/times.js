@@ -50,14 +50,14 @@ export function saveAll(userId, times) {
   return batch.commit();
 }
 
-export function update(userId, timeId, fields) {
+export function update(timeId, fields) {
   return db
     .collection('times')
     .doc(timeId)
     .set(fields, { merge: true });
 }
 
-export function updateAll(userId, timeIds, fields) {
+export function updateAll(timeIds, fields) {
   const batch = db.batch();
 
   timeIds.forEach(id => {
@@ -68,14 +68,14 @@ export function updateAll(userId, timeIds, fields) {
   return batch.commit();
 }
 
-export function remove(userId, timeId) {
+export function remove(timeId) {
   return db
     .collection('times')
     .doc(timeId)
     .delete();
 }
 
-export function removeAll(userId, timeIds) {
+export function removeAll(timeIds) {
   const batch = db.batch();
 
   timeIds.forEach(id => {

@@ -42,9 +42,7 @@ export const updateTimeEpic = (action$, state$) =>
     ofType(actionTypes.UPDATE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action, state]) =>
-      from(timesRepository.update(getUserId(state), action.id, action.fields))
-    ),
+    mergeMap(([action]) => from(timesRepository.update(action.id, action.fields))),
     ignoreElements()
   );
 
@@ -53,7 +51,7 @@ export const removeTimeEpic = (action$, state$) =>
     ofType(actionTypes.REMOVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action, state]) => from(timesRepository.remove(getUserId(state), action.id))),
+    mergeMap(([action]) => from(timesRepository.remove(action.id))),
     ignoreElements()
   );
 
@@ -64,7 +62,7 @@ export const archiveTimesEpic = (action$, state$) =>
     filter(([, state]) => isLoggedIn(state)),
     mergeMap(([, state]) =>
       from(
-        timesRepository.updateAll(getUserId(state), getCurrentTimeIds(state), {
+        timesRepository.updateAll(getCurrentTimeIds(state), {
           current: false
         })
       )
@@ -77,9 +75,7 @@ export const clearTimesEpic = (action$, state$) =>
     ofType(actionTypes.CLEAR_TIMES),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([, state]) =>
-      from(timesRepository.removeAll(getUserId(state), getCurrentTimeIds(state)))
-    ),
+    mergeMap(([, state]) => from(timesRepository.removeAll(getCurrentTimeIds(state)))),
     ignoreElements()
   );
 
