@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import ToggleContent from './shared/ToggleContent';
-import Button from './shared/Button';
+import Button, { ButtonIcon } from './shared/Button';
 import Modal from './shared/Modal';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faCaretCircleLeft from '@fortawesome/fontawesome-pro-solid/faCaretCircleLeft';
@@ -116,10 +116,12 @@ const Showcase = () => {
     <ToggleContent
       toggle={({ show }) => (
         <Button tag tiny empty subtle onClick={show}>
-          <StarIcon>
-            <FontAwesome icon={faStar} />
-          </StarIcon>
-          &nbsp; Show features
+          <ButtonIcon>
+            <StarIcon>
+              <FontAwesome icon={faStar} />
+            </StarIcon>
+          </ButtonIcon>
+          Show features
         </Button>
       )}
       content={({ hide }) => (

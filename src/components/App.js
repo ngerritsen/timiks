@@ -22,7 +22,7 @@ const App = () => (
         <Route exact path="/" component={TimerView} />
         <Route path="/archive" component={ArchiveContainer} />
       </Section>
-      <Section center>
+      <Section textAlign="center">
         <Showcase />
       </Section>
       <NotificationContainer />

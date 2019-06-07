@@ -49,12 +49,19 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph, availableS
                 </Cell>
               </tr>
             )}
-            {availableStats.filter(stat => stats[stat.name]).map(stat => {
-              const { current, best } = stats[stat.name];
-              return (
-                <TimeTableStatRow key={stat.name} name={stat.name} current={current} best={best} />
-              );
-            })}
+            {availableStats
+              .filter(stat => stats[stat.name])
+              .map(stat => {
+                const { current, best } = stats[stat.name];
+                return (
+                  <TimeTableStatRow
+                    key={stat.name}
+                    name={stat.name}
+                    current={current}
+                    best={best}
+                  />
+                );
+              })}
           </tbody>
         </Tables>
         {showGraph && <TimeGraph stats={stats} times={noDnfTimes} />}

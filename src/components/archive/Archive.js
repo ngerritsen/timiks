@@ -14,6 +14,7 @@ import Modal from '../shared/Modal';
 import ToggleContent from '../shared/ToggleContent';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
+import Export from './Export';
 
 const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }) => (
   <div>
@@ -24,6 +25,11 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }
       <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
     )}
     {times.length > 1 && <TimeGraph times={times} stats={stats} />}
+    {times.length > 1 && (
+      <Section margin="md">
+        <Export times={times} puzzle={puzzle} />
+      </Section>
+    )}
     {timesPerDay.length > 0 && (
       <Section>
         {timesPerDay.map(({ date, times }) => (
