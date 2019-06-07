@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircle';
 
-import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';
 import TimeGraph from './TimeGraph';
 import ToggleContent from '../shared/ToggleContent';
@@ -16,7 +15,7 @@ import { Cell, HeadingCell, SubtleHeadingCell, Tables } from '../shared/Tables';
 import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
 
-const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
+const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph, availableStats }) => {
   return (
     <TimeTableContainer>
       <TimeTableColumn>
@@ -43,14 +42,14 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
             </tr>
           </thead>
           <tbody>
-            {AVAILABLE_STATS.filter(stat => stats[stat.name]).length === 0 && !showGraph && (
+            {availableStats.filter(stat => stats[stat.name]).length === 0 && !showGraph && (
               <tr>
                 <Cell colSpan="2">
                   <i>Not enough solves yet.</i>
                 </Cell>
               </tr>
             )}
-            {AVAILABLE_STATS.filter(stat => stats[stat.name]).map(stat => {
+            {availableStats.filter(stat => stats[stat.name]).map(stat => {
               const { current, best } = stats[stat.name];
               return (
                 <TimeTableStatRow key={stat.name} name={stat.name} current={current} best={best} />
@@ -83,6 +82,7 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
 TimeTable.propTypes = {
   stats: PropTypes.object.isRequired,
   removeTime: PropTypes.func,
+  availableStats: PropTypes.arrayOf(PropTypes.object).isRequired,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   noDnfTimes: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   showGraph: PropTypes.bool

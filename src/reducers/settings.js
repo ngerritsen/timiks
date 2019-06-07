@@ -8,7 +8,9 @@ const initialState = {
   useManualTimeEntry: false,
   theme: 'light',
   activationDuration: DEFAULT_ACTIVATION_DURATION,
-  showHelpText: true
+  showHelpText: true,
+  showMo3: true,
+  showTimerTime: true
 };
 
 export default function settingsReducer(state = initialState, action) {
@@ -33,6 +35,16 @@ export default function settingsReducer(state = initialState, action) {
       return {
         ...state,
         showHelpText: !state.showHelpText
+      };
+    case actionTypes.TOGGLE_SHOW_MO3:
+      return {
+        ...state,
+        showMo3: !state.showMo3
+      };
+    case actionTypes.TOGGLE_SHOW_TIMER_TIME:
+      return {
+        ...state,
+        showTimerTime: !state.showTimerTime
       };
     case actionTypes.TOGGLE_MANUAL_TIME_ENTRY:
       return {

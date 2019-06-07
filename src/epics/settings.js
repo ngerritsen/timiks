@@ -17,7 +17,9 @@ export const storeSettingsEpic = (action$, state$) =>
       actionTypes.CHANGE_ACTIVATION_DURATION,
       actionTypes.TOGGLE_INSPECTION_TIME,
       actionTypes.TOGGLE_MANUAL_TIME_ENTRY,
-      actionTypes.TOGGLE_SHOW_HELP_TEXT
+      actionTypes.TOGGLE_SHOW_HELP_TEXT,
+      actionTypes.TOGGLE_SHOW_TIMER_TIME,
+      actionTypes.TOGGLE_SHOW_MO3
     ),
     withLatestFrom(state$),
     tap(([, state]) => settingsRepository.store(getSettings(state))),

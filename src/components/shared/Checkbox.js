@@ -4,11 +4,15 @@ import styled from 'styled-components';
 import faCheck from '@fortawesome/fontawesome-pro-solid/faCheck';
 import FontAwesome from '@fortawesome/react-fontawesome';
 
-const Checkbox = ({ onChange, checked }) => (
-  <CheckboxBox onClick={() => onChange(!checked)} checked={checked}>
-    {checked && <FontAwesome icon={faCheck} size="xs" />}
-  </CheckboxBox>
-);
+const Checkbox = ({ onChange, checked, inverse }) => {
+  const isChecked = inverse ? !checked : checked;
+
+  return (
+    <CheckboxBox onClick={() => onChange(!isChecked)} checked={isChecked}>
+      {isChecked && <FontAwesome icon={faCheck} size="xs" />}
+    </CheckboxBox>
+  );
+};
 
 const CheckboxBox = styled.div`
   display: inline-flex;
@@ -31,6 +35,7 @@ const CheckboxBox = styled.div`
 
 Checkbox.propTypes = {
   checked: PropTypes.bool,
+  inverse: PropTypes.bool,
   onChange: PropTypes.func.isRequired
 };
 

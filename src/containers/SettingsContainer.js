@@ -17,6 +17,8 @@ export default connect(
     toggleShowHelpText: actions.toggleShowHelpText,
     changeTheme: actions.changeTheme,
     changeActivationDuration: actions.changeActivationDuration,
-    toggleManualTimeEntry: actions.toggleManualTimeEntry
+    toggleManualTimeEntry: actions.toggleManualTimeEntry,
+    toggleShowTimerTime: actions.toggleShowTimerTime,
+    toggleShowMo3: actions.toggleShowMo3
   }
 )(Settings);

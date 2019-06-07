@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { submitTimeInput, updateTimeInput } from '../../actions';
 import { getLastTime } from '../../selectors/times';
 import Timer from '../../components/timer/Timer';
-import { shouldUseManualTimeEntry } from '../../selectors/settings';
+import { shouldUseManualTimeEntry, shouldShowTimerTime } from '../../selectors/settings';
 import { isPreparing, isPreparingForInspection, isReady } from '../../selectors/activation';
 import * as timerSelectors from '../../selectors/timer';
 
@@ -24,7 +24,8 @@ function mapStateToProps(state) {
     showLastTime,
     startTime,
     stopped: timerSelectors.isStopped(state),
-    useManualTimeEntry
+    useManualTimeEntry,
+    showTimerTime: shouldShowTimerTime(state)
   };
 }
 
