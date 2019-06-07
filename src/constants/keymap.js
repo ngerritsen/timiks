@@ -20,6 +20,11 @@ const keymap = [
     description: 'Toggle DNF for the last time'
   },
   {
+    key: 'backspace',
+    commands: ['removeLastTime'],
+    description: 'Remove the last time'
+  },
+  {
     key: 'esc',
     commands: ['closeModal'],
     description: 'Close any modal'

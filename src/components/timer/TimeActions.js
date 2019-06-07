@@ -20,6 +20,8 @@ const TimeActions = ({ plus2, togglePlus2LastTime, dnf, toggleDnfLastTime, remov
         DNF
       </Button>
     </TimeAction>
+
+    <Shortcut command="removeLastTime" action={removeLastTime} />
     <TimeAction>
       <Button tiny tag danger onClick={removeLastTime}>
         Remove

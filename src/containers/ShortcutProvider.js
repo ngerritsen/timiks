@@ -6,6 +6,8 @@ import keycode from 'keycode';
 
 import ShortcutContext from './ShortcutContext';
 
+const inputElements = ['textarea', 'input', 'select'];
+
 class ShortcutProvider extends Component {
   constructor(...args) {
     super(...args);
@@ -23,6 +25,10 @@ class ShortcutProvider extends Component {
 
   _handleKeyDown(event) {
     const { ctrlKey, metaKey, shiftKey, altKey } = event;
+
+    if (inputElements.includes(event.target.tagName)) {
+      return;
+    }
 
     if (!this.props.stopped || ctrlKey || metaKey || shiftKey || altKey) {
       return;
