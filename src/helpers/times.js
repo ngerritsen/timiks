@@ -20,10 +20,6 @@ export function getId(time) {
   return time.id;
 }
 
-export function isEligableForLocalStorage(time) {
-  return Boolean(time.current || !time.stored);
-}
-
 function calculateAveragesOf(times, amount, deviation = 1) {
   if (times.length < amount) {
     return null;
@@ -33,9 +29,9 @@ function calculateAveragesOf(times, amount, deviation = 1) {
     calculateAverageOf(times.slice(index, index + amount), deviation)
   );
 
-  const best = result.reduce((total, current) =>
-    total === current || total < current ? total : current
-  );
+  const best = result
+    .map(time => (time === 'DNF' ? Infinity : time))
+    .reduce((total, current) => (total === current || total < current ? total : current));
 
   return {
     current: result[result.length - 1],
