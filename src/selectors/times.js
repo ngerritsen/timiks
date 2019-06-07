@@ -48,7 +48,7 @@ export const getCurrentNoDnfTimes = createSelector(
 );
 
 export const getStatsForCurrentTimes = createSelector(
-  getCurrentTimes,
+  getCurrentMarkedSortedTimes,
   calculateStats
 );
 
