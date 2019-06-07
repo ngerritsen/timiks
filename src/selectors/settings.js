@@ -6,8 +6,6 @@ export const getPuzzle = state => state.settings.puzzle;
 export const getTheme = state => state.settings.theme;
 export const getActivationDuration = state => state.settings.activationDuration;
 export const shouldUseManualTimeEntry = state => state.settings.useManualTimeEntry;
-export const shouldShowHelpText = state => state.settings.showHelpText;
-export const shouldShowMo3 = state => state.settings.showMo3;
 export const shouldShowTimerTime = state => state.settings.showTimerTime;
 export const getPuzzleInfo = createSelector(
   getPuzzle,

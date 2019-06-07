@@ -70,8 +70,6 @@ export const requireTimes = (current, puzzle) => ({
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });
 export const settingsStored = () => ({ type: actionTypes.SETTINGS_STORED });
 export const toggleManualTimeEntry = () => ({ type: actionTypes.TOGGLE_MANUAL_TIME_ENTRY });
-export const toggleShowHelpText = () => ({ type: actionTypes.TOGGLE_SHOW_HELP_TEXT });
-export const toggleShowMo3 = () => ({ type: actionTypes.TOGGLE_SHOW_MO3 });
 export const toggleShowTimerTime = () => ({ type: actionTypes.TOGGLE_SHOW_TIMER_TIME });
 export const changePuzzle = puzzle => ({ type: actionTypes.CHANGE_PUZZLE, puzzle });
 export const changeTheme = theme => ({ type: actionTypes.CHANGE_THEME, theme });

@@ -13,7 +13,6 @@ const Activation = ({
   preparingForInspection,
   ready,
   stopped,
-  showHelpText,
   submitTimeInput,
   useInspectionTime,
   useManualTimeEntry,
@@ -44,37 +43,35 @@ const Activation = ({
       })()}
     </Button>
 
-    {showHelpText && (
-      <Explain>
-        {(() => {
-          switch (true) {
-            case useManualTimeEntry:
-              return 'Enter a time and press enter or click submit.';
-            case preparingForInspection:
-              return 'Release to start inspection.';
-            case preparing && ready:
-              return 'Release to start!';
-            case preparing && !ready:
-              return 'Hold on...';
-            case !stopped:
-              return (
-                <>
-                  <DesktopOnly>Click, touch or smash any key to stop</DesktopOnly>
-                  <MobileOnly>Touch anywhere to stop.</MobileOnly>
-                </>
-              );
-            default:
-              return (
-                <>
-                  <DesktopOnly>Click, touch or hold spacebar and release to start</DesktopOnly>
-                  <MobileOnly>Hold and release to start</MobileOnly>
-                  {useInspectionTime ? ' inspection.' : '.'}
-                </>
-              );
-          }
-        })()}
-      </Explain>
-    )}
+    <Explain>
+      {(() => {
+        switch (true) {
+          case useManualTimeEntry:
+            return 'Enter a time and press enter or click submit.';
+          case preparingForInspection:
+            return 'Release to start inspection.';
+          case preparing && ready:
+            return 'Release to start!';
+          case preparing && !ready:
+            return 'Hold on...';
+          case !stopped:
+            return (
+              <>
+                <DesktopOnly>Click, touch or smash any key to stop</DesktopOnly>
+                <MobileOnly>Touch anywhere to stop.</MobileOnly>
+              </>
+            );
+          default:
+            return (
+              <>
+                <DesktopOnly>Click, touch or hold spacebar and release to start</DesktopOnly>
+                <MobileOnly>Hold and release to start</MobileOnly>
+                {useInspectionTime ? ' inspection.' : '.'}
+              </>
+            );
+        }
+      })()}
+    </Explain>
 
     {(!stopped || preparing || preparingForInspection || inspecting) && <FullScreenMask />}
   </ActivationContainer>
@@ -90,8 +87,7 @@ Activation.propTypes = {
   submitTimeInput: PropTypes.func.isRequired,
   useInspectionTime: PropTypes.bool.isRequired,
   useManualTimeEntry: PropTypes.bool.isRequired,
-  validTimeInput: PropTypes.bool.isRequired,
-  showHelpText: PropTypes.bool.isRequired
+  validTimeInput: PropTypes.bool.isRequired
 };
 
 const DesktopOnly = styled.span`

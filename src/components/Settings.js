@@ -20,9 +20,7 @@ const Settings = ({
   toggleInspectionTime,
   changeTheme,
   toggleManualTimeEntry,
-  toggleShowTimerTime,
-  toggleShowHelpText,
-  toggleShowMo3
+  toggleShowTimerTime
 }) => (
   <>
     <ToggleContent
@@ -35,80 +33,58 @@ const Settings = ({
       content={({ hide }) => (
         <Modal title="Settings" onClose={hide}>
           <>
-            <Section margin="md">
-              <SectionTitle>Timer</SectionTitle>
-              <Section margin="sm">
-                <Setting>
-                  <label>Activation delay*</label>
-                  <Select
-                    onChange={changeActivationDuration}
-                    options={ACTIVATION_DURATION_OPTIONS}
-                    value={settings.activationDuration}
-                    numeric
-                    fullWidth
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Use inspection time</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={toggleInspectionTime}
-                    checked={settings.useInspectionTime}
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Manual time entry</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={toggleManualTimeEntry}
-                    checked={settings.useManualTimeEntry}
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Hide time during solve</label>
-                  <Checkbox
-                    type="checkbox"
-                    inverse
-                    onChange={toggleShowTimerTime}
-                    checked={settings.showTimerTime}
-                  />
-                </Setting>
-              </Section>
+            <Section margin="sm">
+              <Setting>
+                <label>Activation delay*</label>
+                <Select
+                  onChange={changeActivationDuration}
+                  options={ACTIVATION_DURATION_OPTIONS}
+                  value={settings.activationDuration}
+                  numeric
+                  fullWidth
+                />
+              </Setting>
             </Section>
-            <Section margin="md">
-              <SectionTitle>User interface</SectionTitle>
-              <Section margin="sm">
-                <Setting>
-                  <label>Dark mode</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={() => changeTheme(settings.theme === 'dark' ? 'light' : 'dark')}
-                    checked={settings.theme === 'dark'}
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Show help text</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={toggleShowHelpText}
-                    checked={settings.showHelpText}
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Show mo3</label>
-                  <Checkbox type="checkbox" onChange={toggleShowMo3} checked={settings.showMo3} />
-                </Setting>
-              </Section>
+            <Section margin="sm">
+              <Setting>
+                <label>Use inspection time</label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={toggleInspectionTime}
+                  checked={settings.useInspectionTime}
+                />
+              </Setting>
+            </Section>
+            <Section margin="sm">
+              <Setting>
+                <label>Manual time entry</label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={toggleManualTimeEntry}
+                  checked={settings.useManualTimeEntry}
+                />
+              </Setting>
+            </Section>
+            <Section margin="sm">
+              <Setting>
+                <label>Hide time during solve</label>
+                <Checkbox
+                  type="checkbox"
+                  inverse
+                  onChange={toggleShowTimerTime}
+                  checked={settings.showTimerTime}
+                />
+              </Setting>
+            </Section>
+            <Section margin="sm">
+              <Setting>
+                <label>Dark mode</label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={() => changeTheme(settings.theme === 'dark' ? 'light' : 'dark')}
+                  checked={settings.theme === 'dark'}
+                />
+              </Setting>
             </Section>
             <Section margin="md">
               <Explanation>
@@ -138,21 +114,11 @@ const Explanation = styled.span`
   font-style: italic;
 `;
 
-const SectionTitle = styled.p`
-  display: block;
-  font-size: 1.7rem;
-  font-weight: bold;
-  padding: 0;
-  margin: 0 0 ${props => props.theme.sizes.sm};
-`;
-
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
   changeActivationDuration: PropTypes.func.isRequired,
   toggleInspectionTime: PropTypes.func.isRequired,
-  toggleShowHelpText: PropTypes.func.isRequired,
   toggleShowTimerTime: PropTypes.func.isRequired,
-  toggleShowMo3: PropTypes.func.isRequired,
   toggleManualTimeEntry: PropTypes.func.isRequired,
   changeTheme: PropTypes.func.isRequired
 };

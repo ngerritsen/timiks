@@ -14,11 +14,9 @@ export default connect(
   mapStateToProps,
   {
     toggleInspectionTime: actions.toggleInspectionTime,
-    toggleShowHelpText: actions.toggleShowHelpText,
     changeTheme: actions.changeTheme,
     changeActivationDuration: actions.changeActivationDuration,
     toggleManualTimeEntry: actions.toggleManualTimeEntry,
-    toggleShowTimerTime: actions.toggleShowTimerTime,
-    toggleShowMo3: actions.toggleShowMo3
+    toggleShowTimerTime: actions.toggleShowTimerTime
   }
 )(Settings);

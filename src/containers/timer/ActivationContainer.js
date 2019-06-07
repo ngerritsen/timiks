@@ -13,7 +13,6 @@ function mapStateToProps(state) {
     stopped: timerSelectors.isStopped(state),
     preparationStage: activationSelectors.getPreparationStage(state),
     useManualTimeEntry: settingsSelectors.shouldUseManualTimeEntry(state),
-    showHelpText: settingsSelectors.shouldShowHelpText(state),
     preparing: activationSelectors.isPreparing(state),
     preparingForInspection: activationSelectors.isPreparingForInspection(state),
     inspecting: timerSelectors.isInspecting(state),
