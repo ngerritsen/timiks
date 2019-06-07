@@ -1,8 +1,11 @@
+/* eslint-disable no-console */
 import * as firebase from 'firebase/app';
 import { serializeTime, parseTimes } from '../helpers/serialization';
 import { Observable } from 'rxjs';
 
 const db = firebase.firestore();
+
+db.enablePersistence().catch(() => {});
 
 export function listenForChanges(userId, current, puzzle) {
   return new Observable(observer => {
