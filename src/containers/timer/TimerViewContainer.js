@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
 import TimerView from '../../components/timer/TimerView';
-import { getTimes } from '../../actions';
+import { requireTimes } from '../../actions';
 
 export default connect(
   undefined,
-  { getTimes }
+  { requireTimes }
 )(TimerView);

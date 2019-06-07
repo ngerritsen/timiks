@@ -14,7 +14,7 @@ export const getCurrentTimes = createSelector(
   times => times.filter(isCurrent)
 );
 
-export const subscribeTo = state => state.times.subscribeTo;
+export const getRequiredTimes = state => state.times.requiredTimes;
 
 export const getCurrentTimeIds = state =>
   getTimes(state)

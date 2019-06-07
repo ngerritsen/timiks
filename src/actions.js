@@ -49,13 +49,22 @@ export const noSleepDisabled = () => ({ type: actionTypes.NO_SLEEP_DISABLED });
 // Times
 export const saveTime = time => ({ type: actionTypes.SAVE_TIME, time });
 export const updateTime = (id, fields) => ({ type: actionTypes.UPDATE_TIME, id, fields });
-export const loadTimes = (times = []) => ({ type: actionTypes.LOAD_TIMES, times });
+export const loadTimes = (times = [], current, puzzle) => ({
+  type: actionTypes.LOAD_TIMES,
+  times,
+  current,
+  puzzle
+});
 export const loadLocalTimes = (times = []) => ({ type: actionTypes.LOAD_LOCAL_TIMES, times });
 export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
 export const archiveTimes = () => ({ type: actionTypes.ARCHIVE_TIMES });
 export const storedLocalTimes = () => ({ type: actionTypes.STORED_LOCAL_TIMES });
-export const getTimes = (current, puzzle) => ({ type: actionTypes.GET_TIMES, current, puzzle });
+export const requireTimes = (current, puzzle) => ({
+  type: actionTypes.REQUIRE_TIMES,
+  current,
+  puzzle
+});
 
 // Settings
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });

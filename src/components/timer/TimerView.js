@@ -6,9 +6,9 @@ import TimerContainer from '../../containers/timer/TimerContainer';
 import TimeBoardContainer from '../../containers/timer/TimeBoardContainer';
 import Section from '../shared/Section';
 
-const TimerView = ({ getTimes }) => {
+const TimerView = ({ requireTimes }) => {
   useEffect(() => {
-    getTimes(true);
+    requireTimes(true);
   }, []);
 
   return (
@@ -27,7 +27,7 @@ const TimerView = ({ getTimes }) => {
 };
 
 TimerView.propTypes = {
-  getTimes: PropTypes.func.isRequired
+  requireTimes: PropTypes.func.isRequired
 };
 
 export default TimerView;

@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = {
   times: [],
   useLocalTimes: true,
-  subscribeTo: {
+  requiredTimes: {
     current: true,
     puzzle: null
   }
@@ -15,10 +15,10 @@ export default function timesReducer(state = initialState, action) {
       return { ...state, useLocalTimes: false };
     case actionTypes.LOGOUT_SUCCEEDED:
       return { ...state, useLocalTimes: true };
-    case actionTypes.GET_TIMES:
+    case actionTypes.REQUIRE_TIMES:
       return {
         ...state,
-        subscribeTo: {
+        requiredTimes: {
           puzzle: action.puzzle || null,
           current: Boolean(action.current)
         }
@@ -30,7 +30,15 @@ export default function timesReducer(state = initialState, action) {
   if (!state.useLocalTimes) {
     switch (action.type) {
       case actionTypes.LOAD_TIMES:
-        return { ...state, times: action.times.map(time => ({ ...time, stored: true })) };
+        return {
+          ...state,
+          times: [
+            ...state.times.filter(time =>
+              action.current ? !time.current : time.current || time.puzzle !== action.puzzle
+            ),
+            ...action.times.map(time => ({ ...time, stored: true }))
+          ]
+        };
       default:
         return state;
     }

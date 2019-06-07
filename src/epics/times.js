@@ -14,7 +14,7 @@ import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 import * as timesRepository from '../repositories/times';
 import { getUserId, isLoggedIn } from '../selectors/authentication';
-import { getCurrentTimeIds, getUnstoredTimes, subscribeTo } from '../selectors/times';
+import { getCurrentTimeIds, getUnstoredTimes, getRequiredTimes } from '../selectors/times';
 import { listenForChanges } from '../repositories/times';
 
 export const saveTimeEpic = (action$, state$) =>
@@ -86,20 +86,18 @@ export const clearTimesEpic = (action$, state$) =>
 export const loadTimesEpic = (action$, state$) =>
   merge(
     action$.pipe(ofType(actionTypes.LOGIN_SUCCEEDED)),
-    action$.pipe(ofType(actionTypes.GET_TIMES)).pipe(
+    action$.pipe(ofType(actionTypes.REQUIRE_TIMES)).pipe(
       withLatestFrom(state$),
       filter(([, state]) => isLoggedIn(state))
     )
   ).pipe(
     withLatestFrom(state$),
-    switchMap(([, state]) =>
-      listenForChanges(
-        getUserId(state),
-        subscribeTo(state).current,
-        subscribeTo(state).puzzle
-      ).pipe(
-        map(actions.loadTimes),
+    switchMap(([, state]) => {
+      const { current, puzzle } = getRequiredTimes(state);
+
+      return listenForChanges(getUserId(state), current, puzzle).pipe(
+        map(times => actions.loadTimes(times, current, puzzle)),
         takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
-      )
-    )
+      );
+    })
   );
