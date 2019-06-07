@@ -58,16 +58,18 @@ const Activation = ({
               return 'Hold on...';
             case !stopped:
               return (
-                <span>
-                  Click, tap or smash <Spacebar /> spacebar to stop
-                </span>
+                <>
+                  <DesktopOnly>Click, touch or smash any key to stop</DesktopOnly>
+                  <MobileOnly>Touch anywhere to stop.</MobileOnly>
+                </>
               );
             default:
               return (
-                <span>
-                  Click, touch or press <Spacebar /> spacebar. Hold and release to start
-                  {useInspectionTime ? ' inspection' : ''}
-                </span>
+                <>
+                  <DesktopOnly>Click, touch or hold spacebar and release to start</DesktopOnly>
+                  <MobileOnly>Hold and release to start</MobileOnly>
+                  {useInspectionTime ? ' inspection.' : '.'}
+                </>
               );
           }
         })()}
@@ -92,6 +94,20 @@ Activation.propTypes = {
   showHelpText: PropTypes.bool.isRequired
 };
 
+const DesktopOnly = styled.span`
+  display: none;
+
+  @media screen and (min-width: 620px) {
+    display: inline;
+  }
+`;
+
+const MobileOnly = styled.span`
+  @media screen and (min-width: 720px) {
+    display: none;
+  }
+`;
+
 const ActivationContainer = styled.div`
   position: relative;
   z-index: ${props => props.theme.zIndices.onFullScreenMask};
@@ -105,16 +121,6 @@ const Explain = styled.p`
   position: relative;
   top: -${props => props.theme.sizes.xxs};
   z-index: 102;
-`;
-
-const Spacebar = styled.span`
-  position: relative;
-  display: inline-block;
-  border-radius: 0.3rem;
-  margin: 0 ${props => props.theme.sizes.xxs};
-  border: 2px solid ${props => props.theme.colors.subtleFg};
-  height: 1rem;
-  width: 4rem;
 `;
 
 export default React.memo(Activation);
