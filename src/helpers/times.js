@@ -3,12 +3,12 @@ import { getMs } from './time';
 
 export function calculateStats(times) {
   return {
+    mo3: calculateAveragesOf(times, 3, 0),
     ao5: calculateAveragesOf(times, 5, 1),
     ao12: calculateAveragesOf(times, 12, 1),
     ao25: calculateAveragesOf(times, 25, 2),
     ao50: calculateAveragesOf(times, 50, 3),
-    ao100: calculateAveragesOf(times, 100, 5),
-    mo3: calculateAveragesOf(times, 3, 0)
+    ao100: calculateAveragesOf(times, 100, 5)
   };
 }
 
