@@ -55,6 +55,7 @@ export const removeTime = id => ({ type: actionTypes.REMOVE_TIME, id });
 export const clearTimes = () => ({ type: actionTypes.CLEAR_TIMES });
 export const archiveTimes = () => ({ type: actionTypes.ARCHIVE_TIMES });
 export const storedLocalTimes = () => ({ type: actionTypes.STORED_LOCAL_TIMES });
+export const getTimes = (current, puzzle) => ({ type: actionTypes.GET_TIMES, current, puzzle });
 
 // Settings
 export const loadSettings = settings => ({ type: actionTypes.LOAD_SETTINGS, settings });

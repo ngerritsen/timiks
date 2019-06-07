@@ -1,12 +1,20 @@
-import { from } from 'rxjs';
+import { from, merge } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { withLatestFrom, filter, mergeMap, map, takeUntil, ignoreElements } from 'rxjs/operators';
+import {
+  withLatestFrom,
+  filter,
+  mergeMap,
+  switchMap,
+  map,
+  takeUntil,
+  ignoreElements
+} from 'rxjs/operators';
 
 import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 import * as timesRepository from '../repositories/times';
 import { getUserId, isLoggedIn } from '../selectors/authentication';
-import { getCurrentTimeIds, getUnstoredTimes } from '../selectors/times';
+import { getCurrentTimeIds, getUnstoredTimes, subscribeTo } from '../selectors/times';
 import { listenForChanges } from '../repositories/times';
 
 export const saveTimeEpic = (action$, state$) =>
@@ -76,11 +84,20 @@ export const clearTimesEpic = (action$, state$) =>
   );
 
 export const loadTimesEpic = (action$, state$) =>
-  action$.pipe(
-    ofType(actionTypes.LOGIN_SUCCEEDED),
+  merge(
+    action$.pipe(ofType(actionTypes.LOGIN_SUCCEEDED)),
+    action$.pipe(ofType(actionTypes.GET_TIMES)).pipe(
+      withLatestFrom(state$),
+      filter(([, state]) => isLoggedIn(state))
+    )
+  ).pipe(
     withLatestFrom(state$),
-    mergeMap(([, state]) =>
-      listenForChanges(getUserId(state)).pipe(
+    switchMap(([, state]) =>
+      listenForChanges(
+        getUserId(state),
+        subscribeTo(state).current,
+        subscribeTo(state).puzzle
+      ).pipe(
         map(actions.loadTimes),
         takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
       )

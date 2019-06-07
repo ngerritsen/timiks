@@ -31,6 +31,7 @@ export const ARCHIVE_TIMES = 'ARCHIVE_TIMES';
 export const LOAD_TIMES = 'LOAD_TIMES';
 export const LOAD_LOCAL_TIMES = 'LOAD_LOCAL_TIMES';
 export const STORED_LOCAL_TIMES = 'STORED_LOCAL_TIMES';
+export const GET_TIMES = 'GET_TIMES';
 
 // Authentication
 export const LOGIN = 'LOGIN';

@@ -4,25 +4,29 @@ import { Observable } from 'rxjs';
 
 const db = firebase.firestore();
 
-export function listenForChanges(userId) {
-  return new Observable(observer =>
-    db
+export function listenForChanges(userId, current, puzzle) {
+  return new Observable(observer => {
+    let collection = db
       .collection('times')
       .where('userId', '==', userId)
-      .onSnapshot({ includeMetadataChanges: true }, querySnapshot => {
-        const data = [];
+      .where('current', '==', current);
 
-        querySnapshot.forEach(snapshot =>
-          data.push(
-            snapshot.metadata.hasPendingWrites
-              ? { ...snapshot.data(), dirty: true }
-              : snapshot.data()
-          )
-        );
+    if (puzzle) {
+      collection = collection.where('puzzle', '==', puzzle);
+    }
 
-        observer.next(parseTimes(data));
-      })
-  );
+    return collection.onSnapshot({ includeMetadataChanges: true }, querySnapshot => {
+      const data = [];
+
+      querySnapshot.forEach(snapshot =>
+        data.push(
+          snapshot.metadata.hasPendingWrites ? { ...snapshot.data(), dirty: true } : snapshot.data()
+        )
+      );
+
+      observer.next(parseTimes(data));
+    });
+  });
 }
 
 export function save(userId, time) {

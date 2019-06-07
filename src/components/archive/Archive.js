@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { darken, lighten } from 'polished';
 
@@ -16,63 +16,69 @@ import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
 import Export from './Export';
 
-const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay }) => (
-  <div>
-    <Section margin="sm">
-      <ArchiveOptions changePuzzle={changePuzzle} puzzle={puzzle} />
-    </Section>
-    {times.length === 0 && (
-      <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
-    )}
-    {times.length > 1 && <TimeGraph times={times} stats={stats} />}
-    {times.length > 1 && (
-      <Section margin="md">
-        <Export times={times} puzzle={puzzle} />
+const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay, getTimes }) => {
+  useEffect(() => {
+    getTimes(false, puzzle);
+  }, [puzzle]);
+
+  return (
+    <div>
+      <Section margin="sm">
+        <ArchiveOptions changePuzzle={changePuzzle} puzzle={puzzle} />
       </Section>
-    )}
-    {timesPerDay.length > 0 && (
-      <Section>
-        {timesPerDay.map(({ date, times }) => (
-          <div key={date.toISOString()}>
-            <h3>{formatLocalDate(date)}</h3>
-            <TimeTiles>
-              {times.map(time => (
-                <ToggleContent
-                  key={time.id}
-                  toggle={({ show }) => (
-                    <TimeTile onClick={show}>
-                      <TimeTileTime>
-                        <Time time={time} />
-                      </TimeTileTime>
-                      <DateTag>{formatLocalTime(time.date)}</DateTag>
-                      {time.stored && (
-                        <SyncStatusIcon>
-                          <CloudSyncIcon time={time} size="xs" />
-                        </SyncStatusIcon>
-                      )}
-                    </TimeTile>
-                  )}
-                  content={({ hide }) => (
-                    <Modal title="Details" onClose={hide}>
-                      <TimeDetails
-                        time={time}
-                        onClose={hide}
-                        onRemoveTime={() => {
-                          hide();
-                          removeTime(time.id);
-                        }}
-                      />
-                    </Modal>
-                  )}
-                />
-              ))}
-            </TimeTiles>
-          </div>
-        ))}
-      </Section>
-    )}
-  </div>
-);
+      {times.length === 0 && (
+        <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
+      )}
+      {times.length > 1 && <TimeGraph times={times} stats={stats} />}
+      {times.length > 1 && (
+        <Section margin="md">
+          <Export times={times} puzzle={puzzle} />
+        </Section>
+      )}
+      {timesPerDay.length > 0 && (
+        <Section>
+          {timesPerDay.map(({ date, times }) => (
+            <div key={date.toISOString()}>
+              <h3>{formatLocalDate(date)}</h3>
+              <TimeTiles>
+                {times.map(time => (
+                  <ToggleContent
+                    key={time.id}
+                    toggle={({ show }) => (
+                      <TimeTile onClick={show}>
+                        <TimeTileTime>
+                          <Time time={time} />
+                        </TimeTileTime>
+                        <DateTag>{formatLocalTime(time.date)}</DateTag>
+                        {time.stored && (
+                          <SyncStatusIcon>
+                            <CloudSyncIcon time={time} size="xs" />
+                          </SyncStatusIcon>
+                        )}
+                      </TimeTile>
+                    )}
+                    content={({ hide }) => (
+                      <Modal title="Details" onClose={hide}>
+                        <TimeDetails
+                          time={time}
+                          onClose={hide}
+                          onRemoveTime={() => {
+                            hide();
+                            removeTime(time.id);
+                          }}
+                        />
+                      </Modal>
+                    )}
+                  />
+                ))}
+              </TimeTiles>
+            </div>
+          ))}
+        </Section>
+      )}
+    </div>
+  );
+};
 
 Archive.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
@@ -82,6 +88,7 @@ Archive.propTypes = {
       times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
     })
   ).isRequired,
+  getTimes: PropTypes.func.isRequired,
   stats: PropTypes.object.isRequired,
   changePuzzle: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
@@ -112,7 +119,15 @@ const TimeTiles = styled.div`
   grid-column-gap: ${props => props.theme.sizes.xs};
   grid-row-gap: ${props => props.theme.sizes.xs};
 
-  @media screen and (min-width: 620px) {
+  @media screen and (min-width: 500px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media screen and (min-width: 600px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  @media screen and (min-width: 700px) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
 `;
