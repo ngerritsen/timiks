@@ -4,9 +4,10 @@ const ROW_DELIMITER = '\n';
 const COLUMN_DELIMTER = ',';
 
 export function timesToCsv(times) {
-  const headers = ['ms', 'date', 'puzzle', 'scramble', 'plus2', 'dnf'].join(COLUMN_DELIMTER);
+  const headers = ['id', 'ms', 'date', 'puzzle', 'scramble', 'plus2', 'dnf'].join(COLUMN_DELIMTER);
   const rows = times.map(time =>
     [
+      time.id,
       getMs(time),
       time.date.toISOString(),
       time.puzzle,
