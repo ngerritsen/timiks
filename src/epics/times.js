@@ -51,7 +51,7 @@ export const removeTimeEpic = (action$, state$) =>
     ofType(actionTypes.REMOVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action]) => from(timesRepository.remove(action.id))),
+    mergeMap(([action]) => from(timesRepository.remove(action.payload))),
     ignoreElements()
   );
 

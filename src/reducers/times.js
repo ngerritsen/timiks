@@ -19,8 +19,8 @@ export default function timesReducer(state = initialState, action) {
       return {
         ...state,
         requiredTimes: {
-          puzzle: action.puzzle || null,
-          current: Boolean(action.current)
+          puzzle: action.payload.puzzle || null,
+          current: Boolean(action.payload.current)
         }
       };
     default:
@@ -48,7 +48,7 @@ export default function timesReducer(state = initialState, action) {
     case actionTypes.SAVE_TIME:
       return { ...state, times: [...state.times, action.time] };
     case actionTypes.REMOVE_TIME:
-      return { ...state, times: state.times.filter(time => time.id !== action.id) };
+      return { ...state, times: state.times.filter(time => time.id !== action.payload) };
     case actionTypes.UPDATE_TIME:
       return {
         ...state,

@@ -11,8 +11,8 @@ export default function notificationReducer(state = initialState, action) {
     case SHOW_NOTIFICATION:
       return {
         ...state,
-        message: action.message,
-        isError: Boolean(action.isError),
+        message: action.payload.message,
+        isError: Boolean(action.payload.isError),
         show: true
       };
     case HIDE_NOTIFICATION:
