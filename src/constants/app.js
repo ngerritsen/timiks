@@ -22,7 +22,7 @@ export const DEFAULT_PUZZLE = '3x3x3';
 
 export const BUTTON_COLORS = [
   { label: 'Default', value: 'primary' },
-  { label: 'Dark grey', value: 'dark' },
+  { label: 'Black & white', value: 'fg' },
   { label: 'Blue', value: 'blue' },
   { label: 'Deep blue', value: 'deepBlue' },
   { label: 'Red', value: 'red' },
@@ -32,7 +32,7 @@ export const BUTTON_COLORS = [
   { label: 'Purple', value: 'purple' },
   { label: 'Pink', value: 'pink' },
   { label: 'Turqoise', value: 'turquoise' },
-  { label: 'Mint', value: 'mint' }
+  { label: 'Lime', value: 'lime' }
 ];
 export const DEFAULT_BUTTON_COLOR = 'primary';
 

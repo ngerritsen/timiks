@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { darken, transparentize, desaturate } from 'polished';
-import { light } from '../../theme';
+import { darken, transparentize, desaturate, getLuminance } from 'polished';
 
 const sizeToHeight = {
   sm: '2.6rem',
@@ -26,10 +25,9 @@ const sizeToFontSize = {
   lg: '1.8rem'
 };
 
-const blackTextColors = [light.colors.yellow];
-
 const Button = styled.button.attrs({
-  color: props => props.theme.colors[(props.disabled && 'grey') || props.color]
+  bg: props =>
+    props.theme.colors[(props.disabled && 'grey') || props.color] || props.theme.colors.blue
 })`
   display: inline-block;
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
@@ -38,17 +36,17 @@ const Button = styled.button.attrs({
   height: ${props => sizeToHeight[props.size]};
   line-height: calc(${props => sizeToHeight[props.size]} - 0.1rem);
   width: ${props => (props.tag ? 'auto' : '100%')};
-  background-color: ${props => (props.outline ? 'transparent' : props.color)};
+  background-color: ${props => (props.outline ? 'transparent' : props.bg)};
   padding: 0 ${props => sizeToPadding[props.size]};
   font-size: ${props => sizeToFontSize[props.size]};
-  border: ${props => (props.outline ? `1px solid ${props.color}` : 'none')};
+  border: ${props => (props.outline ? `1px solid ${props.bg}` : 'none')};
   border-radius: ${props => sizeToRadius[props.size]};
   color: ${props =>
     props.outline
       ? props.theme.colors.fg
-      : blackTextColors.includes(props.color)
-      ? 'black'
-      : 'white'};
+      : getLuminance(props.bg) > 0.5
+      ? props.theme.colors.black
+      : props.theme.colors.white};
   text-transform: uppercase;
   transition: background-color 0.2s ease;
 
@@ -56,8 +54,8 @@ const Button = styled.button.attrs({
   &:hover {
     background-color: ${props =>
       props.outline
-        ? transparentize(0.75, props.color)
-        : desaturate(props.disabled ? 0 : 0.06, darken(props.disabled ? 0 : 0.06, props.color))};
+        ? transparentize(0.75, props.bg)
+        : desaturate(props.disabled ? 0 : 0.06, darken(props.disabled ? 0 : 0.06, props.bg))};
   }
 `;
 

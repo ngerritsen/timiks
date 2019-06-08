@@ -1,19 +1,19 @@
 import { lighten, darken } from 'polished';
 
 const BLACK = '#000';
-const BLUE = '#288bd6';
+const BLUE = '#2889e0';
 const CLOUD_BLUE = '#7dc9ff';
-const DEEP_BLUE = '#433eda';
+const DEEP_BLUE = '#2a17ef';
 const GOOGLE_RED = '#f95555';
-const GREEN = '#26d947';
-const MINT = '#a3e21d';
+const GREEN = '#1ccc51';
+const LIME = '#cbf71b';
 const ORANGE = '#f98a13';
 const PINK = '#ef47b2';
 const PURPLE = '#6f42c1';
-const RED = '#e83a3a';
-const TURQUOISE = '#20dfd9';
+const RED = '#e83632';
+const TURQUOISE = '#22e8e8';
 const WHITE = '#fff';
-const YELLOW = '#f9e339';
+const YELLOW = '#f9e636';
 
 const BASE_SIZE = 0.8;
 
@@ -26,13 +26,13 @@ export const light = {
     bg: WHITE,
     blue: BLUE,
     cloudBlue: CLOUD_BLUE,
-    darkBlue: DEEP_BLUE,
+    deepBlue: DEEP_BLUE,
     dark: lighten(0.2, BLACK),
-    fg: BLACK,
+    fg: lighten(0.04, BLACK),
     googleRed: GOOGLE_RED,
     green: GREEN,
     grey: darken(0.25, WHITE),
-    mint: MINT,
+    lime: LIME,
     orange: ORANGE,
     pink: PINK,
     primary: PURPLE,
@@ -66,7 +66,7 @@ export const dark = {
     ...light.colors,
     bg: BLACK,
     darkGrey: darken(0.5, WHITE),
-    fg: darken(0.1, WHITE),
+    fg: darken(0.04, WHITE),
     grey: lighten(0.3, BLACK),
     primary: ORANGE,
     subtleBg: lighten(0.2, BLACK),
