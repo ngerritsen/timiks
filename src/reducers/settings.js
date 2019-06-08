@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
-import { DEFAULT_PUZZLE } from '../constants/app';
+import { DEFAULT_PUZZLE, DEFAULT_BUTTON_COLOR } from '../constants/app';
 import { DEFAULT_ACTIVATION_DURATION } from '../constants/app';
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
   useInspectionTime: false,
   useManualTimeEntry: false,
   theme: 'light',
+  buttonColor: DEFAULT_BUTTON_COLOR,
   activationDuration: DEFAULT_ACTIVATION_DURATION,
   showTimerTime: true
 };

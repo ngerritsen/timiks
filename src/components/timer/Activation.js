@@ -16,12 +16,13 @@ const Activation = ({
   submitTimeInput,
   useInspectionTime,
   useManualTimeEntry,
-  validTimeInput
+  validTimeInput,
+  buttonColor
 }) => (
   <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
     <Button
       size="lg"
-      color="primary"
+      color={buttonColor}
       {...(useManualTimeEntry ? {} : { 'data-activation': true })}
       disabled={useManualTimeEntry && !validTimeInput}
       type="button"
@@ -87,7 +88,8 @@ Activation.propTypes = {
   submitTimeInput: PropTypes.func.isRequired,
   useInspectionTime: PropTypes.bool.isRequired,
   useManualTimeEntry: PropTypes.bool.isRequired,
-  validTimeInput: PropTypes.bool.isRequired
+  validTimeInput: PropTypes.bool.isRequired,
+  buttonColor: PropTypes.string.isRequired
 };
 
 const DesktopOnly = styled.span`

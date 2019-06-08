@@ -19,7 +19,8 @@ function mapStateToProps(state) {
     validTimeInput: timerSelectors.isValidTimeInput(state),
     timeInput: timerSelectors.getTimeInput(state),
     useInspectionTime: settingsSelectors.shouldUseInspectionTime(state),
-    ready: activationSelectors.isReady(state)
+    ready: activationSelectors.isReady(state),
+    buttonColor: settingsSelectors.getButtonColor(state)
   };
 }
 
