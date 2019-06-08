@@ -9,21 +9,21 @@ const TimeActions = ({ plus2, togglePlus2LastTime, dnf, toggleDnfLastTime, remov
   <StyledTimeActions>
     <TimeAction>
       <Shortcut command="plus2LastTime" action={togglePlus2LastTime} />
-      <Button tiny tag empty={!plus2} onClick={togglePlus2LastTime}>
+      <Button size="sm" tag outline={!plus2} onClick={togglePlus2LastTime}>
         +2
       </Button>
     </TimeAction>
 
     <Shortcut command="dnfLastTime" action={toggleDnfLastTime} />
     <TimeAction>
-      <Button tiny tag empty={!dnf} onClick={toggleDnfLastTime}>
+      <Button size="sm" tag outline={!dnf} onClick={toggleDnfLastTime}>
         DNF
       </Button>
     </TimeAction>
 
     <Shortcut command="removeLastTime" action={removeLastTime} />
     <TimeAction>
-      <Button tiny tag danger onClick={removeLastTime}>
+      <Button size="sm" tag color="red" onClick={removeLastTime}>
         Remove
       </Button>
     </TimeAction>

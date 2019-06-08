@@ -27,3 +27,12 @@ export const YELLOW = 'YELLOW';
 export const ORANGE = 'ORANGE';
 export const RED = 'RED';
 export const GREEN = 'GREEN';
+
+export const puzzleColors = {
+  [WHITE]: 'white',
+  [YELLOW]: 'yellow',
+  [GREEN]: 'green',
+  [BLUE]: 'blue',
+  [RED]: 'red',
+  [ORANGE]: 'orange'
+};

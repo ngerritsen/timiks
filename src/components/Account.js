@@ -42,7 +42,7 @@ const Account = ({
                 <Section margin="md">
                   <p>Login to store your times in the cloud and sync them with all your devices!</p>
                 </Section>
-                <Button type="button" google onClick={() => !isLoggingIn && login()}>
+                <Button type="button" color="googleRed" onClick={() => !isLoggingIn && login()}>
                   <ButtonIcon>
                     <FontAwesome
                       spin={isLoggingIn}

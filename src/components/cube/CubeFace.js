@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { darken, lighten } from 'polished';
+import { puzzleColors } from '../../constants/puzzle';
 
 const CubeFace = ({ face = [], cubeSize }) => (
   <Face>
@@ -44,13 +45,13 @@ const Tile = styled.span`
   border-radius: ${props => scale(props.cubeSize, 0.2, 0.4)}rem;
   display: inline-block;
   flex-grow: 1;
-  background-color: ${props => props.theme.puzzleColors[props.color]};
+  background-color: ${props => props.theme.colors[puzzleColors[props.color]]};
   border-width: 1px;
   border-style: solid;
   border-color: ${props =>
     props.theme.dark
-      ? lighten(0.15, props.theme.puzzleColors[props.color])
-      : darken(0.25, props.theme.puzzleColors[props.color])};
+      ? lighten(0.15, props.theme.colors[puzzleColors[props.color]])
+      : darken(0.25, props.theme.colors[puzzleColors[props.color]])};
   width: 100%;
   margin-right: ${props => (props.isLastColumn ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
   margin-bottom: ${props => (props.isLastRow ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;

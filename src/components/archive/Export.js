@@ -9,7 +9,7 @@ import { timesToCsv } from '../../helpers/csv';
 import { downloadAsFile } from '../../helpers/file';
 
 const Export = ({ times, puzzle }) => (
-  <Button tag tiny onClick={() => downloadAsCsv(times, puzzle)}>
+  <Button tag size="sm" onClick={() => downloadAsCsv(times, puzzle)}>
     <ButtonIcon>
       <FontAwesome icon={faDownload} />
     </ButtonIcon>

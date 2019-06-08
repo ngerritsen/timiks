@@ -17,7 +17,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
     <ToolbarItem>
       <ToggleContent
         toggle={({ show }) => (
-          <Button tiny tag onClick={show}>
+          <Button size="sm" tag onClick={show}>
             <Shortcut command="archiveTimes" action={show} />
             <InlineFontawesome icon={faArchive} /> Archive
           </Button>
@@ -40,7 +40,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                   </Button>
                 </ButtonDuoItem>
                 <ButtonDuoItem>
-                  <Button neutral empty onClick={hide}>
+                  <Button color="subtleFg" outline onClick={hide}>
                     Cancel
                   </Button>
                 </ButtonDuoItem>
@@ -54,7 +54,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
     <ToolbarItem>
       <ToggleContent
         toggle={({ show }) => (
-          <Button tiny tag danger onClick={show}>
+          <Button size="sm" tag color="red" onClick={show}>
             <Shortcut command="clearTimes" action={show} />
             <InlineFontawesome icon={faTrash} /> Clear
           </Button>
@@ -68,7 +68,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
               <ButtonDuo>
                 <ButtonDuoItem>
                   <Button
-                    danger
+                    color="red"
                     onClick={() => {
                       hide();
                       clearTimes();
@@ -78,7 +78,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                   </Button>
                 </ButtonDuoItem>
                 <ButtonDuoItem>
-                  <Button neutral empty onClick={hide}>
+                  <Button color="subtleFg" outline onClick={hide}>
                     Cancel
                   </Button>
                 </ButtonDuoItem>

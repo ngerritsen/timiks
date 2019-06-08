@@ -20,8 +20,8 @@ const Activation = ({
 }) => (
   <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
     <Button
-      big
-      primary
+      size="lg"
+      color="primary"
       {...(useManualTimeEntry ? {} : { 'data-activation': true })}
       disabled={useManualTimeEntry && !validTimeInput}
       type="button"

@@ -42,7 +42,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
       <ToggleContent
         toggle={({ show, hide, isShown }) => (
           <Section margin={isShown ? 'sm' : ''}>
-            <Button empty neutral onClick={isShown ? hide : show}>
+            <Button outline color="subtleFg" onClick={isShown ? hide : show}>
               <FontAwesome fixedWidth icon={isShown ? faEyeSlash : faEye} /> &nbsp;
               {isShown ? 'Hide' : 'Show'} scramble
             </Button>
@@ -54,7 +54,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
     <Section>
       <ButtonDuo>
         <ButtonDuoItem>
-          <Button onClick={onRemoveTime} danger>
+          <Button onClick={onRemoveTime} color="red">
             Remove
           </Button>
         </ButtonDuoItem>

@@ -44,8 +44,19 @@ const TimeGraph = ({ times, stats }) => {
     }
   };
 
+  const lineColors = AVAILABLE_STATS.reduce(
+    (colors, stat) => ({ ...colors, [stat.name]: stat.color }),
+    {}
+  );
+
   return (
-    <StyledChartistGraph className="ct-perfect-fifth" data={data} options={options} type="Line" />
+    <StyledChartistGraph
+      lineColors={lineColors}
+      className="ct-perfect-fifth"
+      data={data}
+      options={options}
+      type="Line"
+    />
   );
 };
 
@@ -55,27 +66,27 @@ const StyledChartistGraph = styled(ChartistGraph)`
   }
 
   .ct-series-a .ct-line {
-    stroke: ${props => props.theme.colors.lightBlue};
+    stroke: ${props => props.theme.colors.blue};
   }
 
   .ct-series-b .ct-line {
-    stroke: ${props => props.theme.colors.green};
+    stroke: ${props => props.theme.colors[props.lineColors.ao5]};
   }
 
   .ct-series-c .ct-line {
-    stroke: ${props => props.theme.colors.yellow};
+    stroke: ${props => props.theme.colors[props.lineColors.ao12]};
   }
 
   .ct-series-d .ct-line {
-    stroke: ${props => props.theme.colors.orange};
+    stroke: ${props => props.theme.colors[props.lineColors.ao25]};
   }
 
   .ct-series-e .ct-line {
-    stroke: ${props => props.theme.colors.fluoRed};
+    stroke: ${props => props.theme.colors[props.lineColors.ao50]};
   }
 
   .ct-series-f .ct-line {
-    stroke: ${props => props.theme.colors.purple};
+    stroke: ${props => props.theme.colors[props.lineColors.ao100]};
   }
 
   .ct-grid {

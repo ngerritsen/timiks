@@ -29,7 +29,7 @@ export const AVAILABLE_STATS = [
   { name: 'ao5', size: 5, deviation: 1, color: 'green' },
   { name: 'ao12', size: 12, deviation: 1, color: 'yellow' },
   { name: 'ao25', size: 25, deviation: 2, color: 'orange' },
-  { name: 'ao50', size: 50, deviation: 3, color: 'fluoRed' },
+  { name: 'ao50', size: 50, deviation: 3, color: 'red' },
   { name: 'ao100', size: 100, deviation: 5, color: 'purple' }
 ];
 
