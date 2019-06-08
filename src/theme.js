@@ -4,7 +4,6 @@ const WHITE = '#fff';
 const BLACK = '#000';
 const BASE_SIZE = 0.8;
 const ORANGE = '#fc7f0a';
-const FLUO_ORANGE = '#fca344';
 const PURPLE = '#6f42c1';
 const YELLOW = '#fff244';
 const RED = '#f83f3f';
@@ -12,6 +11,7 @@ const BLUE = '#208dd6';
 const CLOUD_BLUE = '#7dc9ff';
 const GREEN = '#34db52';
 const GOOGLE_RED = '#f95555';
+const PINK = '#fc50a3';
 
 const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
@@ -26,13 +26,14 @@ export const light = {
     subtleFg: lighten(0.3, BLACK),
     dark: lighten(0.2, BLACK),
     grey: darken(0.25, WHITE),
-    orange: FLUO_ORANGE,
+    orange: ORANGE,
     purple: PURPLE,
     primary: PURPLE,
     yellow: YELLOW,
     green: GREEN,
     blue: BLUE,
     red: RED,
+    pink: PINK,
     cloudBlue: CLOUD_BLUE,
     googleRed: GOOGLE_RED
   },

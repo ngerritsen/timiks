@@ -16,7 +16,15 @@ import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
 import Export from './Export';
 
-const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay, requireTimes }) => {
+const Archive = ({
+  times,
+  stats,
+  changeSetting,
+  puzzle,
+  removeTime,
+  timesPerDay,
+  requireTimes
+}) => {
   useEffect(() => {
     requireTimes(false, puzzle);
   }, [puzzle]);
@@ -24,7 +32,7 @@ const Archive = ({ times, stats, changePuzzle, puzzle, removeTime, timesPerDay, 
   return (
     <div>
       <Section margin="sm">
-        <ArchiveOptions changePuzzle={changePuzzle} puzzle={puzzle} />
+        <ArchiveOptions changeSetting={changeSetting} puzzle={puzzle} />
       </Section>
       {times.length === 0 && (
         <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
@@ -90,7 +98,7 @@ Archive.propTypes = {
   ).isRequired,
   requireTimes: PropTypes.func.isRequired,
   stats: PropTypes.object.isRequired,
-  changePuzzle: PropTypes.func.isRequired,
+  changeSetting: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
   removeTime: PropTypes.func.isRequired
 };

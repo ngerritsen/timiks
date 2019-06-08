@@ -8,7 +8,7 @@ const Checkbox = ({ onChange, checked, inverse }) => {
   const isChecked = inverse ? !checked : checked;
 
   return (
-    <CheckboxBox onClick={() => onChange(!isChecked)} checked={isChecked}>
+    <CheckboxBox onClick={() => onChange(!checked)} checked={isChecked}>
       {isChecked && <FontAwesome icon={faCheck} size="xs" />}
     </CheckboxBox>
   );

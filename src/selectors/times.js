@@ -1,4 +1,4 @@
-import { getPuzzle } from './settings';
+import { getArchivePuzzle } from './settings';
 import { markBestTime, calculateStats, isCurrent, getId } from '../helpers/times';
 import { createSelector } from 'reselect';
 import { getLastTimeId } from './timer';
@@ -56,7 +56,7 @@ export const getStatsForCurrentTimes = createSelector(
 
 export const getSortedArchivedTimesForPuzzle = createSelector(
   getArchivedTimes,
-  getPuzzle,
+  getArchivePuzzle,
   (times, puzzle) => times.filter(time => time.puzzle === puzzle).sort(createAscSorter('date'))
 );
 

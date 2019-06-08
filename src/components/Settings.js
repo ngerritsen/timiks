@@ -14,14 +14,7 @@ import Checkbox from './shared/Checkbox';
 import Button from './shared/Button';
 import Modal from './shared/Modal';
 
-const Settings = ({
-  settings,
-  changeActivationDuration,
-  toggleInspectionTime,
-  changeTheme,
-  toggleManualTimeEntry,
-  toggleShowTimerTime
-}) => (
+const Settings = ({ settings, changeSetting }) => (
   <>
     <ToggleContent
       toggle={({ show }) => (
@@ -37,7 +30,7 @@ const Settings = ({
               <Setting>
                 <label>Activation delay*</label>
                 <Select
-                  onChange={changeActivationDuration}
+                  onChange={delay => changeSetting('activationDuration', delay)}
                   options={ACTIVATION_DURATION_OPTIONS}
                   value={settings.activationDuration}
                   numeric
@@ -50,7 +43,7 @@ const Settings = ({
                 <label>Use inspection time</label>
                 <Checkbox
                   type="checkbox"
-                  onChange={toggleInspectionTime}
+                  onChange={checked => changeSetting('useInspectionTime', checked)}
                   checked={settings.useInspectionTime}
                 />
               </Setting>
@@ -60,7 +53,7 @@ const Settings = ({
                 <label>Manual time entry</label>
                 <Checkbox
                   type="checkbox"
-                  onChange={toggleManualTimeEntry}
+                  onChange={checked => changeSetting('useManualTimeEntry', checked)}
                   checked={settings.useManualTimeEntry}
                 />
               </Setting>
@@ -71,7 +64,7 @@ const Settings = ({
                 <Checkbox
                   type="checkbox"
                   inverse
-                  onChange={toggleShowTimerTime}
+                  onChange={checked => changeSetting('showTimerTime', checked)}
                   checked={settings.showTimerTime}
                 />
               </Setting>
@@ -81,7 +74,7 @@ const Settings = ({
                 <label>Dark mode</label>
                 <Checkbox
                   type="checkbox"
-                  onChange={() => changeTheme(settings.theme === 'dark' ? 'light' : 'dark')}
+                  onChange={checked => changeSetting('theme', checked ? 'dark' : 'light')}
                   checked={settings.theme === 'dark'}
                 />
               </Setting>
@@ -116,11 +109,7 @@ const Explanation = styled.span`
 
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
-  changeActivationDuration: PropTypes.func.isRequired,
-  toggleInspectionTime: PropTypes.func.isRequired,
-  toggleShowTimerTime: PropTypes.func.isRequired,
-  toggleManualTimeEntry: PropTypes.func.isRequired,
-  changeTheme: PropTypes.func.isRequired
+  changeSetting: PropTypes.func.isRequired
 };
 
 export default React.memo(Settings);

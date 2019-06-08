@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import TimerOptions from '../../components/timer/TimerOptions';
-import { changePuzzle, refreshScramble } from '../../actions';
+import { changeSetting, refreshScramble } from '../../actions';
 import { getPuzzle } from '../../selectors/settings';
 
 function mapStateToProps(state) {
@@ -12,5 +12,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { changePuzzle, refreshScramble }
+  { changeSetting, refreshScramble }
 )(TimerOptions);

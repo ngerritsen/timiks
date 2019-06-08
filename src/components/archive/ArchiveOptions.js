@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import Select from '../shared/Select';
 import puzzles from '../../constants/puzzles';
 
-const ArchiveOptions = ({ changePuzzle, puzzle }) => (
+const ArchiveOptions = ({ changeSetting, puzzle }) => (
   <Select
     label="Puzzle"
-    onChange={changePuzzle}
+    onChange={puzzle => changeSetting('archivePuzzle', puzzle)}
     options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
     value={puzzle}
   />
 );
 
 ArchiveOptions.propTypes = {
-  changePuzzle: PropTypes.func.isRequired,
+  changeSetting: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired
 };
 

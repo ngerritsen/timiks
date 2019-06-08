@@ -4,6 +4,7 @@ import { DEFAULT_ACTIVATION_DURATION } from '../constants/app';
 
 const initialState = {
   puzzle: DEFAULT_PUZZLE,
+  archivePuzzle: DEFAULT_PUZZLE,
   useInspectionTime: false,
   useManualTimeEntry: false,
   theme: 'light',
@@ -16,38 +17,12 @@ export default function settingsReducer(state = initialState, action) {
     case actionTypes.LOAD_SETTINGS:
       return {
         ...state,
-        ...action.settings
+        ...action.payload
       };
-    case actionTypes.CHANGE_PUZZLE:
+    case actionTypes.CHANGE_SETTING:
       return {
         ...state,
-        puzzle: action.puzzle
-      };
-    case actionTypes.CHANGE_THEME: {
-      return {
-        ...state,
-        theme: action.theme
-      };
-    }
-    case actionTypes.TOGGLE_SHOW_TIMER_TIME:
-      return {
-        ...state,
-        showTimerTime: !state.showTimerTime
-      };
-    case actionTypes.TOGGLE_MANUAL_TIME_ENTRY:
-      return {
-        ...state,
-        useManualTimeEntry: !state.useManualTimeEntry
-      };
-    case actionTypes.TOGGLE_INSPECTION_TIME:
-      return {
-        ...state,
-        useInspectionTime: !state.useInspectionTime
-      };
-    case actionTypes.CHANGE_ACTIVATION_DURATION:
-      return {
-        ...state,
-        activationDuration: action.activationDuration
+        [action.payload.setting]: action.payload.value
       };
     default:
       return state;

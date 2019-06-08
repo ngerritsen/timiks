@@ -19,6 +19,17 @@ export const ACTIVATION_DURATION_OPTIONS = [
 ];
 export const DEFAULT_ACTIVATION_DURATION = 300;
 export const DEFAULT_PUZZLE = '3x3x3';
+export const BUTTON_COLORS = [
+  { label: 'Default', value: '' },
+  { label: 'Greyscale', value: 'subtleFg' },
+  { label: 'Blue', value: 'blue' },
+  { label: 'Red', value: 'red' },
+  { label: 'Orange', value: 'orange' },
+  { label: 'Yellow', value: 'yellow' },
+  { label: 'Green', value: 'green' },
+  { label: 'Purple', value: 'purple' },
+  { label: 'Pink', value: 'pink' }
+];
 
 // Scramble
 export const SCRAMBLE_DELIMITER = ' ';

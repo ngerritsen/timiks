@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
 import Archive from '../../components/archive/Archive';
-import { changePuzzle, removeTime, requireTimes } from '../../actions';
-import { getPuzzle } from '../../selectors/settings';
+import { changeSetting, removeTime, requireTimes } from '../../actions';
+import { getArchivePuzzle } from '../../selectors/settings';
 import * as archiveSelectors from '../../selectors/times';
 
 function mapStateToProps(state) {
@@ -10,11 +10,11 @@ function mapStateToProps(state) {
     times: archiveSelectors.getSortedArchivedTimesForPuzzle(state),
     timesPerDay: archiveSelectors.getArchivedTimesPerDayForPuzzle(state),
     stats: archiveSelectors.getStatsForArchivedTimesForPuzzle(state),
-    puzzle: getPuzzle(state)
+    puzzle: getArchivePuzzle(state)
   };
 }
 
 export default connect(
   mapStateToProps,
-  { changePuzzle, removeTime, requireTimes }
+  { changeSetting, removeTime, requireTimes }
 )(Archive);

@@ -9,13 +9,13 @@ import Button from '../shared/Button';
 import puzzles from '../../constants/puzzles';
 import Shortcut from '../shared/Shortcut';
 
-const TimerOptions = ({ changePuzzle, puzzle, refreshScramble }) => (
+const TimerOptions = ({ changeSetting, puzzle, refreshScramble }) => (
   <>
     <Shortcut command="refreshScramble" action={refreshScramble} />
     <Desktop>
       <Select
         label="Puzzle"
-        onChange={changePuzzle}
+        onChange={puzzle => changeSetting('puzzle', puzzle)}
         options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
         value={puzzle}
       />
@@ -28,7 +28,7 @@ const TimerOptions = ({ changePuzzle, puzzle, refreshScramble }) => (
     </Desktop>
     <Mobile>
       <Select
-        onChange={changePuzzle}
+        onChange={puzzle => changeSetting('puzzle', puzzle)}
         options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
         value={puzzle}
       />
@@ -67,7 +67,7 @@ const Mobile = styled.div`
 `;
 
 TimerOptions.propTypes = {
-  changePuzzle: PropTypes.func.isRequired,
+  changeSetting: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
   refreshScramble: PropTypes.func.isRequired
 };

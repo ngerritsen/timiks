@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
+import { changeSetting } from '../actions';
 import Settings from '../components/Settings';
 import { getSettings } from '../selectors/settings';
 
@@ -12,11 +12,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  {
-    toggleInspectionTime: actions.toggleInspectionTime,
-    changeTheme: actions.changeTheme,
-    changeActivationDuration: actions.changeActivationDuration,
-    toggleManualTimeEntry: actions.toggleManualTimeEntry,
-    toggleShowTimerTime: actions.toggleShowTimerTime
-  }
+  { changeSetting }
 )(Settings);
