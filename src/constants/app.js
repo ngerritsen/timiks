@@ -22,7 +22,7 @@ export const DEFAULT_PUZZLE = '3x3x3';
 
 export const BUTTON_COLORS = [
   { label: 'Default', value: 'primary' },
-  { label: 'Greyscale', value: 'subtleFg' },
+  { label: 'Dark grey', value: 'dark' },
   { label: 'Blue', value: 'blue' },
   { label: 'Red', value: 'red' },
   { label: 'Orange', value: 'orange' },
