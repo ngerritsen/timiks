@@ -19,14 +19,16 @@ export const submitTimeEpic = (action$, state$) =>
   action$.pipe(
     ofType(SUBMIT_TIME_INPUT),
     withLatestFrom(state$),
-    map(([action, state]) => createSaveTime(action.ms, state, action.dnf, action.plus2))
+    map(([action, state]) =>
+      createSaveTime(action.payload.ms, state, action.payload.dnf, action.payload.plus2)
+    )
   );
 
 export const stopTimerEpic = (action$, state$) =>
   action$.pipe(
     ofType(STOP_TIMER),
     withLatestFrom(state$),
-    map(([action, state]) => createSaveTime(action.stopTime - getStartTime(state), state))
+    map(([action, state]) => createSaveTime(action.payload - getStartTime(state), state))
   );
 
 const createSaveTime = (ms, state, dnf, plus2) =>

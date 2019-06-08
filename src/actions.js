@@ -3,17 +3,16 @@ import * as types from './constants/actionTypes';
 
 // Timer
 export const resetTime = createAction(types.RESET_TIME);
-export const startTimer = startTime => ({ type: types.START_TIMER, startTime });
-export const stopTimer = stopTime => ({ type: types.STOP_TIMER, stopTime });
+export const startTimer = createAction(types.START_TIMER, startTime => startTime);
+export const stopTimer = createAction(types.STOP_TIMER, stopTime => stopTime);
 export const prepareInspection = createAction(types.PREPARE_INSPECTION);
-export const startInspection = startTime => ({ type: types.START_INSPECTION, startTime });
+export const startInspection = createAction(types.START_INSPECTION, startTime => startTime);
 export const failInspection = createAction(types.FAIL_INSPECTION);
-export const submitTimeInput = (ms, dnf, plus2) => ({
-  type: types.SUBMIT_TIME_INPUT,
+export const submitTimeInput = createAction(types.SUBMIT_TIME_INPUT, (ms, dnf, plus2) => ({
   ms,
   dnf,
   plus2
-});
+}));
 export const updateTimeInput = timeInput => ({ type: types.UPDATE_TIME_INPUT, timeInput });
 
 // Activation
@@ -24,23 +23,21 @@ export const incrementPreparationStage = createAction(types.INCREMENT_PREPARATIO
 
 // Authentication
 export const login = createAction(types.LOGIN);
-export const loginSucceeded = (userId, displayName, email) => ({
-  type: types.LOGIN_SUCCEEDED,
+export const loginSucceeded = createAction(types.LOGIN_SUCCEEDED, (userId, displayName, email) => ({
   userId,
   displayName,
   email
-});
+}));
 export const loginFailed = createAction(types.LOGIN_FAILED);
 export const logout = createAction(types.LOGOUT);
 export const logoutSucceeded = createAction(types.LOGOUT_SUCCEEDED);
 export const logoutFailed = createAction(types.LOGOUT_FAILED);
 
 // Scramble
-export const setScramble = (scramble, puzzle) => ({
-  type: types.SET_SCRAMBLE,
+export const setScramble = createAction(types.SET_SCRAMBLE, (scramble, puzzle) => ({
   scramble,
   puzzle
-});
+}));
 export const refreshScramble = createAction(types.REFRESH_SCRAMBLE);
 
 // No Sleep
@@ -48,15 +45,14 @@ export const noSleepEnabled = createAction(types.NO_SLEEP_ENABLED);
 export const noSleepDisabled = createAction(types.NO_SLEEP_DISABLED);
 
 // Times
-export const saveTime = time => ({ type: types.SAVE_TIME, time });
-export const updateTime = (id, fields) => ({ type: types.UPDATE_TIME, id, fields });
-export const loadTimes = (times = [], current, puzzle) => ({
-  type: types.LOAD_TIMES,
+export const saveTime = createAction(types.SAVE_TIME, time => time);
+export const updateTime = createAction(types.UPDATE_TIME, (id, fields) => ({ id, fields }));
+export const loadTimes = createAction(types.LOAD_TIMES, (times = [], current, puzzle) => ({
   times,
   current,
   puzzle
-});
-export const loadLocalTimes = (times = []) => ({ type: types.LOAD_LOCAL_TIMES, times });
+}));
+export const loadLocalTimes = createAction(types.LOAD_LOCAL_TIMES, (times = []) => times);
 export const removeTime = createAction(types.REMOVE_TIME, id => id);
 export const clearTimes = createAction(types.CLEAR_TIMES);
 export const archiveTimes = createAction(types.ARCHIVE_TIMES);

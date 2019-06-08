@@ -22,7 +22,7 @@ export const saveTimeEpic = (action$, state$) =>
     ofType(actionTypes.SAVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action, state]) => from(timesRepository.save(getUserId(state), action.time))),
+    mergeMap(([action, state]) => from(timesRepository.save(getUserId(state), action.payload))),
     ignoreElements()
   );
 
@@ -42,7 +42,7 @@ export const updateTimeEpic = (action$, state$) =>
     ofType(actionTypes.UPDATE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action]) => from(timesRepository.update(action.id, action.fields))),
+    mergeMap(([action]) => from(timesRepository.update(action.payload.id, action.payload.fields))),
     ignoreElements()
   );
 

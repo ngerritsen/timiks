@@ -34,9 +34,11 @@ export default function timesReducer(state = initialState, action) {
           ...state,
           times: [
             ...state.times.filter(time =>
-              action.current ? !time.current : time.current || time.puzzle !== action.puzzle
+              action.payload.current
+                ? !time.current
+                : time.current || time.puzzle !== action.payload.puzzle
             ),
-            ...action.times.map(time => ({ ...time, stored: true }))
+            ...action.payload.times.map(time => ({ ...time, stored: true }))
           ]
         };
       default:
@@ -46,14 +48,14 @@ export default function timesReducer(state = initialState, action) {
 
   switch (action.type) {
     case actionTypes.SAVE_TIME:
-      return { ...state, times: [...state.times, action.time] };
+      return { ...state, times: [...state.times, action.payload] };
     case actionTypes.REMOVE_TIME:
       return { ...state, times: state.times.filter(time => time.id !== action.payload) };
     case actionTypes.UPDATE_TIME:
       return {
         ...state,
         times: state.times.map(time =>
-          time.id !== action.id ? time : { ...time, ...action.fields }
+          time.id !== action.payload.id ? time : { ...time, ...action.payload.fields }
         )
       };
     case actionTypes.ARCHIVE_TIMES:
@@ -64,7 +66,7 @@ export default function timesReducer(state = initialState, action) {
     case actionTypes.CLEAR_TIMES:
       return { ...state, times: state.times.filter(time => !time.current) };
     case actionTypes.LOAD_LOCAL_TIMES:
-      return { ...state, times: action.times };
+      return { ...state, times: action.payload };
     default:
       return state;
   }

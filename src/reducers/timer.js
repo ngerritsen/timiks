@@ -14,7 +14,7 @@ export default function timerReducer(state = initialState, action) {
     case actionTypes.START_TIMER:
       return {
         ...state,
-        startTime: action.startTime,
+        startTime: action.payload,
         stopped: false,
         inspecting: false,
         inspectionStartTime: 0
@@ -26,14 +26,14 @@ export default function timerReducer(state = initialState, action) {
     case actionTypes.START_INSPECTION:
       return {
         ...state,
-        inspectionStartTime: action.startTime,
+        inspectionStartTime: action.payload,
         inspecting: true
       };
     case actionTypes.SAVE_TIME:
       return {
         ...state,
         startTime: 0,
-        lastTimeId: action.time.id
+        lastTimeId: action.payload.id
       };
     case actionTypes.STOP_TIMER:
       return {

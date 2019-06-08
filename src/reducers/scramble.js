@@ -10,8 +10,8 @@ export default function scrambleReducer(state = initialState, action) {
   if (action.type === SET_SCRAMBLE) {
     return {
       ...state,
-      scramble: action.scramble,
-      puzzle: action.puzzle
+      scramble: action.payload.scramble,
+      puzzle: action.payload.puzzle
     };
   }
 

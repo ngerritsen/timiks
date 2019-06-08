@@ -29,9 +29,9 @@ export default function activationReducer(state = initialState, action) {
         isLoggedIn: true,
         isLoggingIn: false,
         isInitialized: true,
-        displayName: action.displayName,
-        email: action.email,
-        userId: action.userId
+        displayName: action.payload.displayName,
+        email: action.payload.email,
+        userId: action.payload.userId
       };
     case actionTypes.LOGOUT:
       return {
