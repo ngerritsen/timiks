@@ -24,6 +24,7 @@ export const BUTTON_COLORS = [
   { label: 'Default', value: 'primary' },
   { label: 'Dark grey', value: 'dark' },
   { label: 'Blue', value: 'blue' },
+  { label: 'Deep blue', value: 'deepBlue' },
   { label: 'Red', value: 'red' },
   { label: 'Orange', value: 'orange' },
   { label: 'Yellow', value: 'yellow' },

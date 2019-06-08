@@ -3,6 +3,7 @@ import { lighten, darken } from 'polished';
 const BLACK = '#000';
 const BLUE = '#288bd6';
 const CLOUD_BLUE = '#7dc9ff';
+const DEEP_BLUE = '#2c27ce';
 const GOOGLE_RED = '#f95555';
 const GREEN = '#34db52';
 const MINT = '#ace532';
@@ -25,6 +26,7 @@ export const light = {
     bg: WHITE,
     blue: BLUE,
     cloudBlue: CLOUD_BLUE,
+    darkBlue: DEEP_BLUE,
     dark: lighten(0.2, BLACK),
     fg: BLACK,
     googleRed: GOOGLE_RED,
