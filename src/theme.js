@@ -3,17 +3,17 @@ import { lighten, darken } from 'polished';
 const BLACK = '#000';
 const BLUE = '#288bd6';
 const CLOUD_BLUE = '#7dc9ff';
-const DEEP_BLUE = '#2c27ce';
+const DEEP_BLUE = '#433eda';
 const GOOGLE_RED = '#f95555';
-const GREEN = '#34db52';
-const MINT = '#ace532';
+const GREEN = '#26d947';
+const MINT = '#a3e21d';
 const ORANGE = '#f98a13';
 const PINK = '#ef47b2';
 const PURPLE = '#6f42c1';
 const RED = '#e83a3a';
-const TURQUOISE = '#36e2dd';
+const TURQUOISE = '#20dfd9';
 const WHITE = '#fff';
-const YELLOW = '#f9e43e';
+const YELLOW = '#f9e339';
 
 const BASE_SIZE = 0.8;
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken, transparentize, desaturate } from 'polished';
+import { light } from '../../theme';
 
 const sizeToHeight = {
   sm: '2.6rem',
@@ -25,6 +26,8 @@ const sizeToFontSize = {
   lg: '1.8rem'
 };
 
+const blackTextColors = [light.colors.yellow];
+
 const Button = styled.button.attrs({
   color: props => props.theme.colors[(props.disabled && 'grey') || props.color]
 })`
@@ -40,7 +43,12 @@ const Button = styled.button.attrs({
   font-size: ${props => sizeToFontSize[props.size]};
   border: ${props => (props.outline ? `1px solid ${props.color}` : 'none')};
   border-radius: ${props => sizeToRadius[props.size]};
-  color: ${props => (props.outline ? props.theme.colors.fg : 'white')};
+  color: ${props =>
+    props.outline
+      ? props.theme.colors.fg
+      : blackTextColors.includes(props.color)
+      ? 'black'
+      : 'white'};
   text-transform: uppercase;
   transition: background-color 0.2s ease;
 
