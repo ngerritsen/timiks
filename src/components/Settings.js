@@ -86,7 +86,7 @@ const Settings = ({ settings, changeSetting }) => (
               </Section>
               <Section margin="sm">
                 <Setting>
-                  <label>Button color</label>
+                  <label>Start button color</label>
                   <Select
                     onChange={color => changeSetting('buttonColor', color)}
                     options={BUTTON_COLORS}
