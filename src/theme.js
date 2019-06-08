@@ -1,17 +1,20 @@
 import { lighten, darken } from 'polished';
 
-const WHITE = '#fff';
 const BLACK = '#000';
-const BASE_SIZE = 0.8;
-const ORANGE = '#fc7f0a';
-const PURPLE = '#6f42c1';
-const YELLOW = '#fff244';
-const RED = '#f83f3f';
-const BLUE = '#208dd6';
+const BLUE = '#288bd6';
 const CLOUD_BLUE = '#7dc9ff';
-const GREEN = '#34db52';
 const GOOGLE_RED = '#f95555';
-const PINK = '#fc417f';
+const GREEN = '#34db52';
+const MINT = '#ace532';
+const ORANGE = '#f98a13';
+const PINK = '#ef47b2';
+const PURPLE = '#6f42c1';
+const RED = '#e83a3a';
+const TURQUOISE = '#36e2dd';
+const WHITE = '#fff';
+const YELLOW = '#f9e43e';
+
+const BASE_SIZE = 0.8;
 
 const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
@@ -27,6 +30,7 @@ export const light = {
     googleRed: GOOGLE_RED,
     green: GREEN,
     grey: darken(0.25, WHITE),
+    mint: MINT,
     orange: ORANGE,
     pink: PINK,
     primary: PURPLE,
@@ -34,6 +38,7 @@ export const light = {
     red: RED,
     subtleBg: darken(0.1, WHITE),
     subtleFg: lighten(0.3, BLACK),
+    turquoise: TURQUOISE,
     white: WHITE,
     yellow: YELLOW
   },

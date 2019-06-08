@@ -29,9 +29,9 @@ const Button = styled.button.attrs({
   color: props => props.theme.colors[(props.disabled && 'grey') || props.color]
 })`
   display: inline-block;
-
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   margin: 0;
+  font-weight: bold;
   height: ${props => sizeToHeight[props.size]};
   line-height: calc(${props => sizeToHeight[props.size]} - 0.1rem);
   width: ${props => (props.tag ? 'auto' : '100%')};
@@ -41,7 +41,6 @@ const Button = styled.button.attrs({
   border: ${props => (props.outline ? `1px solid ${props.color}` : 'none')};
   border-radius: ${props => sizeToRadius[props.size]};
   color: ${props => (props.outline ? props.theme.colors.fg : 'white')};
-  font-weight: normal;
   text-transform: uppercase;
   transition: background-color 0.2s ease;
 

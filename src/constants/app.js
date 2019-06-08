@@ -29,7 +29,9 @@ export const BUTTON_COLORS = [
   { label: 'Yellow', value: 'yellow' },
   { label: 'Green', value: 'green' },
   { label: 'Purple', value: 'purple' },
-  { label: 'Pink', value: 'pink' }
+  { label: 'Pink', value: 'pink' },
+  { label: 'Turqoise', value: 'turquoise' },
+  { label: 'Mint', value: 'mint' }
 ];
 export const DEFAULT_BUTTON_COLOR = 'primary';
 
