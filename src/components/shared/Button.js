@@ -19,10 +19,12 @@ const Button = styled.button.attrs({
   sidepadding: props => (props.big ? 'lg' : props.tiny ? 'sm' : 'md'),
   radius: props => (props.big ? '0.5rem' : '0.3rem')
 })`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   margin: 0;
   height: ${props => props.height};
-  line-height: ${props => props.height};
   width: ${props => (props.tag ? 'auto' : '100%')};
   background-color: ${props => (props.empty ? 'transparent' : props.color)};
   padding: 0 ${props => props.theme.sizes[props.sidepadding]};
@@ -44,9 +46,14 @@ const Button = styled.button.attrs({
 `;
 
 const ButtonIcon = styled.span`
-  margin-right: ${props => props.theme.sizes.sm};
+  margin-right: ${props => props.theme.sizes.xs};
+  height: 100%;
+  display: flex;
+  align-items: center;
 `;
 
-export { ButtonIcon };
+const LinkButton = Button.withComponent('a');
+
+export { ButtonIcon, LinkButton };
 
 export default Button;

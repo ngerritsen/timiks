@@ -60,6 +60,7 @@ button,
 select,
 input,
 textarea {
+  font-family: 'Barlow', Arial, sans-serif;
   font-size: 100%;
 }
 

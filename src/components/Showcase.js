@@ -116,11 +116,9 @@ const Showcase = () => {
     <ToggleContent
       toggle={({ show }) => (
         <Button tag tiny empty subtle onClick={show}>
-          <ButtonIcon>
-            <StarIcon>
-              <FontAwesome icon={faStar} />
-            </StarIcon>
-          </ButtonIcon>
+          <StarIcon>
+            <FontAwesome icon={faStar} />
+          </StarIcon>
           Show features
         </Button>
       )}
@@ -158,7 +156,7 @@ const Image = styled.img`
   margin-top: ${props => props.theme.sizes.xs};
 `;
 
-const StarIcon = styled.span`
+const StarIcon = ButtonIcon.extend`
   color: ${props => props.theme.colors.orange};
 `;
 

@@ -9,6 +9,8 @@ import NotificationContainer from '../containers/NotificationContainer';
 import LoginPromotionContainer from '../containers/LoginPromotionContainer';
 import NewVersionPromptContainer from '../containers/NewVersionPromptContainer';
 import Showcase from './Showcase';
+import Donate from './Donate';
+import { ButtonDuo, ButtonDuoItem } from './shared/ButtonDuo';
 
 const App = () => (
   <>
@@ -23,7 +25,14 @@ const App = () => (
         <Route path="/archive" component={ArchiveContainer} />
       </Section>
       <Section textAlign="center">
-        <Showcase />
+        <ButtonDuo center>
+          <ButtonDuoItem center>
+            <Showcase />
+          </ButtonDuoItem>
+          <ButtonDuoItem center>
+            <Donate />
+          </ButtonDuoItem>
+        </ButtonDuo>
       </Section>
       <NotificationContainer />
     </div>
