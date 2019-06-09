@@ -1,17 +1,17 @@
 import { lighten, darken } from 'polished';
 
 const BLACK = '#000';
-const BLUE = '#2889e0';
+const BLUE = '#3491e5';
 const CLOUD_BLUE = '#7dc9ff';
-const DEEP_BLUE = '#382cd6';
+const DEEP_BLUE = '#3d35d6';
 const GOOGLE_RED = '#f95555';
-const GREEN = '#1ccc51';
-const LIME = '#cbf71b';
-const ORANGE = '#f48813';
+const GREEN = '#32db65';
+const LIME = '#d5f243';
+const ORANGE = '#f29b30';
 const PINK = '#ef47b2';
-const PURPLE = '#6f42c1';
-const RED = '#e83733';
-const TURQUOISE = '#22e8e8';
+const PURPLE = '#7642d6';
+const RED = '#e83d3a';
+const TURQUOISE = '#3be5e5';
 const WHITE = '#fff';
 const YELLOW = '#f9e636';
 
