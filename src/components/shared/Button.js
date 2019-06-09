@@ -49,14 +49,12 @@ const Button = styled.button.attrs({
       ? props.theme.colors.black
       : props.theme.colors.white};
   text-transform: uppercase;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.1s ease;
 
   &:focus,
   &:hover {
     background-color: ${props =>
-      props.outline
-        ? transparentize(0.75, props.bg)
-        : desaturate(props.disabled ? 0 : 0.06, darken(props.disabled ? 0 : 0.06, props.bg))};
+      props.outline ? transparentize(0.8, props.bg) : darken(props.disabled ? 0 : 0.1, props.bg)};
   }
 `;
 

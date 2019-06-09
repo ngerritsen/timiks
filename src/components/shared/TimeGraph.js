@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ChartistGraph from 'react-chartist';
@@ -15,29 +15,32 @@ const lineColors = AVAILABLE_STATS.reduce(
 );
 
 const TimeGraph = ({ times, stats }) => {
-  const data = {
-    labels: times.map(time => time.date.toISOString()),
-    series: [
-      {
-        name: 'single',
-        data: times.map(getMs)
-      }
-    ]
-  };
+  const [disabledLines, setDisabledLines] = useState([]);
 
-  const statLines = AVAILABLE_STATS.filter(
+  const disableLine = name => setDisabledLines([...disabledLines, name]);
+  const enableLine = name => setDisabledLines(disabledLines.filter(lineName => lineName !== name));
+
+  const statsToShow = AVAILABLE_STATS.filter(
     stat => stat.name !== 'mo3' && stats[stat.name] && stats[stat.name].all.length > 1
-  ).map(stat => {
-    const times = stats[stat.name].all.map(ms => getMs({ ms: Math.round(ms) }));
-    const offset = data.labels.length - times.length;
+  );
+
+  const statLines = statsToShow.map(stat => {
+    const statTimes = stats[stat.name].all.map(ms => getMs({ ms: Math.round(ms) }));
+    const offset = times.length - statTimes.length;
 
     return {
       name: stat.name,
-      data: [...new Array(offset), ...times]
+      className: stat.name,
+      data: [...new Array(offset), ...statTimes]
     };
   });
 
-  data.series.push(...statLines);
+  const lines = [{ name: 'single', className: 'single', data: times.map(getMs) }, ...statLines];
+
+  const data = {
+    labels: times.map(time => time.date.toISOString()),
+    series: lines.filter(line => !disabledLines.includes(line.name))
+  };
 
   const options = {
     showPoint: false,
@@ -60,9 +63,18 @@ const TimeGraph = ({ times, stats }) => {
         type="Line"
       />
       <Legend>
-        {data.series.map(serie => (
-          <LegendItem key={serie.name}>
-            <Tag color={lineColors[serie.name]}>{serie.name}</Tag>
+        {lines.map(line => (
+          <LegendItem key={line.name}>
+            <Tag
+              color={lineColors[line.name]}
+              withCheckbox
+              onClick={() => {
+                disabledLines.includes(line.name) ? enableLine(line.name) : disableLine(line.name);
+              }}
+              checked={disabledLines.includes(line.name)}
+            >
+              {line.name}
+            </Tag>
           </LegendItem>
         ))}
       </Legend>
@@ -75,27 +87,27 @@ const StyledChartistGraph = styled(ChartistGraph)`
     stroke-width: 2px;
   }
 
-  .ct-series-a .ct-line {
+  .single .ct-line {
     stroke: ${props => props.theme.colors[lineColors.single]};
   }
 
-  .ct-series-b .ct-line {
+  .ao5 .ct-line {
     stroke: ${props => props.theme.colors[lineColors.ao5]};
   }
 
-  .ct-series-c .ct-line {
+  .ao12 .ct-line {
     stroke: ${props => props.theme.colors[lineColors.ao12]};
   }
 
-  .ct-series-d .ct-line {
+  .ao25 .ct-line {
     stroke: ${props => props.theme.colors[lineColors.ao25]};
   }
 
-  .ct-series-e .ct-line {
+  .ao50 .ct-line {
     stroke: ${props => props.theme.colors[lineColors.ao50]};
   }
 
-  .ct-series-f .ct-line {
+  .ao100 .ct-line {
     stroke: ${props => props.theme.colors[lineColors.ao100]};
   }
 
@@ -124,7 +136,9 @@ const Legend = styled.div`
 `;
 
 const LegendItem = styled.span`
+  display: inline-block;
   margin-right: ${props => props.theme.sizes.xxs};
+  margin-bottom: ${props => props.theme.sizes.xxs};
 
   &:last-child {
     margin-right: 0;

@@ -16,6 +16,7 @@ body {
   line-height: 1.4;
   margin: 0;
   padding: 0;
+  transition: background-color 0.1s ease;
 }
 
 ul {
@@ -31,7 +32,7 @@ header {
   padding-top: 1.6rem;
 }
 
-body.is-dark {
+.is-dark {
   background-color: #000;
   color: #fafafa;
 }

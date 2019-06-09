@@ -92,7 +92,7 @@ const TimeTableContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 512px) {
+  @media screen and (min-width: 520px) {
     flex-direction: row;
   }
 `;
@@ -105,7 +105,7 @@ const TimeTableColumn = styled.div`
     margin-bottom: 0;
   }
 
-  @media screen and (min-width: 512px) {
+  @media screen and (min-width: 520px) {
     width: 50%;
     margin-right: ${props => props.theme.sizes.md};
     margin-bottom: 0;

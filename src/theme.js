@@ -24,6 +24,7 @@ export const light = {
   monoFont: '"Roboto Mono", monospace',
   colors: {
     bg: WHITE,
+    black: BLACK,
     blue: BLUE,
     cloudBlue: CLOUD_BLUE,
     deepBlue: DEEP_BLUE,
