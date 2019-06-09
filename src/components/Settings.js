@@ -20,6 +20,10 @@ const Settings = ({ settings, changeSetting }) => (
       toggle={({ show }) => (
         <IconButton onClick={show}>
           <Shortcut command="openSettings" action={show} />
+          <Shortcut
+            command="toggleDarkMode"
+            action={() => changeSetting('theme', settings.theme === 'dark' ? 'light' : 'dark')}
+          />
           <FontAwesome icon={faCog} fixedWidth />
         </IconButton>
       )}

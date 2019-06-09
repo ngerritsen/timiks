@@ -35,6 +35,11 @@ const keymap = [
     description: 'Show keyboard shortcuts'
   },
   {
+    key: 'n',
+    commands: ['toggleDarkMode'],
+    description: 'Toggle dark mode'
+  },
+  {
     key: 'p',
     commands: ['plus2LastTime'],
     description: 'Toggle +2 penalty for the last time'
