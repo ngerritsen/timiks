@@ -9,6 +9,7 @@ const initialState = {
   useManualTimeEntry: false,
   theme: 'light',
   buttonColor: DEFAULT_BUTTON_COLOR,
+  buttonColorDarkMode: '',
   activationDuration: DEFAULT_ACTIVATION_DURATION,
   showTimerTime: true
 };

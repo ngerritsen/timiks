@@ -99,6 +99,17 @@ const Settings = ({ settings, changeSetting }) => (
                   />
                 </Setting>
               </Section>
+              <Section margin="sm">
+                <Setting>
+                  <label>Start button color in dark mode</label>
+                  <Select
+                    onChange={color => changeSetting('buttonColorDarkMode', color)}
+                    options={[{ label: 'Inherit', value: '' }, ...BUTTON_COLORS]}
+                    value={settings.buttonColorDarkMode}
+                    fullWidth
+                  />
+                </Setting>
+              </Section>
             </Section>
             <Section margin="md">
               <Explanation>

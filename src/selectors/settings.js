@@ -8,7 +8,11 @@ export const getTheme = state => state.settings.theme;
 export const getActivationDuration = state => state.settings.activationDuration;
 export const shouldUseManualTimeEntry = state => state.settings.useManualTimeEntry;
 export const shouldShowTimerTime = state => state.settings.showTimerTime;
-export const getButtonColor = state => state.settings.buttonColor;
+export const isInDarkMode = state => getTheme(state) === 'dark';
+export const getButtonColor = state =>
+  isInDarkMode(state)
+    ? state.settings.buttonColorDarkMode || state.settings.buttonColor
+    : state.settings.buttonColor;
 export const getPuzzleInfo = createSelector(
   getPuzzle,
   puzzleHelpers.getPuzzle

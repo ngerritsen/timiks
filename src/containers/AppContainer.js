@@ -4,7 +4,7 @@ import { HashRouter as Router } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { light, dark } from '../theme';
+import * as themes from '../theme';
 import App from '../components/App';
 import { getTheme } from '../selectors/settings';
 
@@ -25,7 +25,7 @@ class AppContainer extends React.Component {
   }
 
   _changeTheme(name) {
-    const theme = name === 'dark' ? dark : light;
+    const theme = themes[name];
 
     renderGlobalTheme(theme);
 
