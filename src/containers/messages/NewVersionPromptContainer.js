@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
-import NewVersionPrompt from '../components/NewVersionPrompt';
-import { shouldPromptNewVersion } from '../selectors/version';
-import { dismissNewVersion } from '../actions';
+import NewVersionPrompt from '../../components/messages/NewVersionPrompt';
+import { shouldPromptNewVersion } from '../../selectors/version';
+import { dismissNewVersion } from '../../actions';
 
 function mapStateToProps(state) {
   return {

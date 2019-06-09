@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Message from './Message';
+import Message from '../shared/Message';
 
 export const LoginPromotion = ({ dismissLoginPromotion, shouldPromoteLogin }) =>
   shouldPromoteLogin ? (

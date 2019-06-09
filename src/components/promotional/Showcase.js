@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import ToggleContent from './shared/ToggleContent';
-import Button, { ButtonIcon } from './shared/Button';
-import Modal from './shared/Modal';
+import ToggleContent from '../shared/ToggleContent';
+import Button, { ButtonIcon } from '../shared/Button';
+import Modal from '../shared/Modal';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faCaretCircleLeft from '@fortawesome/fontawesome-pro-solid/faCaretCircleLeft';
 import faCaretCircleRight from '@fortawesome/fontawesome-pro-solid/faCaretCircleRight';
@@ -62,8 +62,8 @@ const Showcase = () => {
         <>
           <p>
             Keep track of all your times using the archive. In combination with cloud sync you can
-            can track your progress on all devices. The times are nicely organized by date and
-            event. You can even preview the scrambles of any solve in history.
+            track your progress on all devices. The times are nicely organized by date and event.
+            You can even preview the scrambles of any solve in history.
           </p>
           <Image src="/images/archive-graph.png" />
           <Image src="/images/archive-times.png" />
@@ -116,9 +116,9 @@ const Showcase = () => {
     <ToggleContent
       toggle={({ show }) => (
         <Button tag size="sm" outline color="grey" onClick={show}>
-          <StarIcon>
+          <ButtonIcon color="subtleFg">
             <FontAwesome icon={faStar} />
-          </StarIcon>
+          </ButtonIcon>
           Show features
         </Button>
       )}
@@ -154,10 +154,6 @@ const Image = styled.img`
   width: 100%;
   border-radius: 0.4rem;
   margin-top: ${props => props.theme.sizes.xs};
-`;
-
-const StarIcon = ButtonIcon.extend`
-  color: ${props => props.theme.colors.orange};
 `;
 
 const ArrowIconWrapper = styled.div`

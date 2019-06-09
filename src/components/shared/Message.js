@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
-import IconButton from './shared/IconButton';
+import IconButton from './IconButton';
 
 const Message = ({ message, dismiss, withPointer }) => (
   <MessageBox>

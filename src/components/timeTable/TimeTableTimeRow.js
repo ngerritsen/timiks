@@ -9,7 +9,7 @@ import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
 import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 import ToggleContent from '../shared/ToggleContent';
 import Modal from '../shared/Modal';
-import TimeDetails from './TimeDetails';
+import TimeDetails from '../shared/TimeDetails';
 import * as CustomPropTypes from '../../propTypes';
 import IconButton from '../shared/IconButton';
 import { Cell } from '../shared/Tables';

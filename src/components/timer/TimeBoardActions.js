@@ -30,6 +30,11 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
               </Section>
               <ButtonDuo>
                 <ButtonDuoItem>
+                  <Button color="subtleFg" outline onClick={hide}>
+                    Cancel
+                  </Button>
+                </ButtonDuoItem>
+                <ButtonDuoItem>
                   <Button
                     onClick={() => {
                       hide();
@@ -37,11 +42,6 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                     }}
                   >
                     Archive
-                  </Button>
-                </ButtonDuoItem>
-                <ButtonDuoItem>
-                  <Button color="subtleFg" outline onClick={hide}>
-                    Cancel
                   </Button>
                 </ButtonDuoItem>
               </ButtonDuo>
@@ -67,6 +67,11 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
               </Section>
               <ButtonDuo>
                 <ButtonDuoItem>
+                  <Button color="subtleFg" outline onClick={hide}>
+                    Cancel
+                  </Button>
+                </ButtonDuoItem>
+                <ButtonDuoItem>
                   <Button
                     color="red"
                     onClick={() => {
@@ -75,11 +80,6 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => (
                     }}
                   >
                     Remove
-                  </Button>
-                </ButtonDuoItem>
-                <ButtonDuoItem>
-                  <Button color="subtleFg" outline onClick={hide}>
-                    Cancel
                   </Button>
                 </ButtonDuoItem>
               </ButtonDuo>

@@ -41,6 +41,7 @@ const Button = styled.button.attrs({
   font-size: ${props => sizeToFontSize[props.size]};
   border: ${props => (props.outline ? `1px solid ${props.bg}` : 'none')};
   border-radius: ${props => sizeToRadius[props.size]};
+  text-decoration: none;
   color: ${props =>
     props.outline
       ? props.theme.colors.fg
@@ -65,6 +66,7 @@ Button.defaultProps = {
 };
 
 const ButtonIcon = styled.span`
+  color: ${props => props.theme.colors[props.color] || 'inherit'};
   margin-right: ${props => props.theme.sizes.xs};
 `;
 
