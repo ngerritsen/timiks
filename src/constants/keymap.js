@@ -30,9 +30,19 @@ const keymap = [
     description: 'Close any modal'
   },
   {
+    key: 'i',
+    commands: ['toggleInspectionTime'],
+    description: 'Toggle inspection time'
+  },
+  {
     key: 'k',
     commands: ['showKeyboardShortcuts'],
     description: 'Show keyboard shortcuts'
+  },
+  {
+    key: 'm',
+    commands: ['toggleManualTimeEntry'],
+    description: 'Toggle manual time entry'
   },
   {
     key: 'n',

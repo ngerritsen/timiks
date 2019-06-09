@@ -9,9 +9,23 @@ import Button from '../shared/Button';
 import puzzles from '../../constants/puzzles';
 import Shortcut from '../shared/Shortcut';
 
-const TimerOptions = ({ changeSetting, puzzle, refreshScramble }) => (
+const TimerOptions = ({
+  changeSetting,
+  puzzle,
+  refreshScramble,
+  useInspectionTime,
+  useManualTimeEntry
+}) => (
   <>
     <Shortcut command="refreshScramble" action={refreshScramble} />
+    <Shortcut
+      command="toggleInspectionTime"
+      action={() => changeSetting('useInspectionTime', !useInspectionTime)}
+    />
+    <Shortcut
+      command="toggleManualTimeEntry"
+      action={() => changeSetting('useManualTimeEntry', !useManualTimeEntry)}
+    />
     <Desktop>
       <Select
         label="Puzzle"
@@ -69,7 +83,9 @@ const Mobile = styled.div`
 TimerOptions.propTypes = {
   changeSetting: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
-  refreshScramble: PropTypes.func.isRequired
+  refreshScramble: PropTypes.func.isRequired,
+  useInspectionTime: PropTypes.bool.isRequired,
+  useManualTimeEntry: PropTypes.bool.isRequired
 };
 
 export default React.memo(TimerOptions);

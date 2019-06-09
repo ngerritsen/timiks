@@ -2,11 +2,13 @@ import { connect } from 'react-redux';
 
 import TimerOptions from '../../components/timer/TimerOptions';
 import { changeSetting, refreshScramble } from '../../actions';
-import { getPuzzle } from '../../selectors/settings';
+import * as settingSelectors from '../../selectors/settings';
 
 function mapStateToProps(state) {
   return {
-    puzzle: getPuzzle(state)
+    puzzle: settingSelectors.getPuzzle(state),
+    useInspectionTime: settingSelectors.shouldUseInspectionTime(state),
+    useManualTimeEntry: settingSelectors.shouldUseManualTimeEntry(state)
   };
 }
 
