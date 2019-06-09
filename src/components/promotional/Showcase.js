@@ -22,7 +22,8 @@ const Showcase = () => {
           </p>
           <p>
             Your current session will be synced too. You can time on your phone, and see your stats
-            update live, on your laptop&apos;s screen.
+            update live on your laptop&apos;s screen. If you are not logged in, times will still be
+            saved locally and synced after you login.
           </p>
           <p>With Google login it&apos;s a matter of seconds to start syncing.</p>
           <Image src="/images/cloud-sync.png" />

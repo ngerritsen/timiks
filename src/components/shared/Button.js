@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darken, transparentize, desaturate, getLuminance } from 'polished';
+import { darken, transparentize, getLuminance } from 'polished';
 
 const sizeToHeight = {
   sm: '2.6rem',
