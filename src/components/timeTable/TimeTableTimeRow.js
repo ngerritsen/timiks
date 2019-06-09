@@ -35,7 +35,7 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
       {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
       <ToggleContent
         toggle={({ show }) => (
-          <InfoIconButton onClick={show}>
+          <InfoIconButton color="blue" onClick={show}>
             <FontAwesome icon={faInfoCircle} fixedWidth size="sm" />
           </InfoIconButton>
         )}
@@ -52,7 +52,7 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
           </Modal>
         )}
       />
-      <RemoveItemIconButton onClick={() => removeTime(time.id)}>
+      <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
         <FontAwesome icon={faTimes} fixedWidth size="sm" />
       </RemoveItemIconButton>
     </Cell>
@@ -80,13 +80,11 @@ const BestTimeIcon = styled.span`
 `;
 
 const InfoIconButton = IconButton.extend`
-  margin-left: 1rem;
-  color: ${props => props.theme.colors.blue};
+  margin-left: ${props => props.theme.sizes.xs};
 `;
 
 const RemoveItemIconButton = IconButton.extend`
   margin-left: ${props => props.theme.sizes.xxs};
-  color: ${props => props.theme.colors.red};
 `;
 
 export default React.memo(TimeTableTimeRow);

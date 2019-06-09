@@ -128,7 +128,6 @@ const ScrambleIconButtonContainer = styled.span`
   display: inline-block;
   font-size: 1.8rem;
   margin: 0 ${props => props.theme.sizes.xxs};
-  color: ${props => props.theme.colors.blue};
 `;
 
 export default React.memo(Scramble);

@@ -37,11 +37,15 @@ const Archive = ({
       {times.length === 0 && (
         <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
       )}
-      {times.length > 1 && <TimeGraph times={times} stats={stats} />}
       {times.length > 1 && (
-        <Section margin="md">
-          <Export times={times} puzzle={puzzle} />
-        </Section>
+        <>
+          <Section margin="md">
+            <TimeGraph times={times} stats={stats} />
+          </Section>
+          <Section margin="md">
+            <Export times={times} puzzle={puzzle} />
+          </Section>
+        </>
       )}
       {timesPerDay.length > 0 && (
         <Section>

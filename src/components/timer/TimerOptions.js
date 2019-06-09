@@ -47,7 +47,7 @@ const TimerOptions = ({
         value={puzzle}
       />
       <ButtonContainer>
-        <Button size="sm" color="dark" onClick={refreshScramble}>
+        <Button size="sm" color="subtleBg" onClick={refreshScramble}>
           <InlineFontawesome fixedWidth icon={faSyncAlt} />
           Scramble
         </Button>

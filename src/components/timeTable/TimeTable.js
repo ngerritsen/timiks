@@ -29,7 +29,7 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
               <HeadingCell rightAlign>
                 <ToggleContent
                   toggle={({ show }) => (
-                    <QuestionIconButton onClick={show}>
+                    <QuestionIconButton color="blue" onClick={show}>
                       <FontAwesome icon={faQuestionCircle} size="sm" />
                     </QuestionIconButton>
                   )}
@@ -65,7 +65,7 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
           <thead>
             <tr>
               <HeadingCell colSpan="3">
-                Times <Tag>{times.length}</Tag>
+                Times <Tag color="subtleBg">{times.length}</Tag>
               </HeadingCell>
             </tr>
           </thead>
@@ -118,7 +118,6 @@ const TimeTableColumn = styled.div`
 `;
 
 const QuestionIconButton = IconButton.extend`
-  color: ${props => props.theme.colors.blue};
   margin-left: ${props => props.theme.sizes.xs};
 `;
 
