@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
@@ -9,65 +10,73 @@ const initialState = {
   }
 };
 
+const standardTimesReducer = handleActions(
+  {
+    [actionTypes.LOGIN_SUCCEEDED]: state => ({ ...state, useLocalTimes: false }),
+    [actionTypes.LOGOUT_SUCCEEDED]: state => ({ ...state, useLocalTimes: true }),
+    [actionTypes.REQUIRE_TIMES]: (state, action) => ({
+      ...state,
+      requiredTimes: {
+        puzzle: action.payload.puzzle || null,
+        current: Boolean(action.payload.current)
+      }
+    })
+  },
+  initialState
+);
+
+const cloudTimesReducer = handleActions(
+  {
+    [actionTypes.LOAD_TIMES]: (state, action) => ({
+      ...state,
+      times: [
+        ...state.times.filter(time =>
+          action.payload.current
+            ? !time.current
+            : time.current || time.puzzle !== action.payload.puzzle
+        ),
+        ...action.payload.times.map(time => ({ ...time, stored: true }))
+      ]
+    })
+  },
+  initialState
+);
+
+const localTimesReducer = handleActions(
+  {
+    [actionTypes.SAVE_TIME]: (state, action) => ({
+      ...state,
+      times: [...state.times, action.payload]
+    }),
+    [actionTypes.REMOVE_TIME]: (state, action) => ({
+      ...state,
+      times: state.times.filter(time => time.id !== action.payload)
+    }),
+    [actionTypes.UPDATE_TIME]: (state, action) => ({
+      ...state,
+      times: state.times.map(time =>
+        time.id !== action.payload.id ? time : { ...time, ...action.payload.fields }
+      )
+    }),
+    [actionTypes.ARCHIVE_TIMES]: state => ({
+      ...state,
+      times: state.times.map(time => (time.current ? { ...time, current: false } : time))
+    }),
+    [actionTypes.CLEAR_TIMES]: state => ({
+      ...state,
+      times: state.times.filter(time => !time.current)
+    }),
+    [actionTypes.LOAD_LOCAL_TIMES]: (state, action) => ({ ...state, times: action.payload })
+  },
+  initialState
+);
+
 export default function timesReducer(state = initialState, action) {
-  switch (action.type) {
-    case actionTypes.LOGIN_SUCCEEDED:
-      return { ...state, useLocalTimes: false };
-    case actionTypes.LOGOUT_SUCCEEDED:
-      return { ...state, useLocalTimes: true };
-    case actionTypes.REQUIRE_TIMES:
-      return {
-        ...state,
-        requiredTimes: {
-          puzzle: action.payload.puzzle || null,
-          current: Boolean(action.payload.current)
-        }
-      };
-    default:
-      break;
-  }
+  state = standardTimesReducer(state, action);
 
   if (!state.useLocalTimes) {
-    switch (action.type) {
-      case actionTypes.LOAD_TIMES:
-        return {
-          ...state,
-          times: [
-            ...state.times.filter(time =>
-              action.payload.current
-                ? !time.current
-                : time.current || time.puzzle !== action.payload.puzzle
-            ),
-            ...action.payload.times.map(time => ({ ...time, stored: true }))
-          ]
-        };
-      default:
-        return state;
-    }
+    return cloudTimesReducer(state, action);
   }
 
-  switch (action.type) {
-    case actionTypes.SAVE_TIME:
-      return { ...state, times: [...state.times, action.payload] };
-    case actionTypes.REMOVE_TIME:
-      return { ...state, times: state.times.filter(time => time.id !== action.payload) };
-    case actionTypes.UPDATE_TIME:
-      return {
-        ...state,
-        times: state.times.map(time =>
-          time.id !== action.payload.id ? time : { ...time, ...action.payload.fields }
-        )
-      };
-    case actionTypes.ARCHIVE_TIMES:
-      return {
-        ...state,
-        times: state.times.map(time => (time.current ? { ...time, current: false } : time))
-      };
-    case actionTypes.CLEAR_TIMES:
-      return { ...state, times: state.times.filter(time => !time.current) };
-    case actionTypes.LOAD_LOCAL_TIMES:
-      return { ...state, times: action.payload };
-    default:
-      return state;
-  }
+  return localTimesReducer(state, action);
 }

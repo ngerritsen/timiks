@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
@@ -9,53 +10,42 @@ const initialState = {
   lastTimeId: ''
 };
 
-export default function timerReducer(state = initialState, action) {
-  switch (action.type) {
-    case actionTypes.START_TIMER:
-      return {
-        ...state,
-        startTime: action.payload,
-        stopped: false,
-        inspecting: false,
-        inspectionStartTime: 0
-      };
-    case actionTypes.FAIL_INSPECTION:
-      return {
-        ...initialState
-      };
-    case actionTypes.START_INSPECTION:
-      return {
-        ...state,
-        inspectionStartTime: action.payload,
-        inspecting: true
-      };
-    case actionTypes.SAVE_TIME:
-      return {
-        ...state,
-        startTime: 0,
-        lastTimeId: action.payload.id
-      };
-    case actionTypes.STOP_TIMER:
-      return {
-        ...state,
-        stopped: true
-      };
-    case actionTypes.RESET_TIME:
-      return {
-        ...state,
-        startTime: 0
-      };
-    case actionTypes.SUBMIT_TIME_INPUT:
-      return {
-        ...state,
-        timeInput: ''
-      };
-    case actionTypes.UPDATE_TIME_INPUT:
-      return {
-        ...state,
-        timeInput: action.timeInput
-      };
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    [actionTypes.START_TIMER]: (state, action) => ({
+      ...state,
+      startTime: action.payload,
+      stopped: false,
+      inspecting: false,
+      inspectionStartTime: 0
+    }),
+    [actionTypes.FAIL_INSPECTION]: () => initialState,
+    [actionTypes.START_INSPECTION]: (state, action) => ({
+      ...state,
+      inspectionStartTime: action.payload,
+      inspecting: true
+    }),
+    [actionTypes.SAVE_TIME]: (state, action) => ({
+      ...state,
+      startTime: 0,
+      lastTimeId: action.payload.id
+    }),
+    [actionTypes.STOP_TIMER]: state => ({
+      ...state,
+      stopped: true
+    }),
+    [actionTypes.RESET_TIME]: state => ({
+      ...state,
+      startTime: 0
+    }),
+    [actionTypes.SUBMIT_TIME_INPUT]: state => ({
+      ...state,
+      timeInput: ''
+    }),
+    [actionTypes.UPDATE_TIME_INPUT]: (state, action) => ({
+      ...state,
+      timeInput: action.timeInput
+    })
+  },
+  initialState
+);

@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
 import { PREPARATION_STAGES } from '../constants/app';
 
@@ -6,41 +7,33 @@ const initialState = {
   preparingForInspection: false
 };
 
-export default function activationReducer(state = initialState, action) {
-  switch (action.type) {
-    case actionTypes.PREPARE_INSPECTION:
-      return {
-        ...state,
-        preparingForInspection: true
-      };
-    case actionTypes.START_INSPECTION:
-      return {
-        ...state,
-        preparingForInspection: false
-      };
-    case actionTypes.FAIL_INSPECTION:
-      return initialState;
-    case actionTypes.INCREMENT_PREPARATION_STAGE:
-      return {
-        ...state,
-        preparationStage: state.preparationStage + 1
-      };
-    case actionTypes.SKIP_PREPARATION_STAGE:
-      return {
-        ...state,
-        preparationStage: PREPARATION_STAGES
-      };
-    case actionTypes.PREPARE_ACTIVATION:
-      return {
-        ...state,
-        preparationStage: 0
-      };
-    case actionTypes.RESET_ACTIVATION:
-      return {
-        ...state,
-        preparationStage: -1
-      };
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    [actionTypes.PREPARE_INSPECTION]: state => ({
+      ...state,
+      preparingForInspection: true
+    }),
+    [actionTypes.START_INSPECTION]: state => ({
+      ...state,
+      preparingForInspection: false
+    }),
+    [actionTypes.FAIL_INSPECTION]: () => initialState,
+    [actionTypes.INCREMENT_PREPARATION_STAGE]: state => ({
+      ...state,
+      preparationStage: state.preparationStage + 1
+    }),
+    [actionTypes.SKIP_PREPARATION_STAGE]: state => ({
+      ...state,
+      preparationStage: PREPARATION_STAGES
+    }),
+    [actionTypes.PREPARE_ACTIVATION]: state => ({
+      ...state,
+      preparationStage: 0
+    }),
+    [actionTypes.RESET_ACTIVATION]: state => ({
+      ...state,
+      preparationStage: -1
+    })
+  },
+  initialState
+);

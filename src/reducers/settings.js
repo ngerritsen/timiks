@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
 import { DEFAULT_PUZZLE, DEFAULT_BUTTON_COLOR } from '../constants/app';
 import { DEFAULT_ACTIVATION_DURATION } from '../constants/app';
@@ -14,19 +15,16 @@ const initialState = {
   showTimerTime: true
 };
 
-export default function settingsReducer(state = initialState, action) {
-  switch (action.type) {
-    case actionTypes.LOAD_SETTINGS:
-      return {
-        ...state,
-        ...action.payload
-      };
-    case actionTypes.CHANGE_SETTING:
-      return {
-        ...state,
-        [action.payload.setting]: action.payload.value
-      };
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    [actionTypes.LOAD_SETTINGS]: (state, action) => ({
+      ...state,
+      ...action.payload
+    }),
+    [actionTypes.CHANGE_SETTING]: (state, action) => ({
+      ...state,
+      [action.payload.setting]: action.payload.value
+    })
+  },
+  initialState
+);
