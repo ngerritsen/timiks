@@ -6,7 +6,8 @@
   "scripts": {
     "static": "mkdir -p public; cp -r src/static/* public/",
     "images": "mkdir -p public/images; imagemin src/images/* --out-dir public/images",
-    "watch": "npm run static; npm run images; webpack-dev-server --mode=development --content-base ./public",
+    "copy-images": "mkdir -p public/images; cp src/images/* public/images/",
+    "watch": "npm run static; npm run copy-images; webpack-dev-server --mode=development --content-base ./public",
     "test": "eslint .",
     "build": "npm run static; npm run images; webpack --mode=production",
     "precommit": "npm run test",

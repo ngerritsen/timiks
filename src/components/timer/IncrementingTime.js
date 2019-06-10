@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Time from '../shared/Time';
 import { TIMER_UPDATE_RATE } from '../../constants/app';
 
-const IncrementingTimer = ({ startTime, secondsOnly }) => {
+const IncrementingTimer = ({ startTime }) => {
   const [ms, setMs] = useState(Date.now() - startTime);
 
   useEffect(() => {
@@ -12,12 +12,11 @@ const IncrementingTimer = ({ startTime, secondsOnly }) => {
     return () => clearInterval(interval);
   });
 
-  return <Time time={{ ms }} secondsOnly={secondsOnly} />;
+  return <Time time={{ ms }} />;
 };
 
 IncrementingTimer.propTypes = {
-  startTime: PropTypes.number.isRequired,
-  secondsOnly: PropTypes.bool
+  startTime: PropTypes.number.isRequired
 };
 
 export default IncrementingTimer;

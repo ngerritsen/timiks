@@ -26,7 +26,7 @@ class ShortcutProvider extends Component {
   _handleKeyDown(event) {
     const { ctrlKey, metaKey, shiftKey, altKey } = event;
 
-    if (inputElements.includes(event.target.tagName)) {
+    if (inputElements.includes(event.target.tagName.toLowerCase())) {
       return;
     }
 
@@ -45,14 +45,9 @@ class ShortcutProvider extends Component {
         return;
       }
 
-      const modalEl = document.querySelector('[data-modal]');
       const shortcutEl = document.querySelector(`[data-shortcut="${shortcut.token}"]`);
 
       if (!shortcutEl) {
-        return;
-      }
-
-      if (modalEl && !shortcutEl.closest('[data-modal]')) {
         return;
       }
 

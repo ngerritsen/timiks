@@ -23,16 +23,16 @@ export const DEFAULT_PUZZLE = '3x3x3';
 export const BUTTON_COLORS = [
   { label: 'Default', value: 'primary' },
   { label: 'Black & white', value: 'fg' },
-  { label: 'Blue', value: 'blue' },
-  { label: 'Deep blue', value: 'deepBlue' },
   { label: 'Red', value: 'red' },
   { label: 'Orange', value: 'orange' },
   { label: 'Yellow', value: 'yellow' },
+  { label: 'Lime', value: 'lime' },
   { label: 'Green', value: 'green' },
-  { label: 'Purple', value: 'purple' },
-  { label: 'Pink', value: 'pink' },
   { label: 'Turqoise', value: 'turquoise' },
-  { label: 'Lime', value: 'lime' }
+  { label: 'Blue', value: 'blue' },
+  { label: 'Deep blue', value: 'deepBlue' },
+  { label: 'Purple', value: 'purple' },
+  { label: 'Pink', value: 'pink' }
 ];
 export const DEFAULT_BUTTON_COLOR = 'primary';
 

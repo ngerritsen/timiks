@@ -17,9 +17,9 @@ import Modal from './shared/Modal';
 const Settings = ({ settings, changeSetting }) => (
   <>
     <ToggleContent
-      toggle={({ show }) => (
+      toggle={({ show, toggle }) => (
         <IconButton onClick={show}>
-          <Shortcut command="openSettings" action={show} />
+          <Shortcut command="openSettings" action={toggle} />
           <Shortcut
             command="toggleDarkMode"
             action={() => changeSetting('theme', settings.theme === 'dark' ? 'light' : 'dark')}

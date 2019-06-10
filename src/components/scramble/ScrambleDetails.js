@@ -13,9 +13,9 @@ import * as CustomPropTypes from '../../propTypes';
 
 const ScrambleDetails = ({ scramble, puzzle }) => (
   <ToggleContent
-    toggle={({ show }) => (
+    toggle={({ show, toggle }) => (
       <IconButton onClick={show}>
-        <Shortcut command="showScramble" action={show} />
+        <Shortcut command="showScramble" action={toggle} />
         <FontAwesome icon={faEye} />
       </IconButton>
     )}

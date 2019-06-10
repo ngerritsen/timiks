@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import ToggleContent from '../shared/ToggleContent';
 import Button, { ButtonIcon } from '../shared/Button';
+import Scramble from '../scramble/Scramble';
 import Modal from '../shared/Modal';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faCaretCircleLeft from '@fortawesome/fontawesome-pro-solid/faCaretCircleLeft';
 import faCaretCircleRight from '@fortawesome/fontawesome-pro-solid/faCaretCircleRight';
 import faStar from '@fortawesome/fontawesome-pro-solid/faStar';
+import KeyMap from '../KeyMap';
+import Section from '../shared/Section';
+import Shortcut from '../shared/Shortcut';
+import { BUTTON_COLORS } from '../../constants/app';
 
-const Showcase = () => {
+const relayScramble = `2x2x2 U' F' U F2 R' F2 R F' R' 3x3x3 F2 R B2 R2 D2 R' B2 L D2 B2 R B' R U' L2 R' F' U2 L' B2 D' 4x4x4 Rw Uw2 Fw Rw2 Fw' D2 F' Uw U' L2 R Fw' D' L Rw' R Uw R Uw Rw2 U2 L2 F2 L R2 U F' U' B F' L' D2 Fw2 D2 Fw L Rw2 R' F Uw 5x5x5 L B Fw' U L2 Lw Dw2 Uw U' L' Fw2 Uw2 Lw' F Dw Fw' F' R' Uw U2 B2 L Bw L' Lw' Dw Lw Rw2 Dw2 U B2 Bw2 Fw2 Lw' D' Dw' U Lw Bw2 R2 B2 L Bw2 F' L' Bw Lw' Fw Uw Fw2 F2 Dw R Bw2 F2 D2 Fw2 R B2 F 6x6x6 B2 3Fw Uw' R2 U2 R B Rw 3Uw2 Lw2 Dw' Fw2 D2 Lw2 Fw2 Rw' D2 3Fw Lw' B2 3Fw Fw2 D2 3Uw' U' L2 Lw R2 Bw Rw' D' Dw2 B' 3Fw R2 3Fw 3Rw Fw2 F Lw2 R D L' 3Fw Dw 3Uw' L Rw D2 Uw' Fw' R 3Uw' B' Fw' F' 3Uw B' L Uw R2 3Fw2 Fw' L2 3Rw' Fw2 L' R' Uw2 Bw 7x7x7 U2 R' 3Fw2 3Rw' Bw' 3Uw 3Bw2 Fw2 3Rw Dw U' 3Fw' 3Rw2 Fw2 3Uw' 3Lw2 3Fw' F' Rw2 3Fw 3Rw2 3Dw2 3Uw2 Rw B' 3Bw' Uw Bw 3Dw F' 3Lw2 Uw2 B2 R D2 U Rw 3Dw2 U 3Lw B2 Dw2 B' 3Lw' Rw2 Dw2 3Uw2 3Bw' Dw2 L' 3Rw2 3Uw2 U 3Bw' 3Fw2 Fw2 F2 R' Uw2 3Lw Dw' Uw2 B2 R' 3Dw' B' Fw 3Uw' U' Lw F D' L Lw' Uw R2 3Fw' Lw2 3Dw' Rw U2 Bw2 3Bw 3Fw' L' 3Lw B2 Bw' D2 L2 3Dw' Uw2 3Fw' D' U' Rw' 3Dw 3Rw D' 3Bw'`;
+
+const Showcase = ({ theme }) => {
+  const screenshotTheme = theme.dark ? 'dark' : 'light';
   const features = [
     {
       title: 'Cloud sync',
@@ -36,24 +45,19 @@ const Showcase = () => {
         <>
           <p>
             An accurate timer made for speedsolvers. Responds immediately at your input, so that you
-            can get that important 100st of a second accuracy.
+            can get that important 100st of a second accuracy. Enable inspection time to prepare for
+            those WCA solves, the solve will DNF when it expired.
           </p>
-          <p>The activation duration is configurable to personalize the feel.</p>
-          <Image src="/images/timer.png" />
           <p>
             Quick controls will let you quickly mark the time with a plus 2 penalty or DNF. Keyboard
             shortcuts are there for the real power users.
           </p>
-          <Image src="/images/plus-2.png" />
+          <Image src={`/images/timer-${screenshotTheme}.png`} />
           <p>
             Manual time entry allows you to quickly enter times that were timed from a different
             source. You can even enter DNF or add +2 to immediately mark the time with a penalty!
           </p>
-          <Image src="/images/manual-entry.png" />
-          <p>
-            Enable inspection time to prepare for those WCA solves, the solve will DNF when it
-            expired.
-          </p>
+          <Image src={`/images/manual-entry-${screenshotTheme}.png`} />
         </>
       )
     },
@@ -66,8 +70,8 @@ const Showcase = () => {
             track your progress on all devices. The times are nicely organized by date and event.
             You can even preview the scrambles of any solve in history.
           </p>
-          <Image src="/images/archive-graph.png" />
-          <Image src="/images/archive-times.png" />
+          <Image src={`/images/archive-graph-${screenshotTheme}.png`} />
+          <Image src={`/images/archive-times-${screenshotTheme}.png`} />
         </>
       )
     },
@@ -93,7 +97,31 @@ const Showcase = () => {
             puzzles. As a bonus, if you are logged in, you will be able to have multiple devices and
             screens show the same session!
           </p>
-          <Image src="/images/time-table.png" />
+          <Image src={`/images/time-table-${screenshotTheme}.png`} />
+        </>
+      )
+    },
+    {
+      title: 'Powerful keyboard shortcuts',
+      content: (
+        <>
+          <p>
+            Power users will love the keyboard shortcuts, allowing the switching of modes and
+            settings fast and efficient.
+          </p>
+          <KeyMap />
+        </>
+      )
+    },
+    {
+      title: 'Export to CSV',
+      content: (
+        <>
+          <p>
+            Take control of you own analysis, with export as CSV you can have your archive per
+            puzzle in your own spreadsheet application.
+          </p>
+          <Image src="/images/csv.png" />
         </>
       )
     },
@@ -101,10 +129,27 @@ const Showcase = () => {
       title: 'Relays',
       content: (
         <>
-          <p>Relays with nice, tabbed scrambles and previews.</p>
-          <Image src="/images/relay-timer.png" />
-          <p>You can even view all the scrambles the relays of any time in history</p>
-          <Image src="/images/relay-details.png" />
+          <p>
+            Relays with nice, tabbed scrambles and previews. You can even view all the scrambles the
+            relays of any time in history in the archive.
+          </p>
+          <Scramble scramble={relayScramble.split(' ')} puzzle="2-7-relay" withPreview />
+        </>
+      )
+    },
+    {
+      title: 'Make it your own',
+      content: (
+        <>
+          <p>
+            Configure your activation delay, hide the time during the solve or change the start
+            button color to make the timer your own.
+          </p>
+          {BUTTON_COLORS.slice(2).map(option => (
+            <Section margin="xs" key={option.value}>
+              <Button color={option.value}>Start</Button>
+            </Section>
+          ))}
         </>
       )
     }
@@ -128,19 +173,25 @@ const Showcase = () => {
           <FeatureTitleBar>
             <ArrowIconWrapper>
               {featureIndex > 0 && (
-                <FontAwesome
-                  icon={faCaretCircleLeft}
-                  onClick={() => setFeatureIndex(featureIndex - 1)}
-                />
+                <>
+                  <FontAwesome
+                    icon={faCaretCircleLeft}
+                    onClick={() => setFeatureIndex(featureIndex - 1)}
+                  />
+                  <Shortcut command="previous" action={() => setFeatureIndex(featureIndex - 1)} />
+                </>
               )}
             </ArrowIconWrapper>
             <FeatureTitle>{title}</FeatureTitle>
             <ArrowIconWrapper>
               {featureIndex < features.length - 1 && (
-                <FontAwesome
-                  icon={faCaretCircleRight}
-                  onClick={() => setFeatureIndex(featureIndex + 1)}
-                />
+                <>
+                  <FontAwesome
+                    icon={faCaretCircleRight}
+                    onClick={() => setFeatureIndex(featureIndex + 1)}
+                  />
+                  <Shortcut command="next" action={() => setFeatureIndex(featureIndex + 1)} />
+                </>
               )}
             </ArrowIconWrapper>
           </FeatureTitleBar>
@@ -151,9 +202,13 @@ const Showcase = () => {
   );
 };
 
+Showcase.propTypes = {
+  theme: PropTypes.object.isRequired
+};
+
 const Image = styled.img`
   width: 100%;
-  border-radius: 0.4rem;
+  border-radius: 0.3rem;
   margin-top: ${props => props.theme.sizes.xs};
 `;
 
@@ -179,4 +234,4 @@ const FeatureTitle = styled.h3`
   margin: 0;
 `;
 
-export default Showcase;
+export default withTheme(Showcase);

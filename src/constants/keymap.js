@@ -68,6 +68,16 @@ const keymap = [
     key: 'space',
     commands: [],
     description: 'Start/stop the timer'
+  },
+  {
+    key: 'right',
+    commands: ['next'],
+    hide: true
+  },
+  {
+    key: 'left',
+    commands: ['previous'],
+    hide: true
   }
 ];
 
