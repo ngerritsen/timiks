@@ -143,7 +143,7 @@ const StyledChartistGraph = styled(ChartistGraph)`
 `;
 
 const Legend = styled.div`
-  margin-top: -${props => props.theme.sizes.sm};
+  margin-top: -2rem;
   text-align: center;
 `;
 
