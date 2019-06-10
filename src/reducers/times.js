@@ -18,7 +18,8 @@ const standardTimesReducer = handleActions(
       ...state,
       requiredTimes: {
         puzzle: action.payload.puzzle || null,
-        current: Boolean(action.payload.current)
+        current: Boolean(action.payload.current),
+        days: action.payload.days || null
       }
     })
   },

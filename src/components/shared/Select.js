@@ -28,7 +28,7 @@ const Select = ({ onChange, options, value, numeric, label }) => (
 );
 
 const SelectContainer = styled.span`
-  display: inline-block;
+  display: block;
   position: relative;
 `;
 
@@ -37,11 +37,12 @@ const Label = styled.label`
 `;
 
 const SelectInput = styled.select`
-  display: inline-flex;
+  display: flex;
   align-items: center;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+  width: 100%;
   font-size: 1.4rem;
   height: 2.6rem;
   border-radius: 0.4rem;

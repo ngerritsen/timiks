@@ -1,11 +1,12 @@
 import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
 import { DEFAULT_PUZZLE, DEFAULT_BUTTON_COLOR } from '../constants/app';
-import { DEFAULT_ACTIVATION_DURATION } from '../constants/app';
+import { DEFAULT_ACTIVATION_DURATION, DEFAULT_ARCHIVE_DAYS } from '../constants/app';
 
 const initialState = {
   puzzle: DEFAULT_PUZZLE,
   archivePuzzle: DEFAULT_PUZZLE,
+  archiveDays: DEFAULT_ARCHIVE_DAYS,
   useInspectionTime: false,
   useManualTimeEntry: false,
   theme: 'light',
@@ -19,7 +20,8 @@ export default handleActions(
   {
     [actionTypes.LOAD_SETTINGS]: (state, action) => ({
       ...state,
-      ...action.payload
+      ...action.payload,
+      archiveDays: DEFAULT_ARCHIVE_DAYS
     }),
     [actionTypes.CHANGE_SETTING]: (state, action) => ({
       ...state,

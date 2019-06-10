@@ -5,9 +5,11 @@ import { Observable } from 'rxjs';
 
 const db = firebase.firestore();
 
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+
 db.enablePersistence().catch(() => {});
 
-export function listenForChanges(userId, current, puzzle) {
+export function listenForChanges(userId, current, puzzle, days) {
   return new Observable(observer => {
     let collection = db
       .collection('times')
@@ -16,6 +18,11 @@ export function listenForChanges(userId, current, puzzle) {
 
     if (puzzle) {
       collection = collection.where('puzzle', '==', puzzle);
+    }
+
+    if (days) {
+      const fromDate = new Date(Date.now() - days * MILLISECONDS_PER_DAY);
+      collection = collection.where('timestamp', '>=', fromDate);
     }
 
     return collection.onSnapshot({ includeMetadataChanges: true }, querySnapshot => {

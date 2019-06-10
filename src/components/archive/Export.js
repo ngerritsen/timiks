@@ -9,11 +9,11 @@ import { timesToCsv } from '../../helpers/csv';
 import { downloadAsFile } from '../../helpers/file';
 
 const Export = ({ times, puzzle }) => (
-  <Button tag size="sm" color="subtleBg" onClick={() => downloadAsCsv(times, puzzle)}>
+  <Button size="sm" color="subtleBg" onClick={() => downloadAsCsv(times, puzzle)}>
     <ButtonIcon>
       <FontAwesome icon={faDownload} />
     </ButtonIcon>
-    Download as CSV
+    Export CSV
   </Button>
 );
 
@@ -26,7 +26,8 @@ function downloadAsCsv(times, puzzle) {
 
 Export.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  puzzle: PropTypes.string
+  puzzle: PropTypes.string.isRequired,
+  tag: PropTypes.bool
 };
 
 export default Export;

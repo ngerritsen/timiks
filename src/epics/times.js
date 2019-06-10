@@ -89,9 +89,9 @@ export const loadTimesEpic = (action$, state$) =>
   ).pipe(
     withLatestFrom(state$),
     switchMap(([, state]) => {
-      const { current, puzzle } = getRequiredTimes(state);
+      const { current, puzzle, days } = getRequiredTimes(state);
 
-      return listenForChanges(getUserId(state), current, puzzle).pipe(
+      return listenForChanges(getUserId(state), current, puzzle, days).pipe(
         map(times => actions.loadTimes(times, current, puzzle)),
         takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
       );

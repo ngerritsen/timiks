@@ -36,6 +36,16 @@ export const BUTTON_COLORS = [
 ];
 export const DEFAULT_BUTTON_COLOR = 'primary';
 
+export const ARCHIVE_DAYS_OPTIONS = [
+  { label: 'Last 7 days', value: 7 },
+  { label: 'Last 30 days', value: 30 },
+  { label: 'Last 3 months', value: 92 },
+  { label: 'Last 6 months', value: 183 },
+  { label: 'Last 12 months', value: 365 },
+  { label: 'Last 2 years', value: 730 }
+];
+export const DEFAULT_ARCHIVE_DAYS = 7;
+
 // Scramble
 export const SCRAMBLE_DELIMITER = ' ';
 

@@ -9,44 +9,33 @@ import TimeDetails from '../shared/TimeDetails';
 import TimeGraph from '../shared/TimeGraph';
 import Section from '../shared/Section';
 import Time from '../shared/Time';
-import ArchiveOptions from './ArchiveOptions';
+
 import Modal from '../shared/Modal';
 import ToggleContent from '../shared/ToggleContent';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
-import Export from './Export';
 import { getBreakpoint, getSize, getColor, isDark } from '../../helpers/theme';
+import ArchiveOptionsContainer from '../../containers/archive/ArchiveOptionsContainer';
 
-const Archive = ({
-  times,
-  stats,
-  changeSetting,
-  puzzle,
-  removeTime,
-  timesPerDay,
-  requireTimes
-}) => {
+const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireTimes }) => {
   useEffect(() => {
-    requireTimes(false, puzzle);
-  }, [puzzle]);
+    requireTimes(false, puzzle, days);
+  }, [puzzle, days]);
 
   return (
-    <div>
-      <Section margin="sm">
-        <ArchiveOptions changeSetting={changeSetting} puzzle={puzzle} />
-      </Section>
-      {times.length === 0 && (
-        <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
-      )}
+    <>
       {times.length > 1 && (
         <>
           <Section margin="md">
             <TimeGraph times={times} stats={stats} />
           </Section>
-          <Section margin="md">
-            <Export times={times} puzzle={puzzle} />
-          </Section>
         </>
+      )}
+      <Section margin="sm">
+        <ArchiveOptionsContainer />
+      </Section>
+      {times.length === 0 && (
+        <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
       )}
       {timesPerDay.length > 0 && (
         <Section>
@@ -89,7 +78,7 @@ const Archive = ({
           ))}
         </Section>
       )}
-    </div>
+    </>
   );
 };
 
@@ -103,8 +92,8 @@ Archive.propTypes = {
   ).isRequired,
   requireTimes: PropTypes.func.isRequired,
   stats: PropTypes.object.isRequired,
-  changeSetting: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
+  days: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired
 };
 

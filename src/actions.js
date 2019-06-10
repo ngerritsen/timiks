@@ -57,9 +57,10 @@ export const removeTime = createAction(types.REMOVE_TIME, id => id);
 export const clearTimes = createAction(types.CLEAR_TIMES);
 export const archiveTimes = createAction(types.ARCHIVE_TIMES);
 export const storedLocalTimes = createAction(types.STORED_LOCAL_TIMES);
-export const requireTimes = createAction(types.REQUIRE_TIMES, (current, puzzle) => ({
+export const requireTimes = createAction(types.REQUIRE_TIMES, (current, puzzle, days) => ({
   current,
-  puzzle
+  puzzle,
+  days
 }));
 
 // Settings
