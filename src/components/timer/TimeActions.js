@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { getSize } from '../../helpers/theme';
 import Button from '../shared/Button';
 import Shortcut from '../shared/Shortcut';
 
@@ -44,7 +45,7 @@ const StyledTimeActions = styled.div`
 `;
 
 const TimeAction = styled.span`
-  margin-right: ${props => props.theme.sizes.xs};
+  margin-right: ${getSize('xs')};
 `;
 
 export default TimeActions;

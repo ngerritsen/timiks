@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken, transparentize, getLuminance } from 'polished';
+import { getColor, getSize } from '../../helpers/theme';
 
 const sizeToHeight = {
   sm: '2.6rem',
@@ -26,8 +27,7 @@ const sizeToFontSize = {
 };
 
 const Button = styled.button.attrs({
-  bg: props =>
-    props.theme.colors[(props.disabled && 'grey') || props.color] || props.theme.colors.blue
+  bg: props => getColor(props.disabled ? 'grey' : props.color)(props) || getColor('blue')(props)
 })`
   display: inline-block;
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
@@ -44,10 +44,10 @@ const Button = styled.button.attrs({
   text-decoration: none;
   color: ${props =>
     props.outline
-      ? props.theme.colors.fg
+      ? getColor('fg')(props)
       : getLuminance(props.bg) > 0.5
-      ? props.theme.colors.black
-      : props.theme.colors.white};
+      ? getColor('black')(props)
+      : getColor('white')(props)};
   text-transform: uppercase;
   transition: background-color 0.1s ease;
 
@@ -64,8 +64,8 @@ Button.defaultProps = {
 };
 
 const ButtonIcon = styled.span`
-  color: ${props => props.theme.colors[props.color] || 'inherit'};
-  margin-right: ${props => props.theme.sizes.xs};
+  color: ${props => getColor(props.color)(props) || 'inherit'};
+  margin-right: ${getSize('xs')};
 `;
 
 const LinkButton = Button.withComponent('a');

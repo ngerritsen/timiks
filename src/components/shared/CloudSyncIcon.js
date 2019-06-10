@@ -5,6 +5,7 @@ import faCloud from '@fortawesome/fontawesome-pro-solid/faCloud';
 import faCloudUpload from '@fortawesome/fontawesome-pro-solid/faCloudUpload';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import * as CustomPropTypes from '../../propTypes';
+import { getColor } from '../../helpers/theme';
 
 const CloudSyncIcon = ({ time, size, fixedWidth }) => (
   <IconWrapper>
@@ -13,7 +14,7 @@ const CloudSyncIcon = ({ time, size, fixedWidth }) => (
 );
 
 const IconWrapper = styled.span`
-  color: ${props => props.theme.colors.cloudBlue};
+  color: ${getColor('cloudBlue')};
 `;
 
 CloudSyncIcon.propTypes = {

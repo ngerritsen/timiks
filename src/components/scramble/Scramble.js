@@ -9,6 +9,7 @@ import { getPuzzle } from '../../helpers/puzzle';
 import { splitRelayScramble } from '../../helpers/scramble';
 import CubePreview from '../cube/CubePreview';
 import ScrambleDetails from './ScrambleDetails';
+import { getColor, getSize, getFont } from '../../helpers/theme';
 
 const Scramble = ({ scramble, withDetails, withPreview, puzzle, expand }) => {
   const isRelay = getPuzzle(puzzle).type === RELAY;
@@ -77,7 +78,7 @@ const ScrambleTabs = styled.div`
 `;
 
 const ScrambleTab = styled.div`
-  background-color: ${props => props.theme.colors.subtleBg};
+  background-color: ${getColor('subtleBg')};
   opacity: ${props => (props.active ? 1 : 0.4)};
   padding: 0.6rem 1.2rem;
   font-size: 1.4rem;
@@ -99,10 +100,10 @@ const ScrambleTab = styled.div`
 const ScrambleBox = styled.div`
   font-size: 1.65rem;
   text-align: center;
-  font-family: ${props => props.theme.monoFont};
+  font-family: ${getFont('mono')};
   line-height: 1.3;
-  background-color: ${props => props.theme.colors.subtleBg};
-  padding: ${props => props.theme.sizes.xs};
+  background-color: ${getColor('subtleBg')};
+  padding: ${getSize('xs')};
   margin: 0;
   font-weight: bold;
   border-bottom-right-radius: 0.3rem;
@@ -127,7 +128,7 @@ const ScrambleIconButtonContainer = styled.span`
   float: right;
   display: inline-block;
   font-size: 1.8rem;
-  margin: 0 ${props => props.theme.sizes.xxs};
+  margin: 0 ${getSize('xxs')};
 `;
 
 export default React.memo(Scramble);

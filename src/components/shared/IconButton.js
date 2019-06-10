@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { getColor } from '../../helpers/theme';
 
 export default styled.button`
   border: none;
   background: transparent;
   padding: 0;
-  color: ${props => props.theme.colors[props.color] || 'inherit'};
+  color: ${props => getColor(props.color)(props) || 'inherit'};
   cursor: pointer;
 
   &:focus,

@@ -9,6 +9,7 @@ import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 import Shortcut from './Shortcut';
 import IconButton from './IconButton';
 import { MODAL_ROOT_SELECTOR } from '../../constants/app';
+import { getSize, getColor, getZIndex } from '../../helpers/theme';
 
 const Modal = ({ title, onClose, children }) => {
   const modalRef = useRef(null);
@@ -60,22 +61,22 @@ const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
-  padding: ${props => props.theme.sizes.xs};
+  padding: ${getSize('xs')};
   left: 0;
   right: 0;
-  background-color: ${props => transparentize(0.6, props.theme.colors.fg)};
+  background-color: ${props => transparentize(0.6, getColor('fg')(props))};
   justify-content: center;
   align-items: center;
-  z-index: ${props => props.theme.zIndices.modal};
+  z-index: ${getZIndex('modal')};
 `;
 
 const ModalBox = styled.div`
-  background-color: ${props => props.theme.colors.bg};
+  background-color: ${getColor('bg')};
   border-radius: 0.5rem;
-  padding: ${props => props.theme.sizes.sm};
+  padding: ${getSize('sm')};
   width: 100%;
   max-width: 540px;
-  max-height: calc(100% - ${props => props.theme.sizes.md});
+  max-height: calc(100% - ${getSize('md')});
   overflow: auto;
 
   &:focus {
@@ -86,12 +87,12 @@ const ModalBox = styled.div`
 const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 0 ${props => props.theme.sizes.md};
+  margin: 0 0 ${getSize('md')};
 `;
 
 const ModalTitle = styled.h2`
   font-size: 2rem;
-  margin: 0 ${props => props.theme.sizes.sm} 0 0;
+  margin: 0 ${getSize('sm')} 0 0;
 `;
 
 export default Modal;

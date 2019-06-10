@@ -8,6 +8,7 @@ import Select from '../shared/Select';
 import Button from '../shared/Button';
 import puzzles from '../../constants/puzzles';
 import Shortcut from '../shared/Shortcut';
+import { getBreakpoint, getSize } from '../../helpers/theme';
 
 const TimerOptions = ({
   changeSetting,
@@ -57,14 +58,14 @@ const TimerOptions = ({
 );
 
 const ButtonContainer = styled.span`
-  margin-left: ${props => props.theme.sizes.xs};
+  margin-left: ${getSize('xs')};
   flex-grow: 1;
 `;
 
 const Desktop = styled.div`
   display: none;
 
-  @media screen and (min-width: 420px) {
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
     display: flex;
     align-items: center;
   }
@@ -75,7 +76,7 @@ const Mobile = styled.div`
   flex-wrap: nowrap;
   align-items: center;
 
-  @media screen and (min-width: 420px) {
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
     display: none;
   }
 `;

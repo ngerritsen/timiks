@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { darken, lighten } from 'polished';
 import { puzzleColors } from '../../constants/puzzle';
+import { getSize, getColor, isDark } from '../../helpers/theme';
 
 const CubeFace = ({ face = [], cubeSize }) => (
   <Face>
@@ -33,7 +34,7 @@ const Face = styled.div`
   min-width: 8.6rem;
   width: 8.6rem;
   height: 8.6rem;
-  margin-right: ${props => props.theme.sizes.xs};
+  margin-right: ${getSize('xs')};
 `;
 
 const Row = styled.div`
@@ -45,13 +46,13 @@ const Tile = styled.span`
   border-radius: ${props => scale(props.cubeSize, 0.2, 0.4)}rem;
   display: inline-block;
   flex-grow: 1;
-  background-color: ${props => props.theme.colors[puzzleColors[props.color]]};
+  background-color: ${props => getColor([puzzleColors[props.color]])(props)};
   border-width: 1px;
   border-style: solid;
   border-color: ${props =>
-    props.theme.dark
-      ? lighten(0.15, props.theme.colors[puzzleColors[props.color]])
-      : darken(0.25, props.theme.colors[puzzleColors[props.color]])};
+    isDark(props)
+      ? lighten(0.15, getColor([puzzleColors[props.color]])(props))
+      : darken(0.25, getColor([puzzleColors[props.color]])(props))};
   width: 100%;
   margin-right: ${props => (props.isLastColumn ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
   margin-bottom: ${props => (props.isLastRow ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import FullScreenMask from './FullScreenMask';
 import PrepartionCircles from './PreparationCircles';
 import Button from '../shared/Button';
+import { getBreakpoint, getZIndex, getColor, getSize } from '../../helpers/theme';
 
 const Activation = ({
   inspecting,
@@ -95,29 +96,29 @@ Activation.propTypes = {
 const DesktopOnly = styled.span`
   display: none;
 
-  @media screen and (min-width: 620px) {
+  @media screen and (min-width: ${getBreakpoint('md')}) {
     display: inline;
   }
 `;
 
 const MobileOnly = styled.span`
-  @media screen and (min-width: 720px) {
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
     display: none;
   }
 `;
 
 const ActivationContainer = styled.div`
   position: relative;
-  z-index: ${props => props.theme.zIndices.onFullScreenMask};
+  z-index: ${getZIndex('onFullScreenMask')};
 `;
 
 const Explain = styled.p`
   font-size: 1.5rem;
-  color: ${props => props.theme.colors.subtleFg};
+  color: ${getColor('subtleFg')};
   text-align: center;
-  margin: ${props => props.theme.sizes.sm} 0 0;
+  margin: ${getSize('sm')} 0 0;
   position: relative;
-  top: -${props => props.theme.sizes.xxs};
+  top: -${getSize('xxs')};
   z-index: 102;
 `;
 

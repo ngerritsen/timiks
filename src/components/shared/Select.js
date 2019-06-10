@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import faCaretDown from '@fortawesome/fontawesome-pro-solid/faCaretDown';
 import FontAwesome from '@fortawesome/react-fontawesome';
+import { getSize, getColor } from '../../helpers/theme';
 
 const Select = ({ onChange, options, value, numeric, label }) => (
   <SelectContainer>
@@ -32,7 +33,7 @@ const SelectContainer = styled.span`
 `;
 
 const Label = styled.label`
-  margin-right: ${props => props.theme.sizes.xs};
+  margin-right: ${getSize('xs')};
 `;
 
 const SelectInput = styled.select`
@@ -45,24 +46,24 @@ const SelectInput = styled.select`
   height: 2.6rem;
   border-radius: 0.4rem;
   box-sizing: border-box;
-  padding: 0 ${props => props.theme.sizes.lg} 0 ${props => props.theme.sizes.xs};
-  border: 1px solid ${props => props.theme.colors.grey};
-  color: ${props => props.theme.colors.fg};
-  background-color: ${props => props.theme.colors.bg};
+  padding: 0 ${getSize('lg')} 0 ${getSize('xs')};
+  border: 1px solid ${getColor('grey')};
+  color: ${getColor('fg')};
+  background-color: ${getColor('bg')};
 
   &::-ms-expand {
     display: none;
   }
 
   &:hover {
-    border-color: ${props => props.theme.colors.subtleFg};
+    border-color: ${getColor('subtleFg')};
   }
 
   &:focus {
-    border-color: ${props => props.theme.colors.blue};
-    box-shadow: 0 0 0 1px ${props => props.theme.colors.blue};
+    border-color: ${getColor('blue')};
+    box-shadow: 0 0 0 1px ${getColor('blue')};
     box-shadow: 0 0 0 1px -moz-mac-focusring;
-    color: ${props => props.theme.colors.fg};
+    color: ${getColor('fg')};
     outline: none !important;
   }
 

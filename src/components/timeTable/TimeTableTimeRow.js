@@ -15,6 +15,7 @@ import IconButton from '../shared/IconButton';
 import { Cell } from '../shared/Tables';
 import { SubtleText } from '../shared/Typography';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
+import { getColor, getSize } from '../../helpers/theme';
 
 const TimeTableTimeRow = ({ index, time, removeTime }) => (
   <tr>
@@ -71,20 +72,20 @@ const TimeIndexCell = Cell.extend`
 
 const TimeInfo = styled.span`
   padding-left: 1rem;
-  color: ${props => props.theme.colors.subtleFg};
+  color: ${getColor('subtleFg')};
   font-size: 1.5rem;
 `;
 
 const BestTimeIcon = styled.span`
-  color: ${props => props.theme.colors.green};
+  color: ${getColor('green')};
 `;
 
 const InfoIconButton = IconButton.extend`
-  margin-left: ${props => props.theme.sizes.xs};
+  margin-left: ${getSize('xs')};
 `;
 
 const RemoveItemIconButton = IconButton.extend`
-  margin-left: ${props => props.theme.sizes.xxs};
+  margin-left: ${getSize('xxs')};
 `;
 
 export default React.memo(TimeTableTimeRow);

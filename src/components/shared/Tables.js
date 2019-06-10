@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getColor } from '../../helpers/theme';
 
 export const Tables = styled.table`
   width: 100%;
@@ -9,13 +10,13 @@ export const Tables = styled.table`
 
 export const Cell = styled.td`
   text-align: ${props => (props.rightAlign ? 'right' : 'left')};
-  border-top: 1px solid ${props => props.theme.colors.grey};
+  border-top: 1px solid ${getColor('grey')};
   height: 3.6rem;
 `;
 
 export const HeadingCell = styled.th`
   text-align: ${props => (props.rightAlign ? 'right' : 'left')};
-  border-bottom: 2px solid ${props => props.theme.colors.grey};
+  border-bottom: 2px solid ${getColor('grey')};
   height: 3.6rem;
   font-weight: bold;
 `;

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../../constants/puzzle';
 import { layoutScramble } from '../../helpers/cube';
 import CubeFace from './CubeFace';
+import { getSize, getColor } from '../../helpers/theme';
 
 const CUBE_LAYOUT = [[null, UP, null, null], [LEFT, FRONT, RIGHT, BACK], [null, DOWN, null, null]];
 
@@ -50,14 +51,14 @@ const CubePreviewContainer = styled.div`
 
 const Note = styled.span`
   display: block;
-  margin-top: ${props => props.theme.sizes.xs};
-  color: ${props => props.theme.colors.subtleFg};
+  margin-top: ${getSize('xs')};
+  color: ${getColor('subtleFg')};
   text-align: left;
 `;
 
 const Row = styled.div`
   display: flex;
-  margin-bottom: ${props => props.theme.sizes.xs};
+  margin-bottom: ${getSize('xs')};
 `;
 
 export default CubePreview;

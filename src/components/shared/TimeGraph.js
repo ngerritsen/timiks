@@ -8,8 +8,8 @@ import faCircle from '@fortawesome/fontawesome-pro-solid/faCircle';
 
 import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, getMs } from '../../helpers/time';
-
 import { AVAILABLE_STATS } from '../../constants/app';
+import { getColor, getSize } from '../../helpers/theme';
 
 const lineColors = AVAILABLE_STATS.reduce(
   (colors, stat) => ({ ...colors, [stat.name]: stat.color }),
@@ -107,38 +107,38 @@ const StyledChartistGraph = styled(ChartistGraph)`
   }
 
   .single .ct-line {
-    stroke: ${props => props.theme.colors[lineColors.single]};
+    stroke: ${getColor(lineColors.single)};
   }
 
   .ao5 .ct-line {
-    stroke: ${props => props.theme.colors[lineColors.ao5]};
+    stroke: ${getColor(lineColors.ao5)};
   }
 
   .ao12 .ct-line {
-    stroke: ${props => props.theme.colors[lineColors.ao12]};
+    stroke: ${getColor(lineColors.ao12)};
   }
 
   .ao25 .ct-line {
-    stroke: ${props => props.theme.colors[lineColors.ao25]};
+    stroke: ${getColor(lineColors.ao25)};
   }
 
   .ao50 .ct-line {
-    stroke: ${props => props.theme.colors[lineColors.ao50]};
+    stroke: ${getColor(lineColors.ao50)};
   }
 
   .ao100 .ct-line {
-    stroke: ${props => props.theme.colors[lineColors.ao100]};
+    stroke: ${getColor(lineColors.ao100)};
   }
 
   .ct-grid {
-    stroke: ${props => props.theme.colors.grey};
+    stroke: ${getColor('grey')};
   }
 
   .ct-label {
     position: relative;
     font-size: 1.3rem;
-    color: ${props => props.theme.colors.grey};
-    top: ${props => props.theme.sizes.xxs};
+    color: ${getColor('grey')};
+    top: ${getSize('xxs')};
   }
 `;
 
@@ -150,8 +150,8 @@ const Legend = styled.div`
 const LegendItemIcon = styled.span`
   position; relative;
   top: 0.1rem;
-  color: ${props => props.theme.colors[props.color]};
-  margin-right: ${props => props.theme.sizes.xxs};
+  color: ${props => getColor(props.color)(props)};
+  margin-right: ${getSize('xxs')};
 `;
 
 const LegendItemLabel = styled.span`
@@ -161,10 +161,10 @@ const LegendItemLabel = styled.span`
 const LegendItem = styled.span`
   cursor: pointer;
   display: inline-block;
-  color: ${props => props.theme.colors.subtleFg};
+  color: ${getColor('subtleFg')};
   font-size: 1.3rem;
-  margin-right: ${props => props.theme.sizes.sm};
-  margin-bottom: ${props => props.theme.sizes.xs};
+  margin-right: ${getSize('sm')};
+  margin-bottom: ${getSize('xs')};
 
   &:last-child {
     margin-right: 0;

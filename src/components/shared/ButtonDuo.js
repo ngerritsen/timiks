@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getSize } from '../../helpers/theme';
 
 export const ButtonDuo = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const ButtonDuo = styled.div`
 
 export const ButtonDuoItem = styled.div`
   flex-grow: ${props => (props.center ? '0' : '1')};
-  margin-right: ${props => props.theme.sizes.xs};
+  margin-right: ${getSize('xs')};
 
   &:last-child {
     margin-right: 0;

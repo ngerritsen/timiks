@@ -20,8 +20,10 @@ const BASE_SIZE = 0.8;
 const getSize = n => (BASE_SIZE * n).toFixed(1) + 'rem';
 
 export const light = {
-  font: 'Barlow, Arial, sans-serif',
-  monoFont: '"Roboto Mono", monospace',
+  fonts: {
+    default: 'Barlow, Arial, sans-serif',
+    mono: '"Roboto Mono", monospace'
+  },
   colors: {
     bg: WHITE,
     black: BLACK,
@@ -44,6 +46,11 @@ export const light = {
     turquoise: TURQUOISE,
     white: WHITE,
     yellow: YELLOW
+  },
+  breakpoints: {
+    sm: '520px',
+    md: '620px',
+    lg: '720px'
   },
   sizes: {
     xxs: getSize(0.5),

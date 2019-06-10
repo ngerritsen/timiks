@@ -12,6 +12,7 @@ import TimeEntryContainer from '../../containers/timer/TimeEntryContainer';
 import IncrementingTime from './IncrementingTime';
 import DecrementingTime from './DecrementingTime';
 import { INSPECTION_TIME } from '../../constants/app';
+import { getZIndex } from '../../helpers/theme';
 
 const Timer = ({
   inspecting,
@@ -89,7 +90,7 @@ const TimeFooter = styled.div`
 const TimerTime = styled.span`
   position: relative;
   opacity: ${props => (props.disabled ? 0.5 : 1)};
-  z-index: ${props => props.theme.zIndices.onFullScreenMask};
+  z-index: ${getZIndex('onFullScreenMask')};
 `;
 
 const TimerTimeContainer = styled.div`

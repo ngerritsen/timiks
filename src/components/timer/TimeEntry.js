@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Input from '../shared/Input';
 import ManualTimeEntryExplanation from './ManualTimeEntryExplanation';
+import { getColor, getSize, getFont } from '../../helpers/theme';
 
 const TimeEntry = ({ value, onKeyPress, onChange }) => (
   <TimeInputContainer>
@@ -35,7 +36,7 @@ const HelperText = styled.p`
   font-size: 1.5rem;
   top: 7.2rem;
   margin: 0;
-  color: ${props => props.theme.colors.subtleFg};
+  color: ${getColor('subtleFg')};
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
@@ -47,8 +48,8 @@ const TimeInput = Input.extend`
   text-align: center;
   -webkit-appearance: none;
   height: 6rem;
-  font-family: ${props => props.theme.font};
-  padding: 0 ${props => props.theme.sizes.xs};
+  font-family: ${getFont('default')};
+  padding: 0 ${getSize('xs')};
 `;
 
 export default TimeEntry;

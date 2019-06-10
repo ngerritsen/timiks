@@ -15,6 +15,7 @@ import TimeTableTimeRow from './TimeTableTimeRow';
 import { Cell, HeadingCell, SubtleHeadingCell, Tables } from '../shared/Tables';
 import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
+import { getBreakpoint, getSize } from '../../helpers/theme';
 
 const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
   return (
@@ -92,22 +93,22 @@ const TimeTableContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 520px) {
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
     flex-direction: row;
   }
 `;
 
 const TimeTableColumn = styled.div`
-  margin-bottom: ${props => props.theme.sizes.sm};
+  margin-bottom: ${getSize('sm')};
   overflow: auto;
 
   &:last-child {
     margin-bottom: 0;
   }
 
-  @media screen and (min-width: 520px) {
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
     width: 50%;
-    margin-right: ${props => props.theme.sizes.md};
+    margin-right: ${getSize('md')};
     margin-bottom: 0;
 
     &:last-child {
@@ -118,7 +119,7 @@ const TimeTableColumn = styled.div`
 `;
 
 const QuestionIconButton = IconButton.extend`
-  margin-left: ${props => props.theme.sizes.xs};
+  margin-left: ${getSize('xs')};
 `;
 
 export default React.memo(TimeTable);

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 import IconButton from './IconButton';
+import { getSize, getColor } from '../../helpers/theme';
 
 const Message = ({ message, dismiss, withPointer }) => (
   <MessageBox>
@@ -29,8 +30,8 @@ Message.propTypes = {
 };
 
 const MessageBox = styled.div`
-  color: ${props => props.theme.colors.white};
-  background-color: ${props => props.theme.colors.blue};
+  color: ${getColor('white')};
+  background-color: ${getColor('blue')};
   padding: 2rem 0;
 `;
 
@@ -47,7 +48,7 @@ const MessagePointer = styled.div`
   height: 0;
   border-left: 0.8rem solid transparent;
   border-right: 0.8rem solid transparent;
-  border-top: 0.9rem solid ${props => props.theme.colors.blue};
+  border-top: 0.9rem solid ${getColor('blue')};
   position: absolute;
   bottom: calc(-2.9rem);
   right: 0.1rem;
@@ -58,8 +59,8 @@ const MessageText = styled.div`
 `;
 
 const MessageClose = styled.div`
-  margin-left: ${props => props.theme.sizes.md};
-  margin-right: ${props => props.theme.sizes.xxs};
+  margin-left: ${getSize('md')};
+  margin-right: ${getSize('xxs')};
   display: flex;
   align-items: center;
 `;

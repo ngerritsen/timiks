@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getSize } from '../../helpers/theme';
 
 export const Toolbar = styled.p`
   text-align: right;
@@ -7,5 +8,5 @@ export const Toolbar = styled.p`
 `;
 
 export const ToolbarItem = styled.span`
-  margin-left: ${props => props.theme.sizes.xs};
+  margin-left: ${getSize('xs')};
 `;

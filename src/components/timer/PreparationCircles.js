@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { PREPARATION_STAGES } from '../../constants/app';
 import { generateArr } from '../../helpers/general';
+import { getSize } from '../../helpers/theme';
 
 const PrepartionCircles = ({ preparationStage }) =>
   generateArr(PREPARATION_STAGES).map(index => (
@@ -22,7 +23,7 @@ const PrepartionCircle = styled.span`
   line-height: 1.6rem;
   background-color: white;
   opacity: ${props => (props.active ? 1 : 0.3)};
-  margin: 0 ${props => props.theme.sizes.sm};
+  margin: 0 ${getSize('sm')};
 `;
 
 export default PrepartionCircles;

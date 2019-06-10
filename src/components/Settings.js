@@ -13,6 +13,7 @@ import Select from './shared/Select';
 import Checkbox from './shared/Checkbox';
 import Button from './shared/Button';
 import Modal from './shared/Modal';
+import { getSize, getColor } from '../helpers/theme';
 
 const Settings = ({ settings, changeSetting }) => (
   <>
@@ -129,11 +130,11 @@ const Setting = styled.label`
   justify-content: space-between;
   height: 2.2rem;
   align-items: center;
-  padding-right: ${props => props.theme.sizes.xxs};
+  padding-right: ${getSize('xxs')};
 `;
 
 const SectionTitle = styled.h3`
-  margin: 0 0 ${props => props.theme.sizes.sm};
+  margin: 0 0 ${getSize('sm')};
   font-weight: bold;
   font-size: 1.7rem;
 `;
@@ -141,7 +142,7 @@ const SectionTitle = styled.h3`
 const Explanation = styled.span`
   margin: 0;
   padding: 0;
-  color: ${props => props.theme.colors.subtleFg};
+  color: ${getColor('subtleFg')};
   font-style: italic;
 `;
 

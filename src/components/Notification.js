@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { NOTIFICATION_ROOT_SELECTOR } from '../constants/app';
+import { getBreakpoint, getSize, getZIndex, getColor } from '../helpers/theme';
 
 const Notification = ({ message, isError, show, hideNotification }) => {
   return ReactDOM.createPortal(
@@ -28,24 +29,24 @@ const NotificationContainer = styled.div`
   display: flex;
   position: fixed;
   bottom: ${props => (props.show ? '0' : '-16rem')};
-  padding: 0 ${props => props.theme.sizes.sm} ${props => props.theme.sizes.xs};
+  padding: 0 ${getSize('sm')} ${getSize('xs')};
   left: 0;
   right: 0;
   justify-content: center;
   align-items: center;
   pointer-events: none;
-  z-index: ${props => props.theme.zIndices.modal};
+  z-index: ${getZIndex('modal')};
 
-  @media screen and (min-width: 540px) {
-    padding-bottom: ${props => props.theme.sizes.sm};
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
+    padding-bottom: ${getSize('sm')};
   }
 `;
 
 const NotificationMessage = styled.div`
-  background-color: ${props => (props.error ? props.theme.colors.red : props.theme.colors.dark)};
-  color: ${props => props.theme.colors.white};
+  background-color: ${props => getColor(props.error ? 'red' : 'dark')(props)};
+  color: ${getColor('white')};
   border-radius: 0.5rem;
-  padding: ${props => props.theme.sizes.sm};
+  padding: ${getSize('sm')};
   width: 100%;
   pointer-events: auto;
   max-width: 540px;

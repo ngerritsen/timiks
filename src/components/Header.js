@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import SettingsContainer from '../containers/SettingsContainer';
 import KeyboardShortcuts from './KeyboardShortcuts';
 import AccountContainer from '../containers/AccountContainer';
+import { getBreakpoint, getZIndex, getColor } from '../helpers/theme';
 
 const Header = () => (
   <HeaderBar>
@@ -35,7 +36,7 @@ const HeaderBar = styled.header`
 
 const Title = styled.h1`
   position: relative;
-  z-index: ${props => props.theme.zIndices.onFullScreenMask};
+  z-index: ${getZIndex('onFullScreenMask')};
 `;
 
 const IconContainer = styled.span`
@@ -45,14 +46,14 @@ const IconContainer = styled.span`
 const KeyboardShortcutsIconContainer = IconContainer.extend`
   display: none;
 
-  @media screen and (min-width: 540px) {
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
     display: inline;
   }
 `;
 
 const StyledNavLink = styled(NavLink)`
   margin-right: 1.2rem;
-  color: ${props => props.theme.colors.fg};
+  color: ${getColor('fg')};
   font-weight: bold;
   text-decoration: none;
   padding-bottom: 1px;
@@ -60,17 +61,17 @@ const StyledNavLink = styled(NavLink)`
   &:hover,
   &:focus,
   &:visited {
-    color: ${props => props.theme.colors.fg};
+    color: ${getColor('fg')};
     text-decoration: none;
   }
 
   &:hover,
   &:focus {
-    border-bottom: 2px solid ${props => props.theme.colors.grey};
+    border-bottom: 2px solid ${getColor('grey')};
   }
 
   &.selected {
-    border-bottom: 2px solid ${props => props.theme.colors.fg};
+    border-bottom: 2px solid ${getColor('fg')};
   }
 `;
 

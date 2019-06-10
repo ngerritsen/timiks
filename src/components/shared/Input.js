@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
+import { getColor, getSize } from '../../helpers/theme';
 
 const Input = styled.input`
   background: transparent;
@@ -7,15 +8,15 @@ const Input = styled.input`
   -webkit-appearance: none;
   width: 100%;
   font-size: 1.5rem;
-  color: ${props => props.theme.colors.fg};
-  border: 1px solid ${props => props.theme.colors.grey};
+  color: ${getColor('fg')};
+  border: 1px solid ${getColor('grey')};
   border-radius: 0.3rem;
-  padding: ${props => props.theme.sizes.xs};
+  padding: ${getSize('xs')};
   margin: 0;
 
   &:focus {
     outline: none;
-    border: 1px solid ${props => transparentize(0.2, props.theme.colors.blue)};
+    border: 1px solid ${props => transparentize(0.2, getColor('blue')(props))};
   }
 `;
 

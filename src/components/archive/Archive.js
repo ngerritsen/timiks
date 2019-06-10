@@ -15,6 +15,7 @@ import ToggleContent from '../shared/ToggleContent';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
 import Export from './Export';
+import { getBreakpoint, getSize, getColor, isDark } from '../../helpers/theme';
 
 const Archive = ({
   times,
@@ -108,7 +109,7 @@ Archive.propTypes = {
 };
 
 const Message = styled.p`
-  color: ${props => props.theme.colors.grey};
+  color: ${getColor('grey')};
   font-weight: bold;
   padding: 15vh 0;
   text-align: center;
@@ -128,18 +129,18 @@ const DateTag = styled.div`
 const TimeTiles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: ${props => props.theme.sizes.xs};
-  grid-row-gap: ${props => props.theme.sizes.xs};
+  grid-column-gap: ${getSize('xs')};
+  grid-row-gap: ${getSize('xs')};
 
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: ${getBreakpoint('sm')}) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: ${getBreakpoint('md')}) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
 `;
@@ -154,14 +155,13 @@ const SyncStatusIcon = styled.span`
 const TimeTile = styled.div`
   position: relative;
   text-align: center;
-  border: 1px solid ${props => props.theme.colors.grey};
-  padding: ${props => props.theme.sizes.sm};
+  border: 1px solid ${getColor('grey')};
+  padding: ${getSize('sm')};
   border-radius: 3px;
   cursor: pointer;
 
   :hover {
-    background-color: ${props =>
-      (props.theme.dark ? lighten : darken)(0.075, props.theme.colors.bg)};
+    background-color: ${props => (isDark(props) ? lighten : darken)(0.075, getColor('bg')(props))};
   }
 `;
 

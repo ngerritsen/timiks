@@ -49,7 +49,6 @@ AppContainer.propTypes = {
 };
 
 function renderGlobalTheme(theme) {
-  document.body.style['font-family'] = theme.font;
   document.body.style['background-color'] = theme.colors.bg;
   document.body.style.color = theme.colors.fg;
 }

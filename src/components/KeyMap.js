@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import keymap from '../constants/keymap';
 import Section from './shared/Section';
+import { getColor } from '../helpers/theme';
 
 const KeyMap = () => (
   <>
@@ -29,9 +30,9 @@ const Key = styled.span`
   font-size: 1.4rem;
   display: inline-block;
   border-radius: 0.3rem;
-  border: 1px solid ${props => props.theme.colors.grey};
-  background-color: ${props => props.theme.colors.subtleBg};
-  color: ${props => props.theme.colors.subtleFg};
+  border: 1px solid ${getColor('grey')};
+  background-color: ${getColor('subtleBg')};
+  color: ${getColor('subtleFg')};
   padding: 0.15rem 0.4rem;
 `;
 
