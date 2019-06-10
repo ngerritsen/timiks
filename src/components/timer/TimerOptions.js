@@ -8,7 +8,8 @@ import Select from '../shared/Select';
 import Button from '../shared/Button';
 import puzzles from '../../constants/puzzles';
 import Shortcut from '../shared/Shortcut';
-import { getBreakpoint, getSize } from '../../helpers/theme';
+import { getSize } from '../../helpers/theme';
+import { VisibleFrom, HiddenFrom } from '../shared/Visibility';
 
 const TimerOptions = ({
   changeSetting,
@@ -27,33 +28,37 @@ const TimerOptions = ({
       command="toggleManualTimeEntry"
       action={() => changeSetting('useManualTimeEntry', !useManualTimeEntry)}
     />
-    <Desktop>
-      <Select
-        label="Puzzle"
-        onChange={puzzle => changeSetting('puzzle', puzzle)}
-        options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
-        value={puzzle}
-      />
-      <ButtonContainer>
-        <Button size="sm" tag color="subtleBg" onClick={refreshScramble}>
-          <InlineFontawesome fixedWidth icon={faSyncAlt} />
-          Scramble
-        </Button>
-      </ButtonContainer>
-    </Desktop>
-    <Mobile>
-      <Select
-        onChange={puzzle => changeSetting('puzzle', puzzle)}
-        options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
-        value={puzzle}
-      />
-      <ButtonContainer>
-        <Button size="sm" color="subtleBg" onClick={refreshScramble}>
-          <InlineFontawesome fixedWidth icon={faSyncAlt} />
-          Scramble
-        </Button>
-      </ButtonContainer>
-    </Mobile>
+    <VisibleFrom breakpoint="sm">
+      <Toolbar>
+        <Select
+          label="Puzzle"
+          onChange={puzzle => changeSetting('puzzle', puzzle)}
+          options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
+          value={puzzle}
+        />
+        <ButtonContainer>
+          <Button size="sm" tag color="subtleBg" onClick={refreshScramble}>
+            <InlineFontawesome fixedWidth icon={faSyncAlt} />
+            Scramble
+          </Button>
+        </ButtonContainer>
+      </Toolbar>
+    </VisibleFrom>
+    <HiddenFrom breakpoint="sm">
+      <Toolbar>
+        <Select
+          onChange={puzzle => changeSetting('puzzle', puzzle)}
+          options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
+          value={puzzle}
+        />
+        <ButtonContainer>
+          <Button size="sm" color="subtleBg" onClick={refreshScramble}>
+            <InlineFontawesome fixedWidth icon={faSyncAlt} />
+            Scramble
+          </Button>
+        </ButtonContainer>
+      </Toolbar>
+    </HiddenFrom>
   </>
 );
 
@@ -62,23 +67,10 @@ const ButtonContainer = styled.span`
   flex-grow: 1;
 `;
 
-const Desktop = styled.div`
-  display: none;
-
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
-    display: flex;
-    align-items: center;
-  }
-`;
-
-const Mobile = styled.div`
+const Toolbar = styled.div`
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
-    display: none;
-  }
 `;
 
 TimerOptions.propTypes = {

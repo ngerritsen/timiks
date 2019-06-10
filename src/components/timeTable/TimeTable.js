@@ -90,16 +90,14 @@ TimeTable.propTypes = {
 };
 
 const TimeTableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
   @media screen and (min-width: ${getBreakpoint('sm')}) {
     flex-direction: row;
+    display: flex;
   }
 `;
 
 const TimeTableColumn = styled.div`
-  margin-bottom: ${getSize('sm')};
+  margin-bottom: ${getSize('xs')};
   overflow: auto;
 
   &:last-child {

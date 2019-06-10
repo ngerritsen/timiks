@@ -5,7 +5,8 @@ import { NavLink } from 'react-router-dom';
 import SettingsContainer from '../containers/SettingsContainer';
 import KeyboardShortcuts from './KeyboardShortcuts';
 import AccountContainer from '../containers/AccountContainer';
-import { getBreakpoint, getZIndex, getColor } from '../helpers/theme';
+import { getZIndex, getColor } from '../helpers/theme';
+import { VisibleFrom } from './shared/Visibility';
 
 const Header = () => (
   <HeaderBar>
@@ -17,7 +18,7 @@ const Header = () => (
       <StyledNavLink activeClassName="selected" to="/archive">
         Archive
       </StyledNavLink>
-      <KeyboardShortcutsIconContainer>
+      <KeyboardShortcutsIconContainer breakpoint="sm" display="inline">
         <KeyboardShortcuts />
       </KeyboardShortcutsIconContainer>
       <IconContainer>
@@ -43,12 +44,8 @@ const IconContainer = styled.span`
   margin-right: 1rem;
 `;
 
-const KeyboardShortcutsIconContainer = IconContainer.extend`
-  display: none;
-
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
-    display: inline;
-  }
+const KeyboardShortcutsIconContainer = VisibleFrom.extend`
+  margin-right: 1rem;
 `;
 
 const StyledNavLink = styled(NavLink)`

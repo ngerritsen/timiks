@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import FullScreenMask from './FullScreenMask';
 import PrepartionCircles from './PreparationCircles';
 import Button from '../shared/Button';
-import { getBreakpoint, getZIndex, getColor, getSize } from '../../helpers/theme';
+import { getZIndex, getColor, getSize } from '../../helpers/theme';
+import { VisibleFrom, HiddenFrom } from '../shared/Visibility';
 
 const Activation = ({
   inspecting,
@@ -59,16 +60,17 @@ const Activation = ({
           case !stopped:
             return (
               <>
-                <DesktopOnly>Click, touch or smash any key to stop</DesktopOnly>
-                <MobileOnly>Touch anywhere to stop.</MobileOnly>
+                <VisibleFrom breakpoint="md">Click, touch or smash any key to stop.</VisibleFrom>
+                <HiddenFrom breakpoint="md">Touch anywhere to stop.</HiddenFrom>
               </>
             );
           default:
             return (
               <>
-                <DesktopOnly>Click, touch or hold spacebar and release to start</DesktopOnly>
-                <MobileOnly>Hold and release to start</MobileOnly>
-                {useInspectionTime ? ' inspection.' : '.'}
+                <VisibleFrom breakpoint="md">
+                  Click, touch or hold spacebar and release to start.
+                </VisibleFrom>
+                <HiddenFrom breakpoint="md">Hold and release to start.</HiddenFrom>
               </>
             );
         }
@@ -93,26 +95,12 @@ Activation.propTypes = {
   buttonColor: PropTypes.string.isRequired
 };
 
-const DesktopOnly = styled.span`
-  display: none;
-
-  @media screen and (min-width: ${getBreakpoint('md')}) {
-    display: inline;
-  }
-`;
-
-const MobileOnly = styled.span`
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
-    display: none;
-  }
-`;
-
 const ActivationContainer = styled.div`
   position: relative;
   z-index: ${getZIndex('onFullScreenMask')};
 `;
 
-const Explain = styled.p`
+const Explain = styled.div`
   font-size: 1.5rem;
   color: ${getColor('subtleFg')};
   text-align: center;
