@@ -117,7 +117,7 @@ const Showcase = () => {
     <ToggleContent
       toggle={({ show }) => (
         <Button tag size="sm" outline color="grey" onClick={show}>
-          <ButtonIcon color="subtleFg">
+          <ButtonIcon color="yellow">
             <FontAwesome icon={faStar} />
           </ButtonIcon>
           Show features
