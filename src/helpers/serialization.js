@@ -29,7 +29,6 @@ export function serializeTime(time) {
     ms: time.ms,
     puzzle: time.puzzle,
     scramble: serializeScramble(time.scramble),
-    date: time.date.toISOString(),
     timestamp: time.date,
     dnf: time.dnf || undefined,
     plus2: time.plus2 || undefined,
