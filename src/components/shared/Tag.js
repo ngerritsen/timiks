@@ -2,17 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { getLuminance, darken } from 'polished';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faCheckCircle from '@fortawesome/fontawesome-pro-solid/faCheckCircle';
-import faCircle from '@fortawesome/fontawesome-pro-solid/faCircle';
 
-const Tag = ({ children, color, withCheckbox, checked, onClick }) => (
-  <TagTag color={color} hoverable={withCheckbox} onClick={e => onClick && onClick(e)}>
-    {withCheckbox && (
-      <TagCheck>
-        <FontAwesome icon={checked ? faCircle : faCheckCircle} />
-      </TagCheck>
-    )}
+const Tag = ({ children, color, onClick }) => (
+  <TagTag color={color} hoverable={Boolean(onClick)} onClick={e => onClick && onClick(e)}>
     {children}
   </TagTag>
 );
@@ -48,13 +40,6 @@ const TagTag = styled.span.attrs({
   &:focus {
     background-color: ${props => darken(props.hoverable ? 0.07 : 0, props.bg)};
   }
-`;
-
-const TagCheck = styled.span`
-  position: relative;
-  top: 0.1rem;
-  margin-right: 0.2rem;
-  left: -0.2rem;
 `;
 
 export default Tag;
