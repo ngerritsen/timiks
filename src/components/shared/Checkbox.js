@@ -16,7 +16,7 @@ const Checkbox = ({ onChange, checked, inverse }) => {
   );
 };
 
-const CheckboxBox = styled.input`
+const CheckboxBox = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
