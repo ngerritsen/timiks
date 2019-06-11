@@ -98,7 +98,7 @@ const ScrambleTab = styled.div`
 `;
 
 const ScrambleBox = styled.div`
-  font-size: 1.65rem;
+  font-size: 1.8rem;
   text-align: center;
   font-family: ${getFont('mono')};
   line-height: 1.3;
