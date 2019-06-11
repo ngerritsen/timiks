@@ -89,12 +89,13 @@ Account.propTypes = {
   isInitialized: PropTypes.bool,
   email: PropTypes.string,
   login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  avatarUrl: PropTypes.string.isRequired
 };
 
 const Avatar = styled.img`
   width: 8rem;
-  height: auto;
+  height: 8rem;
   border-radius: 4rem;
   margin: 0 0 ${getSize('sm')};
   border: 1px solid ${getColor('subtleBg')};
