@@ -1,9 +1,10 @@
-import { getArchivePuzzle } from './settings';
+import { getArchivePuzzle, getArchiveDays } from './settings';
 import { markBestTime, calculateStats, isCurrent, getId } from '../helpers/times';
 import { createSelector } from 'reselect';
 import { getLastTimeId } from './timer';
 import { groupByDay } from '../helpers/archive';
 import { createAscSorter } from '../helpers/general';
+import { getDateForDaysAgo } from '../helpers/dateTime';
 
 export const getTimes = state => state.times.times;
 
@@ -54,18 +55,24 @@ export const getStatsForCurrentTimes = createSelector(
   calculateStats
 );
 
-export const getSortedArchivedTimesForPuzzle = createSelector(
+export const getSortedFilteredArchivedTimes = createSelector(
   getArchivedTimes,
   getArchivePuzzle,
-  (times, puzzle) => times.filter(time => time.puzzle === puzzle).sort(createAscSorter('date'))
+  getArchiveDays,
+  (times, puzzle, days) => {
+    const fromDate = days ? getDateForDaysAgo(days) : null;
+    return times
+      .filter(time => time.puzzle === puzzle && (!fromDate || time.date >= fromDate))
+      .sort(createAscSorter('date'));
+  }
 );
 
 export const getArchivedTimesPerDayForPuzzle = createSelector(
-  getSortedArchivedTimesForPuzzle,
+  getSortedFilteredArchivedTimes,
   groupByDay
 );
 
 export const getStatsForArchivedTimesForPuzzle = createSelector(
-  getSortedArchivedTimesForPuzzle,
+  getSortedFilteredArchivedTimes,
   calculateStats
 );

@@ -7,7 +7,7 @@ import * as archiveSelectors from '../../selectors/times';
 
 function mapStateToProps(state) {
   return {
-    times: archiveSelectors.getSortedArchivedTimesForPuzzle(state),
+    times: archiveSelectors.getSortedFilteredArchivedTimes(state),
     timesPerDay: archiveSelectors.getArchivedTimesPerDayForPuzzle(state),
     stats: archiveSelectors.getStatsForArchivedTimesForPuzzle(state),
     puzzle: getArchivePuzzle(state),

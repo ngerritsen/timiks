@@ -2,10 +2,9 @@
 import * as firebase from 'firebase/app';
 import { serializeTime, parseTimes } from '../helpers/serialization';
 import { Observable } from 'rxjs';
+import { getDateForDaysAgo } from '../helpers/dateTime';
 
 const db = firebase.firestore();
-
-const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 
 db.enablePersistence().catch(() => {});
 
@@ -21,7 +20,7 @@ export function listenForChanges(userId, current, puzzle, days) {
     }
 
     if (days) {
-      const fromDate = new Date(Date.now() - days * MILLISECONDS_PER_DAY);
+      const fromDate = getDateForDaysAgo(days);
       collection = collection.where('timestamp', '>=', fromDate);
     }
 
