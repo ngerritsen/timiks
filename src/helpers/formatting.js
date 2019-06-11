@@ -11,3 +11,7 @@ export function fillZeroes(stringNumber, length, toEnd = false) {
 
   return zeroes + stringNumber;
 }
+
+export function decapitalize(string) {
+  return string.charAt(0).toLowerCase() + string.substring(1);
+}

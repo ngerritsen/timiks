@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { darken, lighten } from 'polished';
-
-import puzzles from '../../constants/puzzles';
-import * as CustomPropTypes from '../../propTypes';
 import styled from 'styled-components';
-import TimeDetails from '../shared/TimeDetails';
+
+import * as CustomPropTypes from '../../propTypes';
 import TimeGraph from '../shared/TimeGraph';
 import Section from '../shared/Section';
-import Time from '../shared/Time';
-
-import Modal from '../shared/Modal';
-import ToggleContent from '../shared/ToggleContent';
-import CloudSyncIcon from '../shared/CloudSyncIcon';
-import { formatLocalDate, formatLocalTime } from '../../helpers/dateTime';
-import { getBreakpoint, getSize, getColor, isDark } from '../../helpers/theme';
+import { formatLocalDate } from '../../helpers/dateTime';
+import { getBreakpoint, getSize, getColor } from '../../helpers/theme';
 import ArchiveOptionsContainer from '../../containers/archive/ArchiveOptionsContainer';
+import ArchiveItem from './ArchiveItem';
+import { getPuzzle } from '../../helpers/puzzle';
+import { ARCHIVE_DAYS_OPTIONS } from '../../constants/app';
+import { decapitalize } from '../../helpers/formatting';
 
 const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireTimes }) => {
   useEffect(() => {
@@ -35,7 +31,10 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
         <ArchiveOptionsContainer />
       </Section>
       {times.length === 0 && (
-        <Message>No {puzzles.find(p => p.name === puzzle).title} solves in the archive.</Message>
+        <Message>
+          No {getPuzzle(puzzle).title} solves in the{' '}
+          {decapitalize(ARCHIVE_DAYS_OPTIONS.find(option => option.value === days).label)}.
+        </Message>
       )}
       {timesPerDay.length > 0 && (
         <Section>
@@ -44,34 +43,7 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
               <h3>{formatLocalDate(date)}</h3>
               <TimeTiles>
                 {times.map(time => (
-                  <ToggleContent
-                    key={time.id}
-                    toggle={({ show }) => (
-                      <TimeTile onClick={show}>
-                        <TimeTileTime>
-                          <Time time={time} />
-                        </TimeTileTime>
-                        <DateTag>{formatLocalTime(time.date)}</DateTag>
-                        {time.stored && (
-                          <SyncStatusIcon>
-                            <CloudSyncIcon time={time} size="xs" />
-                          </SyncStatusIcon>
-                        )}
-                      </TimeTile>
-                    )}
-                    content={({ hide }) => (
-                      <Modal title="Details" onClose={hide}>
-                        <TimeDetails
-                          time={time}
-                          onClose={hide}
-                          onRemoveTime={() => {
-                            hide();
-                            removeTime(time.id);
-                          }}
-                        />
-                      </Modal>
-                    )}
-                  />
+                  <ArchiveItem key={time.id} time={time} removeTime={removeTime} />
                 ))}
               </TimeTiles>
             </div>
@@ -104,17 +76,6 @@ const Message = styled.p`
   text-align: center;
 `;
 
-const TimeTileTime = styled.strong`
-  position: relative;
-  top: 0.3rem;
-`;
-
-const DateTag = styled.div`
-  font-size: 0.7em;
-  opacity: 0.7;
-  margin-top: 0.3rem;
-`;
-
 const TimeTiles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -131,26 +92,6 @@ const TimeTiles = styled.div`
 
   @media screen and (min-width: ${getBreakpoint('lg')}) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  }
-`;
-
-const SyncStatusIcon = styled.span`
-  position: absolute;
-  font-size: 0.9em;
-  top: 0.2rem;
-  right: 0.5rem;
-`;
-
-const TimeTile = styled.div`
-  position: relative;
-  text-align: center;
-  border: 1px solid ${getColor('grey')};
-  padding: ${getSize('sm')};
-  border-radius: 3px;
-  cursor: pointer;
-
-  :hover {
-    background-color: ${props => (isDark(props) ? lighten : darken)(0.075, getColor('bg')(props))};
   }
 `;
 
