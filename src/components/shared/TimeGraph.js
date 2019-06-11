@@ -19,6 +19,13 @@ const TimeGraph = ({ times, stats }) => {
 
   const disableLine = name => setDisabledLines([...disabledLines, name]);
   const enableLine = name => setDisabledLines(disabledLines.filter(lineName => lineName !== name));
+  const buildLine = (name, data) => ({
+    name,
+    className: name,
+    data,
+    enabled: !disabledLines.includes(name),
+    color: lineColors[name]
+  });
 
   const statsToShow = AVAILABLE_STATS.filter(
     stat => stat.name !== 'mo3' && stats[stat.name] && stats[stat.name].all.length > 1
@@ -28,25 +35,10 @@ const TimeGraph = ({ times, stats }) => {
     const statTimes = stats[stat.name].all.map(ms => getMs({ ms: Math.round(ms) }));
     const offset = times.length - statTimes.length;
 
-    return {
-      name: stat.name,
-      className: stat.name,
-      enabled: !disabledLines.includes(stat.name),
-      data: [...new Array(offset), ...statTimes],
-      color: lineColors[stat.name]
-    };
+    return buildLine(stat.name, [...new Array(offset), ...statTimes]);
   });
 
-  const lines = [
-    {
-      name: 'single',
-      className: 'single',
-      data: times.map(getMs),
-      enabled: !disabledLines.includes('single'),
-      color: lineColors.single
-    },
-    ...statLines
-  ];
+  const lines = [buildLine('single', times.map(getMs)), ...statLines];
 
   const data = {
     labels: times.map(time => time.date.toISOString()),
