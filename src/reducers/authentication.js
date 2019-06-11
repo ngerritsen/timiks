@@ -29,7 +29,8 @@ export default handleActions(
       isInitialized: true,
       displayName: action.payload.displayName,
       email: action.payload.email,
-      userId: action.payload.userId
+      userId: action.payload.userId,
+      avatarUrl: action.payload.avatarUrl
     }),
     [actionTypes.LOGOUT]: state => ({
       ...state,

@@ -11,7 +11,8 @@ function mapStateToProps(state) {
     isLoggingOut: authenticationSelectors.isLoggingOut(state),
     displayName: authenticationSelectors.getDisplayName(state),
     isInitialized: authenticationSelectors.isInitialized(state),
-    email: authenticationSelectors.getEmail(state)
+    email: authenticationSelectors.getEmail(state),
+    avatarUrl: authenticationSelectors.getAvatarUrl(state)
   };
 }
 

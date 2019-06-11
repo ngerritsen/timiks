@@ -14,7 +14,7 @@ export const loginStatusEpic = () =>
       mergeMap(user =>
         user
           ? of(
-              actions.loginSucceeded(user.uid, user.displayName, user.email),
+              actions.loginSucceeded(user.uid, user.displayName, user.email, user.photoURL),
               dismissLoginPromotion(),
               actions.showNotification('Logged in')
             )
