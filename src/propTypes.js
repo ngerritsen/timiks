@@ -13,3 +13,9 @@ export const Time = PropTypes.shape({
   stored: PropTypes.bool,
   dirty: PropTypes.bool
 });
+
+export const GraphLine = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  enabled: PropTypes.bool.isRequired,
+  color: PropTypes.string.isRequired
+});

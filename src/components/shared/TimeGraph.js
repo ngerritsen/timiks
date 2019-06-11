@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ChartistGraph from 'react-chartist';
 
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faCircle from '@fortawesome/fontawesome-pro-solid/faCircle';
-import faCheckCircle from '@fortawesome/fontawesome-pro-solid/faCheckCircle';
-
 import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, getMs } from '../../helpers/time';
 import { AVAILABLE_STATS } from '../../constants/app';
 import { getColor, getSize } from '../../helpers/theme';
+import TimeGraphLegend from './TimeGraphLegend';
 
 const lineColors = AVAILABLE_STATS.reduce(
   (colors, stat) => ({ ...colors, [stat.name]: stat.color }),
@@ -35,7 +32,8 @@ const TimeGraph = ({ times, stats }) => {
       name: stat.name,
       className: stat.name,
       enabled: !disabledLines.includes(stat.name),
-      data: [...new Array(offset), ...statTimes]
+      data: [...new Array(offset), ...statTimes],
+      color: lineColors[stat.name]
     };
   });
 
@@ -44,7 +42,8 @@ const TimeGraph = ({ times, stats }) => {
       name: 'single',
       className: 'single',
       data: times.map(getMs),
-      enabled: !disabledLines.includes('single')
+      enabled: !disabledLines.includes('single'),
+      color: lineColors.single
     },
     ...statLines
   ];
@@ -74,21 +73,9 @@ const TimeGraph = ({ times, stats }) => {
         options={options}
         type="Line"
       />
-      <Legend>
-        {lines.map(line => (
-          <LegendItem
-            key={line.name}
-            onClick={() => {
-              line.enabled ? disableLine(line.name) : enableLine(line.name);
-            }}
-          >
-            <LegendItemIcon color={lineColors[line.name]}>
-              <FontAwesome size="sm" icon={line.enabled ? faCheckCircle : faCircle} />
-            </LegendItemIcon>
-            <LegendItemLabel enabled={line.enabled}>{line.name}</LegendItemLabel>
-          </LegendItem>
-        ))}
-      </Legend>
+      <LegendWrapper>
+        <TimeGraphLegend lines={lines} enableLine={enableLine} disableLine={disableLine} />
+      </LegendWrapper>
     </>
   );
 };
@@ -143,33 +130,9 @@ const StyledChartistGraph = styled(ChartistGraph)`
   }
 `;
 
-const Legend = styled.div`
+const LegendWrapper = styled.div`
   margin-top: -2rem;
   text-align: center;
-`;
-
-const LegendItemIcon = styled.span`
-  position; relative;
-  top: 0.1rem;
-  color: ${props => getColor(props.color)(props)};
-  margin-right: ${getSize('xxs')};
-`;
-
-const LegendItemLabel = styled.span`
-  text-decoration: ${props => (props.enabled ? 'none' : 'line-through')};
-`;
-
-const LegendItem = styled.span`
-  cursor: pointer;
-  display: inline-block;
-  color: ${getColor('subtleFg')};
-  font-size: 1.3rem;
-  margin-right: ${getSize('sm')};
-  margin-bottom: ${getSize('xs')};
-
-  &:last-child {
-    margin-right: 0;
-  }
 `;
 
 export default React.memo(TimeGraph);
