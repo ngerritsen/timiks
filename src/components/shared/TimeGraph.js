@@ -5,6 +5,7 @@ import ChartistGraph from 'react-chartist';
 
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faCircle from '@fortawesome/fontawesome-pro-solid/faCircle';
+import faCheckCircle from '@fortawesome/fontawesome-pro-solid/faCheckCircle';
 
 import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, getMs } from '../../helpers/time';
@@ -82,7 +83,7 @@ const TimeGraph = ({ times, stats }) => {
             }}
           >
             <LegendItemIcon color={lineColors[line.name]}>
-              <FontAwesome size="sm" icon={faCircle} />
+              <FontAwesome size="sm" icon={line.enabled ? faCheckCircle : faCircle} />
             </LegendItemIcon>
             <LegendItemLabel enabled={line.enabled}>{line.name}</LegendItemLabel>
           </LegendItem>
