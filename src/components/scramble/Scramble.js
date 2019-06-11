@@ -101,7 +101,7 @@ const ScrambleBox = styled.div`
   font-size: 1.8rem;
   text-align: center;
   font-family: ${getFont('mono')};
-  line-height: 1.3;
+  line-height: 1.25;
   background-color: ${getColor('subtleBg')};
   padding: ${getSize('xs')};
   margin: 0;
