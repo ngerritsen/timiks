@@ -52,6 +52,9 @@ const createConfig = (env, argv) => {
   if (argv.mode === 'development') {
     config.devtool = 'inline-source-map';
     config.output.publicPath = '/';
+    config.devServer = {
+      historyApiFallback: true
+    };
   }
 
   return config;
