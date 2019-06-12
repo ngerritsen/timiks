@@ -8,7 +8,8 @@ const initialState = {
   isLoggingOut: false,
   displayName: '',
   email: '',
-  userId: ''
+  userId: '',
+  avatarUrl: ''
 };
 
 export default handleActions(
@@ -41,14 +42,9 @@ export default handleActions(
       isLoggingOut: false,
       isLoggedOut: false
     }),
-    [actionTypes.LOGOUT_SUCCEEDED]: state => ({
-      ...state,
-      isLoggingOut: false,
-      isLoggedIn: false,
-      isInitialized: true,
-      displayName: '',
-      email: '',
-      userId: ''
+    [actionTypes.LOGOUT_SUCCEEDED]: () => ({
+      ...initialState,
+      isInitialized: true
     })
   },
   initialState
