@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
 import ShortcutContext from './ShortcutContext';
+import { isStopped, getStopTime } from '../selectors/timer';
+import { TIMER_COOLDOWN } from '../constants/app';
 
 const inputElements = ['textarea', 'input', 'select'];
 
@@ -25,6 +27,10 @@ class ShortcutProvider extends Component {
 
   _handleKeyDown(event) {
     const { ctrlKey, metaKey, shiftKey, altKey } = event;
+
+    if (Date.now() - this.props.stopTime < TIMER_COOLDOWN) {
+      return;
+    }
 
     if (inputElements.includes(event.target.tagName.toLowerCase())) {
       return;
@@ -89,12 +95,14 @@ class ShortcutProvider extends Component {
 ShortcutProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   keymap: PropTypes.arrayOf(PropTypes.object).isRequired,
-  stopped: PropTypes.bool.isRequired
+  stopped: PropTypes.bool.isRequired,
+  stopTime: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    stopped: state.timer.stopped
+    stopped: isStopped(state),
+    stopTime: getStopTime(state)
   };
 }
 

@@ -4,6 +4,7 @@ import { parseTimeInput } from '../helpers/time';
 export const getTime = state => state.timer.time;
 export const getLastTimeId = state => state.timer.lastTimeId;
 export const isStopped = state => state.timer.stopped;
+export const getStopTime = state => state.timer.stopTime;
 export const getTimeInput = state => state.timer.timeInput;
 export const isInspecting = state => state.timer.inspecting;
 export const getInspectionStartTime = state => state.timer.inspectionStartTime;

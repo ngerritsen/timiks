@@ -7,11 +7,11 @@ import {
   shouldUseManualTimeEntry
 } from '../selectors/settings';
 import * as actions from '../actions';
-import { INSPECTION_TIME, PREPARATION_STAGES } from '../constants/app';
+import { INSPECTION_TIME, PREPARATION_STAGES, TIMER_COOLDOWN } from '../constants/app';
 import { ofType } from 'redux-observable';
 import { PREPARE_ACTIVATION, START_INSPECTION, START_TIMER } from '../constants/actionTypes';
 import * as activationSelectors from '../selectors/activation';
-import { isStopped, isInspecting } from '../selectors/timer';
+import { isStopped, isInspecting, getStopTime } from '../selectors/timer';
 
 const inputElements = ['input', 'textarea'];
 
@@ -22,6 +22,7 @@ export const initializeActivationEpic = (_, state$) =>
       ([, state]) =>
         !shouldUseManualTimeEntry(state) &&
         isStopped(state) &&
+        Date.now() - getStopTime(state) > TIMER_COOLDOWN &&
         !activationSelectors.isPreparing(state)
     ),
     tap(scrollToTop),

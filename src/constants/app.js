@@ -9,6 +9,7 @@ export const NOTIFICATION_DURATION = 4000;
 export const INSPECTION_TIME = 15000;
 export const TIMER_UPDATE_RATE = 10;
 export const PREPARATION_STAGES = 3;
+export const TIMER_COOLDOWN = 250;
 
 // Settings
 export const ACTIVATION_DURATION_OPTIONS = [

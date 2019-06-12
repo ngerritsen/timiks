@@ -3,8 +3,9 @@ import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
   startTime: 0,
-  stopped: true,
+  stopTime: 0,
   inspectionStartTime: 0,
+  stopped: true,
   timeInput: '',
   inspecting: false,
   lastTimeId: ''
@@ -30,9 +31,10 @@ export default handleActions(
       startTime: 0,
       lastTimeId: action.payload.id
     }),
-    [actionTypes.STOP_TIMER]: state => ({
+    [actionTypes.STOP_TIMER]: (state, action) => ({
       ...state,
-      stopped: true
+      stopped: true,
+      stopTime: action.payload
     }),
     [actionTypes.RESET_TIME]: state => ({
       ...state,
