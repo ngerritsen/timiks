@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
