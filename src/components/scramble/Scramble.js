@@ -110,7 +110,7 @@ const ScrambleBox = styled.div`
   border-bottom-left-radius: 0.3rem;
   border-top-right-radius: ${props => (props.withTabs ? '0' : '0.3rem')};
   border-top-left-radius: ${props => (props.withTabs ? '0' : '0.3rem')};
-  max-height: ${props => (props.expand ? '' : '14.5rem')};
+  max-height: ${props => (props.expand ? '' : '15rem')};
   overflow-y: auto;
 `;
 
