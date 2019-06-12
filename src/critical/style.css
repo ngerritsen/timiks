@@ -29,7 +29,7 @@ li {
 
 header {
   display: block;
-  padding-top: 1.6rem;
+  padding-top: 1.2rem;
 }
 
 .is-dark {
@@ -42,9 +42,7 @@ body.with-modal {
 }
 
 .container {
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 0 1.6rem;
+  padding: 0 1.2rem;
 }
 
 h1 {
@@ -115,4 +113,16 @@ footer a:active {
   width: 100%;
   color: #000;
   top: 0;
+}
+
+@media screen and (min-width: 520px) {
+  header {
+    padding-top: 1.6rem;
+  }
+
+  .container {
+    padding: 0 1.6rem;
+    max-width: 74rem;
+    margin: 0 auto;
+  }
 }
