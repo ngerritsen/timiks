@@ -63,5 +63,5 @@ export function markBestTime(times) {
 
   const bestTime = Math.min(...times.map(time => getMs(time)));
 
-  return times.map(time => (time.ms === bestTime ? { ...time, best: true } : time));
+  return times.map(time => (getMs(time) === bestTime ? { ...time, best: true } : time));
 }

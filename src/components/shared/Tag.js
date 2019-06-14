@@ -4,8 +4,28 @@ import styled from 'styled-components';
 import { getLuminance, darken } from 'polished';
 import { getColor, getSize } from '../../helpers/theme';
 
-const Tag = ({ children, color, onClick }) => (
-  <TagTag color={color} hoverable={Boolean(onClick)} onClick={e => onClick && onClick(e)}>
+const sizeToHeight = {
+  sm: '2.2rem',
+  md: '2.6rem'
+};
+
+const sizeToFontSize = {
+  sm: '1.2rem',
+  md: '1.4rem'
+};
+
+const sizeToSidePadding = {
+  sm: 'xs',
+  md: 'sm'
+};
+
+const Tag = ({ children, color, onClick, size }) => (
+  <TagTag
+    color={color}
+    hoverable={Boolean(onClick)}
+    size={size}
+    onClick={e => onClick && onClick(e)}
+  >
     {children}
   </TagTag>
 );
@@ -15,7 +35,12 @@ Tag.propTypes = {
   color: PropTypes.string,
   withCheckbox: PropTypes.bool,
   checked: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  size: PropTypes.string
+};
+
+Tag.defaultProps = {
+  size: 'md'
 };
 
 const TagTag = styled.span.attrs({
@@ -23,16 +48,14 @@ const TagTag = styled.span.attrs({
 })`
   display: inline-block;
   position: relative;
-  top: -0.1rem;
-  height: 2.2rem;
-  line-height: 2.15rem;
-  left: ${getSize('xxs')};
+  height: ${props => sizeToHeight[props.size]};
+  line-height: calc(${props => sizeToHeight[props.size]} - 0.1rem);
   background-color: ${props => props.bg};
   color: ${props =>
     getLuminance(props.bg) > 0.5 ? getColor('black')(props) : getColor('white')(props)};
-  padding: 0 ${getSize('xs')};
+  padding: 0 ${props => getSize(sizeToSidePadding[props.size])(props)};
   text-align: center;
-  font-size: 1.2rem;
+  font-size: ${props => sizeToFontSize[props.size]};
   font-weight: bold;
   border-radius: 99rem;
   cursor: ${props => (props.hoverable ? 'pointer' : 'normal')};

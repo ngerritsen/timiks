@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import * as CustomPropTypes from '../../propTypes';
 import { fillZeroes } from '../../helpers/formatting';
 import { breakUpTime, getMs } from '../../helpers/time';
-import { getColor, getSize } from '../../helpers/theme';
+import { getColor } from '../../helpers/theme';
 
 const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
   if (dnf) {
@@ -20,12 +20,12 @@ const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
   const showMinute = minutes > 0;
 
   return (
-    <span>
+    <>
       {showMinute && formatPart(minutes, 2)}
       {showMinute && ':'}
       {formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}
       {plus2 && <Plus2>(+2)</Plus2>}
-    </span>
+    </>
   );
 };
 
@@ -44,11 +44,11 @@ Time.propTypes = {
 
 const Plus2 = styled.span`
   position: relative;
-  top: -0.4em;
+  top: -0.6em;
   border-radius: 3em;
-  font-size: 0.6em;
+  font-size: 0.5em;
   color: ${getColor('subtleFg')};
-  margin-left: ${getSize('xxs')};
+  margin-left: 0.3em;
 `;
 
 const TimeNumber = styled.span`

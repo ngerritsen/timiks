@@ -66,7 +66,10 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
           <thead>
             <tr>
               <HeadingCell colSpan="3">
-                Times <Tag color="subtleBg">{times.length}</Tag>
+                Times &nbsp;
+                <Tag size="sm" color="subtleBg">
+                  {times.length}
+                </Tag>
               </HeadingCell>
             </tr>
           </thead>

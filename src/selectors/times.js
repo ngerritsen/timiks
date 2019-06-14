@@ -34,15 +34,15 @@ export const getArchivedTimes = createSelector(
 
 export const hasCurrentTimes = state => getCurrentTimes(state).length > 0;
 
-export const getLastTime = createSelector(
-  getCurrentTimes,
-  getLastTimeId,
-  (times, lastTimeId) => times.find(time => time.id === lastTimeId)
-);
-
 export const getCurrentMarkedSortedTimes = createSelector(
   getCurrentTimes,
   times => markBestTime(times).sort(createAscSorter('date'))
+);
+
+export const getLastTime = createSelector(
+  getCurrentMarkedSortedTimes,
+  getLastTimeId,
+  (times, lastTimeId) => times.find(time => time.id === lastTimeId)
 );
 
 export const getCurrentNoDnfTimes = createSelector(

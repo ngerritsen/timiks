@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
+import FontAwesome from '@fortawesome/react-fontawesome';
+import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
 import * as CustomPropTypes from '../../propTypes';
 import ActivationContainer from '../../containers/timer/ActivationContainer';
 import ScrambleContainer from '../../containers/timer/ScrambleContainer';
@@ -13,6 +15,7 @@ import IncrementingTime from './IncrementingTime';
 import DecrementingTime from './DecrementingTime';
 import { INSPECTION_TIME } from '../../constants/app';
 import { getZIndex } from '../../helpers/theme';
+import Tag from '../shared/Tag';
 
 const Timer = ({
   inspecting,
@@ -29,6 +32,14 @@ const Timer = ({
   <div>
     <Section margin="sm">
       <TimerTimeContainer withManualEntry={useManualTimeEntry}>
+        {showLastTime && lastTime.best && (
+          <RecordMessageContainer>
+            <Tag color="green">
+              <FontAwesome icon={faThumbsUp} />
+              &nbsp; Best session single
+            </Tag>
+          </RecordMessageContainer>
+        )}
         <TimerTime disabled={preparing && !ready}>
           {(() => {
             switch (true) {
@@ -47,7 +58,7 @@ const Timer = ({
               case startTime > 0 && showTimerTime:
                 return <IncrementingTime startTime={startTime} />;
               case startTime > 0 && !showTimerTime:
-                return 'Solve.';
+                return 'Solve';
               case showLastTime:
                 return <Time time={lastTime} />;
               default:
@@ -87,6 +98,14 @@ const TimeFooter = styled.div`
   text-align: center;
 `;
 
+const RecordMessageContainer = styled.div`
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: -2.6rem;
+  left: 0;
+`;
+
 const TimerTime = styled.span`
   position: relative;
   opacity: ${props => (props.disabled ? 0.5 : 1)};
@@ -96,7 +115,7 @@ const TimerTime = styled.span`
 const TimerTimeContainer = styled.div`
   text-align: center;
   padding: ${props => (props.withManualEntry ? '6rem' : '5.2rem')} 0 0;
-  font-size: 5.6rem;
+  font-size: 5.4rem;
   position: relative;
 `;
 
