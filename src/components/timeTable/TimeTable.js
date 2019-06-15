@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircle';
 
-import { AVAILABLE_STATS } from '../../constants/app';
 import * as CustomPropTypes from '../../propTypes';
 import TimeGraph from '../shared/TimeGraph';
 import ToggleContent from '../shared/ToggleContent';
@@ -12,81 +11,82 @@ import IconButton from '../shared/IconButton';
 import Tag from '../shared/Tag';
 import Modal from '../shared/Modal';
 import TimeTableTimeRow from './TimeTableTimeRow';
-import { Cell, HeadingCell, SubtleHeadingCell, Tables } from '../shared/Tables';
+import { Cell, HeadingCell, SubtleHeadingCell, Table } from '../shared/Table';
 import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
 import { getBreakpoint, getSize } from '../../helpers/theme';
 
-const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => {
-  return (
-    <TimeTableContainer>
-      <TimeTableColumn>
-        <Tables>
-          <thead>
+const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => (
+  <TimeTableContainer>
+    <TimeTableColumn>
+      <Table>
+        <thead>
+          <tr>
+            <HeadingCell>Stats</HeadingCell>
+            <SubtleHeadingCell>Current</SubtleHeadingCell>
+            <SubtleHeadingCell>Best</SubtleHeadingCell>
+            <HeadingCell rightAlign>
+              <ToggleContent
+                toggle={({ show }) => (
+                  <QuestionIconButton color="blue" onClick={show}>
+                    <FontAwesome icon={faQuestionCircle} size="sm" />
+                  </QuestionIconButton>
+                )}
+                content={({ hide }) => (
+                  <Modal title="Stats" onClose={hide}>
+                    <StatsExplanation />
+                  </Modal>
+                )}
+              />
+            </HeadingCell>
+          </tr>
+        </thead>
+        <tbody>
+          {stats.length === 0 && (
             <tr>
-              <HeadingCell>Stats</HeadingCell>
-              <SubtleHeadingCell>Current</SubtleHeadingCell>
-              <SubtleHeadingCell>Best</SubtleHeadingCell>
-              <HeadingCell rightAlign>
-                <ToggleContent
-                  toggle={({ show }) => (
-                    <QuestionIconButton color="blue" onClick={show}>
-                      <FontAwesome icon={faQuestionCircle} size="sm" />
-                    </QuestionIconButton>
-                  )}
-                  content={({ hide }) => (
-                    <Modal title="Stats" onClose={hide}>
-                      <StatsExplanation />
-                    </Modal>
-                  )}
-                />
-              </HeadingCell>
+              <Cell colSpan="2">
+                <i>Not enough solves yet.</i>
+              </Cell>
             </tr>
-          </thead>
-          <tbody>
-            {AVAILABLE_STATS.filter(stat => stats[stat.name]).length === 0 && !showGraph && (
-              <tr>
-                <Cell colSpan="2">
-                  <i>Not enough solves yet.</i>
-                </Cell>
-              </tr>
-            )}
-            {AVAILABLE_STATS.filter(stat => stats[stat.name]).map(stat => {
-              const { current, best } = stats[stat.name];
-              return (
-                <TimeTableStatRow key={stat.name} name={stat.name} current={current} best={best} />
-              );
-            })}
-          </tbody>
-        </Tables>
-        {showGraph && <TimeGraph stats={stats} times={noDnfTimes} />}
-      </TimeTableColumn>
-      <TimeTableColumn>
-        <Tables>
-          <thead>
-            <tr>
-              <HeadingCell colSpan="3">
-                Times &nbsp;
-                <Tag size="sm" color="subtleBg">
-                  {times.length}
-                </Tag>
-              </HeadingCell>
-            </tr>
-          </thead>
-          <tbody>
-            {times.map((time, index) => (
-              <TimeTableTimeRow key={time.id} time={time} index={index} removeTime={removeTime} />
+          )}
+          {stats.length > 0 &&
+            stats.map(stat => (
+              <TimeTableStatRow
+                key={stat.name}
+                name={stat.name}
+                current={stat.current}
+                best={stat.best}
+              />
             ))}
-          </tbody>
-        </Tables>
-      </TimeTableColumn>
-    </TimeTableContainer>
-  );
-};
+        </tbody>
+      </Table>
+      {showGraph && <TimeGraph stats={stats} times={noDnfTimes} />}
+    </TimeTableColumn>
+    <TimeTableColumn>
+      <Table>
+        <thead>
+          <tr>
+            <HeadingCell colSpan="3">
+              Times &nbsp;
+              <Tag size="sm" color="subtleBg">
+                {times.length}
+              </Tag>
+            </HeadingCell>
+          </tr>
+        </thead>
+        <tbody>
+          {times.map((time, index) => (
+            <TimeTableTimeRow key={time.id} time={time} index={index} removeTime={removeTime} />
+          ))}
+        </tbody>
+      </Table>
+    </TimeTableColumn>
+  </TimeTableContainer>
+);
 
 TimeTable.propTypes = {
-  stats: PropTypes.object.isRequired,
-  removeTime: PropTypes.func,
+  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
+  removeTime: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   noDnfTimes: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   showGraph: PropTypes.bool

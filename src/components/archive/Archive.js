@@ -63,7 +63,7 @@ Archive.propTypes = {
     })
   ).isRequired,
   requireTimes: PropTypes.func.isRequired,
-  stats: PropTypes.object.isRequired,
+  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
   puzzle: PropTypes.string.isRequired,
   days: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired

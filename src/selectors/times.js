@@ -1,5 +1,7 @@
 import { getArchivePuzzle, getArchiveDays } from './settings';
-import { markBestTime, calculateStats, isCurrent, getId } from '../helpers/times';
+import { markBestTime, isCurrent, getId } from '../helpers/times';
+import { calculateStats } from '../helpers/stats';
+
 import { createSelector } from 'reselect';
 import { getLastTimeId } from './timer';
 import { groupByDay } from '../helpers/archive';

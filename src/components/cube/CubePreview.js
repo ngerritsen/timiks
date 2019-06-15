@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../../constants/puzzle';
+import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../../constants/puzzles';
 import { layoutScramble } from '../../helpers/cube';
 import CubeFace from './CubeFace';
 import { getSize, getColor } from '../../helpers/theme';

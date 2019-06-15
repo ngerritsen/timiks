@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { darken, lighten } from 'polished';
-import { puzzleColors } from '../../constants/puzzle';
+import { puzzleColors } from '../../constants/puzzles';
 import { getSize, getColor, isDark } from '../../helpers/theme';
 
 const CubeFace = ({ face = [], cubeSize }) => (

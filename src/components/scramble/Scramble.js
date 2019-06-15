@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import * as CustomPropTypes from '../../propTypes';
 import Section from '../shared/Section';
-import { CUBE, RELAY } from '../../constants/puzzle';
+import { CUBE, RELAY } from '../../constants/puzzles';
 import { getPuzzle } from '../../helpers/puzzle';
 import { splitRelayScramble } from '../../helpers/scramble';
 import CubePreview from '../cube/CubePreview';

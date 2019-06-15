@@ -1,5 +1,5 @@
 import * as constants from '../constants/app';
-import * as puzzleConstants from '../constants/puzzle';
+import * as puzzleConstants from '../constants/puzzles';
 import { getPuzzle } from './puzzle';
 import scramblers from '../vendor/jsss';
 

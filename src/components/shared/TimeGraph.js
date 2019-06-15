@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ChartistGraph from 'react-chartist';
 
+import { default as allStats } from '../../constants/stats';
 import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, getMs } from '../../helpers/time';
-import { AVAILABLE_STATS } from '../../constants/app';
 import { getColor, getSize } from '../../helpers/theme';
 import TimeGraphLegend from './TimeGraphLegend';
 
-const lineColors = AVAILABLE_STATS.reduce(
-  (colors, stat) => ({ ...colors, [stat.name]: stat.color }),
-  { single: 'blue' }
+const lineColors = allStats.reduce(
+  (colors, stat) => ({ ...colors, [stat.name]: stat.graphLineColor }),
+  {}
 );
 
 const TimeGraph = ({ times, stats }) => {
@@ -27,18 +27,18 @@ const TimeGraph = ({ times, stats }) => {
     color: lineColors[name]
   });
 
-  const statsToShow = AVAILABLE_STATS.filter(
-    stat => stat.name !== 'mo3' && stats[stat.name] && stats[stat.name].all.length > 1
-  );
+  const statLines = stats
+    .filter(stat => stat.showInGraph && stat.all.length > 1)
+    .map(stat => {
+      const statTimes = stat.all
+        .filter(ms => ms < Infinity)
+        .map(ms => getMs({ ms: Math.round(ms) }));
+      const offset = times.length - statTimes.length;
 
-  const statLines = statsToShow.map(stat => {
-    const statTimes = stats[stat.name].all.map(ms => getMs({ ms: Math.round(ms) }));
-    const offset = times.length - statTimes.length;
+      return buildLine(stat.name, [...new Array(Math.max(offset, 0)), ...statTimes]);
+    });
 
-    return buildLine(stat.name, [...new Array(offset), ...statTimes]);
-  });
-
-  const lines = [buildLine('single', times.map(getMs)), ...statLines];
+  const lines = [...statLines];
 
   const data = {
     labels: times.map(time => time.date.toISOString()),
@@ -74,9 +74,7 @@ const TimeGraph = ({ times, stats }) => {
 
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  stats: PropTypes.object,
-  theme: PropTypes.object,
-  showDateLabels: PropTypes.bool
+  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired
 };
 
 const StyledChartistGraph = styled(ChartistGraph)`

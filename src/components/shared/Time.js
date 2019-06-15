@@ -8,7 +8,7 @@ import { breakUpTime, getMs } from '../../helpers/time';
 import { getColor } from '../../helpers/theme';
 
 const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
-  if (dnf) {
+  if (dnf || ms === Infinity) {
     return monospace('DNF');
   }
 

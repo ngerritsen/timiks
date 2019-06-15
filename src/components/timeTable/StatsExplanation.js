@@ -1,22 +1,71 @@
 import React from 'react';
+import stats, { STANDARD_DEVIATION, AVERAGE, MEAN } from '../../constants/stats';
+import { Table, Cell } from '../shared/Table';
+import { getSize } from '../../helpers/theme';
+import { calculateTrim } from '../../helpers/stats';
 
 const StatsExplanation = () => (
   <>
-    <p>After 2 valid solves (excluding DNF{`'`}s) a trend graph will be shown.</p>
-
     <p>
-      When a minimum of 3 solves are present the mean of 3 (<strong>mo3</strong>) will be shown
-      (best average of 3 consecutive solves).
+      Stats are show if there are enough solves to calculate them. DNF&apos;s are excluded in the
+      mean and standard deviation. A trim percentage of 5% is used to exclude the best and worst
+      solves from the averages.
     </p>
-
-    <p>
-      After 5 solves the average of the <i>last</i> 5 solves (without the best and the worst solve)
-      will be shown (<strong>ao5</strong>). After that it will continue with:{' '}
-      <strong>ao12, ao25, ao50* and ao100*</strong>.
-    </p>
-
-    <i>*The a50 will exclude the best and worst 3 solves, the ao100 will exclude 5.</i>
+    <Table>
+      <tbody>
+        {stats.map(stat => {
+          switch (stat.type) {
+            case AVERAGE:
+              return (
+                <tr key={stat.name}>
+                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell>
+                    Average of {stat.size} excluding the best and worst
+                    {calculateTrim(stat.size) === 1
+                      ? ' solve'
+                      : ` ${calculateTrim(stat.size)} solves`}
+                    .
+                  </Cell>
+                </tr>
+              );
+            case MEAN:
+              return stat.size ? (
+                <tr key={stat.name}>
+                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell>Mean (average) of {stat.size} consecutive solves.</Cell>
+                </tr>
+              ) : (
+                <tr key={stat.name}>
+                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell>Mean (average) of all solves.</Cell>
+                </tr>
+              );
+            case STANDARD_DEVIATION:
+              return (
+                <tr key={stat.name}>
+                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell>
+                    <a
+                      href="https://www.mathsisfun.com/data/standard-deviation.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Standard deviation
+                    </a>
+                    &nbsp;of all solves, the lower the more consistent.
+                  </Cell>
+                </tr>
+              );
+          }
+        })}
+      </tbody>
+    </Table>
   </>
 );
+
+const StatNameCell = Cell.extend`
+  padding-right: ${getSize('xs')};
+  font-weight: bold;
+`;
 
 export default StatsExplanation;

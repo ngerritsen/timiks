@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Time from '../shared/Time';
-import { Cell } from '../shared/Tables';
+import { Cell } from '../shared/Table';
 import { SubtleText } from '../shared/Typography';
 
 const TimeTableStatRow = ({ name, current, best }) => (
@@ -21,14 +21,16 @@ const TimeTableStatRow = ({ name, current, best }) => (
       </strong>
     </Cell>
     <Cell colSpan="2">
-      <strong>
-        <Time
-          time={{
-            ms: best === 'DNF' ? Infinity : best,
-            dnf: best === 'DNF'
-          }}
-        />
-      </strong>
+      {best && (
+        <strong>
+          <Time
+            time={{
+              ms: best === 'DNF' ? Infinity : best,
+              dnf: best === 'DNF'
+            }}
+          />
+        </strong>
+      )}
     </Cell>
   </tr>
 );
@@ -36,7 +38,7 @@ const TimeTableStatRow = ({ name, current, best }) => (
 TimeTableStatRow.propTypes = {
   name: PropTypes.string.isRequired,
   current: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  best: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+  best: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default React.memo(TimeTableStatRow);

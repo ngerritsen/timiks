@@ -12,7 +12,7 @@ import Modal from '../shared/Modal';
 import TimeDetails from '../shared/TimeDetails';
 import * as CustomPropTypes from '../../propTypes';
 import IconButton from '../shared/IconButton';
-import { Cell } from '../shared/Tables';
+import { Cell } from '../shared/Table';
 import { SubtleText } from '../shared/Typography';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { getColor, getSize } from '../../helpers/theme';

@@ -1,5 +1,5 @@
-import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzle';
-import { WHITE, BLUE, YELLOW, ORANGE, RED, GREEN } from '../constants/puzzle';
+import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzles';
+import { WHITE, BLUE, YELLOW, ORANGE, RED, GREEN } from '../constants/puzzles';
 import { createAscSorter } from './general';
 
 const TOP_EDGE = { axis: 'y', opposite: false };
