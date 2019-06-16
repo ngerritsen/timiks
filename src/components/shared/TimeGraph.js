@@ -27,7 +27,7 @@ const TimeGraph = ({ times, stats }) => {
     color: lineColors[name]
   });
 
-  const statLines = stats
+  const lines = stats
     .filter(stat => stat.showInGraph && stat.all.length > 1)
     .map(stat => {
       const statTimes = stat.all
@@ -38,10 +38,7 @@ const TimeGraph = ({ times, stats }) => {
       return buildLine(stat.name, [...new Array(Math.max(offset, 0)), ...statTimes]);
     });
 
-  const lines = [...statLines];
-
   const data = {
-    labels: times.map(time => time.date.toISOString()),
     series: lines.filter(line => line.enabled)
   };
 
@@ -53,7 +50,8 @@ const TimeGraph = ({ times, stats }) => {
     },
     axisY: {
       labelInterpolationFnc: formatShortTime
-    }
+    },
+    stretch: true
   };
 
   return (
