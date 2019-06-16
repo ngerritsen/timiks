@@ -51,6 +51,7 @@ export function saveAll(userId, times) {
   times.forEach(time => {
     const timeRef = db.collection('times').doc(time.id);
     batch.set(timeRef, { ...stripUndefined(serializeTime(time)), userId });
+    console.log({ ...stripUndefined(serializeTime(time)), userId });
   });
 
   return batch.commit();

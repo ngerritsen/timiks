@@ -57,3 +57,6 @@ export const LOAD_SETTINGS = 'LOAD_SETTINGS';
 // Notifications
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
 export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+
+// Import
+export const IMPORT_TIMES = 'IMPORT_TIMES';

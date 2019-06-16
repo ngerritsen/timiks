@@ -58,9 +58,18 @@ const INITIAL_FACES = {
 };
 
 export function layoutScramble(scramble, size) {
-  const cube = scramble.reduce((cube, move) => {
-    const { direction, depth, reversed, twice } = parseMove(move);
+  const moves = scramble.map(parseMove);
 
+  const validMoves = moves.every(
+    move => move.depth <= Math.floor(size / 2) && DIRECTIONS.includes(move.direction)
+  );
+
+  if (!validMoves) {
+    return null;
+  }
+
+  const cube = moves.reduce((cube, move) => {
+    const { direction, depth, reversed, twice } = move;
     return generateArr(twice ? 2 : reversed ? 3 : 1).reduce(
       scrambledCube => rotate(scrambledCube, direction, depth),
       cube

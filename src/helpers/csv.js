@@ -19,3 +19,49 @@ export function timesToCsv(times) {
 
   return [headers, rows.join(ROW_DELIMITER)].join(ROW_DELIMITER);
 }
+
+export function parseCsv(csv, delimiter = ',', escapeChar = '"') {
+  let headers = [];
+
+  return csv
+    .trim()
+    .split('\n')
+    .map((line, lineNumber) => {
+      if (!line.trim()) {
+        return;
+      }
+
+      const columns = [];
+      let currentColumn = '';
+      let inEscape = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+
+        if (char === delimiter && !inEscape) {
+          columns.push(currentColumn);
+          currentColumn = '';
+        } else if (char === escapeChar && !inEscape) {
+          inEscape = true;
+        } else if (char === escapeChar && inEscape && line[i + 1] === delimiter) {
+          inEscape = false;
+        } else {
+          currentColumn += char;
+        }
+      }
+
+      if (lineNumber === 0) {
+        headers = columns;
+        return;
+      }
+
+      return headers.reduce(
+        (columnData, header, i) => ({
+          ...columnData,
+          [header]: columns[i]
+        }),
+        {}
+      );
+    })
+    .filter(Boolean);
+}

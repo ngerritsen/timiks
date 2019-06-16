@@ -92,3 +92,6 @@ export const showNotification = createAction(
   })
 );
 export const hideNotification = createAction(types.HIDE_NOTIFICATION);
+
+// Import
+export const importTimes = createAction(types.IMPORT_TIMES, times => ({ times }));

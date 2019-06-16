@@ -1,5 +1,9 @@
 import { getMs } from './time';
 
+export function addPuzzleToTimes(times, puzzle) {
+  return times.map(time => ({ ...time, puzzle }));
+}
+
 export function isCurrent(time) {
   return Boolean(time.current);
 }

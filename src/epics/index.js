@@ -11,6 +11,7 @@ import * as timesEpics from './times';
 import * as notificationEpics from './notifications';
 import * as loginPromotionEpics from './loginPromotionEpic';
 import * as versionEpics from './version';
+import * as importEpics from './import';
 
 const rootEpic = combineEpics(
   noSleepEpics.enableNoSleepEpic,
@@ -43,7 +44,8 @@ const rootEpic = combineEpics(
   notificationEpics.notificationEpic,
   loginPromotionEpics.loginPromotionEpic,
   loginPromotionEpics.dismissLoginPromotionEpic,
-  versionEpics.newVersionEpic
+  versionEpics.newVersionEpic,
+  importEpics.importTimesEpic
 );
 
 export default rootEpic;

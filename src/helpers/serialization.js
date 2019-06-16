@@ -32,7 +32,7 @@ export function serializeTime(time) {
     timestamp: time.date,
     dnf: time.dnf || undefined,
     plus2: time.plus2 || undefined,
-    current: time.current || undefined
+    current: Boolean(time.current)
   };
 }
 

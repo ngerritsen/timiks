@@ -9,6 +9,7 @@ import Export from './Export';
 import Section from '../shared/Section';
 import { ARCHIVE_DAYS_OPTIONS } from '../../constants/app';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
+import ImportContainer from '../../containers/archive/ImportContainer';
 
 const puzzleOptions = puzzles.map(({ name, title }) => ({ label: title, value: name }));
 
@@ -29,23 +30,28 @@ const ArchiveOptions = ({ changeSetting, puzzle, times, days }) => {
     />
   );
   const exportButton = <Export puzzle={puzzle} times={times} />;
+  const importButton = <ImportContainer />;
 
   return (
     <>
-      <HiddenFrom breakpoint="sm">
+      <HiddenFrom breakpoint="md">
         <Section margin="xs">
           <Toolbar>
             <ToolbarItem grow>{puzzleSelector}</ToolbarItem>
             <ToolbarItem grow>{daySelector}</ToolbarItem>
           </Toolbar>
         </Section>
-        {exportButton}
+        <Toolbar>
+          <ToolbarItem grow>{exportButton}</ToolbarItem>
+          <ToolbarItem grow>{importButton}</ToolbarItem>
+        </Toolbar>
       </HiddenFrom>
-      <VisibleFrom breakpoint="sm">
+      <VisibleFrom breakpoint="md">
         <Toolbar>
           <ToolbarItem>{puzzleSelector}</ToolbarItem>
           <ToolbarItem>{daySelector}</ToolbarItem>
           <ToolbarItem shrink>{exportButton}</ToolbarItem>
+          <ToolbarItem shrink>{importButton}</ToolbarItem>
         </Toolbar>
       </VisibleFrom>
     </>

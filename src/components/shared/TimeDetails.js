@@ -38,7 +38,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
       <FontAwesome fixedWidth icon={faCube} /> &nbsp;
       {getPuzzle(time.puzzle).title || 'Unknown'}
     </Section>
-    <Section margin="sm">
+    <Section margin="md">
       <ToggleContent
         toggle={({ show, hide, isShown }) => (
           <Section margin={isShown ? 'sm' : ''}>

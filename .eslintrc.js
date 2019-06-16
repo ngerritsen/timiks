@@ -7,6 +7,9 @@ module.exports = {
     'prettier',
     'react'
   ],
+  globals: {
+    Promise: true
+  },
   parser: 'babel-eslint',
   env: {
     browser: true,

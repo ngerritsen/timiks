@@ -27,11 +27,13 @@ const sizeToFontSize = {
 };
 
 const Button = styled.button.attrs({
-  bg: props => getColor(props.disabled ? 'grey' : props.color)(props) || getColor('blue')(props)
+  bg: props => getColor(props.color)(props) || getColor('blue')(props)
 })`
   display: inline-block;
+  text-align: center;
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   margin: 0;
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
   font-weight: bold;
   height: ${props => sizeToHeight[props.size]};
   line-height: calc(${props => sizeToHeight[props.size]} - 0.1rem);
@@ -63,13 +65,12 @@ Button.defaultProps = {
   color: 'blue'
 };
 
-const ButtonIcon = styled.span`
+export const ButtonIcon = styled.span`
   color: ${props => getColor(props.color)(props) || 'inherit'};
   margin-right: ${getSize('xs')};
 `;
 
-const LinkButton = Button.withComponent('a');
-
-export { ButtonIcon, LinkButton };
+export const LinkButton = Button.withComponent('a');
+export const LabelButton = Button.withComponent('label');
 
 export default Button;
