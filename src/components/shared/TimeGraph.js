@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import ChartistGraph from 'react-chartist';
+import { transparentize } from 'polished';
+import styled, { withTheme } from 'styled-components';
+import { Line } from 'react-chartjs-2';
 
-import { default as allStats } from '../../constants/stats';
 import * as CustomPropTypes from '../../propTypes';
-import { formatShortTime, getMs } from '../../helpers/time';
-import { getColor, getSize } from '../../helpers/theme';
+import { formatShortTime, getMs, formatTime } from '../../helpers/time';
 import TimeGraphLegend from './TimeGraphLegend';
+import { formatLocalDateTime } from '../../helpers/dateTime';
 
-const lineColors = allStats.reduce(
-  (colors, stat) => ({ ...colors, [stat.name]: stat.graphLineColor }),
-  {}
-);
-
-const TimeGraph = ({ times, stats }) => {
+const TimeGraph = ({ times, stats, theme }) => {
   const [disabledLines, setDisabledLines] = useState([]);
 
   const disableLine = name => setDisabledLines([...disabledLines, name]);
   const enableLine = name => setDisabledLines(disabledLines.filter(lineName => lineName !== name));
-  const buildLine = (name, data) => ({
+  const buildLine = (name, data, color) => ({
     name,
-    className: name,
-    data,
+    color,
+    label: name,
+    borderWidth: 2,
+    lineTension: 0.25,
+    backgroundColor: transparentize(1, theme.colors[color]),
+    borderColor: theme.colors[color],
+    pointBackgroundColor: theme.colors[color],
+    pointHitRadius: 8,
+    pointHoverRadius: 3,
+    pointRadius: 0,
     enabled: !disabledLines.includes(name),
-    color: lineColors[name]
+    data
   });
 
   const lines = stats
@@ -33,36 +36,60 @@ const TimeGraph = ({ times, stats }) => {
       const statTimes = stat.all
         .filter(ms => ms < Infinity)
         .map(ms => getMs({ ms: Math.round(ms) }));
+
       const offset = times.length - statTimes.length;
 
-      return buildLine(stat.name, [...new Array(Math.max(offset, 0)), ...statTimes]);
+      return buildLine(
+        stat.name,
+        [...new Array(Math.max(offset, 0)), ...statTimes],
+        stat.graphLineColor
+      );
     });
 
   const data = {
-    series: lines.filter(line => line.enabled)
+    labels: times.map(time => formatLocalDateTime(time.date)),
+    datasets: lines.filter(line => line.enabled)
   };
 
   const options = {
-    showPoint: false,
-    axisX: {
-      showLabel: false,
-      showGrid: false
+    animation: {
+      duration: 0
     },
-    axisY: {
-      labelInterpolationFnc: formatShortTime
+    legend: {
+      display: false
     },
-    stretch: true
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem, data) => {
+          const label = data.datasets[tooltipItem.datasetIndex].label;
+          return label + ': ' + formatTime(tooltipItem.value);
+        }
+      }
+    },
+    scales: {
+      xAxes: [
+        {
+          display: false
+        }
+      ],
+      yAxes: [
+        {
+          ticks: {
+            callback: formatShortTime
+          },
+          gridLines: {
+            color: theme.colors.subtleBg,
+            tickMarkLength: 7,
+            drawBorder: false
+          }
+        }
+      ]
+    }
   };
 
   return (
     <>
-      <StyledChartistGraph
-        lineColors={lineColors}
-        className="ct-perfect-fifth"
-        data={data}
-        options={options}
-        type="Line"
-      />
+      <Line data={data} options={options} />
       <LegendWrapper>
         <TimeGraphLegend lines={lines} enableLine={enableLine} disableLine={disableLine} />
       </LegendWrapper>
@@ -72,55 +99,12 @@ const TimeGraph = ({ times, stats }) => {
 
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired
+  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
+  theme: PropTypes.object.isRequired
 };
 
-const StyledChartistGraph = styled(ChartistGraph)`
-  pointer-events: none;
-
-  .ct-line {
-    stroke-width: 2px;
-  }
-
-  .single .ct-line {
-    stroke: ${getColor(lineColors.single)};
-  }
-
-  .ao5 .ct-line {
-    stroke: ${getColor(lineColors.ao5)};
-  }
-
-  .ao12 .ct-line {
-    stroke: ${getColor(lineColors.ao12)};
-  }
-
-  .ao25 .ct-line {
-    stroke: ${getColor(lineColors.ao25)};
-  }
-
-  .ao50 .ct-line {
-    stroke: ${getColor(lineColors.ao50)};
-  }
-
-  .ao100 .ct-line {
-    stroke: ${getColor(lineColors.ao100)};
-  }
-
-  .ct-grid {
-    stroke: ${getColor('grey')};
-  }
-
-  .ct-label {
-    position: relative;
-    font-size: 1.3rem;
-    color: ${getColor('grey')};
-    top: ${getSize('xxs')};
-  }
-`;
-
 const LegendWrapper = styled.div`
-  margin-top: -2rem;
   text-align: center;
 `;
 
-export default React.memo(TimeGraph);
+export default React.memo(withTheme(TimeGraph));

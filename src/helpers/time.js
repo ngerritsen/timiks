@@ -63,8 +63,7 @@ export function formatShortTime(ms) {
 export function formatTime(ms) {
   const { minutes, seconds, milliseconds } = breakUpTime(ms);
   return (
-    fillZeroes(String(minutes), 2) +
-    ':' +
+    (minutes > 0 ? fillZeroes(String(minutes), 2) + ':' : '') +
     fillZeroes(String(seconds), 2) +
     '.' +
     fillZeroes(String(milliseconds), 3)

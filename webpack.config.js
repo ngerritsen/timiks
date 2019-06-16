@@ -1,5 +1,6 @@
 /* global require, __dirname, process, module */
 
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -20,10 +21,6 @@ const createConfig = (env, argv) => {
           test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel-loader'
-        },
-        {
-          test: /\.css$/,
-          loader: 'css-loader'
         }
       ]
     },
@@ -33,7 +30,8 @@ const createConfig = (env, argv) => {
         template: './src/index.html',
         inject: true,
         buildNumber
-      })
+      }),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ],
     optimization: {
       splitChunks: {

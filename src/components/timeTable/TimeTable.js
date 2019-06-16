@@ -9,6 +9,7 @@ import TimeGraph from '../shared/TimeGraph';
 import ToggleContent from '../shared/ToggleContent';
 import IconButton from '../shared/IconButton';
 import Tag from '../shared/Tag';
+import Section from '../shared/Section';
 import Modal from '../shared/Modal';
 import TimeTableTimeRow from './TimeTableTimeRow';
 import { Cell, HeadingCell, SubtleHeadingCell, Table } from '../shared/Table';
@@ -19,47 +20,49 @@ import { getBreakpoint, getSize } from '../../helpers/theme';
 const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => (
   <TimeTableContainer>
     <TimeTableColumn>
-      <Table>
-        <thead>
-          <tr>
-            <HeadingCell>Stats</HeadingCell>
-            <SubtleHeadingCell>Current</SubtleHeadingCell>
-            <SubtleHeadingCell>Best</SubtleHeadingCell>
-            <HeadingCell rightAlign>
-              <ToggleContent
-                toggle={({ show }) => (
-                  <QuestionIconButton color="blue" onClick={show}>
-                    <FontAwesome icon={faQuestionCircle} size="sm" />
-                  </QuestionIconButton>
-                )}
-                content={({ hide }) => (
-                  <Modal title="Stats" onClose={hide}>
-                    <StatsExplanation />
-                  </Modal>
-                )}
-              />
-            </HeadingCell>
-          </tr>
-        </thead>
-        <tbody>
-          {stats.length === 0 && (
+      <Section margin={showGraph ? 'xs' : ''}>
+        <Table>
+          <thead>
             <tr>
-              <Cell colSpan="2">
-                <i>Not enough solves yet.</i>
-              </Cell>
+              <HeadingCell>Stats</HeadingCell>
+              <SubtleHeadingCell>Current</SubtleHeadingCell>
+              <SubtleHeadingCell>Best</SubtleHeadingCell>
+              <HeadingCell rightAlign>
+                <ToggleContent
+                  toggle={({ show }) => (
+                    <QuestionIconButton color="blue" onClick={show}>
+                      <FontAwesome icon={faQuestionCircle} size="sm" />
+                    </QuestionIconButton>
+                  )}
+                  content={({ hide }) => (
+                    <Modal title="Stats" onClose={hide}>
+                      <StatsExplanation />
+                    </Modal>
+                  )}
+                />
+              </HeadingCell>
             </tr>
-          )}
-          {stats.length > 0 &&
-            stats.map(stat => (
-              <TimeTableStatRow
-                key={stat.name}
-                name={stat.name}
-                current={stat.current}
-                best={stat.best}
-              />
-            ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {stats.length === 0 && (
+              <tr>
+                <Cell colSpan="2">
+                  <i>Not enough solves yet.</i>
+                </Cell>
+              </tr>
+            )}
+            {stats.length > 0 &&
+              stats.map(stat => (
+                <TimeTableStatRow
+                  key={stat.name}
+                  name={stat.name}
+                  current={stat.current}
+                  best={stat.best}
+                />
+              ))}
+          </tbody>
+        </Table>
+      </Section>
       {showGraph && <TimeGraph stats={stats} times={noDnfTimes} />}
     </TimeTableColumn>
     <TimeTableColumn>

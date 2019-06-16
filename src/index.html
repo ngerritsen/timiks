@@ -22,10 +22,7 @@
 
     <title>Timiks - Cube timer made for speedsolvers</title>
 
-    <%= `<style>${require('uglifycss').processFiles([
-      './src/critical/style.css',
-      './node_modules/chartist/dist/chartist.css'
-    ])}</style>` %>
+    <%= `<style>${require('uglifycss').processFiles(['./src/critical/style.css'])}</style>` %>
 </head>
 <body data-build-number="<%= htmlWebpackPlugin.options.buildNumber %>">
     <!--[if lt IE 11]>
