@@ -37,7 +37,8 @@ export function serializeTime(time) {
 }
 
 function parseDate(rawTime) {
-  return rawTime.timestamp ? rawTime.timestamp.toDate() : new Date(rawTime.date);
+  const date = rawTime.timestamp || rawTime.date;
+  return typeof date === 'string' ? new Date(rawTime.timestamp) : rawTime.timestamp.toDate();
 }
 
 function serializeScramble(scramble) {
