@@ -12,13 +12,17 @@ export function timesToCsv(times) {
       getMs(time),
       time.date.toISOString(),
       time.puzzle,
-      time.scramble.join(' '),
+      escapeColumn(time.scramble.join(' ')),
       time.plus2 ? 'yes' : '',
       time.dnf ? 'yes' : ''
     ].join(COLUMN_DELIMTER)
   );
 
   return [headers, rows.join(ROW_DELIMITER)].join(ROW_DELIMITER);
+}
+
+function escapeColumn(string) {
+  return `"${string.replace(/"/g, '""')}"`;
 }
 
 export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
@@ -28,17 +32,12 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
   let currentRow = [];
   let currentColumn = '';
   let inEscape = false;
+  let inEscapeEscape = false;
 
   for (let i = 0; i < trimmedCsv.length; i++) {
     const char = trimmedCsv[i];
     const nextChar = trimmedCsv[i + 1];
     const isLast = i === trimmedCsv.length - 1;
-
-    if (char === delimiter && !inEscape) {
-      currentRow.push(currentColumn);
-      currentColumn = '';
-      continue;
-    }
 
     if (char === ESCAPE_CHAR && !inEscape) {
       inEscape = true;
@@ -46,10 +45,17 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
     }
 
     if (char === ESCAPE_CHAR && nextChar === ESCAPE_CHAR) {
+      inEscapeEscape = true;
       continue;
     }
 
-    if (char === ESCAPE_CHAR && [delimiter, ROW_DELIMITER].includes(nextChar)) {
+    if (char === ESCAPE_CHAR && inEscapeEscape) {
+      currentColumn += char;
+      inEscapeEscape = false;
+      continue;
+    }
+
+    if (char === ESCAPE_CHAR) {
       inEscape = false;
       continue;
     }
@@ -59,6 +65,10 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
       currentRow.push(currentColumn);
       currentColumn = '';
 
+      if (char === delimiter) {
+        currentRow.push('');
+      }
+
       if (headers.length === 0) {
         headers = currentRow;
       } else {
@@ -66,6 +76,12 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
       }
 
       currentRow = [];
+      continue;
+    }
+
+    if (char === delimiter && !inEscape) {
+      currentRow.push(currentColumn);
+      currentColumn = '';
       continue;
     }
 
