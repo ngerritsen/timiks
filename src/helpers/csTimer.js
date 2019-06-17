@@ -2,7 +2,7 @@ import { parseTimeInput } from './time';
 import { parseCsv } from './csv';
 import shortid from 'shortid';
 
-export function csTimerSessionToTimes(csv) {
+export default function parseCsTimerSession(csv) {
   return parseCsv(csv, ';')
     .map(item => {
       try {

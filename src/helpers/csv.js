@@ -20,9 +20,7 @@ export function timesToCsv(times) {
   return [headers, rows.join(ROW_DELIMITER)].join(ROW_DELIMITER);
 }
 
-export function parseCsv(csv, delimiter = ',', escapeChar = '"') {
-  let headers = [];
-
+export function parseCsv(csv, delimiter = ',', escapeChar = '"', headers = []) {
   return csv
     .trim()
     .split('\n')
@@ -43,14 +41,21 @@ export function parseCsv(csv, delimiter = ',', escapeChar = '"') {
           currentColumn = '';
         } else if (char === escapeChar && !inEscape) {
           inEscape = true;
-        } else if (char === escapeChar && inEscape && line[i + 1] === delimiter) {
+        } else if (
+          char === escapeChar &&
+          inEscape &&
+          (line[i + 1] === delimiter || i === line.length - 1)
+        ) {
           inEscape = false;
         } else {
           currentColumn += char;
         }
       }
 
-      if (lineNumber === 0) {
+      columns.push(currentColumn);
+      currentColumn = '';
+
+      if (lineNumber === 0 && headers.length === 0) {
         headers = columns;
         return;
       }

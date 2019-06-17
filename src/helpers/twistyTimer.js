@@ -1,0 +1,34 @@
+import { parseTimeInput } from './time';
+import { parseCsv } from './csv';
+import shortid from 'shortid';
+
+export default function parseTwistyTimerExport(csv) {
+  return parseCsv(csv, ';', '"', ['time', 'scramble', 'date', 'penalty'])
+    .map(item => {
+      try {
+        return {
+          id: shortid.generate(),
+          ...parseTwistyTimerTime(item.time, item.penalty),
+          scramble: parseCsTimerScramble(item.scramble),
+          date: new Date(Date.parse(item.date))
+        };
+      } catch (e) {
+        return null;
+      }
+    })
+    .filter(Boolean);
+}
+
+function parseTwistyTimerTime(string, penalty) {
+  return {
+    ...parseTimeInput(string),
+    dnf: penalty === 'DNF'
+  };
+}
+
+function parseCsTimerScramble(string) {
+  return string
+    .trim()
+    .replace(/[\n\s]+/g, ' ') // Remove extra whitespcae
+    .split(' ');
+}
