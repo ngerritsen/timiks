@@ -67,7 +67,17 @@ const localTimesReducer = handleActions(
       ...state,
       times: state.times.filter(time => !time.current)
     }),
-    [actionTypes.LOAD_LOCAL_TIMES]: (state, action) => ({ ...state, times: action.payload })
+    [actionTypes.LOAD_LOCAL_TIMES]: (state, action) => ({ ...state, times: action.payload }),
+    [actionTypes.IMPORT_TIMES]: (state, action) => {
+      const importedIds = action.payload.times.map(time => time.id);
+      return {
+        ...state,
+        times: [
+          ...state.times.filter(time => !importedIds.includes(time.id)),
+          ...action.payload.times
+        ]
+      };
+    }
   },
   initialState
 );

@@ -12,7 +12,9 @@ export const importTimesEpic = (action$, state$) =>
     withLatestFrom(state$),
     mergeMap(([action, state]) =>
       from(
-        isLoggedIn(state) ? timesRepository.saveAll(getUserId(state), action.payload.times) : null
+        isLoggedIn(state)
+          ? timesRepository.saveAll(getUserId(state), action.payload.times)
+          : Promise.resolve()
       ).pipe(map(() => showNotification(`Imported ${action.payload.times.length} times.`)))
     )
   );

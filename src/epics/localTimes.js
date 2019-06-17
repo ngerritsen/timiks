@@ -21,7 +21,8 @@ export const storeLocalTimesEpic = (action$, state$) =>
       actionTypes.REMOVE_TIME,
       actionTypes.CLEAR_TIMES,
       actionTypes.UPDATE_TIME,
-      actionTypes.ARCHIVE_TIMES
+      actionTypes.ARCHIVE_TIMES,
+      actionTypes.IMPORT_TIMES
     ),
     delay(0),
     withLatestFrom(state$),
