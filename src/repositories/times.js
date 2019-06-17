@@ -1,8 +1,9 @@
-/* eslint-disable no-console */
 import * as firebase from 'firebase/app';
 import { serializeTime, parseTimes } from '../helpers/serialization';
 import { Observable } from 'rxjs';
 import { getDateForDaysAgo } from '../helpers/dateTime';
+
+const MAX_BATCH_SIZE = 500;
 
 const db = firebase.firestore();
 
@@ -46,15 +47,17 @@ export function save(userId, time) {
 }
 
 export function saveAll(userId, times) {
+  const chunk = times.slice(0, MAX_BATCH_SIZE);
   const batch = db.batch();
 
-  times.forEach(time => {
+  chunk.forEach(time => {
     const timeRef = db.collection('times').doc(time.id);
     batch.set(timeRef, { ...stripUndefined(serializeTime(time)), userId });
-    console.log({ ...stripUndefined(serializeTime(time)), userId });
   });
 
-  return batch.commit();
+  return batch
+    .commit()
+    .then(() => times.length > MAX_BATCH_SIZE && saveAll(userId, times.slice(MAX_BATCH_SIZE)));
 }
 
 export function update(timeId, fields) {
