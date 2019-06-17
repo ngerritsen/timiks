@@ -71,7 +71,7 @@ const Import = ({ importTimes }) => {
                   Import
                 </Button>
               </Section>
-              <ImportPreview times={times} />
+              <ImportPreview times={times} puzzle={puzzle} />
             </>
           )}
         </Modal>

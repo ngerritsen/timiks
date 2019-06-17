@@ -26,7 +26,10 @@ const FileUploadButton = ({ label, name, onChange, accept }) => {
 
     readFile(file)
       .then(data => onChange({ file, data }))
-      .catch(() => {})
+      .catch(err => {
+        console.error(err); // eslint-disable-line no-console
+        onChange({ file, data: [] });
+      })
       .then(() => setLoadingFile(false));
   }
 

@@ -2,6 +2,7 @@ import { getMs } from './time';
 
 const ROW_DELIMITER = '\n';
 const COLUMN_DELIMTER = ',';
+const ESCAPE_CHAR = '"';
 
 export function timesToCsv(times) {
   const headers = ['id', 'ms', 'date', 'puzzle', 'scramble', 'plus2', 'dnf'].join(COLUMN_DELIMTER);
@@ -20,53 +21,64 @@ export function timesToCsv(times) {
   return [headers, rows.join(ROW_DELIMITER)].join(ROW_DELIMITER);
 }
 
-export function parseCsv(csv, delimiter = ',', escapeChar = '"', headers = []) {
-  return csv
-    .trim()
-    .split('\n')
-    .map((line, lineNumber) => {
-      if (!line.trim()) {
-        return;
-      }
+export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
+  const trimmedCsv = csv.trim();
+  const rows = [];
 
-      const columns = [];
-      let currentColumn = '';
-      let inEscape = false;
+  let currentRow = [];
+  let currentColumn = '';
+  let inEscape = false;
 
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
+  for (let i = 0; i < trimmedCsv.length; i++) {
+    const char = trimmedCsv[i];
+    const nextChar = trimmedCsv[i + 1];
+    const isLast = i === trimmedCsv.length - 1;
 
-        if (char === delimiter && !inEscape) {
-          columns.push(currentColumn);
-          currentColumn = '';
-        } else if (char === escapeChar && !inEscape) {
-          inEscape = true;
-        } else if (
-          char === escapeChar &&
-          inEscape &&
-          (line[i + 1] === delimiter || i === line.length - 1)
-        ) {
-          inEscape = false;
-        } else {
-          currentColumn += char;
-        }
-      }
+    if (char === delimiter && !inEscape) {
+      currentRow.push(currentColumn);
+      currentColumn = '';
+      continue;
+    }
 
-      columns.push(currentColumn);
+    if (char === ESCAPE_CHAR && !inEscape) {
+      inEscape = true;
+      continue;
+    }
+
+    if (char === ESCAPE_CHAR && nextChar === ESCAPE_CHAR) {
+      continue;
+    }
+
+    if (char === ESCAPE_CHAR && [delimiter, ROW_DELIMITER].includes(nextChar)) {
+      inEscape = false;
+      continue;
+    }
+
+    if ((char === ROW_DELIMITER || isLast) && (!inEscape || char === ESCAPE_CHAR)) {
+      inEscape = false;
+      currentRow.push(currentColumn);
       currentColumn = '';
 
-      if (lineNumber === 0 && headers.length === 0) {
-        headers = columns;
-        return;
+      if (headers.length === 0) {
+        headers = currentRow;
+      } else {
+        rows.push(currentRow);
       }
 
-      return headers.reduce(
-        (columnData, header, i) => ({
-          ...columnData,
-          [header]: columns[i]
-        }),
-        {}
-      );
-    })
-    .filter(Boolean);
+      currentRow = [];
+      continue;
+    }
+
+    currentColumn += char;
+  }
+
+  return rows.map(row =>
+    headers.reduce(
+      (columnData, header, i) => ({
+        ...columnData,
+        [header]: row[i]
+      }),
+      {}
+    )
+  );
 }

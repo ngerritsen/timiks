@@ -1,17 +1,19 @@
-import { parseTimeInput } from './time';
+import { parseTimeInput, isValidTime } from './time';
 import { parseCsv } from './csv';
 import shortid from 'shortid';
 
 export default function parseTwistyTimerExport(csv) {
-  return parseCsv(csv, ';', '"', ['time', 'scramble', 'date', 'penalty'])
+  return parseCsv(csv, ';', ['time', 'scramble', 'date', 'penalty'])
     .map(item => {
       try {
-        return {
+        const time = {
           id: shortid.generate(),
           ...parseTwistyTimerTime(item.time, item.penalty),
           scramble: parseCsTimerScramble(item.scramble),
           date: new Date(Date.parse(item.date))
         };
+
+        return isValidTime(time) && time;
       } catch (e) {
         return null;
       }

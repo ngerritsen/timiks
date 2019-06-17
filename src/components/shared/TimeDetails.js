@@ -52,23 +52,26 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => (
       />
     </Section>
     <Section>
-      <ButtonDuo>
-        <ButtonDuoItem>
-          <Button onClick={onRemoveTime} color="red">
-            Remove
-          </Button>
-        </ButtonDuoItem>
-        <ButtonDuoItem>
-          <Button onClick={onClose}>Close</Button>
-        </ButtonDuoItem>
-      </ButtonDuo>
+      {onRemoveTime && (
+        <ButtonDuo>
+          <ButtonDuoItem>
+            <Button onClick={onRemoveTime} color="red">
+              Remove
+            </Button>
+          </ButtonDuoItem>
+          <ButtonDuoItem>
+            <Button onClick={onClose}>Close</Button>
+          </ButtonDuoItem>
+        </ButtonDuo>
+      )}
+      {!onRemoveTime && <Button onClick={onClose}>Close</Button>}
     </Section>
   </div>
 );
 
 TimeDetails.propTypes = {
   time: CustomPropTypes.Time.isRequired,
-  onRemoveTime: PropTypes.func.isRequired,
+  onRemoveTime: PropTypes.func,
   onClose: PropTypes.func.isRequired
 };
 

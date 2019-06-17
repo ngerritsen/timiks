@@ -36,6 +36,16 @@ const timeInputPatterns = [
   }
 ];
 
+export function isValidTime(time) {
+  return (
+    time &&
+    typeof time.ms === 'number' &&
+    !isNaN(time.ms) &&
+    time.date &&
+    !isNaN(time.date.getTime())
+  );
+}
+
 export function breakUpTime(ms) {
   let milliseconds = Math.round(ms);
 

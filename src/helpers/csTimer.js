@@ -1,4 +1,4 @@
-import { parseTimeInput } from './time';
+import { parseTimeInput, isValidTime } from './time';
 import { parseCsv } from './csv';
 import shortid from 'shortid';
 
@@ -6,12 +6,14 @@ export default function parseCsTimerSession(csv) {
   return parseCsv(csv, ';')
     .map(item => {
       try {
-        return {
+        const time = {
           id: shortid.generate(),
           ...parseCsTimerTime(item.Time),
           scramble: parseCsTimerScramble(item.Scramble),
           date: new Date(Date.parse(item.Date))
         };
+
+        return isValidTime(time) && time;
       } catch (e) {
         return null;
       }

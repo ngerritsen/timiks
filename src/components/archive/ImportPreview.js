@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import faInfoCircle from '@fortawesome/fontawesome-pro-solid/faInfoCircle';
 
 import * as CustomPropTypes from '../../propTypes';
 import { Table, Cell, HeadingCell } from '../shared/Table';
 import Time from '../shared/Time';
 import Tag from '../shared/Tag';
+import ToggleContent from '../shared/ToggleContent';
+import TimeDetails from '../shared/TimeDetails';
+import IconButton from '../shared/IconButton';
+import Modal from '../shared/Modal';
 import { formatLocalDateTime } from '../../helpers/dateTime';
 
-const ImportPreview = ({ times }) => (
+const ImportPreview = ({ times, puzzle }) => (
   <Table>
     <thead>
       <tr>
-        <HeadingCell colSpan="2">
+        <HeadingCell colSpan="3">
           Times to be imported &nbsp; <Tag size="sm">{times.length}</Tag>
         </HeadingCell>
       </tr>
@@ -20,9 +26,25 @@ const ImportPreview = ({ times }) => (
       {times.map(time => (
         <tr key={time.id}>
           <Cell>
-            <Time time={time} />
+            <strong>
+              <Time time={time} />
+            </strong>
           </Cell>
           <Cell>{formatLocalDateTime(time.date)}</Cell>
+          <Cell>
+            <ToggleContent
+              toggle={({ show }) => (
+                <IconButton color="blue" onClick={show}>
+                  <FontAwesome icon={faInfoCircle} />
+                </IconButton>
+              )}
+              content={({ hide }) => (
+                <Modal title="Details" onClose={hide}>
+                  <TimeDetails time={{ ...time, puzzle }} onClose={hide} />
+                </Modal>
+              )}
+            />
+          </Cell>
         </tr>
       ))}
     </tbody>
@@ -30,7 +52,8 @@ const ImportPreview = ({ times }) => (
 );
 
 ImportPreview.propTypes = {
-  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
+  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
+  puzzle: PropTypes.string
 };
 
 export default ImportPreview;
