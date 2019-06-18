@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { withTheme } from 'styled-components';
 import { Line } from 'react-chartjs-2';
+import * as zoom from 'chartjs-plugin-zoom';
 
 import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, getMs, formatTime } from '../../helpers/time';
 import TimeGraphLegend from './TimeGraphLegend';
-import { formatLocalDateTime } from '../../helpers/dateTime';
 
 const TimeGraph = ({ times, stats, theme }) => {
   const [disabledLines, setDisabledLines] = useState([]);
@@ -19,7 +19,7 @@ const TimeGraph = ({ times, stats, theme }) => {
     color,
     label: name,
     borderWidth: 2,
-    lineTension: 0.25,
+    lineTension: 0.2,
     backgroundColor: transparentize(1, theme.colors[color]),
     borderColor: theme.colors[color],
     pointBackgroundColor: theme.colors[color],
@@ -47,7 +47,7 @@ const TimeGraph = ({ times, stats, theme }) => {
     });
 
   const data = {
-    labels: times.map(time => formatLocalDateTime(time.date)),
+    labels: times.map(time => time.date),
     datasets: lines.filter(line => line.enabled)
   };
 
@@ -65,6 +65,14 @@ const TimeGraph = ({ times, stats, theme }) => {
           return label + ': ' + formatTime(tooltipItem.value);
         }
       }
+    },
+    pan: {
+      enabled: true,
+      mode: 'x'
+    },
+    zoom: {
+      enabled: true,
+      mode: 'x'
     },
     scales: {
       xAxes: [
@@ -89,7 +97,7 @@ const TimeGraph = ({ times, stats, theme }) => {
 
   return (
     <>
-      <Line data={data} options={options} />
+      <Line data={data} options={options} plugins={[zoom]} />
       <LegendWrapper>
         <TimeGraphLegend lines={lines} enableLine={enableLine} disableLine={disableLine} />
       </LegendWrapper>

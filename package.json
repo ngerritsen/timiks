@@ -34,6 +34,7 @@
     "@fortawesome/fontawesome-pro-solid": "^5.0.13",
     "@fortawesome/react-fontawesome": "0.0.17",
     "chart.js": "^2.8.0",
+    "chartjs-plugin-zoom": "^0.7.0",
     "element-closest": "^2.0.2",
     "firebase": "^6.0.2",
     "imagemin": "^6.1.0",
