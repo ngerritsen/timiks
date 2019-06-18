@@ -58,6 +58,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
   };
 
   const options = {
+    aspectRatio: 1.5,
     animation: {
       duration: 0
     },
@@ -118,7 +119,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
   return (
     <>
       <GraphWrapper>
-        <Line data={data} options={options} ref={chartRef} />
+        <Line data={data} options={options} ref={chartRef} height={null} width={null} />
         {enableZoom && (
           <ResetZoomButton onClick={resetZoom} size="sm" color="subtleBg" tag>
             <FontAwesome icon={faSearchMinus} />
