@@ -11,6 +11,7 @@ import Button from './Button';
 import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, getMs, formatTime } from '../../helpers/time';
 import TimeGraphLegend from './TimeGraphLegend';
+import { formatLocalDateTime } from '../../helpers/dateTime';
 
 const TimeGraph = ({ times, stats, theme, enableZoom }) => {
   const [disabledLines, setDisabledLines] = useState([]);
@@ -64,11 +65,24 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
       display: false
     },
     tooltips: {
+      backgroundColor: theme.colors.dark,
+      footerFontFamily: theme.fonts.default,
+      footerFontSize: 14,
+      footerFontStyle: 'normal',
+      bodyFontFamily: theme.fonts.default,
+      bodyFontStyle: 'bold',
+      bodyFontSize: 15,
+      xPadding: 12,
+      yPadding: 12,
+      caretSize: 7,
+      caretPadding: 5,
+      footerMarginTop: 8,
+      displayColors: false,
       callbacks: {
-        label: (tooltipItem, data) => {
-          const label = data.datasets[tooltipItem.datasetIndex].label;
-          return label + ': ' + formatTime(tooltipItem.value);
-        }
+        label: tooltipItem =>
+          `${formatTime(tooltipItem.value)}  (${data.datasets[tooltipItem.datasetIndex].name})`,
+        footer: tooltipItem => formatLocalDateTime(new Date(tooltipItem[0].label)),
+        title: () => null
       }
     },
     pan: {
