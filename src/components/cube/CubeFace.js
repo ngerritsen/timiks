@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
+import { shade, tint } from 'polished';
 import { puzzleColors } from '../../constants/puzzles';
 import { getSize, getColor, isDark } from '../../helpers/theme';
 
@@ -51,8 +51,8 @@ const Tile = styled.span`
   border-style: solid;
   border-color: ${props =>
     isDark(props)
-      ? lighten(0.15, getColor([puzzleColors[props.color]])(props))
-      : darken(0.25, getColor([puzzleColors[props.color]])(props))};
+      ? tint(0.6, getColor([puzzleColors[props.color]])(props))
+      : shade(0.6, getColor([puzzleColors[props.color]])(props))};
   width: 100%;
   margin-right: ${props => (props.isLastColumn ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
   margin-bottom: ${props => (props.isLastRow ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
