@@ -93,7 +93,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
     zoom: {
       enabled: enableZoom,
       mode: 'x',
-      sensitivity: 1
+      sensitivity: 0.5
     },
     scales: {
       xAxes: [
