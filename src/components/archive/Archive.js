@@ -23,7 +23,7 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
       {times.length > 1 && (
         <>
           <Section margin="md">
-            <TimeGraph times={times} stats={stats} />
+            <TimeGraph times={times} stats={stats} enableZoom />
           </Section>
         </>
       )}

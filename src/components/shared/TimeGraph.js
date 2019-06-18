@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { withTheme } from 'styled-components';
 import { Line } from 'react-chartjs-2';
-import * as zoom from 'chartjs-plugin-zoom';
+import 'chartjs-plugin-zoom';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import faSearchMinus from '@fortawesome/fontawesome-pro-solid/faSearchMinus';
 
+import Button from './Button';
 import * as CustomPropTypes from '../../propTypes';
 import { formatShortTime, getMs, formatTime } from '../../helpers/time';
 import TimeGraphLegend from './TimeGraphLegend';
 
-const TimeGraph = ({ times, stats, theme }) => {
+const TimeGraph = ({ times, stats, theme, enableZoom }) => {
   const [disabledLines, setDisabledLines] = useState([]);
+  const chartRef = useRef(null);
 
+  const resetZoom = () => chartRef.current && chartRef.current.chartInstance.resetZoom();
   const disableLine = name => setDisabledLines([...disabledLines, name]);
   const enableLine = name => setDisabledLines(disabledLines.filter(lineName => lineName !== name));
   const buildLine = (name, data, color) => ({
@@ -67,12 +72,13 @@ const TimeGraph = ({ times, stats, theme }) => {
       }
     },
     pan: {
-      enabled: true,
+      enabled: enableZoom,
       mode: 'x'
     },
     zoom: {
-      enabled: true,
-      mode: 'x'
+      enabled: enableZoom,
+      mode: 'x',
+      sensitivity: 1
     },
     scales: {
       xAxes: [
@@ -97,7 +103,14 @@ const TimeGraph = ({ times, stats, theme }) => {
 
   return (
     <>
-      <Line data={data} options={options} plugins={[zoom]} />
+      <GraphWrapper>
+        <Line data={data} options={options} ref={chartRef} />
+        {enableZoom && (
+          <ResetZoomButton onClick={resetZoom} size="sm" color="subtleBg" tag>
+            <FontAwesome icon={faSearchMinus} />
+          </ResetZoomButton>
+        )}
+      </GraphWrapper>
       <LegendWrapper>
         <TimeGraphLegend lines={lines} enableLine={enableLine} disableLine={disableLine} />
       </LegendWrapper>
@@ -108,8 +121,19 @@ const TimeGraph = ({ times, stats, theme }) => {
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
+  enableZoom: PropTypes.bool
 };
+
+const GraphWrapper = styled.div`
+  position: relative;
+`;
+
+const ResetZoomButton = Button.extend`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
 
 const LegendWrapper = styled.div`
   text-align: center;
