@@ -17,7 +17,7 @@ import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
 import { getBreakpoint, getSize } from '../../helpers/theme';
 
-const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => (
+const TimeTable = ({ stats, removeTime, times, showGraph }) => (
   <TimeTableContainer>
     <TimeTableColumn>
       <Section margin={showGraph ? 'xs' : ''}>
@@ -63,7 +63,7 @@ const TimeTable = ({ stats, removeTime, times, noDnfTimes, showGraph }) => (
           </tbody>
         </Table>
       </Section>
-      {showGraph && <TimeGraph stats={stats} times={noDnfTimes} />}
+      {showGraph && <TimeGraph stats={stats} times={times} />}
     </TimeTableColumn>
     <TimeTableColumn>
       <Table>
@@ -91,7 +91,6 @@ TimeTable.propTypes = {
   stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
   removeTime: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  noDnfTimes: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   showGraph: PropTypes.bool
 };
 

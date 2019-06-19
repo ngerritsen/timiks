@@ -33,15 +33,16 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
     pointHoverRadius: 3,
     pointRadius: 0,
     enabled: !disabledLines.includes(name),
+    spanGaps: true,
     data
   });
 
   const lines = stats
     .filter(stat => stat.showInGraph && stat.all.length > 1)
     .map(stat => {
-      const statTimes = stat.all
-        .filter(ms => ms < Infinity)
-        .map(ms => getMs({ ms: Math.round(ms) }));
+      const statTimes = stat.all.map(ms =>
+        ms === Infinity ? null : getMs({ ms: Math.round(ms) })
+      );
 
       const offset = times.length - statTimes.length;
 

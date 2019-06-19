@@ -8,7 +8,6 @@ function mapStateToProps(state) {
   return {
     times: timesSelectors.getCurrentMarkedSortedTimes(state),
     stats: timesSelectors.getStatsForCurrentTimes(state),
-    noDnfTimes: timesSelectors.getCurrentNoDnfTimes(state),
     showGraph: timesSelectors.getCurrentNoDnfTimes(state).length > 1
   };
 }
