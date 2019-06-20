@@ -12,6 +12,7 @@ import ArchiveItem from './ArchiveItem';
 import { getPuzzle } from '../../helpers/puzzle';
 import { ARCHIVE_DAYS_OPTIONS } from '../../constants/app';
 import { decapitalize } from '../../helpers/formatting';
+import TopStats from './TopStats';
 
 const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireTimes }) => {
   useEffect(() => {
@@ -27,7 +28,7 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
           </Section>
         </>
       )}
-      <Section margin="sm">
+      <Section margin="md">
         <ArchiveOptionsContainer />
       </Section>
       {times.length === 0 && (
@@ -36,20 +37,22 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
           {decapitalize(ARCHIVE_DAYS_OPTIONS.find(option => option.value === days).label)}.
         </Message>
       )}
-      {timesPerDay.length > 0 && (
-        <Section>
-          {timesPerDay.map(({ date, times }) => (
-            <div key={date.toISOString()}>
-              <h3>{formatLocalDate(date)}</h3>
-              <TimeTiles>
-                {times.map(time => (
-                  <ArchiveItem key={time.id} time={time} removeTime={removeTime} />
-                ))}
-              </TimeTiles>
-            </div>
-          ))}
+      {times.length > 1 && (
+        <Section margin="md">
+          <SectionTitle>Top Stats</SectionTitle>
+          <TopStats stats={stats} />
         </Section>
       )}
+      {timesPerDay.map(({ date, times }) => (
+        <Section margin="md" key={date.toISOString()}>
+          <SectionTitle>{formatLocalDate(date)}</SectionTitle>
+          <TimeTiles>
+            {times.map(time => (
+              <ArchiveItem key={time.id} time={time} removeTime={removeTime} />
+            ))}
+          </TimeTiles>
+        </Section>
+      ))}
     </>
   );
 };
@@ -74,6 +77,10 @@ const Message = styled.p`
   font-weight: bold;
   padding: 15vh 0;
   text-align: center;
+`;
+
+const SectionTitle = styled.h3`
+  margin: 0 0 ${getSize('sm')};
 `;
 
 const TimeTiles = styled.div`
