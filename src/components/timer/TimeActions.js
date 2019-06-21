@@ -9,7 +9,7 @@ import * as CustomPropTypes from '../../propTypes';
 import { getSize } from '../../helpers/theme';
 import Button from '../shared/Button';
 import Shortcut from '../shared/Shortcut';
-import Toggle from '../shared/Toggle';
+import ToggleContent from '../shared/ToggleContent';
 import EditCommentContainer from '../../containers/EditCommentContainer';
 
 const TimeActions = ({
@@ -43,17 +43,17 @@ const TimeActions = ({
     </TimeAction>
 
     <TimeAction>
-      <Toggle>
-        {({ isShown, toggle, hide }) => (
+      <ToggleContent
+        toggle={({ toggle }) => (
           <>
             <Shortcut command="commentOnTime" action={toggle} />
             <Button size="sm" tag color="subtleFg" onClick={toggle}>
               <FontAwesome fixedWidth icon={faCommentAltLines} />
             </Button>
-            {isShown && <EditCommentContainer onCancel={hide} time={lastTime} />}
           </>
         )}
-      </Toggle>
+        content={({ hide }) => <EditCommentContainer onCancel={hide} time={lastTime} />}
+      />
     </TimeAction>
   </StyledTimeActions>
 );
