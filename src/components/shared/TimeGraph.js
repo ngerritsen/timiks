@@ -46,11 +46,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
 
       const offset = times.length - statTimes.length;
 
-      return buildLine(
-        stat.name,
-        [...new Array(Math.max(offset, 0)), ...statTimes],
-        stat.color
-      );
+      return buildLine(stat.name, [...new Array(Math.max(offset, 0)), ...statTimes], stat.color);
     });
 
   const data = {
