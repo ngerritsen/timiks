@@ -6,8 +6,15 @@ import * as CustomPropTypes from '../../propTypes';
 import { getBreakpoint, getSize, getColor } from '../../helpers/theme';
 import Time from '../shared/Time';
 
-const TopStats = ({ stats }) => (
+const TopStats = ({ stats, solves }) => (
   <TopStatsContainer>
+    <div>
+      <TopStatTitle>
+        <TopStatColor color="subtleFg" />
+        solves:
+      </TopStatTitle>
+      <strong>{solves}</strong>
+    </div>
     {stats.map(stat => (
       <div key={stat.name}>
         <TopStatTitle>
@@ -23,14 +30,14 @@ const TopStats = ({ stats }) => (
 );
 
 TopStats.propTypes = {
-  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired
+  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
+  solves: PropTypes.number.isRequired
 };
 
 const TopStatsContainer = styled.div`
   padding: ${getSize('sm')} ${getSize('xxs')};
   border-top: 1px solid ${getColor('subtleBg')};
   border-bottom: 1px solid ${getColor('subtleBg')};
-  border-radius: 0.3rem;
   display: grid;
   grid-column-gap: ${getSize('xs')};
   grid-row-gap: ${getSize('xs')};
@@ -47,7 +54,7 @@ const TopStatsContainer = styled.div`
 
 const TopStatTitle = styled.span`
   display: inline-block;
-  width: 6.75rem;
+  width: 7rem;
 `;
 
 const TopStatColor = styled.span`

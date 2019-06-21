@@ -39,7 +39,7 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
       </RemoveItemIconButton>
       <ToggleContent
         toggle={({ show }) => (
-          <ShowTimeButton onClick={show}>
+          <ShowTimeButton onClick={show} color="subtleFg">
             <FontAwesome icon={faEllipsisH} fixedWidth size="sm" />
           </ShowTimeButton>
         )}

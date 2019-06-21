@@ -14,7 +14,8 @@ export default [
   {
     name: 'mo3',
     type: MEAN,
-    size: 3
+    size: 3,
+    color: 'turquoise'
   },
   {
     name: 'ao5',
@@ -53,10 +54,12 @@ export default [
   },
   {
     name: 'mean',
-    type: MEAN
+    type: MEAN,
+    color: 'deepBlue'
   },
   {
     name: 'σ',
-    type: STANDARD_DEVIATION
+    type: STANDARD_DEVIATION,
+    color: 'pink'
   }
 ];

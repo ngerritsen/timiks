@@ -38,7 +38,7 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
       {stats.length > 0 && (
         <Section margin="md">
           <SectionTitle>Top Stats</SectionTitle>
-          <TopStats stats={stats} />
+          <TopStats solves={times.length} stats={stats} />
         </Section>
       )}
       {timesPerDay.map(({ date, times }) => (

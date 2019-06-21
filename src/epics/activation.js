@@ -90,6 +90,7 @@ const initiates = () =>
     fromEvent(window, 'touchstart', { passive: false }).pipe(filter(isValidTouchClickEvent)),
     fromEvent(window, 'mousedown').pipe(filter(isValidTouchClickEvent))
   ).pipe(
+    tap(preventRepeatEventSideEffects),
     filter(isValidActivationEvent),
     tap(preventEventSideEffects)
   );
@@ -120,6 +121,14 @@ const preventEventSideEffects = event => {
   event.preventDefault();
   event.target.blur();
 };
+
+const preventRepeatEventSideEffects = event => {
+  if (event.repeat) {
+    event.preventDefault();
+  }
+};
+
+
 const isValidTouchClickEvent = event => Boolean(event.target.closest('[data-activation]'));
 const isSpacebarEvent = event => keycode(event.keyCode) === 'space';
 const isValidStopEvent = () => Boolean(document.querySelector('[data-stop]'));
