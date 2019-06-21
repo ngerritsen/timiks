@@ -8,19 +8,17 @@ import Time from '../shared/Time';
 
 const TopStats = ({ stats }) => (
   <TopStatsContainer>
-    {stats
-      .filter(stat => stat.best || stat.current)
-      .map(stat => (
-        <div key={stat.name}>
-          <TopStatTitle>
-            <TopStatColor color={stat.graphLineColor} />
-            {stat.name}:
-          </TopStatTitle>
-          <strong>
-            <Time time={{ ms: stat.best || stat.current }} />
-          </strong>
-        </div>
-      ))}
+    {stats.map(stat => (
+      <div key={stat.name}>
+        <TopStatTitle>
+          <TopStatColor color={stat.color} />
+          {stat.name}:
+        </TopStatTitle>
+        <strong>
+          <Time time={{ ms: stat.best || stat.current }} />
+        </strong>
+      </div>
+    ))}
   </TopStatsContainer>
 );
 

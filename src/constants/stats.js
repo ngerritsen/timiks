@@ -9,7 +9,7 @@ export default [
     name: 'single',
     type: SINGLE,
     showInGraph: true,
-    graphLineColor: 'blue'
+    color: 'blue'
   },
   {
     name: 'mo3',
@@ -21,35 +21,35 @@ export default [
     type: AVERAGE,
     size: 5,
     showInGraph: true,
-    graphLineColor: 'green'
+    color: 'green'
   },
   {
     name: 'ao12',
     type: AVERAGE,
     size: 12,
     showInGraph: true,
-    graphLineColor: 'yellow'
+    color: 'yellow'
   },
   {
     name: 'ao25',
     type: AVERAGE,
     size: 25,
     showInGraph: true,
-    graphLineColor: 'orange'
+    color: 'orange'
   },
   {
     name: 'ao50',
     type: AVERAGE,
     size: 50,
     showInGraph: true,
-    graphLineColor: 'red'
+    color: 'red'
   },
   {
     name: 'ao100',
     type: AVERAGE,
     size: 100,
     showInGraph: true,
-    graphLineColor: 'purple'
+    color: 'purple'
   },
   {
     name: 'mean',

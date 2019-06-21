@@ -35,7 +35,7 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
           {decapitalize(ARCHIVE_DAYS_OPTIONS.find(option => option.value === days).label)}.
         </Message>
       )}
-      {times.length > 1 && (
+      {stats.length > 0 && (
         <Section margin="md">
           <SectionTitle>Top Stats</SectionTitle>
           <TopStats stats={stats} />

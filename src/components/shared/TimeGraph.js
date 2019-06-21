@@ -49,7 +49,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
       return buildLine(
         stat.name,
         [...new Array(Math.max(offset, 0)), ...statTimes],
-        stat.graphLineColor
+        stat.color
       );
     });
 
