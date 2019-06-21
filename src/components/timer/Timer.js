@@ -69,7 +69,7 @@ const Timer = ({
       </TimerTimeContainer>
     </Section>
     <TimeFooter withManualEntry={useManualTimeEntry}>
-      {showLastTime && <TimeActionsContainer />}
+      {showLastTime && <TimeActionsContainer lastTime={lastTime} />}
     </TimeFooter>
     <Section margin="sm">
       <ScrambleContainer />

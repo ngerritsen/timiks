@@ -16,8 +16,8 @@ const ToggleContent = ({ toggle, content }) => {
 };
 
 ToggleContent.propTypes = {
-  toggle: PropTypes.func.isRequired,
-  content: PropTypes.func.isRequired
+  toggle: PropTypes.func,
+  content: PropTypes.func
 };
 
 export default ToggleContent;

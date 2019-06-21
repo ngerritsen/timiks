@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Time from '../shared/Time';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import faInfoCircle from '@fortawesome/fontawesome-pro-solid/faInfoCircle';
+import faEllipsisH from '@fortawesome/fontawesome-pro-solid/faEllipsisH';
 import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
 import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 import ToggleContent from '../shared/ToggleContent';
@@ -34,11 +34,14 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
     </Cell>
     <Cell rightAlign>
       {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
+      <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
+        <FontAwesome icon={faTimes} fixedWidth size="sm" />
+      </RemoveItemIconButton>
       <ToggleContent
         toggle={({ show }) => (
-          <InfoIconButton color="blue" onClick={show}>
-            <FontAwesome icon={faInfoCircle} fixedWidth size="sm" />
-          </InfoIconButton>
+          <ShowTimeButton onClick={show}>
+            <FontAwesome icon={faEllipsisH} fixedWidth size="sm" />
+          </ShowTimeButton>
         )}
         content={({ hide }) => (
           <Modal title="Details" onClose={hide}>
@@ -53,9 +56,6 @@ const TimeTableTimeRow = ({ index, time, removeTime }) => (
           </Modal>
         )}
       />
-      <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
-        <FontAwesome icon={faTimes} fixedWidth size="sm" />
-      </RemoveItemIconButton>
     </Cell>
   </tr>
 );
@@ -80,12 +80,12 @@ const BestTimeIcon = styled.span`
   color: ${getColor('green')};
 `;
 
-const InfoIconButton = IconButton.extend`
+const ShowTimeButton = IconButton.extend`
   margin-left: ${getSize('xs')};
 `;
 
 const RemoveItemIconButton = IconButton.extend`
-  margin-left: ${getSize('xxs')};
+  margin-left: ${getSize('xs')};
 `;
 
 export default React.memo(TimeTableTimeRow);

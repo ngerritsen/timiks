@@ -1,12 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import faCommentAltLines from '@fortawesome/fontawesome-pro-solid/faCommentAltLines';
+import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTimes';
 
+import * as CustomPropTypes from '../../propTypes';
 import { getSize } from '../../helpers/theme';
 import Button from '../shared/Button';
 import Shortcut from '../shared/Shortcut';
+import Toggle from '../shared/Toggle';
+import EditCommentContainer from '../../containers/EditCommentContainer';
 
-const TimeActions = ({ plus2, togglePlus2LastTime, dnf, toggleDnfLastTime, removeLastTime }) => (
+const TimeActions = ({
+  plus2,
+  togglePlus2LastTime,
+  dnf,
+  toggleDnfLastTime,
+  removeLastTime,
+  lastTime
+}) => (
   <StyledTimeActions>
     <TimeAction>
       <Shortcut command="plus2LastTime" action={togglePlus2LastTime} />
@@ -25,8 +38,22 @@ const TimeActions = ({ plus2, togglePlus2LastTime, dnf, toggleDnfLastTime, remov
     <Shortcut command="removeLastTime" action={removeLastTime} />
     <TimeAction>
       <Button size="sm" tag color="red" onClick={removeLastTime}>
-        Remove
+        <FontAwesome fixedWidth icon={faTrashAlt} />
       </Button>
+    </TimeAction>
+
+    <TimeAction>
+      <Toggle>
+        {({ isShown, toggle, hide }) => (
+          <>
+            <Shortcut command="commentOnTime" action={toggle} />
+            <Button size="sm" tag color="subtleFg" onClick={toggle}>
+              <FontAwesome fixedWidth icon={faCommentAltLines} />
+            </Button>
+            {isShown && <EditCommentContainer onCancel={hide} time={lastTime} />}
+          </>
+        )}
+      </Toggle>
     </TimeAction>
   </StyledTimeActions>
 );
@@ -36,7 +63,8 @@ TimeActions.propTypes = {
   plus2: PropTypes.bool,
   removeLastTime: PropTypes.func.isRequired,
   toggleDnfLastTime: PropTypes.func.isRequired,
-  togglePlus2LastTime: PropTypes.func.isRequired
+  togglePlus2LastTime: PropTypes.func.isRequired,
+  lastTime: CustomPropTypes.Time.isRequired
 };
 
 const StyledTimeActions = styled.div`
