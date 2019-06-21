@@ -42,7 +42,7 @@ export const light = {
     purple: PURPLE,
     red: RED,
     subtleBg: darken(0.1, WHITE),
-    subtleFg: lighten(0.3, BLACK),
+    subtleFg: lighten(0.4, BLACK),
     turquoise: TURQUOISE,
     white: WHITE,
     yellow: YELLOW

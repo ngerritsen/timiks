@@ -65,7 +65,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => {
               </InfoItemIcon>
               {time.comment && (
                 <>
-                  {time.comment}&nbsp;
+                  {time.comment} &nbsp;
                   <IconButton color="subtleFg" onClick={show}>
                     <FontAwesome fixedWidth size="sm" icon={faPencil} />
                   </IconButton>

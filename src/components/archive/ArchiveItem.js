@@ -2,6 +2,8 @@ import React from 'react';
 import { darken, lighten } from 'polished';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import FontAwesome from '@fortawesome/react-fontawesome';
+import faCommentAltLines from '@fortawesome/fontawesome-pro-solid/faCommentAltLines';
 
 import { formatLocalTime } from '../../helpers/dateTime';
 import ToggleContent from '../shared/ToggleContent';
@@ -25,6 +27,11 @@ const ArchiveItem = ({ time, removeTime }) => (
           <SyncStatusIcon>
             <CloudSyncIcon time={time} size="xs" />
           </SyncStatusIcon>
+        )}
+        {time.comment && (
+          <CommentIcon>
+            <FontAwesome icon={faCommentAltLines} fixedWidth size="xs" />
+          </CommentIcon>
         )}
       </TimeTile>
     )}
@@ -57,6 +64,14 @@ const DateTag = styled.div`
   font-size: 0.7em;
   opacity: 0.7;
   margin-top: 0.3rem;
+`;
+
+const CommentIcon = styled.span`
+  position: absolute;
+  font-size: 0.9em;
+  bottom: 0.2rem;
+  right: 0.5rem;
+  color: ${getColor('subtleFg')};
 `;
 
 const SyncStatusIcon = styled.span`
