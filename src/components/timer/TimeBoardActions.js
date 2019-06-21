@@ -16,9 +16,9 @@ import { VisibleFrom, HiddenFrom } from '../shared/Visibility';
 const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
   const archiveButton = (
     <ToggleContent
-      toggle={({ show }) => (
-        <Button size="sm" onClick={show}>
-          <Shortcut command="archiveTimes" action={show} />
+      toggle={({ toggle }) => (
+        <Button size="sm" onClick={toggle}>
+          <Shortcut command="archiveTimes" action={toggle} />
           <InlineFontawesome icon={faArchive} /> Archive
         </Button>
       )}
@@ -53,9 +53,9 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
 
   const clearButton = (
     <ToggleContent
-      toggle={({ show }) => (
-        <Button size="sm" color="red" onClick={show}>
-          <Shortcut command="clearTimes" action={show} />
+      toggle={({ toggle }) => (
+        <Button size="sm" color="red" onClick={toggle}>
+          <Shortcut command="clearTimes" action={toggle} />
           <InlineFontawesome icon={faTrash} /> Clear
         </Button>
       )}

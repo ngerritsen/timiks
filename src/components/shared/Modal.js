@@ -20,12 +20,16 @@ const Modal = ({ title, onClose, children }) => {
       modalRef.current.focus();
     }
 
+    if (document.body.classList.contains('with-modal')) {
+      return;
+    }
+
     document.body.classList.add('with-modal');
 
     return () => {
       document.body.classList.remove('with-modal');
     };
-  });
+  }, [modalRef]);
 
   const onClickOverlay = event => {
     if (event.target === overlayRef.current) {

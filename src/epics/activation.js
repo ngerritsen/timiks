@@ -90,8 +90,8 @@ const initiates = () =>
     fromEvent(window, 'touchstart', { passive: false }).pipe(filter(isValidTouchClickEvent)),
     fromEvent(window, 'mousedown').pipe(filter(isValidTouchClickEvent))
   ).pipe(
-    tap(preventEventSideEffects),
-    filter(isValidActivationEvent)
+    filter(isValidActivationEvent),
+    tap(preventEventSideEffects)
   );
 
 const fires = () =>
