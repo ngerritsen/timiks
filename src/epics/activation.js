@@ -128,7 +128,6 @@ const preventRepeatEventSideEffects = event => {
   }
 };
 
-
 const isValidTouchClickEvent = event => Boolean(event.target.closest('[data-activation]'));
 const isSpacebarEvent = event => keycode(event.keyCode) === 'space';
 const isValidStopEvent = () => Boolean(document.querySelector('[data-stop]'));
