@@ -29,7 +29,7 @@ TopStats.propTypes = {
 };
 
 const TopStatsContainer = styled.div`
-  padding: ${getSize('sm')} 0;
+  padding: ${getSize('sm')} ${getSize('xxs')};
   border-top: 1px solid ${getColor('subtleBg')};
   border-bottom: 1px solid ${getColor('subtleBg')};
   border-radius: 0.3rem;
@@ -49,7 +49,7 @@ const TopStatsContainer = styled.div`
 
 const TopStatTitle = styled.span`
   display: inline-block;
-  width: 6.5rem;
+  width: 6.75rem;
 `;
 
 const TopStatColor = styled.span`
