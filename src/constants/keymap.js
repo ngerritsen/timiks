@@ -70,6 +70,11 @@ const keymap = [
     description: 'Start/stop the timer'
   },
   {
+    key: 't',
+    commands: ['commentOnTime'],
+    description: 'Comment on the last time'
+  },
+  {
     key: 'right',
     commands: ['next'],
     hide: true
