@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { PREPARATION_STAGES } from '../../constants/app';
+import { PREPARATION_STAGES } from '../../constants/timer';
 import { generateArr } from '../../helpers/general';
 import { getSize } from '../../helpers/theme';
 

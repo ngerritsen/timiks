@@ -1,16 +1,17 @@
 import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
-import { DEFAULT_PUZZLE, DEFAULT_BUTTON_COLOR } from '../constants/app';
-import { DEFAULT_ACTIVATION_DURATION, DEFAULT_ARCHIVE_DAYS } from '../constants/app';
+import * as settingsConstants from '../constants/settings';
+import { DEFAULT_ACTIVATION_DURATION, DEFAULT_ARCHIVE_DAYS } from '../constants/settings';
 
 const initialState = {
-  puzzle: DEFAULT_PUZZLE,
-  archivePuzzle: DEFAULT_PUZZLE,
+  puzzle: settingsConstants.DEFAULT_PUZZLE,
+  archivePuzzle: settingsConstants.DEFAULT_PUZZLE,
   archiveDays: DEFAULT_ARCHIVE_DAYS,
   useInspectionTime: false,
   useManualTimeEntry: false,
+  warnForInspectionTime: true,
   theme: 'light',
-  buttonColor: DEFAULT_BUTTON_COLOR,
+  buttonColor: settingsConstants.DEFAULT_BUTTON_COLOR,
   buttonColorDarkMode: '',
   activationDuration: DEFAULT_ACTIVATION_DURATION,
   showTimerTime: true

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Time from '../shared/Time';
-import { TIMER_UPDATE_RATE } from '../../constants/app';
+import { TIMER_UPDATE_RATE } from '../../constants/timer';
 
 const DecrementingTime = ({ decrementFrom, startTime, secondsOnly }) => {
   const [ms, setMs] = useState(decrementFrom);

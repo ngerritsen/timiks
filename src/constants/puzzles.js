@@ -309,6 +309,4 @@ const puzzles = [
   }
 ];
 
-export const DEFAULT_PUZZLE = puzzles[1];
-
 export default puzzles;

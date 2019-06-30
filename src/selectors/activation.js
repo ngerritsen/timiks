@@ -1,4 +1,4 @@
-import { PREPARATION_STAGES } from '../constants/app';
+import { PREPARATION_STAGES } from '../constants/timer';
 
 export const isReady = state => getPreparationStage(state) >= PREPARATION_STAGES;
 export const isPreparing = state => getPreparationStage(state) > -1;

@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import * as constants from '../constants/app';
+import { SCRAMBLE_DELIMITER } from '../constants/scramble';
 
 export function parseTimes(rawTimes) {
   return rawTimes.map(parseTime);
@@ -44,9 +44,9 @@ function parseDate(rawTime) {
 }
 
 function serializeScramble(scramble) {
-  return scramble.join(constants.SCRAMBLE_DELIMITER);
+  return scramble.join(SCRAMBLE_DELIMITER);
 }
 
 function parseScramble(rawScramble) {
-  return rawScramble.split(constants.SCRAMBLE_DELIMITER);
+  return rawScramble.split(SCRAMBLE_DELIMITER);
 }

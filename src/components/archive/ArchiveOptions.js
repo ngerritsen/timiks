@@ -7,7 +7,7 @@ import { VisibleFrom, HiddenFrom } from '../shared/Visibility';
 import * as CustomPropTypes from '../../propTypes';
 import Export from './Export';
 import Section from '../shared/Section';
-import { ARCHIVE_DAYS_OPTIONS } from '../../constants/app';
+import { ARCHIVE_DAYS_OPTIONS } from '../../constants/settings';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 import ImportContainer from '../../containers/archive/ImportContainer';
 

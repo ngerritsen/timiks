@@ -13,7 +13,7 @@ import TimeActionsContainer from '../../containers/timer/TimeActionsContainer';
 import TimeEntryContainer from '../../containers/timer/TimeEntryContainer';
 import IncrementingTime from './IncrementingTime';
 import DecrementingTime from './DecrementingTime';
-import { INSPECTION_TIME } from '../../constants/app';
+import { INSPECTION_TIME } from '../../constants/timer';
 import { getZIndex } from '../../helpers/theme';
 import Tag from '../shared/Tag';
 

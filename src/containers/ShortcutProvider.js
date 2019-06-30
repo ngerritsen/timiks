@@ -6,7 +6,7 @@ import keycode from 'keycode';
 
 import ShortcutContext from './ShortcutContext';
 import { isStopped, getStopTime } from '../selectors/timer';
-import { TIMER_COOLDOWN } from '../constants/app';
+import { TIMER_COOLDOWN } from '../constants/timer';
 
 const inputElements = ['textarea', 'input', 'select'];
 

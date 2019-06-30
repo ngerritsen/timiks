@@ -1,4 +1,4 @@
-import { LOGIN_PROMOTED } from '../constants/app';
+import { LOGIN_PROMOTED } from '../constants/storage';
 
 export function isLoginPromoted() {
   return !localStorage.getItem(LOGIN_PROMOTED);

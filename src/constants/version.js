@@ -1,0 +1,1 @@
+export const POLL_VERSION_INTERVAL = 60000;

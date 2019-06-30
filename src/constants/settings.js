@@ -1,17 +1,3 @@
-// DOM
-export const APP_ROOT_SELECTOR = '#app-root';
-export const MODAL_ROOT_SELECTOR = '#modal-root';
-export const NOTIFICATION_ROOT_SELECTOR = '#notification-root';
-export const FULL_SCREEN_MASK_ROOT_SELECTOR = '#full-screen-mask-root';
-
-// Timer
-export const NOTIFICATION_DURATION = 4000;
-export const INSPECTION_TIME = 15000;
-export const TIMER_UPDATE_RATE = 10;
-export const PREPARATION_STAGES = 3;
-export const TIMER_COOLDOWN = 250;
-
-// Settings
 export const ACTIVATION_DURATION_OPTIONS = [
   { label: 'none', value: 0 },
   { label: '300ms', value: 300 },
@@ -46,20 +32,3 @@ export const ARCHIVE_DAYS_OPTIONS = [
   { label: 'Last 2 years', value: 730 }
 ];
 export const DEFAULT_ARCHIVE_DAYS = 7;
-
-// Scramble
-export const SCRAMBLE_DELIMITER = ' ';
-
-// Version
-export const POLL_VERSION_INTERVAL = 60000;
-
-// Storage
-export const LOGIN_PROMOTED = 'loginPromoted';
-export const SETTINGS_STORAGE_KEY = 'settings';
-export const TIMES_STORAGE_KEY = 'times';
-export const CURRENT_TIMES_STORAGE_KEY = 'currentTimes';
-export const ARCHIVED_TIMES_STORAGE_KEY = 'archivedTimes';
-
-// Donation
-export const PAY_PAL_DONATION_LINK =
-  'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LGH2SZA4W38R2&currency_code=EUR&source=url';

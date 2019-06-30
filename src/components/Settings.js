@@ -5,7 +5,7 @@ import FontAwesome from '@fortawesome/react-fontawesome';
 import faCog from '@fortawesome/fontawesome-pro-solid/faCog';
 
 import Shortcut from './shared/Shortcut';
-import { ACTIVATION_DURATION_OPTIONS, BUTTON_COLORS } from '../constants/app';
+import { ACTIVATION_DURATION_OPTIONS, BUTTON_COLORS } from '../constants/settings';
 import IconButton from './shared/IconButton';
 import ToggleContent from './shared/ToggleContent';
 import Section from './shared/Section';
@@ -52,6 +52,16 @@ const Settings = ({ settings, changeSetting }) => (
                     type="checkbox"
                     onChange={checked => changeSetting('useInspectionTime', checked)}
                     checked={settings.useInspectionTime}
+                  />
+                </Setting>
+              </Section>
+              <Section margin="sm">
+                <Setting>
+                  <label>Voice alert for inspection time</label>
+                  <Checkbox
+                    type="checkbox"
+                    onChange={checked => changeSetting('warnForInspectionTime', checked)}
+                    checked={settings.warnForInspectionTime}
                   />
                 </Setting>
               </Section>

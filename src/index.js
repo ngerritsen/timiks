@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import './firebase';
 
 import keymap from './constants/keymap';
-import { APP_ROOT_SELECTOR } from './constants/app';
+import { APP_ROOT_SELECTOR } from './constants/dom';
 import AppContainer from './containers/AppContainer';
 import store from './store';
 import ShortcutProvider from './containers/ShortcutProvider';

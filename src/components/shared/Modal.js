@@ -8,7 +8,7 @@ import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
 
 import Shortcut from './Shortcut';
 import IconButton from './IconButton';
-import { MODAL_ROOT_SELECTOR } from '../../constants/app';
+import { MODAL_ROOT_SELECTOR } from '../../constants/dom';
 import { getSize, getColor, getZIndex } from '../../helpers/theme';
 
 const Modal = ({ title, onClose, children }) => {

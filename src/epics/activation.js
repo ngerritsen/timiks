@@ -1,17 +1,28 @@
 import { fromEvent, interval, merge, of, timer } from 'rxjs';
 import keycode from 'keycode';
-import { filter, withLatestFrom, map, tap, switchMap, takeUntil, mergeMap } from 'rxjs/operators';
+import {
+  filter,
+  withLatestFrom,
+  map,
+  tap,
+  switchMap,
+  takeUntil,
+  mergeMap,
+  ignoreElements
+} from 'rxjs/operators';
 import {
   getActivationDuration,
   shouldUseInspectionTime,
-  shouldUseManualTimeEntry
+  shouldUseManualTimeEntry,
+  shouldWarnForInspectionTime
 } from '../selectors/settings';
 import * as actions from '../actions';
-import { INSPECTION_TIME, PREPARATION_STAGES, TIMER_COOLDOWN } from '../constants/app';
+import * as timerContants from '../constants/timer';
 import { ofType } from 'redux-observable';
 import { PREPARE_ACTIVATION, START_INSPECTION, START_TIMER } from '../constants/actionTypes';
 import * as activationSelectors from '../selectors/activation';
 import { isStopped, isInspecting, getStopTime } from '../selectors/timer';
+import { playSound } from '../helpers/audio';
 
 const inputElements = ['input', 'textarea'];
 
@@ -22,7 +33,7 @@ export const initializeActivationEpic = (_, state$) =>
       ([, state]) =>
         !shouldUseManualTimeEntry(state) &&
         isStopped(state) &&
-        Date.now() - getStopTime(state) > TIMER_COOLDOWN &&
+        Date.now() - getStopTime(state) > timerContants.TIMER_COOLDOWN &&
         !activationSelectors.isPreparing(state)
     ),
     tap(scrollToTop),
@@ -40,13 +51,30 @@ export const prepareActivationEpic = (action$, state$) =>
     ofType(PREPARE_ACTIVATION),
     withLatestFrom(state$),
     switchMap(([, state]) =>
-      interval(getActivationDuration(state) / PREPARATION_STAGES).pipe(
+      interval(getActivationDuration(state) / timerContants.PREPARATION_STAGES).pipe(
         withLatestFrom(state$),
         filter(([, state]) => !activationSelectors.isReady(state)),
         map(actions.incrementPreparationStage),
         takeUntil(fires())
       )
     )
+  );
+
+export const warnForInspectionEpic = (action$, state$) =>
+  action$.pipe(
+    ofType(START_INSPECTION),
+    withLatestFrom(state$),
+    filter(([, state]) => shouldWarnForInspectionTime(state)),
+    mergeMap(() =>
+      merge(
+        ...timerContants.inspectionTimeWarnings.map(({ time, sound }) =>
+          timer(time - timerContants.INSPECTION_TIME_WARNING_OFFSET).pipe(
+            tap(() => playSound(sound))
+          )
+        )
+      ).pipe(takeUntil(action$.pipe(ofType(START_TIMER))))
+    ),
+    ignoreElements()
   );
 
 export const fireInspectionEpic = (action$, state$) =>
@@ -60,7 +88,9 @@ export const fireInspectionEpic = (action$, state$) =>
 export const runInspectionEpic = action$ =>
   action$.pipe(
     ofType(START_INSPECTION),
-    switchMap(() => timer(INSPECTION_TIME).pipe(takeUntil(action$.pipe(ofType(START_TIMER))))),
+    switchMap(() =>
+      timer(timerContants.INSPECTION_TIME).pipe(takeUntil(action$.pipe(ofType(START_TIMER))))
+    ),
     map(actions.failInspection)
   );
 
@@ -76,7 +106,7 @@ export const fireActivationEpic = (action$, state$) =>
     )
   );
 
-export const stopActivationEpic = (action$, state$) =>
+export const stopActivationEpic = (_, state$) =>
   stops().pipe(
     withLatestFrom(state$),
     filter(([, state]) => !isStopped(state)),

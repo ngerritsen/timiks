@@ -10,7 +10,7 @@ import { getBreakpoint, getSize, getColor } from '../../helpers/theme';
 import ArchiveOptionsContainer from '../../containers/archive/ArchiveOptionsContainer';
 import ArchiveItem from './ArchiveItem';
 import { getPuzzle } from '../../helpers/puzzle';
-import { ARCHIVE_DAYS_OPTIONS } from '../../constants/app';
+import { ARCHIVE_DAYS_OPTIONS } from '../../constants/settings';
 import { decapitalize } from '../../helpers/formatting';
 import TopStats from './TopStats';
 

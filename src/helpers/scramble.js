@@ -1,4 +1,4 @@
-import * as constants from '../constants/app';
+import { DEFAULT_PUZZLE } from '../constants/settings';
 import * as puzzleConstants from '../constants/puzzles';
 import { getPuzzle } from './puzzle';
 import scramblers from '../vendor/jsss';
@@ -26,7 +26,7 @@ export function splitRelayScramble(puzzle, scramble) {
   );
 }
 
-export function generateScramble(puzzle = constants.DEFAULT_PUZZLE) {
+export function generateScramble(puzzle = DEFAULT_PUZZLE) {
   const { scrambleOptions, type, size } = getPuzzle(puzzle);
   const { jsssScrambler, puzzles: relayPuzzles } = scrambleOptions;
 

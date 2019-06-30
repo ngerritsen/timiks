@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { FULL_SCREEN_MASK_ROOT_SELECTOR } from '../../constants/app';
+import { FULL_SCREEN_MASK_ROOT_SELECTOR } from '../../constants/dom';
 import { getZIndex, getColor } from '../../helpers/theme';
 
 const FullScreenMask = () =>

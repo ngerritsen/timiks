@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
-import { PREPARATION_STAGES } from '../constants/app';
+import { PREPARATION_STAGES } from '../constants/timer';
 
 const initialState = {
   preparationStage: -1,

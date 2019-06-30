@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { HIDE_NOTIFICATION, SHOW_NOTIFICATION } from '../constants/actionTypes';
-import { NOTIFICATION_DURATION } from '../constants/app';
+import { NOTIFICATION_DURATION } from '../constants/notifications';
 import { hideNotification } from '../actions';
 import { timer } from 'rxjs';
 

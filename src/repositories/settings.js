@@ -1,4 +1,4 @@
-import { SETTINGS_STORAGE_KEY } from '../constants/app';
+import { SETTINGS_STORAGE_KEY } from '../constants/storage';
 
 export function store(settings) {
   localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));

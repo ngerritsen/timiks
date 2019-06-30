@@ -11,7 +11,7 @@ import {
 import { newVersionAvailable } from '../actions';
 import * as versionService from '../services/version';
 import { shouldPromoteLogin } from '../selectors/loginPromotion';
-import { POLL_VERSION_INTERVAL } from '../constants/app';
+import { POLL_VERSION_INTERVAL } from '../constants/version';
 
 export const newVersionEpic = (_, state$) =>
   interval(POLL_VERSION_INTERVAL).pipe(

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { NOTIFICATION_ROOT_SELECTOR } from '../constants/app';
+import { NOTIFICATION_ROOT_SELECTOR } from '../constants/dom';
 import { getBreakpoint, getSize, getZIndex, getColor } from '../helpers/theme';
 
 const Notification = ({ message, isError, show, hideNotification }) => {
