@@ -40,10 +40,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
   const lines = stats
     .filter(stat => stat.showInGraph && stat.all.length > 1)
     .map(stat => {
-      const statTimes = stat.all.map(ms =>
-        ms === Infinity ? null : getMs({ ms: Math.round(ms) })
-      );
-
+      const statTimes = stat.all.map(stat => (stat.ms === Infinity ? null : getMs(stat)));
       const offset = times.length - statTimes.length;
 
       return buildLine(stat.name, [...new Array(Math.max(offset, 0)), ...statTimes], stat.color);

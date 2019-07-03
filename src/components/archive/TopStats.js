@@ -22,7 +22,7 @@ const TopStats = ({ stats, solves }) => (
           {stat.name}:
         </TopStatTitle>
         <strong>
-          <Time time={{ ms: stat.best || stat.current }} />
+          <Time time={stat.best || stat.current} />
         </strong>
       </div>
     ))}

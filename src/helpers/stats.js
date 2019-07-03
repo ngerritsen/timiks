@@ -21,7 +21,7 @@ export function calculateStats(times) {
         case SINGLE: {
           if (times.length === 0) return null;
 
-          const all = times.map(getMs);
+          const all = times.map(time => ({ ms: getMs(time), ids: [time.id] }));
 
           return {
             ...stat,
@@ -106,7 +106,12 @@ function calculateAverageOf(times, trim = 0) {
     .filter(time => !time.dnf)
     .reduce((totalTimes, time) => totalTimes + getMs(time), 0);
 
-  return totalTime / (times.length - trim * 2);
+  const average = totalTime / (times.length - trim * 2);
+
+  return {
+    ms: average,
+    ids: times.map(time => time.id)
+  };
 }
 
 function calculateStandardDeviation(times) {
@@ -116,11 +121,13 @@ function calculateStandardDeviation(times) {
     noDnfTimes.reduce((total, time) => Math.pow(getMs(time) - mean, 2) + total, 0) /
     (noDnfTimes.length - 1);
 
-  return Math.sqrt(variance);
+  return { ms: Math.sqrt(variance) };
 }
 
 function getBest(times) {
-  return times.reduce((best, current) => (best === current || best < current ? best : current));
+  return times.reduce((best, current) =>
+    best.ms === current.ms || best.ms < current.ms ? best : current
+  );
 }
 
 function getCurrent(times) {
