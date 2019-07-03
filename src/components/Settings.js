@@ -57,7 +57,7 @@ const Settings = ({ settings, changeSetting }) => (
               </Section>
               <Section margin="sm">
                 <Setting>
-                  <label>Voice alert for inspection time</label>
+                  <label>Voice alert for inspection time**</label>
                   <Checkbox
                     type="checkbox"
                     onChange={checked => changeSetting('warnForInspectionTime', checked)}
@@ -122,9 +122,14 @@ const Settings = ({ settings, changeSetting }) => (
                 </Setting>
               </Section>
             </Section>
-            <Section margin="md">
+            <Section margin="xs">
               <Explanation>
                 *For how long you have to hold spacebar, mouse or touch before starting the timer.
+              </Explanation>
+            </Section>
+            <Section margin="md">
+              <Explanation>
+                **Does not work on most mobile devices due to browser restrictions.
               </Explanation>
             </Section>
             <Button onClick={hide}>Close</Button>
