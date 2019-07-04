@@ -13,7 +13,7 @@ const DecrementingTime = ({ decrementFrom, startTime, secondsOnly }) => {
       TIMER_UPDATE_RATE
     );
     return () => clearInterval(interval);
-  });
+  }, [startTime]);
 
   return <Time time={{ ms }} secondsOnly={secondsOnly} />;
 };

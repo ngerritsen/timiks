@@ -10,7 +10,7 @@ const IncrementingTimer = ({ startTime }) => {
   useEffect(() => {
     const interval = setInterval(() => setMs(Date.now() - startTime), TIMER_UPDATE_RATE);
     return () => clearInterval(interval);
-  });
+  }, [startTime]);
 
   return <Time time={{ ms }} />;
 };
