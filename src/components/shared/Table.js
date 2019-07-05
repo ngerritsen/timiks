@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { getColor } from '../../helpers/theme';
+import { transparentize, saturate } from 'polished';
+
+import { getColor, getSize } from '../../helpers/theme';
 
 export const Table = styled.table`
   width: 100%;
@@ -11,7 +13,11 @@ export const Table = styled.table`
 export const Cell = styled.td`
   text-align: ${props => (props.rightAlign ? 'right' : 'left')};
   border-top: 1px solid ${getColor('grey')};
-  padding: 0.7rem 0;
+  padding: ${getSize('xs')} ${getSize('xxs')};
+  cursor: default;
+  font-weight: ${props => (props.bold ? 'bold' : 'inherit')};
+  background-color: ${props =>
+    props.highlighted ? saturate(1, transparentize(0.8, getColor('blue')(props))) : 'transparent'};
 `;
 
 export const HeadingCell = styled.th`

@@ -6,39 +6,60 @@ import { Cell } from '../shared/Table';
 import { SubtleText } from '../shared/Typography';
 import * as CustomPropTypes from '../../propTypes';
 
-const TimeTableStatRow = ({ name, current, best, highlightIds }) => (
-  <tr key={name}>
-    <Cell>
-      <SubtleText>{name}</SubtleText>
-    </Cell>
-    <Cell
-      colSpan={best ? 1 : 3}
-      onMouseEnter={() => current.ids && highlightIds(current.ids)}
-      onMouseLeave={() => current.ids && highlightIds([])}
-    >
-      <strong>
-        <Time time={current} />
-      </strong>
-    </Cell>
-    {best && (
-      <Cell
-        colSpan={2}
-        onMouseEnter={() => best.ids && highlightIds(best.ids)}
-        onMouseLeave={() => best.ids && highlightIds([])}
-      >
-        <strong>
-          <Time time={best} />
-        </strong>
+const TimeTableStatRow = ({
+  name,
+  current,
+  best,
+  onHighlight,
+  onUnhighlight,
+  highlightedStatName,
+  highlightedStatType
+}) => {
+  return (
+    <tr key={name}>
+      <Cell>
+        <SubtleText>{name}</SubtleText>
       </Cell>
-    )}
-  </tr>
-);
+      {createStatCell(current, 'current', best ? 1 : 3)}
+      {best && createStatCell(best, 'best', 2)}
+    </tr>
+  );
+
+  function createStatCell(statTime, type, colSpan) {
+    if (!current || !best) {
+      return (
+        <Cell bold colSpan={colSpan}>
+          <Time time={statTime} />
+        </Cell>
+      );
+    }
+
+    const isHighlighted = highlightedStatName === name && highlightedStatType === type;
+    const highlight = () => onHighlight([name, type]);
+
+    return (
+      <Cell
+        bold
+        colSpan={2}
+        highlighted={isHighlighted}
+        onMouseEnter={highlight}
+        onMouseLeave={onUnhighlight}
+        onTouchStart={isHighlighted ? onUnhighlight : highlight}
+      >
+        <Time time={best} />
+      </Cell>
+    );
+  }
+};
 
 TimeTableStatRow.propTypes = {
   name: PropTypes.string.isRequired,
   current: CustomPropTypes.StatTime.isRequired,
   best: CustomPropTypes.StatTime,
-  highlightIds: PropTypes.func.isRequired
+  onHighlight: PropTypes.func.isRequired,
+  onUnhighlight: PropTypes.func.isRequired,
+  highlightedStatName: PropTypes.string,
+  highlightedStatType: PropTypes.string
 };
 
 export default React.memo(TimeTableStatRow);

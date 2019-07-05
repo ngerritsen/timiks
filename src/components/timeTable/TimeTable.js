@@ -18,7 +18,10 @@ import StatsExplanation from './StatsExplanation';
 import { getBreakpoint, getSize } from '../../helpers/theme';
 
 const TimeTable = ({ stats, removeTime, times, showGraph }) => {
-  const [highlightedIds, setHighlightedIds] = useState([]);
+  const [[highlightedStat, highlightedType], setHighlightedStat] = useState([]);
+  const highlightedStatObj = stats.find(stat => stat.name === highlightedStat);
+  const highlightedIds = highlightedStatObj ? highlightedStatObj[highlightedType].ids : [];
+  const unhighlight = () => setHighlightedStat([]);
 
   return (
     <TimeTableContainer>
@@ -61,7 +64,10 @@ const TimeTable = ({ stats, removeTime, times, showGraph }) => {
                     name={stat.name}
                     current={stat.current}
                     best={stat.best}
-                    highlightIds={setHighlightedIds}
+                    onUnhighlight={unhighlight}
+                    highlightedStatName={highlightedStat}
+                    highlightedStatType={highlightedType}
+                    onHighlight={setHighlightedStat}
                   />
                 ))}
             </tbody>
@@ -88,7 +94,7 @@ const TimeTable = ({ stats, removeTime, times, showGraph }) => {
                 time={time}
                 index={index}
                 removeTime={removeTime}
-                highlighted={highlightedIds.includes(time.id)}
+                isHighlighted={highlightedIds && highlightedIds.includes(time.id)}
               />
             ))}
           </tbody>

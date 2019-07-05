@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { transparentize, saturate } from 'polished';
 
 import Time from '../shared/Time';
 import FontAwesome from '@fortawesome/react-fontawesome';
@@ -18,12 +17,12 @@ import { SubtleText } from '../shared/Typography';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { getColor, getSize } from '../../helpers/theme';
 
-const TimeTableTimeRow = ({ index, time, removeTime, highlighted }) => (
-  <TimeRow highlighted={highlighted}>
-    <TimeIndexCell>
+const TimeTableTimeRow = ({ index, time, removeTime, isHighlighted }) => (
+  <tr>
+    <TimeIndexCell highlighted={isHighlighted}>
       <SubtleText>{index + 1}.</SubtleText>
     </TimeIndexCell>
-    <Cell>
+    <Cell highlighted={isHighlighted}>
       <Time time={time} />
       {time.best && (
         <TimeInfo>
@@ -33,7 +32,7 @@ const TimeTableTimeRow = ({ index, time, removeTime, highlighted }) => (
         </TimeInfo>
       )}
     </Cell>
-    <Cell rightAlign>
+    <Cell rightAlign highlighted={isHighlighted}>
       {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
       <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
         <FontAwesome icon={faTimes} fixedWidth size="sm" />
@@ -58,22 +57,15 @@ const TimeTableTimeRow = ({ index, time, removeTime, highlighted }) => (
         )}
       />
     </Cell>
-  </TimeRow>
+  </tr>
 );
 
 TimeTableTimeRow.propTypes = {
   time: CustomPropTypes.Time.isRequired,
   index: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired,
-  highlighted: PropTypes.bool
+  isHighlighted: PropTypes.bool
 };
-
-const TimeRow = styled.tr`
-  background-color: ${props =>
-    props.highlighted
-      ? saturate(0.8, transparentize(0.85, getColor('blue')(props)))
-      : 'transparent'};
-`;
 
 const TimeIndexCell = Cell.extend`
   width: 3rem;
