@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
+import faSpaceShuttle from '@fortawesome/fontawesome-pro-solid/faSpaceShuttle';
 import * as CustomPropTypes from '../../propTypes';
 import ActivationContainer from '../../containers/timer/ActivationContainer';
 import ScrambleContainer from '../../containers/timer/ScrambleContainer';
@@ -58,7 +59,7 @@ const Timer = ({
               case startTime > 0 && showTimerTime:
                 return <IncrementingTime startTime={startTime} />;
               case startTime > 0 && !showTimerTime:
-                return 'Solve';
+                return <FontAwesome icon={faSpaceShuttle} rotation={270} />;
               case showLastTime:
                 return <Time time={lastTime} />;
               default:
