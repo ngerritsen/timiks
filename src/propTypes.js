@@ -5,7 +5,8 @@ export const Scramble = PropTypes.arrayOf(PropTypes.string);
 
 export const StatTime = PropTypes.shape({
   ms: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  ids: PropTypes.arrayOf(PropTypes.string)
+  includedIds: PropTypes.arrayOf(PropTypes.string),
+  excludedIds: PropTypes.arrayOf(PropTypes.string)
 });
 
 export const Stat = PropTypes.shape({

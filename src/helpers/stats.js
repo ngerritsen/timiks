@@ -21,7 +21,7 @@ export function calculateStats(times) {
         case SINGLE: {
           if (times.length === 0) return null;
 
-          const all = times.map(time => ({ ms: getMs(time), ids: [time.id] }));
+          const all = times.map(time => ({ ms: getMs(time), includedIds: [time.id] }));
 
           return {
             ...stat,
@@ -97,20 +97,26 @@ function calculateAverageOf(times, trim = 0) {
   const dnfs = times.reduce((dnfs, time) => (time.dnf ? dnfs + 1 : dnfs), 0);
 
   if (dnfs > trim) {
-    return Infinity;
+    return {
+      ms: Infinity,
+      includedIds: times.map(time => time.id)
+    };
   }
 
-  const totalTime = [...times]
+  const includedTimes = [...times]
     .sort((a, b) => Math.sign(getMs(a) - getMs(b)))
     .slice(trim, trim === 0 ? undefined : -1 * trim)
-    .filter(time => !time.dnf)
-    .reduce((totalTimes, time) => totalTimes + getMs(time), 0);
+    .filter(time => !time.dnf);
 
+  const totalTime = includedTimes.reduce((totalTimes, time) => totalTimes + getMs(time), 0);
   const average = totalTime / (times.length - trim * 2);
+  const includedIds = includedTimes.map(time => time.id);
+  const excludedIds = times.filter(time => !includedIds.includes(time.id)).map(time => time.id);
 
   return {
     ms: average,
-    ids: times.map(time => time.id)
+    includedIds,
+    excludedIds
   };
 }
 

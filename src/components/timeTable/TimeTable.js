@@ -17,11 +17,30 @@ import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
 import { getBreakpoint, getSize } from '../../helpers/theme';
 
+function useHighlightedStats() {
+  const [highlightState, setHighlightedStat] = useState([]);
+  const [highlightedStatName, highlightedStatType] = highlightState;
+
+  return [highlightedStatName, highlightedStatType, setHighlightedStat];
+}
+
 const TimeTable = ({ stats, removeTime, times, showGraph }) => {
-  const [[highlightedStat, highlightedType], setHighlightedStat] = useState([]);
-  const highlightedStatObj = stats.find(stat => stat.name === highlightedStat);
-  const highlightedIds = highlightedStatObj ? highlightedStatObj[highlightedType].ids : [];
-  const unhighlight = () => setHighlightedStat([]);
+  const [
+    softHighlightedStatName,
+    softHighlightedStatType,
+    setSoftHighlightedStat
+  ] = useHighlightedStats(stats);
+
+  const [
+    hardHighlightedStatName,
+    hardHighlightedStatType,
+    setHardHighlightedStat
+  ] = useHighlightedStats(stats);
+
+  const highlightedStatName = softHighlightedStatName || hardHighlightedStatName;
+  const highlightedStatType = softHighlightedStatType || hardHighlightedStatType;
+  const highlightedStat = stats.find(stat => stat.name === highlightedStatName) || {};
+  const { includedIds = [], excludedIds = [] } = highlightedStat[highlightedStatType] || {};
 
   return (
     <TimeTableContainer>
@@ -64,10 +83,12 @@ const TimeTable = ({ stats, removeTime, times, showGraph }) => {
                     name={stat.name}
                     current={stat.current}
                     best={stat.best}
-                    onUnhighlight={unhighlight}
-                    highlightedStatName={highlightedStat}
-                    highlightedStatType={highlightedType}
-                    onHighlight={setHighlightedStat}
+                    softHighlightedStatName={softHighlightedStatName}
+                    softHighlightedStatType={softHighlightedStatType}
+                    hardHighlightedStatName={hardHighlightedStatName}
+                    hardHighlightedStatType={hardHighlightedStatType}
+                    onHardHighlight={setHardHighlightedStat}
+                    onSoftHighlight={setSoftHighlightedStat}
                   />
                 ))}
             </tbody>
@@ -94,7 +115,8 @@ const TimeTable = ({ stats, removeTime, times, showGraph }) => {
                 time={time}
                 index={index}
                 removeTime={removeTime}
-                isHighlighted={highlightedIds && highlightedIds.includes(time.id)}
+                isIncluded={includedIds.includes(time.id)}
+                isExcluded={excludedIds.includes(time.id)}
               />
             ))}
           </tbody>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { transparentize, saturate } from 'polished';
+import { transparentize } from 'polished';
 
 import { getColor, getSize } from '../../helpers/theme';
 
@@ -17,7 +17,9 @@ export const Cell = styled.td`
   cursor: default;
   font-weight: ${props => (props.bold ? 'bold' : 'inherit')};
   background-color: ${props =>
-    props.highlighted ? saturate(1, transparentize(0.8, getColor('blue')(props))) : 'transparent'};
+    props.highlightColor
+      ? transparentize(0.7, getColor(props.highlightColor)(props))
+      : 'transparent'};
 `;
 
 export const HeadingCell = styled.th`

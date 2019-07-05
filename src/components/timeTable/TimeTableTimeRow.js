@@ -17,54 +17,58 @@ import { SubtleText } from '../shared/Typography';
 import CloudSyncIcon from '../shared/CloudSyncIcon';
 import { getColor, getSize } from '../../helpers/theme';
 
-const TimeTableTimeRow = ({ index, time, removeTime, isHighlighted }) => (
-  <tr>
-    <TimeIndexCell highlighted={isHighlighted}>
-      <SubtleText>{index + 1}.</SubtleText>
-    </TimeIndexCell>
-    <Cell highlighted={isHighlighted}>
-      <Time time={time} />
-      {time.best && (
-        <TimeInfo>
-          <BestTimeIcon>
-            <FontAwesome icon={faThumbsUp} />
-          </BestTimeIcon>
-        </TimeInfo>
-      )}
-    </Cell>
-    <Cell rightAlign highlighted={isHighlighted}>
-      {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
-      <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
-        <FontAwesome icon={faTimes} fixedWidth size="sm" />
-      </RemoveItemIconButton>
-      <ToggleContent
-        toggle={({ show }) => (
-          <ShowTimeButton onClick={show} color="subtleFg">
-            <FontAwesome icon={faEllipsisH} fixedWidth size="sm" />
-          </ShowTimeButton>
+const TimeTableTimeRow = ({ index, time, removeTime, isIncluded, isExcluded }) => {
+  const highlightColor = isIncluded ? 'blue' : isExcluded ? 'orange' : '';
+  return (
+    <tr>
+      <TimeIndexCell highlightColor={highlightColor}>
+        <SubtleText>{index + 1}.</SubtleText>
+      </TimeIndexCell>
+      <Cell highlightColor={highlightColor}>
+        <Time time={time} />
+        {time.best && (
+          <TimeInfo>
+            <BestTimeIcon>
+              <FontAwesome icon={faThumbsUp} />
+            </BestTimeIcon>
+          </TimeInfo>
         )}
-        content={({ hide }) => (
-          <Modal title="Details" onClose={hide}>
-            <TimeDetails
-              time={time}
-              onClose={hide}
-              onRemoveTime={() => {
-                hide();
-                removeTime(time.id);
-              }}
-            />
-          </Modal>
-        )}
-      />
-    </Cell>
-  </tr>
-);
+      </Cell>
+      <Cell rightAlign highlightColor={highlightColor}>
+        {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
+        <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
+          <FontAwesome icon={faTimes} fixedWidth size="sm" />
+        </RemoveItemIconButton>
+        <ToggleContent
+          toggle={({ show }) => (
+            <ShowTimeButton onClick={show} color="subtleFg">
+              <FontAwesome icon={faEllipsisH} fixedWidth size="sm" />
+            </ShowTimeButton>
+          )}
+          content={({ hide }) => (
+            <Modal title="Details" onClose={hide}>
+              <TimeDetails
+                time={time}
+                onClose={hide}
+                onRemoveTime={() => {
+                  hide();
+                  removeTime(time.id);
+                }}
+              />
+            </Modal>
+          )}
+        />
+      </Cell>
+    </tr>
+  );
+};
 
 TimeTableTimeRow.propTypes = {
   time: CustomPropTypes.Time.isRequired,
   index: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired,
-  isHighlighted: PropTypes.bool
+  isIncluded: PropTypes.bool,
+  isExcluded: PropTypes.bool
 };
 
 const TimeIndexCell = Cell.extend`
