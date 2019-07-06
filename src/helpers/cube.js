@@ -76,7 +76,7 @@ export function layoutScramble(scramble, size) {
     );
   }, createCube(size));
 
-  return formatCube(cube);
+  return cube;
 }
 
 function parseMove(move) {
@@ -112,36 +112,12 @@ function createCube(size) {
   );
 }
 
-function formatCube(cube) {
-  return Object.keys(cube).reduce(
-    (formattedCube, face) => ({
-      ...formattedCube,
-      [face]: formatFace(cube[face])
-    }),
-    cube
-  );
-}
-
 function rotate(cube, face, depth) {
   return {
     ...cube,
     ...cycleEdges(FACE_EDGE_MAP[face], cube, depth),
     [face]: rotateFace(cube[face])
   };
-}
-
-function formatFace(face) {
-  return generateArr(getSize(face)).reduce(
-    (rows, y) => [
-      ...rows,
-      generateArr(getSize(face)).reduce((row, x) => [...row, getTile(face, x, y).color], [])
-    ],
-    []
-  );
-}
-
-function getTile(face, x, y) {
-  return face.find(tile => tile.x === x && tile.y === y);
 }
 
 function createFace(size, color) {

@@ -24,12 +24,8 @@ const CubePreview = ({ scramble, cubeSize }) => {
           {CUBE_LAYOUT.map((row, y) => (
             <Row key={y}>
               {row.map((face, x) => (
-                <Col>
-                  <CubeFace
-                    key={x}
-                    cubeSize={cubeSize}
-                    face={face !== null ? cube[face] : undefined}
-                  />
+                <Col key={x}>
+                  <CubeFace key={x} cubeSize={cubeSize} tiles={face !== null ? cube[face] : []} />
                 </Col>
               ))}
             </Row>
