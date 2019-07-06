@@ -1,65 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { shade, tint } from 'polished';
+import styled, { withTheme } from 'styled-components';
 import { puzzleColors } from '../../constants/puzzles';
-import { getSize, getColor, isDark } from '../../helpers/theme';
+import { getColor } from '../../helpers/theme';
 
-const CubeFace = ({ face = [], cubeSize }) => (
-  <Face>
-    {face.map((row, y) => (
-      <Row key={y}>
-        {row.map((color, x) => (
-          <Tile
-            key={x}
-            isLastColumn={x + 1 === cubeSize}
-            isLastRow={y + 1 === cubeSize}
+const CubeFace = ({ face = [], cubeSize, theme }) => {
+  const tileSize = 100 / cubeSize;
+  const gap = 12 / cubeSize;
+  const stroke = 3 / cubeSize;
+  const radius = 9 / cubeSize;
+
+  return (
+    <Face viewBox="0 0 100 100">
+      {face.map((row, y) =>
+        row.map((color, x) => (
+          <rect
+            stroke={getColor('dark')({ theme })}
+            strokeWidth={stroke}
+            fill={getColor([puzzleColors[color]])({ theme })}
+            rx={radius}
+            key={x + '.' + y}
+            width={tileSize - gap}
+            height={tileSize - gap}
+            x={tileSize * x + gap / 2}
+            y={tileSize * y + gap / 2}
             color={color}
-            cubeSize={cubeSize}
           />
-        ))}
-      </Row>
-    ))}
-  </Face>
-);
+        ))
+      )}
+    </Face>
+  );
+};
 
 CubeFace.propTypes = {
   cubeSize: PropTypes.number.isRequired,
-  face: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+  face: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  theme: PropTypes.object.isRequired
 };
 
-const Face = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  min-width: 8.6rem;
-  width: 8.6rem;
-  height: 8.6rem;
-  margin-right: ${getSize('xs')};
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-grow: 1;
-`;
-
-const Tile = styled.span`
-  border-radius: ${props => scale(props.cubeSize, 0.2, 0.4)}rem;
-  display: inline-block;
-  flex-grow: 1;
-  background-color: ${props => getColor([puzzleColors[props.color]])(props)};
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${props =>
-    isDark(props)
-      ? tint(0.6, getColor([puzzleColors[props.color]])(props))
-      : shade(0.6, getColor([puzzleColors[props.color]])(props))};
+const Face = styled.svg`
   width: 100%;
-  margin-right: ${props => (props.isLastColumn ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
-  margin-bottom: ${props => (props.isLastRow ? '0' : scale(props.cubeSize, 0.2, 0.4))}rem;
+  height: 100%;
 `;
 
-function scale(cubeSize, min, max) {
-  return min + (max - min) * ((7 - cubeSize) / 5);
-}
-
-export default CubeFace;
+export default withTheme(CubeFace);

@@ -24,11 +24,13 @@ const CubePreview = ({ scramble, cubeSize }) => {
           {CUBE_LAYOUT.map((row, y) => (
             <Row key={y}>
               {row.map((face, x) => (
-                <CubeFace
-                  key={x}
-                  cubeSize={cubeSize}
-                  face={face !== null ? cube[face] : undefined}
-                />
+                <Col>
+                  <CubeFace
+                    key={x}
+                    cubeSize={cubeSize}
+                    face={face !== null ? cube[face] : undefined}
+                  />
+                </Col>
               ))}
             </Row>
           ))}
@@ -45,6 +47,12 @@ CubePreview.propTypes = {
   cubeSize: PropTypes.number,
   scramble: PropTypes.arrayOf(PropTypes.string)
 };
+
+const Col = styled.div`
+  width: 9rem;
+  height: 9rem;
+  margin-right: ${getSize('xs')};
+`;
 
 const CubePreviewScrollContainer = styled.div`
   overflow-x: auto;
