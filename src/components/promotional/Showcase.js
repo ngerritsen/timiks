@@ -46,8 +46,8 @@ const Showcase = ({ theme }) => {
         <>
           <p>
             An accurate timer made for speedsolvers. Responds immediately at your input, so that you
-            can get that important 100st of a second accuracy. Enable inspection time to prepare for
-            those WCA solves, the solve will DNF when it expired.
+            can get that important 100st of a second accuracy. Enable inspection time with voice
+            warnings to prepare for those WCA solves, the solve will DNF when it expired.
           </p>
           <p>
             Quick controls will let you quickly mark the time with a plus 2 penalty or DNF. Keyboard
@@ -119,10 +119,14 @@ const Showcase = ({ theme }) => {
       content: (
         <>
           <p>
-            Take control of you own analysis, with export as CSV you can have your archive per
+            Take control of your own analysis, with export as CSV you can have your archive per
             puzzle in your own spreadsheet application.
           </p>
           <Image src="/images/csv.png" />
+          <p>
+            You can import your existing sessions from Twisty Timer and csTimer, to continue where
+            you left off.
+          </p>
         </>
       )
     },
