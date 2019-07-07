@@ -51,6 +51,7 @@ const Timer = ({
                   <DecrementingTime
                     decrementFrom={INSPECTION_TIME}
                     startTime={inspectionStartTime}
+                    belowZeroText="+2"
                     secondsOnly
                   />
                 );

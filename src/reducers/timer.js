@@ -17,8 +17,7 @@ export default handleActions(
       ...state,
       startTime: action.payload,
       stopped: false,
-      inspecting: false,
-      inspectionStartTime: 0
+      inspecting: false
     }),
     [actionTypes.FAIL_INSPECTION]: () => initialState,
     [actionTypes.START_INSPECTION]: (state, action) => ({
@@ -29,6 +28,7 @@ export default handleActions(
     [actionTypes.SAVE_TIME]: (state, action) => ({
       ...state,
       startTime: 0,
+      inspectionStartTime: 0,
       lastTimeId: action.payload.id
     }),
     [actionTypes.STOP_TIMER]: (state, action) => ({
@@ -38,7 +38,8 @@ export default handleActions(
     }),
     [actionTypes.RESET_TIME]: state => ({
       ...state,
-      startTime: 0
+      startTime: 0,
+      inspectionStartTime: 0
     }),
     [actionTypes.SUBMIT_TIME_INPUT]: state => ({
       ...state,

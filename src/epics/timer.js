@@ -5,7 +5,7 @@ import { ofType } from 'redux-observable';
 import { FAIL_INSPECTION, SUBMIT_TIME_INPUT, STOP_TIMER } from '../constants/actionTypes';
 import { saveTime } from '../actions';
 import { getPuzzle } from '../selectors/settings';
-import { getStartTime } from '../selectors/timer';
+import { getStartTime, hasInspectionPenalty } from '../selectors/timer';
 import { getScramble } from '../selectors/scramble';
 
 export const failInspectionEpic = (action$, state$) =>
@@ -28,7 +28,14 @@ export const stopTimerEpic = (action$, state$) =>
   action$.pipe(
     ofType(STOP_TIMER),
     withLatestFrom(state$),
-    map(([action, state]) => createSaveTime(action.payload - getStartTime(state), state))
+    map(([action, state]) =>
+      createSaveTime(
+        action.payload - getStartTime(state),
+        state,
+        false,
+        hasInspectionPenalty(state)
+      )
+    )
   );
 
 const createSaveTime = (ms, state, dnf, plus2) =>

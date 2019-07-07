@@ -13,7 +13,7 @@ const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
   }
 
   if (secondsOnly) {
-    return <span>{formatPart(Math.round(ms / 1000))}</span>;
+    return <span>{formatPart(Math.ceil(ms / 1000))}</span>;
   }
 
   const { minutes, seconds, milliseconds } = breakUpTime(getMs({ ms, plus2 }));

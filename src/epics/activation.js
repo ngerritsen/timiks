@@ -89,7 +89,9 @@ export const runInspectionEpic = action$ =>
   action$.pipe(
     ofType(START_INSPECTION),
     switchMap(() =>
-      timer(timerContants.INSPECTION_TIME).pipe(takeUntil(action$.pipe(ofType(START_TIMER))))
+      timer(timerContants.INSPECTION_TIME + timerContants.INSPECTION_TIME_PENALTY_TIME).pipe(
+        takeUntil(action$.pipe(ofType(START_TIMER)))
+      )
     ),
     map(actions.failInspection)
   );
