@@ -3,6 +3,8 @@ import 'element-closest';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import history from './history';
 
 import './firebase';
 
@@ -16,9 +18,11 @@ const rootEl = document.querySelector(APP_ROOT_SELECTOR);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ShortcutProvider keymap={keymap}>
-      <AppContainer />
-    </ShortcutProvider>
+    <ConnectedRouter history={history}>
+      <ShortcutProvider keymap={keymap}>
+        <AppContainer />
+      </ShortcutProvider>
+    </ConnectedRouter>
   </Provider>,
   rootEl
 );

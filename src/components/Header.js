@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import faDumbbell from '@fortawesome/fontawesome-pro-solid/faDumbbell';
+import FontAwesome from '@fortawesome/react-fontawesome';
 
 import SettingsContainer from '../containers/SettingsContainer';
 import KeyboardShortcuts from './KeyboardShortcuts';
@@ -17,6 +19,9 @@ const Header = () => (
       </StyledNavLink>
       <StyledNavLink activeClassName="selected" to="/archive">
         Archive
+      </StyledNavLink>
+      <StyledNavLink activeClassName="selected" to="/trainer">
+        <FontAwesome icon={faDumbbell} />
       </StyledNavLink>
       <KeyboardShortcutsIconContainer breakpoint="sm" display="inline">
         <KeyboardShortcuts />

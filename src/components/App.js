@@ -9,6 +9,7 @@ import NotificationContainer from '../containers/NotificationContainer';
 import LoginPromotionContainer from '../containers/messages/LoginPromotionContainer';
 import NewVersionPromptContainer from '../containers/messages/NewVersionPromptContainer';
 import Footer from './Footer';
+import TrainerContainer from '../containers/trainer/TrainerContainer';
 
 const App = () => (
   <>
@@ -21,6 +22,7 @@ const App = () => (
       <Section margin="xl">
         <Route exact path="/" component={TimerViewContainer} />
         <Route path="/archive" component={ArchiveContainer} />
+        <Route path="/trainer" component={TrainerContainer} />
       </Section>
       <Section textAlign="center">
         <Footer />

@@ -7,6 +7,7 @@ import * as authenticationEpics from './authentication';
 import * as localTimesEpics from './localTimes';
 import * as timerEpics from './timer';
 import * as activationEpics from './activation';
+import * as trainerEpics from './trainer';
 import * as timesEpics from './times';
 import * as notificationEpics from './notifications';
 import * as loginPromotionEpics from './loginPromotionEpic';
@@ -42,6 +43,7 @@ const rootEpic = combineEpics(
   timesEpics.archiveTimesEpic,
   timesEpics.clearTimesEpic,
   timesEpics.storeTimesEpic,
+  trainerEpics.pickCaseEpic,
   notificationEpics.notificationEpic,
   loginPromotionEpics.loginPromotionEpic,
   loginPromotionEpics.dismissLoginPromotionEpic,

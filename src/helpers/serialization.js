@@ -47,6 +47,6 @@ function serializeScramble(scramble) {
   return scramble.join(SCRAMBLE_DELIMITER);
 }
 
-function parseScramble(rawScramble) {
+export function parseScramble(rawScramble) {
   return rawScramble.split(SCRAMBLE_DELIMITER);
 }

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -36,9 +35,7 @@ class AppContainer extends React.Component {
   render() {
     return (
       <ThemeProvider theme={this.state.theme}>
-        <Router>
-          <App />
-        </Router>
+        <App />
       </ThemeProvider>
     );
   }

@@ -3,7 +3,7 @@ import * as puzzleConstants from '../constants/puzzles';
 import { getPuzzle } from './puzzle';
 import scramblers from '../vendor/jsss';
 
-import { generateArr } from './general';
+import { generateArr, pickRandom } from './general';
 
 export function splitRelayScramble(puzzle, scramble) {
   const relayPuzzle = getPuzzle(puzzle);
@@ -180,10 +180,6 @@ function pickRandomDirection(directions, previousDirection, opposites = []) {
   return pickRandom(
     directions.filter(direction => ![...opposites, previousDirection].includes(direction))
   );
-}
-
-function pickRandom(array) {
-  return array[Math.floor(Math.random() * array.length)];
 }
 
 function charIf(bool, a, b = '') {

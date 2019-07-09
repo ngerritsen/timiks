@@ -54,3 +54,7 @@ export function multiMatch(patterns, inputString) {
 
   return null;
 }
+
+export function pickRandom(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}

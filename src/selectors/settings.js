@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import * as puzzleHelpers from '../helpers/puzzle';
+import { isInTrainer } from './router';
 
 export const getSettings = state => state.settings;
 export const getPuzzle = state => state.settings.puzzle;
@@ -21,4 +22,6 @@ export const getPuzzleInfo = createSelector(
 );
 
 export const shouldUseInspectionTime = state =>
-  state.settings.useInspectionTime && getPuzzleInfo(state).allowInspectionTime;
+  state.settings.useInspectionTime &&
+  getPuzzleInfo(state).allowInspectionTime &&
+  !isInTrainer(state);

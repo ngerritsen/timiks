@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import TimerOptionsContainer from '../../containers/timer/TimerOptionsContainer';
 import TimerContainer from '../../containers/timer/TimerContainer';
 import TimeBoardContainer from '../../containers/timer/TimeBoardContainer';
+import ActivationContainer from '../../containers/timer/ActivationContainer';
+import ScrambleContainer from '../../containers/timer/ScrambleContainer';
 import Section from '../shared/Section';
 
 const TimerView = ({ requireTimes }) => {
@@ -15,6 +17,12 @@ const TimerView = ({ requireTimes }) => {
     <div>
       <Section margin="lg">
         <TimerContainer />
+      </Section>
+      <Section margin="sm">
+        <ScrambleContainer />
+      </Section>
+      <Section margin="sm">
+        <ActivationContainer />
       </Section>
       <Section margin="sm">
         <TimerOptionsContainer />

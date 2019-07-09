@@ -95,3 +95,10 @@ export const hideNotification = createAction(types.HIDE_NOTIFICATION);
 
 // Import
 export const importTimes = createAction(types.IMPORT_TIMES, times => ({ times }));
+
+// Trainer
+export const requestNextCase = createAction(types.REQUEST_NEXT_CASE);
+export const nextCaseDetermined = createAction(types.NEXT_CASE_DETERMINED, (id, scrambleIndex) => ({
+  id,
+  scrambleIndex
+}));

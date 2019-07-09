@@ -6,8 +6,6 @@ import FontAwesome from '@fortawesome/react-fontawesome';
 import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
 import faSpaceShuttle from '@fortawesome/fontawesome-pro-solid/faSpaceShuttle';
 import * as CustomPropTypes from '../../propTypes';
-import ActivationContainer from '../../containers/timer/ActivationContainer';
-import ScrambleContainer from '../../containers/timer/ScrambleContainer';
 import Section from '../shared/Section';
 import Time from '../shared/Time';
 import TimeActionsContainer from '../../containers/timer/TimeActionsContainer';
@@ -73,12 +71,6 @@ const Timer = ({
     <TimeFooter withManualEntry={useManualTimeEntry}>
       {showLastTime && <TimeActionsContainer lastTime={lastTime} />}
     </TimeFooter>
-    <Section margin="sm">
-      <ScrambleContainer />
-    </Section>
-    <Section margin="sm">
-      <ActivationContainer />
-    </Section>
   </div>
 );
 
