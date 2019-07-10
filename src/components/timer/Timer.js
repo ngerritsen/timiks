@@ -26,7 +26,8 @@ const Timer = ({
   startTime,
   lastTime,
   useManualTimeEntry,
-  showTimerTime
+  showTimerTime,
+  stopTime
 }) => (
   <div>
     <Section margin="sm">
@@ -55,6 +56,8 @@ const Timer = ({
                 );
               case preparingForInspection:
                 return <Time time={{ ms: INSPECTION_TIME }} secondsOnly />;
+              case startTime > 0 && stopTime > 0:
+                return <Time time={{ ms: stopTime - startTime }} />;
               case startTime > 0 && showTimerTime:
                 return <IncrementingTime startTime={startTime} />;
               case startTime > 0 && !showTimerTime:
@@ -82,6 +85,7 @@ Timer.propTypes = {
   ready: PropTypes.bool.isRequired,
   showLastTime: PropTypes.bool.isRequired,
   startTime: PropTypes.number.isRequired,
+  stopTime: PropTypes.number.isRequired,
   lastTime: CustomPropTypes.Time,
   useManualTimeEntry: PropTypes.bool.isRequired,
   showTimerTime: PropTypes.bool.isRequired

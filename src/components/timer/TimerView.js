@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import TimerOptionsContainer from '../../containers/timer/TimerOptionsContainer';
 import TimerContainer from '../../containers/timer/TimerContainer';
-import TimeBoardContainer from '../../containers/timer/TimeBoardContainer';
 import ActivationContainer from '../../containers/timer/ActivationContainer';
+import TimeBoardContainer from '../../containers/timer/TimeBoardContainer';
 import ScrambleContainer from '../../containers/timer/ScrambleContainer';
 import Section from '../shared/Section';
 

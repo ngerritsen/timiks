@@ -13,6 +13,7 @@ import { getPuzzle } from '../../helpers/puzzle';
 import { ARCHIVE_DAYS_OPTIONS } from '../../constants/settings';
 import { decapitalize } from '../../helpers/formatting';
 import TopStats from './TopStats';
+import SectionTitle from '../shared/SectionTitle';
 
 const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireTimes }) => {
   useEffect(() => {
@@ -70,17 +71,6 @@ Archive.propTypes = {
   removeTime: PropTypes.func.isRequired
 };
 
-const Message = styled.p`
-  color: ${getColor('grey')};
-  font-weight: bold;
-  padding: 15vh 0;
-  text-align: center;
-`;
-
-const SectionTitle = styled.h3`
-  margin: 0 0 ${getSize('sm')};
-`;
-
 const TimeTiles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -98,6 +88,13 @@ const TimeTiles = styled.div`
   @media screen and (min-width: ${getBreakpoint('lg')}) {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
+`;
+
+const Message = styled.p`
+  color: ${getColor('grey')};
+  font-weight: bold;
+  padding: 15vh 0;
+  text-align: center;
 `;
 
 export default Archive;

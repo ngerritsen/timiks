@@ -38,3 +38,17 @@ export const GraphLine = PropTypes.shape({
   enabled: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired
 });
+
+export const Case = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  algs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  probability: PropTypes.number.isRequired,
+  selected: PropTypes.bool,
+  id: PropTypes.number
+});
+
+export const CaseGroup = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  prefix: PropTypes.string.isRequired,
+  cases: PropTypes.arrayOf(Case).isRequired
+});

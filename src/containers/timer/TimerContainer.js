@@ -9,6 +9,7 @@ import * as timerSelectors from '../../selectors/timer';
 
 function mapStateToProps(state) {
   const startTime = timerSelectors.getStartTime(state);
+  const stopTime = timerSelectors.getStopTime(state);
   const ready = isReady(state);
   const useManualTimeEntry = shouldUseManualTimeEntry(state);
   const lastTime = getLastTime(state);
@@ -23,6 +24,8 @@ function mapStateToProps(state) {
     ready,
     showLastTime,
     startTime,
+    stopTime,
+    finalTime: stopTime - startTime,
     stopped: timerSelectors.isStopped(state),
     useManualTimeEntry,
     showTimerTime: shouldShowTimerTime(state)

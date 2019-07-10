@@ -23,12 +23,13 @@ export const CUBE_OPPOSITES = [[UP, DOWN], [RIGHT, LEFT], [FRONT, BACK]];
 export const CUBE_DIRECTIONS = [UP, DOWN, FRONT, BACK, LEFT, RIGHT];
 export const STATIC_DIRECTIONS = [X, Y, Z];
 
-export const WHITE = 'WHITE';
-export const BLUE = 'BLUE';
-export const YELLOW = 'YELLOW';
-export const ORANGE = 'ORANGE';
-export const RED = 'RED';
-export const GREEN = 'GREEN';
+export const WHITE = 'W';
+export const BLUE = 'B';
+export const YELLOW = 'Y';
+export const ORANGE = 'O';
+export const RED = 'R';
+export const GREEN = 'G';
+export const NONE = 'X';
 
 export const puzzleColors = {
   [WHITE]: 'white',
@@ -36,7 +37,8 @@ export const puzzleColors = {
   [GREEN]: 'green',
   [BLUE]: 'blue',
   [RED]: 'red',
-  [ORANGE]: 'orange'
+  [ORANGE]: 'orange',
+  [NONE]: 'dark'
 };
 
 const puzzles = [

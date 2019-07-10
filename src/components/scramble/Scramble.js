@@ -98,14 +98,14 @@ const ScrambleTab = styled.div`
 `;
 
 const ScrambleBox = styled.div`
-  font-size: 1.8rem;
+  font-size: 2.1rem;
   text-align: center;
   font-family: ${getFont('mono')};
-  line-height: 1.25;
+  line-height: 1.2;
   background-color: ${getColor('subtleBg')};
   padding: ${getSize('xs')};
   margin: 0;
-  font-weight: bold;
+  font-weight: 700;
   border-bottom-right-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
   border-top-right-radius: ${props => (props.withTabs ? '0' : '0.3rem')};

@@ -102,3 +102,6 @@ export const nextCaseDetermined = createAction(types.NEXT_CASE_DETERMINED, (id, 
   id,
   scrambleIndex
 }));
+export const selectCase = createAction(types.SELECT_CASE, id => id);
+export const deselectCase = createAction(types.DESELECT_CASE, id => id);
+export const loadEnabledCases = createAction(types.LOAD_ENABLED_CASES, ids => ids);
