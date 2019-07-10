@@ -10,10 +10,20 @@ import { DEFAULT_PUZZLE } from '../../constants/settings';
 import * as CustomPropTypes from '../../propTypes';
 import SectionTitle from '../shared/SectionTitle';
 import Tile from '../shared/Tile';
-import { getSize, getBreakpoint } from '../../helpers/theme';
-import LastLayerPreview from '../cube/LastLayerPreview';
+import Tiles from '../shared/Tiles';
 
-const Trainer = ({ scramble, groupedCases, selectCase, deselectCase }) => (
+import { getSize } from '../../helpers/theme';
+import LastLayerPreview from '../cube/LastLayerPreview';
+import Checkbox from '../shared/Checkbox';
+
+const Trainer = ({
+  scramble,
+  groupedCases,
+  selectCase,
+  deselectCase,
+  selectCases,
+  deselectCases
+}) => (
   <div>
     <Section margin="lg">
       <TimerContainer showFinalTime />
@@ -24,23 +34,42 @@ const Trainer = ({ scramble, groupedCases, selectCase, deselectCase }) => (
     <Section margin="md">
       <ActivationContainer />
     </Section>
-    {groupedCases.map(group => (
-      <Section margin="md" key={group.prefix}>
-        <SectionTitle>{group.name}</SectionTitle>
-        <Cases>
-          {group.cases.map(c => (
-            <Tile
-              key={c.id}
-              selected={c.selected}
-              onClick={() => (c.selected ? deselectCase(c.id) : selectCase(c.id))}
+    <Section margin="md">
+      Select the OLL cases you want to train. Selecting nothing will be the same as everything.
+    </Section>
+    {groupedCases.map(group => {
+      const allSelected = group.cases.every(c => c.selected);
+      return (
+        <Section margin="md" key={group.prefix}>
+          <SectionTitle>
+            {group.name}
+            &nbsp; &nbsp;
+            <SelectAllLabel
+              onClick={() =>
+                (allSelected ? deselectCases : selectCases)(group.cases.map(c => c.id))
+              }
             >
-              <LastLayerPreview previewString={c.preview} />
-              {c.name}
-            </Tile>
-          ))}
-        </Cases>
-      </Section>
-    ))}
+              <SelectAllCheckBox>
+                <Checkbox name={group.prefix} checked={allSelected} onChange={() => {}} />
+              </SelectAllCheckBox>
+              Select all
+            </SelectAllLabel>
+          </SectionTitle>
+          <Tiles>
+            {group.cases.map(c => (
+              <Tile
+                key={c.id}
+                selected={c.selected}
+                onClick={() => (c.selected ? deselectCase(c.id) : selectCase(c.id))}
+              >
+                <LastLayerPreview previewString={c.preview} />
+                {c.name}
+              </Tile>
+            ))}
+          </Tiles>
+        </Section>
+      );
+    })}
   </div>
 );
 
@@ -48,26 +77,24 @@ Trainer.propTypes = {
   scramble: CustomPropTypes.Scramble.isRequired,
   groupedCases: PropTypes.arrayOf(CustomPropTypes.CaseGroup).isRequired,
   selectCase: PropTypes.func.isRequired,
-  deselectCase: PropTypes.func.isRequired
+  deselectCase: PropTypes.func.isRequired,
+  selectCases: PropTypes.func.isRequired,
+  deselectCases: PropTypes.func.isRequired
 };
 
-const Cases = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: ${getSize('xs')};
-  grid-row-gap: ${getSize('xs')};
+const SelectAllLabel = styled.label`
+  position: relative;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: normal;
+  align-items: center;
+  cursor: pointer;
+`;
 
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media screen and (min-width: ${getBreakpoint('md')}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
+const SelectAllCheckBox = styled.span`
+  position: relative;
+  margin-right: ${getSize('xxs')};
+  top: 0.2rem;
 `;
 
 export default Trainer;

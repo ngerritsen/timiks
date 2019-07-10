@@ -1,15 +1,22 @@
 import { ofType } from 'redux-observable';
 import { merge, of } from 'rxjs';
 import { withLatestFrom, map, tap, ignoreElements } from 'rxjs/operators';
-import { STOP_TIMER, SELECT_CASE, DESELECT_CASE } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import { getRandomCase, getRandomScramble } from '../helpers/trainer';
 import { getCurrentScrambleIndex, getEnabledCases } from '../selectors/trainer';
 import { nextCaseDetermined, loadEnabledCases } from '../actions';
 import * as oll from '../constants/oll';
 import * as trainerRepository from '../repositories/trainer';
 
+const enabledCaseChangeActions = [
+  actionTypes.SELECT_CASE,
+  actionTypes.DESELECT_CASE,
+  actionTypes.SELECT_CASES,
+  actionTypes.DESELECT_CASES
+];
+
 export const pickCaseEpic = (action$, state$) =>
-  merge(action$.pipe(ofType(STOP_TIMER, SELECT_CASE, DESELECT_CASE)), of(null)).pipe(
+  merge(action$.pipe(ofType(actionTypes.STOP_TIMER, ...enabledCaseChangeActions)), of(null)).pipe(
     withLatestFrom(state$),
     map(([, state]) => {
       const nextCaseId = getRandomCase(oll.cases, getEnabledCases(state));
@@ -24,7 +31,7 @@ export const loadEnabledCasesEpic = () =>
 
 export const saveEnabledCasesEpic = (action$, state$) =>
   action$.pipe(
-    ofType(SELECT_CASE, DESELECT_CASE),
+    ofType(...enabledCaseChangeActions),
     withLatestFrom(state$),
     tap(([, state]) => trainerRepository.storeEnabledCaseIds(getEnabledCases(state))),
     ignoreElements()

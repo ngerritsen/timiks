@@ -58,3 +58,7 @@ export function multiMatch(patterns, inputString) {
 export function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
+
+export function unique(array) {
+  return array.filter((item, i, ar) => ar.indexOf(item) === i);
+}

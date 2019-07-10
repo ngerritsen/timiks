@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
+import { unique } from '../helpers/general';
 
 const initialState = {
   enabledCases: [],
@@ -25,6 +26,14 @@ export default handleActions(
     [actionTypes.DESELECT_CASE]: (state, action) => ({
       ...state,
       enabledCases: state.enabledCases.filter(id => id !== action.payload)
+    }),
+    [actionTypes.SELECT_CASES]: (state, action) => ({
+      ...state,
+      enabledCases: unique([...state.enabledCases, ...action.payload])
+    }),
+    [actionTypes.DESELECT_CASES]: (state, action) => ({
+      ...state,
+      enabledCases: state.enabledCases.filter(id => !action.payload.includes(id))
     })
   },
   initialState

@@ -6,7 +6,7 @@ import * as CustomPropTypes from '../../propTypes';
 import TimeGraph from '../shared/TimeGraph';
 import Section from '../shared/Section';
 import { formatLocalDate } from '../../helpers/dateTime';
-import { getBreakpoint, getSize, getColor } from '../../helpers/theme';
+import { getColor } from '../../helpers/theme';
 import ArchiveOptionsContainer from '../../containers/archive/ArchiveOptionsContainer';
 import ArchiveItem from './ArchiveItem';
 import { getPuzzle } from '../../helpers/puzzle';
@@ -14,6 +14,7 @@ import { ARCHIVE_DAYS_OPTIONS } from '../../constants/settings';
 import { decapitalize } from '../../helpers/formatting';
 import TopStats from './TopStats';
 import SectionTitle from '../shared/SectionTitle';
+import Tiles from '../shared/Tiles';
 
 const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireTimes }) => {
   useEffect(() => {
@@ -45,11 +46,11 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
       {timesPerDay.map(({ date, times }) => (
         <Section margin="md" key={date.toISOString()}>
           <SectionTitle>{formatLocalDate(date)}</SectionTitle>
-          <TimeTiles>
+          <Tiles>
             {times.map(time => (
               <ArchiveItem key={time.id} time={time} removeTime={removeTime} />
             ))}
-          </TimeTiles>
+          </Tiles>
         </Section>
       ))}
     </>
@@ -70,25 +71,6 @@ Archive.propTypes = {
   days: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired
 };
-
-const TimeTiles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: ${getSize('xs')};
-  grid-row-gap: ${getSize('xs')};
-
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  @media screen and (min-width: ${getBreakpoint('md')}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
-
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  }
-`;
 
 const Message = styled.p`
   color: ${getColor('grey')};

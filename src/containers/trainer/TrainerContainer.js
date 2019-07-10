@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import Trainer from '../../components/trainer/Trainer';
 import { getCurrentScramble, getGroupedSelectedCases } from '../../selectors/trainer';
-import { selectCase, deselectCase } from '../../actions';
+import { selectCase, deselectCase, selectCases, deselectCases } from '../../actions';
 
 function mapStateToProps(state) {
   return {
@@ -13,5 +13,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { selectCase, deselectCase }
+  { selectCase, deselectCase, selectCases, deselectCases }
 )(Trainer);

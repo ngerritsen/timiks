@@ -6,11 +6,11 @@ import FontAwesome from '@fortawesome/react-fontawesome';
 
 import { getColor } from '../../helpers/theme';
 
-const Checkbox = ({ onChange, checked, inverse }) => {
+const Checkbox = ({ onChange, checked, inverse, name }) => {
   const isChecked = inverse ? !checked : checked;
 
   return (
-    <CheckboxBox onClick={() => onChange(!checked)} checked={isChecked}>
+    <CheckboxBox name={name} onClick={() => onChange(!checked)} checked={isChecked}>
       {isChecked && <FontAwesome icon={faCheck} size="xs" />}
     </CheckboxBox>
   );
@@ -22,6 +22,7 @@ const CheckboxBox = styled.div`
   align-items: center;
   height: 1.5rem;
   width: 1.5rem;
+  overflow: hidden;
   font-size: 0.8em;
   border-radius: 0.3rem;
   border: 1px solid ${props => getColor(props.checked ? 'blue' : 'grey')(props)};
@@ -37,7 +38,8 @@ const CheckboxBox = styled.div`
 Checkbox.propTypes = {
   checked: PropTypes.bool,
   inverse: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string
 };
 
 export default Checkbox;

@@ -1,6 +1,6 @@
 export const groups = [
   {
-    name: 'All Edges Oriented Correctly',
+    name: 'All Edges Oriented',
     prefix: 'OCLL'
   },
   {
@@ -52,7 +52,7 @@ export const groups = [
     prefix: 'B'
   },
   {
-    name: 'No Edges Flipped Correctly',
+    name: 'No Edges Oriented',
     prefix: 'O'
   }
 ];
