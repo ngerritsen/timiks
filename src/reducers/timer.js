@@ -29,7 +29,6 @@ export default handleActions(
     [actionTypes.SAVE_TIME]: (state, action) => ({
       ...state,
       startTime: 0,
-      stopTime: 0,
       inspectionStartTime: 0,
       lastTimeId: action.payload.id
     }),

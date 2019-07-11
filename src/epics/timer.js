@@ -1,13 +1,20 @@
 import shortid from 'shortid';
 import { withLatestFrom, map, filter } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 import { FAIL_INSPECTION, SUBMIT_TIME_INPUT, STOP_TIMER } from '../constants/actionTypes';
-import { saveTime } from '../actions';
+import { saveTime, resetTime } from '../actions';
 import { getPuzzle } from '../selectors/settings';
 import { getStartTime, hasInspectionPenalty } from '../selectors/timer';
 import { getScramble } from '../selectors/scramble';
 import { isInTrainer } from '../selectors/router';
+
+export const resetOnRouteEpic = action$ =>
+  action$.pipe(
+    ofType(LOCATION_CHANGE),
+    map(resetTime)
+  );
 
 export const failInspectionEpic = (action$, state$) =>
   action$.pipe(
