@@ -35,6 +35,7 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase }) => (
           href="#"
           onClick={event => {
             event.stopPropagation();
+            event.preventDefault();
             show();
           }}
         >
