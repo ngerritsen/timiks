@@ -68,14 +68,19 @@ export function update(timeId, fields) {
 }
 
 export function updateAll(timeIds, fields) {
+  const chunk = timeIds.slice(0, MAX_BATCH_SIZE);
   const batch = db.batch();
 
-  timeIds.forEach(id => {
+  chunk.forEach(id => {
     const timeRef = db.collection('times').doc(id);
     batch.set(timeRef, fields, { merge: true });
   });
 
-  return batch.commit();
+  return batch
+    .commit()
+    .then(
+      () => timeIds.length > MAX_BATCH_SIZE && updateAll(timeIds.slice(MAX_BATCH_SIZE), fields)
+    );
 }
 
 export function remove(timeId) {
