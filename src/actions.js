@@ -107,3 +107,4 @@ export const deselectCase = createAction(types.DESELECT_CASE, id => id);
 export const selectCases = createAction(types.SELECT_CASES, ids => ids);
 export const deselectCases = createAction(types.DESELECT_CASES, ids => ids);
 export const loadEnabledCases = createAction(types.LOAD_ENABLED_CASES, ids => ids);
+export const changeTrainingType = createAction(types.CHANGE_TRAINING_TYPE, type => type);

@@ -10,31 +10,41 @@ import * as CustomPropTypes from '../../propTypes';
 import TrainerCase from './TrainerCase';
 import Section from '../shared/Section';
 
-const TrainerCases = ({ groupedCases, selectCase, deselectCase, selectCases, deselectCases }) =>
-  groupedCases.map(group => {
-    const allSelected = group.cases.every(c => c.selected);
+const TrainerCases = ({
+  groupedCases,
+  selectCase,
+  deselectCase,
+  selectCases,
+  deselectCases,
+  trainingType
+}) =>
+  groupedCases.map(category => {
+    const allSelected = category.cases.every(c => c.selected);
 
     return (
-      <Section margin="md" key={group.prefix}>
+      <Section margin="md" key={category.id}>
         <SectionTitle>
-          {group.name}
+          {category.name}
           &nbsp; &nbsp;
           <SelectAllLabel
-            onClick={() => (allSelected ? deselectCases : selectCases)(group.cases.map(c => c.id))}
+            onClick={() =>
+              (allSelected ? deselectCases : selectCases)(category.cases.map(c => c.id))
+            }
           >
             <SelectAllCheckBox>
-              <Checkbox name={group.prefix} checked={allSelected} onChange={() => {}} />
+              <Checkbox name={category.id} checked={allSelected} onChange={() => {}} />
             </SelectAllCheckBox>
             Select all
           </SelectAllLabel>
         </SectionTitle>
         <Tiles>
-          {group.cases.map(trainerCase => (
+          {category.cases.map(trainerCase => (
             <TrainerCase
               selectCase={selectCase}
               deselectCase={deselectCase}
               trainingCase={trainerCase}
               key={trainerCase.id}
+              trainingType={trainingType}
             />
           ))}
         </Tiles>
@@ -43,11 +53,12 @@ const TrainerCases = ({ groupedCases, selectCase, deselectCase, selectCases, des
   });
 
 TrainerCases.propTypes = {
-  groupedCases: PropTypes.arrayOf(CustomPropTypes.CaseGroup).isRequired,
+  groupedCases: PropTypes.arrayOf(CustomPropTypes.CaseCategory).isRequired,
   selectCase: PropTypes.func.isRequired,
   deselectCase: PropTypes.func.isRequired,
   selectCases: PropTypes.func.isRequired,
-  deselectCases: PropTypes.func.isRequired
+  deselectCases: PropTypes.func.isRequired,
+  trainingType: PropTypes.string.isRequired
 };
 
 const SelectAllLabel = styled.label`

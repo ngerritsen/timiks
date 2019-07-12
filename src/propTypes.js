@@ -44,11 +44,12 @@ export const Case = PropTypes.shape({
   algs: PropTypes.arrayOf(PropTypes.string).isRequired,
   probability: PropTypes.number.isRequired,
   selected: PropTypes.bool,
-  id: PropTypes.number
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  category: PropTypes.string.isRequired
 });
 
-export const CaseGroup = PropTypes.shape({
+export const CaseCategory = PropTypes.shape({
   name: PropTypes.string.isRequired,
-  prefix: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   cases: PropTypes.arrayOf(Case).isRequired
 });

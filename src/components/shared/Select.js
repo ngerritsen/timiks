@@ -5,9 +5,8 @@ import faCaretDown from '@fortawesome/fontawesome-pro-solid/faCaretDown';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import { getSize, getColor } from '../../helpers/theme';
 
-const Select = ({ onChange, options, value, numeric, label }) => (
+const Select = ({ onChange, options, value, numeric }) => (
   <SelectContainer>
-    {label && <Label>{label}:</Label>}
     <SelectIcon>
       <FontAwesome icon={faCaretDown} />
     </SelectIcon>
@@ -30,10 +29,6 @@ const Select = ({ onChange, options, value, numeric, label }) => (
 const SelectContainer = styled.span`
   display: block;
   position: relative;
-`;
-
-const Label = styled.label`
-  margin-right: ${getSize('xs')};
 `;
 
 const SelectInput = styled.select`
@@ -82,7 +77,6 @@ const SelectIcon = styled.div`
 `;
 
 Select.propTypes = {
-  label: PropTypes.string,
   fullWidth: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(

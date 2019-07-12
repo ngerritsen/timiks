@@ -1,65 +1,66 @@
-export const groups = [
+export const categories = [
   {
     name: 'All Edges Oriented',
-    prefix: 'OCLL'
+    id: 'OCLL'
   },
   {
     name: 'T-Shapes',
-    prefix: 'T'
+    id: 'T'
   },
   {
     name: 'Squares',
-    prefix: 'S'
+    id: 'S'
   },
   {
     name: 'C-Shapes',
-    prefix: 'C'
+    id: 'C'
   },
   {
     name: 'W-Shapes',
-    prefix: 'W'
+    id: 'W'
   },
   {
     name: 'Corners Correct, Edges Flipped',
-    prefix: 'E'
+    id: 'E'
   },
   {
     name: 'P-Shapes',
-    prefix: 'P'
+    id: 'P'
   },
   {
     name: 'I-Shapes',
-    prefix: 'I'
+    id: 'I'
   },
   {
     name: 'Fish Shapes',
-    prefix: 'F'
+    id: 'F'
   },
   {
     name: 'Knight Move Shapes',
-    prefix: 'K'
+    id: 'K'
   },
   {
     name: 'Awkward Shapes',
-    prefix: 'A'
+    id: 'A'
   },
   {
     name: 'L-Shapes',
-    prefix: 'L'
+    id: 'L'
   },
   {
     name: 'Lightning Bolts',
-    prefix: 'B'
+    id: 'B'
   },
   {
     name: 'No Edges Oriented',
-    prefix: 'O'
+    id: 'O'
   }
 ];
 
 export const cases = [
   {
     name: 'OCLL6',
+    category: 'OCLL',
     id: 26,
     probability: 1 / 54,
     algs: [`R U2 R' U' R U' R'`, `y' R' U' R U' R' U2 R`],
@@ -67,6 +68,7 @@ export const cases = [
   },
   {
     name: 'OCLL7',
+    category: 'OCLL',
     id: 27,
     probability: 1 / 54,
     algs: [`R U R' U R U2' R'`, `y' R' U2' R U R' U R`],
@@ -74,6 +76,7 @@ export const cases = [
   },
   {
     name: 'OCLL1',
+    category: 'OCLL',
     id: 21,
     probability: 1 / 108,
     algs: [`(R U2 R') (U' R U R') (U' R U' R')`, `y (R U R' U) (R U' R' U) (R U2' R')`],
@@ -81,6 +84,7 @@ export const cases = [
   },
   {
     name: 'OCLL2',
+    category: 'OCLL',
     id: 22,
     probability: 1 / 54,
     algs: [`R U2' R2' U' R2 U' R2' U2' R`],
@@ -88,6 +92,7 @@ export const cases = [
   },
   {
     name: 'OCLL4',
+    category: 'OCLL',
     id: 24,
     probability: 1 / 54,
     algs: [`(r U R' U') (r' F R F')`, `y (R U R D) (R' U' R D') R2'`],
@@ -95,6 +100,7 @@ export const cases = [
   },
   {
     name: 'OCLL5',
+    category: 'OCLL',
     id: 25,
     probability: 1 / 54,
     algs: [`y F' (r U R' U') r' F R`, `x (R' U R) D' (R' U' R) D x'`],
@@ -102,6 +108,7 @@ export const cases = [
   },
   {
     name: 'OCLL3',
+    category: 'OCLL',
     id: 23,
     probability: 1 / 54,
     algs: [`R2 D (R' U2 R) D' (R' U2 R'`, `y2 R2' D' (R U2 R') D (R U2 R)`],
@@ -109,6 +116,7 @@ export const cases = [
   },
   {
     name: 'T1',
+    category: 'T',
     id: 33,
     probability: 1 / 54,
     algs: [`(R U R' U') (R' F R F')`],
@@ -116,6 +124,7 @@ export const cases = [
   },
   {
     name: 'T2',
+    category: 'T',
     id: 45,
     probability: 1 / 54,
     algs: [`F (R U R' U') F'`],
@@ -123,6 +132,7 @@ export const cases = [
   },
   {
     name: 'S1',
+    category: 'S',
     id: 5,
     probability: 1 / 54,
     algs: [`(r' U2' R U R' U r)`],
@@ -130,6 +140,7 @@ export const cases = [
   },
   {
     name: 'S2',
+    category: 'S',
     id: 6,
     probability: 1 / 54,
     algs: [`(r U2 R' U' R U' r')`],
@@ -137,6 +148,7 @@ export const cases = [
   },
   {
     name: 'C1',
+    category: 'C',
     id: 34,
     probability: 1 / 54,
     algs: [`(R U R2' U') (R' F R U) R U' F'`],
@@ -144,6 +156,7 @@ export const cases = [
   },
   {
     name: 'C2',
+    category: 'C',
     id: 46,
     probability: 1 / 54,
     algs: [`R' U' (R' F R F') U R`],
@@ -151,6 +164,7 @@ export const cases = [
   },
   {
     name: 'W1',
+    category: 'W',
     id: 36,
     probability: 1 / 54,
     algs: [
@@ -161,6 +175,7 @@ export const cases = [
   },
   {
     name: 'W2',
+    category: 'W',
     id: 38,
     probability: 1 / 54,
     algs: [`(R U R' U) (R U' R' U') (R' F R F')`],
@@ -168,6 +183,7 @@ export const cases = [
   },
   {
     name: 'E1',
+    category: 'E',
     id: 28,
     probability: 1 / 54,
     algs: [`(r U R' U') M (U R U' R')`],
@@ -175,6 +191,7 @@ export const cases = [
   },
   {
     name: 'E2',
+    category: 'E',
     id: 57,
     probability: 1 / 108,
     algs: [`(R U R' U') M' (U R U' r')`],
@@ -182,6 +199,7 @@ export const cases = [
   },
   {
     name: 'P1',
+    category: 'P',
     id: 31,
     probability: 1 / 54,
     algs: [`(R' U' F) (U R U' R') F' R`],
@@ -189,6 +207,7 @@ export const cases = [
   },
   {
     name: 'P2',
+    category: 'P',
     id: 32,
     probability: 1 / 54,
     algs: [`R U B' (U' R' U) (R B R')`, `S (R U R' U') (R' F R f')`],
@@ -196,6 +215,7 @@ export const cases = [
   },
   {
     name: 'P3',
+    category: 'P',
     id: 43,
     probability: 1 / 54,
     algs: [`y R' U' F' U F R`, `f' (L' U' L U) f`],
@@ -203,6 +223,7 @@ export const cases = [
   },
   {
     name: 'P4',
+    category: 'P',
     id: 44,
     probability: 1 / 54,
     algs: [`f (R U R' U') f'`, `y2 F (U R U' R') F'`],
@@ -210,6 +231,7 @@ export const cases = [
   },
   {
     name: 'I1',
+    category: 'I',
     id: 51,
     probability: 1 / 54,
     algs: [`f (R U R' U') (R U R' U') f'`, `y2 F (U R U' R') (U R U' R') F'`],
@@ -217,6 +239,7 @@ export const cases = [
   },
   {
     name: 'I4',
+    category: 'I',
     id: 56,
     probability: 1 / 108,
     algs: [`r' U' r (U' R' U R) (U' R' U R) r' U r`],
@@ -224,6 +247,7 @@ export const cases = [
   },
   {
     name: 'I2',
+    category: 'I',
     id: 52,
     probability: 1 / 54,
     algs: [`(R' U' R U' R' U) y' (R' U R) B`, `(R U R' U R U') y (R U' R') F' `],
@@ -231,6 +255,7 @@ export const cases = [
   },
   {
     name: 'I3',
+    category: 'I',
     id: 55,
     probability: 1 / 108,
     algs: [`y (R' F R U) (R U' R2' F') R2 U' R' (U R U R')`],
@@ -238,6 +263,7 @@ export const cases = [
   },
   {
     name: 'F1',
+    category: 'F',
     id: 9,
     probability: 1 / 54,
     algs: [`(R U R' U') R' F (R2 U R' U') F'`, `(R' U' R) y r U' r' U r U r'`],
@@ -245,6 +271,7 @@ export const cases = [
   },
   {
     name: 'F2',
+    category: 'F',
     id: 10,
     probability: 1 / 54,
     algs: [`(R U R' U) (R' F R F') (R U2' R')`, `(R U R') y (R' F R U') (R' F' R)`],
@@ -252,6 +279,7 @@ export const cases = [
   },
   {
     name: 'F3',
+    category: 'F',
     id: 35,
     probability: 1 / 54,
     algs: [`(R U2') (R2' F R F') (R U2' R')`],
@@ -259,6 +287,7 @@ export const cases = [
   },
   {
     name: 'F4',
+    category: 'F',
     id: 37,
     probability: 1 / 54,
     algs: [`F (R U' R' U') (R U R' F')`],
@@ -266,6 +295,7 @@ export const cases = [
   },
   {
     name: 'K1',
+    category: 'K',
     id: 13,
     probability: 1 / 54,
     algs: [`(r U' r') (U' r U r') y' (R' U R)`, `F U R U' R2' F' R U (R U' R')`],
@@ -273,6 +303,7 @@ export const cases = [
   },
   {
     name: 'K2',
+    category: 'K',
     id: 14,
     probability: 1 / 54,
     algs: [`(R' F R) (U R' F' R) (F U' F')`],
@@ -280,6 +311,7 @@ export const cases = [
   },
   {
     name: 'K4',
+    category: 'K',
     id: 16,
     probability: 1 / 54,
     algs: [`(r U r') (R U R' U') (r U' r')`],
@@ -287,6 +319,7 @@ export const cases = [
   },
   {
     name: 'K3',
+    category: 'K',
     id: 15,
     probability: 1 / 54,
     algs: [`(r' U' r) (R' U' R U) (r' U r)`],
@@ -294,6 +327,7 @@ export const cases = [
   },
   {
     name: 'A1',
+    category: 'A',
     id: 29,
     probability: 1 / 54,
     algs: [`y (R U R' U') (R U' R') (F' U' F) (R U R')`, `M U (R U R' U')(R' F R F') M'`],
@@ -301,6 +335,7 @@ export const cases = [
   },
   {
     name: 'A2',
+    category: 'A',
     id: 30,
     probability: 1 / 54,
     algs: [`y' F U (R U2 R' U') (R U2 R' U') F'`, `y' (F R' F) (R2 U' R' U') (R U R') F2`],
@@ -308,6 +343,7 @@ export const cases = [
   },
   {
     name: 'A3',
+    category: 'A',
     id: 41,
     probability: 1 / 54,
     algs: [`(R U R' U R U2' R') F (R U R' U') F'`],
@@ -315,6 +351,7 @@ export const cases = [
   },
   {
     name: 'A4',
+    category: 'A',
     id: 42,
     probability: 1 / 54,
     algs: [
@@ -325,6 +362,7 @@ export const cases = [
   },
   {
     name: 'L2',
+    category: 'L',
     id: 48,
     probability: 1 / 54,
     algs: [`F (R U R' U') (R U R' U') F'`],
@@ -332,6 +370,7 @@ export const cases = [
   },
   {
     name: 'L1',
+    category: 'L',
     id: 47,
     probability: 1 / 54,
     algs: [`F' (L' U' L U) (L' U' L U) F`, `R' U' (R' F R F') (R' F R F') U R`],
@@ -339,6 +378,7 @@ export const cases = [
   },
   {
     name: 'L3',
+    category: 'L',
     id: 49,
     probability: 1 / 54,
     algs: [`r U' r2' U r2 U r2' U' r`],
@@ -346,6 +386,7 @@ export const cases = [
   },
   {
     name: 'L4',
+    category: 'L',
     id: 50,
     probability: 1 / 54,
     algs: [`r' U r2 U' r2' U' r2 U r'`, `y' (R U2 R' U' R U' R') F (R U R' U') F'`],
@@ -353,6 +394,7 @@ export const cases = [
   },
   {
     name: 'L5',
+    category: 'L',
     id: 53,
     probability: 1 / 54,
     algs: [`(r' U' R U') (R' U R U') R' U2 r`, `y r' U2' R (U R' U' R) (U R' U r)`],
@@ -360,6 +402,7 @@ export const cases = [
   },
   {
     name: 'L6',
+    category: 'L',
     id: 54,
     probability: 1 / 54,
     algs: [`(r U R' U) (R U' R' U) R U2' r'`, `y' (r U2 R' U') (R U R' U') R U' r'`],
@@ -367,6 +410,7 @@ export const cases = [
   },
   {
     name: 'B1',
+    category: 'B',
     id: 7,
     probability: 1 / 54,
     algs: [`(r U R' U R U2' r')`],
@@ -374,6 +418,7 @@ export const cases = [
   },
   {
     name: 'B2',
+    category: 'B',
     id: 8,
     probability: 1 / 54,
     algs: [`(r' U' R U' R' U2 r)`, `y2 l' U' L U' L' U2 l`],
@@ -381,6 +426,7 @@ export const cases = [
   },
   {
     name: 'B3',
+    category: 'B',
     id: 11,
     probability: 1 / 54,
     algs: [`r' (R2 U R' U R U2 R') U M'`],
@@ -388,6 +434,7 @@ export const cases = [
   },
   {
     name: 'B4',
+    category: 'B',
     id: 12,
     probability: 1 / 54,
     algs: [`M' (R' U' R U' R' U2 R) U' M`, `y F (R U R' U') F' U F (R U R' U') F'`],
@@ -395,6 +442,7 @@ export const cases = [
   },
   {
     name: 'B5',
+    category: 'B',
     id: 39,
     probability: 1 / 54,
     algs: [`(L F') (L' U' L U) F U' L'`, `F (R U R' U') F' (R' U' R U' R' U2 R)`],
@@ -402,6 +450,7 @@ export const cases = [
   },
   {
     name: 'B6',
+    category: 'B',
     id: 40,
     probability: 1 / 54,
     algs: [`(R' F) (R U R' U') F' U R`],
@@ -409,6 +458,7 @@ export const cases = [
   },
   {
     name: 'O1',
+    category: 'O',
     id: 1,
     probability: 1 / 108,
     algs: [`(R U2') (R2' F R F') U2' (R' F R F')`],
@@ -416,6 +466,7 @@ export const cases = [
   },
   {
     name: 'O2',
+    category: 'O',
     id: 2,
     probability: 1 / 54,
     algs: [`F (R U R' U') F' f (R U R' U') f'`, `y (r U r') U2 R U2' R' U2 (r U' r')`],
@@ -423,6 +474,7 @@ export const cases = [
   },
   {
     name: 'O3',
+    category: 'O',
     id: 3,
     probability: 1 / 54,
     algs: [`f (R U R' U') f' U' F (R U R' U') F'`],
@@ -430,6 +482,7 @@ export const cases = [
   },
   {
     name: 'O4',
+    category: 'O',
     id: 4,
     probability: 1 / 54,
     algs: [`f (R U R' U') f' U F (R U R' U') F'`],
@@ -437,6 +490,7 @@ export const cases = [
   },
   {
     name: 'O6',
+    category: 'O',
     id: 18,
     probability: 1 / 54,
     algs: [`y R U2' (R2' F R F') U2' M' (U R U' r')`, `(r U R' U R U2 r') (r' U' R U' R' U2 r)`],
@@ -444,6 +498,7 @@ export const cases = [
   },
   {
     name: 'O7',
+    category: 'O',
     id: 19,
     probability: 1 / 54,
     algs: [`M U (R U R' U') M' (R' F R F')`],
@@ -451,6 +506,7 @@ export const cases = [
   },
   {
     name: 'O5',
+    category: 'O',
     id: 17,
     probability: 1 / 54,
     algs: [`(R U R' U) (R' F R F') U2' (R' F R F')`],
@@ -458,6 +514,7 @@ export const cases = [
   },
   {
     name: 'O8',
+    category: 'O',
     id: 20,
     probability: 1 / 216,
     algs: [`M U (R U R' U') M2' (U R U' r')`, `(r U R' U') M2' (U R U' R') U' M'`],

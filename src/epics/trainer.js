@@ -1,12 +1,12 @@
 import { ofType } from 'redux-observable';
-import { merge, of } from 'rxjs';
-import { withLatestFrom, map, tap, ignoreElements } from 'rxjs/operators';
+import { merge, of, EMPTY } from 'rxjs';
+import { withLatestFrom, map, tap, ignoreElements, mergeMap } from 'rxjs/operators';
 import * as actionTypes from '../constants/actionTypes';
 import { getRandomCase, getRandomScramble } from '../helpers/trainer';
-import { getCurrentScrambleIndex, getEnabledCases } from '../selectors/trainer';
-import { nextCaseDetermined, loadEnabledCases } from '../actions';
-import * as oll from '../constants/oll';
+import * as trainerSelectors from '../selectors/trainer';
+import { nextCaseDetermined, loadEnabledCases, changeTrainingType } from '../actions';
 import * as trainerRepository from '../repositories/trainer';
+import { cases } from '../constants/trainer';
 
 const enabledCaseChangeActions = [
   actionTypes.SELECT_CASE,
@@ -16,11 +16,24 @@ const enabledCaseChangeActions = [
 ];
 
 export const pickCaseEpic = (action$, state$) =>
-  merge(action$.pipe(ofType(actionTypes.STOP_TIMER, ...enabledCaseChangeActions)), of(null)).pipe(
+  merge(
+    action$.pipe(
+      ofType(actionTypes.STOP_TIMER, actionTypes.CHANGE_TRAINING_TYPE, ...enabledCaseChangeActions)
+    ),
+    of(null)
+  ).pipe(
     withLatestFrom(state$),
     map(([, state]) => {
-      const nextCaseId = getRandomCase(oll.cases, getEnabledCases(state));
-      const nextScrambleIndex = getRandomScramble(nextCaseId, getCurrentScrambleIndex(state));
+      const trainingType = trainerSelectors.getTrainingType(state);
+      const nextCaseId = getRandomCase(
+        cases[trainingType],
+        trainerSelectors.getActiveEnabledCases(state)
+      );
+      const nextScrambleIndex = getRandomScramble(
+        trainingType,
+        nextCaseId,
+        trainerSelectors.getCurrentScrambleIndex(state)
+      );
 
       return nextCaseDetermined(nextCaseId, nextScrambleIndex);
     })
@@ -29,10 +42,29 @@ export const pickCaseEpic = (action$, state$) =>
 export const loadEnabledCasesEpic = () =>
   of(loadEnabledCases(trainerRepository.getEnabledCaseIds()));
 
+export const restoreActiveTrainingTypeEpic = (_, state$) =>
+  of(trainerRepository.getActiveTrainingType()).pipe(
+    withLatestFrom(state$),
+    mergeMap(([type, state]) =>
+      !type || trainerSelectors.getTrainingType(state) === type
+        ? EMPTY
+        : of(changeTrainingType(type))
+    )
+  );
+
+export const saveActiveTrainingTypeEpic = action$ =>
+  action$.pipe(
+    ofType(actionTypes.CHANGE_TRAINING_TYPE),
+    tap(action => trainerRepository.storeActiveTrainingType(action.payload)),
+    ignoreElements()
+  );
+
 export const saveEnabledCasesEpic = (action$, state$) =>
   action$.pipe(
     ofType(...enabledCaseChangeActions),
     withLatestFrom(state$),
-    tap(([, state]) => trainerRepository.storeEnabledCaseIds(getEnabledCases(state))),
+    tap(([, state]) =>
+      trainerRepository.storeEnabledCaseIds(trainerSelectors.getEnabledCases(state))
+    ),
     ignoreElements()
   );

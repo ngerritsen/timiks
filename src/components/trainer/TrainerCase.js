@@ -11,8 +11,10 @@ import { getSize, getColor, getBreakpoint } from '../../helpers/theme';
 import Section from '../shared/Section';
 import ToggleContent from '../shared/ToggleContent';
 import Modal from '../shared/Modal';
+import { OLL } from '../../constants/trainer';
+import { buildAlgDbUrl } from '../../helpers/trainer';
 
-const TrainerCase = ({ trainingCase, selectCase, deselectCase }) => (
+const TrainerCase = ({ trainingCase, selectCase, deselectCase, trainingType }) => (
   <Tile
     key={trainingCase.id}
     selected={trainingCase.selected}
@@ -26,7 +28,7 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase }) => (
     <Section>
       <CaseName>
         <strong>{trainingCase.name}</strong>
-        <CaseId> - #{trainingCase.id}</CaseId>
+        {trainingType === OLL && <CaseId> - #{trainingCase.id}</CaseId>}
       </CaseName>
     </Section>
     <ToggleContent
@@ -43,7 +45,10 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase }) => (
         </Link>
       )}
       content={({ hide }) => (
-        <Modal onClose={hide} title={trainingCase.name + ' - #' + trainingCase.id}>
+        <Modal
+          onClose={hide}
+          title={trainingCase.name + (trainingType === OLL ? ' - #' + trainingCase.id : '')}
+        >
           <CaseDetails>
             <Section margin="sm">
               <LastLayerPreview previewString={trainingCase.preview} />
@@ -61,7 +66,7 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase }) => (
               </Section>
               <Section margin="sm">
                 <Link
-                  href={'http://algdb.net/puzzle/333/oll/oll' + trainingCase.id}
+                  href={buildAlgDbUrl(trainingType, trainingCase.id)}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -79,7 +84,8 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase }) => (
 TrainerCase.propTypes = {
   trainingCase: CustomPropTypes.Case.isRequired,
   selectCase: PropTypes.func.isRequired,
-  deselectCase: PropTypes.func.isRequired
+  deselectCase: PropTypes.func.isRequired,
+  trainingType: PropTypes.string.isRequired
 };
 
 const Probability = styled.div`

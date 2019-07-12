@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import TrainerCases from '../../components/trainer/TrainerCases';
 import { selectCase, deselectCase, selectCases, deselectCases } from '../../actions';
 
-import { getGroupedSelectedCases } from '../../selectors/trainer';
+import { getGroupedSelectedCases, getTrainingType } from '../../selectors/trainer';
 
 function mapStateToProps(state) {
   return {
-    groupedCases: getGroupedSelectedCases(state)
+    groupedCases: getGroupedSelectedCases(state),
+    trainingType: getTrainingType(state)
   };
 }
 

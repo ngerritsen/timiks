@@ -5,6 +5,7 @@ import TimerContainer from '../../containers/timer/TimerContainer';
 import ActivationContainer from '../../containers/timer/ActivationContainer';
 import TrainerCasesContainer from '../../containers/trainer/TrainerCasesContainer';
 import TrainerScrambleContainer from '../../containers/trainer/TrainerScrambleContainer';
+import TrainerOptionsContainer from '../../containers/trainer/TrainerOptionsContainer';
 
 const Trainer = () => (
   <>
@@ -18,7 +19,7 @@ const Trainer = () => (
       <ActivationContainer />
     </Section>
     <Section margin="md">
-      Select the OLL cases you want to train. Selecting nothing will be the same as everything.
+      <TrainerOptionsContainer />
     </Section>
     <TrainerCasesContainer />
   </>
