@@ -57,15 +57,15 @@ const Timer = ({
               case preparingForInspection:
                 return <Time time={{ ms: INSPECTION_TIME }} secondsOnly />;
               case startTime > 0 && stopTime > 0:
-                return <Time time={{ ms: stopTime - startTime }} />;
+                return <Time time={{ ms: stopTime - startTime }} showMilliseconds />;
               case startTime > 0 && showTimerTime:
                 return <IncrementingTime startTime={startTime} />;
               case startTime > 0 && !showTimerTime:
                 return <FontAwesome icon={faSpaceShuttle} rotation={270} />;
               case showLastTime:
-                return <Time time={lastTime} />;
+                return <Time time={lastTime} showMilliseconds />;
               default:
-                return <Time time={{ ms: 0 }} />;
+                return <Time time={{ ms: 0 }} showMilliseconds />;
             }
           })()}
         </TimerTime>

@@ -12,7 +12,7 @@ const IncrementingTimer = ({ startTime }) => {
     return () => clearInterval(interval);
   }, [startTime]);
 
-  return <Time time={{ ms }} />;
+  return <Time time={{ ms }} showMilliseconds />;
 };
 
 IncrementingTimer.propTypes = {

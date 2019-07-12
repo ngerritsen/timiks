@@ -7,7 +7,7 @@ import { fillZeroes } from '../../helpers/formatting';
 import { breakUpTime, getMs } from '../../helpers/time';
 import { getColor } from '../../helpers/theme';
 
-const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
+const Time = ({ secondsOnly, showMilliseconds, time: { ms, dnf, plus2 } }) => {
   if (dnf || ms === Infinity) {
     return monospace('DNF');
   }
@@ -23,7 +23,8 @@ const Time = ({ secondsOnly, time: { ms, dnf, plus2 } }) => {
     <>
       {showMinute && formatPart(minutes, 2)}
       {showMinute && ':'}
-      {formatPart(seconds, 2)}.{formatPart(milliseconds, 3)}
+      {formatPart(seconds, 2)}.{!showMilliseconds && formatPart(Math.floor(milliseconds / 10), 2)}
+      {showMilliseconds && formatPart(milliseconds, 3)}
       {plus2 && <Plus2>(+2)</Plus2>}
     </>
   );
