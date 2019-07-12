@@ -1,15 +1,12 @@
 import { handleActions } from 'redux-actions';
 import * as actionTypes from '../constants/actionTypes';
 import { unique } from '../helpers/general';
-import { OLL, PLL } from '../constants/trainer';
+import { types, cases } from '../constants/trainer';
 
 const initialState = {
-  enabledCases: {
-    [OLL]: [],
-    [PLL]: []
-  },
-  trainingType: PLL,
-  currentCaseId: 'Z',
+  enabledCases: types.reduce((enabledCases, type) => ({ ...enabledCases, [type]: [] }), {}),
+  trainingType: types[0],
+  currentCaseId: Object.keys(cases[types[0]])[0],
   currentScrambleIndex: 0
 };
 

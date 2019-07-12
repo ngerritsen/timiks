@@ -119,7 +119,7 @@ export const cases = [
     category: 'AC',
     probability: 1 / 18,
     algs: [`(R U R' F') (R U R' U') R' F R2 U' R' [U']`],
-    preview: 'OOG RRO GGB BBB YYY YYY YYY'
+    preview: 'OOG RRO GGR BBB YYY YYY YYY'
   },
   {
     name: 'T',
@@ -187,7 +187,7 @@ export const cases = [
       `R2 U (R' U R' U') (R U' R2) D U' (R' U R D') [U]`,
       `R2 u (R' U R' U') R u' R2 y' (R' U R)`
     ],
-    preview: 'OBR BOG RRB OGO YYY YYY YYY'
+    preview: 'GBR BOG RRB OGO YYY YYY YYY'
   },
   {
     name: 'Gb',
