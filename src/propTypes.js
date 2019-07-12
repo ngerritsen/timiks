@@ -39,13 +39,19 @@ export const GraphLine = PropTypes.shape({
   color: PropTypes.string.isRequired
 });
 
+export const PreviewArrows = PropTypes.arrayOf(
+  PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.bool]))
+);
+
 export const Case = PropTypes.shape({
   name: PropTypes.string.isRequired,
   algs: PropTypes.arrayOf(PropTypes.string).isRequired,
   probability: PropTypes.number.isRequired,
   selected: PropTypes.bool,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  category: PropTypes.string.isRequired
+  category: PropTypes.string.isRequired,
+  preview: PropTypes.string.isRequired,
+  previewArrows: PreviewArrows
 });
 
 export const CaseCategory = PropTypes.shape({

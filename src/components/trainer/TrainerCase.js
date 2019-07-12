@@ -23,7 +23,10 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase, trainingType }) =
     }
   >
     <Section margin="xs">
-      <LastLayerPreview previewString={trainingCase.preview} />
+      <LastLayerPreview
+        previewString={trainingCase.preview}
+        previewArrows={trainingCase.previewArrows}
+      />
     </Section>
     <Section>
       <CaseName>
@@ -51,7 +54,10 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase, trainingType }) =
         >
           <CaseDetails>
             <Section margin="sm">
-              <LastLayerPreview previewString={trainingCase.preview} />
+              <LastLayerPreview
+                previewString={trainingCase.preview}
+                previewArrows={trainingCase.previewArrows}
+              />
             </Section>
             <div>
               <Section margin="sm">
