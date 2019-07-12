@@ -40,7 +40,8 @@ function monospace(string) {
 
 Time.propTypes = {
   time: CustomPropTypes.Time.isRequired,
-  secondsOnly: PropTypes.bool
+  secondsOnly: PropTypes.bool,
+  showMilliseconds: PropTypes.bool
 };
 
 const Plus2 = styled.span`
