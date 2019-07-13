@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import TrainerOptions from '../../components/trainer/TrainerOptions';
-import { changeTrainingType } from '../../actions';
+import { changeTrainingType, requestNextCase } from '../../actions';
 
 import { getTrainingType } from '../../selectors/trainer';
 
@@ -13,5 +13,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { changeTrainingType }
+  { changeTrainingType, requestNextCase }
 )(TrainerOptions);

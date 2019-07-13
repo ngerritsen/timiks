@@ -18,7 +18,13 @@ const enabledCaseChangeActions = [
 export const pickCaseEpic = (action$, state$) =>
   merge(
     action$.pipe(
-      ofType(actionTypes.STOP_TIMER, actionTypes.CHANGE_TRAINING_TYPE, ...enabledCaseChangeActions)
+      ofType(
+        actionTypes.STOP_TIMER,
+        actionTypes.CHANGE_TRAINING_TYPE,
+        actionTypes.LOAD_ENABLED_CASES,
+        actionTypes.REQUEST_NEXT_CASE,
+        ...enabledCaseChangeActions
+      )
     ),
     of(null)
   ).pipe(
