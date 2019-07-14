@@ -6,6 +6,8 @@ import Timer from '../../components/timer/Timer';
 import { shouldUseManualTimeEntry, shouldShowTimerTime } from '../../selectors/settings';
 import { isPreparing, isPreparingForInspection, isReady } from '../../selectors/activation';
 import * as timerSelectors from '../../selectors/timer';
+import { getTrainingType, getActiveEnabledCases } from '../../selectors/trainer';
+import { isInTrainer } from '../../selectors/router';
 
 function mapStateToProps(state) {
   const startTime = timerSelectors.getStartTime(state);
@@ -14,6 +16,9 @@ function mapStateToProps(state) {
   const useManualTimeEntry = shouldUseManualTimeEntry(state);
   const lastTime = getLastTime(state);
   const showLastTime = startTime === 0 && !ready && !useManualTimeEntry && Boolean(lastTime);
+  const trainingType = getTrainingType(state);
+  const isTraining = isInTrainer(state);
+  const enabledCases = getActiveEnabledCases(state).length;
 
   return {
     inspecting: timerSelectors.isInspecting(state),
@@ -28,7 +33,10 @@ function mapStateToProps(state) {
     finalTime: stopTime - startTime,
     stopped: timerSelectors.isStopped(state),
     useManualTimeEntry,
-    showTimerTime: shouldShowTimerTime(state)
+    showTimerTime: shouldShowTimerTime(state),
+    isTraining,
+    trainingType,
+    enabledCases
   };
 }
 

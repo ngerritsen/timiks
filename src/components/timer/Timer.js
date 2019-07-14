@@ -27,19 +27,22 @@ const Timer = ({
   lastTime,
   useManualTimeEntry,
   showTimerTime,
-  stopTime
+  stopTime,
+  isTraining,
+  trainingType,
+  enabledCases
 }) => (
   <div>
     <Section margin="sm">
       <TimerTimeContainer withManualEntry={useManualTimeEntry}>
-        {showLastTime && lastTime.best && (
-          <RecordMessageContainer>
+        <TimerHeader>
+          {!isTraining && showLastTime && lastTime.best && (
             <Tag color="green">
               <FontAwesome icon={faThumbsUp} />
               &nbsp; Best session single
             </Tag>
-          </RecordMessageContainer>
-        )}
+          )}
+        </TimerHeader>
         <TimerTime disabled={preparing && !ready}>
           {(() => {
             switch (true) {
@@ -72,7 +75,21 @@ const Timer = ({
       </TimerTimeContainer>
     </Section>
     <TimeFooter withManualEntry={useManualTimeEntry}>
-      {showLastTime && <TimeActionsContainer lastTime={lastTime} />}
+      {isTraining && (
+        <Tag color="subtleBg">
+          {(() => {
+            switch (enabledCases) {
+              case 0:
+                return `${trainingType} - All cases`;
+              case 1:
+                return `${trainingType} - 1 case selected`;
+              default:
+                return `${trainingType} - ${enabledCases} cases selected`;
+            }
+          })()}
+        </Tag>
+      )}
+      {!isTraining && showLastTime && <TimeActionsContainer lastTime={lastTime} />}
     </TimeFooter>
   </div>
 );
@@ -88,15 +105,19 @@ Timer.propTypes = {
   stopTime: PropTypes.number.isRequired,
   lastTime: CustomPropTypes.Time,
   useManualTimeEntry: PropTypes.bool.isRequired,
-  showTimerTime: PropTypes.bool.isRequired
+  showTimerTime: PropTypes.bool.isRequired,
+  isTraining: PropTypes.bool,
+  trainingType: PropTypes.string.isRequired,
+  enabledCases: PropTypes.number.isRequired
 };
 
 const TimeFooter = styled.div`
   height: ${props => (props.withManualEntry ? '9.3rem' : '6.4rem')};
   text-align: center;
+  overflow: hidden;
 `;
 
-const RecordMessageContainer = styled.div`
+const TimerHeader = styled.div`
   position: absolute;
   text-align: center;
   width: 100%;
