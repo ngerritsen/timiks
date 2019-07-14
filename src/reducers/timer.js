@@ -40,8 +40,7 @@ export default handleActions(
     [actionTypes.RESET_TIME]: state => ({
       ...state,
       startTime: 0,
-      stopTime: 0,
-      inspectionStartTime: 0
+      stopTime: 0
     }),
     [actionTypes.SUBMIT_TIME_INPUT]: state => ({
       ...state,

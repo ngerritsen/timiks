@@ -43,7 +43,8 @@ export const initializeActivationEpic = (_, state$) =>
         : getActivationDuration(state) === 0
         ? actions.skipPreparationStage()
         : actions.prepareActivation()
-    )
+    ),
+    mergeMap(action => merge(of(action), of(actions.resetTime())))
   );
 
 export const prepareActivationEpic = (action$, state$) =>
