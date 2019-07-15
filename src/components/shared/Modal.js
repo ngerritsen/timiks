@@ -44,13 +44,7 @@ const Modal = ({ title, onClose, children }) => {
       <ModalBox innerRef={modalRef} tabIndex={-1}>
         <ModalHeader>
           <ModalTitle>{title}</ModalTitle>
-          <IconButton
-            color="subtleFg"
-            onClick={event => {
-              event.stopPropagation();
-              onClose();
-            }}
-          >
+          <IconButton color="subtleFg" onClick={onClose}>
             <Shortcut command="closeModal" action={onClose} />
             <FontAwesome icon={faTimes} />
           </IconButton>
