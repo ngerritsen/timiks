@@ -32,6 +32,8 @@ const Modal = ({ title, onClose, children }) => {
   }, [modalRef]);
 
   const onClickOverlay = event => {
+    event.stopPropagation();
+
     if (event.target === overlayRef.current) {
       onClose();
     }
