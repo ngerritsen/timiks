@@ -4,6 +4,8 @@ const fs = require('fs');
 const pll = require('../src/scrambles/pll');
 const oll = require('../src/scrambles/oll');
 
+const MAX_SCRAMBLES = 75;
+
 rotate(pll, 'pll');
 rotate(oll, 'oll');
 
@@ -30,7 +32,7 @@ function rotateScrambles(scrambles) {
   return newScrambles
     .filter((val, i, arr) => arr.indexOf(val) === i)
     .sort((a, b) => Math.sign(a.length - b.length))
-    .slice(0, 500);
+    .slice(0, MAX_SCRAMBLES);
 }
 
 function rotateScramble(scramble) {
