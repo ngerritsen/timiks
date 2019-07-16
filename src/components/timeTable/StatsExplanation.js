@@ -18,7 +18,9 @@ const StatsExplanation = () => (
             case AVERAGE:
               return (
                 <tr key={stat.name}>
-                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell bold width="6rem">
+                    {stat.name}
+                  </Cell>
                   <Cell>
                     Average of {stat.size} excluding the best and worst
                     {calculateTrim(stat.size) === 1
@@ -31,19 +33,25 @@ const StatsExplanation = () => (
             case MEAN:
               return stat.size ? (
                 <tr key={stat.name}>
-                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell bold width="6rem">
+                    {stat.name}
+                  </Cell>
                   <Cell>Mean (average) of {stat.size} consecutive solves.</Cell>
                 </tr>
               ) : (
                 <tr key={stat.name}>
-                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell bold width="6rem">
+                    {stat.name}
+                  </Cell>
                   <Cell>Mean (average) of all solves.</Cell>
                 </tr>
               );
             case STANDARD_DEVIATION:
               return (
                 <tr key={stat.name}>
-                  <StatNameCell>{stat.name}</StatNameCell>
+                  <Cell bold width="6rem">
+                    {stat.name}
+                  </Cell>
                   <Cell>
                     <a
                       href="https://www.mathsisfun.com/data/standard-deviation.html"
@@ -62,10 +70,5 @@ const StatsExplanation = () => (
     </Table>
   </>
 );
-
-const StatNameCell = Cell.extend`
-  padding-right: ${getSize('xs')};
-  font-weight: bold;
-`;
 
 export default StatsExplanation;

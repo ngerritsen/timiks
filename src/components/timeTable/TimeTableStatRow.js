@@ -46,7 +46,7 @@ const TimeTableStatRow = ({
     return (
       <Cell
         bold
-        colSpan={2}
+        colSpan={colSpan}
         highlightColor={(isHardHighlighted && 'blue') || (isSoftHighlighted && 'grey')}
         onMouseEnter={softHighlight}
         onMouseLeave={softUnhighlight}

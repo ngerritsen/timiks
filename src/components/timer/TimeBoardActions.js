@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import faTrash from '@fortawesome/fontawesome-pro-solid/faTrash';
+import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTrashAlt';
 import faArchive from '@fortawesome/fontawesome-pro-solid/faArchive';
 
 import InlineFontawesome from '../shared/InlineFontawesome';
@@ -56,7 +56,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
       toggle={({ toggle }) => (
         <Button size="sm" color="red" onClick={toggle}>
           <Shortcut command="clearTimes" action={toggle} />
-          <InlineFontawesome icon={faTrash} /> Clear
+          <InlineFontawesome icon={faTrashAlt} /> Clear
         </Button>
       )}
       content={({ hide }) => (

@@ -15,6 +15,10 @@ export const Cell = styled.td`
   border-top: 1px solid ${getColor('grey')};
   padding: ${getSize('xs')} ${getSize('xxs')};
   cursor: default;
+  color: ${props => (props.color ? getColor(props.color)(props) : 'inherit')};
+  width: ${props => props.width || 'auto'};
+  min-width: ${props => props.width || 'auto'};
+  max-width: 0;
   font-weight: ${props => (props.bold ? 'bold' : 'inherit')};
   background-color: ${props =>
     props.highlightColor
@@ -24,11 +28,7 @@ export const Cell = styled.td`
 
 export const HeadingCell = styled.th`
   text-align: ${props => (props.rightAlign ? 'right' : 'left')};
+  padding: ${getSize('xs')} ${getSize('xxs')};
   border-bottom: 2px solid ${getColor('grey')};
   font-weight: bold;
-  padding: 0.7rem 0;
-`;
-
-export const SubtleHeadingCell = HeadingCell.extend`
-  font-weight: normal;
 `;

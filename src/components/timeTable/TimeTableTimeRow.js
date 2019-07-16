@@ -21,9 +21,9 @@ const TimeTableTimeRow = ({ index, time, removeTime, isIncluded, isExcluded }) =
   const highlightColor = isIncluded ? 'blue' : isExcluded ? 'orange' : '';
   return (
     <tr>
-      <TimeIndexCell highlightColor={highlightColor}>
+      <Cell width="3rem" highlightColor={highlightColor}>
         <SubtleText>{index + 1}.</SubtleText>
-      </TimeIndexCell>
+      </Cell>
       <Cell highlightColor={highlightColor}>
         <Time time={time} />
         {time.best && (
@@ -70,10 +70,6 @@ TimeTableTimeRow.propTypes = {
   isIncluded: PropTypes.bool,
   isExcluded: PropTypes.bool
 };
-
-const TimeIndexCell = Cell.extend`
-  width: 3rem;
-`;
 
 const TimeInfo = styled.span`
   padding-left: 1rem;

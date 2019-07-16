@@ -12,7 +12,7 @@ import Tag from '../shared/Tag';
 import Section from '../shared/Section';
 import Modal from '../shared/Modal';
 import TimeTableTimeRow from './TimeTableTimeRow';
-import { Cell, HeadingCell, SubtleHeadingCell, Table } from '../shared/Table';
+import { Cell, HeadingCell, Table } from '../shared/Table';
 import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
 import { getBreakpoint, getSize } from '../../helpers/theme';
@@ -50,8 +50,8 @@ const TimeTable = ({ stats, removeTime, times, showGraph }) => {
             <thead>
               <tr>
                 <HeadingCell>Stats</HeadingCell>
-                <SubtleHeadingCell>Current</SubtleHeadingCell>
-                <SubtleHeadingCell>Best</SubtleHeadingCell>
+                <HeadingCell>Current</HeadingCell>
+                <HeadingCell>Best</HeadingCell>
                 <HeadingCell rightAlign>
                   <ToggleContent
                     toggle={({ show }) => (

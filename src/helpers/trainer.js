@@ -1,31 +1,44 @@
 import { pickRandom } from './general';
-import { scrambles, OLL, PLL, ALGDB_BASE_URL } from '../constants/trainer';
+import { cases, scrambles, OLL, PLL, ALGDB_BASE_URL, categories } from '../constants/trainer';
 
-export function getCase(cases, id) {
-  return cases.find(c => c.id === id);
-}
-
-export function getRandomCase(cases, enabledIds = []) {
+export function getRandomCase(trainingType, enabledIds = []) {
   if (enabledIds.length === 0) {
-    return pickRandom(cases).id;
+    return pickRandom(cases[trainingType]).id;
   }
 
-  return pickRandom(cases.filter(c => enabledIds.includes(c.id))).id;
+  return pickRandom(cases[trainingType].filter(c => enabledIds.includes(c.id))).id;
 }
 
 export function getRandomScramble(trainingType, caseId) {
   return pickRandom(scrambles[trainingType][caseId]);
 }
 
-export function selectCases(cases, enabledIds) {
-  return cases.map(c => (enabledIds.includes(c.id) ? { ...c, selected: true } : c));
+export function selectCases(trainingType, enabledIds) {
+  return cases[trainingType].map(trainingCase =>
+    enabledIds.includes(trainingCase.id) ? { ...trainingCase, selected: true } : trainingCase
+  );
 }
 
-export function groupCases(categories, cases) {
-  return categories.map(category => ({
+export function groupCases(trainingType, selectedCases) {
+  return categories[trainingType].map(category => ({
     ...category,
-    cases: cases.filter(c => c.category === category.id)
+    cases: selectedCases.filter(c => c.category === category.id)
   }));
+}
+
+export function getCasesWithTimes(times, trainingType) {
+  const timesForTraining = times.filter(time => time.trainingType === trainingType);
+  return cases[trainingType]
+    .map(trainingCase => ({
+      ...trainingCase,
+      times: timesForTraining.filter(time => time.caseId === trainingCase.id),
+      mean: times.reduce((total, time) => time.ms + total, 0) / Math.max(times.length || 1)
+    }))
+    .filter(trainingCase => trainingCase.times.length > 0);
+}
+
+export function buildFullCaseTitle(trainingCase, trainingType) {
+  return trainingCase.name + (trainingType === OLL ? ' - #' + trainingCase.id : '');
 }
 
 export function buildAlgDbUrl(trainingType, caseId) {

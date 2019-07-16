@@ -13,6 +13,18 @@ const initialState = {
 
 export default handleActions(
   {
+    [actionTypes.LOAD_TRAINER_TIMES]: (state, action) => ({
+      ...state,
+      times: action.payload
+    }),
+    [actionTypes.SAVE_TRAINER_TIME]: (state, action) => ({
+      ...state,
+      times: [...state.times, action.payload]
+    }),
+    [actionTypes.CLEAR_TRAINER_TIMES]: (state, action) => ({
+      ...state,
+      times: state.times.filter(time => time.trainingType !== action.payload)
+    }),
     [actionTypes.CHANGE_TRAINING_TYPE]: (state, action) => ({
       ...state,
       trainingType: action.payload

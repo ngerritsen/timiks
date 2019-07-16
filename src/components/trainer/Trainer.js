@@ -6,6 +6,7 @@ import ActivationContainer from '../../containers/timer/ActivationContainer';
 import TrainerCasesContainer from '../../containers/trainer/TrainerCasesContainer';
 import TrainerScrambleContainer from '../../containers/trainer/TrainerScrambleContainer';
 import TrainerOptionsContainer from '../../containers/trainer/TrainerOptionsContainer';
+import TrainerTimeTableContainer from '../../containers/trainer/TrainerTimeTableContainer';
 
 const Trainer = () => (
   <>
@@ -20,6 +21,9 @@ const Trainer = () => (
     </Section>
     <Section margin="md">
       <TrainerOptionsContainer />
+    </Section>
+    <Section margin="lg">
+      <TrainerTimeTableContainer />
     </Section>
     <TrainerCasesContainer />
   </>

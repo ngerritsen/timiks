@@ -9,6 +9,10 @@ export function storeActiveTrainingType(type) {
   localStorage.setItem(storageConstants.ACTIVE_TRAINING_TYPE, type);
 }
 
+export function storeTrainerTimes(times) {
+  localStorage.setItem(storageConstants.TRAINER_TIMES_STORAGE_KEY, JSON.stringify(times));
+}
+
 export function getEnabledCaseIds() {
   const rawCaseIds = localStorage.getItem(storageConstants.ENABLED_CASE_IDS);
 
@@ -21,6 +25,11 @@ export function getEnabledCaseIds() {
   }
 
   return parsedCases;
+}
+
+export function getTrainerTimes() {
+  const rawTimes = localStorage.getItem(storageConstants.TRAINER_TIMES_STORAGE_KEY);
+  return rawTimes ? JSON.parse(rawTimes) || [] : [];
 }
 
 export function getActiveTrainingType() {

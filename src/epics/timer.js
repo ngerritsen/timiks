@@ -1,14 +1,15 @@
 import shortid from 'shortid';
-import { withLatestFrom, map, filter } from 'rxjs/operators';
+import { withLatestFrom, map } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import { LOCATION_CHANGE } from 'connected-react-router';
 
 import { FAIL_INSPECTION, SUBMIT_TIME_INPUT, STOP_TIMER } from '../constants/actionTypes';
-import { saveTime, resetTime } from '../actions';
+import { saveTime, resetTime, saveTrainerTime } from '../actions';
 import { getPuzzle } from '../selectors/settings';
 import { getStartTime, hasInspectionPenalty } from '../selectors/timer';
 import { getScramble } from '../selectors/scramble';
 import { isInTrainer } from '../selectors/router';
+import { getTrainingType, getCurrentCaseId } from '../selectors/trainer';
 
 export const resetOnRouteEpic = action$ =>
   action$.pipe(
@@ -36,14 +37,19 @@ export const stopTimerEpic = (action$, state$) =>
   action$.pipe(
     ofType(STOP_TIMER),
     withLatestFrom(state$),
-    filter(([, state]) => !isInTrainer(state)),
     map(([action, state]) =>
-      createSaveTime(
-        action.payload - getStartTime(state),
-        state,
-        false,
-        hasInspectionPenalty(state)
-      )
+      isInTrainer(state)
+        ? saveTrainerTime(
+            action.payload - getStartTime(state),
+            getTrainingType(state),
+            getCurrentCaseId(state)
+          )
+        : createSaveTime(
+            action.payload - getStartTime(state),
+            state,
+            false,
+            hasInspectionPenalty(state)
+          )
     )
   );
 

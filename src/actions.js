@@ -108,3 +108,17 @@ export const selectCases = createAction(types.SELECT_CASES, ids => ids);
 export const deselectCases = createAction(types.DESELECT_CASES, ids => ids);
 export const loadEnabledCases = createAction(types.LOAD_ENABLED_CASES, ids => ids);
 export const changeTrainingType = createAction(types.CHANGE_TRAINING_TYPE, type => type);
+export const saveTrainerTime = createAction(
+  types.SAVE_TRAINER_TIME,
+  (ms, trainingType, caseId) => ({
+    ms,
+    trainingType,
+    caseId
+  })
+);
+export const clearTrainerTimes = createAction(
+  types.CLEAR_TRAINER_TIMES,
+  trainingType => trainingType
+);
+
+export const loadTrainerTimes = createAction(types.LOAD_TRAINER_TIMES, times => times);
