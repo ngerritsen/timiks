@@ -1,7 +1,7 @@
 import * as oll from './oll';
 import * as pll from './pll';
-import ollScrambles from '../data/ollScrambles';
-import pllScrambles from '../data/pllScrambles';
+import ollScrambles from '../scrambles/oll';
+import pllScrambles from '../scrambles/pll';
 
 export const OLL = 'OLL';
 export const PLL = 'PLL';

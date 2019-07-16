@@ -41,6 +41,12 @@ const createConfig = (env, argv) => {
             chunks: 'initial',
             name: 'vendor',
             enforce: true
+          },
+          scrambles: {
+            test: /src\/scrambles/,
+            chunks: 'initial',
+            name: 'scrambles',
+            enforce: true
           }
         }
       }
