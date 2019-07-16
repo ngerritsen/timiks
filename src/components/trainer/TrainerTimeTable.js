@@ -104,13 +104,14 @@ const CaseCell = Cell.extend`
 const TimesCell = Cell.extend`
   white-space: nowrap;
   overflow-x: auto;
+  position: relative;
 
   &:after {
     content: '';
     right: 0;
     top: 0;
+    bottom: 0;
     position: absolute;
-    height: 100%;
     width: ${getSize('lg')};
     background-image: linear-gradient(to right, transparent, ${getColor('bg')});
   }

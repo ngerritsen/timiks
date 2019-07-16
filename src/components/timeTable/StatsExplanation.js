@@ -1,7 +1,6 @@
 import React from 'react';
 import stats, { STANDARD_DEVIATION, AVERAGE, MEAN } from '../../constants/stats';
 import { Table, Cell } from '../shared/Table';
-import { getSize } from '../../helpers/theme';
 import { calculateTrim } from '../../helpers/stats';
 
 const StatsExplanation = () => (
