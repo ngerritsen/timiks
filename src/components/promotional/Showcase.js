@@ -166,7 +166,7 @@ const Showcase = ({ theme }) => {
             Relays with nice, tabbed scrambles and previews. You can even view the scramble previews
             of all historic relays in the archive.
           </p>
-          <Scramble scramble={relayScramble.split(' ')} puzzle="2-7-relay" withPreview />
+          <Scramble scramble={relayScramble} puzzle="2-7-relay" withPreview />
         </>
       )
     },

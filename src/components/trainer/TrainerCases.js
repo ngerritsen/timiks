@@ -38,12 +38,12 @@ const TrainerCases = ({
           </SelectAllLabel>
         </SectionTitle>
         <Tiles>
-          {category.cases.map(trainerCase => (
+          {category.cases.map(trainingCase => (
             <TrainerCase
               selectCase={selectCase}
               deselectCase={deselectCase}
-              trainingCase={trainerCase}
-              key={trainerCase.id}
+              trainingCase={trainingCase}
+              key={trainingCase.id}
               trainingType={trainingType}
             />
           ))}

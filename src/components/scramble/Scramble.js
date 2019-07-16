@@ -9,8 +9,18 @@ import { splitRelayScramble, splitScramble } from '../../helpers/scramble';
 import CubePreview from '../cube/CubePreview';
 import ScrambleDetails from './ScrambleDetails';
 import { getColor, getSize, getFont } from '../../helpers/theme';
+import * as CustomPropTypes from '../../propTypes';
+import ScrambleCaseView from './ScrambleCaseView';
 
-const Scramble = ({ scramble, withDetails, withPreview, puzzle, expand }) => {
+const Scramble = ({
+  scramble,
+  withDetails,
+  withPreview,
+  withTrainingCase,
+  trainingType,
+  puzzle,
+  expand
+}) => {
   const isRelay = getPuzzle(puzzle).type === RELAY;
   const splitScrambles = isRelay ? splitRelayScramble(puzzle, scramble) : [{ scramble, puzzle }];
 
@@ -44,6 +54,11 @@ const Scramble = ({ scramble, withDetails, withPreview, puzzle, expand }) => {
           </ScrambleTabs>
         )}
         <ScrambleBox withTabs={isRelay} expand={expand}>
+          {withTrainingCase && !showDetails && (
+            <ScrambleIconButtonContainer>
+              <ScrambleCaseView trainingCase={withTrainingCase} trainingType={trainingType} />
+            </ScrambleIconButtonContainer>
+          )}
           {showDetails && (
             <ScrambleIconButtonContainer>
               <ScrambleDetails scramble={activeScramble} puzzle={activePuzzle} />
@@ -65,7 +80,9 @@ Scramble.propTypes = {
   scramble: PropTypes.string,
   small: PropTypes.bool,
   puzzle: PropTypes.string,
-  expand: PropTypes.bool
+  expand: PropTypes.bool,
+  withTrainingCase: CustomPropTypes.Case,
+  trainingType: PropTypes.string
 };
 
 const ScrambleTabs = styled.div`

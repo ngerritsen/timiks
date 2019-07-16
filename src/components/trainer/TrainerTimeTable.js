@@ -15,6 +15,9 @@ import ToggleContent from '../shared/ToggleContent';
 import Modal from '../shared/Modal';
 import TrainerCaseDetails from './TrainerCaseDetails';
 import { buildFullCaseTitle } from '../../helpers/trainer';
+import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
+import Shortcut from '../shared/Shortcut';
+import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 
 const TrainerTimeTable = ({ cases, clearTrainerTimes, trainingType }) =>
   cases.length > 0 && (
@@ -39,7 +42,8 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, trainingType }) =>
                           previewString={trainingCase.preview}
                           previewArrows={trainingCase.previewArrows}
                         />
-                      </PreviewWrapper>{' '}
+                      </PreviewWrapper>
+                      &nbsp;
                       {trainingCase.name}
                     </CaseCell>
                   )}
@@ -67,12 +71,48 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, trainingType }) =>
       </Section>
       {cases.length > 0 && (
         <Section>
-          <Button onClick={clearTrainerTimes} size="sm" tag color="red">
-            <ButtonIcon>
-              <FontAwesome icon={faTrashAlt} />
-            </ButtonIcon>
-            Clear
-          </Button>
+          <Toolbar>
+            <ToolbarItem>
+              <ToggleContent
+                toggle={({ toggle }) => (
+                  <Button size="sm" color="red" tag onClick={toggle}>
+                    <Shortcut command="clearTimes" action={toggle} />
+                    <ButtonIcon>
+                      <FontAwesome icon={faTrashAlt} />
+                    </ButtonIcon>
+                    Clear
+                  </Button>
+                )}
+                content={({ hide }) => (
+                  <Modal title={`Clear ${trainingType} times`} onClose={hide}>
+                    <>
+                      <Section margin="md">
+                        <p>Are you sure you want to remove the current {trainingType} times?</p>
+                      </Section>
+                      <ButtonDuo>
+                        <ButtonDuoItem>
+                          <Button color="subtleFg" outline onClick={hide}>
+                            Cancel
+                          </Button>
+                        </ButtonDuoItem>
+                        <ButtonDuoItem>
+                          <Button
+                            color="red"
+                            onClick={() => {
+                              hide();
+                              clearTrainerTimes();
+                            }}
+                          >
+                            Remove
+                          </Button>
+                        </ButtonDuoItem>
+                      </ButtonDuo>
+                    </>
+                  </Modal>
+                )}
+              />
+            </ToolbarItem>
+          </Toolbar>
         </Section>
       )}
     </>

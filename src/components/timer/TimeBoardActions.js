@@ -63,7 +63,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
         <Modal title="Clear current times" onClose={hide}>
           <>
             <Section margin="md">
-              <p>Are you sure you want to clear the current times?</p>
+              <p>Are you sure you want to remove the current times?</p>
             </Section>
             <ButtonDuo>
               <ButtonDuoItem>

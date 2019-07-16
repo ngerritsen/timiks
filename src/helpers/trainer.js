@@ -1,6 +1,10 @@
 import { pickRandom } from './general';
 import { cases, scrambles, OLL, PLL, ALGDB_BASE_URL, categories } from '../constants/trainer';
 
+export function getCase(trainingType, caseId) {
+  return cases[trainingType].find(trainingCase => trainingCase.id === caseId);
+}
+
 export function getRandomCase(trainingType, enabledIds = []) {
   if (enabledIds.length === 0) {
     return pickRandom(cases[trainingType]).id;

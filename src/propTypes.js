@@ -41,8 +41,16 @@ export const PreviewArrows = PropTypes.arrayOf(
   PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.bool]))
 );
 
+export const TrainingTime = PropTypes.shape({
+  ms: PropTypes.number.isRequired,
+  caseId: PropTypes.string.isRequired,
+  trainingType: PropTypes.isRequired
+});
+
 export const Case = PropTypes.shape({
   name: PropTypes.string.isRequired,
+  times: PropTypes.arrayOf(TrainingTime),
+  mean: PropTypes.number,
   algs: PropTypes.arrayOf(PropTypes.string).isRequired,
   probability: PropTypes.number.isRequired,
   selected: PropTypes.bool,
