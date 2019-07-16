@@ -85,8 +85,8 @@ TrainerTimeTable.propTypes = {
 };
 
 const PreviewWrapper = styled.span`
-  width: 1.8em;
-  height: 1.8em;
+  width: 1.6em;
+  height: 1.6em;
   overflow: hidden;
   display: inline-block;
   margin: -${getSize('xs')} ${getSize('xxs')} -${getSize('xs')} 0;

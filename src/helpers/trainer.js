@@ -28,12 +28,20 @@ export function groupCases(trainingType, selectedCases) {
 
 export function getCasesWithTimes(times, trainingType) {
   const timesForTraining = times.filter(time => time.trainingType === trainingType);
+
   return cases[trainingType]
-    .map(trainingCase => ({
-      ...trainingCase,
-      times: timesForTraining.filter(time => time.caseId === trainingCase.id),
-      mean: times.reduce((total, time) => time.ms + total, 0) / Math.max(times.length || 1)
-    }))
+    .map(trainingCase => {
+      const timesForCase = timesForTraining.filter(time => time.caseId === trainingCase.id);
+      const mean =
+        timesForCase.reduce((total, time) => time.ms + total, 0) /
+        Math.max(timesForCase.length || 1);
+
+      return {
+        ...trainingCase,
+        times: timesForCase,
+        mean
+      };
+    })
     .filter(trainingCase => trainingCase.times.length > 0);
 }
 
