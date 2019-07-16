@@ -58,11 +58,14 @@
 
     <script><%= require('fs').readFileSync('./src/critical/script.js') %></script>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39696629-4"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        dataLayer.push(['js', new Date()]);
-        dataLayer.push(['config', 'UA-39696629-4']);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-39696629-4');
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
