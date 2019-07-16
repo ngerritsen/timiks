@@ -7,7 +7,10 @@ export const getPuzzle = state => state.settings.puzzle;
 export const getArchivePuzzle = state => state.settings.archivePuzzle;
 export const getArchiveDays = state => state.settings.archiveDays;
 export const getTheme = state => state.settings.theme;
-export const getActivationDuration = state => state.settings.activationDuration;
+
+export const getActivationDuration = state =>
+  isInTrainer(state) ? 0 : state.settings.activationDuration;
+
 export const shouldShowTimerTime = state => state.settings.showTimerTime;
 export const shouldWarnForInspectionTime = state => state.settings.warnForInspectionTime;
 export const isInDarkMode = state => getTheme(state) === 'dark';

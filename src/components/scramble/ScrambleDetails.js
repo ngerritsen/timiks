@@ -9,7 +9,6 @@ import Modal from '../shared/Modal';
 import ToggleContent from '../shared/ToggleContent';
 import Scramble from './Scramble';
 import Section from '../shared/Section';
-import * as CustomPropTypes from '../../propTypes';
 
 const ScrambleDetails = ({ scramble, puzzle }) => (
   <ToggleContent
@@ -30,7 +29,7 @@ const ScrambleDetails = ({ scramble, puzzle }) => (
 );
 
 ScrambleDetails.propTypes = {
-  scramble: CustomPropTypes.Scramble,
+  scramble: PropTypes.string,
   puzzle: PropTypes.string
 };
 

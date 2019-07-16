@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import { AVERAGE, STANDARD_DEVIATION, SINGLE, MEAN } from './constants/stats';
 
-export const Scramble = PropTypes.arrayOf(PropTypes.string);
-
 export const StatTime = PropTypes.shape({
   ms: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   includedIds: PropTypes.arrayOf(PropTypes.string),
@@ -28,7 +26,7 @@ export const Time = PropTypes.shape({
   ms: PropTypes.number,
   plus2: PropTypes.bool,
   puzzle: PropTypes.string,
-  scramble: Scramble,
+  scramble: PropTypes.string,
   stored: PropTypes.bool,
   dirty: PropTypes.bool
 });

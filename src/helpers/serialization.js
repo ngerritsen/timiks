@@ -1,5 +1,4 @@
 import shortid from 'shortid';
-import { SCRAMBLE_DELIMITER } from '../constants/scramble';
 
 export function parseTimes(rawTimes) {
   return rawTimes.map(parseTime);
@@ -11,7 +10,7 @@ export function parseTime(raw) {
     ms: raw.ms,
     puzzle: raw.puzzle,
     comment: String(raw.comment || ''),
-    scramble: parseScramble(raw.scramble),
+    scramble: raw.scramble,
     date: parseDate(raw),
     dnf: Boolean(raw.dnf),
     plus2: Boolean(raw.plus2),
@@ -30,7 +29,7 @@ export function serializeTime(time) {
     ms: time.ms,
     puzzle: time.puzzle,
     comment: time.comment || '',
-    scramble: serializeScramble(time.scramble),
+    scramble: time.scramble,
     timestamp: time.date,
     dnf: time.dnf || undefined,
     plus2: time.plus2 || undefined,
@@ -41,12 +40,4 @@ export function serializeTime(time) {
 function parseDate(rawTime) {
   const date = rawTime.timestamp || rawTime.date;
   return typeof date === 'string' ? new Date(rawTime.timestamp) : rawTime.timestamp.toDate();
-}
-
-function serializeScramble(scramble) {
-  return scramble.join(SCRAMBLE_DELIMITER);
-}
-
-export function parseScramble(rawScramble) {
-  return rawScramble.split(SCRAMBLE_DELIMITER);
 }

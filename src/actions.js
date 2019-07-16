@@ -98,9 +98,9 @@ export const importTimes = createAction(types.IMPORT_TIMES, times => ({ times })
 
 // Trainer
 export const requestNextCase = createAction(types.REQUEST_NEXT_CASE);
-export const nextCaseDetermined = createAction(types.NEXT_CASE_DETERMINED, (id, scrambleIndex) => ({
+export const nextCaseDetermined = createAction(types.NEXT_CASE_DETERMINED, (id, scramble) => ({
   id,
-  scrambleIndex
+  scramble
 }));
 export const selectCase = createAction(types.SELECT_CASE, id => id);
 export const deselectCase = createAction(types.DESELECT_CASE, id => id);

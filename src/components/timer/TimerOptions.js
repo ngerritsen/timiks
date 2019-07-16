@@ -63,8 +63,8 @@ TimerOptions.propTypes = {
   changeSetting: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
   refreshScramble: PropTypes.func.isRequired,
-  useInspectionTime: PropTypes.bool.isRequired,
-  useManualTimeEntry: PropTypes.bool.isRequired
+  useInspectionTime: PropTypes.bool,
+  useManualTimeEntry: PropTypes.bool
 };
 
 export default React.memo(TimerOptions);

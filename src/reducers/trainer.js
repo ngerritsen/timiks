@@ -7,7 +7,8 @@ const initialState = {
   enabledCases: types.reduce((enabledCases, type) => ({ ...enabledCases, [type]: [] }), {}),
   trainingType: types[0],
   currentCaseId: Object.keys(cases[types[0]])[0],
-  currentScrambleIndex: 0
+  currentScramble: 0,
+  times: []
 };
 
 export default handleActions(
@@ -23,7 +24,7 @@ export default handleActions(
     [actionTypes.NEXT_CASE_DETERMINED]: (state, action) => ({
       ...state,
       currentCaseId: action.payload.id,
-      currentScrambleIndex: action.payload.scrambleIndex
+      currentScramble: action.payload.scramble
     }),
     [actionTypes.SELECT_CASE]: (state, action) => ({
       ...state,

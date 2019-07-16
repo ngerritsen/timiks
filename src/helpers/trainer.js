@@ -1,5 +1,4 @@
-import { pickRandom, generateArr } from './general';
-import { parseScramble } from './serialization';
+import { pickRandom } from './general';
 import { scrambles, OLL, PLL, ALGDB_BASE_URL } from '../constants/trainer';
 
 export function getCase(cases, id) {
@@ -14,15 +13,8 @@ export function getRandomCase(cases, enabledIds = []) {
   return pickRandom(cases.filter(c => enabledIds.includes(c.id))).id;
 }
 
-export function getRandomScramble(trainingType, id, previousIndex) {
-  const scrambleCount = scrambles[trainingType][id].length;
-  const availableIndices = generateArr(scrambleCount).filter(i => i !== previousIndex);
-
-  return pickRandom(availableIndices);
-}
-
-export function getScrambleFor(trainingType, id, scrambleIndex) {
-  return parseScramble(scrambles[trainingType][id][scrambleIndex]);
+export function getRandomScramble(trainingType, caseId) {
+  return pickRandom(scrambles[trainingType][caseId]);
 }
 
 export function selectCases(cases, enabledIds) {

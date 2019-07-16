@@ -82,16 +82,16 @@ const Activation = ({
 );
 
 Activation.propTypes = {
-  inspecting: PropTypes.bool.isRequired,
+  inspecting: PropTypes.bool,
   preparationStage: PropTypes.number.isRequired,
-  preparing: PropTypes.bool.isRequired,
-  preparingForInspection: PropTypes.bool.isRequired,
-  ready: PropTypes.bool.isRequired,
-  stopped: PropTypes.bool.isRequired,
+  preparing: PropTypes.bool,
+  preparingForInspection: PropTypes.bool,
+  ready: PropTypes.bool,
+  stopped: PropTypes.bool,
   submitTimeInput: PropTypes.func.isRequired,
-  useInspectionTime: PropTypes.bool.isRequired,
-  useManualTimeEntry: PropTypes.bool.isRequired,
-  validTimeInput: PropTypes.bool.isRequired,
+  useInspectionTime: PropTypes.bool,
+  useManualTimeEntry: PropTypes.bool,
+  validTimeInput: PropTypes.bool,
   buttonColor: PropTypes.string.isRequired
 };
 

@@ -35,13 +35,9 @@ export const pickCaseEpic = (action$, state$) =>
         cases[trainingType],
         trainerSelectors.getActiveEnabledCases(state)
       );
-      const nextScrambleIndex = getRandomScramble(
-        trainingType,
-        nextCaseId,
-        trainerSelectors.getCurrentScrambleIndex(state)
-      );
+      const nextScramble = getRandomScramble(trainingType, nextCaseId);
 
-      return nextCaseDetermined(nextCaseId, nextScrambleIndex);
+      return nextCaseDetermined(nextCaseId, nextScramble);
     })
   );
 

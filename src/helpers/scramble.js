@@ -4,22 +4,24 @@ import { getPuzzle } from './puzzle';
 import scramblers from '../vendor/jsss';
 
 import { generateArr, pickRandom } from './general';
+import { SCRAMBLE_DELIMITER } from '../constants/scramble';
 
 export function splitRelayScramble(puzzle, scramble) {
   const relayPuzzle = getPuzzle(puzzle);
   const puzzles = relayPuzzle.scrambleOptions.puzzles || [];
+  const parsedScramble = splitScramble(scramble);
 
-  if (scramble[0] !== puzzles[0]) {
+  if (parsedScramble[0] !== puzzles[0]) {
     return [];
   }
 
-  return scramble.reduce(
+  return parsedScramble.reduce(
     (splitScrambles, token) =>
       puzzles.includes(token)
-        ? [...splitScrambles, { puzzle: token, scramble: [] }]
+        ? [...splitScrambles, { puzzle: token, scramble: '' }]
         : splitScrambles.map((scramble, i) =>
             i === splitScrambles.length - 1
-              ? { ...scramble, scramble: [...scramble.scramble, token] }
+              ? { ...scramble, scramble: scramble.scramble + SCRAMBLE_DELIMITER + token }
               : scramble
           ),
     []
@@ -46,8 +48,15 @@ export function generateScramble(puzzle = DEFAULT_PUZZLE) {
     case puzzleConstants.CLOCK:
       return generateClockScamble(scrambleOptions);
     default:
-      return [];
+      return '';
   }
+}
+
+export function splitScramble(str, splitOn = SCRAMBLE_DELIMITER) {
+  return str
+    .split(splitOn)
+    .map(str => str.trim())
+    .filter(Boolean);
 }
 
 function getJsssScramble(jsssScrambler, type) {
@@ -67,56 +76,60 @@ function getJsssScramble(jsssScrambler, type) {
     return formatJsssSquareOneScramble(scrambleString);
   }
 
-  return scrambleString.split(' ');
+  return scrambleString;
 }
 
 function formatJsssCubeScramble(scramble) {
-  return splitScramble(scramble, ' ').map(move => {
-    const firstChar = Number(move.charAt(0));
+  return splitScramble(scramble)
+    .map(move => {
+      const firstChar = Number(move.charAt(0));
 
-    if (isNaN(firstChar)) {
-      return move;
-    }
+      if (isNaN(firstChar)) {
+        return move;
+      }
 
-    const prefix = firstChar > 2 ? move.substr(0, 2) : move.substr(1, 1);
+      const prefix = firstChar > 2 ? move.substr(0, 2) : move.substr(1, 1);
 
-    return prefix + 'w' + move.substr(2);
-  });
+      return prefix + 'w' + move.substr(2);
+    })
+    .join(SCRAMBLE_DELIMITER);
 }
 
 function formatJsssDodecahedronScramble(scramble) {
-  return splitScramble(scramble.replace(/<br>/g, ' '), ' ');
+  return splitScramble(scramble.replace(/<br>/g, ' ')).join(SCRAMBLE_DELIMITER);
 }
 
 function formatJsssSquareOneScramble(scramble) {
-  return splitScramble(scramble, '/').reduce(
-    (moves, move, index) => (index === 0 ? [...moves, move] : [...moves, '/', move]),
-    []
-  );
+  return splitScramble(scramble, '/')
+    .reduce((moves, move, index) => (index === 0 ? [...moves, move] : [...moves, '/', move]), [])
+    .join(SCRAMBLE_DELIMITER);
 }
 
 function generateRelayScramble(relayPuzzles) {
   return relayPuzzles.reduce(
-    (relayScramble, puzzle) => [...relayScramble, puzzle, ...generateScramble(puzzle)],
-    []
+    (relayScramble, puzzle) =>
+      [relayScramble, puzzle, generateScramble(puzzle)].join(SCRAMBLE_DELIMITER),
+    ''
   );
 }
 
 function generateSkewbScramble(scrambleOptions) {
   const { directions, length } = scrambleOptions;
 
-  return generateArr(length).reduce(moves => {
-    const previousDirection = extractLastDirection(moves, directions);
-    const relevantOpposites = puzzleConstants.CUBE_OPPOSITES.find(arr =>
-      arr.includes(previousDirection)
-    );
-    const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
-    const reversed = randomBoolean();
+  return generateArr(length)
+    .reduce(moves => {
+      const previousDirection = extractLastDirection(moves, directions);
+      const relevantOpposites = puzzleConstants.CUBE_OPPOSITES.find(arr =>
+        arr.includes(previousDirection)
+      );
+      const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
+      const reversed = randomBoolean();
 
-    const move = direction + charIf(reversed, `'`);
+      const move = direction + charIf(reversed, `'`);
 
-    return [...moves, move];
-  }, []);
+      return [...moves, move];
+    }, [])
+    .join(SCRAMBLE_DELIMITER);
 }
 
 function generateCubeScramble(scrambleOptions, size) {
@@ -124,52 +137,58 @@ function generateCubeScramble(scrambleOptions, size) {
   const wideLayerAmount = Math.max(Math.floor(size / 2), 1);
   const wideLayerOptions = generateArr(wideLayerAmount).map(i => (i === 0 ? '' : i + 1));
 
-  return generateArr(length).reduce(moves => {
-    const previousDirection = extractLastDirection(moves, directions);
-    const relevantOpposites = puzzleConstants.CUBE_OPPOSITES.find(arr =>
-      arr.includes(previousDirection)
-    );
-    const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
-    const wideLayers = pickRandom(wideLayerOptions);
-    const double = pickRandom([true, false, false]);
-    const reversed = randomBoolean() && !double;
+  return generateArr(length)
+    .reduce(moves => {
+      const previousDirection = extractLastDirection(moves, directions);
+      const relevantOpposites = puzzleConstants.CUBE_OPPOSITES.find(arr =>
+        arr.includes(previousDirection)
+      );
+      const direction = pickRandomDirection(directions, previousDirection, relevantOpposites);
+      const wideLayers = pickRandom(wideLayerOptions);
+      const double = pickRandom([true, false, false]);
+      const reversed = randomBoolean() && !double;
 
-    const move =
-      wideLayers +
-      direction +
-      charIf(wideLayers, 'w') +
-      charIf(reversed, `'`) +
-      charIf(double, '2');
+      const move =
+        wideLayers +
+        direction +
+        charIf(wideLayers, 'w') +
+        charIf(reversed, `'`) +
+        charIf(double, '2');
 
-    return [...moves, move];
-  }, []);
+      return [...moves, move];
+    }, [])
+    .join(SCRAMBLE_DELIMITER);
 }
 
 function generateStaticScramble(scrambleOptions) {
   const { directions, length } = scrambleOptions;
 
-  return generateArr(length).reduce(moves => {
-    const previousDirection = extractLastDirection(moves, directions);
-    const direction = pickRandomDirection(directions, previousDirection);
-    const double = pickRandom([true, false, false]);
-    const reversed = randomBoolean() && !double;
+  return generateArr(length)
+    .reduce(moves => {
+      const previousDirection = extractLastDirection(moves, directions);
+      const direction = pickRandomDirection(directions, previousDirection);
+      const double = pickRandom([true, false, false]);
+      const reversed = randomBoolean() && !double;
 
-    const move = direction + charIf(reversed, `'`) + charIf(double, '2');
+      const move = direction + charIf(reversed, `'`) + charIf(double, '2');
 
-    return [...moves, move];
-  }, []);
+      return [...moves, move];
+    }, [])
+    .join(SCRAMBLE_DELIMITER);
 }
 
 function generateClockScamble(scrambleOptions) {
-  return generateArr(scrambleOptions.length).map(() => {
-    const pins = generateArr(4)
-      .map(() => pickRandom(['d', 'U']))
-      .join('');
-    const wheel = randomNumber(1, 4);
-    const turns = pickRandom([randomNumber(-6, -1), randomNumber(1, 6)]);
+  return generateArr(scrambleOptions.length)
+    .map(() => {
+      const pins = generateArr(4)
+        .map(() => pickRandom(['d', 'U']))
+        .join('');
+      const wheel = randomNumber(1, 4);
+      const turns = pickRandom([randomNumber(-6, -1), randomNumber(1, 6)]);
 
-    return `(${pins}, ${wheel}, ${turns})`;
-  });
+      return `(${pins}, ${wheel}, ${turns})`;
+    })
+    .join(SCRAMBLE_DELIMITER);
 }
 
 function randomBoolean() {
@@ -188,13 +207,6 @@ function charIf(bool, a, b = '') {
 
 function getLastMove(moves) {
   return moves[moves.length - 1] || '';
-}
-
-function splitScramble(str, splitOn) {
-  return str
-    .split(splitOn)
-    .map(str => str.trim())
-    .filter(Boolean);
 }
 
 function randomNumber(min, max) {

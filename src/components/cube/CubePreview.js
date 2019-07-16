@@ -41,7 +41,7 @@ const CubePreview = ({ scramble, cubeSize }) => {
 
 CubePreview.propTypes = {
   cubeSize: PropTypes.number,
-  scramble: PropTypes.arrayOf(PropTypes.string)
+  scramble: PropTypes.string.isRequired
 };
 
 const Col = styled.div`

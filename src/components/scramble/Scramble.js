@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
-import * as CustomPropTypes from '../../propTypes';
 import Section from '../shared/Section';
 import { CUBE, RELAY } from '../../constants/puzzles';
 import { getPuzzle } from '../../helpers/puzzle';
-import { splitRelayScramble } from '../../helpers/scramble';
+import { splitRelayScramble, splitScramble } from '../../helpers/scramble';
 import CubePreview from '../cube/CubePreview';
 import ScrambleDetails from './ScrambleDetails';
 import { getColor, getSize, getFont } from '../../helpers/theme';
@@ -50,7 +49,7 @@ const Scramble = ({ scramble, withDetails, withPreview, puzzle, expand }) => {
               <ScrambleDetails scramble={activeScramble} puzzle={activePuzzle} />
             </ScrambleIconButtonContainer>
           )}
-          {activeScramble.map((move, i) => (
+          {splitScramble(activeScramble).map((move, i) => (
             <Move key={i}>{move}</Move>
           ))}
         </ScrambleBox>
@@ -63,7 +62,7 @@ const Scramble = ({ scramble, withDetails, withPreview, puzzle, expand }) => {
 Scramble.propTypes = {
   withDetails: PropTypes.bool,
   withPreview: PropTypes.bool,
-  scramble: CustomPropTypes.Scramble,
+  scramble: PropTypes.string,
   small: PropTypes.bool,
   puzzle: PropTypes.string,
   expand: PropTypes.bool

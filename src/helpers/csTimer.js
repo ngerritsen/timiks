@@ -39,6 +39,5 @@ function parseCsTimerScramble(string) {
   return string
     .trim()
     .replace(/\(\//g, ') /') // Add missing whitespace to square-1 scramble
-    .replace(/[\n\s]+/g, ' ') // Remove extra whitespcae
-    .split(' ');
+    .replace(/[\n\s]+/g, ' '); // Remove extra whitespace
 }

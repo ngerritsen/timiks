@@ -1,6 +1,7 @@
 import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzles';
 import { WHITE, BLUE, YELLOW, ORANGE, RED, GREEN } from '../constants/puzzles';
 import { createAscSorter } from './general';
+import { splitScramble } from './scramble';
 
 const TOP_EDGE = { axis: 'y', opposite: false };
 const RIGHT_EDGE = { axis: 'x', opposite: true };
@@ -58,7 +59,7 @@ const INITIAL_FACES = {
 };
 
 export function layoutScramble(scramble, size) {
-  const moves = scramble.map(parseMove);
+  const moves = splitScramble(scramble).map(parseMove);
 
   const validMoves = moves.every(
     move => move.depth <= Math.floor(size / 2) && DIRECTIONS.includes(move.direction)
