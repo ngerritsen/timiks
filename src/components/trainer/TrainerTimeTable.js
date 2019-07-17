@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTrashAlt';
 import styled from 'styled-components';
-import { transparentize } from 'polished';
 
 import * as CustomPropTypes from '../../propTypes';
 import { Table, Cell, HeadingCell } from '../shared/Table';
@@ -154,11 +153,6 @@ const TimesCell = Cell.extend`
     bottom: 0;
     position: absolute;
     width: ${getSize('lg')};
-    background-image: linear-gradient(
-      to right,
-      ${props => transparentize(getColor('bg')(props))},
-      ${getColor('bg')}
-    );
   }
 
   padding-right: ${getSize('lg')};
