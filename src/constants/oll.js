@@ -259,7 +259,7 @@ export const cases = [
     id: 55,
     probability: 1 / 108,
     algs: [`y (R' F R U) (R U' R2' F') R2 U' R' (U R U R')`],
-    preview: 'XYX YYY XXX YYY XYX XYX XYX'
+    preview: 'XXX YYY XXX YYY XYX XYX XYX'
   },
   {
     name: 'F1',
