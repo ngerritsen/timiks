@@ -49,7 +49,7 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase, trainingType }) =
       )}
       content={({ hide }) => (
         <Modal onClose={hide} title={buildFullCaseTitle(trainingCase, trainingType)}>
-          <TrainerCaseDetails trainingCase={trainingCase} />
+          <TrainerCaseDetails trainingCase={trainingCase} trainingType={trainingType} />
         </Modal>
       )}
     />

@@ -49,7 +49,7 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, trainingType }) =>
                   )}
                   content={({ hide }) => (
                     <Modal onClose={hide} title={buildFullCaseTitle(trainingCase, trainingType)}>
-                      <TrainerCaseDetails trainingCase={trainingCase} />
+                      <TrainerCaseDetails trainingCase={trainingCase} trainingType={trainingType} />
                     </Modal>
                   )}
                 />
