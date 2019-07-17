@@ -502,7 +502,7 @@ export const cases = [
     id: 19,
     probability: 1 / 54,
     algs: [`M U (R U R' U') M' (R' F R F')`],
-    preview: 'XYX XYY XXX YYX YXY XYX XXX'
+    preview: 'XYX XYY XYX YYX YXY XYX XXX'
   },
   {
     name: 'O5',
