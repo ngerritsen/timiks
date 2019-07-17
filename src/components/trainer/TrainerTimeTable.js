@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTrashAlt';
+import styled from 'styled-components';
+import { transparentize } from 'polished';
 
 import * as CustomPropTypes from '../../propTypes';
 import { Table, Cell, HeadingCell } from '../shared/Table';
@@ -10,7 +12,6 @@ import Section from '../shared/Section';
 import { getColor, getSize } from '../../helpers/theme';
 import Button, { ButtonIcon } from '../shared/Button';
 import LastLayerPreview from '../cube/LastLayerPreview';
-import styled from 'styled-components';
 import ToggleContent from '../shared/ToggleContent';
 import Modal from '../shared/Modal';
 import TrainerCaseDetails from './TrainerCaseDetails';
@@ -153,7 +154,11 @@ const TimesCell = Cell.extend`
     bottom: 0;
     position: absolute;
     width: ${getSize('lg')};
-    background-image: linear-gradient(to right, transparent, ${getColor('bg')});
+    background-image: linear-gradient(
+      to right,
+      ${props => transparentize(getColor('bg')(props))},
+      ${getColor('bg')}
+    );
   }
 
   padding-right: ${getSize('lg')};
