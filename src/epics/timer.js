@@ -9,7 +9,7 @@ import { getPuzzle } from '../selectors/settings';
 import { getStartTime, hasInspectionPenalty } from '../selectors/timer';
 import { getScramble } from '../selectors/scramble';
 import { isInTrainer } from '../selectors/router';
-import { getTrainingType, getCurrentCaseId } from '../selectors/trainer';
+import { getTrainingType, getCurrentCaseId, getCurrentScramble } from '../selectors/trainer';
 
 export const resetOnRouteEpic = action$ =>
   action$.pipe(
@@ -39,11 +39,14 @@ export const stopTimerEpic = (action$, state$) =>
     withLatestFrom(state$),
     map(([action, state]) =>
       isInTrainer(state)
-        ? saveTrainerTime(
-            action.payload - getStartTime(state),
-            getTrainingType(state),
-            getCurrentCaseId(state)
-          )
+        ? saveTrainerTime({
+            id: shortid.generate(),
+            trainingType: getTrainingType(state),
+            caseId: getCurrentCaseId(state),
+            ms: action.payload - getStartTime(state),
+            timestamp: new Date(),
+            scramble: getCurrentScramble(state)
+          })
         : createSaveTime(
             action.payload - getStartTime(state),
             state,

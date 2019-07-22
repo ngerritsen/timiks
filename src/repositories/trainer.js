@@ -1,3 +1,4 @@
+import shortid from 'shortid';
 import * as storageConstants from '../constants/storage';
 import { OLL } from '../constants/trainer';
 
@@ -29,7 +30,13 @@ export function getEnabledCaseIds() {
 
 export function getTrainerTimes() {
   const rawTimes = localStorage.getItem(storageConstants.TRAINER_TIMES_STORAGE_KEY);
-  return rawTimes ? JSON.parse(rawTimes) || [] : [];
+  const times = rawTimes ? JSON.parse(rawTimes) || [] : [];
+
+  return times.map(time => ({
+    ...time,
+    id: time.id || shortid.generate(),
+    timestamp: time.timestamp ? new Date(time.timestamp) : new Date()
+  }));
 }
 
 export function getActiveTrainingType() {

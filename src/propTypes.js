@@ -43,8 +43,10 @@ export const PreviewArrows = PropTypes.arrayOf(
 
 export const TrainingTime = PropTypes.shape({
   ms: PropTypes.number.isRequired,
-  caseId: PropTypes.string.isRequired,
-  trainingType: PropTypes.isRequired
+  caseId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  trainingType: PropTypes.isRequired,
+  timestamp: PropTypes.instanceOf(Date),
+  id: PropTypes.string.isRequired
 });
 
 export const Case = PropTypes.shape({
