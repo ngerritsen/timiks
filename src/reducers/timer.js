@@ -48,7 +48,7 @@ export default handleActions(
     }),
     [actionTypes.UPDATE_TIME_INPUT]: (state, action) => ({
       ...state,
-      timeInput: action.timeInput
+      timeInput: action.payload
     })
   },
   initialState

@@ -13,7 +13,7 @@ export const submitTimeInput = createAction(types.SUBMIT_TIME_INPUT, (ms, dnf, p
   dnf,
   plus2
 }));
-export const updateTimeInput = timeInput => ({ type: types.UPDATE_TIME_INPUT, timeInput });
+export const updateTimeInput = createAction(types.UPDATE_TIME_INPUT, timeInput => timeInput);
 
 // Activation
 export const prepareActivation = createAction(types.PREPARE_ACTIVATION);
