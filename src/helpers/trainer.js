@@ -35,7 +35,10 @@ export function getCasesWithTimes(times, trainingType) {
 
   return cases[trainingType]
     .map(trainingCase => {
-      const timesForCase = timesForTraining.filter(time => time.caseId === trainingCase.id);
+      const timesForCase = timesForTraining
+        .filter(time => time.caseId === trainingCase.id)
+        .sort((a, b) => Math.sign(b.timestamp - a.timestamp));
+
       const mean =
         timesForCase.reduce((total, time) => time.ms + total, 0) /
         Math.max(timesForCase.length || 1);
