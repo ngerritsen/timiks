@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTrashAlt';
+import faStopwatch from '@fortawesome/fontawesome-pro-solid/faStopwatch';
+import faFlask from '@fortawesome/fontawesome-pro-solid/faFlask';
 import styled from 'styled-components';
 
 import * as CustomPropTypes from '../../propTypes';
@@ -19,7 +21,7 @@ import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
 import Shortcut from '../shared/Shortcut';
 import { Toolbar, ToolbarItem } from '../shared/Toolbar';
 
-const TrainerTimeTable = ({ cases, clearTrainerTimes, trainingType }) =>
+const TrainerTimeTable = ({ cases, clearTrainerTimes, removeTrainerTime, trainingType }) =>
   cases.length > 0 && (
     <>
       <Section margin="sm">
@@ -60,7 +62,44 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, trainingType }) =>
                   {trainingCase.times.map((time, i) => (
                     <span key={i}>
                       {i > 0 && <span>, &nbsp;&nbsp;</span>}
-                      <Time time={time} />
+                      <ToggleContent
+                        toggle={({ show }) => (
+                          <TrainerTime onClick={show}>
+                            <Time time={time} />
+                          </TrainerTime>
+                        )}
+                        content={({ hide }) => (
+                          <Modal title="Remove trainer time" onClose={hide}>
+                            <Section margin="md">
+                              <Section margin="sm">
+                                <FontAwesome icon={faFlask} fixedWidth />{' '}
+                                {buildFullCaseTitle(trainingCase, trainingType)}
+                              </Section>
+                              <Section margin="sm">
+                                <FontAwesome icon={faStopwatch} fixedWidth /> <Time time={time} />
+                              </Section>
+                            </Section>
+                            <ButtonDuo>
+                              <ButtonDuoItem>
+                                <Button onClick={hide} outline color="subtleFg">
+                                  Cancel
+                                </Button>
+                              </ButtonDuoItem>
+                              <ButtonDuoItem>
+                                <Button
+                                  color="red"
+                                  onClick={() => {
+                                    removeTrainerTime(time.id);
+                                    hide();
+                                  }}
+                                >
+                                  Remove
+                                </Button>
+                              </ButtonDuoItem>
+                            </ButtonDuo>
+                          </Modal>
+                        )}
+                      />
                     </span>
                   ))}
                 </TimesCell>
@@ -121,8 +160,18 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, trainingType }) =>
 TrainerTimeTable.propTypes = {
   cases: PropTypes.arrayOf(CustomPropTypes.Case).isRequired,
   clearTrainerTimes: PropTypes.func.isRequired,
-  trainingType: PropTypes.string.isRequired
+  trainingType: PropTypes.string.isRequired,
+  removeTrainerTime: PropTypes.func.isRequired
 };
+
+const TrainerTime = styled.span`
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid ${getColor('fg')};
+  }
+`;
 
 const PreviewWrapper = styled.span`
   width: 1.6em;

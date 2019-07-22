@@ -42,7 +42,11 @@ export const loadTrainerTimesEpic = () =>
 
 export const storeTrainerTimesEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.SAVE_TRAINER_TIME, actionTypes.CLEAR_TRAINER_TIMES),
+    ofType(
+      actionTypes.SAVE_TRAINER_TIME,
+      actionTypes.CLEAR_TRAINER_TIMES,
+      actionTypes.REMOVE_TRAINER_TIME
+    ),
     withLatestFrom(state$),
     tap(([, state]) =>
       trainerRepository.storeTrainerTimes(trainerSelectors.getTrainerTimes(state))

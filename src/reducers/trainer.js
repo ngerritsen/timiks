@@ -21,6 +21,10 @@ export default handleActions(
       ...state,
       times: [...state.times, action.payload]
     }),
+    [actionTypes.REMOVE_TRAINER_TIME]: (state, action) => ({
+      ...state,
+      times: state.times.filter(time => time.id !== action.payload)
+    }),
     [actionTypes.CLEAR_TRAINER_TIMES]: (state, action) => ({
       ...state,
       times: state.times.filter(time => time.trainingType !== action.payload)

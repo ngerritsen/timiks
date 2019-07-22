@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import TrainerTimeTable from '../../components/trainer/TrainerTimeTable';
-import { clearTrainerTimes } from '../../actions';
+import { clearTrainerTimes, removeTrainerTime } from '../../actions';
 
 import { getTrainerTimesPerCase, getTrainingType } from '../../selectors/trainer';
 
@@ -23,6 +23,6 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { clearTrainerTimes },
+  { clearTrainerTimes, removeTrainerTime },
   mergeProps
 )(TrainerTimeTable);

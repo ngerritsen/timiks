@@ -113,5 +113,5 @@ export const clearTrainerTimes = createAction(
   types.CLEAR_TRAINER_TIMES,
   trainingType => trainingType
 );
-
+export const removeTrainerTime = createAction(types.REMOVE_TRAINER_TIME, id => id);
 export const loadTrainerTimes = createAction(types.LOAD_TRAINER_TIMES, times => times);
