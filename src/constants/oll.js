@@ -454,7 +454,7 @@ export const cases = [
     id: 40,
     probability: 1 / 54,
     algs: [`(R' F) (R U R' U') F' U R`],
-    preview: 'XXY XXX XYX YXX YXX YYY XXY'
+    preview: 'XYY XXX XYX YXX YXX YYY XXY'
   },
   {
     name: 'O1',
