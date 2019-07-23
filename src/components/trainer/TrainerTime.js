@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faStopwatch from '@fortawesome/fontawesome-pro-solid/faStopwatch';
-import faFlask from '@fortawesome/fontawesome-pro-solid/faFlask';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStopwatch } from '@fortawesome/pro-solid-svg-icons/faStopwatch';
+import { faFlask } from '@fortawesome/pro-solid-svg-icons/faFlask';
 import styled from 'styled-components';
 
 import * as CustomPropTypes from '../../propTypes';
@@ -26,11 +26,11 @@ const TrainerTime = ({ trainerTime, removeTrainerTime, trainingType, trainingCas
       <Modal title="Remove trainer time" onClose={hide}>
         <Section margin="md">
           <Section margin="sm">
-            <FontAwesome icon={faFlask} fixedWidth />{' '}
+            <FontAwesomeIcon icon={faFlask} fixedWidth />{' '}
             {buildFullCaseTitle(trainingCase, trainingType)}
           </Section>
           <Section margin="sm">
-            <FontAwesome icon={faStopwatch} fixedWidth /> <Time time={trainerTime} />
+            <FontAwesomeIcon icon={faStopwatch} fixedWidth /> <Time time={trainerTime} />
           </Section>
         </Section>
         <ButtonDuo>

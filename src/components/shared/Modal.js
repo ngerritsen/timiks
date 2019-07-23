@@ -3,8 +3,8 @@ import { transparentize } from 'polished';
 import PropTypes from 'prop-types';
 import React, { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/pro-solid-svg-icons/faTimes';
 
 import Shortcut from './Shortcut';
 import IconButton from './IconButton';
@@ -46,7 +46,7 @@ const Modal = ({ title, onClose, children }) => {
           <ModalTitle>{title}</ModalTitle>
           <IconButton color="subtleFg" onClick={onClose}>
             <Shortcut command="closeModal" action={onClose} />
-            <FontAwesome icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes} />
           </IconButton>
         </ModalHeader>
         {children}

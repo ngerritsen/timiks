@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import faCheck from '@fortawesome/fontawesome-pro-solid/faCheck';
-import FontAwesome from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/pro-solid-svg-icons/faCheck';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getColor, getSize } from '../../helpers/theme';
 
@@ -18,7 +18,7 @@ const Checkbox = ({ onChange, checked, inverse, name, label }) => {
         type="checkbox"
       />
       <CheckboxBox name={name} checked={isChecked}>
-        <CheckboxCheck>{isChecked && <FontAwesome icon={faCheck} size="xs" />}</CheckboxCheck>
+        <CheckboxCheck>{isChecked && <FontAwesomeIcon icon={faCheck} size="xs" />}</CheckboxCheck>
       </CheckboxBox>
       {label && <TextLabel>{label}</TextLabel>}
     </Label>

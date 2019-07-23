@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faFolderOpen from '@fortawesome/fontawesome-pro-solid/faFolderOpen';
-import faSpinnerThird from '@fortawesome/fontawesome-pro-solid/faSpinnerThird';
-import faFile from '@fortawesome/fontawesome-pro-solid/faFile';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFolderOpen } from '@fortawesome/pro-solid-svg-icons/faFolderOpen';
+import { faSpinnerThird } from '@fortawesome/pro-solid-svg-icons/faSpinnerThird';
+import { faFile } from '@fortawesome/pro-solid-svg-icons/faFile';
 
 import { readFile } from '../../helpers/file';
 import { ButtonIcon, LabelButton } from '../shared/Button';
@@ -46,13 +46,13 @@ const FileUploadButton = ({ label, name, onChange, accept }) => {
       />
       <LabelButton htmlFor={name} color="subtleBg">
         <ButtonIcon>
-          <FontAwesome icon={faFolderOpen} />
+          <FontAwesomeIcon icon={faFolderOpen} />
         </ButtonIcon>
         {label}
       </LabelButton>
       {currentFile && (
         <FileName>
-          <FontAwesome icon={loadingFile ? faSpinnerThird : faFile} spin={loadingFile} />
+          <FontAwesomeIcon icon={loadingFile ? faSpinnerThird : faFile} spin={loadingFile} />
           &nbsp; {currentFile.name}
         </FileName>
       )}

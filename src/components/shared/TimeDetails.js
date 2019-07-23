@@ -1,13 +1,13 @@
 import React from 'react';
-import FontAwesome from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
-import faCalendarAlt from '@fortawesome/fontawesome-pro-solid/faCalendarAlt';
-import faStopwatch from '@fortawesome/fontawesome-pro-solid/faStopwatch';
-import faCube from '@fortawesome/fontawesome-pro-solid/faCube';
-import faEye from '@fortawesome/fontawesome-pro-solid/faEye';
-import faPencil from '@fortawesome/fontawesome-pro-solid/faPencil';
-import faCommentAltLines from '@fortawesome/fontawesome-pro-solid/faCommentAltLines';
-import faEyeSlash from '@fortawesome/fontawesome-pro-solid/faEyeSlash';
+import { faCalendarAlt } from '@fortawesome/pro-solid-svg-icons/faCalendarAlt';
+import { faStopwatch } from '@fortawesome/pro-solid-svg-icons/faStopwatch';
+import { faCube } from '@fortawesome/pro-solid-svg-icons/faCube';
+import { faEye } from '@fortawesome/pro-solid-svg-icons/faEye';
+import { faPencil } from '@fortawesome/pro-solid-svg-icons/faPencil';
+import { faCommentAltLines } from '@fortawesome/pro-solid-svg-icons/faCommentAltLines';
+import { faEyeSlash } from '@fortawesome/pro-solid-svg-icons/faEyeSlash';
 import PropTypes from 'prop-types';
 
 import * as CustomPropTypes from '../../propTypes';
@@ -39,19 +39,19 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => {
           )}
           <InfoItem margin="sm">
             <InfoItemIcon>
-              <FontAwesome fixedWidth icon={faStopwatch} />
+              <FontAwesomeIcon fixedWidth icon={faStopwatch} />
             </InfoItemIcon>
             <Time time={time} />
           </InfoItem>
           <InfoItem margin="sm">
             <InfoItemIcon>
-              <FontAwesome fixedWidth icon={faCalendarAlt} />
+              <FontAwesomeIcon fixedWidth icon={faCalendarAlt} />
             </InfoItemIcon>
             {formatLocalDateTime(time.date)}
           </InfoItem>
           <InfoItem margin="sm">
             <InfoItemIcon>
-              <FontAwesome fixedWidth icon={faCube} />
+              <FontAwesomeIcon fixedWidth icon={faCube} />
             </InfoItemIcon>
             {getPuzzle(time.puzzle).title || 'Unknown'}
           </InfoItem>
@@ -61,13 +61,13 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => {
           toggle={({ show }) => (
             <InfoItem margin="md">
               <InfoItemIcon>
-                <FontAwesome fixedWidth icon={faCommentAltLines} />
+                <FontAwesomeIcon fixedWidth icon={faCommentAltLines} />
               </InfoItemIcon>
               {time.comment && (
                 <>
                   {time.comment} &nbsp;
                   <IconButton color="subtleFg" onClick={show}>
-                    <FontAwesome fixedWidth size="sm" icon={faPencil} />
+                    <FontAwesomeIcon fixedWidth size="sm" icon={faPencil} />
                   </IconButton>
                 </>
               )}
@@ -88,7 +88,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => {
           toggle={({ show, hide, isShown }) => (
             <Section margin={isShown ? 'sm' : ''}>
               <Button outline color="subtleFg" onClick={isShown ? hide : show}>
-                <FontAwesome fixedWidth icon={isShown ? faEyeSlash : faEye} /> &nbsp;
+                <FontAwesomeIcon fixedWidth icon={isShown ? faEyeSlash : faEye} /> &nbsp;
                 {isShown ? 'Hide' : 'Show'} scramble
               </Button>
             </Section>

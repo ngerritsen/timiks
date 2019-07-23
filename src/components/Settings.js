@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faCog from '@fortawesome/fontawesome-pro-solid/faCog';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/pro-solid-svg-icons/faCog';
 
 import Shortcut from './shared/Shortcut';
 import { ACTIVATION_DURATION_OPTIONS, BUTTON_COLORS } from '../constants/settings';
@@ -25,7 +25,7 @@ const Settings = ({ settings, changeSetting }) => (
             command="toggleDarkMode"
             action={() => changeSetting('theme', settings.theme === 'dark' ? 'light' : 'dark')}
           />
-          <FontAwesome icon={faCog} fixedWidth />
+          <FontAwesomeIcon icon={faCog} fixedWidth />
         </IconButton>
       )}
       content={({ hide }) => (

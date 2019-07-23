@@ -1,6 +1,6 @@
 import React from 'react';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faKeyboard from '@fortawesome/fontawesome-pro-solid/faKeyboard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faKeyboard } from '@fortawesome/pro-solid-svg-icons/faKeyboard';
 
 import IconButton from './shared/IconButton';
 import ToggleContent from './shared/ToggleContent';
@@ -13,7 +13,7 @@ const KeyboardShortcuts = () => (
     toggle={({ show, toggle }) => (
       <IconButton onClick={show}>
         <Shortcut command="showKeyboardShortcuts" action={toggle} />
-        <FontAwesome fixedWidth icon={faKeyboard} />
+        <FontAwesomeIcon fixedWidth icon={faKeyboard} />
       </IconButton>
     )}
     content={({ hide }) => (

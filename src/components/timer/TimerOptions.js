@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import faSyncAlt from '@fortawesome/fontawesome-pro-solid/faSyncAlt';
+import { faSyncAlt } from '@fortawesome/pro-solid-svg-icons/faSyncAlt';
 
 import InlineFontawesome from '../shared/InlineFontawesome';
 import Select from '../shared/Select';

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/pro-solid-svg-icons/faQuestionCircle';
 
 import * as CustomPropTypes from '../../propTypes';
 import TimeGraph from '../shared/TimeGraph';
@@ -56,7 +56,7 @@ const TimeTable = ({ stats, removeTime, times, showGraph }) => {
                   <ToggleContent
                     toggle={({ show }) => (
                       <QuestionIconButton color="blue" onClick={show}>
-                        <FontAwesome icon={faQuestionCircle} size="sm" />
+                        <FontAwesomeIcon icon={faQuestionCircle} size="sm" />
                       </QuestionIconButton>
                     )}
                     content={({ hide }) => (

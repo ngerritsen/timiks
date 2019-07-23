@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faCircle from '@fortawesome/fontawesome-pro-solid/faCircle';
-import faCheckCircle from '@fortawesome/fontawesome-pro-solid/faCheckCircle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/pro-solid-svg-icons/faCircle';
+import { faCheckCircle } from '@fortawesome/pro-solid-svg-icons/faCheckCircle';
 
 import * as CustomPropTypes from '../../propTypes';
 import { getColor, getSize } from '../../helpers/theme';
@@ -20,7 +20,7 @@ const TimeGraphLegend = ({ lines, enableLine, disableLine }) => {
           }}
         >
           <LegendItemIcon color={line.color}>
-            <FontAwesome size="sm" icon={line.enabled ? faCheckCircle : faCircle} />
+            <FontAwesomeIcon size="sm" icon={line.enabled ? faCheckCircle : faCircle} />
           </LegendItemIcon>
           <LegendItemLabel enabled={line.enabled}>{line.name}</LegendItemLabel>
         </LegendItem>

@@ -1,6 +1,6 @@
 import React from 'react';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faQuestionCircle from '@fortawesome/fontawesome-pro-solid/faQuestionCircle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/pro-solid-svg-icons/faQuestionCircle';
 
 import ToggleContent from '../shared/ToggleContent';
 import IconButton from '../shared/IconButton';
@@ -11,7 +11,7 @@ const ManualTimeEntryExplanation = () => (
   <ToggleContent
     toggle={({ show }) => (
       <IconButton onClick={show} color="blue">
-        <FontAwesome icon={faQuestionCircle} size="sm" />
+        <FontAwesomeIcon icon={faQuestionCircle} size="sm" />
       </IconButton>
     )}
     content={({ hide }) => (

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTrashAlt';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/pro-solid-svg-icons/faTrashAlt';
 import styled from 'styled-components';
 
 import * as CustomPropTypes from '../../propTypes';
@@ -85,7 +85,7 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, removeTrainerTime, trainin
                   <Button size="sm" color="red" tag onClick={toggle}>
                     <Shortcut command="clearTimes" action={toggle} />
                     <ButtonIcon>
-                      <FontAwesome icon={faTrashAlt} />
+                      <FontAwesomeIcon icon={faTrashAlt} />
                     </ButtonIcon>
                     Clear
                   </Button>

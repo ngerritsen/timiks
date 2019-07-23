@@ -4,8 +4,8 @@ import { transparentize } from 'polished';
 import styled, { withTheme } from 'styled-components';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-zoom';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faSearchMinus from '@fortawesome/fontawesome-pro-solid/faSearchMinus';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearchMinus } from '@fortawesome/pro-solid-svg-icons/faSearchMinus';
 
 import Button from './Button';
 import * as CustomPropTypes from '../../propTypes';
@@ -116,7 +116,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
         <Line data={data} options={options} ref={chartRef} height={null} width={null} />
         {enableZoom && (
           <ResetZoomButton onClick={resetZoom} size="sm" color="subtleBg" tag>
-            <FontAwesome icon={faSearchMinus} />
+            <FontAwesomeIcon icon={faSearchMinus} />
           </ResetZoomButton>
         )}
       </GraphWrapper>

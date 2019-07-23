@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faUpload from '@fortawesome/fontawesome-pro-solid/faUpload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/pro-solid-svg-icons/faUpload';
 
 import Button, { ButtonIcon } from '../shared/Button';
 import ToggleContent from '../shared/ToggleContent';
@@ -35,7 +35,7 @@ const Import = ({ importTimes }) => {
       toggle={({ show }) => (
         <Button size="sm" color="subtleBg" onClick={show}>
           <ButtonIcon>
-            <FontAwesome icon={faUpload} />
+            <FontAwesomeIcon icon={faUpload} />
           </ButtonIcon>
           Import
         </Button>

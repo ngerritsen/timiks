@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTrashAlt';
-import faArchive from '@fortawesome/fontawesome-pro-solid/faArchive';
+import { faTrashAlt } from '@fortawesome/pro-solid-svg-icons/faTrashAlt';
+import { faArchive } from '@fortawesome/pro-solid-svg-icons/faArchive';
 
 import InlineFontawesome from '../shared/InlineFontawesome';
 import Button from '../shared/Button';

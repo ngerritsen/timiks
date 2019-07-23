@@ -3,10 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Time from '../shared/Time';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faEllipsisH from '@fortawesome/fontawesome-pro-solid/faEllipsisH';
-import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
-import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisH } from '@fortawesome/pro-solid-svg-icons/faEllipsisH';
+import { faThumbsUp } from '@fortawesome/pro-solid-svg-icons/faThumbsUp';
+import { faTimes } from '@fortawesome/pro-solid-svg-icons/faTimes';
 import ToggleContent from '../shared/ToggleContent';
 import Modal from '../shared/Modal';
 import TimeDetails from '../shared/TimeDetails';
@@ -29,7 +29,7 @@ const TimeTableTimeRow = ({ index, time, removeTime, isIncluded, isExcluded }) =
         {time.best && (
           <TimeInfo>
             <BestTimeIcon>
-              <FontAwesome icon={faThumbsUp} />
+              <FontAwesomeIcon icon={faThumbsUp} />
             </BestTimeIcon>
           </TimeInfo>
         )}
@@ -37,12 +37,12 @@ const TimeTableTimeRow = ({ index, time, removeTime, isIncluded, isExcluded }) =
       <Cell rightAlign highlightColor={highlightColor}>
         {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
         <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
-          <FontAwesome icon={faTimes} fixedWidth size="sm" />
+          <FontAwesomeIcon icon={faTimes} fixedWidth size="sm" />
         </RemoveItemIconButton>
         <ToggleContent
           toggle={({ show }) => (
             <ShowTimeButton onClick={show} color="subtleFg">
-              <FontAwesome icon={faEllipsisH} fixedWidth size="sm" />
+              <FontAwesomeIcon icon={faEllipsisH} fixedWidth size="sm" />
             </ShowTimeButton>
           )}
           content={({ hide }) => (

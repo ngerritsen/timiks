@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faStepForward from '@fortawesome/fontawesome-pro-regular/faStepForward';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStepForward } from '@fortawesome/pro-solid-svg-icons/faStepForward';
 
 import Select from '../shared/Select';
 import { types } from '../../constants/trainer';
@@ -21,7 +21,7 @@ const TrainerOptions = ({ changeTrainingType, type, requestNextCase }) => (
       <Shortcut command="requestNextCase" action={requestNextCase} />
       <Button size="sm" onClick={requestNextCase} color="subtleBg">
         <ButtonIcon>
-          <FontAwesome icon={faStepForward} />
+          <FontAwesomeIcon icon={faStepForward} />
         </ButtonIcon>
         Next case
       </Button>

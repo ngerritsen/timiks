@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 import * as CustomPropTypes from '../../propTypes';
 import Button, { ButtonIcon } from '../shared/Button';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faDownload from '@fortawesome/fontawesome-pro-solid/faDownload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/pro-solid-svg-icons/faDownload';
 import { timesToCsv } from '../../helpers/csv';
 import { downloadAsFile } from '../../helpers/file';
 
 const Export = ({ times, puzzle }) => (
   <Button size="sm" color="subtleBg" onClick={() => downloadAsCsv(times, puzzle)}>
     <ButtonIcon>
-      <FontAwesome icon={faDownload} />
+      <FontAwesomeIcon icon={faDownload} />
     </ButtonIcon>
     Export CSV
   </Button>

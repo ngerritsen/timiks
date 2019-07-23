@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
-import faUserAstronaut from '@fortawesome/fontawesome-pro-solid/faUserAstronaut';
-import faSignInAlt from '@fortawesome/fontawesome-pro-solid/faSignInAlt';
-import faSignOutAlt from '@fortawesome/fontawesome-pro-solid/faSignOutAlt';
-import faSpinnerThird from '@fortawesome/fontawesome-pro-solid/faSpinnerThird';
-import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
+import { faUserAstronaut } from '@fortawesome/pro-solid-svg-icons/faUserAstronaut';
+import { faSignInAlt } from '@fortawesome/pro-solid-svg-icons/faSignInAlt';
+import { faSignOutAlt } from '@fortawesome/pro-solid-svg-icons/faSignOutAlt';
+import { faSpinnerThird } from '@fortawesome/pro-solid-svg-icons/faSpinnerThird';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle';
 
 import IconButton from './shared/IconButton';
 import ToggleContent from './shared/ToggleContent';
@@ -32,9 +32,9 @@ const Account = ({
       toggle={({ show }) => (
         <IconButton onClick={show}>
           {isInitialized && (
-            <FontAwesome fixedWidth icon={isLoggedIn ? faUserAstronaut : faSignInAlt} />
+            <FontAwesomeIcon fixedWidth icon={isLoggedIn ? faUserAstronaut : faSignInAlt} />
           )}
-          {!isInitialized && <FontAwesome fixedWidth icon={faSpinnerThird} spin />}
+          {!isInitialized && <FontAwesomeIcon fixedWidth icon={faSpinnerThird} spin />}
         </IconButton>
       )}
       content={({ hide }) => (
@@ -47,7 +47,7 @@ const Account = ({
                 </Section>
                 <Button type="button" color="googleRed" onClick={() => !isLoggingIn && login()}>
                   <ButtonIcon>
-                    <FontAwesome
+                    <FontAwesomeIcon
                       spin={isLoggingIn}
                       icon={isLoggingIn ? faSpinnerThird : faGoogle}
                     />
@@ -65,7 +65,7 @@ const Account = ({
                 </Section>
                 <Button type="button" red onClick={() => !isLoggingOut && logout() && hide()}>
                   <ButtonIcon>
-                    <FontAwesome
+                    <FontAwesomeIcon
                       spin={isLoggingIn}
                       icon={isLoggingOut ? faSpinnerThird : faSignOutAlt}
                     />

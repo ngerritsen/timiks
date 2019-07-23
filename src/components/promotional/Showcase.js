@@ -6,10 +6,10 @@ import ToggleContent from '../shared/ToggleContent';
 import Button, { ButtonIcon } from '../shared/Button';
 import Scramble from '../scramble/Scramble';
 import Modal from '../shared/Modal';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faCaretCircleLeft from '@fortawesome/fontawesome-pro-solid/faCaretCircleLeft';
-import faCaretCircleRight from '@fortawesome/fontawesome-pro-solid/faCaretCircleRight';
-import faStar from '@fortawesome/fontawesome-pro-solid/faStar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretCircleLeft } from '@fortawesome/pro-solid-svg-icons/faCaretCircleLeft';
+import { faCaretCircleRight } from '@fortawesome/pro-solid-svg-icons/faCaretCircleRight';
+import { faStar } from '@fortawesome/pro-solid-svg-icons/faStar';
 import KeyMap from '../KeyMap';
 import Section from '../shared/Section';
 import Shortcut from '../shared/Shortcut';
@@ -196,7 +196,7 @@ const Showcase = ({ theme }) => {
       toggle={({ show }) => (
         <Button tag size="sm" outline color="grey" onClick={show}>
           <ButtonIcon color="yellow">
-            <FontAwesome icon={faStar} />
+            <FontAwesomeIcon icon={faStar} />
           </ButtonIcon>
           Show features
         </Button>
@@ -207,7 +207,7 @@ const Showcase = ({ theme }) => {
             <ArrowIconWrapper>
               {featureIndex > 0 && (
                 <>
-                  <FontAwesome
+                  <FontAwesomeIcon
                     icon={faCaretCircleLeft}
                     onClick={() => setFeatureIndex(featureIndex - 1)}
                   />
@@ -219,7 +219,7 @@ const Showcase = ({ theme }) => {
             <ArrowIconWrapper>
               {featureIndex < features.length - 1 && (
                 <>
-                  <FontAwesome
+                  <FontAwesomeIcon
                     icon={faCaretCircleRight}
                     onClick={() => setFeatureIndex(featureIndex + 1)}
                   />

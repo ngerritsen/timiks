@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faTimes from '@fortawesome/fontawesome-pro-solid/faTimes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/pro-solid-svg-icons/faTimes';
 import IconButton from './IconButton';
 import { getSize, getColor } from '../../helpers/theme';
 
@@ -15,7 +15,7 @@ const Message = ({ message, dismiss, withPointer }) => (
         <MessageText>{message}</MessageText>
         <MessageClose>
           <IconButton onClick={dismiss}>
-            <FontAwesome icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes} />
           </IconButton>
         </MessageClose>
       </MessageContent>

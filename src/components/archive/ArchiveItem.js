@@ -2,8 +2,8 @@ import React from 'react';
 import { darken, lighten } from 'polished';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faCommentAltLines from '@fortawesome/fontawesome-pro-solid/faCommentAltLines';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCommentAltLines } from '@fortawesome/pro-solid-svg-icons/faCommentAltLines';
 
 import { formatLocalTime } from '../../helpers/dateTime';
 import ToggleContent from '../shared/ToggleContent';
@@ -30,7 +30,7 @@ const ArchiveItem = ({ time, removeTime }) => (
         )}
         {time.comment && (
           <CommentIcon>
-            <FontAwesome icon={faCommentAltLines} fixedWidth size="xs" />
+            <FontAwesomeIcon icon={faCommentAltLines} fixedWidth size="xs" />
           </CommentIcon>
         )}
       </TimeTile>

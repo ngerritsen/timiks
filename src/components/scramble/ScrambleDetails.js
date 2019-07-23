@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faEye from '@fortawesome/fontawesome-pro-solid/faEye';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/pro-solid-svg-icons/faEye';
 
 import IconButton from '../shared/IconButton';
 import Shortcut from '../shared/Shortcut';
@@ -15,7 +15,7 @@ const ScrambleDetails = ({ scramble, puzzle }) => (
     toggle={({ show, toggle }) => (
       <IconButton onClick={show}>
         <Shortcut command="showScramble" action={toggle} />
-        <FontAwesome icon={faEye} />
+        <FontAwesomeIcon icon={faEye} />
       </IconButton>
     )}
     content={({ hide }) => (

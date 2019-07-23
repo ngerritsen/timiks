@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faThumbsUp from '@fortawesome/fontawesome-pro-solid/faThumbsUp';
-import faSpaceShuttle from '@fortawesome/fontawesome-pro-solid/faSpaceShuttle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp } from '@fortawesome/pro-solid-svg-icons/faThumbsUp';
+import { faSpaceShuttle } from '@fortawesome/pro-solid-svg-icons/faSpaceShuttle';
 import * as CustomPropTypes from '../../propTypes';
 import Section from '../shared/Section';
 import Time from '../shared/Time';
@@ -38,7 +38,7 @@ const Timer = ({
         <TimerHeader>
           {!isTraining && showLastTime && lastTime.best && (
             <Tag color="green">
-              <FontAwesome icon={faThumbsUp} />
+              <FontAwesomeIcon icon={faThumbsUp} />
               &nbsp; Best session single
             </Tag>
           )}
@@ -64,7 +64,7 @@ const Timer = ({
               case startTime > 0 && showTimerTime:
                 return <IncrementingTime startTime={startTime} />;
               case startTime > 0 && !showTimerTime:
-                return <FontAwesome icon={faSpaceShuttle} rotation={270} />;
+                return <FontAwesomeIcon icon={faSpaceShuttle} rotation={270} />;
               case showLastTime:
                 return <Time time={lastTime} showMilliseconds />;
               default:
