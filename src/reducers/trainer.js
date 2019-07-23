@@ -8,6 +8,7 @@ const initialState = {
   trainingType: types[0],
   currentCaseId: Object.keys(cases[types[0]])[0],
   currentScramble: 0,
+  rehearsedCases: types.reduce((enabledCases, type) => ({ ...enabledCases, [type]: [] }), {}),
   times: []
 };
 

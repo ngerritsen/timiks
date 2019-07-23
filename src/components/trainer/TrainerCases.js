@@ -20,21 +20,19 @@ const TrainerCases = ({
 }) =>
   groupedCases.map(category => {
     const allSelected = category.cases.every(c => c.selected);
+    const caseIds = category.cases.map(c => c.id);
 
     return (
       <Section margin="md" key={category.id}>
         <SectionTitle>
           {category.name}
-          &nbsp; &nbsp;
-          <SelectAllLabel
-            onClick={() =>
-              (allSelected ? deselectCases : selectCases)(category.cases.map(c => c.id))
-            }
-          >
-            <SelectAllCheckBox>
-              <Checkbox name={category.id} checked={allSelected} onChange={() => {}} />
-            </SelectAllCheckBox>
-            Select all
+          <SelectAllLabel>
+            <Checkbox
+              label="Select all"
+              name={category.id}
+              checked={allSelected}
+              onChange={checked => (checked ? selectCases(caseIds) : deselectCases(caseIds))}
+            />
           </SelectAllLabel>
         </SectionTitle>
         <Tiles>
@@ -62,18 +60,12 @@ TrainerCases.propTypes = {
 };
 
 const SelectAllLabel = styled.label`
-  position: relative;
   font-size: 1.6rem;
-  display: inline-block;
-  font-weight: normal;
-  align-items: center;
-  cursor: pointer;
-`;
-
-const SelectAllCheckBox = styled.span`
   position: relative;
-  margin-right: ${getSize('xxs')};
-  top: 0.2rem;
+  top: 0.1rem;
+  display: inline-block;
+  margin-left: ${getSize('sm')};
+  font-weight: normal;
 `;
 
 export default React.memo(TrainerCases);

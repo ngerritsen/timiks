@@ -4,26 +4,56 @@ import styled from 'styled-components';
 import faCheck from '@fortawesome/fontawesome-pro-solid/faCheck';
 import FontAwesome from '@fortawesome/react-fontawesome';
 
-import { getColor } from '../../helpers/theme';
+import { getColor, getSize } from '../../helpers/theme';
 
-const Checkbox = ({ onChange, checked, inverse, name }) => {
+const Checkbox = ({ onChange, checked, inverse, name, label }) => {
   const isChecked = inverse ? !checked : checked;
 
   return (
-    <CheckboxBox name={name} onClick={() => onChange(!checked)} checked={isChecked}>
-      {isChecked && <FontAwesome icon={faCheck} size="xs" />}
-    </CheckboxBox>
+    <Label htmlFor={name}>
+      <HiddenCheckbox
+        id={name}
+        checked={isChecked}
+        onChange={() => onChange(!checked)}
+        type="checkbox"
+      />
+      <CheckboxBox name={name} checked={isChecked}>
+        <CheckboxCheck>{isChecked && <FontAwesome icon={faCheck} size="xs" />}</CheckboxCheck>
+      </CheckboxBox>
+      {label && <TextLabel>{label}</TextLabel>}
+    </Label>
   );
 };
 
-const CheckboxBox = styled.div`
-  display: inline-flex;
-  justify-content: center;
+const HiddenCheckbox = styled.input`
+  display: none;
+`;
+
+const Label = styled.label`
+  display: flex;
   align-items: center;
+  cursor: pointer;
+`;
+
+const TextLabel = styled.span`
+  margin-left: ${getSize('xs')};
+`;
+
+const CheckboxCheck = styled.div`
+  position: absolute;
+  top: -0.32rem;
+  left: 0.15rem;
+  height: 1.1rem;
+  width: 1.1rem;
+  font-size: 1.3rem;
+  text-align: center;
+`;
+
+const CheckboxBox = styled.div`
+  position: relative;
   height: 1.5rem;
   width: 1.5rem;
   overflow: hidden;
-  font-size: 0.8em;
   border-radius: 0.3rem;
   border: 1px solid ${props => getColor(props.checked ? 'blue' : 'grey')(props)};
   background-color: ${props => getColor(props.checked ? 'blue' : 'bg')(props)};
@@ -39,7 +69,8 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   inverse: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  name: PropTypes.string
+  name: PropTypes.string,
+  label: PropTypes.string
 };
 
 export default Checkbox;
