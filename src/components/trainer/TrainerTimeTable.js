@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { transparentize } from 'polished';
 import FontAwesome from '@fortawesome/react-fontawesome';
 import faTrashAlt from '@fortawesome/fontawesome-pro-solid/faTrashAlt';
 import styled from 'styled-components';
@@ -159,6 +160,11 @@ const TimesCell = Cell.extend`
     top: 0;
     bottom: 0;
     position: absolute;
+    background-image: linear-gradient(
+      to right,
+      ${props => transparentize(1, getColor('fg')(props))},
+      ${getColor('bg')}
+    );
     width: ${getSize('lg')};
   }
 
