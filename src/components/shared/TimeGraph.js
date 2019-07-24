@@ -48,7 +48,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
 
   const data = {
     labels: times.map(time => time.date),
-    datasets: lines.filter(line => line.enabled)
+    datasets: lines.filter(line => line.enabled).reverse()
   };
 
   const options = {
