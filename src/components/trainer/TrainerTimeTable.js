@@ -159,10 +159,10 @@ const TimesCell = Cell.extend`
     right: 0;
     top: 0;
     bottom: 0;
-    position: absolute;
+    position: fixed;
     background-image: linear-gradient(
       to right,
-      ${props => transparentize(1, getColor('fg')(props))},
+      ${props => transparentize(0.99, getColor('bg')(props))},
       ${getColor('bg')}
     );
     width: ${getSize('lg')};
