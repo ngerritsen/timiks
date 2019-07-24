@@ -59,17 +59,19 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, removeTrainerTime, trainin
                   <Time time={{ ms: trainingCase.mean }} />
                 </Cell>
                 <TimesCell>
-                  {trainingCase.times.map((time, i) => (
-                    <span key={i}>
-                      {i > 0 && <span>, &nbsp;&nbsp;</span>}
-                      <TrainerTime
-                        trainerTime={time}
-                        trainingType={trainingType}
-                        trainingCase={trainingCase}
-                        removeTrainerTime={removeTrainerTime}
-                      />
-                    </span>
-                  ))}
+                  <TimesCellScrollContainer>
+                    {trainingCase.times.map((time, i) => (
+                      <span key={i}>
+                        {i > 0 && <span>, &nbsp;&nbsp;</span>}
+                        <TrainerTime
+                          trainerTime={time}
+                          trainingType={trainingType}
+                          trainingCase={trainingCase}
+                          removeTrainerTime={removeTrainerTime}
+                        />
+                      </span>
+                    ))}
+                  </TimesCellScrollContainer>
                 </TimesCell>
               </tr>
             ))}
@@ -150,8 +152,6 @@ const CaseCell = Cell.extend`
 `;
 
 const TimesCell = Cell.extend`
-  white-space: nowrap;
-  overflow-x: auto;
   position: relative;
 
   &:after {
@@ -159,7 +159,7 @@ const TimesCell = Cell.extend`
     right: 0;
     top: 0;
     bottom: 0;
-    position: fixed;
+    position: absolute;
     background-image: linear-gradient(
       to right,
       ${props => transparentize(0.99, getColor('bg')(props))},
@@ -167,7 +167,11 @@ const TimesCell = Cell.extend`
     );
     width: ${getSize('lg')};
   }
+`;
 
+const TimesCellScrollContainer = styled.div`
+  overflow-x: auto;
+  white-space: nowrap;
   padding-right: ${getSize('lg')};
 
   ::-webkit-scrollbar {
