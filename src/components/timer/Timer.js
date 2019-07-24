@@ -15,6 +15,7 @@ import DecrementingTime from './DecrementingTime';
 import { INSPECTION_TIME } from '../../constants/timer';
 import { getZIndex } from '../../helpers/theme';
 import Tag from '../shared/Tag';
+import TrainerStatusContainer from '../../containers/trainer/TrainerStatusContainer';
 
 const Timer = ({
   inspecting,
@@ -28,9 +29,7 @@ const Timer = ({
   useManualTimeEntry,
   showTimerTime,
   stopTime,
-  isTraining,
-  trainingType,
-  enabledCases
+  isTraining
 }) => (
   <div>
     <Section margin="sm">
@@ -75,20 +74,7 @@ const Timer = ({
       </TimerTimeContainer>
     </Section>
     <TimeFooter withManualEntry={useManualTimeEntry}>
-      {isTraining && (
-        <Tag color="subtleBg">
-          {(() => {
-            switch (enabledCases) {
-              case 0:
-                return `${trainingType} - All cases`;
-              case 1:
-                return `${trainingType} - 1 case selected`;
-              default:
-                return `${trainingType} - ${enabledCases} cases selected`;
-            }
-          })()}
-        </Tag>
-      )}
+      {isTraining && <TrainerStatusContainer />}
       {!isTraining && showLastTime && <TimeActionsContainer lastTime={lastTime} />}
     </TimeFooter>
   </div>
@@ -106,9 +92,7 @@ Timer.propTypes = {
   lastTime: CustomPropTypes.Time,
   useManualTimeEntry: PropTypes.bool.isRequired,
   showTimerTime: PropTypes.bool.isRequired,
-  isTraining: PropTypes.bool,
-  trainingType: PropTypes.string.isRequired,
-  enabledCases: PropTypes.number.isRequired
+  isTraining: PropTypes.bool
 };
 
 const TimeFooter = styled.div`

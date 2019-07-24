@@ -115,3 +115,5 @@ export const clearTrainerTimes = createAction(
 );
 export const removeTrainerTime = createAction(types.REMOVE_TRAINER_TIME, id => id);
 export const loadTrainerTimes = createAction(types.LOAD_TRAINER_TIMES, times => times);
+export const startRehearsal = createAction(types.START_REHEARSAL);
+export const stopRehearsal = createAction(types.STOP_REHEARSAL);

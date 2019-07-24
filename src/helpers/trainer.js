@@ -5,12 +5,18 @@ export function getCase(trainingType, caseId) {
   return cases[trainingType].find(trainingCase => trainingCase.id === caseId);
 }
 
-export function getRandomCase(trainingType, enabledIds = []) {
-  if (enabledIds.length === 0) {
-    return pickRandom(cases[trainingType]).id;
-  }
+export function getRandomCase(trainingType, selectCaseIds) {
+  return pickRandom(cases[trainingType].filter(c => selectCaseIds.includes(c.id))).id;
+}
 
-  return pickRandom(cases[trainingType].filter(c => enabledIds.includes(c.id))).id;
+export function getSelectedCaseIds(trainingType, enabledIds) {
+  return cases[trainingType]
+    .filter(trainingCase => enabledIds.length === 0 || enabledIds.includes(trainingCase.id))
+    .map(trainingCase => trainingCase.id);
+}
+
+export function getRemainingRehearsalCaseIds(selectedCaseIds, rehearsedCaseIds) {
+  return selectedCaseIds.filter(id => !rehearsedCaseIds.includes(id));
 }
 
 export function getRandomScramble(trainingType, caseId) {

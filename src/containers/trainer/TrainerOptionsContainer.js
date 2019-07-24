@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
 
 import TrainerOptions from '../../components/trainer/TrainerOptions';
-import { changeTrainingType, requestNextCase } from '../../actions';
+import { changeTrainingType, requestNextCase, startRehearsal, stopRehearsal } from '../../actions';
 
-import { getTrainingType } from '../../selectors/trainer';
+import { getTrainingType, isInRehearsal } from '../../selectors/trainer';
 
 function mapStateToProps(state) {
   return {
-    type: getTrainingType(state)
+    trainingType: getTrainingType(state),
+    inRehearsal: isInRehearsal(state)
   };
 }
 
 export default connect(
   mapStateToProps,
-  { changeTrainingType, requestNextCase }
+  { changeTrainingType, requestNextCase, startRehearsal, stopRehearsal }
 )(TrainerOptions);

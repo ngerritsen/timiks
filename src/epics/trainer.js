@@ -14,6 +14,21 @@ const enabledCaseChangeActions = [
   actionTypes.DESELECT_CASES
 ];
 
+export const stopRehearsalEpic = (action$, state$) =>
+  merge(
+    action$.pipe(ofType(actionTypes.CHANGE_TRAINING_TYPE)),
+    action$.pipe(
+      ofType(actionTypes.SAVE_TRAINER_TIME),
+      withLatestFrom(state$),
+      mergeMap(([, state]) =>
+        trainerSelectors.isInRehearsal(state) &&
+        trainerSelectors.getRemainingRehearsalCaseIds(state).length === 0
+          ? of(1)
+          : EMPTY
+      )
+    )
+  ).pipe(map(actions.stopRehearsal));
+
 export const pickCaseEpic = (action$, state$) =>
   merge(
     action$.pipe(
@@ -30,7 +45,13 @@ export const pickCaseEpic = (action$, state$) =>
     withLatestFrom(state$),
     map(([, state]) => {
       const trainingType = trainerSelectors.getTrainingType(state);
-      const nextCaseId = getRandomCase(trainingType, trainerSelectors.getActiveEnabledCases(state));
+      const eligableCaseIds =
+        trainerSelectors.isInRehearsal(state) &&
+        trainerSelectors.getRemainingRehearsalCaseIds(state).length > 0
+          ? trainerSelectors.getRemainingRehearsalCaseIds(state)
+          : trainerSelectors.getSelectedCaseIds(state);
+
+      const nextCaseId = getRandomCase(trainingType, eligableCaseIds);
       const nextScramble = getRandomScramble(trainingType, nextCaseId);
 
       return actions.nextCaseDetermined(nextCaseId, nextScramble);

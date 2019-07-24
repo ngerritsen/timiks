@@ -51,6 +51,7 @@ const rootEpic = combineEpics(
   trainerEpics.saveActiveTrainingTypeEpic,
   trainerEpics.storeTrainerTimesEpic,
   trainerEpics.loadTrainerTimesEpic,
+  trainerEpics.stopRehearsalEpic,
   notificationEpics.notificationEpic,
   loginPromotionEpics.loginPromotionEpic,
   loginPromotionEpics.dismissLoginPromotionEpic,

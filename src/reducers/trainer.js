@@ -8,19 +8,33 @@ const initialState = {
   trainingType: types[0],
   currentCaseId: Object.keys(cases[types[0]])[0],
   currentScramble: 0,
-  rehearsedCases: [],
+  inRehearsal: false,
+  rehearsedCaseIds: [],
   times: []
 };
 
 export default handleActions(
   {
+    [actionTypes.START_REHEARSAL]: state => ({
+      ...state,
+      inRehearsal: true,
+      rehearsedCaseIds: []
+    }),
+    [actionTypes.STOP_REHEARSAL]: state => ({
+      ...state,
+      inRehearsal: false,
+      rehearsedCaseIds: []
+    }),
     [actionTypes.LOAD_TRAINER_TIMES]: (state, action) => ({
       ...state,
       times: action.payload
     }),
     [actionTypes.SAVE_TRAINER_TIME]: (state, action) => ({
       ...state,
-      times: [...state.times, action.payload]
+      times: [...state.times, action.payload],
+      rehearsedCaseIds: state.inRehearsal
+        ? [...state.rehearsedCaseIds, action.payload.caseId]
+        : state.rehearsedCaseIds
     }),
     [actionTypes.REMOVE_TRAINER_TIME]: (state, action) => ({
       ...state,
