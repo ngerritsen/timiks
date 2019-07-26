@@ -22,6 +22,7 @@ const TrainerOptions = ({
   inRehearsal
 }) => (
   <Toolbar>
+    <ToolbarItem>Train:</ToolbarItem>
     <ToolbarItem>
       <Select
         onChange={type => changeTrainingType(type)}
@@ -44,7 +45,7 @@ const TrainerOptions = ({
           <ButtonIcon>
             <FontAwesomeIcon icon={faPlay} />
           </ButtonIcon>
-          Rehearsal
+          Start Rehearsal
         </Button>
       )}
       {inRehearsal && (
@@ -52,7 +53,7 @@ const TrainerOptions = ({
           <ButtonIcon>
             <FontAwesomeIcon icon={faStop} />
           </ButtonIcon>
-          Rehearsal
+          Stop Rehearsal
         </Button>
       )}
     </ToolbarItem>

@@ -35,6 +35,12 @@ export const getTrainerTimesPerCase = createSelector(
   trainerHelpers.getCasesWithTimes
 );
 
+export const getLastCase = createSelector(
+  getTrainerTimes,
+  getTrainingType,
+  trainerHelpers.getLastCase
+);
+
 export const getGroupedSelectedCases = createSelector(
   getActiveEnabledCases,
   getTrainingType,

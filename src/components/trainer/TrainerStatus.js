@@ -10,7 +10,7 @@ const TrainerStatus = ({
   trainingCases,
   remainingRehearsalCases
 }) => (
-  <Tag color="subtleBg">
+  <Tag color={inRehearsal ? 'blue' : 'subtleBg'}>
     {!inRehearsal &&
       (() => {
         switch (enabledCases) {

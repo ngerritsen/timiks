@@ -29,6 +29,18 @@ export function selectCases(trainingType, enabledIds) {
   );
 }
 
+export function getLastCase(times, trainingType) {
+  const timesForTraining = times.filter(time => time.trainingType === trainingType);
+
+  if (timesForTraining.length === 0) {
+    return undefined;
+  }
+
+  const lastTime = timesForTraining.sort((a, b) => Math.sign(b.timestamp - a.timestamp))[0];
+
+  return getCase(trainingType, lastTime.caseId);
+}
+
 export function groupCases(trainingType, selectedCases) {
   return categories[trainingType].map(category => ({
     ...category,
