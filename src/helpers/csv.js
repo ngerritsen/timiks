@@ -12,7 +12,7 @@ export function timesToCsv(times) {
       getMs(time),
       time.date.toISOString(),
       time.puzzle,
-      escapeColumn(time.scramble.join(' ')),
+      escapeColumn(time.scramble),
       time.plus2 ? 'yes' : '',
       time.dnf ? 'yes' : ''
     ].join(COLUMN_DELIMTER)

@@ -9,7 +9,7 @@ export default function parseTwistyTimerExport(csv) {
         const time = {
           id: shortid.generate(),
           ...parseTwistyTimerTime(item.time, item.penalty),
-          scramble: parseCsTimerScramble(item.scramble),
+          scramble: parseTwistyTimerScramble(item.scramble),
           date: new Date(Date.parse(item.date))
         };
 
@@ -28,9 +28,6 @@ function parseTwistyTimerTime(string, penalty) {
   };
 }
 
-function parseCsTimerScramble(string) {
-  return string
-    .trim()
-    .replace(/[\n\s]+/g, ' ') // Remove extra whitespcae
-    .split(' ');
+function parseTwistyTimerScramble(string) {
+  return string.trim().replace(/[\n\s]+/g, ' ');
 }
