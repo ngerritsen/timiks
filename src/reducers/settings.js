@@ -14,7 +14,8 @@ const initialState = {
   buttonColor: settingsConstants.DEFAULT_BUTTON_COLOR,
   buttonColorDarkMode: '',
   activationDuration: DEFAULT_ACTIVATION_DURATION,
-  showTimerTime: true
+  showTimerTime: true,
+  fixGraphYAxis: false
 };
 
 export default handleActions(

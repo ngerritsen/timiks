@@ -11,6 +11,7 @@ export const getTheme = state => state.settings.theme;
 export const getActivationDuration = state =>
   isInTrainer(state) ? 0 : state.settings.activationDuration;
 
+export const shouldFixGraphYAxis = state => state.settings.fixGraphYAxis;
 export const shouldShowTimerTime = state => state.settings.showTimerTime;
 export const shouldWarnForInspectionTime = state => state.settings.warnForInspectionTime;
 export const isInDarkMode = state => getTheme(state) === 'dark';

@@ -24,7 +24,7 @@ function useHighlightedStats() {
   return [highlightedStatName, highlightedStatType, setHighlightedStat];
 }
 
-const TimeTable = ({ stats, removeTime, times, showGraph }) => {
+const TimeTable = ({ stats, removeTime, times, showGraph, fixGraphYAxis }) => {
   const [
     softHighlightedStatName,
     softHighlightedStatType,
@@ -94,7 +94,7 @@ const TimeTable = ({ stats, removeTime, times, showGraph }) => {
             </tbody>
           </Table>
         </Section>
-        {showGraph && <TimeGraph stats={stats} times={times} />}
+        {showGraph && <TimeGraph stats={stats} times={times} fixYAxis={fixGraphYAxis} />}
       </TimeTableColumn>
       <TimeTableColumn>
         <Table>
@@ -130,7 +130,8 @@ TimeTable.propTypes = {
   stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
   removeTime: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  showGraph: PropTypes.bool
+  showGraph: PropTypes.bool,
+  fixGraphYAxis: PropTypes.bool
 };
 
 const TimeTableContainer = styled.div`

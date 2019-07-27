@@ -121,6 +121,16 @@ const Settings = ({ settings, changeSetting }) => (
                   />
                 </Setting>
               </Section>
+              <Section margin="sm">
+                <Setting>
+                  <label>Fix graph y-axis</label>
+                  <Checkbox
+                    type="checkbox"
+                    onChange={checked => changeSetting('fixGraphYAxis', checked)}
+                    checked={settings.fixGraphYAxis}
+                  />
+                </Setting>
+              </Section>
             </Section>
             <Section margin="xs">
               <Explanation>

@@ -16,7 +16,16 @@ import TopStats from './TopStats';
 import SectionTitle from '../shared/SectionTitle';
 import Tiles from '../shared/Tiles';
 
-const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireTimes }) => {
+const Archive = ({
+  times,
+  stats,
+  days,
+  puzzle,
+  removeTime,
+  timesPerDay,
+  requireTimes,
+  fixGraphYAxis
+}) => {
   useEffect(() => {
     requireTimes(false, puzzle, days);
   }, [puzzle, days]);
@@ -25,7 +34,7 @@ const Archive = ({ times, stats, days, puzzle, removeTime, timesPerDay, requireT
     <>
       {times.length > 1 && (
         <Section margin="md">
-          <TimeGraph times={times} stats={stats} enableZoom />
+          <TimeGraph times={times} stats={stats} enableZoom fixYAxis={fixGraphYAxis} />
         </Section>
       )}
       <Section margin="md">
@@ -69,7 +78,8 @@ Archive.propTypes = {
   stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
   puzzle: PropTypes.string.isRequired,
   days: PropTypes.number.isRequired,
-  removeTime: PropTypes.func.isRequired
+  removeTime: PropTypes.func.isRequired,
+  fixGraphYAxis: PropTypes.bool
 };
 
 const Message = styled.p`

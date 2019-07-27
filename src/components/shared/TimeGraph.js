@@ -13,10 +13,11 @@ import { formatShortTime, getMs, formatTime } from '../../helpers/time';
 import TimeGraphLegend from './TimeGraphLegend';
 import { formatLocalDateTime } from '../../helpers/dateTime';
 
-const TimeGraph = ({ times, stats, theme, enableZoom }) => {
+const TimeGraph = ({ times, stats, theme, enableZoom, fixYAxis }) => {
   const [disabledLines, setDisabledLines] = useState([]);
   const chartRef = useRef(null);
 
+  let minYAxis, maxYAxis;
   const resetZoom = () => chartRef.current && chartRef.current.chartInstance.resetZoom();
   const disableLine = name => setDisabledLines([...disabledLines, name]);
   const enableLine = name => setDisabledLines(disabledLines.filter(lineName => lineName !== name));
@@ -36,6 +37,17 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
     spanGaps: true,
     data
   });
+
+  if (fixYAxis) {
+    const allMs = stats
+      .filter(stat => stat.all)
+      .reduce((allTimes, stat) => [...allTimes, ...stat.all], [])
+      .map(time => time.ms)
+      .filter(ms => ms && ms > 0 && ms < Infinity);
+
+    minYAxis = Math.min(...allMs);
+    maxYAxis = Math.max(...allMs);
+  }
 
   const lines = stats
     .filter(stat => stat.showInGraph && stat.all.length > 1)
@@ -98,7 +110,9 @@ const TimeGraph = ({ times, stats, theme, enableZoom }) => {
       yAxes: [
         {
           ticks: {
-            callback: formatShortTime
+            callback: formatShortTime,
+            suggestedMin: minYAxis,
+            suggestedMax: maxYAxis
           },
           gridLines: {
             color: theme.colors.subtleBg,
@@ -131,7 +145,8 @@ TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
   theme: PropTypes.object.isRequired,
-  enableZoom: PropTypes.bool
+  enableZoom: PropTypes.bool,
+  fixYAxis: PropTypes.bool
 };
 
 const GraphWrapper = styled.div`
