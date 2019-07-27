@@ -11,9 +11,14 @@ import { getScramble } from '../selectors/scramble';
 import { isInTrainer } from '../selectors/router';
 import { getTrainingType, getCurrentCaseId, getCurrentScramble } from '../selectors/trainer';
 
-export const resetOnRouteEpic = action$ =>
+export const resetTimeEpic = action$ =>
   action$.pipe(
-    ofType(LOCATION_CHANGE, actionTypes.CHANGE_TRAINING_TYPE),
+    ofType(
+      LOCATION_CHANGE,
+      actionTypes.CHANGE_TRAINING_TYPE,
+      actionTypes.CLEAR_TRAINER_TIMES,
+      actionTypes.REMOVE_TRAINER_TIME
+    ),
     map(resetTime)
   );
 

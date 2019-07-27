@@ -29,7 +29,7 @@ const rootEpic = combineEpics(
   timerEpics.failInspectionEpic,
   timerEpics.submitTimeEpic,
   timerEpics.stopTimerEpic,
-  timerEpics.resetOnRouteEpic,
+  timerEpics.resetTimeEpic,
   activationEpics.initializeActivationEpic,
   activationEpics.prepareActivationEpic,
   activationEpics.fireActivationEpic,
