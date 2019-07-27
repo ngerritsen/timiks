@@ -3,7 +3,7 @@ import { withLatestFrom, map } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import { LOCATION_CHANGE } from 'connected-react-router';
 
-import { FAIL_INSPECTION, SUBMIT_TIME_INPUT, STOP_TIMER } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import { saveTime, resetTime, saveTrainerTime } from '../actions';
 import { getPuzzle } from '../selectors/settings';
 import { getStartTime, hasInspectionPenalty } from '../selectors/timer';
@@ -13,20 +13,20 @@ import { getTrainingType, getCurrentCaseId, getCurrentScramble } from '../select
 
 export const resetOnRouteEpic = action$ =>
   action$.pipe(
-    ofType(LOCATION_CHANGE),
+    ofType(LOCATION_CHANGE, actionTypes.CHANGE_TRAINING_TYPE),
     map(resetTime)
   );
 
 export const failInspectionEpic = (action$, state$) =>
   action$.pipe(
-    ofType(FAIL_INSPECTION),
+    ofType(actionTypes.FAIL_INSPECTION),
     withLatestFrom(state$),
     map(([, state]) => createSaveTime(0, state, true))
   );
 
 export const submitTimeEpic = (action$, state$) =>
   action$.pipe(
-    ofType(SUBMIT_TIME_INPUT),
+    ofType(actionTypes.SUBMIT_TIME_INPUT),
     withLatestFrom(state$),
     map(([action, state]) =>
       createSaveTime(action.payload.ms, state, action.payload.dnf, action.payload.plus2)
@@ -35,7 +35,7 @@ export const submitTimeEpic = (action$, state$) =>
 
 export const stopTimerEpic = (action$, state$) =>
   action$.pipe(
-    ofType(STOP_TIMER),
+    ofType(actionTypes.STOP_TIMER),
     withLatestFrom(state$),
     map(([action, state]) =>
       isInTrainer(state)

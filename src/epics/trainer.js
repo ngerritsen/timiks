@@ -36,7 +36,6 @@ export const pickCaseEpic = (action$, state$) =>
         actionTypes.SAVE_TRAINER_TIME,
         actionTypes.CHANGE_TRAINING_TYPE,
         actionTypes.LOAD_ENABLED_CASES,
-        actionTypes.REQUEST_NEXT_CASE,
         ...enabledCaseChangeActions
       )
     ),
@@ -56,6 +55,17 @@ export const pickCaseEpic = (action$, state$) =>
 
       return actions.nextCaseDetermined(nextCaseId, nextScramble);
     })
+  );
+
+export const retryCaseEpic = action$ =>
+  action$.pipe(
+    ofType(actionTypes.RETRY_CASE),
+    map(action =>
+      actions.nextCaseDetermined(
+        action.payload.caseId,
+        getRandomScramble(action.payload.trainingType, action.payload.caseId)
+      )
+    )
   );
 
 export const loadTrainerTimesEpic = () =>

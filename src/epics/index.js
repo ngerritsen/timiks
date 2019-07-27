@@ -49,6 +49,7 @@ const rootEpic = combineEpics(
   trainerEpics.saveEnabledCasesEpic,
   trainerEpics.restoreActiveTrainingTypeEpic,
   trainerEpics.saveActiveTrainingTypeEpic,
+  trainerEpics.retryCaseEpic,
   trainerEpics.storeTrainerTimesEpic,
   trainerEpics.loadTrainerTimesEpic,
   trainerEpics.stopRehearsalEpic,

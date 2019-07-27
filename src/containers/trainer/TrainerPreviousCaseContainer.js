@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import TrainerPreviousCase from '../../components/trainer/TrainerPreviousCase';
 import { getTrainingType, getLastCase } from '../../selectors/trainer';
+import { retryCase } from '../../actions';
 
 function mapStateToProps(state) {
   return {
@@ -10,4 +11,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TrainerPreviousCase);
+export default connect(
+  mapStateToProps,
+  { retryCase }
+)(TrainerPreviousCase);

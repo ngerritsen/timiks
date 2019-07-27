@@ -16,7 +16,7 @@ import { INSPECTION_TIME } from '../../constants/timer';
 import { getZIndex } from '../../helpers/theme';
 import Tag from '../shared/Tag';
 import TrainerStatusContainer from '../../containers/trainer/TrainerStatusContainer';
-
+import TrainerPreviousCaseContainer from '../../containers/trainer/TrainerPreviousCaseContainer';
 const Timer = ({
   inspecting,
   preparing,
@@ -35,6 +35,7 @@ const Timer = ({
     <Section margin="sm">
       <TimerTimeContainer withManualEntry={useManualTimeEntry}>
         <TimerHeader>
+          {isTraining && <TrainerStatusContainer />}
           {!isTraining && showLastTime && lastTime.best && (
             <Tag color="green">
               <FontAwesomeIcon icon={faThumbsUp} />
@@ -74,7 +75,7 @@ const Timer = ({
       </TimerTimeContainer>
     </Section>
     <TimeFooter withManualEntry={useManualTimeEntry}>
-      {isTraining && <TrainerStatusContainer />}
+      {isTraining && startTime > 0 && stopTime > 0 && <TrainerPreviousCaseContainer />}
       {!isTraining && showLastTime && <TimeActionsContainer lastTime={lastTime} />}
     </TimeFooter>
   </div>

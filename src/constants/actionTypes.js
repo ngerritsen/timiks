@@ -62,7 +62,7 @@ export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
 export const IMPORT_TIMES = 'IMPORT_TIMES';
 
 // Trainer
-export const REQUEST_NEXT_CASE = 'REQUEST_NEXT_CASE';
+export const RETRY_CASE = 'RETRY_CASE';
 export const NEXT_CASE_DETERMINED = 'NEXT_CASE_DETERMINED';
 export const SELECT_CASE = 'SELECT_CASE';
 export const DESELECT_CASE = 'DESELECT_CASE';

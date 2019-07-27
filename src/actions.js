@@ -97,7 +97,6 @@ export const hideNotification = createAction(types.HIDE_NOTIFICATION);
 export const importTimes = createAction(types.IMPORT_TIMES, times => ({ times }));
 
 // Trainer
-export const requestNextCase = createAction(types.REQUEST_NEXT_CASE);
 export const nextCaseDetermined = createAction(types.NEXT_CASE_DETERMINED, (id, scramble) => ({
   id,
   scramble
@@ -105,6 +104,10 @@ export const nextCaseDetermined = createAction(types.NEXT_CASE_DETERMINED, (id, 
 export const selectCase = createAction(types.SELECT_CASE, id => id);
 export const deselectCase = createAction(types.DESELECT_CASE, id => id);
 export const selectCases = createAction(types.SELECT_CASES, ids => ids);
+export const retryCase = createAction(types.RETRY_CASE, (trainingType, caseId) => ({
+  trainingType,
+  caseId
+}));
 export const deselectCases = createAction(types.DESELECT_CASES, ids => ids);
 export const loadEnabledCases = createAction(types.LOAD_ENABLED_CASES, ids => ids);
 export const changeTrainingType = createAction(types.CHANGE_TRAINING_TYPE, type => type);

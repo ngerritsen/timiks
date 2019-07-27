@@ -36,7 +36,7 @@ const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faExternalLink} /> View on AlgDb.net
+          <FontAwesomeIcon size="sm" icon={faExternalLink} /> View on AlgDb.net
         </Link>
       </Section>
     </div>

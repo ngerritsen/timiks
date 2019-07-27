@@ -147,7 +147,7 @@ const CaseCell = Cell.extend`
 
   &:hover,
   &:focus {
-    background-color: ${getColor('subtleBg')};
+    background-color: ${props => transparentize(0.5, getColor('subtleBg')(props))};
   }
 `;
 
