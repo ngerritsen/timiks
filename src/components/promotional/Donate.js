@@ -9,7 +9,7 @@ import { PAY_PAL_DONATION_LINK } from '../../constants/donation';
 
 const Donate = () => (
   <LinkButton size="sm" tag color="grey" outline href={PAY_PAL_DONATION_LINK}>
-    <ButtonIcon color="green">
+    <ButtonIcon color="subtleFg">
       <FontAwesomeIcon icon={faDonate} />
     </ButtonIcon>
     Support
