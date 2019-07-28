@@ -10,6 +10,7 @@ import times from './times';
 import notifications from './notifications';
 import loginPromotion from './loginPromotion';
 import trainer from './trainer';
+import network from './network';
 import version from './version';
 import history from '../history';
 
@@ -22,6 +23,7 @@ export default combineReducers({
   timer,
   times,
   trainer,
+  network,
   notifications,
   loginPromotion,
   version

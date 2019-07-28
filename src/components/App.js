@@ -10,9 +10,11 @@ import LoginPromotionContainer from '../containers/messages/LoginPromotionContai
 import NewVersionPromptContainer from '../containers/messages/NewVersionPromptContainer';
 import Footer from './Footer';
 import Trainer from './trainer/Trainer';
+import NetworkStatusBarContainer from '../containers/NetworkStatusBarContainer';
 
 const App = () => (
   <>
+    <NetworkStatusBarContainer />
     <NewVersionPromptContainer />
     <LoginPromotionContainer />
     <div className="container">

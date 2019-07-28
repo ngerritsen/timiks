@@ -61,6 +61,10 @@ export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
 // Import
 export const IMPORT_TIMES = 'IMPORT_TIMES';
 
+// Network
+export const NETWORK_ONLINE = 'NETWORK_ONLINE';
+export const NETWORK_OFFLINE = 'NETWORK_OFFLINE';
+
 // Trainer
 export const RETRY_CASE = 'RETRY_CASE';
 export const NEXT_CASE_DETERMINED = 'NEXT_CASE_DETERMINED';

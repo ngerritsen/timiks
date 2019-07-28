@@ -5,6 +5,7 @@ import * as scrambleEpics from './scramble';
 import * as settingsEpics from './settings';
 import * as authenticationEpics from './authentication';
 import * as localTimesEpics from './localTimes';
+import * as networkEpics from './network';
 import * as timerEpics from './timer';
 import * as activationEpics from './activation';
 import * as trainerEpics from './trainer';
@@ -24,6 +25,8 @@ const rootEpic = combineEpics(
   authenticationEpics.loginEpic,
   authenticationEpics.logoutEpic,
   authenticationEpics.redirectStatusEpic,
+  networkEpics.offlineEpic,
+  networkEpics.onlineEpic,
   localTimesEpics.loadLocalTimesEpic,
   localTimesEpics.storeLocalTimesEpic,
   timerEpics.failInspectionEpic,
