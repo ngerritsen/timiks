@@ -15,10 +15,10 @@
     <link rel="shortcut icon" href="/favicon.png">
     <link rel="manifest" href="/timiks.webmanifest">
 
+    <link rel="preload" href="/fonts.css">
     <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.main.entry %>" as="script">
     <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>" as="script">
     <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks.scrambles.entry %>" as="script">
-    <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" as="script">
     <link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=UA-39696629-4" as="script">
 
     <title>Timiks - Cube timer made for speedsolvers</title>
@@ -56,6 +56,14 @@
           
     </footer>
 
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/serviceWorker.js');
+        });
+      }
+    </script>
+
     <script><%= require('fs').readFileSync('./src/critical/script.js') %></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -68,13 +76,9 @@
       gtag('config', 'UA-39696629-4');
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-    <script>
-      WebFont.load({
-        google: {
-          families: ['Roboto Mono:500', 'Barlow:400,600&display=swap']
-        }
-      });
+    <script async>
+      document.querySelector('head').innerHTML +=
+        '<link rel="stylesheet" type="text/css" href="/fonts.css" />';
     </script>
 </body>
 </html>

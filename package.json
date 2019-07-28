@@ -4,7 +4,7 @@
   "description": "Rubik's cube timer",
   "main": "index.js",
   "scripts": {
-    "static": "mkdir -p public; cp -r src/static/* public/; cp -r src/sounds public/sounds",
+    "static": "mkdir -p public; cp -r src/static/* public/; cp -r src/sounds public/; cp -r src/fonts public/",
     "images": "mkdir -p public/images; imagemin src/images/* --out-dir public/images",
     "copy-images": "mkdir -p public/images; cp src/images/* public/images/",
     "watch": "npm run static; npm run copy-images; webpack-dev-server --mode=development --content-base ./public",
