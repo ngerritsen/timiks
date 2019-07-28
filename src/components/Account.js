@@ -17,6 +17,7 @@ import Modal from './shared/Modal';
 import { getColor, getSize } from '../helpers/theme';
 
 const Account = ({
+  isOnline,
   isLoggedIn,
   login,
   logout,
@@ -59,7 +60,12 @@ const Account = ({
             {isLoggedIn && (
               <>
                 <Section textAlign="center" margin="xl">
-                  <Avatar src={avatarUrl} />
+                  {isOnline && <Avatar src={avatarUrl} />}
+                  {!isOnline && (
+                    <AvatarIcon>
+                      <FontAwesomeIcon size="2x" icon={faUserAstronaut} />
+                    </AvatarIcon>
+                  )}
                   <Name>{displayName}</Name>
                   <Email>{email}</Email>
                 </Section>
@@ -82,6 +88,7 @@ const Account = ({
 );
 
 Account.propTypes = {
+  isOnline: PropTypes.bool,
   isLoggedIn: PropTypes.bool,
   isLoggingIn: PropTypes.bool,
   isLoggingOut: PropTypes.bool,
@@ -97,8 +104,16 @@ const Avatar = styled.img`
   width: 8rem;
   height: 8rem;
   border-radius: 4rem;
+  color: ${getColor('subtleFg')};
   margin: 0 0 ${getSize('sm')};
   border: 1px solid ${getColor('subtleBg')};
+`;
+
+const AvatarIcon = Avatar.withComponent('figure').extend`
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Name = styled.p`
