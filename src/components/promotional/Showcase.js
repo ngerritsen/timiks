@@ -17,6 +17,8 @@ import { BUTTON_COLORS } from '../../constants/settings';
 import { getSize, getColor } from '../../helpers/theme';
 import TrainerCaseDetails from '../trainer/TrainerCaseDetails';
 import { cases, PLL, OLL } from '../../constants/trainer';
+import NetworkStatusBar from '../NetworkStatusBar';
+import CloudSyncIcon from '../shared/CloudSyncIcon';
 
 const relayScramble = `2x2x2 U' F' U F2 R' F2 R F' R' 3x3x3 F2 R B2 R2 D2 R' B2 L D2 B2 R B' R U' L2 R' F' U2 L' B2 D' 4x4x4 Rw Uw2 Fw Rw2 Fw' D2 F' Uw U' L2 R Fw' D' L Rw' R Uw R Uw Rw2 U2 L2 F2 L R2 U F' U' B F' L' D2 Fw2 D2 Fw L Rw2 R' F Uw 5x5x5 L B Fw' U L2 Lw Dw2 Uw U' L' Fw2 Uw2 Lw' F Dw Fw' F' R' Uw U2 B2 L Bw L' Lw' Dw Lw Rw2 Dw2 U B2 Bw2 Fw2 Lw' D' Dw' U Lw Bw2 R2 B2 L Bw2 F' L' Bw Lw' Fw Uw Fw2 F2 Dw R Bw2 F2 D2 Fw2 R B2 F 6x6x6 B2 3Fw Uw' R2 U2 R B Rw 3Uw2 Lw2 Dw' Fw2 D2 Lw2 Fw2 Rw' D2 3Fw Lw' B2 3Fw Fw2 D2 3Uw' U' L2 Lw R2 Bw Rw' D' Dw2 B' 3Fw R2 3Fw 3Rw Fw2 F Lw2 R D L' 3Fw Dw 3Uw' L Rw D2 Uw' Fw' R 3Uw' B' Fw' F' 3Uw B' L Uw R2 3Fw2 Fw' L2 3Rw' Fw2 L' R' Uw2 Bw 7x7x7 U2 R' 3Fw2 3Rw' Bw' 3Uw 3Bw2 Fw2 3Rw Dw U' 3Fw' 3Rw2 Fw2 3Uw' 3Lw2 3Fw' F' Rw2 3Fw 3Rw2 3Dw2 3Uw2 Rw B' 3Bw' Uw Bw 3Dw F' 3Lw2 Uw2 B2 R D2 U Rw 3Dw2 U 3Lw B2 Dw2 B' 3Lw' Rw2 Dw2 3Uw2 3Bw' Dw2 L' 3Rw2 3Uw2 U 3Bw' 3Fw2 Fw2 F2 R' Uw2 3Lw Dw' Uw2 B2 R' 3Dw' B' Fw 3Uw' U' Lw F D' L Lw' Uw R2 3Fw' Lw2 3Dw' Rw U2 Bw2 3Bw 3Fw' L' 3Lw B2 Bw' D2 L2 3Dw' Uw2 3Fw' D' U' Rw' 3Dw 3Rw D' 3Bw'`;
 
@@ -101,6 +103,24 @@ const Showcase = ({ theme }) => {
             <TrainerCaseDetails trainingCase={cases[PLL][4]} trainingType={PLL} />
           </Section>
           <TrainerCaseDetails trainingCase={cases[OLL][4]} trainingType={OLL} />
+        </>
+      )
+    },
+    {
+      title: 'Offline mode',
+      content: (
+        <>
+          <Section margin="sm" />
+          <NetworkStatusBar isOnline={false} />
+          <p>
+            When Timiks has been loaded once on your device, you can access it while you are
+            offline. This allows timing your solves, even when you are in a flight, or out of data.
+          </p>
+          <CloudSyncIcon time={{ dirty: true }} size="2x" />
+          <p>
+            Cloud sync will be paused when you are offline and your times will be synced when you
+            have a connection again.
+          </p>
         </>
       )
     },
