@@ -29,4 +29,8 @@ function cacheFonts() {
 
 function cacheHtml() {
   workbox.precaching.precacheAndRoute(['/', '/trainer', '/archive']);
+  workbox.routing.registerRoute(
+    /\/[A-Za-z0-9-]*\/?$/,
+    new workbox.strategies.NetworkFirst({ cacheName: 'html' })
+  );
 }
