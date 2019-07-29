@@ -46,7 +46,12 @@ const Account = ({
                 <Section margin="md">
                   <p>Login to store your times in the cloud and sync them with all your devices!</p>
                 </Section>
-                <Button type="button" color="googleRed" onClick={() => !isLoggingIn && login()}>
+                <Button
+                  type="button"
+                  color="googleRed"
+                  disabled={!isOnline}
+                  onClick={() => isOnline && !isLoggingIn && login()}
+                >
                   <ButtonIcon>
                     <FontAwesomeIcon
                       spin={isLoggingIn}
@@ -69,7 +74,7 @@ const Account = ({
                   <Name>{displayName}</Name>
                   <Email>{email}</Email>
                 </Section>
-                <Button type="button" red onClick={() => !isLoggingOut && logout() && hide()}>
+                <Button type="button" onClick={() => !isLoggingOut && logout() && hide()}>
                   <ButtonIcon>
                     <FontAwesomeIcon
                       spin={isLoggingIn}
