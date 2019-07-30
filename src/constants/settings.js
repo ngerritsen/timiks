@@ -25,6 +25,7 @@ export const DEFAULT_BUTTON_COLOR = 'primary';
 
 export const ARCHIVE_DAYS_OPTIONS = [
   { label: 'Last 7 days', value: 7 },
+  { label: 'Last 14 days', value: 14 },
   { label: 'Last 30 days', value: 30 },
   { label: 'Last 3 months', value: 92 },
   { label: 'Last 6 months', value: 183 },
