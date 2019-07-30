@@ -34,6 +34,7 @@
     "@fortawesome/pro-regular-svg-icons": "^5.9.0",
     "@fortawesome/pro-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "@sentry/browser": "^5.5.0",
     "chart.js": "^2.8.0",
     "chartjs-plugin-zoom": "^0.7.0",
     "connected-react-router": "^6.5.0",
