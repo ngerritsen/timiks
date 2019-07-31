@@ -39,5 +39,10 @@ export function serializeTime(time) {
 
 function parseDate(rawTime) {
   const date = rawTime.timestamp || rawTime.date;
+
+  if (!date) {
+    return new Date();
+  }
+
   return typeof date === 'string' ? new Date(rawTime.timestamp) : rawTime.timestamp.toDate();
 }
