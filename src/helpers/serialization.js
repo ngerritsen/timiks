@@ -10,7 +10,7 @@ export function parseTime(raw) {
     ms: raw.ms,
     puzzle: raw.puzzle,
     comment: String(raw.comment || ''),
-    scramble: raw.scramble,
+    scramble: String(raw.scramble || ''),
     date: parseDate(raw),
     dnf: Boolean(raw.dnf),
     plus2: Boolean(raw.plus2),

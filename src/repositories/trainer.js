@@ -34,6 +34,7 @@ export function getTrainerTimes() {
 
   return times.map(time => ({
     ...time,
+    scramble: String(time.scramble || ''),
     id: time.id || shortid.generate(),
     timestamp: time.timestamp ? new Date(time.timestamp) : new Date()
   }));
