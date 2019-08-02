@@ -55,7 +55,7 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
       continue;
     }
 
-    if (char === ESCAPE_CHAR) {
+    if (char === ESCAPE_CHAR && !isLast) {
       inEscape = false;
       continue;
     }

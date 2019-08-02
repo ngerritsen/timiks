@@ -10,7 +10,7 @@ export default function parseCsTimerSession(csv) {
           id: shortid.generate(),
           ...parseCsTimerTime(item.Time),
           scramble: parseCsTimerScramble(item.Scramble),
-          date: new Date(Date.parse(item.Date))
+          date: parseCsTimerDate(item.Date)
         };
 
         return isValidTime(time) && time;
@@ -19,6 +19,26 @@ export default function parseCsTimerSession(csv) {
       }
     })
     .filter(Boolean);
+}
+
+function parseCsTimerDate(dateString) {
+  const match = dateString.match(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/);
+
+  if (!match) {
+    return null;
+  }
+
+  const [, year, month, day, hour, minute, second] = match;
+  const date = new Date();
+
+  date.setFullYear(parseInt(year));
+  date.setMonth(parseInt(month) - 1);
+  date.setDate(parseInt(day));
+  date.setHours(parseInt(hour));
+  date.setMinutes(parseInt(minute));
+  date.setSeconds(parseInt(second));
+
+  return date;
 }
 
 function parseCsTimerTime(string) {

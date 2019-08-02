@@ -10,7 +10,7 @@ export default function parseTwistyTimerExport(csv) {
           id: shortid.generate(),
           ...parseTwistyTimerTime(item.time, item.penalty),
           scramble: parseTwistyTimerScramble(item.scramble),
-          date: new Date(Date.parse(item.date))
+          date: new Date(item.date)
         };
 
         return isValidTime(time) && time;
