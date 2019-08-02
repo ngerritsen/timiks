@@ -1,13 +1,5 @@
-import { interval } from 'rxjs';
-import {
-  mergeMap,
-  catchError,
-  map,
-  ignoreElements,
-  filter,
-  take,
-  withLatestFrom
-} from 'rxjs/operators';
+import { interval, EMPTY } from 'rxjs';
+import { mergeMap, catchError, map, filter, take, withLatestFrom } from 'rxjs/operators';
 import { newVersionAvailable } from '../actions';
 import * as versionService from '../services/version';
 import { shouldPromoteLogin } from '../selectors/loginPromotion';
@@ -15,7 +7,7 @@ import { POLL_VERSION_INTERVAL } from '../constants/version';
 
 export const newVersionEpic = (_, state$) =>
   interval(POLL_VERSION_INTERVAL).pipe(
-    mergeMap(() => versionService.getLatestBuildNumber().pipe(catchError(ignoreElements()))),
+    mergeMap(() => versionService.getLatestBuildNumber().pipe(catchError(() => EMPTY))),
     withLatestFrom(state$),
     filter(
       ([buildNumber, state]) =>
