@@ -32,4 +32,4 @@ export const ARCHIVE_DAYS_OPTIONS = [
   { label: 'Last 12 months', value: 365 },
   { label: 'Last 2 years', value: 730 }
 ];
-export const DEFAULT_ARCHIVE_DAYS = 7;
+export const DEFAULT_ARCHIVE_DAYS = 14;
