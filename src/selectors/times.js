@@ -1,4 +1,4 @@
-import { getArchivePuzzle, getArchiveDays } from './settings';
+import { getArchivePuzzle, getArchiveDays, getPuzzle } from './settings';
 import { markBestTime, isCurrent, getId } from '../helpers/times';
 import { calculateStats } from '../helpers/stats';
 
@@ -14,15 +14,13 @@ export const getTime = (state, id) => getTimes(state).find(time => time.id === i
 
 export const getCurrentTimes = createSelector(
   getTimes,
-  times => times.filter(isCurrent)
+  getPuzzle,
+  (times, puzzle) => times.filter(isCurrent).filter(time => time.puzzle === puzzle)
 );
 
 export const getRequiredTimes = state => state.times.requiredTimes;
 
-export const getCurrentTimeIds = state =>
-  getTimes(state)
-    .filter(isCurrent)
-    .map(getId);
+export const getCurrentTimeIds = state => getCurrentTimes(state).map(getId);
 
 export const getTimesForLocalStorage = (state, isLoggedIn) =>
   isLoggedIn ? getUnstoredTimes(state) : getTimes(state);
