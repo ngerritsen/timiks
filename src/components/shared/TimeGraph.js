@@ -66,7 +66,7 @@ const TimeGraph = ({ times, stats, theme, enableZoom, fixYAxis }) => {
   const options = {
     aspectRatio: 1.5,
     animation: {
-      duration: 0
+      duration: 500
     },
     legend: {
       display: false

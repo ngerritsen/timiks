@@ -51,7 +51,7 @@ const Button = styled.button.attrs({
       ? getColor('black')(props)
       : getColor('white')(props)};
   text-transform: uppercase;
-  transition: background-color 0.1s ease;
+  transition: background-color 0.2s ease;
 
   &:focus,
   &:hover {

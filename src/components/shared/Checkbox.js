@@ -59,6 +59,7 @@ const CheckboxBox = styled.div`
   background-color: ${props => getColor(props.checked ? 'blue' : 'bg')(props)};
   color: ${getColor('white')};
   cursor: pointer;
+  transition: background-color 0.2s ease;
 
   &:hover {
     border: 1px solid ${props => getColor(props.checked ? 'blue' : 'subtleFg')(props)};

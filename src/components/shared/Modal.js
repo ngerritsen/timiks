@@ -5,6 +5,7 @@ import React, { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/pro-solid-svg-icons/faTimes';
+import { useSpring, animated } from 'react-spring';
 
 import Shortcut from './Shortcut';
 import IconButton from './IconButton';
@@ -14,6 +15,16 @@ import { getSize, getColor, getZIndex } from '../../helpers/theme';
 const Modal = ({ title, onClose, children }) => {
   const modalRef = useRef(null);
   const overlayRef = useRef(null);
+  const overlaySpringProps = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    config: { tension: 350 }
+  });
+  const modalSpringProps = useSpring({
+    scale: 1,
+    from: { scale: 0.7 },
+    config: { tension: 500, mass: 0.8 }
+  });
 
   useEffect(() => {
     if (modalRef) {
@@ -40,8 +51,17 @@ const Modal = ({ title, onClose, children }) => {
   };
 
   return ReactDOM.createPortal(
-    <ModalOverlay data-modal innerRef={overlayRef} onClick={onClickOverlay}>
-      <ModalBox innerRef={modalRef} tabIndex={-1}>
+    <ModalOverlay
+      style={overlaySpringProps}
+      data-modal
+      innerRef={overlayRef}
+      onClick={onClickOverlay}
+    >
+      <ModalBox
+        style={{ transform: modalSpringProps.scale.interpolate(scale => `scale(${scale})`) }}
+        innerRef={modalRef}
+        tabIndex={-1}
+      >
         <ModalHeader>
           <ModalTitle>{title}</ModalTitle>
           <IconButton color="subtleFg" onClick={onClose}>
@@ -62,7 +82,7 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired
 };
 
-const ModalOverlay = styled.div`
+const ModalOverlay = animated(styled.div`
   display: flex;
   position: fixed;
   top: 0;
@@ -74,9 +94,9 @@ const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: ${getZIndex('modal')};
-`;
+`);
 
-const ModalBox = styled.div`
+const ModalBox = animated(styled.div`
   background-color: ${getColor('bg')};
   border-radius: 0.5rem;
   padding: ${getSize('sm')};
@@ -88,7 +108,7 @@ const ModalBox = styled.div`
   &:focus {
     outline: none;
   }
-`;
+`);
 
 const ModalHeader = styled.div`
   display: flex;

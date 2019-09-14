@@ -7,6 +7,7 @@ export default styled.button`
   padding: 0;
   color: ${props => getColor(props.color)(props) || 'inherit'};
   cursor: pointer;
+  transition: opacity 0.2s ease;
 
   &:focus,
   &:hover {

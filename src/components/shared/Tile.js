@@ -13,6 +13,7 @@ const Tile = styled.div`
   padding: ${getSize('sm')};
   border-radius: 3px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 
   :hover {
     background-color: ${props =>
