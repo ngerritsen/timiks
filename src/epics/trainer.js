@@ -36,6 +36,8 @@ export const pickCaseEpic = (action$, state$) =>
         actionTypes.SAVE_TRAINER_TIME,
         actionTypes.CHANGE_TRAINING_TYPE,
         actionTypes.LOAD_ENABLED_CASES,
+        actionTypes.START_REHEARSAL,
+        actionTypes.RE_QUEUE_CASE,
         ...enabledCaseChangeActions
       )
     ),

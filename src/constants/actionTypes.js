@@ -67,6 +67,7 @@ export const NETWORK_OFFLINE = 'NETWORK_OFFLINE';
 
 // Trainer
 export const RETRY_CASE = 'RETRY_CASE';
+export const RE_QUEUE_CASE = 'RE_QUEUE_CASE';
 export const NEXT_CASE_DETERMINED = 'NEXT_CASE_DETERMINED';
 export const SELECT_CASE = 'SELECT_CASE';
 export const DESELECT_CASE = 'DESELECT_CASE';

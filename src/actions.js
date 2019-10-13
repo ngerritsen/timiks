@@ -112,6 +112,10 @@ export const retryCase = createAction(types.RETRY_CASE, (trainingType, caseId) =
   trainingType,
   caseId
 }));
+export const reQueueCase = createAction(types.RE_QUEUE_CASE, (trainingType, caseId) => ({
+  trainingType,
+  caseId
+}));
 export const deselectCases = createAction(types.DESELECT_CASES, ids => ids);
 export const loadEnabledCases = createAction(types.LOAD_ENABLED_CASES, ids => ids);
 export const changeTrainingType = createAction(types.CHANGE_TRAINING_TYPE, type => type);

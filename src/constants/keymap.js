@@ -56,8 +56,8 @@ const keymap = [
   },
   {
     key: 'r',
-    commands: ['refreshScramble', 'retryCase'],
-    description: 'Refresh current scramble / retry training case'
+    commands: ['refreshScramble', 'retryCase', 'reQueueCase'],
+    description: 'Refresh scramble or retry/re-queue training case'
   },
   {
     key: 's',

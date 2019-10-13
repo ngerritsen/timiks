@@ -25,13 +25,10 @@ export default handleActions(
       inRehearsal: false,
       rehearsedCaseIds: []
     }),
-    [actionTypes.RETRY_CASE]: (state, action) =>
-      state.inRehearsal && state.trainingType === action.payload.trainingType
-        ? {
-            ...state,
-            rehearsedCaseIds: state.rehearsedCaseIds.filter(id => id !== action.payload.caseId)
-          }
-        : state,
+    [actionTypes.RE_QUEUE_CASE]: (state, action) => ({
+      ...state,
+      rehearsedCaseIds: state.rehearsedCaseIds.filter(id => id !== action.payload.caseId)
+    }),
     [actionTypes.LOAD_TRAINER_TIMES]: (state, action) => ({
       ...state,
       times: action.payload

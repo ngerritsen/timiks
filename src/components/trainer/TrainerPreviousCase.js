@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUndo } from '@fortawesome/pro-solid-svg-icons/faUndo';
+import { faHistory } from '@fortawesome/pro-solid-svg-icons/faHistory';
 import { transparentize } from 'polished';
 
 import * as CustomPropTypes from '../../propTypes';
@@ -16,7 +17,7 @@ import Section from '../shared/Section';
 import Link from '../shared/Link';
 import Shortcut from '../shared/Shortcut';
 
-const TrainerPreviousCase = ({ trainingType, lastCase, retryCase }) =>
+const TrainerPreviousCase = ({ trainingType, lastCase, retryCase, reQueueCase, isInRehearsal }) =>
   lastCase ? (
     <ToggleContent
       toggle={({ show }) => (
@@ -32,16 +33,40 @@ const TrainerPreviousCase = ({ trainingType, lastCase, retryCase }) =>
               Last case: <strong>{lastCase.name}</strong>
             </Section>
             <Section>
-              <Shortcut command="retryCase" action={() => retryCase(trainingType, lastCase.id)} />
-              <Link
-                href="#"
-                onClick={event => {
-                  event.preventDefault();
-                  retryCase(trainingType, lastCase.id);
-                }}
-              >
-                <FontAwesomeIcon size="sm" icon={faUndo} /> Retry
-              </Link>
+              {!isInRehearsal && (
+                <>
+                  <Shortcut
+                    command="retryCase"
+                    action={() => retryCase(trainingType, lastCase.id)}
+                  />
+                  <Link
+                    href="#"
+                    onClick={event => {
+                      event.preventDefault();
+                      retryCase(trainingType, lastCase.id);
+                    }}
+                  >
+                    <FontAwesomeIcon size="sm" icon={faUndo} /> Retry
+                  </Link>
+                </>
+              )}
+              {isInRehearsal && (
+                <>
+                  <Shortcut
+                    command="reQueueCase"
+                    action={() => reQueueCase(trainingType, lastCase.id)}
+                  />
+                  <Link
+                    href="#"
+                    onClick={event => {
+                      event.preventDefault();
+                      reQueueCase(trainingType, lastCase.id);
+                    }}
+                  >
+                    <FontAwesomeIcon size="sm" icon={faHistory} /> Re-queue
+                  </Link>
+                </>
+              )}
             </Section>
           </PreviousCaseContent>
         </PreviousCase>
@@ -57,7 +82,9 @@ const TrainerPreviousCase = ({ trainingType, lastCase, retryCase }) =>
 TrainerPreviousCase.propTypes = {
   trainingType: PropTypes.string.isRequired,
   lastCase: CustomPropTypes.Case,
-  retryCase: PropTypes.func.isRequired
+  retryCase: PropTypes.func.isRequired,
+  reQueueCase: PropTypes.func.isRequired,
+  isInRehearsal: PropTypes.bool
 };
 
 const PreviousCaseContent = styled.div`
