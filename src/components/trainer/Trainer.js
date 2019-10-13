@@ -7,6 +7,7 @@ import TrainerCasesContainer from '../../containers/trainer/TrainerCasesContaine
 import TrainerScrambleContainer from '../../containers/trainer/TrainerScrambleContainer';
 import TrainerOptionsContainer from '../../containers/trainer/TrainerOptionsContainer';
 import TrainerTimeTableContainer from '../../containers/trainer/TrainerTimeTableContainer';
+import TrainerActionsContainer from '../../containers/trainer/TrainerActionsContainer';
 
 const Trainer = () => (
   <>
@@ -25,7 +26,12 @@ const Trainer = () => (
     <Section margin="lg">
       <TrainerTimeTableContainer />
     </Section>
-    <TrainerCasesContainer />
+    <Section margin="md">
+      <TrainerCasesContainer />
+    </Section>
+    <Section margin="md">
+      <TrainerActionsContainer />
+    </Section>
   </>
 );
 

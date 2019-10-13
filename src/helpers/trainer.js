@@ -41,6 +41,10 @@ export function getLastCase(times, trainingType) {
   return getCase(trainingType, lastTime.caseId);
 }
 
+export function getAvailableCaseIds(trainingType) {
+  return cases[trainingType].map(c => c.id);
+}
+
 export function groupCases(trainingType, selectedCases) {
   return categories[trainingType].map(category => ({
     ...category,

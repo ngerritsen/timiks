@@ -23,6 +23,11 @@ export const getSelectedCaseIds = createSelector(
   trainerHelpers.getSelectedCaseIds
 );
 
+export const getAvailableCaseIds = createSelector(
+  getTrainingType,
+  trainerHelpers.getAvailableCaseIds
+);
+
 export const getRemainingRehearsalCaseIds = createSelector(
   getSelectedCaseIds,
   getRehearsedCaseIds,
