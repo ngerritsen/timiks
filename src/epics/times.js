@@ -7,8 +7,7 @@ import {
   switchMap,
   map,
   takeUntil,
-  ignoreElements,
-  retry
+  ignoreElements
 } from 'rxjs/operators';
 
 import * as actionTypes from '../constants/actionTypes';
@@ -94,8 +93,7 @@ export const loadTimesEpic = (action$, state$) =>
 
       return listenForChanges(getUserId(state), current, puzzle, days).pipe(
         map(times => actions.loadTimes(times, current, puzzle)),
-        takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED))),
-        retry(2)
+        takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
       );
     })
   );

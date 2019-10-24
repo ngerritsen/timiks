@@ -7,6 +7,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from './history';
 import * as Sentry from '@sentry/browser';
 
+import './errorHandler';
 import './firebase';
 
 import keymap from './constants/keymap';
