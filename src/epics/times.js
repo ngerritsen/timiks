@@ -9,6 +9,7 @@ import {
   takeUntil,
   ignoreElements
 } from 'rxjs/operators';
+import { retryWithDelay } from 'rxjs-retry-delay';
 
 import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
@@ -17,12 +18,18 @@ import { getUserId, isLoggedIn } from '../selectors/authentication';
 import { getCurrentTimeIds, getUnstoredTimes, getRequiredTimes } from '../selectors/times';
 import { listenForChanges } from '../repositories/times';
 
+const STORAGE_RETRIES = 3;
+const STORAGE_RETRY_DELAY = 500;
+const STORAGE_RETRY_DELAY_SCALING_FACTOR = 2;
+
 export const saveTimeEpic = (action$, state$) =>
   action$.pipe(
     ofType(actionTypes.SAVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action, state]) => from(timesRepository.save(getUserId(state), action.payload))),
+    mergeMap(([action, state]) =>
+      from(timesRepository.save(getUserId(state), action.payload)).pipe(retry())
+    ),
     ignoreElements()
   );
 
@@ -42,7 +49,9 @@ export const updateTimeEpic = (action$, state$) =>
     ofType(actionTypes.UPDATE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action]) => from(timesRepository.update(action.payload.id, action.payload.fields))),
+    mergeMap(([action]) =>
+      from(timesRepository.update(action.payload.id, action.payload.fields)).pipe(retry())
+    ),
     ignoreElements()
   );
 
@@ -51,7 +60,7 @@ export const removeTimeEpic = (action$, state$) =>
     ofType(actionTypes.REMOVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action]) => from(timesRepository.remove(action.payload))),
+    mergeMap(([action]) => from(timesRepository.remove(action.payload)).pipe(retry())),
     ignoreElements()
   );
 
@@ -65,7 +74,7 @@ export const archiveTimesEpic = (action$, state$) =>
         timesRepository.updateAll(getCurrentTimeIds(state), {
           current: false
         })
-      )
+      ).pipe(retry())
     ),
     ignoreElements()
   );
@@ -75,7 +84,9 @@ export const clearTimesEpic = (action$, state$) =>
     ofType(actionTypes.CLEAR_TIMES),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([, state]) => from(timesRepository.removeAll(getCurrentTimeIds(state)))),
+    mergeMap(([, state]) =>
+      from(timesRepository.removeAll(getCurrentTimeIds(state))).pipe(retry())
+    ),
     ignoreElements()
   );
 
@@ -93,7 +104,15 @@ export const loadTimesEpic = (action$, state$) =>
 
       return listenForChanges(getUserId(state), current, puzzle, days).pipe(
         map(times => actions.loadTimes(times, current, puzzle)),
-        takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
+        takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED))),
+        retry()
       );
     })
   );
+
+const retry = () =>
+  retryWithDelay({
+    delay: STORAGE_RETRY_DELAY,
+    maxRetryAttempts: STORAGE_RETRIES,
+    scalingFactor: STORAGE_RETRY_DELAY_SCALING_FACTOR
+  });
