@@ -1,27 +1,19 @@
-import { light } from './theme';
-
 window.addEventListener('error', () => {
-  if (document.querySelector('.js-error-message')) {
+  if (document.querySelector('[data-error-message]')) {
     return;
   }
 
   document.body.innerHTML =
     `
-    <div style="
-      background-color: ${light.colors.red};
-      padding: ${light.sizes.md};
-      color: ${light.colors.white};
-    " class="js-error-message">
+    <div class="error-message" data-error-message>
       <div class="container">
-        An error occured,
-        <strong
-          href="#"
-          style="cursor: pointer; text-decoration: underline"
-          onclick="window.location.reload(true)"
-        >
-          reload
-        </strong>.
+        An error occured, <strong data-error-message-reload class="error-message-reload">reload now</strong>.
       </div>
     </div>
   ` + document.body.innerHTML;
+
+  document.querySelector('[data-error-message-reload]').addEventListener('click', e => {
+    e.preventDefault();
+    window.location.reload(true);
+  });
 });

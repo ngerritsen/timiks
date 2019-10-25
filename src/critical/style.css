@@ -120,6 +120,17 @@ footer a:active {
   top: 0;
 }
 
+.error-message {
+  background-color: #e83d3a;
+  padding: 2.4rem 0;
+  color: #fff;
+}
+
+.error-message-reload {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 520px) {
   header {
     padding-top: 1.6rem;
