@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -12,9 +12,10 @@ import ArchiveItem from './ArchiveItem';
 import { getPuzzle } from '../../helpers/puzzle';
 import { ARCHIVE_DAYS_OPTIONS } from '../../constants/settings';
 import { decapitalize } from '../../helpers/formatting';
-import TopStats from './TopStats';
+import Stats from './Stats';
 import SectionTitle from '../shared/SectionTitle';
 import Tiles from '../shared/Tiles';
+import Button from '../shared/Button';
 
 const Archive = ({
   times,
@@ -29,6 +30,7 @@ const Archive = ({
   useEffect(() => {
     requireTimes(false, puzzle, days);
   }, [puzzle, days]);
+  const [showLastStats, setShowLastStats] = useState(false);
 
   return (
     <>
@@ -37,7 +39,7 @@ const Archive = ({
           <TimeGraph times={times} stats={stats} enableZoom fixYAxis={fixGraphYAxis} />
         </Section>
       )}
-      <Section margin="md">
+      <Section margin="lg">
         <ArchiveOptionsContainer />
       </Section>
       {times.length === 0 && (
@@ -47,9 +49,16 @@ const Archive = ({
         </Message>
       )}
       {stats.length > 0 && (
-        <Section margin="md">
-          <SectionTitle>Top Stats</SectionTitle>
-          <TopStats solves={times.length} stats={stats} />
+        <Section margin="lg">
+          <SectionTitle>{showLastStats ? 'Last' : 'Top'} stats</SectionTitle>
+          <Section margin="sm">
+            <Stats solves={times.length} stats={stats} showLast={showLastStats} />
+          </Section>
+          <Section margin="sm">
+            <Button size="sm" tag color="subtleBg" onClick={() => setShowLastStats(!showLastStats)}>
+              Show {showLastStats ? 'top' : 'last'} stats
+            </Button>
+          </Section>
         </Section>
       )}
       {timesPerDay.map(({ date, times }) => (

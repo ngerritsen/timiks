@@ -6,35 +6,36 @@ import * as CustomPropTypes from '../../propTypes';
 import { getBreakpoint, getSize, getColor } from '../../helpers/theme';
 import Time from '../shared/Time';
 
-const TopStats = ({ stats, solves }) => (
-  <TopStatsContainer>
+const Stats = ({ stats, solves, showLast }) => (
+  <StatsContainer>
     <div>
-      <TopStatTitle>
-        <TopStatColor color="subtleFg" />
+      <StatTitle>
+        <StatColor color="subtleFg" />
         solves:
-      </TopStatTitle>
+      </StatTitle>
       <strong>{solves}</strong>
     </div>
     {stats.map(stat => (
       <div key={stat.name}>
-        <TopStatTitle>
-          <TopStatColor color={stat.color} />
+        <StatTitle>
+          <StatColor color={stat.color} />
           {stat.name}:
-        </TopStatTitle>
+        </StatTitle>
         <strong>
-          <Time time={stat.best || stat.current} />
+          <Time time={showLast ? stat.current : stat.best || stat.current} />
         </strong>
       </div>
     ))}
-  </TopStatsContainer>
+  </StatsContainer>
 );
 
-TopStats.propTypes = {
+Stats.propTypes = {
   stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
-  solves: PropTypes.number.isRequired
+  solves: PropTypes.number.isRequired,
+  showLast: PropTypes.bool
 };
 
-const TopStatsContainer = styled.div`
+const StatsContainer = styled.div`
   padding: ${getSize('sm')} ${getSize('xxs')};
   border-top: 1px solid ${getColor('subtleBg')};
   border-bottom: 1px solid ${getColor('subtleBg')};
@@ -52,12 +53,12 @@ const TopStatsContainer = styled.div`
   }
 `;
 
-const TopStatTitle = styled.span`
+const StatTitle = styled.span`
   display: inline-block;
   width: 7rem;
 `;
 
-const TopStatColor = styled.span`
+const StatColor = styled.span`
   display: inline-block;
   font-weight: bold;
   width: 0.8rem;
@@ -67,4 +68,4 @@ const TopStatColor = styled.span`
   margin-right: ${getSize('xs')};
 `;
 
-export default TopStats;
+export default Stats;
