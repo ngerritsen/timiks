@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as CustomPropTypes from '../../propTypes';
-import TimeGraph from '../shared/TimeGraph';
 import Section from '../shared/Section';
 import { formatLocalDate } from '../../helpers/dateTime';
 import { getColor } from '../../helpers/theme';
@@ -16,6 +15,7 @@ import Stats from './Stats';
 import SectionTitle from '../shared/SectionTitle';
 import Tiles from '../shared/Tiles';
 import Button from '../shared/Button';
+import ArchiveTimeGraphContainer from '../../containers/archive/ArchiveTimeGraphContainer';
 
 const Archive = ({
   times,
@@ -36,7 +36,12 @@ const Archive = ({
     <>
       {times.length > 1 && (
         <Section margin="md">
-          <TimeGraph times={times} stats={stats} enableZoom fixYAxis={fixGraphYAxis} />
+          <ArchiveTimeGraphContainer
+            times={times}
+            stats={stats}
+            enableZoom
+            fixYAxis={fixGraphYAxis}
+          />
         </Section>
       )}
       <Section margin="lg">

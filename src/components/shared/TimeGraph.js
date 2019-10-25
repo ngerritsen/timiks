@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { withTheme } from 'styled-components';
@@ -13,8 +13,19 @@ import { formatShortTime, getMs, formatTime } from '../../helpers/time';
 import TimeGraphLegend from './TimeGraphLegend';
 import { formatLocalDateTime } from '../../helpers/dateTime';
 
-const TimeGraph = ({ times, stats, theme, enableZoom, fixYAxis }) => {
-  const [disabledLines, setDisabledLines] = useState([]);
+const TimeGraph = ({
+  disabledLines,
+  setDisabledLines,
+  times,
+  stats,
+  theme,
+  enableZoom,
+  fixYAxis
+}) => {
+  if (!disabledLines || !setDisabledLines) {
+    [disabledLines, setDisabledLines] = useState([]);
+  }
+
   const chartRef = useRef(null);
 
   let minYAxis, maxYAxis;
@@ -144,6 +155,8 @@ const TimeGraph = ({ times, stats, theme, enableZoom, fixYAxis }) => {
 TimeGraph.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
+  disabledLines: PropTypes.arrayOf(PropTypes.string),
+  setDisabledLines: PropTypes.func,
   theme: PropTypes.object.isRequired,
   enableZoom: PropTypes.bool,
   fixYAxis: PropTypes.bool

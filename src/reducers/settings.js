@@ -15,7 +15,8 @@ const initialState = {
   buttonColorDarkMode: '',
   activationDuration: DEFAULT_ACTIVATION_DURATION,
   showTimerTime: true,
-  fixGraphYAxis: false
+  fixGraphYAxis: false,
+  disabledArchiveGraphLines: []
 };
 
 export default handleActions(

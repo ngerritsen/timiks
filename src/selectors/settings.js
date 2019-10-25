@@ -15,6 +15,7 @@ export const shouldFixGraphYAxis = state => state.settings.fixGraphYAxis;
 export const shouldShowTimerTime = state => state.settings.showTimerTime;
 export const shouldWarnForInspectionTime = state => state.settings.warnForInspectionTime;
 export const isInDarkMode = state => getTheme(state) === 'dark';
+export const getDisabledArchiveGraphLines = state => state.settings.disabledArchiveGraphLines;
 
 export const getButtonColor = state =>
   isInDarkMode(state)
