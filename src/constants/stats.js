@@ -53,9 +53,16 @@ export default [
     color: 'purple'
   },
   {
+    name: 'ao200',
+    type: AVERAGE,
+    size: 200,
+    showInGraph: true,
+    color: 'deepBlue'
+  },
+  {
     name: 'mean',
     type: MEAN,
-    color: 'deepBlue'
+    color: 'grey'
   },
   {
     name: 'σ',
