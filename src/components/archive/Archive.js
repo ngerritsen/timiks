@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretRight } from '@fortawesome/pro-solid-svg-icons/faCaretRight';
+import { faCaretDown } from '@fortawesome/pro-solid-svg-icons/faCaretDown';
 
 import * as CustomPropTypes from '../../propTypes';
 import Section from '../shared/Section';
 import { formatLocalDate } from '../../helpers/dateTime';
-import { getColor } from '../../helpers/theme';
+import { getColor, getSize } from '../../helpers/theme';
 import ArchiveOptionsContainer from '../../containers/archive/ArchiveOptionsContainer';
 import ArchiveItem from './ArchiveItem';
 import { getPuzzle } from '../../helpers/puzzle';
@@ -16,6 +19,7 @@ import SectionTitle from '../shared/SectionTitle';
 import Tiles from '../shared/Tiles';
 import Button from '../shared/Button';
 import ArchiveTimeGraphContainer from '../../containers/archive/ArchiveTimeGraphContainer';
+import Tag from '../shared/Tag';
 
 const Archive = ({
   times,
@@ -31,6 +35,10 @@ const Archive = ({
     requireTimes(false, puzzle, days);
   }, [puzzle, days]);
   const [showLastStats, setShowLastStats] = useState(false);
+
+  const [expandedDays, setExpandedDays] = useState([0, 1, 2]);
+  const expandDay = index => setExpandedDays([...expandedDays, index]);
+  const collapseDay = index => setExpandedDays(expandedDays.filter(i => i !== index));
 
   return (
     <>
@@ -66,16 +74,29 @@ const Archive = ({
           </Section>
         </Section>
       )}
-      {timesPerDay.map(({ date, times }) => (
-        <Section margin="md" key={date.toISOString()}>
-          <SectionTitle>{formatLocalDate(date)}</SectionTitle>
-          <Tiles>
-            {times.map(time => (
-              <ArchiveItem key={time.id} time={time} removeTime={removeTime} />
-            ))}
-          </Tiles>
-        </Section>
-      ))}
+      {timesPerDay.map(({ date, times }, index) => {
+        const expanded = expandedDays.includes(index);
+        return (
+          <Section margin="md" key={date.toISOString()}>
+            <SectionTitleClickable
+              onClick={() => (expanded ? collapseDay(index) : expandDay(index))}
+            >
+              <SectionTitleTitle>{formatLocalDate(date)}</SectionTitleTitle>
+              <SectionTitleTag>
+                <Tag size="sm">{times.length}</Tag>
+              </SectionTitleTag>
+              <FontAwesomeIcon icon={expanded ? faCaretDown : faCaretRight} />
+            </SectionTitleClickable>
+            {expanded && (
+              <Tiles>
+                {times.map(time => (
+                  <ArchiveItem key={time.id} time={time} removeTime={removeTime} />
+                ))}
+              </Tiles>
+            )}
+          </Section>
+        );
+      })}
     </>
   );
 };
@@ -95,6 +116,27 @@ Archive.propTypes = {
   removeTime: PropTypes.func.isRequired,
   fixGraphYAxis: PropTypes.bool
 };
+
+const SectionTitleClickable = styled(SectionTitle)`
+  cursor: pointer;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const SectionTitleTitle = styled.span`
+  margin-right: ${getSize('sm')};
+`;
+
+const SectionTitleTag = styled.span`
+  flex-grow: 1;
+  position: relative;
+  top: -1px;
+`;
 
 const Message = styled.p`
   color: ${getColor('grey')};
