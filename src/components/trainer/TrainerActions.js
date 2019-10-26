@@ -19,8 +19,10 @@ const TrainerActions = ({ availableCaseIds, selectedCaseIds, selectCases, desele
 };
 
 TrainerActions.propTypes = {
-  availableCaseIds: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectedCaseIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  availableCaseIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
+    .isRequired,
+  selectedCaseIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
+    .isRequired,
   selectCases: PropTypes.func.isRequired,
   deselectCases: PropTypes.func.isRequired
 };

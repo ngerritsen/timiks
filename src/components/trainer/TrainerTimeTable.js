@@ -142,7 +142,7 @@ const PreviewWrapper = styled.span`
   margin: -${getSize('xs')} ${getSize('xxs')} -${getSize('xs')} 0;
 `;
 
-const CaseCell = Cell.extend`
+const CaseCell = styled(Cell)`
   cursor: pointer;
 
   &:hover,
@@ -151,7 +151,7 @@ const CaseCell = Cell.extend`
   }
 `;
 
-const TimesCell = Cell.extend`
+const TimesCell = styled(Cell)`
   position: relative;
 
   &:after {

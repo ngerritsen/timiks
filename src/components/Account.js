@@ -67,7 +67,7 @@ const Account = ({
                 <Section textAlign="center" margin="xl">
                   {isOnline && <Avatar src={avatarUrl} />}
                   {!isOnline && (
-                    <AvatarIcon>
+                    <AvatarIcon as="figure">
                       <FontAwesomeIcon size="2x" icon={faUserAstronaut} />
                     </AvatarIcon>
                   )}
@@ -114,7 +114,7 @@ const Avatar = styled.img`
   border: 1px solid ${getColor('subtleBg')};
 `;
 
-const AvatarIcon = Avatar.withComponent('figure').extend`
+const AvatarIcon = styled(Avatar)`
   padding: 0;
   display: inline-flex;
   align-items: center;

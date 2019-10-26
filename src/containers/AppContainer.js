@@ -8,28 +8,21 @@ import App from '../components/App';
 import { getTheme } from '../selectors/settings';
 
 class AppContainer extends React.Component {
-  constructor(...args) {
-    super(...args);
-    this.state = { theme: null };
+  constructor(props, ...args) {
+    super(props, ...args);
+    this.state = { theme: themes[props.theme] };
   }
 
-  componentWillMount() {
-    this._changeTheme(this.props.theme);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.theme !== this.props.theme) {
-      this._changeTheme(nextProps.theme);
+  static getDerivedStateFromProps(props, state) {
+    if (state.theme === props.theme) {
+      return state;
     }
-  }
 
-  _changeTheme(name) {
-    const theme = themes[name];
+    const theme = themes[props.theme];
 
     renderGlobalTheme(theme);
 
-    this.setState({ theme });
-    this.forceUpdate();
+    return { theme };
   }
 
   render() {

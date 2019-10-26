@@ -27,7 +27,7 @@ const Modal = ({ title, onClose, children }) => {
   });
 
   useEffect(() => {
-    if (modalRef) {
+    if (modalRef.current) {
       modalRef.current.focus();
     }
 
@@ -51,15 +51,10 @@ const Modal = ({ title, onClose, children }) => {
   };
 
   return ReactDOM.createPortal(
-    <ModalOverlay
-      style={overlaySpringProps}
-      data-modal
-      innerRef={overlayRef}
-      onClick={onClickOverlay}
-    >
+    <ModalOverlay style={overlaySpringProps} data-modal ref={overlayRef} onClick={onClickOverlay}>
       <ModalBox
         style={{ transform: modalSpringProps.scale.interpolate(scale => `scale(${scale})`) }}
-        innerRef={modalRef}
+        ref={modalRef}
         tabIndex={-1}
       >
         <ModalHeader>

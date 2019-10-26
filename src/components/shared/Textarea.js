@@ -1,6 +1,7 @@
+import styled from 'styled-components';
 import Input from './Input';
 
-const Textarea = Input.withComponent('textarea').extend`
+const Textarea = styled(Input.withComponent('textarea'))`
   min-height: 16rem;
 `;
 

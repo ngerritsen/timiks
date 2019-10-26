@@ -26,9 +26,9 @@ const sizeToFontSize = {
   lg: '1.8rem'
 };
 
-const Button = styled.button.attrs({
-  bg: props => getColor(props.color)(props) || getColor('blue')(props)
-})`
+const Button = styled.button.attrs(props => ({
+  bg: getColor(props.color)(props) || getColor('blue')(props)
+}))`
   display: inline-block;
   text-align: center;
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};

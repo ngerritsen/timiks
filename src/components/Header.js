@@ -49,7 +49,7 @@ const IconContainer = styled.span`
   margin-right: 1rem;
 `;
 
-const KeyboardShortcutsIconContainer = VisibleFrom.extend`
+const KeyboardShortcutsIconContainer = styled(VisibleFrom)`
   margin-right: 1rem;
 `;
 

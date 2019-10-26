@@ -161,7 +161,7 @@ const TimeTableColumn = styled.div`
 }
 `;
 
-const QuestionIconButton = IconButton.extend`
+const QuestionIconButton = styled(IconButton)`
   margin-left: ${getSize('xs')};
 `;
 

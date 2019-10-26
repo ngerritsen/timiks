@@ -43,9 +43,9 @@ Tag.defaultProps = {
   size: 'md'
 };
 
-const TagTag = styled.span.attrs({
-  bg: props => getColor(props.color)(props) || getColor('grey')(props)
-})`
+const TagTag = styled.span.attrs(props => ({
+  bg: getColor(props.color)(props) || getColor('grey')(props)
+}))`
   display: inline-block;
   position: relative;
   height: ${props => sizeToHeight[props.size]};

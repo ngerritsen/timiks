@@ -42,7 +42,7 @@ const HelperText = styled.p`
   font-size: 1.5rem;
 `;
 
-const TimeInput = Input.extend`
+const TimeInput = styled(Input)`
   display: block;
   font-size: 5.4rem;
   text-align: center;

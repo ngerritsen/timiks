@@ -1,30 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ShortcutContext from '../../containers/ShortcutContext';
 
-class Shortcut extends Component {
-  constructor(props) {
-    super(props);
+const Shortcut = ({ registerShortcut, updateShortcut, unregisterShortcut, command, action }) => {
+  const [token, setToken] = useState(null);
 
-    const { registerShortcut, command, action } = props;
+  useEffect(() => {
+    if (!token) {
+      setToken(registerShortcut(command, action));
+      return;
+    }
 
-    this._token = registerShortcut(command, action);
-  }
+    updateShortcut(token, command, action);
+  });
 
-  componentWillReceiveProps(nextProps) {
-    const { updateShortcut, command, action } = nextProps;
-    updateShortcut(this._token, command, action);
-  }
+  useEffect(() => () => unregisterShortcut(token), []);
 
-  componentWillUnmount() {
-    this.props.unregisterShortcut(this._token);
-  }
-
-  render() {
-    return <ShortcutAnchor data-shortcut={this._token} />;
-  }
-}
+  return <ShortcutAnchor data-shortcut={token} />;
+};
 
 Shortcut.propTypes = {
   registerShortcut: PropTypes.func.isRequired,

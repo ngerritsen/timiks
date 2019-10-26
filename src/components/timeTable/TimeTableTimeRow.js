@@ -81,11 +81,11 @@ const BestTimeIcon = styled.span`
   color: ${getColor('green')};
 `;
 
-const ShowTimeButton = IconButton.extend`
+const ShowTimeButton = styled(IconButton)`
   margin-left: ${getSize('xs')};
 `;
 
-const RemoveItemIconButton = IconButton.extend`
+const RemoveItemIconButton = styled(IconButton)`
   margin-left: ${getSize('xs')};
 `;
 

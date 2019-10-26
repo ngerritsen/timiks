@@ -166,7 +166,7 @@ const GraphWrapper = styled.div`
   position: relative;
 `;
 
-const ResetZoomButton = Button.extend`
+const ResetZoomButton = styled(Button)`
   position: absolute;
   top: 0;
   right: 0;
