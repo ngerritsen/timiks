@@ -29,7 +29,7 @@ export function splitRelayScramble(puzzle, scramble) {
 }
 
 export function generateScramble(puzzle = DEFAULT_PUZZLE) {
-  const { scrambleOptions, type, size } = getPuzzle(puzzle);
+  const { scrambleOptions = {}, type, size } = getPuzzle(puzzle);
   const { jsssScrambler, puzzles: relayPuzzles } = scrambleOptions;
 
   if (jsssScrambler) {
@@ -177,18 +177,27 @@ function generateStaticScramble(scrambleOptions) {
     .join(SCRAMBLE_DELIMITER);
 }
 
-function generateClockScamble(scrambleOptions) {
-  return generateArr(scrambleOptions.length)
-    .map(() => {
-      const pins = generateArr(4)
-        .map(() => pickRandom(['d', 'U']))
-        .join('');
-      const wheel = randomNumber(1, 4);
-      const turns = pickRandom([randomNumber(-6, -1), randomNumber(1, 6)]);
+function generateClockScamble() {
+  const multiPinSettings = ['U', 'R', 'D', 'L', 'ALL'];
+  const singlePinSettings = ['UR', 'DR', 'DL', 'UL'];
 
-      return `(${pins}, ${wheel}, ${turns})`;
-    })
-    .join(SCRAMBLE_DELIMITER);
+  const front = [...singlePinSettings, ...multiPinSettings].map(generateClockTurn);
+  const back = multiPinSettings.map(generateClockTurn);
+  const finalPins = generateArr(randomNumber(0, 4))
+    .reduce(
+      chosenPins => [
+        ...chosenPins,
+        pickRandom(singlePinSettings.filter(sps => !chosenPins.includes(sps)))
+      ],
+      []
+    )
+    .sort((a, b) => singlePinSettings.indexOf(a) - singlePinSettings.indexOf(b));
+
+  return [...front, 'y2', ...back, ...finalPins].join(SCRAMBLE_DELIMITER);
+}
+
+function generateClockTurn(pins) {
+  return pins + randomNumber(1, 6) + pickRandom(['+', '-']);
 }
 
 function randomBoolean() {

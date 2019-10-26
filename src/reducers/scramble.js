@@ -3,7 +3,7 @@ import { SET_SCRAMBLE } from '../constants/actionTypes';
 import { DEFAULT_PUZZLE } from '../constants/settings';
 
 const initialState = {
-  scramble: [],
+  scramble: '',
   puzzle: DEFAULT_PUZZLE
 };
 

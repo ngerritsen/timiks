@@ -212,10 +212,7 @@ const puzzles = [
     name: 'clock',
     title: 'Clock',
     type: puzzleConstants.CLOCK,
-    allowInspectionTime: true,
-    scrambleOptions: {
-      length: 12
-    }
+    allowInspectionTime: true
   },
   {
     name: '3x3x3-oh',
