@@ -10,7 +10,6 @@
     "watch": "npm run static; npm run copy-images; webpack-dev-server --mode=development --content-base ./public",
     "test": "eslint .",
     "build": "npm run static; npm run images; webpack --mode=production",
-    "precommit": "npm run test",
     "build-number": "echo \"$TRAVIS_BUILD_NUMBER\" > src/static/build.json"
   },
   "repository": {
@@ -95,5 +94,10 @@
       ],
       "@babel/preset-react"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   }
 }
