@@ -12,6 +12,7 @@ const PINK = '#f469c1';
 const PURPLE = '#7642d6';
 const RED = '#e83d3a';
 const TURQUOISE = '#3be5e5';
+const BROWN = '#783c11';
 const WHITE = '#fff';
 const YELLOW = '#f9e636';
 
@@ -43,6 +44,7 @@ export const light = {
     red: RED,
     subtleBg: darken(0.1, WHITE),
     subtleFg: lighten(0.4, BLACK),
+    brown: BROWN,
     turquoise: TURQUOISE,
     white: WHITE,
     yellow: YELLOW

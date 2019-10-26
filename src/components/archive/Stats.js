@@ -55,7 +55,7 @@ const StatsContainer = styled.div`
 
 const StatTitle = styled.span`
   display: inline-block;
-  width: 7rem;
+  width: 8rem;
 `;
 
 const StatColor = styled.span`

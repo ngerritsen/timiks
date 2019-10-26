@@ -60,6 +60,20 @@ export default [
     color: 'deepBlue'
   },
   {
+    name: 'ao500',
+    type: AVERAGE,
+    size: 500,
+    showInGraph: true,
+    color: 'brown'
+  },
+  {
+    name: 'ao1000',
+    type: AVERAGE,
+    size: 1000,
+    showInGraph: true,
+    color: 'dark'
+  },
+  {
     name: 'mean',
     type: MEAN,
     color: 'grey'
