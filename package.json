@@ -38,7 +38,7 @@
     "chartjs-plugin-zoom": "^0.7.4",
     "connected-react-router": "^6.5.2",
     "element-closest": "^3.0.1",
-    "firebase": "^7.2.2",
+    "firebase": "^7.2.3",
     "imagemin": "^7.0.0",
     "imagemin-cli": "^5.0.0",
     "keycode": "^2.2.0",
