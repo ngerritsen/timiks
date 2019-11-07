@@ -1,66 +1,68 @@
 import { combineEpics } from 'redux-observable';
 
+import * as activationEpics from './activation';
+import * as authenticationEpics from './authentication';
+import * as importEpics from './import';
+import * as localTimesEpics from './localTimes';
+import * as loginPromotionEpics from './loginPromotionEpic';
+import * as networkEpics from './network';
 import * as noSleepEpics from './noSleep';
+import * as notificationEpics from './notifications';
 import * as scrambleEpics from './scramble';
 import * as settingsEpics from './settings';
-import * as authenticationEpics from './authentication';
-import * as localTimesEpics from './localTimes';
-import * as networkEpics from './network';
+import * as themeEpics from './theme';
 import * as timerEpics from './timer';
-import * as activationEpics from './activation';
-import * as trainerEpics from './trainer';
 import * as timesEpics from './times';
-import * as notificationEpics from './notifications';
-import * as loginPromotionEpics from './loginPromotionEpic';
+import * as trainerEpics from './trainer';
 import * as versionEpics from './version';
-import * as importEpics from './import';
 
 const rootEpic = combineEpics(
-  noSleepEpics.enableNoSleepEpic,
+  activationEpics.fireActivationEpic,
+  activationEpics.fireInspectionEpic,
+  activationEpics.initializeActivationEpic,
+  activationEpics.prepareActivationEpic,
+  activationEpics.runInspectionEpic,
+  activationEpics.stopActivationEpic,
+  activationEpics.warnForInspectionEpic,
+  authenticationEpics.loginEpic,
+  authenticationEpics.loginStatusEpic,
+  authenticationEpics.logoutEpic,
+  authenticationEpics.redirectStatusEpic,
+  importEpics.importTimesEpic,
+  localTimesEpics.loadLocalTimesEpic,
+  localTimesEpics.storeLocalTimesEpic,
+  loginPromotionEpics.dismissLoginPromotionEpic,
+  loginPromotionEpics.loginPromotionEpic,
+  networkEpics.offlineEpic,
+  networkEpics.onlineEpic,
   noSleepEpics.disableNoSleepEpic,
+  noSleepEpics.enableNoSleepEpic,
+  notificationEpics.notificationEpic,
   scrambleEpics.scrambleEpic,
   settingsEpics.loadSettingsEpic,
   settingsEpics.storeSettingsEpic,
-  authenticationEpics.loginStatusEpic,
-  authenticationEpics.loginEpic,
-  authenticationEpics.logoutEpic,
-  authenticationEpics.redirectStatusEpic,
-  networkEpics.offlineEpic,
-  networkEpics.onlineEpic,
-  localTimesEpics.loadLocalTimesEpic,
-  localTimesEpics.storeLocalTimesEpic,
+  themeEpics.themeEpic,
   timerEpics.failInspectionEpic,
-  timerEpics.submitTimeEpic,
-  timerEpics.stopTimerEpic,
   timerEpics.resetTimeEpic,
-  activationEpics.initializeActivationEpic,
-  activationEpics.prepareActivationEpic,
-  activationEpics.fireActivationEpic,
-  activationEpics.fireInspectionEpic,
-  activationEpics.stopActivationEpic,
-  activationEpics.runInspectionEpic,
-  activationEpics.warnForInspectionEpic,
-  timesEpics.saveTimeEpic,
-  timesEpics.loadTimesEpic,
-  timesEpics.updateTimeEpic,
-  timesEpics.removeTimeEpic,
+  timerEpics.stopTimerEpic,
+  timerEpics.submitTimeEpic,
   timesEpics.archiveTimesEpic,
   timesEpics.clearTimesEpic,
+  timesEpics.loadTimesEpic,
+  timesEpics.removeTimeEpic,
+  timesEpics.saveTimeEpic,
   timesEpics.storeTimesEpic,
-  trainerEpics.pickCaseEpic,
+  timesEpics.updateTimeEpic,
   trainerEpics.loadEnabledCasesEpic,
-  trainerEpics.saveEnabledCasesEpic,
-  trainerEpics.restoreActiveTrainingTypeEpic,
-  trainerEpics.saveActiveTrainingTypeEpic,
-  trainerEpics.retryCaseEpic,
-  trainerEpics.storeTrainerTimesEpic,
   trainerEpics.loadTrainerTimesEpic,
+  trainerEpics.pickCaseEpic,
+  trainerEpics.restoreActiveTrainingTypeEpic,
+  trainerEpics.retryCaseEpic,
+  trainerEpics.saveActiveTrainingTypeEpic,
+  trainerEpics.saveEnabledCasesEpic,
   trainerEpics.stopRehearsalEpic,
-  notificationEpics.notificationEpic,
-  loginPromotionEpics.loginPromotionEpic,
-  loginPromotionEpics.dismissLoginPromotionEpic,
-  versionEpics.newVersionEpic,
-  importEpics.importTimesEpic
+  trainerEpics.storeTrainerTimesEpic,
+  versionEpics.newVersionEpic
 );
 
 export default rootEpic;

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/pro-solid-svg-icons/faCog';
 
+import { DARK, LIGHT, AUTO, THEME_OPTIONS } from '../constants/theme';
 import Shortcut from './shared/Shortcut';
 import { ACTIVATION_DURATION_OPTIONS, BUTTON_COLORS } from '../constants/settings';
 import IconButton from './shared/IconButton';
@@ -21,10 +22,12 @@ const Settings = ({ settings, changeSetting }) => (
       toggle={({ show, toggle }) => (
         <IconButton onClick={show}>
           <Shortcut command="openSettings" action={toggle} />
-          <Shortcut
-            command="toggleDarkMode"
-            action={() => changeSetting('theme', settings.theme === 'dark' ? 'light' : 'dark')}
-          />
+          {settings.theme !== AUTO && (
+            <Shortcut
+              command="toggleDarkMode"
+              action={() => changeSetting('theme', settings.theme === DARK ? LIGHT : DARK)}
+            />
+          )}
           <FontAwesomeIcon icon={faCog} fixedWidth />
         </IconButton>
       )}
@@ -91,11 +94,12 @@ const Settings = ({ settings, changeSetting }) => (
               <SectionTitle>User Interface</SectionTitle>
               <Section margin="sm">
                 <Setting>
-                  <label>Dark mode</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={checked => changeSetting('theme', checked ? 'dark' : 'light')}
-                    checked={settings.theme === 'dark'}
+                  <label>Theme</label>
+                  <Select
+                    onChange={theme => changeSetting('theme', theme)}
+                    options={THEME_OPTIONS}
+                    value={settings.theme}
+                    fullWidth
                   />
                 </Setting>
               </Section>

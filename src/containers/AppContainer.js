@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import * as themes from '../theme';
 import App from '../components/App';
-import { getTheme } from '../selectors/settings';
+import { getTheme } from '../selectors/theme';
 
 class AppContainer extends React.Component {
   constructor(props, ...args) {

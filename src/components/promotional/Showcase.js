@@ -130,7 +130,8 @@ const Showcase = ({ theme }) => {
         <>
           <p>
             Stunning true dark mode. Look&apos;s great on all devices. Easy on the eyes at night,
-            and might save you some battery on an OLED screen.
+            and might save you some battery on an OLED screen. With the auto setting it will even
+            change based on your OS theme!
           </p>
           <Image src="/images/dark-mode.png" />
         </>

@@ -128,3 +128,6 @@ export const removeTrainerTime = createAction(types.REMOVE_TRAINER_TIME, id => i
 export const loadTrainerTimes = createAction(types.LOAD_TRAINER_TIMES, times => times);
 export const startRehearsal = createAction(types.START_REHEARSAL);
 export const stopRehearsal = createAction(types.STOP_REHEARSAL);
+
+// Theme
+export const setTheme = createAction(types.SET_THEME, theme => theme);

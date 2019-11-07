@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import * as puzzleHelpers from '../helpers/puzzle';
 import { isInTrainer } from './router';
+import { isInDarkMode } from './theme';
 
 export const getSettings = state => state.settings;
 export const getPuzzle = state => state.settings.puzzle;
@@ -14,7 +15,6 @@ export const getActivationDuration = state =>
 export const shouldFixGraphYAxis = state => state.settings.fixGraphYAxis;
 export const shouldShowTimerTime = state => state.settings.showTimerTime;
 export const shouldWarnForInspectionTime = state => state.settings.warnForInspectionTime;
-export const isInDarkMode = state => getTheme(state) === 'dark';
 export const getDisabledArchiveGraphLines = state => state.settings.disabledArchiveGraphLines;
 
 export const getButtonColor = state =>
