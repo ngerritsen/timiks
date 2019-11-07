@@ -19,7 +19,8 @@ export const BUTTON_COLORS = [
   { label: 'Blue', value: 'blue' },
   { label: 'Deep blue', value: 'deepBlue' },
   { label: 'Purple', value: 'purple' },
-  { label: 'Pink', value: 'pink' }
+  { label: 'Pink', value: 'pink' },
+  { label: 'Brown', value: 'brown' }
 ];
 export const DEFAULT_BUTTON_COLOR = 'primary';
 
