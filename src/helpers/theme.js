@@ -19,5 +19,7 @@ export function listenForPreferredTheme() {
 }
 
 export function getPreferredTheme() {
-  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)') ? DARK : LIGHT;
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? DARK
+    : LIGHT;
 }

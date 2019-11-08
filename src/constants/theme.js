@@ -9,4 +9,3 @@ export const THEME_OPTIONS = [
 ];
 
 export const DEFAULT_THEME = AUTO;
-export const PREFERRED_THEME_POLL_INTERVAL = 50;
