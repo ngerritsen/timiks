@@ -10,6 +10,8 @@ script:
 after_success:
   - cd public; zip ../timiks.zip *; cd ..
   - "curl -F 'data=@timiks.zip' -H 'X-Key: '$DEPLOY_KEY -H 'X-ExtractTo: timiks' https://carehr.nl/deploy/"
+  - firebase use --token $FIREBASE_TOKEN timiks-1fc10
+  - firebase --non-interactive --token $FIREBASE_TOKEN
 deploy:
   skip_cleanup: true
   provider: firebase
