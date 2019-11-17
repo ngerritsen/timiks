@@ -125,7 +125,7 @@ footer a:active {
   padding: 2.4rem 0;
   color: #fff;
   position: fixed;
-  bottom: 0;
+  top: 0;
   width: 100%;
   z-index: 9999;
 }
