@@ -124,6 +124,10 @@ footer a:active {
   background-color: #e83d3a;
   padding: 2.4rem 0;
   color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
 .error-message-reload {
