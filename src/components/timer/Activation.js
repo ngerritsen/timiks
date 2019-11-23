@@ -21,7 +21,7 @@ const Activation = ({
   validTimeInput,
   buttonColor
 }) => (
-  <ActivationContainer {...(stopped ? {} : { 'data-stop': true })}>
+  <ActivationContainer>
     <Button
       size="lg"
       color={buttonColor}

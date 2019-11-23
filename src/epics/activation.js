@@ -140,11 +140,10 @@ const stops = () =>
     fromEvent(window, 'keydown'),
     fromEvent(window, 'touchstart', { passive: false }),
     fromEvent(window, 'mousedown')
-  ).pipe(filter(isValidStopEvent));
+  );
 
 const isValidActivationEvent = event =>
   Boolean(document.querySelector('[data-activation]')) &&
-  !document.querySelector('[data-stop]') &&
   !document.querySelector('[data-modal]') &&
   !event.repeat &&
   !inputElements.includes(String(event.target.tagName).toLowerCase()) &&
@@ -167,5 +166,4 @@ const isValidTouchClickEvent = event =>
   !(event.type.includes('mouse') && event.button !== 0);
 
 const isSpacebarEvent = event => keycode(event.keyCode) === 'space';
-const isValidStopEvent = () => Boolean(document.querySelector('[data-stop]'));
 const scrollToTop = () => window.scrollTo(0, 0);
