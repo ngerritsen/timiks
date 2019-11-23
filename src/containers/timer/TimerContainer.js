@@ -13,8 +13,10 @@ function mapStateToProps(state) {
   const stopTime = timerSelectors.getStopTime(state);
   const ready = isReady(state);
   const useManualTimeEntry = shouldUseManualTimeEntry(state);
+  const inspecting = timerSelectors.isInspecting(state);
   const lastTime = getLastTime(state);
-  const showLastTime = startTime === 0 && !ready && !useManualTimeEntry && Boolean(lastTime);
+  const showLastTime =
+    startTime === 0 && !ready && !useManualTimeEntry && !inspecting && Boolean(lastTime);
   const isTraining = isInTrainer(state);
 
   return {

@@ -13,7 +13,7 @@ import TimeEntryContainer from '../../containers/timer/TimeEntryContainer';
 import IncrementingTime from './IncrementingTime';
 import DecrementingTime from './DecrementingTime';
 import { INSPECTION_TIME } from '../../constants/timer';
-import { getZIndex, getBreakpoint } from '../../helpers/theme';
+import { getZIndex, getBreakpoint, getColor } from '../../helpers/theme';
 import Tag from '../shared/Tag';
 import TrainerStatusContainer from '../../containers/trainer/TrainerStatusContainer';
 import TrainerPreviousCaseContainer from '../../containers/trainer/TrainerPreviousCaseContainer';
@@ -49,7 +49,7 @@ const Timer = ({
       </TimerHeader>
     </Section>
     <Section margin="sm">
-      <TimerTime disabled={preparing && !ready}>
+      <TimerTime color={getTimeColor(preparing, preparingForInspection, ready)}>
         {(() => {
           switch (true) {
             case useManualTimeEntry:
@@ -103,6 +103,17 @@ Timer.propTypes = {
   isTraining: PropTypes.bool
 };
 
+function getTimeColor(preparing, preparingForInspection, ready) {
+  switch (true) {
+    case (preparing && ready) || preparingForInspection:
+      return 'green';
+    case preparing && !ready:
+      return 'red';
+    default:
+      return 'fg';
+  }
+}
+
 const TimerActivationContainer = styled.div`
   position: relative;
   z-index: ${getZIndex('onFullScreenMask')};
@@ -124,7 +135,7 @@ const TimerTime = styled.div`
   align-items: center;
   justify-content: center;
   height: 7rem;
-  opacity: ${props => (props.disabled ? 0.5 : 1)};
+  color: ${props => getColor(props.color)(props)};
   font-size: 5.4rem;
 `;
 
