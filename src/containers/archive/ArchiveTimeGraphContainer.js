@@ -17,8 +17,4 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { changeSetting },
-  mergeProps
-)(TimeGraph);
+export default connect(mapStateToProps, { changeSetting }, mergeProps)(TimeGraph);

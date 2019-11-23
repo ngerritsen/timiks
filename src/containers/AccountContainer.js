@@ -18,7 +18,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { login, logout }
-)(Account);
+export default connect(mapStateToProps, { login, logout })(Account);

@@ -13,8 +13,4 @@ function mergeProps(_, dispatchProps, ownProps) {
   };
 }
 
-export default connect(
-  undefined,
-  { updateTime },
-  mergeProps
-)(EditComment);
+export default connect(undefined, { updateTime }, mergeProps)(EditComment);

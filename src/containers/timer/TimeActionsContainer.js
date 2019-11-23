@@ -23,8 +23,4 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { removeTime, updateTime },
-  mergeProps
-)(TimeActions);
+export default connect(mapStateToProps, { removeTime, updateTime }, mergeProps)(TimeActions);

@@ -8,7 +8,11 @@ import CubeFace from './CubeFace';
 import { getSize, getColor } from '../../helpers/theme';
 import Warning from '../shared/Warning';
 
-const CUBE_LAYOUT = [[null, UP, null, null], [LEFT, FRONT, RIGHT, BACK], [null, DOWN, null, null]];
+const CUBE_LAYOUT = [
+  [null, UP, null, null],
+  [LEFT, FRONT, RIGHT, BACK],
+  [null, DOWN, null, null]
+];
 
 const CubePreview = ({ scramble, cubeSize }) => {
   const cube = layoutScramble(scramble, cubeSize);

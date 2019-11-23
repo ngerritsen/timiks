@@ -16,7 +16,6 @@ export const hasInspectionPenalty = state =>
   shouldUseInspectionTime(state) &&
   getStartTime(state) - getInspectionStartTime(state) > INSPECTION_TIME;
 
-export const isValidTimeInput = createSelector(
-  getTimeInput,
-  timeInput => Boolean(parseTimeInput(timeInput))
+export const isValidTimeInput = createSelector(getTimeInput, timeInput =>
+  Boolean(parseTimeInput(timeInput))
 );

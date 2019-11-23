@@ -12,7 +12,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { changeSetting, refreshScramble }
-)(TimerOptions);
+export default connect(mapStateToProps, { changeSetting, refreshScramble })(TimerOptions);

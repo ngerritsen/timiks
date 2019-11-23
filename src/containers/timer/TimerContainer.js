@@ -35,7 +35,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { submitTimeInput, updateTimeInput }
-)(Timer);
+export default connect(mapStateToProps, { submitTimeInput, updateTimeInput })(Timer);

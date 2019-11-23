@@ -12,7 +12,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { retryCase, reQueueCase }
-)(TrainerPreviousCase);
+export default connect(mapStateToProps, { retryCase, reQueueCase })(TrainerPreviousCase);

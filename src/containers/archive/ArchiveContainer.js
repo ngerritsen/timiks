@@ -16,7 +16,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { removeTime, requireTimes }
-)(Archive);
+export default connect(mapStateToProps, { removeTime, requireTimes })(Archive);

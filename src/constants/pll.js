@@ -29,7 +29,20 @@ export const cases = [
     probability: 1 / 18,
     algs: [`R2 U (R U R' U') R' U' (R' U R')`, `y2 (R' U R' U') R' U' (R' U R U) R2'`],
     preview: 'BBB OGO GRG ROR YYY YYY YYY',
-    previewArrows: [[[0, 1], [2, 1]], [[2, 1], [1, 2]], [[1, 2], [0, 1]]]
+    previewArrows: [
+      [
+        [0, 1],
+        [2, 1]
+      ],
+      [
+        [2, 1],
+        [1, 2]
+      ],
+      [
+        [1, 2],
+        [0, 1]
+      ]
+    ]
   },
   {
     name: 'Ua',
@@ -42,7 +55,20 @@ export const cases = [
       `y2 (R2 U' R' U') R U R U (R U' R)`
     ],
     preview: 'BBB ORO GOG RGR YYY YYY YYY',
-    previewArrows: [[[2, 1], [0, 1]], [[1, 2], [2, 1]], [[0, 1], [1, 2]]]
+    previewArrows: [
+      [
+        [2, 1],
+        [0, 1]
+      ],
+      [
+        [1, 2],
+        [2, 1]
+      ],
+      [
+        [0, 1],
+        [1, 2]
+      ]
+    ]
   },
   {
     name: 'Z',
@@ -51,7 +77,16 @@ export const cases = [
     probability: 1 / 36,
     algs: [`(M2' U M2' U) (M' U2) (M2' U2 M') [U2]`, `y' M' U (M2' U M2') U (M' U2 M2) [U']`],
     preview: 'BRB OGO GOG RBR YYY YYY YYY',
-    previewArrows: [[[0, 1], [1, 0]], [[1, 2], [2, 1]]]
+    previewArrows: [
+      [
+        [0, 1],
+        [1, 0]
+      ],
+      [
+        [1, 2],
+        [2, 1]
+      ]
+    ]
   },
   {
     name: 'H',
@@ -60,7 +95,10 @@ export const cases = [
     probability: 1 / 72,
     algs: [`(M2' U M2') U2 (M2' U M2')`],
     preview: 'ORO GBG ROR BGB YYY YYY YYY',
-    previewArrows: [[[1, 0], [1, 2], true], [[0, 1], [2, 1], true]]
+    previewArrows: [
+      [[1, 0], [1, 2], true],
+      [[0, 1], [2, 1], true]
+    ]
   },
   {
     name: 'Aa',
@@ -69,7 +107,20 @@ export const cases = [
     probability: 1 / 18,
     algs: [`x (R' U R') D2 (R U' R') D2 R2 x'`, `y x' R2 D2 (R' U' R) D2 (R' U R') x`],
     preview: 'GOG RGB ORR BBO YYY YYY YYY',
-    previewArrows: [[[0, 0], [2, 0]], [[2, 0], [2, 2]], [[2, 2], [0, 0]]]
+    previewArrows: [
+      [
+        [0, 0],
+        [2, 0]
+      ],
+      [
+        [2, 0],
+        [2, 2]
+      ],
+      [
+        [2, 2],
+        [0, 0]
+      ]
+    ]
   },
   {
     name: 'Ab',
@@ -78,7 +129,20 @@ export const cases = [
     probability: 1 / 18,
     algs: [`x R2' D2 (R U R') D2 (R U' R) x'`, `y x' (R U' R) D2 (R' U R) D2 R2' x`],
     preview: 'ROB OGO GRR BBG YYY YYY YYY',
-    previewArrows: [[[0, 0], [2, 2]], [[2, 2], [2, 0]], [[2, 0], [0, 0]]]
+    previewArrows: [
+      [
+        [0, 0],
+        [2, 2]
+      ],
+      [
+        [2, 2],
+        [2, 0]
+      ],
+      [
+        [2, 0],
+        [0, 0]
+      ]
+    ]
   },
   {
     name: 'E',
@@ -87,7 +151,10 @@ export const cases = [
     probability: 1 / 36,
     algs: [`x' (R U' R' D) (R U R' D') (R U R' D) (R U' R' D') x`],
     preview: 'BOG RGO GRB OBR YYY YYY YYY',
-    previewArrows: [[[0, 0], [0, 2], true], [[2, 0], [2, 2], true]]
+    previewArrows: [
+      [[0, 0], [0, 2], true],
+      [[2, 0], [2, 2], true]
+    ]
   },
   {
     name: 'Ra',
@@ -100,7 +167,10 @@ export const cases = [
       `(R U R' F') (R U2' R' U2') (R' F R U) (R U2' R') [U']`
     ],
     preview: 'BRO GOB OGG RBR YYY YYY YYY',
-    previewArrows: [[[0, 1], [1, 0], true], [[2, 0], [2, 2], true]]
+    previewArrows: [
+      [[0, 1], [1, 0], true],
+      [[2, 0], [2, 2], true]
+    ]
   },
   {
     name: 'Rb',
@@ -112,7 +182,10 @@ export const cases = [
       `(R' U2 R' D') (R U' R' D) (R U R U') (R' U' R) [U']`
     ],
     preview: 'GOB ORG RGR BBO YYY YYY YYY',
-    previewArrows: [[[0, 0], [2, 0], true], [[1, 2], [2, 1], true]]
+    previewArrows: [
+      [[0, 0], [2, 0], true],
+      [[1, 2], [2, 1], true]
+    ]
   },
   {
     name: 'Ja',
@@ -121,7 +194,10 @@ export const cases = [
     probability: 1 / 18,
     algs: [`(R' U L' U2) (R U' R' U2 R) L [U']`, `y' (L' U' L F) (L' U' L U) L F' L2' U L [U]`],
     preview: 'ORR BOO GGG RBB YYY YYY YYY',
-    previewArrows: [[[0, 0], [2, 0], true], [[0, 1], [1, 0], true]]
+    previewArrows: [
+      [[0, 0], [2, 0], true],
+      [[0, 1], [1, 0], true]
+    ]
   },
   {
     name: 'Jb',
@@ -130,7 +206,10 @@ export const cases = [
     probability: 1 / 18,
     algs: [`(R U R' F') (R U R' U') R' F R2 U' R' [U']`],
     preview: 'OOG RRO GGR BBB YYY YYY YYY',
-    previewArrows: [[[2, 0], [2, 2], true], [[1, 2], [2, 1], true]]
+    previewArrows: [
+      [[2, 0], [2, 2], true],
+      [[1, 2], [2, 1], true]
+    ]
   },
   {
     name: 'T',
@@ -139,7 +218,10 @@ export const cases = [
     probability: 1 / 18,
     algs: [`(R U R' U') (R' F R2 U') R' U' (R U R' F')`],
     preview: 'OOG RBO GRR BGB YYY YYY YYY',
-    previewArrows: [[[0, 1], [2, 1], true], [[2, 0], [2, 2], true]]
+    previewArrows: [
+      [[0, 1], [2, 1], true],
+      [[2, 0], [2, 2], true]
+    ]
   },
   {
     name: 'F',
@@ -151,7 +233,10 @@ export const cases = [
       `y (R' U2 R' U') y (R' F' R2 U') (R' U R' F) R U' F`
     ],
     preview: 'BGO GOB OBG RRR YYY YYY YYY',
-    previewArrows: [[[1, 0], [1, 2], true], [[2, 0], [2, 2], true]]
+    previewArrows: [
+      [[1, 0], [1, 2], true],
+      [[2, 0], [2, 2], true]
+    ]
   },
   {
     name: 'V',
@@ -160,7 +245,10 @@ export const cases = [
     probability: 1 / 18,
     algs: [`(R' U R' U') y (R' F' R2 U') (R' U R' F) R F`],
     preview: 'RGO GOB ORR BBG YYY YYY YYY',
-    previewArrows: [[[0, 0], [2, 2], true], [[1, 0], [2, 1], true]]
+    previewArrows: [
+      [[0, 0], [2, 2], true],
+      [[1, 0], [2, 1], true]
+    ]
   },
   {
     name: 'Y',
@@ -169,7 +257,10 @@ export const cases = [
     probability: 1 / 18,
     algs: [`F (R U' R' U') (R U R' F') (R U R' U') (R' F R F')`],
     preview: 'RBO GGB ORR BOG YYY YYY YYY',
-    previewArrows: [[[0, 0], [2, 2], true], [[0, 1], [1, 0], true]]
+    previewArrows: [
+      [[0, 0], [2, 2], true],
+      [[0, 1], [1, 0], true]
+    ]
   },
   {
     name: 'Na',
@@ -181,7 +272,10 @@ export const cases = [
       `z (U R' D) (R2 U' R D') (U R' D) (R2 U' R D') [R'] z'`
     ],
     preview: 'OOR BBG RRO GGB YYY YYY YYY',
-    previewArrows: [[[0, 2], [2, 0], true], [[0, 1], [2, 1], true]]
+    previewArrows: [
+      [[0, 2], [2, 0], true],
+      [[0, 1], [2, 1], true]
+    ]
   },
   {
     name: 'Nb',
@@ -193,7 +287,10 @@ export const cases = [
       `(R' U L' U2 R U' L) (R' U L' U2 R U' L) [U]`
     ],
     preview: 'ROO GBB ORR BGG YYY YYY YYY',
-    previewArrows: [[[0, 0], [2, 2], true], [[0, 1], [2, 1], true]]
+    previewArrows: [
+      [[0, 0], [2, 2], true],
+      [[0, 1], [2, 1], true]
+    ]
   },
   {
     name: 'Ga',
@@ -206,12 +303,30 @@ export const cases = [
     ],
     preview: 'GBR BOG RRB OGO YYY YYY YYY',
     previewArrows: [
-      [[0, 0], [2, 0]],
-      [[0, 2], [0, 0]],
-      [[2, 0], [0, 2]],
-      [[1, 0], [0, 1]],
-      [[0, 1], [2, 1]],
-      [[2, 1], [1, 0]]
+      [
+        [0, 0],
+        [2, 0]
+      ],
+      [
+        [0, 2],
+        [0, 0]
+      ],
+      [
+        [2, 0],
+        [0, 2]
+      ],
+      [
+        [1, 0],
+        [0, 1]
+      ],
+      [
+        [0, 1],
+        [2, 1]
+      ],
+      [
+        [2, 1],
+        [1, 0]
+      ]
     ]
   },
   {
@@ -226,12 +341,30 @@ export const cases = [
     ],
     preview: 'ORO GOR BBG RGB YYY YYY YYY',
     previewArrows: [
-      [[0, 2], [2, 0]],
-      [[2, 0], [0, 0]],
-      [[0, 0], [0, 2]],
-      [[0, 1], [1, 0]],
-      [[1, 0], [2, 1]],
-      [[2, 1], [0, 1]]
+      [
+        [0, 2],
+        [2, 0]
+      ],
+      [
+        [2, 0],
+        [0, 0]
+      ],
+      [
+        [0, 0],
+        [0, 2]
+      ],
+      [
+        [0, 1],
+        [1, 0]
+      ],
+      [
+        [1, 0],
+        [2, 1]
+      ],
+      [
+        [2, 1],
+        [0, 1]
+      ]
     ]
   },
   {
@@ -245,12 +378,30 @@ export const cases = [
     ],
     preview: 'GRR BOG RGB OBO YYY YYY YYY',
     previewArrows: [
-      [[0, 0], [0, 2]],
-      [[0, 2], [2, 2]],
-      [[2, 2], [0, 0]],
-      [[0, 1], [2, 1]],
-      [[2, 1], [1, 2]],
-      [[1, 2], [0, 1]]
+      [
+        [0, 0],
+        [0, 2]
+      ],
+      [
+        [0, 2],
+        [2, 2]
+      ],
+      [
+        [2, 2],
+        [0, 0]
+      ],
+      [
+        [0, 1],
+        [2, 1]
+      ],
+      [
+        [2, 1],
+        [1, 2]
+      ],
+      [
+        [1, 2],
+        [0, 1]
+      ]
     ]
   },
   {
@@ -264,12 +415,30 @@ export const cases = [
     ],
     preview: 'GBR BGG ROB ORO YYY YYY YYY',
     previewArrows: [
-      [[0, 0], [2, 0]],
-      [[2, 0], [0, 2]],
-      [[0, 2], [0, 0]],
-      [[1, 0], [0, 1]],
-      [[0, 1], [1, 2]],
-      [[1, 2], [1, 0]]
+      [
+        [0, 0],
+        [2, 0]
+      ],
+      [
+        [2, 0],
+        [0, 2]
+      ],
+      [
+        [0, 2],
+        [0, 0]
+      ],
+      [
+        [1, 0],
+        [0, 1]
+      ],
+      [
+        [0, 1],
+        [1, 2]
+      ],
+      [
+        [1, 2],
+        [1, 0]
+      ]
     ]
   }
 ];

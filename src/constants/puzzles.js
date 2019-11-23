@@ -19,7 +19,11 @@ export const DODECAHEDRON = 'DODECAHEDRON';
 export const SKEWB = 'SKEWB';
 export const RELAY = 'RELAY';
 
-export const CUBE_OPPOSITES = [[UP, DOWN], [RIGHT, LEFT], [FRONT, BACK]];
+export const CUBE_OPPOSITES = [
+  [UP, DOWN],
+  [RIGHT, LEFT],
+  [FRONT, BACK]
+];
 export const CUBE_DIRECTIONS = [UP, DOWN, FRONT, BACK, LEFT, RIGHT];
 export const STATIC_DIRECTIONS = [X, Y, Z];
 

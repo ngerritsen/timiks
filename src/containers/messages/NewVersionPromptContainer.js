@@ -11,7 +11,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { dismissNewVersion }
-)(NewVersionPrompt);
+export default connect(mapStateToProps, { dismissNewVersion })(NewVersionPrompt);

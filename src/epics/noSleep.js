@@ -7,11 +7,7 @@ import { noSleepDisabled, noSleepEnabled } from '../actions';
 import { isStopped } from '../selectors/timer';
 
 export const enableNoSleepEpic = action$ =>
-  action$.pipe(
-    ofType(actionTypes.START_TIMER),
-    tap(noSleepService.enable),
-    map(noSleepEnabled)
-  );
+  action$.pipe(ofType(actionTypes.START_TIMER), tap(noSleepService.enable), map(noSleepEnabled));
 
 export const disableNoSleepEpic = (action$, state$) =>
   action$.pipe(

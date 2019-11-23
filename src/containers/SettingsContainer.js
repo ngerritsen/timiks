@@ -10,7 +10,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { changeSetting }
-)(Settings);
+export default connect(mapStateToProps, { changeSetting })(Settings);

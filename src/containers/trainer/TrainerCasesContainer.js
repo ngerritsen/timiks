@@ -12,7 +12,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { selectCase, deselectCase, selectCases, deselectCases }
-)(TrainerCases);
+export default connect(mapStateToProps, { selectCase, deselectCase, selectCases, deselectCases })(
+  TrainerCases
+);

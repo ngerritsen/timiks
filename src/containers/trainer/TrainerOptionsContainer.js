@@ -12,7 +12,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { changeTrainingType, startRehearsal, stopRehearsal }
-)(TrainerOptions);
+export default connect(mapStateToProps, { changeTrainingType, startRehearsal, stopRehearsal })(
+  TrainerOptions
+);

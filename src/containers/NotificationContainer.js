@@ -12,7 +12,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { hideNotification }
-)(Notification);
+export default connect(mapStateToProps, { hideNotification })(Notification);

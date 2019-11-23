@@ -12,10 +12,8 @@ export const getTimes = state => state.times.times;
 
 export const getTime = (state, id) => getTimes(state).find(time => time.id === id);
 
-export const getCurrentTimes = createSelector(
-  getTimes,
-  getPuzzle,
-  (times, puzzle) => times.filter(isCurrent).filter(time => time.puzzle === puzzle)
+export const getCurrentTimes = createSelector(getTimes, getPuzzle, (times, puzzle) =>
+  times.filter(isCurrent).filter(time => time.puzzle === puzzle)
 );
 
 export const getRequiredTimes = state => state.times.requiredTimes;
@@ -27,16 +25,14 @@ export const getTimesForLocalStorage = (state, isLoggedIn) =>
 
 export const getUnstoredTimes = state => getTimes(state).filter(time => !time.stored);
 
-export const getArchivedTimes = createSelector(
-  getTimes,
-  times => times.filter(time => !time.current)
+export const getArchivedTimes = createSelector(getTimes, times =>
+  times.filter(time => !time.current)
 );
 
 export const hasCurrentTimes = state => getCurrentTimes(state).length > 0;
 
-export const getCurrentMarkedSortedTimes = createSelector(
-  getCurrentTimes,
-  times => markBestTime(times).sort(createAscSorter('date'))
+export const getCurrentMarkedSortedTimes = createSelector(getCurrentTimes, times =>
+  markBestTime(times).sort(createAscSorter('date'))
 );
 
 export const getLastTime = createSelector(
@@ -45,15 +41,11 @@ export const getLastTime = createSelector(
   (times, lastTimeId) => times.find(time => time.id === lastTimeId)
 );
 
-export const getCurrentNoDnfTimes = createSelector(
-  getCurrentTimes,
-  times => times.filter(time => !time.dnf).sort(createAscSorter('date'))
+export const getCurrentNoDnfTimes = createSelector(getCurrentTimes, times =>
+  times.filter(time => !time.dnf).sort(createAscSorter('date'))
 );
 
-export const getStatsForCurrentTimes = createSelector(
-  getCurrentMarkedSortedTimes,
-  calculateStats
-);
+export const getStatsForCurrentTimes = createSelector(getCurrentMarkedSortedTimes, calculateStats);
 
 export const getSortedFilteredArchivedTimes = createSelector(
   getArchivedTimes,

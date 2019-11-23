@@ -10,7 +10,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { dismissLoginPromotion }
-)(LoginPromotion);
+export default connect(mapStateToProps, { dismissLoginPromotion })(LoginPromotion);

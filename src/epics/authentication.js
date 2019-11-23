@@ -29,11 +29,7 @@ export const redirectStatusEpic = action$ =>
   );
 
 export const loginEpic = action$ =>
-  action$.pipe(
-    ofType(LOGIN),
-    tap(authenticationService.login),
-    map(dismissLoginPromotion)
-  );
+  action$.pipe(ofType(LOGIN), tap(authenticationService.login), map(dismissLoginPromotion));
 
 export const logoutEpic = action$ =>
   action$.pipe(

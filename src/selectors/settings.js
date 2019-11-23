@@ -22,10 +22,7 @@ export const getButtonColor = state =>
     ? state.settings.buttonColorDarkMode || state.settings.buttonColor
     : state.settings.buttonColor;
 
-export const getPuzzleInfo = createSelector(
-  getPuzzle,
-  puzzleHelpers.getPuzzle
-);
+export const getPuzzleInfo = createSelector(getPuzzle, puzzleHelpers.getPuzzle);
 
 export const shouldUseManualTimeEntry = state =>
   state.settings.useManualTimeEntry && !isInTrainer(state);

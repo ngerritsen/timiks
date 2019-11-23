@@ -14,7 +14,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { changeSetting }
-)(ArchiveOptions);
+export default connect(mapStateToProps, { changeSetting })(ArchiveOptions);
