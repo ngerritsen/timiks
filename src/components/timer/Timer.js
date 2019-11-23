@@ -13,10 +13,11 @@ import TimeEntryContainer from '../../containers/timer/TimeEntryContainer';
 import IncrementingTime from './IncrementingTime';
 import DecrementingTime from './DecrementingTime';
 import { INSPECTION_TIME } from '../../constants/timer';
-import { getZIndex } from '../../helpers/theme';
+import { getZIndex, getBreakpoint } from '../../helpers/theme';
 import Tag from '../shared/Tag';
 import TrainerStatusContainer from '../../containers/trainer/TrainerStatusContainer';
 import TrainerPreviousCaseContainer from '../../containers/trainer/TrainerPreviousCaseContainer';
+
 const Timer = ({
   inspecting,
   preparing,
@@ -31,54 +32,60 @@ const Timer = ({
   stopTime,
   isTraining
 }) => (
-  <div>
+  <TimerActivationContainer {...(useManualTimeEntry ? {} : { 'data-activation': true })}>
+    <Section margin="xs">
+      <TimerHeader>
+        {isTraining && (
+          <span data-no-activation>
+            <TrainerStatusContainer />
+          </span>
+        )}
+        {!isTraining && showLastTime && lastTime.best && (
+          <Tag color="green" data-no-activation>
+            <FontAwesomeIcon icon={faThumbsUp} />
+            &nbsp; Best session single
+          </Tag>
+        )}
+      </TimerHeader>
+    </Section>
     <Section margin="sm">
-      <TimerTimeContainer withManualEntry={useManualTimeEntry}>
-        <TimerHeader>
-          {isTraining && <TrainerStatusContainer />}
-          {!isTraining && showLastTime && lastTime.best && (
-            <Tag color="green">
-              <FontAwesomeIcon icon={faThumbsUp} />
-              &nbsp; Best session single
-            </Tag>
-          )}
-        </TimerHeader>
-        <TimerTime disabled={preparing && !ready}>
-          {(() => {
-            switch (true) {
-              case useManualTimeEntry:
-                return <TimeEntryContainer />;
-              case inspecting:
-                return (
-                  <DecrementingTime
-                    decrementFrom={INSPECTION_TIME}
-                    startTime={inspectionStartTime}
-                    belowZeroText="+2"
-                    secondsOnly
-                  />
-                );
-              case preparingForInspection:
-                return <Time time={{ ms: INSPECTION_TIME }} secondsOnly />;
-              case startTime > 0 && stopTime > 0:
-                return <Time time={{ ms: stopTime - startTime }} showMilliseconds />;
-              case startTime > 0 && showTimerTime:
-                return <IncrementingTime startTime={startTime} />;
-              case startTime > 0 && !showTimerTime:
-                return <FontAwesomeIcon icon={faSpaceShuttle} rotation={270} />;
-              case showLastTime:
-                return <Time time={lastTime} showMilliseconds />;
-              default:
-                return <Time time={{ ms: 0 }} showMilliseconds />;
-            }
-          })()}
-        </TimerTime>
-      </TimerTimeContainer>
+      <TimerTime disabled={preparing && !ready}>
+        {(() => {
+          switch (true) {
+            case useManualTimeEntry:
+              return <TimeEntryContainer />;
+            case inspecting:
+              return (
+                <DecrementingTime
+                  decrementFrom={INSPECTION_TIME}
+                  startTime={inspectionStartTime}
+                  belowZeroText="+2"
+                  secondsOnly
+                />
+              );
+            case preparingForInspection:
+              return <Time time={{ ms: INSPECTION_TIME }} secondsOnly />;
+            case startTime > 0 && stopTime > 0:
+              return <Time time={{ ms: stopTime - startTime }} showMilliseconds />;
+            case startTime > 0 && showTimerTime:
+              return <IncrementingTime startTime={startTime} />;
+            case startTime > 0 && !showTimerTime:
+              return <FontAwesomeIcon icon={faSpaceShuttle} rotation={270} />;
+            case showLastTime:
+              return <Time time={lastTime} showMilliseconds />;
+            default:
+              return <Time time={{ ms: 0 }} showMilliseconds />;
+          }
+        })()}
+      </TimerTime>
     </Section>
     <TimeFooter withManualEntry={useManualTimeEntry}>
-      {isTraining && startTime > 0 && stopTime > 0 && <TrainerPreviousCaseContainer />}
-      {!isTraining && showLastTime && <TimeActionsContainer lastTime={lastTime} />}
+      <TimeFooterClickArea data-no-activation>
+        {isTraining && startTime > 0 && stopTime > 0 && <TrainerPreviousCaseContainer />}
+        {!isTraining && showLastTime && <TimeActionsContainer lastTime={lastTime} />}
+      </TimeFooterClickArea>
     </TimeFooter>
-  </div>
+  </TimerActivationContainer>
 );
 
 Timer.propTypes = {
@@ -96,31 +103,45 @@ Timer.propTypes = {
   isTraining: PropTypes.bool
 };
 
-const TimeFooter = styled.div`
-  height: ${props => (props.withManualEntry ? '9.3rem' : '6.4rem')};
-  text-align: center;
-  overflow: hidden;
-`;
-
-const TimerHeader = styled.div`
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  top: -2.6rem;
-  left: 0;
-`;
-
-const TimerTime = styled.span`
+const TimerActivationContainer = styled.div`
   position: relative;
-  opacity: ${props => (props.disabled ? 0.5 : 1)};
   z-index: ${getZIndex('onFullScreenMask')};
 `;
 
-const TimerTimeContainer = styled.div`
-  text-align: center;
-  padding: ${props => (props.withManualEntry ? '6rem' : '5.2rem')} 0 0;
+const TimerHeader = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 5rem;
+
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    height: 8rem;
+  }
+`;
+
+const TimerTime = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
   font-size: 5.4rem;
-  position: relative;
+`;
+
+const TimeFooter = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 6.5rem;
+  overflow: hidden;
+
+  @media screen and (min-width: ${getBreakpoint('lg')}) {
+    height: 9rem;
+  }
+`;
+
+const TimeFooterClickArea = styled.span`
+  display: inline-block;
 `;
 
 export default React.memo(Timer);

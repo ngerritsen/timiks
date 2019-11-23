@@ -161,7 +161,11 @@ const preventRepeatEventSideEffects = event => {
   }
 };
 
-const isValidTouchClickEvent = event => Boolean(event.target.closest('[data-activation]'));
+const isValidTouchClickEvent = event =>
+  Boolean(event.target.closest('[data-activation]'), console.log(event)) &&
+  !event.target.closest('[data-no-activation]') &&
+  !(event.type.includes('mouse') && event.button !== 0);
+
 const isSpacebarEvent = event => keycode(event.keyCode) === 'space';
 const isValidStopEvent = () => Boolean(document.querySelector('[data-stop]'));
 const scrollToTop = () => window.scrollTo(0, 0);
