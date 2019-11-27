@@ -4,8 +4,13 @@ let noSleep = null;
 
 export function enable() {
   disable();
-  noSleep = new NoSleep();
-  noSleep.enable();
+
+  try {
+    noSleep = new NoSleep();
+    noSleep.enable();
+  } catch (e) {
+    console.error('Failed to enabled NoSleep.');
+  }
 }
 
 export function disable() {
@@ -13,5 +18,9 @@ export function disable() {
     return;
   }
 
-  noSleep.disable();
+  try {
+    noSleep.disable();
+  } catch (e) {
+    console.error('Failed to disable NoSleep.');
+  }
 }
