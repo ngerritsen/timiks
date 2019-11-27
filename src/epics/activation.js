@@ -19,7 +19,7 @@ import {
 import * as actions from '../actions';
 import * as timerContants from '../constants/timer';
 import { ofType } from 'redux-observable';
-import { PREPARE_ACTIVATION, START_INSPECTION, START_TIMER } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import * as activationSelectors from '../selectors/activation';
 import { isStopped, isInspecting, getStopTime } from '../selectors/timer';
 import { playSound } from '../helpers/audio';
@@ -49,21 +49,21 @@ export const initializeActivationEpic = (_, state$) =>
 
 export const prepareActivationEpic = (action$, state$) =>
   action$.pipe(
-    ofType(PREPARE_ACTIVATION),
+    ofType(actionTypes.PREPARE_ACTIVATION),
     withLatestFrom(state$),
     switchMap(([, state]) =>
       interval(getActivationDuration(state) / timerContants.PREPARATION_STAGES).pipe(
         withLatestFrom(state$),
         filter(([, state]) => !activationSelectors.isReady(state)),
         map(actions.incrementPreparationStage),
-        takeUntil(fires())
+        takeUntil(action$.ofType(actionTypes.RESET_ACTIVATION))
       )
     )
   );
 
 export const warnForInspectionEpic = (action$, state$) =>
   action$.pipe(
-    ofType(START_INSPECTION),
+    ofType(actionTypes.START_INSPECTION),
     withLatestFrom(state$),
     filter(([, state]) => shouldWarnForInspectionTime(state)),
     mergeMap(() =>
@@ -73,7 +73,7 @@ export const warnForInspectionEpic = (action$, state$) =>
             tap(() => playSound(sound))
           )
         )
-      ).pipe(takeUntil(action$.pipe(ofType(START_TIMER))))
+      ).pipe(takeUntil(action$.pipe(ofType(actionTypes.START_TIMER))))
     ),
     ignoreElements()
   );
@@ -88,10 +88,10 @@ export const fireInspectionEpic = (action$, state$) =>
 
 export const runInspectionEpic = action$ =>
   action$.pipe(
-    ofType(START_INSPECTION),
+    ofType(actionTypes.START_INSPECTION),
     switchMap(() =>
       timer(timerContants.INSPECTION_TIME + timerContants.INSPECTION_TIME_PENALTY_TIME).pipe(
-        takeUntil(action$.pipe(ofType(START_TIMER)))
+        takeUntil(action$.pipe(ofType(actionTypes.START_TIMER)))
       )
     ),
     map(actions.failInspection)
