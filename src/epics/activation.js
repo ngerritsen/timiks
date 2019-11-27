@@ -161,7 +161,7 @@ const preventRepeatEventSideEffects = event => {
 };
 
 const isValidTouchClickEvent = event =>
-  Boolean(event.target.closest('[data-activation]'), console.log(event)) &&
+  Boolean(event.target.closest('[data-activation]')) &&
   !event.target.closest('[data-no-activation]') &&
   !(event.type.includes('mouse') && event.button !== 0);
 
