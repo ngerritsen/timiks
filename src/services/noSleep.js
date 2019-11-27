@@ -1,4 +1,5 @@
 import NoSleep from 'nosleep.js/dist/NoSleep.js';
+import * as Sentry from '@sentry/browser';
 
 let noSleep = null;
 
@@ -8,8 +9,8 @@ export function enable() {
   try {
     noSleep = new NoSleep();
     noSleep.enable();
-  } catch (e) {
-    console.error('Failed to enabled NoSleep.');
+  } catch (err) {
+    Sentry.captureException(err);
   }
 }
 
@@ -20,7 +21,7 @@ export function disable() {
 
   try {
     noSleep.disable();
-  } catch (e) {
-    console.error('Failed to disable NoSleep.');
+  } catch (err) {
+    Sentry.captureException(err);
   }
 }
