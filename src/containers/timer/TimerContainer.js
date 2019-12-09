@@ -6,14 +6,18 @@ import Timer from '../../components/timer/Timer';
 import { shouldUseManualTimeEntry, shouldShowTimerTime } from '../../selectors/settings';
 import { isPreparing, isPreparingForInspection, isReady } from '../../selectors/activation';
 import * as timerSelectors from '../../selectors/timer';
+import * as settingsSelectors from '../../selectors/settings';
 import { isInTrainer } from '../../selectors/router';
 
 function mapStateToProps(state) {
   const startTime = timerSelectors.getStartTime(state);
   const stopTime = timerSelectors.getStopTime(state);
+  const currentPuzzle = settingsSelectors.getPuzzleInfo(state).title;
   const ready = isReady(state);
   const useManualTimeEntry = shouldUseManualTimeEntry(state);
   const inspecting = timerSelectors.isInspecting(state);
+  const useInspectionTime = settingsSelectors.shouldUseInspectionTime(state);
+
   const lastTime = getLastTime(state);
   const showLastTime =
     startTime === 0 && !ready && !useManualTimeEntry && !inspecting && Boolean(lastTime);
@@ -23,6 +27,7 @@ function mapStateToProps(state) {
     inspecting: timerSelectors.isInspecting(state),
     inspectionStartTime: timerSelectors.getInspectionStartTime(state),
     lastTime,
+    currentPuzzle,
     preparing: isPreparing(state),
     preparingForInspection: isPreparingForInspection(state),
     ready,
@@ -32,6 +37,7 @@ function mapStateToProps(state) {
     finalTime: stopTime - startTime,
     stopped: timerSelectors.isStopped(state),
     useManualTimeEntry,
+    useInspectionTime,
     showTimerTime: shouldShowTimerTime(state),
     isTraining
   };

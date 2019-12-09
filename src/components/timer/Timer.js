@@ -22,12 +22,14 @@ const Timer = ({
   inspecting,
   preparing,
   preparingForInspection,
+  currentPuzzle,
   ready,
   showLastTime,
   inspectionStartTime,
   startTime,
   lastTime,
   useManualTimeEntry,
+  useInspectionTime,
   showTimerTime,
   stopTime,
   isTraining
@@ -40,10 +42,16 @@ const Timer = ({
             <TrainerStatusContainer />
           </span>
         )}
-        {!isTraining && showLastTime && lastTime.best && (
-          <Tag color="green" data-no-activation>
-            <FontAwesomeIcon icon={faThumbsUp} />
-            &nbsp; Best session single
+        {!isTraining && (
+          <Tag color={showLastTime && lastTime.best ? 'green' : 'subtleBg'} data-no-activation>
+            {showLastTime && lastTime.best ? (
+              <>
+                <FontAwesomeIcon icon={faThumbsUp} />
+                &nbsp; {currentPuzzle} - Best session single
+              </>
+            ) : (
+              currentPuzzle + (useInspectionTime ? '- With Inspection' : '')
+            )}
           </Tag>
         )}
       </TimerHeader>
@@ -89,6 +97,7 @@ const Timer = ({
 );
 
 Timer.propTypes = {
+  currentPuzzle: PropTypes.string,
   inspecting: PropTypes.bool.isRequired,
   inspectionStartTime: PropTypes.number.isRequired,
   preparing: PropTypes.bool.isRequired,
@@ -99,6 +108,7 @@ Timer.propTypes = {
   stopTime: PropTypes.number.isRequired,
   lastTime: CustomPropTypes.Time,
   useManualTimeEntry: PropTypes.bool.isRequired,
+  useInspectionTime: PropTypes.bool.isRequired,
   showTimerTime: PropTypes.bool.isRequired,
   isTraining: PropTypes.bool
 };
