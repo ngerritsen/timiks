@@ -13,7 +13,7 @@ import TimeEntryContainer from '../../containers/timer/TimeEntryContainer';
 import IncrementingTime from './IncrementingTime';
 import DecrementingTime from './DecrementingTime';
 import { INSPECTION_TIME } from '../../constants/timer';
-import { getZIndex, getBreakpoint, getColor } from '../../helpers/theme';
+import { getZIndex, getBreakpoint, getColor, getSize } from '../../helpers/theme';
 import Tag from '../shared/Tag';
 import TrainerStatusContainer from '../../containers/trainer/TrainerStatusContainer';
 import TrainerPreviousCaseContainer from '../../containers/trainer/TrainerPreviousCaseContainer';
@@ -90,7 +90,11 @@ const Timer = ({
     <TimeFooter withManualEntry={useManualTimeEntry}>
       <TimeFooterClickArea data-no-activation>
         {isTraining && startTime > 0 && stopTime > 0 && <TrainerPreviousCaseContainer />}
-        {!isTraining && showLastTime && <TimeActionsContainer lastTime={lastTime} />}
+        {!isTraining && showLastTime && (
+          <TimeFooterActionsClickArea>
+            <TimeActionsContainer lastTime={lastTime} />
+          </TimeFooterActionsClickArea>
+        )}
       </TimeFooterClickArea>
     </TimeFooter>
   </TimerActivationContainer>
@@ -161,8 +165,13 @@ const TimeFooter = styled.div`
   }
 `;
 
-const TimeFooterClickArea = styled.span`
+const TimeFooterClickArea = styled.div`
   display: inline-block;
+`;
+
+const TimeFooterActionsClickArea = styled.div`
+  display: inline-block;
+  padding: ${getSize('xs')};
 `;
 
 export default React.memo(Timer);
