@@ -5,6 +5,8 @@ before_install:
   - npm run build-number
   - npm config set "@fortawesome:registry" https://npm.fontawesome.com/
   - npm config set "//npm.fontawesome.com/:_authToken" $FONTAWESOME_NPM_TOKEN
+install:
+  - npm install
 script:
   - npm run test
   - npm run build
