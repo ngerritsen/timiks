@@ -36,6 +36,7 @@ const Scramble = ({
   const activeScramble = scrambles.find(s => s.puzzle === activePuzzle).scramble;
   const showPreview = withPreview && type === CUBE;
   const showDetails = withDetails && type === CUBE;
+  const moves = splitScramble(activeScramble);
 
   return (
     <>
@@ -64,8 +65,11 @@ const Scramble = ({
               <ScrambleDetails scramble={activeScramble} puzzle={activePuzzle} />
             </ScrambleIconButtonContainer>
           )}
-          {splitScramble(activeScramble).map((move, i) => (
-            <Move key={i}>{move}</Move>
+          {moves.map((move, i) => (
+            <>
+              <Move key={i}>{move}</Move>
+              {moves.length !== i + 1 && <> </>}
+            </>
           ))}
         </ScrambleBox>
       </Section>
@@ -133,11 +137,6 @@ const ScrambleBox = styled.div`
 const Move = styled.span`
   display: inline-block;
   whitespace: nowrap;
-  margin-right: 0.5em;
-
-  &:last-child {
-    margin-right: 0;
-  }
 `;
 
 const ScrambleIconButtonContainer = styled.span`
