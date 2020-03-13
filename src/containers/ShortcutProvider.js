@@ -57,6 +57,7 @@ class ShortcutProvider extends Component {
         return;
       }
 
+      event.preventDefault();
       shortcut.action();
     });
   }
