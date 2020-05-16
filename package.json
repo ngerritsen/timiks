@@ -32,7 +32,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
     "@fortawesome/pro-regular-svg-icons": "^5.11.2",
     "@fortawesome/pro-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.7",
+    "@fortawesome/react-fontawesome": "^0.1.9",
     "@sentry/browser": "^5.9.1",
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^0.7.5",
