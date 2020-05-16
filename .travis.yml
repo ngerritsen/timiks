@@ -3,7 +3,7 @@ node_js:
   - "8"
 before_install:
   - npm run build-number
-  - printf "@fortawesome:registry=https://npm.fortawesome.com/\n//npm.fortawesome.com/:_authToken=${FONTAWESOME_NPM_TOKEN}" >> ~/.npmrc
+  - printf "@fortawesome:registry=https://npm.fontawesome.com/\n//npm.fontawesome.com/:_authToken=${FONTAWESOME_NPM_TOKEN}" >> ~/.npmrc
 install:
   - npm install
 script:
