@@ -1,6 +1,6 @@
 import { UP, RIGHT, DOWN, LEFT, FRONT, BACK } from '../constants/puzzles';
 import { WHITE, BLUE, YELLOW, ORANGE, RED, GREEN } from '../constants/puzzles';
-import { createAscSorter } from './general';
+import { createAscSorter, generateArr } from './general';
 import { splitScramble } from './scramble';
 
 const TOP_EDGE = { axis: 'y', opposite: false };
@@ -191,10 +191,6 @@ function reverseIndex(index, size) {
 
 function getSize(face) {
   return Math.sqrt(face.length);
-}
-
-function generateArr(size, arr = []) {
-  return arr.length < size ? generateArr(size, [...arr, arr.length]) : arr;
 }
 
 function getPreviousItem(array, index) {
