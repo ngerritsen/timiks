@@ -1,8 +1,8 @@
 export function generateArr(n) {
-  let arr = [];
+  let arr = new Array(n);
 
   for (let i = 0; i < n; i++) {
-    arr = [...arr, i];
+    arr[i] = i;
   }
 
   return arr;
