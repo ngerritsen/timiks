@@ -83,7 +83,7 @@ export function buildAlgDbUrl(trainingType, caseId) {
     case OLL:
       return ALGDB_BASE_URL + '/puzzle/333/oll/oll' + caseId;
     case PLL:
-      return ALGDB_BASE_URL + '/puzzle/333/oll/oll' + caseId;
+      return ALGDB_BASE_URL + '/puzzle/333/pll/' + caseId;
     default:
       return ALGDB_BASE_URL;
   }
