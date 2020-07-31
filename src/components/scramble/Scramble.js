@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import Section from '../shared/Section';
 import { CUBE, RELAY } from '../../constants/puzzles';
@@ -66,10 +66,10 @@ const Scramble = ({
             </ScrambleIconButtonContainer>
           )}
           {moves.map((move, i) => (
-            <>
+            <Fragment key={i}>
               <Move key={i}>{move}</Move>
               {moves.length !== i + 1 && <> </>}
-            </>
+            </Fragment>
           ))}
         </ScrambleBox>
       </Section>

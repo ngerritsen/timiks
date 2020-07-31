@@ -31,7 +31,7 @@ const Time = ({ secondsOnly, showMilliseconds, time: { ms, dnf, plus2 } }) => {
 };
 
 function formatPart(number, minChars) {
-  return monospace(fillZeroes(String(number), minChars));
+  return monospace(minChars ? fillZeroes(String(number), minChars) : String(number));
 }
 
 function monospace(string) {
