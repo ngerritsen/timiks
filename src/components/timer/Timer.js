@@ -3,8 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/pro-solid-svg-icons/faThumbsUp';
-import { faSpaceShuttle } from '@fortawesome/pro-solid-svg-icons/faSpaceShuttle';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
+import { faSpaceShuttle } from '@fortawesome/free-solid-svg-icons/faSpaceShuttle';
 import * as CustomPropTypes from '../../propTypes';
 import Section from '../shared/Section';
 import Time from '../shared/Time';

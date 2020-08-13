@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { faCheck } from '@fortawesome/pro-solid-svg-icons/faCheck';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getColor, getSize } from '../../helpers/theme';

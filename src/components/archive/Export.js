@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as CustomPropTypes from '../../propTypes';
 import Button, { ButtonIcon } from '../shared/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/pro-solid-svg-icons/faDownload';
+import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
 import { timesToCsv } from '../../helpers/csv';
 import { downloadAsFile } from '../../helpers/file';
 

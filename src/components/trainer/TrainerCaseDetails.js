@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLink } from '@fortawesome/pro-solid-svg-icons/faExternalLink';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons/faExternalLinkAlt';
 
 import LastLayerPreview from '../cube/LastLayerPreview';
 import * as CustomPropTypes from '../../propTypes';
@@ -36,7 +36,7 @@ const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon size="sm" icon={faExternalLink} /> View on AlgDb.net
+          <FontAwesomeIcon size="sm" icon={faExternalLinkAlt} /> View on AlgDb.net
         </Link>
       </Section>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons/faInfoCircle';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
 import * as CustomPropTypes from '../../propTypes';
 import { Table, Cell, HeadingCell } from '../shared/Table';

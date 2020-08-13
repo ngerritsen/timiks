@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { faDumbbell } from '@fortawesome/pro-solid-svg-icons/faDumbbell';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons/faDumbbell';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SettingsContainer from '../containers/SettingsContainer';

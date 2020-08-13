@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/pro-solid-svg-icons/faCog';
+import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 
 import { DARK, LIGHT, AUTO, THEME_OPTIONS } from '../constants/theme';
 import Shortcut from './shared/Shortcut';

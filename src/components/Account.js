@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
-import { faUserAstronaut } from '@fortawesome/pro-solid-svg-icons/faUserAstronaut';
-import { faSignInAlt } from '@fortawesome/pro-solid-svg-icons/faSignInAlt';
-import { faSignOutAlt } from '@fortawesome/pro-solid-svg-icons/faSignOutAlt';
-import { faSpinnerThird } from '@fortawesome/pro-solid-svg-icons/faSpinnerThird';
+import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons/faUserAstronaut';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons/faSignInAlt';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons/faCircleNotch';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle';
 
 import IconButton from './shared/IconButton';
@@ -35,7 +35,7 @@ const Account = ({
           {isInitialized && (
             <FontAwesomeIcon fixedWidth icon={isLoggedIn ? faUserAstronaut : faSignInAlt} />
           )}
-          {!isInitialized && <FontAwesomeIcon fixedWidth icon={faSpinnerThird} spin />}
+          {!isInitialized && <FontAwesomeIcon fixedWidth icon={faCircleNotch} spin />}
         </IconButton>
       )}
       content={({ hide }) => (
@@ -55,7 +55,7 @@ const Account = ({
                   <ButtonIcon>
                     <FontAwesomeIcon
                       spin={isLoggingIn}
-                      icon={isLoggingIn ? faSpinnerThird : faGoogle}
+                      icon={isLoggingIn ? faCircleNotch : faGoogle}
                     />
                   </ButtonIcon>
                   Sign in with Google
@@ -78,7 +78,7 @@ const Account = ({
                   <ButtonIcon>
                     <FontAwesomeIcon
                       spin={isLoggingIn}
-                      icon={isLoggingOut ? faSpinnerThird : faSignOutAlt}
+                      icon={isLoggingOut ? faCircleNotch : faSignOutAlt}
                     />
                   </ButtonIcon>
                   Sign out

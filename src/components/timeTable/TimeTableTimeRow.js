@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import Time from '../shared/Time';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH } from '@fortawesome/pro-solid-svg-icons/faEllipsisH';
-import { faThumbsUp } from '@fortawesome/pro-solid-svg-icons/faThumbsUp';
-import { faTimes } from '@fortawesome/pro-solid-svg-icons/faTimes';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons/faEllipsisH';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import ToggleContent from '../shared/ToggleContent';
 import Modal from '../shared/Modal';
 import TimeDetails from '../shared/TimeDetails';

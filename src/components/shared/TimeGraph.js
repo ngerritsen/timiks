@@ -5,7 +5,7 @@ import styled, { withTheme } from 'styled-components';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-zoom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearchMinus } from '@fortawesome/pro-solid-svg-icons/faSearchMinus';
+import { faSearchMinus } from '@fortawesome/free-solid-svg-icons/faSearchMinus';
 
 import Button from './Button';
 import * as CustomPropTypes from '../../propTypes';

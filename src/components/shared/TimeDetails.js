@@ -1,13 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
-import { faCalendarAlt } from '@fortawesome/pro-solid-svg-icons/faCalendarAlt';
-import { faStopwatch } from '@fortawesome/pro-solid-svg-icons/faStopwatch';
-import { faCube } from '@fortawesome/pro-solid-svg-icons/faCube';
-import { faEye } from '@fortawesome/pro-solid-svg-icons/faEye';
-import { faPencil } from '@fortawesome/pro-solid-svg-icons/faPencil';
-import { faCommentAltLines } from '@fortawesome/pro-solid-svg-icons/faCommentAltLines';
-import { faEyeSlash } from '@fortawesome/pro-solid-svg-icons/faEyeSlash';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
+import { faStopwatch } from '@fortawesome/free-solid-svg-icons/faStopwatch';
+import { faCube } from '@fortawesome/free-solid-svg-icons/faCube';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt';
+import { faCommentAlt } from '@fortawesome/free-solid-svg-icons/faCommentAlt';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons/faEyeSlash';
 import PropTypes from 'prop-types';
 
 import * as CustomPropTypes from '../../propTypes';
@@ -61,13 +61,13 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => {
           toggle={({ show }) => (
             <InfoItem margin="md">
               <InfoItemIcon>
-                <FontAwesomeIcon fixedWidth icon={faCommentAltLines} />
+                <FontAwesomeIcon fixedWidth icon={faCommentAlt} />
               </InfoItemIcon>
               {time.comment && (
                 <>
                   {time.comment} &nbsp;
                   <IconButton color="subtleFg" onClick={show}>
-                    <FontAwesomeIcon fixedWidth size="sm" icon={faPencil} />
+                    <FontAwesomeIcon fixedWidth size="sm" icon={faPencilAlt} />
                   </IconButton>
                 </>
               )}

@@ -7,9 +7,9 @@ import Button, { ButtonIcon } from '../shared/Button';
 import Scramble from '../scramble/Scramble';
 import Modal from '../shared/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretCircleLeft } from '@fortawesome/pro-solid-svg-icons/faCaretCircleLeft';
-import { faCaretCircleRight } from '@fortawesome/pro-solid-svg-icons/faCaretCircleRight';
-import { faStar } from '@fortawesome/pro-solid-svg-icons/faStar';
+import { faCaretSquareLeft } from '@fortawesome/free-solid-svg-icons/faCaretSquareLeft';
+import { faCaretSquareRight } from '@fortawesome/free-solid-svg-icons/faCaretSquareRight';
+import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
 import KeyMap from '../KeyMap';
 import Section from '../shared/Section';
 import Shortcut from '../shared/Shortcut';
@@ -229,7 +229,7 @@ const Showcase = ({ theme }) => {
               {featureIndex > 0 && (
                 <>
                   <FontAwesomeIcon
-                    icon={faCaretCircleLeft}
+                    icon={faCaretSquareLeft}
                     onClick={() => setFeatureIndex(featureIndex - 1)}
                   />
                   <Shortcut command="previous" action={() => setFeatureIndex(featureIndex - 1)} />
@@ -241,7 +241,7 @@ const Showcase = ({ theme }) => {
               {featureIndex < features.length - 1 && (
                 <>
                   <FontAwesomeIcon
-                    icon={faCaretCircleRight}
+                    icon={faCaretSquareRight}
                     onClick={() => setFeatureIndex(featureIndex + 1)}
                   />
                   <Shortcut command="next" action={() => setFeatureIndex(featureIndex + 1)} />

@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFolderOpen } from '@fortawesome/pro-solid-svg-icons/faFolderOpen';
-import { faSpinnerThird } from '@fortawesome/pro-solid-svg-icons/faSpinnerThird';
-import { faFile } from '@fortawesome/pro-solid-svg-icons/faFile';
+import { faFolderOpen } from '@fortawesome/free-solid-svg-icons/faFolderOpen';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons/faCircleNotch';
+import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
 
 import { readFile } from '../../helpers/file';
 import { ButtonIcon, LabelButton } from '../shared/Button';
@@ -52,7 +52,7 @@ const FileUploadButton = ({ label, name, onChange, accept }) => {
       </LabelButton>
       {currentFile && (
         <FileName>
-          <FontAwesomeIcon icon={loadingFile ? faSpinnerThird : faFile} spin={loadingFile} />
+          <FontAwesomeIcon icon={loadingFile ? faCircleNotch : faFile} spin={loadingFile} />
           &nbsp; {currentFile.name}
         </FileName>
       )}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/pro-solid-svg-icons/faUpload';
+import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 
 import Button, { ButtonIcon } from '../shared/Button';
 import ToggleContent from '../shared/ToggleContent';

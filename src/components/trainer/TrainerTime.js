@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStopwatch } from '@fortawesome/pro-solid-svg-icons/faStopwatch';
-import { faFlask } from '@fortawesome/pro-solid-svg-icons/faFlask';
+import { faStopwatch } from '@fortawesome/free-solid-svg-icons/faStopwatch';
+import { faFlask } from '@fortawesome/free-solid-svg-icons/faFlask';
 import styled from 'styled-components';
 
 import * as CustomPropTypes from '../../propTypes';

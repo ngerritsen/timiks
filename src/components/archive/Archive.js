@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight } from '@fortawesome/pro-solid-svg-icons/faCaretRight';
-import { faCaretDown } from '@fortawesome/pro-solid-svg-icons/faCaretDown';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 
 import * as CustomPropTypes from '../../propTypes';
 import Section from '../shared/Section';

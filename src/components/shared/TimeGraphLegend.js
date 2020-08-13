@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/pro-solid-svg-icons/faCircle';
-import { faCheckCircle } from '@fortawesome/pro-solid-svg-icons/faCheckCircle';
+import { faCircle } from '@fortawesome/free-solid-svg-icons/faCircle';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 
 import * as CustomPropTypes from '../../propTypes';
 import { getColor, getSize } from '../../helpers/theme';

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/pro-solid-svg-icons/faTimes';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { useSpring, animated } from 'react-spring';
 
 import Shortcut from './Shortcut';

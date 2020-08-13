@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/pro-solid-svg-icons/faPlay';
-import { faStop } from '@fortawesome/pro-solid-svg-icons/faStop';
+import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay';
+import { faStop } from '@fortawesome/free-solid-svg-icons/faStop';
 
 import Select from '../shared/Select';
 import { types } from '../../constants/trainer';

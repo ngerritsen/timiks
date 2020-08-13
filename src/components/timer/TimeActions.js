@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCommentAltLines } from '@fortawesome/pro-solid-svg-icons/faCommentAltLines';
-import { faTimes } from '@fortawesome/pro-solid-svg-icons/faTimes';
+import { faCommentAlt } from '@fortawesome/free-solid-svg-icons/faCommentAlt';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 
 import * as CustomPropTypes from '../../propTypes';
 import { getSize } from '../../helpers/theme';
@@ -48,7 +48,7 @@ const TimeActions = ({
           <>
             <Shortcut command="commentOnTime" action={toggle} />
             <Button size="sm" tag color="subtleFg" onClick={toggle}>
-              <FontAwesomeIcon fixedWidth icon={faCommentAltLines} />
+              <FontAwesomeIcon fixedWidth icon={faCommentAlt} />
             </Button>
           </>
         )}

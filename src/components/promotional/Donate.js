@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDonate } from '@fortawesome/pro-solid-svg-icons/faDonate';
+import { faDonate } from '@fortawesome/free-solid-svg-icons/faDonate';
 
 import { ButtonIcon, LinkButton } from '../shared/Button';
 import { PAY_PAL_DONATION_LINK } from '../../constants/donation';

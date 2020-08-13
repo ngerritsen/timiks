@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/pro-solid-svg-icons/faTrashAlt';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import styled from 'styled-components';
 
 import * as CustomPropTypes from '../../propTypes';
