@@ -89,6 +89,16 @@ const Settings = ({ settings, changeSetting }) => (
                   />
                 </Setting>
               </Section>
+              <Section margin="sm">
+                <Setting>
+                  <label>Show latest solve on top</label>
+                  <Checkbox
+                    type="checkbox"
+                    onChange={checked => changeSetting('showLatestSolveOnTop', checked)}
+                    checked={settings.showLatestSolveOnTop}
+                  />
+                </Setting>
+              </Section>
             </Section>
             <Section margin="md">
               <SectionTitle>User Interface</SectionTitle>

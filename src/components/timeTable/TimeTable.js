@@ -16,6 +16,7 @@ import { Cell, HeadingCell, Table } from '../shared/Table';
 import TimeTableStatRow from './TimeTableStatRow';
 import StatsExplanation from './StatsExplanation';
 import { getBreakpoint, getSize } from '../../helpers/theme';
+import { createDescSorter } from '../../helpers/general';
 
 function useHighlightedStats() {
   const [highlightState, setHighlightedStat] = useState([]);
@@ -24,7 +25,14 @@ function useHighlightedStats() {
   return [highlightedStatName, highlightedStatType, setHighlightedStat];
 }
 
-const TimeTable = ({ stats, removeTime, times, showGraph, fixGraphYAxis }) => {
+const TimeTable = ({
+  stats,
+  times,
+  showLatestSolveOnTop,
+  removeTime,
+  showGraph,
+  fixGraphYAxis
+}) => {
   const [
     softHighlightedStatName,
     softHighlightedStatType,
@@ -41,6 +49,9 @@ const TimeTable = ({ stats, removeTime, times, showGraph, fixGraphYAxis }) => {
   const highlightedStatType = softHighlightedStatType || hardHighlightedStatType;
   const highlightedStat = stats.find(stat => stat.name === highlightedStatName) || {};
   const { includedIds = [], excludedIds = [] } = highlightedStat[highlightedStatType] || {};
+
+  const getSolveIndex = index => (showLatestSolveOnTop ? times.length - 1 - index : index);
+  const sortedTimes = showLatestSolveOnTop ? times.sort(createDescSorter('date')) : times;
 
   return (
     <TimeTableContainer>
@@ -94,7 +105,7 @@ const TimeTable = ({ stats, removeTime, times, showGraph, fixGraphYAxis }) => {
             </tbody>
           </Table>
         </Section>
-        {showGraph && <TimeGraph stats={stats} times={times} fixYAxis={fixGraphYAxis} />}
+        {showGraph && <TimeGraph stats={stats} times={sortedTimes} fixYAxis={fixGraphYAxis} />}
       </TimeTableColumn>
       <TimeTableColumn>
         <Table>
@@ -109,11 +120,11 @@ const TimeTable = ({ stats, removeTime, times, showGraph, fixGraphYAxis }) => {
             </tr>
           </thead>
           <tbody>
-            {times.map((time, index) => (
+            {sortedTimes.map((time, index) => (
               <TimeTableTimeRow
                 key={time.id}
                 time={time}
-                index={index}
+                index={getSolveIndex(index)}
                 removeTime={removeTime}
                 isIncluded={includedIds.includes(time.id)}
                 isExcluded={excludedIds.includes(time.id)}
@@ -131,6 +142,7 @@ TimeTable.propTypes = {
   removeTime: PropTypes.func.isRequired,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   showGraph: PropTypes.bool,
+  showLatestSolveOnTop: PropTypes.bool,
   fixGraphYAxis: PropTypes.bool
 };
 
