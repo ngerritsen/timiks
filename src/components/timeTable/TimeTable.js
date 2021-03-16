@@ -51,7 +51,7 @@ const TimeTable = ({
   const { includedIds = [], excludedIds = [] } = highlightedStat[highlightedStatType] || {};
 
   const getSolveIndex = index => (showLatestSolveOnTop ? times.length - 1 - index : index);
-  const sortedTimes = showLatestSolveOnTop ? times.sort(createDescSorter('date')) : times;
+  const sortedTimes = showLatestSolveOnTop ? [...times].sort(createDescSorter('date')) : times;
 
   return (
     <TimeTableContainer>
