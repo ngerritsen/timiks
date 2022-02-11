@@ -1,8 +1,11 @@
 default:
   image: node:lts
+  cache:
+    paths:
+      - node_modules/
   before_script:
     - npm install
-    - npm run build-number
+    - echo \"$CI_PIPELINE_IID\" > src/static/build.json
 
 stages:
   - build
@@ -13,6 +16,9 @@ build:
   stage: build
   script:
     - npm run build
+  artifacts:
+    paths:
+      - public/
 
 test:
   stage: test

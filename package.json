@@ -9,8 +9,7 @@
     "copy-images": "mkdir -p public/images; cp src/images/* public/images/",
     "watch": "npm run static; npm run copy-images; webpack-dev-server --mode=development --content-base ./public",
     "test": "eslint .",
-    "build": "npm run static; npm run images; webpack --mode=production",
-    "build-number": "echo \"CI_PIPELINE_IID\" > src/static/build.json"
+    "build": "npm run static; npm run images; webpack --mode=production"
   },
   "repository": {
     "type": "git",
