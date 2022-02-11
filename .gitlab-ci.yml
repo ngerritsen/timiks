@@ -1,0 +1,26 @@
+default:
+  image: node:lts
+  before_script:
+    - npm install
+    - npm run build-number
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - npm run build
+
+test:
+  stage: test
+  script:
+    - npm run test
+
+deploy:
+  stage: deploy
+  script:
+    - npm install -g firebase-tools
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_TOKEN

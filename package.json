@@ -10,11 +10,11 @@
     "watch": "npm run static; npm run copy-images; webpack-dev-server --mode=development --content-base ./public",
     "test": "eslint .",
     "build": "npm run static; npm run images; webpack --mode=production",
-    "build-number": "echo \"$TRAVIS_BUILD_NUMBER\" > src/static/build.json"
+    "build-number": "echo \"CI_PIPELINE_IID\" > src/static/build.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ngerritsen/timiks.git"
+    "url": "git+https://gitlab.com/ngerritsen/timiks.git"
   },
   "keywords": [
     "rubiks",
@@ -24,9 +24,9 @@
   "author": "Niels Gerritsen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ngerritsen/timiks/issues"
+    "url": "https://gitlab.com/ngerritsen/timiks/issues"
   },
-  "homepage": "https://github.com/ngerritsen/timiks#readme",
+  "homepage": "https://gitlab.com/ngerritsen/timiks#readme",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
