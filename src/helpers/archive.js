@@ -1,4 +1,4 @@
-import { createDescSorter } from './general';
+import { createDescSorter } from "./general";
 
 export function groupByDay(times) {
   const timesPerDayMap = times.reduce((groupedTimes, time) => {
@@ -6,17 +6,17 @@ export function groupByDay(times) {
 
     const timesForDay = groupedTimes[formattedDay] || {
       date: time.date,
-      times: []
+      times: [],
     };
 
     return {
       ...groupedTimes,
       [formattedDay]: {
         ...timesForDay,
-        times: [...timesForDay.times, time]
-      }
+        times: [...timesForDay.times, time],
+      },
     };
   }, {});
 
-  return Object.values(timesPerDayMap).sort(createDescSorter('date'));
+  return Object.values(timesPerDayMap).sort(createDescSorter("date"));
 }

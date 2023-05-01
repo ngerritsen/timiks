@@ -1,8 +1,8 @@
 export function downloadAsFile(filename, data, type) {
   const blob = new Blob([data], { type });
-  const a = document.createElement('a');
+  const a = document.createElement("a");
 
-  a.style.display = 'none';
+  a.style.display = "none";
   a.href = URL.createObjectURL(blob);
   a.download = filename;
 
@@ -14,10 +14,10 @@ export function downloadAsFile(filename, data, type) {
 }
 
 export function readFile(file) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const reader = new FileReader();
 
-    reader.addEventListener('loadend', () => {
+    reader.addEventListener("loadend", () => {
       resolve(reader.result);
     });
 

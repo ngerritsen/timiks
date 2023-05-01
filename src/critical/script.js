@@ -1,15 +1,15 @@
-const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+const settings = JSON.parse(localStorage.getItem("settings") || "{}");
 
 if (
-  settings.theme === 'dark' ||
-  (settings.theme === 'auto' &&
+  settings.theme === "dark" ||
+  (settings.theme === "auto" &&
     window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches)
+    window.matchMedia("(prefers-color-scheme: dark)").matches)
 ) {
-  document.body.classList.add('is-dark');
+  document.body.classList.add("is-dark");
 }
 
-document.querySelector('[data-reload]').addEventListener('click', event => {
+document.querySelector("[data-reload]").addEventListener("click", (event) => {
   event.preventDefault();
   window.location.reload(true);
 });

@@ -1,11 +1,11 @@
-import { connect } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import React from "react";
+import PropTypes from "prop-types";
 
-import * as themes from '../theme';
-import App from '../components/App';
-import { getTheme } from '../selectors/theme';
+import * as themes from "../theme";
+import App from "../components/App";
+import { getTheme } from "../selectors/theme";
 
 class AppContainer extends React.Component {
   constructor(props, ...args) {
@@ -35,17 +35,17 @@ class AppContainer extends React.Component {
 }
 
 AppContainer.propTypes = {
-  theme: PropTypes.string.isRequired
+  theme: PropTypes.string.isRequired,
 };
 
 function renderGlobalTheme(theme) {
-  document.body.style['background-color'] = theme.colors.bg;
+  document.body.style["background-color"] = theme.colors.bg;
   document.body.style.color = theme.colors.fg;
 }
 
 function mapStateToProps(state) {
   return {
-    theme: getTheme(state)
+    theme: getTheme(state),
   };
 }
 

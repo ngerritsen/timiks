@@ -1,9 +1,9 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import { login, logout } from '../actions';
-import Account from '../components/Account';
-import * as authenticationSelectors from '../selectors/authentication';
-import { isOnline } from '../selectors/network';
+import { login, logout } from "../actions";
+import Account from "../components/Account";
+import * as authenticationSelectors from "../selectors/authentication";
+import { isOnline } from "../selectors/network";
 
 function mapStateToProps(state) {
   return {
@@ -14,7 +14,7 @@ function mapStateToProps(state) {
     displayName: authenticationSelectors.getDisplayName(state),
     isInitialized: authenticationSelectors.isInitialized(state),
     email: authenticationSelectors.getEmail(state),
-    avatarUrl: authenticationSelectors.getAvatarUrl(state)
+    avatarUrl: authenticationSelectors.getAvatarUrl(state),
   };
 }
 

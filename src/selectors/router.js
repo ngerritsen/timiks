@@ -1,1 +1,2 @@
-export const isInTrainer = state => state.router.location.pathname === '/trainer';
+export const isInTrainer = (state) =>
+  state.router.location.pathname === "/trainer";

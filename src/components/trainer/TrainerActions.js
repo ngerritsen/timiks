@@ -1,30 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '../shared/Button';
+import React from "react";
+import PropTypes from "prop-types";
+import Button from "../shared/Button";
 
-const TrainerActions = ({ availableCaseIds, selectedCaseIds, selectCases, deselectCases }) => {
+const TrainerActions = ({
+  availableCaseIds,
+  selectedCaseIds,
+  selectCases,
+  deselectCases,
+}) => {
   if (selectedCaseIds.length > 0) {
     return (
-      <Button size="sm" color="subtleBg" tag onClick={() => deselectCases(selectedCaseIds)}>
+      <Button
+        size="sm"
+        color="subtleBg"
+        tag
+        onClick={() => deselectCases(selectedCaseIds)}
+      >
         Deselect all
       </Button>
     );
   }
 
   return (
-    <Button size="sm" color="subtleBg" tag onClick={() => selectCases(availableCaseIds)}>
+    <Button
+      size="sm"
+      color="subtleBg"
+      tag
+      onClick={() => selectCases(availableCaseIds)}
+    >
       Select all
     </Button>
   );
 };
 
 TrainerActions.propTypes = {
-  availableCaseIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
-    .isRequired,
-  selectedCaseIds: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
-    .isRequired,
+  availableCaseIds: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
+  selectedCaseIds: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
   selectCases: PropTypes.func.isRequired,
-  deselectCases: PropTypes.func.isRequired
+  deselectCases: PropTypes.func.isRequired,
 };
 
 export default TrainerActions;

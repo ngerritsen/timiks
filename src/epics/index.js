@@ -1,20 +1,20 @@
-import { combineEpics } from 'redux-observable';
+import { combineEpics } from "redux-observable";
 
-import * as activationEpics from './activation';
-import * as authenticationEpics from './authentication';
-import * as importEpics from './import';
-import * as localTimesEpics from './localTimes';
-import * as loginPromotionEpics from './loginPromotionEpic';
-import * as networkEpics from './network';
-import * as noSleepEpics from './noSleep';
-import * as notificationEpics from './notifications';
-import * as scrambleEpics from './scramble';
-import * as settingsEpics from './settings';
-import * as themeEpics from './theme';
-import * as timerEpics from './timer';
-import * as timesEpics from './times';
-import * as trainerEpics from './trainer';
-import * as versionEpics from './version';
+import * as activationEpics from "./activation";
+import * as authenticationEpics from "./authentication";
+import * as importEpics from "./import";
+import * as localTimesEpics from "./localTimes";
+import * as loginPromotionEpics from "./loginPromotionEpic";
+import * as networkEpics from "./network";
+import * as noSleepEpics from "./noSleep";
+import * as notificationEpics from "./notifications";
+import * as scrambleEpics from "./scramble";
+import * as settingsEpics from "./settings";
+import * as themeEpics from "./theme";
+import * as timerEpics from "./timer";
+import * as timesEpics from "./times";
+import * as trainerEpics from "./trainer";
+import * as versionEpics from "./version";
 
 const rootEpic = combineEpics(
   activationEpics.fireActivationEpic,

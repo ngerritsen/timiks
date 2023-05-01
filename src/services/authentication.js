@@ -1,12 +1,12 @@
-import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs';
+import * as firebase from "firebase/app";
+import { Observable } from "rxjs";
 
 export function onRedirectError() {
-  return new Observable(observer => {
+  return new Observable((observer) => {
     firebase
       .auth()
       .getRedirectResult()
-      .catch(error => observer.next(error));
+      .catch((error) => observer.next(error));
   });
 }
 
@@ -21,7 +21,7 @@ export function logout() {
 }
 
 export function onUserChanged() {
-  return new Observable(observer => {
-    firebase.auth().onAuthStateChanged(user => observer.next(user));
+  return new Observable((observer) => {
+    firebase.auth().onAuthStateChanged((user) => observer.next(user));
   });
 }

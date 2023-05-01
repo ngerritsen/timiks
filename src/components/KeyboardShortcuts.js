@@ -1,12 +1,12 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faKeyboard } from '@fortawesome/free-solid-svg-icons/faKeyboard';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard } from "@fortawesome/free-solid-svg-icons/faKeyboard";
 
-import IconButton from './shared/IconButton';
-import ToggleContent from './shared/ToggleContent';
-import Shortcut from './shared/Shortcut';
-import Modal from './shared/Modal';
-import KeyMap from './KeyMap';
+import IconButton from "./shared/IconButton";
+import ToggleContent from "./shared/ToggleContent";
+import Shortcut from "./shared/Shortcut";
+import Modal from "./shared/Modal";
+import KeyMap from "./KeyMap";
 
 const KeyboardShortcuts = () => (
   <ToggleContent

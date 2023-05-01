@@ -1,27 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { transparentize } from 'polished';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import { transparentize } from "polished";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
+import styled from "styled-components";
 
-import * as CustomPropTypes from '../../propTypes';
-import { Table, Cell, HeadingCell } from '../shared/Table';
-import Time from '../shared/Time';
-import Section from '../shared/Section';
-import { getColor, getSize } from '../../helpers/theme';
-import Button, { ButtonIcon } from '../shared/Button';
-import LastLayerPreview from '../cube/LastLayerPreview';
-import ToggleContent from '../shared/ToggleContent';
-import Modal from '../shared/Modal';
-import TrainerCaseDetails from './TrainerCaseDetails';
-import { buildFullCaseTitle } from '../../helpers/trainer';
-import { ButtonDuo, ButtonDuoItem } from '../shared/ButtonDuo';
-import Shortcut from '../shared/Shortcut';
-import { Toolbar, ToolbarItem } from '../shared/Toolbar';
-import TrainerTime from './TrainerTime';
+import * as CustomPropTypes from "../../propTypes";
+import { Table, Cell, HeadingCell } from "../shared/Table";
+import Time from "../shared/Time";
+import Section from "../shared/Section";
+import { getColor, getSize } from "../../helpers/theme";
+import Button, { ButtonIcon } from "../shared/Button";
+import LastLayerPreview from "../cube/LastLayerPreview";
+import ToggleContent from "../shared/ToggleContent";
+import Modal from "../shared/Modal";
+import TrainerCaseDetails from "./TrainerCaseDetails";
+import { buildFullCaseTitle } from "../../helpers/trainer";
+import { ButtonDuo, ButtonDuoItem } from "../shared/ButtonDuo";
+import Shortcut from "../shared/Shortcut";
+import { Toolbar, ToolbarItem } from "../shared/Toolbar";
+import TrainerTime from "./TrainerTime";
 
-const TrainerTimeTable = ({ cases, clearTrainerTimes, removeTrainerTime, trainingType }) =>
+const TrainerTimeTable = ({
+  cases,
+  clearTrainerTimes,
+  removeTrainerTime,
+  trainingType,
+}) =>
   cases.length > 0 && (
     <>
       <Section margin="sm">
@@ -34,7 +39,7 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, removeTrainerTime, trainin
             </tr>
           </thead>
           <tbody>
-            {cases.map(trainingCase => (
+            {cases.map((trainingCase) => (
               <tr key={trainingCase.id}>
                 <ToggleContent
                   toggle={({ show }) => (
@@ -50,8 +55,14 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, removeTrainerTime, trainin
                     </CaseCell>
                   )}
                   content={({ hide }) => (
-                    <Modal onClose={hide} title={buildFullCaseTitle(trainingCase, trainingType)}>
-                      <TrainerCaseDetails trainingCase={trainingCase} trainingType={trainingType} />
+                    <Modal
+                      onClose={hide}
+                      title={buildFullCaseTitle(trainingCase, trainingType)}
+                    >
+                      <TrainerCaseDetails
+                        trainingCase={trainingCase}
+                        trainingType={trainingType}
+                      />
                     </Modal>
                   )}
                 />
@@ -96,7 +107,10 @@ const TrainerTimeTable = ({ cases, clearTrainerTimes, removeTrainerTime, trainin
                   <Modal title={`Clear ${trainingType} times`} onClose={hide}>
                     <>
                       <Section margin="md">
-                        <p>Are you sure you want to remove the current {trainingType} times?</p>
+                        <p>
+                          Are you sure you want to remove the current{" "}
+                          {trainingType} times?
+                        </p>
                       </Section>
                       <ButtonDuo>
                         <ButtonDuoItem>
@@ -131,7 +145,7 @@ TrainerTimeTable.propTypes = {
   cases: PropTypes.arrayOf(CustomPropTypes.Case).isRequired,
   clearTrainerTimes: PropTypes.func.isRequired,
   trainingType: PropTypes.string.isRequired,
-  removeTrainerTime: PropTypes.func.isRequired
+  removeTrainerTime: PropTypes.func.isRequired,
 };
 
 const PreviewWrapper = styled.span`
@@ -139,7 +153,7 @@ const PreviewWrapper = styled.span`
   height: 1.6em;
   overflow: hidden;
   display: inline-block;
-  margin: -${getSize('xs')} ${getSize('xxs')} -${getSize('xs')} 0;
+  margin: -${getSize("xs")} ${getSize("xxs")} -${getSize("xs")} 0;
 `;
 
 const CaseCell = styled(Cell)`
@@ -147,7 +161,8 @@ const CaseCell = styled(Cell)`
 
   &:hover,
   &:focus {
-    background-color: ${props => transparentize(0.5, getColor('subtleBg')(props))};
+    background-color: ${(props) =>
+      transparentize(0.5, getColor("subtleBg")(props))};
   }
 `;
 
@@ -155,24 +170,24 @@ const TimesCell = styled(Cell)`
   position: relative;
 
   &:after {
-    content: '';
+    content: "";
     right: 0;
     top: 0;
     bottom: 0;
     position: absolute;
     background-image: linear-gradient(
       to right,
-      ${props => transparentize(0.99, getColor('bg')(props))},
-      ${getColor('bg')}
+      ${(props) => transparentize(0.99, getColor("bg")(props))},
+      ${getColor("bg")}
     );
-    width: ${getSize('lg')};
+    width: ${getSize("lg")};
   }
 `;
 
 const TimesCellScrollContainer = styled.div`
   overflow-x: auto;
   white-space: nowrap;
-  padding-right: ${getSize('lg')};
+  padding-right: ${getSize("lg")};
 
   ::-webkit-scrollbar {
     display: none;

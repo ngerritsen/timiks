@@ -1,5 +1,5 @@
-import NoSleep from 'nosleep.js/dist/NoSleep.js';
-import * as Sentry from '@sentry/browser';
+import NoSleep from "nosleep.js/dist/NoSleep.js";
+import * as Sentry from "@sentry/browser";
 
 let noSleep = null;
 

@@ -1,15 +1,15 @@
-import { ofType } from 'redux-observable';
-import { map, delay, tap, withLatestFrom } from 'rxjs/operators';
-import { merge, of } from 'rxjs';
+import { ofType } from "redux-observable";
+import { map, delay, tap, withLatestFrom } from "rxjs/operators";
+import { merge, of } from "rxjs";
 
-import * as actionTypes from '../constants/actionTypes';
-import { loadLocalTimes, storedLocalTimes } from '../actions';
-import * as timesRepository from '../repositories/localTimes';
-import { getTimesForLocalStorage } from '../selectors/times';
-import { isLoggedIn } from '../selectors/authentication';
-import { LOGOUT_SUCCEEDED } from '../constants/actionTypes';
+import * as actionTypes from "../constants/actionTypes";
+import { loadLocalTimes, storedLocalTimes } from "../actions";
+import * as timesRepository from "../repositories/localTimes";
+import { getTimesForLocalStorage } from "../selectors/times";
+import { isLoggedIn } from "../selectors/authentication";
+import { LOGOUT_SUCCEEDED } from "../constants/actionTypes";
 
-export const loadLocalTimesEpic = action$ =>
+export const loadLocalTimesEpic = (action$) =>
   merge(of(0), action$.pipe(ofType(LOGOUT_SUCCEEDED))).pipe(
     map(() => loadLocalTimes(timesRepository.getAll()))
   );
@@ -26,6 +26,8 @@ export const storeLocalTimesEpic = (action$, state$) =>
     ),
     delay(0),
     withLatestFrom(state$),
-    tap(([, state]) => timesRepository.store(getTimesForLocalStorage(state, isLoggedIn(state)))),
+    tap(([, state]) =>
+      timesRepository.store(getTimesForLocalStorage(state, isLoggedIn(state)))
+    ),
     map(storedLocalTimes)
   );

@@ -1,11 +1,11 @@
-import { getMs } from './time';
+import { getMs } from "./time";
 import stats, {
   AVERAGE,
   STANDARD_DEVIATION,
   TRIM_PERCENTAGE,
   MEAN,
-  SINGLE
-} from '../constants/stats';
+  SINGLE,
+} from "../constants/stats";
 
 export function calculateStats(times) {
   const noDnfTimes = getNoDnfTimes(times);
@@ -15,30 +15,37 @@ export function calculateStats(times) {
   }
 
   return stats
-    .map(stat => {
+    .map((stat) => {
       switch (stat.type) {
         case SINGLE: {
           if (times.length === 0) return null;
 
-          const all = times.map(time => ({ ms: getMs(time), includedIds: [time.id] }));
+          const all = times.map((time) => ({
+            ms: getMs(time),
+            includedIds: [time.id],
+          }));
 
           return {
             ...stat,
             all: all,
             current: getCurrent(all),
-            best: getBest(all)
+            best: getBest(all),
           };
         }
         case AVERAGE: {
           if (times.length < stat.size) return null;
 
-          const averageStats = calculateAveragesOf(times, stat.size, calculateTrim(stat.size));
+          const averageStats = calculateAveragesOf(
+            times,
+            stat.size,
+            calculateTrim(stat.size)
+          );
 
           if (!averageStats) return null;
 
           return {
             ...stat,
-            ...averageStats
+            ...averageStats,
           };
         }
         case MEAN: {
@@ -46,7 +53,7 @@ export function calculateStats(times) {
           if (!stat.size) {
             return {
               ...stat,
-              current: calculateAverageOf(noDnfTimes)
+              current: calculateAverageOf(noDnfTimes),
             };
           }
 
@@ -58,7 +65,7 @@ export function calculateStats(times) {
 
           return {
             ...stat,
-            ...averageStats
+            ...averageStats,
           };
         }
         case STANDARD_DEVIATION:
@@ -66,7 +73,7 @@ export function calculateStats(times) {
 
           return {
             ...stat,
-            current: calculateStandardDeviation(times)
+            current: calculateStandardDeviation(times),
           };
         default:
           return null;
@@ -88,7 +95,7 @@ function calculateAveragesOf(times, size, trim = 0) {
   return {
     all,
     current: getCurrent(all),
-    best: getBest(all)
+    best: getBest(all),
   };
 }
 const timeComparator = (a, b) => {
@@ -126,11 +133,18 @@ function movingAverageTrimmed(times, windowSize, trim = 0) {
   let averages = new Array(times.length - windowSize + 1);
   //The current window, sorted
   let movingWindow = times.slice(0, windowSize);
-  let includedIds = movingWindow.filter(time => !time.dnf).map(time => time.id);
-  let excludedIds = movingWindow.filter(time => time.dnf).map(time => time.id);
+  let includedIds = movingWindow
+    .filter((time) => !time.dnf)
+    .map((time) => time.id);
+  let excludedIds = movingWindow
+    .filter((time) => time.dnf)
+    .map((time) => time.id);
   movingWindow = movingWindow.sort(timeComparator);
   //Track the amount of DNFs to set the average to Infinity, when dnfCount > trim
-  let dnfCount = movingWindow.reduce((dnfs, time) => (time.dnf ? dnfs + 1 : dnfs), 0);
+  let dnfCount = movingWindow.reduce(
+    (dnfs, time) => (time.dnf ? dnfs + 1 : dnfs),
+    0
+  );
   const avgScaling = windowSize - 2 * trim;
   //The lowest value that has not been trimmed
   let lowerBoundary = movingWindow[trim];
@@ -143,7 +157,7 @@ function movingAverageTrimmed(times, windowSize, trim = 0) {
   averages[0] = {
     ms: dnfCount > trim ? Infinity : currentSum / avgScaling,
     includedIds: includedIds.slice(),
-    excludedIds: excludedIds.slice()
+    excludedIds: excludedIds.slice(),
   };
   for (let i = 1; i < averages.length; i++) {
     const expiredValue = times[i - 1]; //The value falling out of the moving avg window
@@ -189,7 +203,7 @@ function movingAverageTrimmed(times, windowSize, trim = 0) {
     averages[i] = {
       ms: dnfCount > trim ? Infinity : currentSum / avgScaling,
       includedIds: includedIds.slice(),
-      excludedIds: excludedIds.slice()
+      excludedIds: excludedIds.slice(),
     };
   }
   return averages;
@@ -244,9 +258,14 @@ function binarySearch(values, target, min, max) {
 
 function calculateStandardDeviation(times) {
   const noDnfTimes = getNoDnfTimes(times);
-  const mean = noDnfTimes.reduce((total, time) => getMs(time) + total, 0) / noDnfTimes.length;
+  const mean =
+    noDnfTimes.reduce((total, time) => getMs(time) + total, 0) /
+    noDnfTimes.length;
   const variance =
-    noDnfTimes.reduce((total, time) => Math.pow(getMs(time) - mean, 2) + total, 0) /
+    noDnfTimes.reduce(
+      (total, time) => Math.pow(getMs(time) - mean, 2) + total,
+      0
+    ) /
     (noDnfTimes.length - 1);
 
   return { ms: Math.sqrt(variance) };
@@ -263,5 +282,5 @@ function getCurrent(times) {
 }
 
 function getNoDnfTimes(times) {
-  return times.filter(time => !time.dnf);
+  return times.filter((time) => !time.dnf);
 }

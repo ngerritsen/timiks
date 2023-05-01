@@ -46,7 +46,7 @@ export function multiMatch(patterns, inputString) {
     return pattern.fields.reduce(
       (fields, key, idx) => ({
         ...fields,
-        [key]: match[idx + 1]
+        [key]: match[idx + 1],
       }),
       {}
     );

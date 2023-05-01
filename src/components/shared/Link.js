@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import { getSize, getColor } from '../../helpers/theme';
+import styled from "styled-components";
+import { getSize, getColor } from "../../helpers/theme";
 
 const Link = styled.a`
-  margin: ${getSize('xs')} 0 0;
+  margin: ${getSize("xs")} 0 0;
   font-size: 1.4rem;
-  color: ${getColor('blue')};
+  color: ${getColor("blue")};
   text-decoration: none;
 
   &:hover,

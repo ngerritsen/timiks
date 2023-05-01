@@ -1,14 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Message from '../shared/Message';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import Message from "../shared/Message";
 
-export const NewVersionPrompt = ({ dismissNewVersion, shouldPromptNewVersion, reload }) =>
+export const NewVersionPrompt = ({
+  dismissNewVersion,
+  shouldPromptNewVersion,
+  reload,
+}) =>
   shouldPromptNewVersion ? (
     <Message
       message={
         <>
-          A new version is available, <ReloadButton onClick={reload}>reload now</ReloadButton>?
+          A new version is available,{" "}
+          <ReloadButton onClick={reload}>reload now</ReloadButton>?
         </>
       }
       dismiss={dismissNewVersion}
@@ -18,7 +23,7 @@ export const NewVersionPrompt = ({ dismissNewVersion, shouldPromptNewVersion, re
 NewVersionPrompt.propTypes = {
   shouldPromptNewVersion: PropTypes.bool,
   reload: PropTypes.func.isRequired,
-  dismissNewVersion: PropTypes.func.isRequired
+  dismissNewVersion: PropTypes.func.isRequired,
 };
 
 const ReloadButton = styled.span`

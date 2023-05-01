@@ -1,5 +1,5 @@
-import { from, merge } from 'rxjs';
-import { ofType } from 'redux-observable';
+import { from, merge } from "rxjs";
+import { ofType } from "redux-observable";
 import {
   withLatestFrom,
   filter,
@@ -7,22 +7,28 @@ import {
   switchMap,
   map,
   takeUntil,
-  ignoreElements
-} from 'rxjs/operators';
+  ignoreElements,
+} from "rxjs/operators";
 
-import * as actionTypes from '../constants/actionTypes';
-import * as actions from '../actions';
-import * as timesRepository from '../repositories/times';
-import { getUserId, isLoggedIn } from '../selectors/authentication';
-import { getCurrentTimeIds, getUnstoredTimes, getRequiredTimes } from '../selectors/times';
-import { listenForChanges } from '../repositories/times';
+import * as actionTypes from "../constants/actionTypes";
+import * as actions from "../actions";
+import * as timesRepository from "../repositories/times";
+import { getUserId, isLoggedIn } from "../selectors/authentication";
+import {
+  getCurrentTimeIds,
+  getUnstoredTimes,
+  getRequiredTimes,
+} from "../selectors/times";
+import { listenForChanges } from "../repositories/times";
 
 export const saveTimeEpic = (action$, state$) =>
   action$.pipe(
     ofType(actionTypes.SAVE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action, state]) => from(timesRepository.save(getUserId(state), action.payload))),
+    mergeMap(([action, state]) =>
+      from(timesRepository.save(getUserId(state), action.payload))
+    ),
     ignoreElements()
   );
 
@@ -42,7 +48,9 @@ export const updateTimeEpic = (action$, state$) =>
     ofType(actionTypes.UPDATE_TIME),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([action]) => from(timesRepository.update(action.payload.id, action.payload.fields))),
+    mergeMap(([action]) =>
+      from(timesRepository.update(action.payload.id, action.payload.fields))
+    ),
     ignoreElements()
   );
 
@@ -63,7 +71,7 @@ export const archiveTimesEpic = (action$, state$) =>
     mergeMap(([, state]) =>
       from(
         timesRepository.updateAll(getCurrentTimeIds(state), {
-          current: false
+          current: false,
         })
       )
     ),
@@ -75,7 +83,9 @@ export const clearTimesEpic = (action$, state$) =>
     ofType(actionTypes.CLEAR_TIMES),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
-    mergeMap(([, state]) => from(timesRepository.removeAll(getCurrentTimeIds(state)))),
+    mergeMap(([, state]) =>
+      from(timesRepository.removeAll(getCurrentTimeIds(state)))
+    ),
     ignoreElements()
   );
 
@@ -92,7 +102,7 @@ export const loadTimesEpic = (action$, state$) =>
       const { current, puzzle, days } = getRequiredTimes(state);
 
       return listenForChanges(getUserId(state), current, puzzle, days).pipe(
-        map(times => actions.loadTimes(times, current, puzzle)),
+        map((times) => actions.loadTimes(times, current, puzzle)),
         takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
       );
     })

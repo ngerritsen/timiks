@@ -1,18 +1,22 @@
-import React from 'react';
-import stats, { STANDARD_DEVIATION, AVERAGE, MEAN } from '../../constants/stats';
-import { Table, Cell } from '../shared/Table';
-import { calculateTrim } from '../../helpers/stats';
+import React from "react";
+import stats, {
+  STANDARD_DEVIATION,
+  AVERAGE,
+  MEAN,
+} from "../../constants/stats";
+import { Table, Cell } from "../shared/Table";
+import { calculateTrim } from "../../helpers/stats";
 
 const StatsExplanation = () => (
   <>
     <p>
-      Stats are show if there are enough solves to calculate them. DNF&apos;s are excluded in the
-      mean and standard deviation. A trim percentage of 5% is used to exclude the best and worst
-      solves from the averages.
+      Stats are show if there are enough solves to calculate them. DNF&apos;s
+      are excluded in the mean and standard deviation. A trim percentage of 5%
+      is used to exclude the best and worst solves from the averages.
     </p>
     <Table>
       <tbody>
-        {stats.map(stat => {
+        {stats.map((stat) => {
           switch (stat.type) {
             case AVERAGE:
               return (
@@ -23,7 +27,7 @@ const StatsExplanation = () => (
                   <Cell>
                     Average of {stat.size} excluding the best and worst
                     {calculateTrim(stat.size) === 1
-                      ? ' solve'
+                      ? " solve"
                       : ` ${calculateTrim(stat.size)} solves`}
                     .
                   </Cell>

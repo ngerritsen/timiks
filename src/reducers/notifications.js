@@ -1,10 +1,10 @@
-import { handleActions } from 'redux-actions';
-import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from '../constants/actionTypes';
+import { handleActions } from "redux-actions";
+import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from "../constants/actionTypes";
 
 const initialState = {
-  message: '',
+  message: "",
   isError: false,
-  show: false
+  show: false,
 };
 
 export default handleActions(
@@ -13,12 +13,12 @@ export default handleActions(
       ...state,
       message: action.payload.message,
       isError: Boolean(action.payload.isError),
-      show: true
+      show: true,
     }),
-    [HIDE_NOTIFICATION]: state => ({
+    [HIDE_NOTIFICATION]: (state) => ({
       ...state,
-      show: false
-    })
+      show: false,
+    }),
   },
   initialState
 );

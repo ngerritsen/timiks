@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import { AVERAGE, STANDARD_DEVIATION, SINGLE, MEAN } from './constants/stats';
+import PropTypes from "prop-types";
+import { AVERAGE, STANDARD_DEVIATION, SINGLE, MEAN } from "./constants/stats";
 
 export const StatTime = PropTypes.shape({
   ms: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   includedIds: PropTypes.arrayOf(PropTypes.string),
-  excludedIds: PropTypes.arrayOf(PropTypes.string)
+  excludedIds: PropTypes.arrayOf(PropTypes.string),
 });
 
 export const Stat = PropTypes.shape({
@@ -16,7 +16,7 @@ export const Stat = PropTypes.shape({
   graphLineColor: PropTypes.string,
   all: PropTypes.arrayOf(StatTime),
   current: StatTime.isRequired,
-  best: StatTime
+  best: StatTime,
 });
 
 export const Time = PropTypes.shape({
@@ -28,25 +28,27 @@ export const Time = PropTypes.shape({
   puzzle: PropTypes.string,
   scramble: PropTypes.string,
   stored: PropTypes.bool,
-  dirty: PropTypes.bool
+  dirty: PropTypes.bool,
 });
 
 export const GraphLine = PropTypes.shape({
   name: PropTypes.string.isRequired,
   enabled: PropTypes.bool.isRequired,
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 });
 
 export const PreviewArrows = PropTypes.arrayOf(
-  PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.bool]))
+  PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.bool])
+  )
 );
 
 export const TrainingTime = PropTypes.shape({
   ms: PropTypes.number.isRequired,
   caseId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  trainingType: PropTypes.isRequired,
+  trainingType: PropTypes.string.isRequired,
   timestamp: PropTypes.instanceOf(Date),
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
 });
 
 export const Case = PropTypes.shape({
@@ -59,11 +61,11 @@ export const Case = PropTypes.shape({
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   category: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
-  previewArrows: PreviewArrows
+  previewArrows: PreviewArrows,
 });
 
 export const CaseCategory = PropTypes.shape({
   name: PropTypes.string.isRequired,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  cases: PropTypes.arrayOf(Case).isRequired
+  cases: PropTypes.arrayOf(Case).isRequired,
 });

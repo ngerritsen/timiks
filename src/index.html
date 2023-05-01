@@ -109,21 +109,11 @@
     <link rel="manifest" href="/timiks.webmanifest" />
 
     <link rel="preload" href="/fonts.css" as="style" />
-    <link
-      rel="preload"
-      href="<%= htmlWebpackPlugin.files.chunks.main.entry %>"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="<%= htmlWebpackPlugin.files.chunks.scrambles.entry %>"
-      as="script"
-    />
+
+    <% htmlWebpackPlugin.files.js.forEach((file) => { %>
+    <link rel="preload" href="<%= file %>" as="script" />
+    <% }) %>
+
     <link
       rel="preload"
       href="https://www.googletagmanager.com/gtag/js?id=UA-39696629-4"

@@ -1,86 +1,86 @@
-export const STANDARD_DEVIATION = 'STANDARD_DEVIATION';
-export const AVERAGE = 'AVERAGE';
-export const SINGLE = 'SINGLE';
-export const MEAN = 'MEAN';
+export const STANDARD_DEVIATION = "STANDARD_DEVIATION";
+export const AVERAGE = "AVERAGE";
+export const SINGLE = "SINGLE";
+export const MEAN = "MEAN";
 export const TRIM_PERCENTAGE = 5;
 
 export default [
   {
-    name: 'single',
+    name: "single",
     type: SINGLE,
     showInGraph: true,
-    color: 'blue'
+    color: "blue",
   },
   {
-    name: 'mo3',
+    name: "mo3",
     type: MEAN,
     size: 3,
-    color: 'turquoise'
+    color: "turquoise",
   },
   {
-    name: 'ao5',
+    name: "ao5",
     type: AVERAGE,
     size: 5,
     showInGraph: true,
-    color: 'green'
+    color: "green",
   },
   {
-    name: 'ao12',
+    name: "ao12",
     type: AVERAGE,
     size: 12,
     showInGraph: true,
-    color: 'yellow'
+    color: "yellow",
   },
   {
-    name: 'ao25',
+    name: "ao25",
     type: AVERAGE,
     size: 25,
     showInGraph: true,
-    color: 'orange'
+    color: "orange",
   },
   {
-    name: 'ao50',
+    name: "ao50",
     type: AVERAGE,
     size: 50,
     showInGraph: true,
-    color: 'red'
+    color: "red",
   },
   {
-    name: 'ao100',
+    name: "ao100",
     type: AVERAGE,
     size: 100,
     showInGraph: true,
-    color: 'purple'
+    color: "purple",
   },
   {
-    name: 'ao200',
+    name: "ao200",
     type: AVERAGE,
     size: 200,
     showInGraph: true,
-    color: 'deepBlue'
+    color: "deepBlue",
   },
   {
-    name: 'ao500',
+    name: "ao500",
     type: AVERAGE,
     size: 500,
     showInGraph: true,
-    color: 'brown'
+    color: "brown",
   },
   {
-    name: 'ao1000',
+    name: "ao1000",
     type: AVERAGE,
     size: 1000,
     showInGraph: true,
-    color: 'dark'
+    color: "dark",
   },
   {
-    name: 'mean',
+    name: "mean",
     type: MEAN,
-    color: 'grey'
+    color: "grey",
   },
   {
-    name: 'σ',
+    name: "σ",
     type: STANDARD_DEVIATION,
-    color: 'pink'
-  }
+    color: "pink",
+  },
 ];

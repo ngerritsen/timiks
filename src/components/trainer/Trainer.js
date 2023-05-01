@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import Section from '../shared/Section';
-import TimerContainer from '../../containers/timer/TimerContainer';
-import ActivationContainer from '../../containers/timer/ActivationContainer';
-import TrainerCasesContainer from '../../containers/trainer/TrainerCasesContainer';
-import TrainerScrambleContainer from '../../containers/trainer/TrainerScrambleContainer';
-import TrainerOptionsContainer from '../../containers/trainer/TrainerOptionsContainer';
-import TrainerTimeTableContainer from '../../containers/trainer/TrainerTimeTableContainer';
-import TrainerActionsContainer from '../../containers/trainer/TrainerActionsContainer';
+import Section from "../shared/Section";
+import TimerContainer from "../../containers/timer/TimerContainer";
+import ActivationContainer from "../../containers/timer/ActivationContainer";
+import TrainerCasesContainer from "../../containers/trainer/TrainerCasesContainer";
+import TrainerScrambleContainer from "../../containers/trainer/TrainerScrambleContainer";
+import TrainerOptionsContainer from "../../containers/trainer/TrainerOptionsContainer";
+import TrainerTimeTableContainer from "../../containers/trainer/TrainerTimeTableContainer";
+import TrainerActionsContainer from "../../containers/trainer/TrainerActionsContainer";
 
 const Trainer = () => (
   <>

@@ -1,1 +1,1 @@
-export const SCRAMBLE_DELIMITER = ' ';
+export const SCRAMBLE_DELIMITER = " ";

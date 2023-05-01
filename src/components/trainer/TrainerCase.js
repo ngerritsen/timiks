@@ -1,25 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import Tile from '../shared/Tile';
-import LastLayerPreview from '../cube/LastLayerPreview';
-import * as CustomPropTypes from '../../propTypes';
-import { getColor } from '../../helpers/theme';
-import Section from '../shared/Section';
-import ToggleContent from '../shared/ToggleContent';
-import Modal from '../shared/Modal';
-import { OLL } from '../../constants/trainer';
-import TrainerCaseDetails from './TrainerCaseDetails';
-import Link from '../shared/Link';
-import { buildFullCaseTitle } from '../../helpers/trainer';
+import Tile from "../shared/Tile";
+import LastLayerPreview from "../cube/LastLayerPreview";
+import * as CustomPropTypes from "../../propTypes";
+import { getColor } from "../../helpers/theme";
+import Section from "../shared/Section";
+import ToggleContent from "../shared/ToggleContent";
+import Modal from "../shared/Modal";
+import { OLL } from "../../constants/trainer";
+import TrainerCaseDetails from "./TrainerCaseDetails";
+import Link from "../shared/Link";
+import { buildFullCaseTitle } from "../../helpers/trainer";
 
-const TrainerCase = ({ trainingCase, selectCase, deselectCase, trainingType }) => (
+const TrainerCase = ({
+  trainingCase,
+  selectCase,
+  deselectCase,
+  trainingType,
+}) => (
   <Tile
     key={trainingCase.id}
     selected={trainingCase.selected}
     onClick={() =>
-      trainingCase.selected ? deselectCase(trainingCase.id) : selectCase(trainingCase.id)
+      trainingCase.selected
+        ? deselectCase(trainingCase.id)
+        : selectCase(trainingCase.id)
     }
   >
     <Section margin="xs">
@@ -38,7 +45,7 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase, trainingType }) =
       toggle={({ show }) => (
         <Link
           href="#"
-          onClick={event => {
+          onClick={(event) => {
             event.stopPropagation();
             event.preventDefault();
             show();
@@ -48,8 +55,14 @@ const TrainerCase = ({ trainingCase, selectCase, deselectCase, trainingType }) =
         </Link>
       )}
       content={({ hide }) => (
-        <Modal onClose={hide} title={buildFullCaseTitle(trainingCase, trainingType)}>
-          <TrainerCaseDetails trainingCase={trainingCase} trainingType={trainingType} />
+        <Modal
+          onClose={hide}
+          title={buildFullCaseTitle(trainingCase, trainingType)}
+        >
+          <TrainerCaseDetails
+            trainingCase={trainingCase}
+            trainingType={trainingType}
+          />
         </Modal>
       )}
     />
@@ -60,7 +73,7 @@ TrainerCase.propTypes = {
   trainingCase: CustomPropTypes.Case.isRequired,
   selectCase: PropTypes.func.isRequired,
   deselectCase: PropTypes.func.isRequired,
-  trainingType: PropTypes.string.isRequired
+  trainingType: PropTypes.string.isRequired,
 };
 
 const CaseName = styled.span`
@@ -69,7 +82,7 @@ const CaseName = styled.span`
 `;
 
 const CaseId = styled.span`
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
 `;
 
 export default React.memo(TrainerCase);

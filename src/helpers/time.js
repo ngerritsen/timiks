@@ -1,5 +1,5 @@
-import { fillZeroes } from './formatting';
-import { multiMatch } from './general';
+import { fillZeroes } from "./formatting";
+import { multiMatch } from "./general";
 
 const MILLISECONDS_IN_SECOND = 1000;
 const SECONDS_IN_MINUTE = 60;
@@ -12,34 +12,34 @@ const MAX_SECONDS_IN_MINUTE = 59;
 const timeInputPatterns = [
   {
     regex: /^(\d{1,2}):(\d{1,2}):(\d{1,2})\.(\d{1,3})$/,
-    fields: ['hours', 'minutes', 'seconds', 'milliseconds']
+    fields: ["hours", "minutes", "seconds", "milliseconds"],
   },
   {
     regex: /^(\d{1,2}):(\d{1,2}):(\d{1,2})$/,
-    fields: ['hours', 'minutes', 'seconds']
+    fields: ["hours", "minutes", "seconds"],
   },
   {
     regex: /^(\d{1,2}):(\d{1,2})\.(\d{1,3})$/,
-    fields: ['minutes', 'seconds', 'milliseconds']
+    fields: ["minutes", "seconds", "milliseconds"],
   },
   {
     regex: /^(\d{1,2}):(\d{1,2})$/,
-    fields: ['minutes', 'seconds']
+    fields: ["minutes", "seconds"],
   },
   {
     regex: /^(\d{1,2})\.(\d{1,3})$/,
-    fields: ['seconds', 'milliseconds']
+    fields: ["seconds", "milliseconds"],
   },
   {
     regex: /^(\d{1,2})$/,
-    fields: ['seconds']
-  }
+    fields: ["seconds"],
+  },
 ];
 
 export function isValidTime(time) {
   return (
     time &&
-    typeof time.ms === 'number' &&
+    typeof time.ms === "number" &&
     !isNaN(time.ms) &&
     time.date &&
     !isNaN(time.date.getTime())
@@ -63,9 +63,9 @@ export function breakUpTime(ms) {
 export function formatShortTime(ms) {
   const { minutes, seconds, milliseconds } = breakUpTime(ms);
   return (
-    (minutes > 0 ? minutes + ':' : '') +
+    (minutes > 0 ? minutes + ":" : "") +
     fillZeroes(String(seconds), 2) +
-    '.' +
+    "." +
     Math.round(milliseconds / 100)
   );
 }
@@ -73,9 +73,9 @@ export function formatShortTime(ms) {
 export function formatTime(ms) {
   const { minutes, seconds, milliseconds } = breakUpTime(ms);
   return (
-    (minutes > 0 ? fillZeroes(String(minutes), 2) + ':' : '') +
+    (minutes > 0 ? fillZeroes(String(minutes), 2) + ":" : "") +
     fillZeroes(String(seconds), 2) +
-    '.' +
+    "." +
     fillZeroes(String(milliseconds), 3)
   );
 }
@@ -88,15 +88,18 @@ export function parseTimeInput(input) {
   let timeInput = input.trim();
   let plus2 = false;
 
-  if (timeInput.toLowerCase() === 'dnf') {
+  if (timeInput.toLowerCase() === "dnf") {
     return {
       ms: 0,
       dnf: true,
-      plus2: false
+      plus2: false,
     };
   }
 
-  if (timeInput.indexOf('+2') > 0 && timeInput.indexOf('+2') === timeInput.length - 2) {
+  if (
+    timeInput.indexOf("+2") > 0 &&
+    timeInput.indexOf("+2") === timeInput.length - 2
+  ) {
     timeInput = timeInput.slice(0, -2);
     plus2 = true;
   }

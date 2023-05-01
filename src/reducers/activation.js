@@ -1,39 +1,39 @@
-import { handleActions } from 'redux-actions';
-import * as actionTypes from '../constants/actionTypes';
-import { PREPARATION_STAGES } from '../constants/timer';
+import { handleActions } from "redux-actions";
+import * as actionTypes from "../constants/actionTypes";
+import { PREPARATION_STAGES } from "../constants/timer";
 
 const initialState = {
   preparationStage: -1,
-  preparingForInspection: false
+  preparingForInspection: false,
 };
 
 export default handleActions(
   {
-    [actionTypes.PREPARE_INSPECTION]: state => ({
+    [actionTypes.PREPARE_INSPECTION]: (state) => ({
       ...state,
-      preparingForInspection: true
+      preparingForInspection: true,
     }),
-    [actionTypes.START_INSPECTION]: state => ({
+    [actionTypes.START_INSPECTION]: (state) => ({
       ...state,
-      preparingForInspection: false
+      preparingForInspection: false,
     }),
     [actionTypes.FAIL_INSPECTION]: () => initialState,
-    [actionTypes.INCREMENT_PREPARATION_STAGE]: state => ({
+    [actionTypes.INCREMENT_PREPARATION_STAGE]: (state) => ({
       ...state,
-      preparationStage: state.preparationStage + 1
+      preparationStage: state.preparationStage + 1,
     }),
-    [actionTypes.SKIP_PREPARATION_STAGE]: state => ({
+    [actionTypes.SKIP_PREPARATION_STAGE]: (state) => ({
       ...state,
-      preparationStage: PREPARATION_STAGES
+      preparationStage: PREPARATION_STAGES,
     }),
-    [actionTypes.PREPARE_ACTIVATION]: state => ({
+    [actionTypes.PREPARE_ACTIVATION]: (state) => ({
       ...state,
-      preparationStage: 0
+      preparationStage: 0,
     }),
-    [actionTypes.RESET_ACTIVATION]: state => ({
+    [actionTypes.RESET_ACTIVATION]: (state) => ({
       ...state,
-      preparationStage: -1
-    })
+      preparationStage: -1,
+    }),
   },
   initialState
 );

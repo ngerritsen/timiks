@@ -1,20 +1,23 @@
-import styled from 'styled-components';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
+import styled from "styled-components";
+import React from "react";
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
 
-import { DARK, LIGHT, AUTO, THEME_OPTIONS } from '../constants/theme';
-import Shortcut from './shared/Shortcut';
-import { ACTIVATION_DURATION_OPTIONS, BUTTON_COLORS } from '../constants/settings';
-import IconButton from './shared/IconButton';
-import ToggleContent from './shared/ToggleContent';
-import Section from './shared/Section';
-import Select from './shared/Select';
-import Checkbox from './shared/Checkbox';
-import Button from './shared/Button';
-import Modal from './shared/Modal';
-import { getSize, getColor } from '../helpers/theme';
+import { DARK, LIGHT, AUTO, THEME_OPTIONS } from "../constants/theme";
+import Shortcut from "./shared/Shortcut";
+import {
+  ACTIVATION_DURATION_OPTIONS,
+  BUTTON_COLORS,
+} from "../constants/settings";
+import IconButton from "./shared/IconButton";
+import ToggleContent from "./shared/ToggleContent";
+import Section from "./shared/Section";
+import Select from "./shared/Select";
+import Checkbox from "./shared/Checkbox";
+import Button from "./shared/Button";
+import Modal from "./shared/Modal";
+import { getSize, getColor } from "../helpers/theme";
 
 const Settings = ({ settings, changeSetting }) => (
   <>
@@ -25,7 +28,9 @@ const Settings = ({ settings, changeSetting }) => (
           {settings.theme !== AUTO && (
             <Shortcut
               command="toggleDarkMode"
-              action={() => changeSetting('theme', settings.theme === DARK ? LIGHT : DARK)}
+              action={() =>
+                changeSetting("theme", settings.theme === DARK ? LIGHT : DARK)
+              }
             />
           )}
           <FontAwesomeIcon icon={faCog} fixedWidth />
@@ -40,7 +45,9 @@ const Settings = ({ settings, changeSetting }) => (
                 <Setting>
                   <label>Activation delay*</label>
                   <Select
-                    onChange={delay => changeSetting('activationDuration', delay)}
+                    onChange={(delay) =>
+                      changeSetting("activationDuration", delay)
+                    }
                     options={ACTIVATION_DURATION_OPTIONS}
                     value={settings.activationDuration}
                     numeric
@@ -53,7 +60,9 @@ const Settings = ({ settings, changeSetting }) => (
                   <label>Use inspection time</label>
                   <Checkbox
                     type="checkbox"
-                    onChange={checked => changeSetting('useInspectionTime', checked)}
+                    onChange={(checked) =>
+                      changeSetting("useInspectionTime", checked)
+                    }
                     checked={settings.useInspectionTime}
                   />
                 </Setting>
@@ -63,7 +72,9 @@ const Settings = ({ settings, changeSetting }) => (
                   <label>Voice alert for inspection time**</label>
                   <Checkbox
                     type="checkbox"
-                    onChange={checked => changeSetting('warnForInspectionTime', checked)}
+                    onChange={(checked) =>
+                      changeSetting("warnForInspectionTime", checked)
+                    }
                     checked={settings.warnForInspectionTime}
                   />
                 </Setting>
@@ -73,7 +84,9 @@ const Settings = ({ settings, changeSetting }) => (
                   <label>Manual time entry</label>
                   <Checkbox
                     type="checkbox"
-                    onChange={checked => changeSetting('useManualTimeEntry', checked)}
+                    onChange={(checked) =>
+                      changeSetting("useManualTimeEntry", checked)
+                    }
                     checked={settings.useManualTimeEntry}
                   />
                 </Setting>
@@ -84,7 +97,9 @@ const Settings = ({ settings, changeSetting }) => (
                   <Checkbox
                     type="checkbox"
                     inverse
-                    onChange={checked => changeSetting('showTimerTime', checked)}
+                    onChange={(checked) =>
+                      changeSetting("showTimerTime", checked)
+                    }
                     checked={settings.showTimerTime}
                   />
                 </Setting>
@@ -94,7 +109,9 @@ const Settings = ({ settings, changeSetting }) => (
                   <label>Show latest solve on top</label>
                   <Checkbox
                     type="checkbox"
-                    onChange={checked => changeSetting('showLatestSolveOnTop', checked)}
+                    onChange={(checked) =>
+                      changeSetting("showLatestSolveOnTop", checked)
+                    }
                     checked={settings.showLatestSolveOnTop}
                   />
                 </Setting>
@@ -106,7 +123,7 @@ const Settings = ({ settings, changeSetting }) => (
                 <Setting>
                   <label>Theme</label>
                   <Select
-                    onChange={theme => changeSetting('theme', theme)}
+                    onChange={(theme) => changeSetting("theme", theme)}
                     options={THEME_OPTIONS}
                     value={settings.theme}
                     fullWidth
@@ -117,7 +134,7 @@ const Settings = ({ settings, changeSetting }) => (
                 <Setting>
                   <label>Start button color</label>
                   <Select
-                    onChange={color => changeSetting('buttonColor', color)}
+                    onChange={(color) => changeSetting("buttonColor", color)}
                     options={BUTTON_COLORS}
                     value={settings.buttonColor}
                     fullWidth
@@ -128,8 +145,13 @@ const Settings = ({ settings, changeSetting }) => (
                 <Setting>
                   <label>Start button color in dark mode</label>
                   <Select
-                    onChange={color => changeSetting('buttonColorDarkMode', color)}
-                    options={[{ label: 'Inherit', value: '' }, ...BUTTON_COLORS]}
+                    onChange={(color) =>
+                      changeSetting("buttonColorDarkMode", color)
+                    }
+                    options={[
+                      { label: "Inherit", value: "" },
+                      ...BUTTON_COLORS,
+                    ]}
                     value={settings.buttonColorDarkMode}
                     fullWidth
                   />
@@ -140,7 +162,9 @@ const Settings = ({ settings, changeSetting }) => (
                   <label>Fix graph y-axis</label>
                   <Checkbox
                     type="checkbox"
-                    onChange={checked => changeSetting('fixGraphYAxis', checked)}
+                    onChange={(checked) =>
+                      changeSetting("fixGraphYAxis", checked)
+                    }
                     checked={settings.fixGraphYAxis}
                   />
                 </Setting>
@@ -148,12 +172,14 @@ const Settings = ({ settings, changeSetting }) => (
             </Section>
             <Section margin="xs">
               <Explanation>
-                *For how long you have to hold spacebar, mouse or touch before starting the timer.
+                *For how long you have to hold spacebar, mouse or touch before
+                starting the timer.
               </Explanation>
             </Section>
             <Section margin="md">
               <Explanation>
-                **Does not work on most mobile devices due to browser restrictions.
+                **Does not work on most mobile devices due to browser
+                restrictions.
               </Explanation>
             </Section>
             <Button onClick={hide}>Close</Button>
@@ -169,11 +195,11 @@ const Setting = styled.label`
   justify-content: space-between;
   height: 2.2rem;
   align-items: center;
-  padding-right: ${getSize('xxs')};
+  padding-right: ${getSize("xxs")};
 `;
 
 const SectionTitle = styled.h3`
-  margin: 0 0 ${getSize('sm')};
+  margin: 0 0 ${getSize("sm")};
   font-weight: bold;
   font-size: 1.7rem;
 `;
@@ -181,13 +207,13 @@ const SectionTitle = styled.h3`
 const Explanation = styled.span`
   margin: 0;
   padding: 0;
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
   font-style: italic;
 `;
 
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
-  changeSetting: PropTypes.func.isRequired
+  changeSetting: PropTypes.func.isRequired,
 };
 
 export default React.memo(Settings);

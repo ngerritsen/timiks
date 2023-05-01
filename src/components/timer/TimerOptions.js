@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { faSyncAlt } from '@fortawesome/free-solid-svg-icons/faSyncAlt';
+import React from "react";
+import PropTypes from "prop-types";
+import { faSyncAlt } from "@fortawesome/free-solid-svg-icons/faSyncAlt";
 
-import InlineFontawesome from '../shared/InlineFontawesome';
-import Select from '../shared/Select';
-import Button from '../shared/Button';
-import puzzles from '../../constants/puzzles';
-import Shortcut from '../shared/Shortcut';
-import { VisibleFrom, HiddenFrom } from '../shared/Visibility';
-import { ToolbarItem, Toolbar } from '../shared/Toolbar';
+import InlineFontawesome from "../shared/InlineFontawesome";
+import Select from "../shared/Select";
+import Button from "../shared/Button";
+import puzzles from "../../constants/puzzles";
+import Shortcut from "../shared/Shortcut";
+import { VisibleFrom, HiddenFrom } from "../shared/Visibility";
+import { ToolbarItem, Toolbar } from "../shared/Toolbar";
 
 const TimerOptions = ({
   changeSetting,
   puzzle,
   refreshScramble,
   useInspectionTime,
-  useManualTimeEntry
+  useManualTimeEntry,
 }) => {
   const scrambleButton = (
     <Button size="sm" color="subtleBg" onClick={refreshScramble}>
@@ -26,8 +26,11 @@ const TimerOptions = ({
 
   const puzzleSelector = (
     <Select
-      onChange={puzzle => changeSetting('puzzle', puzzle)}
-      options={puzzles.map(({ name, title }) => ({ label: title, value: name }))}
+      onChange={(puzzle) => changeSetting("puzzle", puzzle)}
+      options={puzzles.map(({ name, title }) => ({
+        label: title,
+        value: name,
+      }))}
       value={puzzle}
     />
   );
@@ -37,11 +40,11 @@ const TimerOptions = ({
       <Shortcut command="refreshScramble" action={refreshScramble} />
       <Shortcut
         command="toggleInspectionTime"
-        action={() => changeSetting('useInspectionTime', !useInspectionTime)}
+        action={() => changeSetting("useInspectionTime", !useInspectionTime)}
       />
       <Shortcut
         command="toggleManualTimeEntry"
-        action={() => changeSetting('useManualTimeEntry', !useManualTimeEntry)}
+        action={() => changeSetting("useManualTimeEntry", !useManualTimeEntry)}
       />
       <HiddenFrom breakpoint="sm">
         <Toolbar>
@@ -64,7 +67,7 @@ TimerOptions.propTypes = {
   puzzle: PropTypes.string.isRequired,
   refreshScramble: PropTypes.func.isRequired,
   useInspectionTime: PropTypes.bool,
-  useManualTimeEntry: PropTypes.bool
+  useManualTimeEntry: PropTypes.bool,
 };
 
 export default React.memo(TimerOptions);

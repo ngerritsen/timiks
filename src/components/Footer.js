@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import Showcase from './promotional/Showcase';
-import Donate from './promotional/Donate';
-import { ButtonDuo, ButtonDuoItem } from './shared/ButtonDuo';
+import Showcase from "./promotional/Showcase";
+import Donate from "./promotional/Donate";
+import { ButtonDuo, ButtonDuoItem } from "./shared/ButtonDuo";
 
 const Footer = () => (
   <ButtonDuo center>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import Section from '../shared/Section';
-import TimeBoardActionsContainer from '../../containers/timer/TimeBoardActionsContainer';
-import TimeTableContainer from '../../containers/timeTable/TimeTableContainer';
+import Section from "../shared/Section";
+import TimeBoardActionsContainer from "../../containers/timer/TimeBoardActionsContainer";
+import TimeTableContainer from "../../containers/timeTable/TimeTableContainer";
 
 const TimeBoard = () => {
   return (

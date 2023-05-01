@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import ShortcutContext from '../../containers/ShortcutContext';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import ShortcutContext from "../../containers/ShortcutContext";
 
-const Shortcut = ({ registerShortcut, updateShortcut, unregisterShortcut, command, action }) => {
+const Shortcut = ({
+  registerShortcut,
+  updateShortcut,
+  unregisterShortcut,
+  command,
+  action,
+}) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -25,16 +31,16 @@ Shortcut.propTypes = {
   unregisterShortcut: PropTypes.func.isRequired,
   updateShortcut: PropTypes.func.isRequired,
   command: PropTypes.string.isRequired,
-  action: PropTypes.func.isRequired
+  action: PropTypes.func.isRequired,
 };
 
 const ShortcutAnchor = styled.span`
   display: none;
 `;
 
-const WrappedShortcut = props => (
+const WrappedShortcut = (props) => (
   <ShortcutContext.Consumer>
-    {context => <Shortcut {...props} {...context} />}
+    {(context) => <Shortcut {...props} {...context} />}
   </ShortcutContext.Consumer>
 );
 

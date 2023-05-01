@@ -1,24 +1,30 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
 
-import Time from '../shared/Time';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons/faEllipsisH';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
-import ToggleContent from '../shared/ToggleContent';
-import Modal from '../shared/Modal';
-import TimeDetails from '../shared/TimeDetails';
-import * as CustomPropTypes from '../../propTypes';
-import IconButton from '../shared/IconButton';
-import { Cell } from '../shared/Table';
-import { SubtleText } from '../shared/Typography';
-import CloudSyncIcon from '../shared/CloudSyncIcon';
-import { getColor, getSize } from '../../helpers/theme';
+import Time from "../shared/Time";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons/faEllipsisH";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import ToggleContent from "../shared/ToggleContent";
+import Modal from "../shared/Modal";
+import TimeDetails from "../shared/TimeDetails";
+import * as CustomPropTypes from "../../propTypes";
+import IconButton from "../shared/IconButton";
+import { Cell } from "../shared/Table";
+import { SubtleText } from "../shared/Typography";
+import CloudSyncIcon from "../shared/CloudSyncIcon";
+import { getColor, getSize } from "../../helpers/theme";
 
-const TimeTableTimeRow = ({ index, time, removeTime, isIncluded, isExcluded }) => {
-  const highlightColor = isIncluded ? 'blue' : isExcluded ? 'orange' : '';
+const TimeTableTimeRow = ({
+  index,
+  time,
+  removeTime,
+  isIncluded,
+  isExcluded,
+}) => {
+  const highlightColor = isIncluded ? "blue" : isExcluded ? "orange" : "";
   return (
     <tr>
       <Cell width="3rem" highlightColor={highlightColor}>
@@ -68,25 +74,25 @@ TimeTableTimeRow.propTypes = {
   index: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired,
   isIncluded: PropTypes.bool,
-  isExcluded: PropTypes.bool
+  isExcluded: PropTypes.bool,
 };
 
 const TimeInfo = styled.span`
   padding-left: 1rem;
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
   font-size: 1.5rem;
 `;
 
 const BestTimeIcon = styled.span`
-  color: ${getColor('green')};
+  color: ${getColor("green")};
 `;
 
 const ShowTimeButton = styled(IconButton)`
-  margin-left: ${getSize('xs')};
+  margin-left: ${getSize("xs")};
 `;
 
 const RemoveItemIconButton = styled(IconButton)`
-  margin-left: ${getSize('xs')};
+  margin-left: ${getSize("xs")};
 `;
 
 export default React.memo(TimeTableTimeRow);

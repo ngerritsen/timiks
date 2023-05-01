@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { getColor, getSize } from '../../helpers/theme';
+import { getColor, getSize } from "../../helpers/theme";
 
 const Checkbox = ({ onChange, checked, inverse, name, label }) => {
   const isChecked = inverse ? !checked : checked;
@@ -18,7 +18,9 @@ const Checkbox = ({ onChange, checked, inverse, name, label }) => {
         type="checkbox"
       />
       <CheckboxBox name={name} checked={isChecked}>
-        <CheckboxCheck>{isChecked && <FontAwesomeIcon icon={faCheck} size="xs" />}</CheckboxCheck>
+        <CheckboxCheck>
+          {isChecked && <FontAwesomeIcon icon={faCheck} size="xs" />}
+        </CheckboxCheck>
       </CheckboxBox>
       {label && <TextLabel>{label}</TextLabel>}
     </Label>
@@ -36,7 +38,7 @@ const Label = styled.label`
 `;
 
 const TextLabel = styled.span`
-  margin-left: ${getSize('xs')};
+  margin-left: ${getSize("xs")};
 `;
 
 const CheckboxCheck = styled.div`
@@ -55,14 +57,17 @@ const CheckboxBox = styled.div`
   width: 1.5rem;
   overflow: hidden;
   border-radius: 0.3rem;
-  border: 1px solid ${props => getColor(props.checked ? 'blue' : 'grey')(props)};
-  background-color: ${props => getColor(props.checked ? 'blue' : 'bg')(props)};
-  color: ${getColor('white')};
+  border: 1px solid
+    ${(props) => getColor(props.checked ? "blue" : "grey")(props)};
+  background-color: ${(props) =>
+    getColor(props.checked ? "blue" : "bg")(props)};
+  color: ${getColor("white")};
   cursor: pointer;
   transition: background-color 0.2s ease;
 
   &:hover {
-    border: 1px solid ${props => getColor(props.checked ? 'blue' : 'subtleFg')(props)};
+    border: 1px solid
+      ${(props) => getColor(props.checked ? "blue" : "subtleFg")(props)};
   }
 `;
 
@@ -71,7 +76,7 @@ Checkbox.propTypes = {
   inverse: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
 };
 
 export default Checkbox;

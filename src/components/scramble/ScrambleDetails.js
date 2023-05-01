@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
+import PropTypes from "prop-types";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
 
-import IconButton from '../shared/IconButton';
-import Shortcut from '../shared/Shortcut';
-import Modal from '../shared/Modal';
-import ToggleContent from '../shared/ToggleContent';
-import Scramble from './Scramble';
-import Section from '../shared/Section';
+import IconButton from "../shared/IconButton";
+import Shortcut from "../shared/Shortcut";
+import Modal from "../shared/Modal";
+import ToggleContent from "../shared/ToggleContent";
+import Scramble from "./Scramble";
+import Section from "../shared/Section";
 
 const ScrambleDetails = ({ scramble, puzzle }) => (
   <ToggleContent
@@ -30,7 +30,7 @@ const ScrambleDetails = ({ scramble, puzzle }) => (
 
 ScrambleDetails.propTypes = {
   scramble: PropTypes.string,
-  puzzle: PropTypes.string
+  puzzle: PropTypes.string,
 };
 
 export default ScrambleDetails;

@@ -1,8 +1,11 @@
-import { handleActions } from 'redux-actions';
-import * as actionTypes from '../constants/actionTypes';
-import * as settingsConstants from '../constants/settings';
-import { DEFAULT_ACTIVATION_DURATION, DEFAULT_ARCHIVE_DAYS } from '../constants/settings';
-import { AUTO } from '../constants/theme';
+import { handleActions } from "redux-actions";
+import * as actionTypes from "../constants/actionTypes";
+import * as settingsConstants from "../constants/settings";
+import {
+  DEFAULT_ACTIVATION_DURATION,
+  DEFAULT_ARCHIVE_DAYS,
+} from "../constants/settings";
+import { AUTO } from "../constants/theme";
 
 const initialState = {
   puzzle: settingsConstants.DEFAULT_PUZZLE,
@@ -13,11 +16,11 @@ const initialState = {
   warnForInspectionTime: true,
   theme: AUTO,
   buttonColor: settingsConstants.DEFAULT_BUTTON_COLOR,
-  buttonColorDarkMode: '',
+  buttonColorDarkMode: "",
   activationDuration: DEFAULT_ACTIVATION_DURATION,
   showTimerTime: true,
   fixGraphYAxis: false,
-  disabledArchiveGraphLines: []
+  disabledArchiveGraphLines: [],
 };
 
 export default handleActions(
@@ -25,12 +28,12 @@ export default handleActions(
     [actionTypes.LOAD_SETTINGS]: (state, action) => ({
       ...state,
       ...action.payload,
-      archiveDays: DEFAULT_ARCHIVE_DAYS
+      archiveDays: DEFAULT_ARCHIVE_DAYS,
     }),
     [actionTypes.CHANGE_SETTING]: (state, action) => ({
       ...state,
-      [action.payload.setting]: action.payload.value
-    })
+      [action.payload.setting]: action.payload.value,
+    }),
   },
   initialState
 );

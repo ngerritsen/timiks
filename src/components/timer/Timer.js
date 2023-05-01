@@ -1,22 +1,27 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons/faThumbsUp';
-import { faSpaceShuttle } from '@fortawesome/free-solid-svg-icons/faSpaceShuttle';
-import * as CustomPropTypes from '../../propTypes';
-import Section from '../shared/Section';
-import Time from '../shared/Time';
-import TimeActionsContainer from '../../containers/timer/TimeActionsContainer';
-import TimeEntryContainer from '../../containers/timer/TimeEntryContainer';
-import IncrementingTime from './IncrementingTime';
-import DecrementingTime from './DecrementingTime';
-import { INSPECTION_TIME } from '../../constants/timer';
-import { getZIndex, getBreakpoint, getColor, getSize } from '../../helpers/theme';
-import Tag from '../shared/Tag';
-import TrainerStatusContainer from '../../containers/trainer/TrainerStatusContainer';
-import TrainerPreviousCaseContainer from '../../containers/trainer/TrainerPreviousCaseContainer';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
+import { faSpaceShuttle } from "@fortawesome/free-solid-svg-icons/faSpaceShuttle";
+import * as CustomPropTypes from "../../propTypes";
+import Section from "../shared/Section";
+import Time from "../shared/Time";
+import TimeActionsContainer from "../../containers/timer/TimeActionsContainer";
+import TimeEntryContainer from "../../containers/timer/TimeEntryContainer";
+import IncrementingTime from "./IncrementingTime";
+import DecrementingTime from "./DecrementingTime";
+import { INSPECTION_TIME } from "../../constants/timer";
+import {
+  getZIndex,
+  getBreakpoint,
+  getColor,
+  getSize,
+} from "../../helpers/theme";
+import Tag from "../shared/Tag";
+import TrainerStatusContainer from "../../containers/trainer/TrainerStatusContainer";
+import TrainerPreviousCaseContainer from "../../containers/trainer/TrainerPreviousCaseContainer";
 
 const Timer = ({
   inspecting,
@@ -32,9 +37,11 @@ const Timer = ({
   useInspectionTime,
   showTimerTime,
   stopTime,
-  isTraining
+  isTraining,
 }) => (
-  <TimerActivationContainer {...(useManualTimeEntry ? {} : { 'data-activation': true })}>
+  <TimerActivationContainer
+    {...(useManualTimeEntry ? {} : { "data-activation": true })}
+  >
     <Section margin="xs">
       <TimerHeader>
         {isTraining && (
@@ -43,14 +50,17 @@ const Timer = ({
           </span>
         )}
         {!isTraining && (
-          <Tag color={showLastTime && lastTime.best ? 'green' : 'subtleBg'} data-no-activation>
+          <Tag
+            color={showLastTime && lastTime.best ? "green" : "subtleBg"}
+            data-no-activation
+          >
             {showLastTime && lastTime.best ? (
               <>
                 <FontAwesomeIcon icon={faThumbsUp} />
                 &nbsp; {currentPuzzle} - Best session single
               </>
             ) : (
-              currentPuzzle + (useInspectionTime ? '- With Inspection' : '')
+              currentPuzzle + (useInspectionTime ? "- With Inspection" : "")
             )}
           </Tag>
         )}
@@ -74,7 +84,9 @@ const Timer = ({
             case preparingForInspection:
               return <Time time={{ ms: INSPECTION_TIME }} secondsOnly />;
             case startTime > 0 && stopTime > 0:
-              return <Time time={{ ms: stopTime - startTime }} showMilliseconds />;
+              return (
+                <Time time={{ ms: stopTime - startTime }} showMilliseconds />
+              );
             case startTime > 0 && showTimerTime:
               return <IncrementingTime startTime={startTime} />;
             case startTime > 0 && !showTimerTime:
@@ -89,7 +101,9 @@ const Timer = ({
     </Section>
     <TimeFooter withManualEntry={useManualTimeEntry}>
       <TimeFooterClickArea data-no-activation>
-        {isTraining && startTime > 0 && stopTime > 0 && <TrainerPreviousCaseContainer />}
+        {isTraining && startTime > 0 && stopTime > 0 && (
+          <TrainerPreviousCaseContainer />
+        )}
         {!isTraining && showLastTime && (
           <TimeFooterActionsClickArea>
             <TimeActionsContainer lastTime={lastTime} />
@@ -114,23 +128,23 @@ Timer.propTypes = {
   useManualTimeEntry: PropTypes.bool.isRequired,
   useInspectionTime: PropTypes.bool.isRequired,
   showTimerTime: PropTypes.bool.isRequired,
-  isTraining: PropTypes.bool
+  isTraining: PropTypes.bool,
 };
 
 function getTimeColor(preparing, preparingForInspection, ready) {
   switch (true) {
     case (preparing && ready) || preparingForInspection:
-      return 'green';
+      return "green";
     case preparing && !ready:
-      return 'red';
+      return "red";
     default:
-      return 'fg';
+      return "fg";
   }
 }
 
 const TimerActivationContainer = styled.div`
   position: relative;
-  z-index: ${getZIndex('onFullScreenMask')};
+  z-index: ${getZIndex("onFullScreenMask")};
 `;
 
 const TimerHeader = styled.div`
@@ -139,7 +153,7 @@ const TimerHeader = styled.div`
   justify-content: center;
   height: 5rem;
 
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
+  @media screen and (min-width: ${getBreakpoint("lg")}) {
     height: 8rem;
   }
 `;
@@ -149,7 +163,7 @@ const TimerTime = styled.div`
   align-items: center;
   justify-content: center;
   height: 7rem;
-  color: ${props => getColor(props.color)(props)};
+  color: ${(props) => getColor(props.color)(props)};
   font-size: 5.4rem;
 `;
 
@@ -160,7 +174,7 @@ const TimeFooter = styled.div`
   height: 6.5rem;
   overflow: hidden;
 
-  @media screen and (min-width: ${getBreakpoint('lg')}) {
+  @media screen and (min-width: ${getBreakpoint("lg")}) {
     height: 9rem;
   }
 `;
@@ -171,7 +185,7 @@ const TimeFooterClickArea = styled.div`
 
 const TimeFooterActionsClickArea = styled.div`
   display: inline-block;
-  padding: ${getSize('xs')};
+  padding: ${getSize("xs")};
 `;
 
 export default React.memo(Timer);

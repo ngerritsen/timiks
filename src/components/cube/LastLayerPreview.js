@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withTheme } from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import { withTheme } from "styled-components";
 
-import { puzzleColors } from '../../constants/puzzles';
-import { getColor } from '../../helpers/theme';
-import * as CustomPropTypes from '../../propTypes';
+import { puzzleColors } from "../../constants/puzzles";
+import { getColor } from "../../helpers/theme";
+import * as CustomPropTypes from "../../propTypes";
 
 const LastLayerPreview = ({ previewString, previewArrows, theme }) => {
   const cubeSize = 3;
@@ -12,11 +12,11 @@ const LastLayerPreview = ({ previewString, previewArrows, theme }) => {
   const gap = 12 / cubeSize;
   const stroke = 3 / cubeSize;
   const radius = 9 / cubeSize;
-  const arrowColor = getColor('dark')({ theme });
+  const arrowColor = getColor("dark")({ theme });
 
   const [top, right, bottom, left, firstRow, secondRow, lastRow] = previewString
-    .split(' ')
-    .map(str => str.split(''));
+    .split(" ")
+    .map((str) => str.split(""));
 
   const tiles = [
     ...top.map((color, i) => ({ color, y: 0, x: i + 1 })),
@@ -25,7 +25,7 @@ const LastLayerPreview = ({ previewString, previewArrows, theme }) => {
     ...left.map((color, i) => ({ color, y: 3 - i, x: 0 })),
     ...firstRow.map((color, i) => ({ color, y: 1, x: i + 1 })),
     ...secondRow.map((color, i) => ({ color, y: 2, x: i + 1 })),
-    ...lastRow.map((color, i) => ({ color, y: 3, x: i + 1 }))
+    ...lastRow.map((color, i) => ({ color, y: 3, x: i + 1 })),
   ];
 
   return (
@@ -57,7 +57,7 @@ const LastLayerPreview = ({ previewString, previewArrows, theme }) => {
       {tiles.map(({ x, y, color }, i) => (
         <rect
           key={i}
-          stroke={getColor('dark')({ theme })}
+          stroke={getColor("dark")({ theme })}
           strokeWidth={stroke}
           fill={getColor([puzzleColors[color]])({ theme })}
           rx={radius}
@@ -75,7 +75,7 @@ const LastLayerPreview = ({ previewString, previewArrows, theme }) => {
           x2={getLinePointCoordinate(end[0], start[0])}
           y2={getLinePointCoordinate(end[1], start[1])}
           markerEnd="url(#arrow-end)"
-          markerStart={swap ? 'url(#arrow-start)' : ''}
+          markerStart={swap ? "url(#arrow-start)" : ""}
           stroke={arrowColor}
           strokeWidth={4}
         />
@@ -87,7 +87,11 @@ const LastLayerPreview = ({ previewString, previewArrows, theme }) => {
     return (
       position * tileSize +
       tileSize +
-      (oppositePosition > position ? 4 : oppositePosition === position ? 0 : -4) -
+      (oppositePosition > position
+        ? 4
+        : oppositePosition === position
+        ? 0
+        : -4) -
       gap / 3
     );
   }
@@ -103,13 +107,13 @@ const LastLayerPreview = ({ previewString, previewArrows, theme }) => {
 };
 
 LastLayerPreview.defaultProps = {
-  previewArrows: []
+  previewArrows: [],
 };
 
 LastLayerPreview.propTypes = {
   previewString: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
-  previewArrows: CustomPropTypes.PreviewArrows
+  previewArrows: CustomPropTypes.PreviewArrows,
 };
 
 export default withTheme(LastLayerPreview);

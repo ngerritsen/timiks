@@ -1,27 +1,27 @@
-import { handleActions } from 'redux-actions';
-import * as actionTypes from '../constants/actionTypes';
+import { handleActions } from "redux-actions";
+import * as actionTypes from "../constants/actionTypes";
 
 const initialState = {
   isInitialized: false,
   isLoggedIn: false,
   isLoggingIn: false,
   isLoggingOut: false,
-  displayName: '',
-  email: '',
-  userId: '',
-  avatarUrl: ''
+  displayName: "",
+  email: "",
+  userId: "",
+  avatarUrl: "",
 };
 
 export default handleActions(
   {
-    [actionTypes.LOGIN]: state => ({
+    [actionTypes.LOGIN]: (state) => ({
       ...state,
-      isLoggingIn: true
+      isLoggingIn: true,
     }),
-    [actionTypes.LOGIN_FAILED]: state => ({
+    [actionTypes.LOGIN_FAILED]: (state) => ({
       ...state,
       isLoggedIn: false,
-      isLoggingIn: false
+      isLoggingIn: false,
     }),
     [actionTypes.LOGIN_SUCCEEDED]: (state, action) => ({
       ...state,
@@ -31,21 +31,21 @@ export default handleActions(
       displayName: action.payload.displayName,
       email: action.payload.email,
       userId: action.payload.userId,
-      avatarUrl: action.payload.avatarUrl
+      avatarUrl: action.payload.avatarUrl,
     }),
-    [actionTypes.LOGOUT]: state => ({
+    [actionTypes.LOGOUT]: (state) => ({
       ...state,
-      isLoggingOut: true
+      isLoggingOut: true,
     }),
-    [actionTypes.LOGOUT_FAILED]: state => ({
+    [actionTypes.LOGOUT_FAILED]: (state) => ({
       ...state,
       isLoggingOut: false,
-      isLoggedOut: false
+      isLoggedOut: false,
     }),
     [actionTypes.LOGOUT_SUCCEEDED]: () => ({
       ...initialState,
-      isInitialized: true
-    })
+      isInitialized: true,
+    }),
   },
   initialState
 );

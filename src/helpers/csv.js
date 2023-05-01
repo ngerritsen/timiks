@@ -1,20 +1,28 @@
-import { getMs } from './time';
+import { getMs } from "./time";
 
-const ROW_DELIMITER = '\n';
-const COLUMN_DELIMTER = ',';
+const ROW_DELIMITER = "\n";
+const COLUMN_DELIMTER = ",";
 const ESCAPE_CHAR = '"';
 
 export function timesToCsv(times) {
-  const headers = ['id', 'ms', 'date', 'puzzle', 'scramble', 'plus2', 'dnf'].join(COLUMN_DELIMTER);
-  const rows = times.map(time =>
+  const headers = [
+    "id",
+    "ms",
+    "date",
+    "puzzle",
+    "scramble",
+    "plus2",
+    "dnf",
+  ].join(COLUMN_DELIMTER);
+  const rows = times.map((time) =>
     [
       time.id,
       getMs(time),
       time.date.toISOString(),
       time.puzzle,
       escapeColumn(time.scramble),
-      time.plus2 ? 'yes' : '',
-      time.dnf ? 'yes' : ''
+      time.plus2 ? "yes" : "",
+      time.dnf ? "yes" : "",
     ].join(COLUMN_DELIMTER)
   );
 
@@ -30,7 +38,7 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
   const rows = [];
 
   let currentRow = [];
-  let currentColumn = '';
+  let currentColumn = "";
   let inEscape = false;
   let inEscapeEscape = false;
 
@@ -60,13 +68,16 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
       continue;
     }
 
-    if ((char === ROW_DELIMITER || isLast) && (!inEscape || char === ESCAPE_CHAR)) {
+    if (
+      (char === ROW_DELIMITER || isLast) &&
+      (!inEscape || char === ESCAPE_CHAR)
+    ) {
       inEscape = false;
       currentRow.push(currentColumn);
-      currentColumn = '';
+      currentColumn = "";
 
       if (char === delimiter) {
-        currentRow.push('');
+        currentRow.push("");
       }
 
       if (headers.length === 0) {
@@ -81,18 +92,18 @@ export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
 
     if (char === delimiter && !inEscape) {
       currentRow.push(currentColumn);
-      currentColumn = '';
+      currentColumn = "";
       continue;
     }
 
     currentColumn += char;
   }
 
-  return rows.map(row =>
+  return rows.map((row) =>
     headers.reduce(
       (columnData, header, i) => ({
         ...columnData,
-        [header]: row[i]
+        [header]: row[i],
       }),
       {}
     )

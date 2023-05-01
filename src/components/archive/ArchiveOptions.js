@@ -1,29 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Select from '../shared/Select';
-import puzzles from '../../constants/puzzles';
-import { VisibleFrom, HiddenFrom } from '../shared/Visibility';
-import * as CustomPropTypes from '../../propTypes';
-import Export from './Export';
-import Section from '../shared/Section';
-import { ARCHIVE_DAYS_OPTIONS } from '../../constants/settings';
-import { Toolbar, ToolbarItem } from '../shared/Toolbar';
-import ImportContainer from '../../containers/archive/ImportContainer';
+import Select from "../shared/Select";
+import puzzles from "../../constants/puzzles";
+import { VisibleFrom, HiddenFrom } from "../shared/Visibility";
+import * as CustomPropTypes from "../../propTypes";
+import Export from "./Export";
+import Section from "../shared/Section";
+import { ARCHIVE_DAYS_OPTIONS } from "../../constants/settings";
+import { Toolbar, ToolbarItem } from "../shared/Toolbar";
+import ImportContainer from "../../containers/archive/ImportContainer";
 
-const puzzleOptions = puzzles.map(({ name, title }) => ({ label: title, value: name }));
+const puzzleOptions = puzzles.map(({ name, title }) => ({
+  label: title,
+  value: name,
+}));
 
 const ArchiveOptions = ({ changeSetting, puzzle, times, days }) => {
   const puzzleSelector = (
     <Select
-      onChange={puzzle => changeSetting('archivePuzzle', puzzle)}
+      onChange={(puzzle) => changeSetting("archivePuzzle", puzzle)}
       options={puzzleOptions}
       value={puzzle}
     />
   );
   const daySelector = (
     <Select
-      onChange={days => changeSetting('archiveDays', days)}
+      onChange={(days) => changeSetting("archiveDays", days)}
       numeric
       options={ARCHIVE_DAYS_OPTIONS}
       value={days}
@@ -62,7 +65,7 @@ ArchiveOptions.propTypes = {
   changeSetting: PropTypes.func.isRequired,
   puzzle: PropTypes.string.isRequired,
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  days: PropTypes.number
+  days: PropTypes.number,
 };
 
 export default ArchiveOptions;

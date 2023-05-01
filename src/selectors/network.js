@@ -1,1 +1,1 @@
-export const isOnline = state => state.network.isOnline;
+export const isOnline = (state) => state.network.isOnline;

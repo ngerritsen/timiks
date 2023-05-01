@@ -1,14 +1,14 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import Notification from '../components/Notification';
-import { getMessage, isError, shouldShow } from '../selectors/notifications';
-import { hideNotification } from '../actions';
+import Notification from "../components/Notification";
+import { getMessage, isError, shouldShow } from "../selectors/notifications";
+import { hideNotification } from "../actions";
 
 function mapStateToProps(state) {
   return {
     message: getMessage(state),
     isError: isError(state),
-    show: shouldShow(state)
+    show: shouldShow(state),
   };
 }
 

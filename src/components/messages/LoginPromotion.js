@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Message from '../shared/Message';
+import React from "react";
+import PropTypes from "prop-types";
+import Message from "../shared/Message";
 
 export const LoginPromotion = ({ dismissLoginPromotion, shouldPromoteLogin }) =>
   shouldPromoteLogin ? (
@@ -13,7 +13,7 @@ export const LoginPromotion = ({ dismissLoginPromotion, shouldPromoteLogin }) =>
 
 LoginPromotion.propTypes = {
   shouldPromoteLogin: PropTypes.bool,
-  dismissLoginPromotion: PropTypes.func.isRequired
+  dismissLoginPromotion: PropTypes.func.isRequired,
 };
 
 export default LoginPromotion;

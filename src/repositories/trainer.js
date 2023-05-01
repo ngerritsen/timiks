@@ -1,9 +1,12 @@
-import shortid from 'shortid';
-import * as storageConstants from '../constants/storage';
-import { OLL } from '../constants/trainer';
+import shortid from "shortid";
+import * as storageConstants from "../constants/storage";
+import { OLL } from "../constants/trainer";
 
 export function storeEnabledCaseIds(enabledCases) {
-  localStorage.setItem(storageConstants.ENABLED_CASE_IDS, JSON.stringify(enabledCases));
+  localStorage.setItem(
+    storageConstants.ENABLED_CASE_IDS,
+    JSON.stringify(enabledCases)
+  );
 }
 
 export function storeActiveTrainingType(type) {
@@ -11,7 +14,10 @@ export function storeActiveTrainingType(type) {
 }
 
 export function storeTrainerTimes(times) {
-  localStorage.setItem(storageConstants.TRAINER_TIMES_STORAGE_KEY, JSON.stringify(times));
+  localStorage.setItem(
+    storageConstants.TRAINER_TIMES_STORAGE_KEY,
+    JSON.stringify(times)
+  );
 }
 
 export function getEnabledCaseIds() {
@@ -21,7 +27,7 @@ export function getEnabledCaseIds() {
 
   if (Array.isArray(parsedCases)) {
     return {
-      [OLL]: parsedCases
+      [OLL]: parsedCases,
     };
   }
 
@@ -29,14 +35,16 @@ export function getEnabledCaseIds() {
 }
 
 export function getTrainerTimes() {
-  const rawTimes = localStorage.getItem(storageConstants.TRAINER_TIMES_STORAGE_KEY);
+  const rawTimes = localStorage.getItem(
+    storageConstants.TRAINER_TIMES_STORAGE_KEY
+  );
   const times = rawTimes ? JSON.parse(rawTimes) || [] : [];
 
-  return times.map(time => ({
+  return times.map((time) => ({
     ...time,
-    scramble: String(time.scramble || ''),
+    scramble: String(time.scramble || ""),
     id: time.id || shortid.generate(),
-    timestamp: time.timestamp ? new Date(time.timestamp) : new Date()
+    timestamp: time.timestamp ? new Date(time.timestamp) : new Date(),
   }));
 }
 

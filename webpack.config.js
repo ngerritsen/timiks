@@ -1,65 +1,52 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const buildNumber = require("./src/static/build");
 
-const buildNumber = require('./src/static/build');
-
-const createConfig = (env, argv) => {
-  const config = {
-    entry: {
-      main: ['element-closest', path.join(__dirname, 'src/index.js')]
-    },
-    output: {
-      path: path.join(__dirname, 'public'),
-      filename: '[name].[chunkHash].js'
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader'
-        }
-      ]
-    },
-    plugins: [
-      new HtmlWebpackPlugin({
-        mode: argv.mode,
-        template: './src/index.html',
-        inject: true,
-        buildNumber
-      }),
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+module.exports = {
+  entry: {
+    main: ["element-closest", path.join(__dirname, "src/index.js")],
+  },
+  output: {
+    path: path.join(__dirname, "public"),
+    filename: "[name].[chunkhash].js",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      },
     ],
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /node_modules|vendor/,
-            chunks: 'initial',
-            name: 'vendor',
-            enforce: true
-          },
-          scrambles: {
-            test: /src\/scrambles/,
-            chunks: 'initial',
-            name: 'scrambles',
-            enforce: true
-          }
-        }
-      }
-    }
-  };
-
-  if (argv.mode === 'development') {
-    config.devtool = 'inline-source-map';
-    config.output.publicPath = '/';
-    config.devServer = {
-      historyApiFallback: true
-    };
-  }
-
-  return config;
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      inject: true,
+      buildNumber,
+    }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }),
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules|vendor/,
+          chunks: "initial",
+          name: "vendor",
+          enforce: true,
+        },
+        scrambles: {
+          test: /src\/scrambles/,
+          chunks: "initial",
+          name: "scrambles",
+          enforce: true,
+        },
+      },
+    },
+  },
 };
-
-module.exports = createConfig;

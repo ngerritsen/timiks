@@ -1,32 +1,20 @@
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended'
-  ],
-  plugins: [
-    'prettier',
-    'react'
-  ],
-  globals: {
-    Promise: true
+  extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  plugins: ["react"],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  parser: 'babel-eslint',
+  globals: {
+    Promise: true,
+  },
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   settings: {
     react: {
-      version: '16.8'
+      version: "16.8",
     },
   },
-  rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        printWidth: 100
-      }
-    ]
-  }
 };

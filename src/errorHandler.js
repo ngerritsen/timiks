@@ -1,5 +1,5 @@
-window.addEventListener('error', () => {
-  if (document.querySelector('[data-error-message]')) {
+window.addEventListener("error", () => {
+  if (document.querySelector("[data-error-message]")) {
     return;
   }
 
@@ -12,8 +12,10 @@ window.addEventListener('error', () => {
     </div>
   ` + document.body.innerHTML;
 
-  document.querySelector('[data-error-message-reload]').addEventListener('click', e => {
-    e.preventDefault();
-    window.location.reload(true);
-  });
+  document
+    .querySelector("[data-error-message-reload]")
+    .addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.reload(true);
+    });
 });

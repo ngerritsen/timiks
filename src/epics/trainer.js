@@ -1,17 +1,23 @@
-import { ofType } from 'redux-observable';
-import { merge, of, EMPTY } from 'rxjs';
-import { withLatestFrom, map, tap, ignoreElements, mergeMap } from 'rxjs/operators';
-import * as actionTypes from '../constants/actionTypes';
-import { getRandomCase, getRandomScramble } from '../helpers/trainer';
-import * as trainerSelectors from '../selectors/trainer';
-import * as actions from '../actions';
-import * as trainerRepository from '../repositories/trainer';
+import { ofType } from "redux-observable";
+import { merge, of, EMPTY } from "rxjs";
+import {
+  withLatestFrom,
+  map,
+  tap,
+  ignoreElements,
+  mergeMap,
+} from "rxjs/operators";
+import * as actionTypes from "../constants/actionTypes";
+import { getRandomCase, getRandomScramble } from "../helpers/trainer";
+import * as trainerSelectors from "../selectors/trainer";
+import * as actions from "../actions";
+import * as trainerRepository from "../repositories/trainer";
 
 const enabledCaseChangeActions = [
   actionTypes.SELECT_CASE,
   actionTypes.DESELECT_CASE,
   actionTypes.SELECT_CASES,
-  actionTypes.DESELECT_CASES
+  actionTypes.DESELECT_CASES,
 ];
 
 export const stopRehearsalEpic = (action$, state$) =>
@@ -57,10 +63,10 @@ export const pickCaseEpic = (action$, state$) =>
     })
   );
 
-export const retryCaseEpic = action$ =>
+export const retryCaseEpic = (action$) =>
   action$.pipe(
     ofType(actionTypes.RETRY_CASE),
-    map(action =>
+    map((action) =>
       actions.nextCaseDetermined(
         action.payload.caseId,
         getRandomScramble(action.payload.trainingType, action.payload.caseId)
@@ -80,7 +86,9 @@ export const storeTrainerTimesEpic = (action$, state$) =>
     ),
     withLatestFrom(state$),
     tap(([, state]) =>
-      trainerRepository.storeTrainerTimes(trainerSelectors.getTrainerTimes(state))
+      trainerRepository.storeTrainerTimes(
+        trainerSelectors.getTrainerTimes(state)
+      )
     ),
     ignoreElements()
   );
@@ -98,10 +106,10 @@ export const restoreActiveTrainingTypeEpic = (_, state$) =>
     )
   );
 
-export const saveActiveTrainingTypeEpic = action$ =>
+export const saveActiveTrainingTypeEpic = (action$) =>
   action$.pipe(
     ofType(actionTypes.CHANGE_TRAINING_TYPE),
-    tap(action => trainerRepository.storeActiveTrainingType(action.payload)),
+    tap((action) => trainerRepository.storeActiveTrainingType(action.payload)),
     ignoreElements()
   );
 
@@ -110,7 +118,9 @@ export const saveEnabledCasesEpic = (action$, state$) =>
     ofType(...enabledCaseChangeActions),
     withLatestFrom(state$),
     tap(([, state]) =>
-      trainerRepository.storeEnabledCaseIds(trainerSelectors.getEnabledCases(state))
+      trainerRepository.storeEnabledCaseIds(
+        trainerSelectors.getEnabledCases(state)
+      )
     ),
     ignoreElements()
   );

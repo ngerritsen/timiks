@@ -1,11 +1,16 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import { startTimer, stopTimer, resetTime, submitTimeInput } from '../../actions';
-import Activation from '../../components/timer/Activation';
-import * as activationSelectors from '../../selectors/activation';
-import * as timerSelectors from '../../selectors/timer';
-import * as settingsSelectors from '../../selectors/settings';
-import { parseTimeInput } from '../../helpers/time';
+import {
+  startTimer,
+  stopTimer,
+  resetTime,
+  submitTimeInput,
+} from "../../actions";
+import Activation from "../../components/timer/Activation";
+import * as activationSelectors from "../../selectors/activation";
+import * as timerSelectors from "../../selectors/timer";
+import * as settingsSelectors from "../../selectors/settings";
+import { parseTimeInput } from "../../helpers/time";
 
 function mapStateToProps(state) {
   return {
@@ -20,7 +25,7 @@ function mapStateToProps(state) {
     timeInput: timerSelectors.getTimeInput(state),
     useInspectionTime: settingsSelectors.shouldUseInspectionTime(state),
     ready: activationSelectors.isReady(state),
-    buttonColor: settingsSelectors.getButtonColor(state)
+    buttonColor: settingsSelectors.getButtonColor(state),
   };
 }
 
@@ -32,8 +37,12 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     submitTimeInput: () => {
       const inputData = parseTimeInput(stateProps.timeInput);
 
-      dispatchProps.submitTimeInput(inputData.ms, inputData.dnf, inputData.plus2);
-    }
+      dispatchProps.submitTimeInput(
+        inputData.ms,
+        inputData.dnf,
+        inputData.plus2
+      );
+    },
   };
 }
 

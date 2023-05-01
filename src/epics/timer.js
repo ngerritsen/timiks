@@ -1,17 +1,21 @@
-import shortid from 'shortid';
-import { withLatestFrom, map } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import { LOCATION_CHANGE } from 'connected-react-router';
+import shortid from "shortid";
+import { withLatestFrom, map } from "rxjs/operators";
+import { ofType } from "redux-observable";
+import { LOCATION_CHANGE } from "connected-react-router";
 
-import * as actionTypes from '../constants/actionTypes';
-import { saveTime, resetTime, saveTrainerTime } from '../actions';
-import { getPuzzle } from '../selectors/settings';
-import { getStartTime, hasInspectionPenalty } from '../selectors/timer';
-import { getScramble } from '../selectors/scramble';
-import { isInTrainer } from '../selectors/router';
-import { getTrainingType, getCurrentCaseId, getCurrentScramble } from '../selectors/trainer';
+import * as actionTypes from "../constants/actionTypes";
+import { saveTime, resetTime, saveTrainerTime } from "../actions";
+import { getPuzzle } from "../selectors/settings";
+import { getStartTime, hasInspectionPenalty } from "../selectors/timer";
+import { getScramble } from "../selectors/scramble";
+import { isInTrainer } from "../selectors/router";
+import {
+  getTrainingType,
+  getCurrentCaseId,
+  getCurrentScramble,
+} from "../selectors/trainer";
 
-export const resetTimeEpic = action$ =>
+export const resetTimeEpic = (action$) =>
   action$.pipe(
     ofType(
       LOCATION_CHANGE,
@@ -34,7 +38,12 @@ export const submitTimeEpic = (action$, state$) =>
     ofType(actionTypes.SUBMIT_TIME_INPUT),
     withLatestFrom(state$),
     map(([action, state]) =>
-      createSaveTime(action.payload.ms, state, action.payload.dnf, action.payload.plus2)
+      createSaveTime(
+        action.payload.ms,
+        state,
+        action.payload.dnf,
+        action.payload.plus2
+      )
     )
   );
 
@@ -50,7 +59,7 @@ export const stopTimerEpic = (action$, state$) =>
             caseId: getCurrentCaseId(state),
             ms: action.payload - getStartTime(state),
             timestamp: new Date(),
-            scramble: getCurrentScramble(state)
+            scramble: getCurrentScramble(state),
           })
         : createSaveTime(
             action.payload - getStartTime(state),
@@ -70,5 +79,5 @@ const createSaveTime = (ms, state, dnf, plus2) =>
     puzzle: getPuzzle(state),
     dnf,
     plus2,
-    current: true
+    current: true,
   });

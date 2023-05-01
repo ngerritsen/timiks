@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
-import FullScreenMask from './FullScreenMask';
-import PrepartionCircles from './PreparationCircles';
-import Button from '../shared/Button';
-import { getZIndex, getColor, getSize } from '../../helpers/theme';
-import { VisibleFrom, HiddenFrom } from '../shared/Visibility';
+import FullScreenMask from "./FullScreenMask";
+import PrepartionCircles from "./PreparationCircles";
+import Button from "../shared/Button";
+import { getZIndex, getColor, getSize } from "../../helpers/theme";
+import { VisibleFrom, HiddenFrom } from "../shared/Visibility";
 
 const Activation = ({
   inspecting,
@@ -19,13 +19,13 @@ const Activation = ({
   useInspectionTime,
   useManualTimeEntry,
   validTimeInput,
-  buttonColor
+  buttonColor,
 }) => (
   <ActivationContainer>
     <Button
       size="lg"
       color={buttonColor}
-      {...(useManualTimeEntry ? {} : { 'data-activation': true })}
+      {...(useManualTimeEntry ? {} : { "data-activation": true })}
       disabled={useManualTimeEntry && !validTimeInput}
       type="button"
       onClick={() => useManualTimeEntry && validTimeInput && submitTimeInput()}
@@ -33,15 +33,17 @@ const Activation = ({
       {(() => {
         switch (true) {
           case useManualTimeEntry:
-            return 'Submit';
+            return "Submit";
           case !stopped:
-            return 'Stop';
+            return "Stop";
           case preparingForInspection:
-            return 'Ready';
+            return "Ready";
           case preparing || ready:
             return <PrepartionCircles preparationStage={preparationStage} />;
           default:
-            return 'Start' + (useInspectionTime && !inspecting ? ' inspection' : '');
+            return (
+              "Start" + (useInspectionTime && !inspecting ? " inspection" : "")
+            );
         }
       })()}
     </Button>
@@ -50,17 +52,19 @@ const Activation = ({
       {(() => {
         switch (true) {
           case useManualTimeEntry:
-            return 'Enter a time and press enter or click submit.';
+            return "Enter a time and press enter or click submit.";
           case preparingForInspection:
-            return 'Release to start inspection.';
+            return "Release to start inspection.";
           case preparing && ready:
-            return 'Release to start!';
+            return "Release to start!";
           case preparing && !ready:
-            return 'Hold on...';
+            return "Hold on...";
           case !stopped:
             return (
               <>
-                <VisibleFrom breakpoint="md">Click, touch or smash any key to stop.</VisibleFrom>
+                <VisibleFrom breakpoint="md">
+                  Click, touch or smash any key to stop.
+                </VisibleFrom>
                 <HiddenFrom breakpoint="md">Touch anywhere to stop.</HiddenFrom>
               </>
             );
@@ -70,14 +74,18 @@ const Activation = ({
                 <VisibleFrom breakpoint="md">
                   Click, touch or hold spacebar and release to start.
                 </VisibleFrom>
-                <HiddenFrom breakpoint="md">Hold and release to start.</HiddenFrom>
+                <HiddenFrom breakpoint="md">
+                  Hold and release to start.
+                </HiddenFrom>
               </>
             );
         }
       })()}
     </Explain>
 
-    {(!stopped || preparing || preparingForInspection || inspecting) && <FullScreenMask />}
+    {(!stopped || preparing || preparingForInspection || inspecting) && (
+      <FullScreenMask />
+    )}
   </ActivationContainer>
 );
 
@@ -92,21 +100,21 @@ Activation.propTypes = {
   useInspectionTime: PropTypes.bool,
   useManualTimeEntry: PropTypes.bool,
   validTimeInput: PropTypes.bool,
-  buttonColor: PropTypes.string.isRequired
+  buttonColor: PropTypes.string.isRequired,
 };
 
 const ActivationContainer = styled.div`
   position: relative;
-  z-index: ${getZIndex('onFullScreenMask')};
+  z-index: ${getZIndex("onFullScreenMask")};
 `;
 
 const Explain = styled.div`
   font-size: 1.5rem;
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
   text-align: center;
-  margin: ${getSize('sm')} 0 0;
+  margin: ${getSize("sm")} 0 0;
   position: relative;
-  top: -${getSize('xxs')};
+  top: -${getSize("xxs")};
   z-index: 102;
 `;
 

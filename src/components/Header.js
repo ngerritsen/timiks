@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { faDumbbell } from '@fortawesome/free-solid-svg-icons/faDumbbell';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { faDumbbell } from "@fortawesome/free-solid-svg-icons/faDumbbell";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import SettingsContainer from '../containers/SettingsContainer';
-import KeyboardShortcuts from './KeyboardShortcuts';
-import AccountContainer from '../containers/AccountContainer';
-import { getZIndex, getColor } from '../helpers/theme';
-import { VisibleFrom } from './shared/Visibility';
+import SettingsContainer from "../containers/SettingsContainer";
+import KeyboardShortcuts from "./KeyboardShortcuts";
+import AccountContainer from "../containers/AccountContainer";
+import { getZIndex, getColor } from "../helpers/theme";
+import { VisibleFrom } from "./shared/Visibility";
 
 const Header = () => (
   <HeaderBar>
@@ -42,7 +42,7 @@ const HeaderBar = styled.header`
 
 const Title = styled.h1`
   position: relative;
-  z-index: ${getZIndex('onFullScreenMask')};
+  z-index: ${getZIndex("onFullScreenMask")};
 `;
 
 const IconContainer = styled.span`
@@ -55,7 +55,7 @@ const KeyboardShortcutsIconContainer = styled(VisibleFrom)`
 
 const StyledNavLink = styled(NavLink)`
   margin-right: 1.2rem;
-  color: ${getColor('fg')};
+  color: ${getColor("fg")};
   font-weight: bold;
   text-decoration: none;
   padding-bottom: 1px;
@@ -63,17 +63,17 @@ const StyledNavLink = styled(NavLink)`
   &:hover,
   &:focus,
   &:visited {
-    color: ${getColor('fg')};
+    color: ${getColor("fg")};
     text-decoration: none;
   }
 
   &:hover,
   &:focus {
-    border-bottom: 2px solid ${getColor('grey')};
+    border-bottom: 2px solid ${getColor("grey")};
   }
 
   &.selected {
-    border-bottom: 2px solid ${getColor('fg')};
+    border-bottom: 2px solid ${getColor("fg")};
   }
 `;
 

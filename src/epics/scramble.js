@@ -1,11 +1,11 @@
-import { ofType } from 'redux-observable';
-import { merge, timer, of } from 'rxjs';
-import { mergeMap, withLatestFrom, map, filter } from 'rxjs/operators';
+import { ofType } from "redux-observable";
+import { merge, timer, of } from "rxjs";
+import { mergeMap, withLatestFrom, map, filter } from "rxjs/operators";
 
-import * as actionTypes from '../constants/actionTypes';
-import { setScramble } from '../actions';
-import { generateScramble } from '../helpers/scramble';
-import { getPuzzle } from '../selectors/settings';
+import * as actionTypes from "../constants/actionTypes";
+import { setScramble } from "../actions";
+import { generateScramble } from "../helpers/scramble";
+import { getPuzzle } from "../selectors/settings";
 
 export const scrambleEpic = (action$, state$) =>
   merge(
@@ -19,7 +19,7 @@ export const scrambleEpic = (action$, state$) =>
     ),
     action$.pipe(
       ofType(actionTypes.CHANGE_SETTING),
-      filter(action => action.payload.setting === 'puzzle')
+      filter((action) => action.payload.setting === "puzzle")
     )
   ).pipe(
     withLatestFrom(state$),
@@ -27,7 +27,9 @@ export const scrambleEpic = (action$, state$) =>
       action.type === actionTypes.LOAD_SETTINGS
         ? of(setScramble(generateScramble(getPuzzle(state)), getPuzzle(state)))
         : timer(1).pipe(
-            map(() => setScramble(generateScramble(getPuzzle(state)), getPuzzle(state)))
+            map(() =>
+              setScramble(generateScramble(getPuzzle(state)), getPuzzle(state))
+            )
           )
     )
   );

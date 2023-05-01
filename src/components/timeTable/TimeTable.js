@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons/faQuestionCircle";
 
-import * as CustomPropTypes from '../../propTypes';
-import TimeGraph from '../shared/TimeGraph';
-import ToggleContent from '../shared/ToggleContent';
-import IconButton from '../shared/IconButton';
-import Tag from '../shared/Tag';
-import Section from '../shared/Section';
-import Modal from '../shared/Modal';
-import TimeTableTimeRow from './TimeTableTimeRow';
-import { Cell, HeadingCell, Table } from '../shared/Table';
-import TimeTableStatRow from './TimeTableStatRow';
-import StatsExplanation from './StatsExplanation';
-import { getBreakpoint, getSize } from '../../helpers/theme';
-import { createDescSorter } from '../../helpers/general';
+import * as CustomPropTypes from "../../propTypes";
+import TimeGraph from "../shared/TimeGraph";
+import ToggleContent from "../shared/ToggleContent";
+import IconButton from "../shared/IconButton";
+import Tag from "../shared/Tag";
+import Section from "../shared/Section";
+import Modal from "../shared/Modal";
+import TimeTableTimeRow from "./TimeTableTimeRow";
+import { Cell, HeadingCell, Table } from "../shared/Table";
+import TimeTableStatRow from "./TimeTableStatRow";
+import StatsExplanation from "./StatsExplanation";
+import { getBreakpoint, getSize } from "../../helpers/theme";
+import { createDescSorter } from "../../helpers/general";
 
 function useHighlightedStats() {
   const [highlightState, setHighlightedStat] = useState([]);
@@ -31,32 +31,39 @@ const TimeTable = ({
   showLatestSolveOnTop,
   removeTime,
   showGraph,
-  fixGraphYAxis
+  fixGraphYAxis,
 }) => {
   const [
     softHighlightedStatName,
     softHighlightedStatType,
-    setSoftHighlightedStat
+    setSoftHighlightedStat,
   ] = useHighlightedStats(stats);
 
   const [
     hardHighlightedStatName,
     hardHighlightedStatType,
-    setHardHighlightedStat
+    setHardHighlightedStat,
   ] = useHighlightedStats(stats);
 
-  const highlightedStatName = softHighlightedStatName || hardHighlightedStatName;
-  const highlightedStatType = softHighlightedStatType || hardHighlightedStatType;
-  const highlightedStat = stats.find(stat => stat.name === highlightedStatName) || {};
-  const { includedIds = [], excludedIds = [] } = highlightedStat[highlightedStatType] || {};
+  const highlightedStatName =
+    softHighlightedStatName || hardHighlightedStatName;
+  const highlightedStatType =
+    softHighlightedStatType || hardHighlightedStatType;
+  const highlightedStat =
+    stats.find((stat) => stat.name === highlightedStatName) || {};
+  const { includedIds = [], excludedIds = [] } =
+    highlightedStat[highlightedStatType] || {};
 
-  const getSolveIndex = index => (showLatestSolveOnTop ? times.length - 1 - index : index);
-  const sortedTimes = showLatestSolveOnTop ? [...times].sort(createDescSorter('date')) : times;
+  const getSolveIndex = (index) =>
+    showLatestSolveOnTop ? times.length - 1 - index : index;
+  const sortedTimes = showLatestSolveOnTop
+    ? [...times].sort(createDescSorter("date"))
+    : times;
 
   return (
     <TimeTableContainer>
       <TimeTableColumn>
-        <Section margin={showGraph ? 'xs' : ''}>
+        <Section margin={showGraph ? "xs" : ""}>
           <Table>
             <thead>
               <tr>
@@ -88,7 +95,7 @@ const TimeTable = ({
                 </tr>
               )}
               {stats.length > 0 &&
-                stats.map(stat => (
+                stats.map((stat) => (
                   <TimeTableStatRow
                     key={stat.name}
                     name={stat.name}
@@ -105,7 +112,13 @@ const TimeTable = ({
             </tbody>
           </Table>
         </Section>
-        {showGraph && <TimeGraph stats={stats} times={sortedTimes} fixYAxis={fixGraphYAxis} />}
+        {showGraph && (
+          <TimeGraph
+            stats={stats}
+            times={sortedTimes}
+            fixYAxis={fixGraphYAxis}
+          />
+        )}
       </TimeTableColumn>
       <TimeTableColumn>
         <Table>
@@ -143,27 +156,27 @@ TimeTable.propTypes = {
   times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
   showGraph: PropTypes.bool,
   showLatestSolveOnTop: PropTypes.bool,
-  fixGraphYAxis: PropTypes.bool
+  fixGraphYAxis: PropTypes.bool,
 };
 
 const TimeTableContainer = styled.div`
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
+  @media screen and (min-width: ${getBreakpoint("sm")}) {
     flex-direction: row;
     display: flex;
   }
 `;
 
 const TimeTableColumn = styled.div`
-  margin-bottom: ${getSize('xs')};
+  margin-bottom: ${getSize("xs")};
   overflow: auto;
 
   &:last-child {
     margin-bottom: 0;
   }
 
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
+  @media screen and (min-width: ${getBreakpoint("sm")}) {
     width: 50%;
-    margin-right: ${getSize('md')};
+    margin-right: ${getSize("md")};
     margin-bottom: 0;
 
     &:last-child {
@@ -174,7 +187,7 @@ const TimeTableColumn = styled.div`
 `;
 
 const QuestionIconButton = styled(IconButton)`
-  margin-left: ${getSize('xs')};
+  margin-left: ${getSize("xs")};
 `;
 
 export default React.memo(TimeTable);

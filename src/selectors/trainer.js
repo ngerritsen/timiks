@@ -1,15 +1,16 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
-import * as trainerHelpers from '../helpers/trainer';
+import * as trainerHelpers from "../helpers/trainer";
 
-export const getCurrentCaseId = state => state.trainer.currentCaseId;
-export const getTrainingType = state => state.trainer.trainingType;
-export const getEnabledCases = state => state.trainer.enabledCases;
-export const getActiveEnabledCases = state => getEnabledCases(state)[getTrainingType(state)];
-export const getCurrentScramble = state => state.trainer.currentScramble;
-export const getTrainerTimes = state => state.trainer.times;
-export const isInRehearsal = state => state.trainer.inRehearsal;
-export const getRehearsedCaseIds = state => state.trainer.rehearsedCaseIds;
+export const getCurrentCaseId = (state) => state.trainer.currentCaseId;
+export const getTrainingType = (state) => state.trainer.trainingType;
+export const getEnabledCases = (state) => state.trainer.enabledCases;
+export const getActiveEnabledCases = (state) =>
+  getEnabledCases(state)[getTrainingType(state)];
+export const getCurrentScramble = (state) => state.trainer.currentScramble;
+export const getTrainerTimes = (state) => state.trainer.times;
+export const isInRehearsal = (state) => state.trainer.inRehearsal;
+export const getRehearsedCaseIds = (state) => state.trainer.rehearsedCaseIds;
 
 export const getCurrentCase = createSelector(
   getTrainingType,
@@ -46,9 +47,19 @@ export const getLastCase = createSelector(
   trainerHelpers.getLastCase
 );
 
+export const isQueued = createSelector(
+  getLastCase,
+  getRehearsedCaseIds,
+  (lastCase, rehearsedCaseIds) =>
+    Boolean(lastCase) && !rehearsedCaseIds.includes(lastCase.id)
+);
+
 export const getGroupedSelectedCases = createSelector(
   getActiveEnabledCases,
   getTrainingType,
   (enabledCases, trainingType) =>
-    trainerHelpers.groupCases(trainingType, trainerHelpers.selectCases(trainingType, enabledCases))
+    trainerHelpers.groupCases(
+      trainingType,
+      trainerHelpers.selectCases(trainingType, enabledCases)
+    )
 );

@@ -1,27 +1,27 @@
-import shortid from 'shortid';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import keycode from 'keycode';
+import shortid from "shortid";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import keycode from "keycode";
 
-import ShortcutContext from './ShortcutContext';
-import { isStopped, getStopTime } from '../selectors/timer';
-import { TIMER_COOLDOWN } from '../constants/timer';
+import ShortcutContext from "./ShortcutContext";
+import { isStopped, getStopTime } from "../selectors/timer";
+import { TIMER_COOLDOWN } from "../constants/timer";
 
-const inputElements = ['textarea', 'input', 'select'];
+const inputElements = ["textarea", "input", "select"];
 
 class ShortcutProvider extends Component {
   constructor(...args) {
     super(...args);
     this.shortcuts = [];
-    window.addEventListener('keydown', event => this._handleKeyDown(event));
+    window.addEventListener("keydown", (event) => this._handleKeyDown(event));
   }
 
   _getChildContext() {
     return {
       registerShortcut: this._registerShortcut.bind(this),
       unregisterShortcut: this._unregisterShortcut.bind(this),
-      updateShortcut: this._updateShortcut.bind(this)
+      updateShortcut: this._updateShortcut.bind(this),
     };
   }
 
@@ -40,18 +40,22 @@ class ShortcutProvider extends Component {
       return;
     }
 
-    const mapping = this.props.keymap.find(m => keycode.isEventKey(event, m.key));
+    const mapping = this.props.keymap.find((m) =>
+      keycode.isEventKey(event, m.key)
+    );
 
     if (!mapping || !mapping.commands) {
       return;
     }
 
-    this.shortcuts.forEach(shortcut => {
+    this.shortcuts.forEach((shortcut) => {
       if (!mapping.commands.includes(shortcut.command)) {
         return;
       }
 
-      const shortcutEl = document.querySelector(`[data-shortcut="${shortcut.token}"]`);
+      const shortcutEl = document.querySelector(
+        `[data-shortcut="${shortcut.token}"]`
+      );
 
       if (!shortcutEl) {
         return;
@@ -71,11 +75,13 @@ class ShortcutProvider extends Component {
   }
 
   _unregisterShortcut(token) {
-    this.shortcuts = this.shortcuts.filter(shortcut => shortcut.token !== token);
+    this.shortcuts = this.shortcuts.filter(
+      (shortcut) => shortcut.token !== token
+    );
   }
 
   _updateShortcut(token, command, action) {
-    this.shortcuts = this.shortcuts.map(shortcut => {
+    this.shortcuts = this.shortcuts.map((shortcut) => {
       if (shortcut.token !== token) {
         return shortcut;
       }
@@ -94,16 +100,19 @@ class ShortcutProvider extends Component {
 }
 
 ShortcutProvider.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
   keymap: PropTypes.arrayOf(PropTypes.object).isRequired,
   stopped: PropTypes.bool.isRequired,
-  stopTime: PropTypes.number.isRequired
+  stopTime: PropTypes.number.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     stopped: isStopped(state),
-    stopTime: getStopTime(state)
+    stopTime: getStopTime(state),
   };
 }
 

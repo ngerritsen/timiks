@@ -1,16 +1,16 @@
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import React, { useState, useEffect, Fragment } from 'react';
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import React, { useState, useEffect, Fragment } from "react";
 
-import Section from '../shared/Section';
-import { CUBE, RELAY } from '../../constants/puzzles';
-import { getPuzzle } from '../../helpers/puzzle';
-import { splitRelayScramble, splitScramble } from '../../helpers/scramble';
-import CubePreview from '../cube/CubePreview';
-import ScrambleDetails from './ScrambleDetails';
-import { getColor, getSize, getFont } from '../../helpers/theme';
-import * as CustomPropTypes from '../../propTypes';
-import ScrambleCaseView from './ScrambleCaseView';
+import Section from "../shared/Section";
+import { CUBE, RELAY } from "../../constants/puzzles";
+import { getPuzzle } from "../../helpers/puzzle";
+import { splitRelayScramble, splitScramble } from "../../helpers/scramble";
+import CubePreview from "../cube/CubePreview";
+import ScrambleDetails from "./ScrambleDetails";
+import { getColor, getSize, getFont } from "../../helpers/theme";
+import * as CustomPropTypes from "../../propTypes";
+import ScrambleCaseView from "./ScrambleCaseView";
 
 const Scramble = ({
   scramble,
@@ -19,10 +19,12 @@ const Scramble = ({
   withTrainingCase,
   trainingType,
   puzzle,
-  expand
+  expand,
 }) => {
   const isRelay = getPuzzle(puzzle).type === RELAY;
-  const splitScrambles = isRelay ? splitRelayScramble(puzzle, scramble) : [{ scramble, puzzle }];
+  const splitScrambles = isRelay
+    ? splitRelayScramble(puzzle, scramble)
+    : [{ scramble, puzzle }];
 
   const [activePuzzle, setActivePuzzle] = useState(splitScrambles[0].puzzle);
   const [scrambles, setScrambles] = useState(splitScrambles);
@@ -33,14 +35,16 @@ const Scramble = ({
   }, [scramble, puzzle]);
 
   const { type, size } = getPuzzle(activePuzzle);
-  const activeScramble = scrambles.find(s => s.puzzle === activePuzzle).scramble;
+  const activeScramble = scrambles.find(
+    (s) => s.puzzle === activePuzzle
+  ).scramble;
   const showPreview = withPreview && type === CUBE;
   const showDetails = withDetails && type === CUBE;
   const moves = splitScramble(activeScramble);
 
   return (
     <>
-      <Section margin={showPreview ? 'md' : ''}>
+      <Section margin={showPreview ? "md" : ""}>
         {isRelay && (
           <ScrambleTabs>
             {scrambles.map(({ puzzle }) => (
@@ -57,12 +61,18 @@ const Scramble = ({
         <ScrambleBox withTabs={isRelay} expand={expand}>
           {withTrainingCase && !showDetails && (
             <ScrambleIconButtonContainer>
-              <ScrambleCaseView trainingCase={withTrainingCase} trainingType={trainingType} />
+              <ScrambleCaseView
+                trainingCase={withTrainingCase}
+                trainingType={trainingType}
+              />
             </ScrambleIconButtonContainer>
           )}
           {showDetails && (
             <ScrambleIconButtonContainer>
-              <ScrambleDetails scramble={activeScramble} puzzle={activePuzzle} />
+              <ScrambleDetails
+                scramble={activeScramble}
+                puzzle={activePuzzle}
+              />
             </ScrambleIconButtonContainer>
           )}
           {moves.map((move, i) => (
@@ -86,7 +96,7 @@ Scramble.propTypes = {
   puzzle: PropTypes.string,
   expand: PropTypes.bool,
   withTrainingCase: CustomPropTypes.Case,
-  trainingType: PropTypes.string
+  trainingType: PropTypes.string,
 };
 
 const ScrambleTabs = styled.div`
@@ -98,14 +108,14 @@ const ScrambleTabs = styled.div`
 `;
 
 const ScrambleTab = styled.div`
-  background-color: ${getColor('subtleBg')};
-  opacity: ${props => (props.active ? 1 : 0.4)};
+  background-color: ${getColor("subtleBg")};
+  opacity: ${(props) => (props.active ? 1 : 0.4)};
   padding: 0.6rem 1.2rem;
   font-size: 1.4rem;
   cursor: pointer;
 
   &:hover {
-    opacity: ${props => (props.active ? 1 : 0.6)};
+    opacity: ${(props) => (props.active ? 1 : 0.6)};
   }
 
   &:first-of-type {
@@ -120,17 +130,17 @@ const ScrambleTab = styled.div`
 const ScrambleBox = styled.div`
   font-size: 2rem;
   text-align: center;
-  font-family: ${getFont('mono')};
+  font-family: ${getFont("mono")};
   line-height: 1.2;
-  background-color: ${getColor('subtleBg')};
-  padding: ${getSize('xs')};
+  background-color: ${getColor("subtleBg")};
+  padding: ${getSize("xs")};
   margin: 0;
   font-weight: 700;
   border-bottom-right-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
-  border-top-right-radius: ${props => (props.withTabs ? '0' : '0.3rem')};
-  border-top-left-radius: ${props => (props.withTabs ? '0' : '0.3rem')};
-  max-height: ${props => (props.expand ? '' : '15rem')};
+  border-top-right-radius: ${(props) => (props.withTabs ? "0" : "0.3rem")};
+  border-top-left-radius: ${(props) => (props.withTabs ? "0" : "0.3rem")};
+  max-height: ${(props) => (props.expand ? "" : "15rem")};
   overflow-y: auto;
 `;
 
@@ -143,7 +153,7 @@ const ScrambleIconButtonContainer = styled.span`
   float: right;
   display: inline-block;
   font-size: 1.8rem;
-  margin: 0 ${getSize('xxs')};
+  margin: 0 ${getSize("xxs")};
 `;
 
 export default React.memo(Scramble);

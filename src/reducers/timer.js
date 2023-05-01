@@ -1,14 +1,14 @@
-import { handleActions } from 'redux-actions';
-import * as actionTypes from '../constants/actionTypes';
+import { handleActions } from "redux-actions";
+import * as actionTypes from "../constants/actionTypes";
 
 const initialState = {
   startTime: 0,
   stopTime: 0,
   inspectionStartTime: 0,
   stopped: true,
-  timeInput: '',
+  timeInput: "",
   inspecting: false,
-  lastTimeId: ''
+  lastTimeId: "",
 };
 
 export default handleActions(
@@ -18,38 +18,38 @@ export default handleActions(
       startTime: action.payload,
       stopped: false,
       stopTime: 0,
-      inspecting: false
+      inspecting: false,
     }),
     [actionTypes.FAIL_INSPECTION]: () => initialState,
     [actionTypes.START_INSPECTION]: (state, action) => ({
       ...state,
       inspectionStartTime: action.payload,
-      inspecting: true
+      inspecting: true,
     }),
     [actionTypes.SAVE_TIME]: (state, action) => ({
       ...state,
       startTime: 0,
       inspectionStartTime: 0,
-      lastTimeId: action.payload.id
+      lastTimeId: action.payload.id,
     }),
     [actionTypes.STOP_TIMER]: (state, action) => ({
       ...state,
       stopped: true,
-      stopTime: action.payload
+      stopTime: action.payload,
     }),
-    [actionTypes.RESET_TIME]: state => ({
+    [actionTypes.RESET_TIME]: (state) => ({
       ...state,
       startTime: 0,
-      stopTime: 0
+      stopTime: 0,
     }),
-    [actionTypes.SUBMIT_TIME_INPUT]: state => ({
+    [actionTypes.SUBMIT_TIME_INPUT]: (state) => ({
       ...state,
-      timeInput: ''
+      timeInput: "",
     }),
     [actionTypes.UPDATE_TIME_INPUT]: (state, action) => ({
       ...state,
-      timeInput: action.payload
-    })
+      timeInput: action.payload,
+    }),
   },
   initialState
 );

@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons/faExternalLinkAlt';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons/faExternalLinkAlt";
 
-import LastLayerPreview from '../cube/LastLayerPreview';
-import * as CustomPropTypes from '../../propTypes';
-import { getSize, getColor, getBreakpoint } from '../../helpers/theme';
-import Section from '../shared/Section';
-import { buildAlgDbUrl } from '../../helpers/trainer';
-import Link from '../shared/Link';
+import LastLayerPreview from "../cube/LastLayerPreview";
+import * as CustomPropTypes from "../../propTypes";
+import { getSize, getColor, getBreakpoint } from "../../helpers/theme";
+import Section from "../shared/Section";
+import { buildAlgDbUrl } from "../../helpers/trainer";
+import Link from "../shared/Link";
 
 const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
   <CaseDetails>
@@ -28,7 +28,9 @@ const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
         ))}
       </Section>
       <Section margin="sm">
-        <Probability>Probability: 1 / {1 / trainingCase.probability}</Probability>
+        <Probability>
+          Probability: 1 / {1 / trainingCase.probability}
+        </Probability>
       </Section>
       <Section margin="sm">
         <Link
@@ -36,7 +38,8 @@ const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon size="sm" icon={faExternalLinkAlt} /> View on AlgDb.net
+          <FontAwesomeIcon size="sm" icon={faExternalLinkAlt} /> View on
+          AlgDb.net
         </Link>
       </Section>
     </div>
@@ -44,23 +47,23 @@ const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
 );
 
 const Probability = styled.div`
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
 `;
 
 const CaseDetails = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-column-gap: ${getSize('sm')};
+  grid-column-gap: ${getSize("sm")};
 
-  @media screen and (min-width: ${getBreakpoint('sm')}) {
+  @media screen and (min-width: ${getBreakpoint("sm")}) {
     grid-template-columns: 1fr 3fr;
-    grid-column-gap: ${getSize('md')};
+    grid-column-gap: ${getSize("md")};
   }
 `;
 
 TrainerCaseDetails.propTypes = {
   trainingCase: CustomPropTypes.Case.isRequired,
-  trainingType: PropTypes.string.isRequired
+  trainingType: PropTypes.string.isRequired,
 };
 
 export default TrainerCaseDetails;

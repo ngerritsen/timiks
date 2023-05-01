@@ -1,11 +1,11 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons/faQuestionCircle";
 
-import ToggleContent from '../shared/ToggleContent';
-import IconButton from '../shared/IconButton';
-import Section from '../shared/Section';
-import Modal from '../shared/Modal';
+import ToggleContent from "../shared/ToggleContent";
+import IconButton from "../shared/IconButton";
+import Section from "../shared/Section";
+import Modal from "../shared/Modal";
 
 const ManualTimeEntryExplanation = () => (
   <ToggleContent
@@ -18,13 +18,13 @@ const ManualTimeEntryExplanation = () => (
       <Modal title="Manual time entry" onClose={hide}>
         <Section margin="sm">
           <p>
-            The format for entering a time is <strong>H:mm:ss.SSS</strong> where only the seconds
-            part is required.
+            The format for entering a time is <strong>H:mm:ss.SSS</strong> where
+            only the seconds part is required.
           </p>
 
           <p>
-            For plus 2 penalties add <strong>+2</strong> at the end of the time (for example:{' '}
-            <i>4.22+2</i>).
+            For plus 2 penalties add <strong>+2</strong> at the end of the time
+            (for example: <i>4.22+2</i>).
           </p>
 
           <p>
@@ -43,7 +43,8 @@ const ManualTimeEntryExplanation = () => (
               <strong>1:3:12</strong> - <i>1 hour, 3 minutes and 12 sec.</i>
             </li>
             <li>
-              <strong>32.12+2</strong> - <i>32 sec. and 12ms with a 2 sec. penalty</i>
+              <strong>32.12+2</strong> -{" "}
+              <i>32 sec. and 12ms with a 2 sec. penalty</i>
             </li>
             <li>
               <strong>dnf</strong> - <i>a DNF</i>

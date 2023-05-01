@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCommentAlt } from '@fortawesome/free-solid-svg-icons/faCommentAlt';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCommentAlt } from "@fortawesome/free-solid-svg-icons/faCommentAlt";
 
-import { formatLocalTime } from '../../helpers/dateTime';
-import ToggleContent from '../shared/ToggleContent';
-import Time from '../shared/Time';
-import Tile from '../shared/Tile';
-import TimeDetails from '../shared/TimeDetails';
-import * as CustomPropTypes from '../../propTypes';
-import Modal from '../shared/Modal';
-import CloudSyncIcon from '../shared/CloudSyncIcon';
-import { getColor } from '../../helpers/theme';
+import { formatLocalTime } from "../../helpers/dateTime";
+import ToggleContent from "../shared/ToggleContent";
+import Time from "../shared/Time";
+import Tile from "../shared/Tile";
+import TimeDetails from "../shared/TimeDetails";
+import * as CustomPropTypes from "../../propTypes";
+import Modal from "../shared/Modal";
+import CloudSyncIcon from "../shared/CloudSyncIcon";
+import { getColor } from "../../helpers/theme";
 
 const ArchiveItem = ({ time, removeTime }) => (
   <ToggleContent
@@ -52,7 +52,7 @@ const ArchiveItem = ({ time, removeTime }) => (
 
 ArchiveItem.propTypes = {
   time: CustomPropTypes.Time.isRequired,
-  removeTime: PropTypes.func.isRequired
+  removeTime: PropTypes.func.isRequired,
 };
 
 const TimeTileTime = styled.strong`
@@ -71,7 +71,7 @@ const CommentIcon = styled.span`
   font-size: 0.9em;
   bottom: 0.2rem;
   right: 0.5rem;
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
 `;
 
 const SyncStatusIcon = styled.span`

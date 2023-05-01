@@ -1,17 +1,17 @@
-import styled from 'styled-components';
-import { getSize, getColor } from '../../helpers/theme';
+import styled from "styled-components";
+import { getSize, getColor } from "../../helpers/theme";
 
 const Info = styled.span`
   font-size: 1.4rem;
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
 `;
 
 export const InfoItem = styled.span`
-  margin-right: ${getSize('sm')};
+  margin-right: ${getSize("sm")};
 `;
 
 export const InfoIcon = styled.span`
-  margin-right: ${getSize('xxs')};
+  margin-right: ${getSize("xxs")};
 `;
 
 export default Info;

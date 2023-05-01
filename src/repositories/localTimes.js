@@ -1,8 +1,10 @@
-import * as storageConstants from '../constants/storage';
-import * as serialization from '../helpers/serialization';
+import * as storageConstants from "../constants/storage";
+import * as serialization from "../helpers/serialization";
 
 export function getAll() {
-  const times = serialization.parseTimes(get(storageConstants.TIMES_STORAGE_KEY));
+  const times = serialization.parseTimes(
+    get(storageConstants.TIMES_STORAGE_KEY)
+  );
   const legacyTimes = getLegacyTimes();
   const allTimes = [...legacyTimes, ...times];
 
@@ -32,7 +34,7 @@ function getLegacyTimes() {
   );
   const legacyCurrentTimes = serialization
     .parseTimes(get(storageConstants.CURRENT_TIMES_STORAGE_KEY))
-    .map(time => ({ ...time, current: true }));
+    .map((time) => ({ ...time, current: true }));
 
   return [...legacyCurrentTimes, ...legacyArchivedTimes];
 }

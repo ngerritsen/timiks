@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
-import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons/faCloudUploadAlt';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as CustomPropTypes from '../../propTypes';
-import { getColor } from '../../helpers/theme';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { faCloud } from "@fortawesome/free-solid-svg-icons/faCloud";
+import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons/faCloudUploadAlt";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as CustomPropTypes from "../../propTypes";
+import { getColor } from "../../helpers/theme";
 
 const CloudSyncIcon = ({ time, size, fixedWidth }) => (
   <IconWrapper>
@@ -18,13 +18,13 @@ const CloudSyncIcon = ({ time, size, fixedWidth }) => (
 );
 
 const IconWrapper = styled.span`
-  color: ${getColor('cloudBlue')};
+  color: ${getColor("cloudBlue")};
 `;
 
 CloudSyncIcon.propTypes = {
   time: CustomPropTypes.Time,
   size: PropTypes.string,
-  fixedWidth: PropTypes.bool
+  fixedWidth: PropTypes.bool,
 };
 
 export default CloudSyncIcon;

@@ -1,14 +1,17 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import TrainerTimeTable from '../../components/trainer/TrainerTimeTable';
-import { clearTrainerTimes, removeTrainerTime } from '../../actions';
+import TrainerTimeTable from "../../components/trainer/TrainerTimeTable";
+import { clearTrainerTimes, removeTrainerTime } from "../../actions";
 
-import { getTrainerTimesPerCase, getTrainingType } from '../../selectors/trainer';
+import {
+  getTrainerTimesPerCase,
+  getTrainingType,
+} from "../../selectors/trainer";
 
 function mapStateToProps(state) {
   return {
     cases: getTrainerTimesPerCase(state),
-    trainingType: getTrainingType(state)
+    trainingType: getTrainingType(state),
   };
 }
 
@@ -17,7 +20,8 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    clearTrainerTimes: () => dispatchProps.clearTrainerTimes(stateProps.trainingType)
+    clearTrainerTimes: () =>
+      dispatchProps.clearTrainerTimes(stateProps.trainingType),
   };
 }
 

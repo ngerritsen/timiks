@@ -1,7 +1,7 @@
-import { getMs } from './time';
+import { getMs } from "./time";
 
 export function addPuzzleToTimes(times, puzzle) {
-  return times.map(time => ({ ...time, puzzle }));
+  return times.map((time) => ({ ...time, puzzle }));
 }
 
 export function isCurrent(time) {
@@ -17,11 +17,13 @@ export function markBestTime(times) {
     return times;
   }
 
-  const bestTime = Math.min(...times.map(time => getMs(time)));
+  const bestTime = Math.min(...times.map((time) => getMs(time)));
 
   if (bestTime === Infinity) {
     return times;
   }
 
-  return times.map(time => (getMs(time) === bestTime ? { ...time, best: true } : time));
+  return times.map((time) =>
+    getMs(time) === bestTime ? { ...time, best: true } : time
+  );
 }

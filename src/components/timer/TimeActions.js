@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCommentAlt } from '@fortawesome/free-solid-svg-icons/faCommentAlt';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCommentAlt } from "@fortawesome/free-solid-svg-icons/faCommentAlt";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 
-import * as CustomPropTypes from '../../propTypes';
-import { getSize } from '../../helpers/theme';
-import Button from '../shared/Button';
-import Shortcut from '../shared/Shortcut';
-import ToggleContent from '../shared/ToggleContent';
-import EditCommentContainer from '../../containers/EditCommentContainer';
+import * as CustomPropTypes from "../../propTypes";
+import { getSize } from "../../helpers/theme";
+import Button from "../shared/Button";
+import Shortcut from "../shared/Shortcut";
+import ToggleContent from "../shared/ToggleContent";
+import EditCommentContainer from "../../containers/EditCommentContainer";
 
 const TimeActions = ({
   plus2,
@@ -18,7 +18,7 @@ const TimeActions = ({
   dnf,
   toggleDnfLastTime,
   removeLastTime,
-  lastTime
+  lastTime,
 }) => (
   <StyledTimeActions>
     <TimeAction>
@@ -52,7 +52,9 @@ const TimeActions = ({
             </Button>
           </>
         )}
-        content={({ hide }) => <EditCommentContainer onCancel={hide} time={lastTime} />}
+        content={({ hide }) => (
+          <EditCommentContainer onCancel={hide} time={lastTime} />
+        )}
       />
     </TimeAction>
   </StyledTimeActions>
@@ -64,7 +66,7 @@ TimeActions.propTypes = {
   removeLastTime: PropTypes.func.isRequired,
   toggleDnfLastTime: PropTypes.func.isRequired,
   togglePlus2LastTime: PropTypes.func.isRequired,
-  lastTime: CustomPropTypes.Time.isRequired
+  lastTime: CustomPropTypes.Time.isRequired,
 };
 
 const StyledTimeActions = styled.div`
@@ -73,7 +75,7 @@ const StyledTimeActions = styled.div`
 `;
 
 const TimeAction = styled.span`
-  margin-right: ${getSize('xs')};
+  margin-right: ${getSize("xs")};
 `;
 
 export default TimeActions;

@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
-import Tag from '../shared/Tag';
+import Tag from "../shared/Tag";
 
 const TrainerStatus = ({
   trainingType,
   enabledCases,
   inRehearsal,
   trainingCases,
-  remainingRehearsalCases
+  remainingRehearsalCases,
 }) => (
-  <Tag color={inRehearsal ? 'blue' : 'subtleBg'}>
+  <Tag color={inRehearsal ? "blue" : "subtleBg"}>
     {!inRehearsal &&
       (() => {
         switch (enabledCases) {
@@ -23,8 +23,9 @@ const TrainerStatus = ({
         }
       })()}
     {inRehearsal &&
-      `${trainingType} - Rehearsing ${trainingCases -
-        remainingRehearsalCases} / ${trainingCases} cases`}
+      `${trainingType} - Rehearsing ${
+        trainingCases - remainingRehearsalCases
+      } / ${trainingCases} cases`}
   </Tag>
 );
 
@@ -33,7 +34,7 @@ TrainerStatus.propTypes = {
   trainingType: PropTypes.string.isRequired,
   enabledCases: PropTypes.number.isRequired,
   trainingCases: PropTypes.number.isRequired,
-  remainingRehearsalCases: PropTypes.number.isRequired
+  remainingRehearsalCases: PropTypes.number.isRequired,
 };
 
 export default TrainerStatus;

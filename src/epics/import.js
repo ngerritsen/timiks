@@ -1,10 +1,10 @@
-import { map, withLatestFrom, mergeMap } from 'rxjs/operators';
-import { from } from 'rxjs';
-import { ofType } from 'redux-observable';
-import { IMPORT_TIMES } from '../constants/actionTypes';
-import { showNotification } from '../actions';
-import { getUserId, isLoggedIn } from '../selectors/authentication';
-import * as timesRepository from '../repositories/times';
+import { map, withLatestFrom, mergeMap } from "rxjs/operators";
+import { from } from "rxjs";
+import { ofType } from "redux-observable";
+import { IMPORT_TIMES } from "../constants/actionTypes";
+import { showNotification } from "../actions";
+import { getUserId, isLoggedIn } from "../selectors/authentication";
+import * as timesRepository from "../repositories/times";
 
 export const importTimesEpic = (action$, state$) =>
   action$.pipe(
@@ -15,6 +15,10 @@ export const importTimesEpic = (action$, state$) =>
         isLoggedIn(state)
           ? timesRepository.saveAll(getUserId(state), action.payload.times)
           : Promise.resolve()
-      ).pipe(map(() => showNotification(`Imported ${action.payload.times.length} times.`)))
+      ).pipe(
+        map(() =>
+          showNotification(`Imported ${action.payload.times.length} times.`)
+        )
+      )
     )
   );

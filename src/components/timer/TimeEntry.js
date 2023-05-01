@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Input from '../shared/Input';
-import ManualTimeEntryExplanation from './ManualTimeEntryExplanation';
-import { getColor, getSize, getFont } from '../../helpers/theme';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import Input from "../shared/Input";
+import ManualTimeEntryExplanation from "./ManualTimeEntryExplanation";
+import { getColor, getSize, getFont } from "../../helpers/theme";
 
 const TimeEntry = ({ value, onKeyPress, onChange }) => (
   <TimeInputContainer>
@@ -15,7 +15,8 @@ const TimeEntry = ({ value, onKeyPress, onChange }) => (
       onChange={onChange}
     />
     <HelperText>
-      Append <strong>+2</strong> for plus 2; enter <strong>dnf</strong> for a DNF &nbsp;
+      Append <strong>+2</strong> for plus 2; enter <strong>dnf</strong> for a
+      DNF &nbsp;
       <ManualTimeEntryExplanation />
     </HelperText>
   </TimeInputContainer>
@@ -24,7 +25,7 @@ const TimeEntry = ({ value, onKeyPress, onChange }) => (
 TimeEntry.propTypes = {
   value: PropTypes.string.isRequired,
   onKeyPress: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 const TimeInputContainer = styled.div`
@@ -36,7 +37,7 @@ const HelperText = styled.p`
   font-size: 1.5rem;
   top: 7.2rem;
   margin: 0;
-  color: ${getColor('subtleFg')};
+  color: ${getColor("subtleFg")};
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
@@ -48,8 +49,8 @@ const TimeInput = styled(Input)`
   text-align: center;
   -webkit-appearance: none;
   height: 6rem;
-  font-family: ${getFont('default')};
-  padding: 0 ${getSize('xs')};
+  font-family: ${getFont("default")};
+  padding: 0 ${getSize("xs")};
 `;
 
 export default TimeEntry;

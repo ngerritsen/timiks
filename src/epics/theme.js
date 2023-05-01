@@ -1,13 +1,19 @@
-import { ofType } from 'redux-observable';
-import { mergeMap, withLatestFrom, filter, map, takeUntil } from 'rxjs/operators';
-import { EMPTY, of, merge } from 'rxjs';
+import { ofType } from "redux-observable";
+import {
+  mergeMap,
+  withLatestFrom,
+  filter,
+  map,
+  takeUntil,
+} from "rxjs/operators";
+import { EMPTY, of, merge } from "rxjs";
 
-import * as actionTypes from '../constants/actionTypes';
-import * as settingsSelectors from '../selectors/settings';
-import * as themeSelectors from '../selectors/theme';
-import { setTheme } from '../actions';
-import { AUTO } from '../constants/theme';
-import { listenForPreferredTheme, getPreferredTheme } from '../helpers/theme';
+import * as actionTypes from "../constants/actionTypes";
+import * as settingsSelectors from "../selectors/settings";
+import * as themeSelectors from "../selectors/theme";
+import { setTheme } from "../actions";
+import { AUTO } from "../constants/theme";
+import { listenForPreferredTheme, getPreferredTheme } from "../helpers/theme";
 
 export const themeEpic = (action$, state$) =>
   action$.pipe(
@@ -20,7 +26,9 @@ export const themeEpic = (action$, state$) =>
         return autoChangeTheme(action$, state$);
       }
 
-      return themeSetting !== themeSelectors.getTheme(state) ? of(setTheme(themeSetting)) : EMPTY;
+      return themeSetting !== themeSelectors.getTheme(state)
+        ? of(setTheme(themeSetting))
+        : EMPTY;
     })
   );
 
@@ -29,5 +37,9 @@ const autoChangeTheme = (action$, state$) =>
     withLatestFrom(state$),
     filter(([theme, state]) => themeSelectors.getTheme(state) !== theme),
     map(([theme]) => setTheme(theme)),
-    takeUntil(action$.pipe(ofType(actionTypes.CHANGE_SETTING, actionTypes.LOAD_SETTINGS)))
+    takeUntil(
+      action$.pipe(
+        ofType(actionTypes.CHANGE_SETTING, actionTypes.LOAD_SETTINGS)
+      )
+    )
   );

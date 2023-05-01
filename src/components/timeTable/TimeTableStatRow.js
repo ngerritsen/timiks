@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
-import Time from '../shared/Time';
-import { Cell } from '../shared/Table';
-import { SubtleText } from '../shared/Typography';
-import * as CustomPropTypes from '../../propTypes';
+import Time from "../shared/Time";
+import { Cell } from "../shared/Table";
+import { SubtleText } from "../shared/Typography";
+import * as CustomPropTypes from "../../propTypes";
 
 const TimeTableStatRow = ({
   name,
@@ -15,15 +15,15 @@ const TimeTableStatRow = ({
   hardHighlightedStatName,
   hardHighlightedStatType,
   softHighlightedStatName,
-  softHighlightedStatType
+  softHighlightedStatType,
 }) => {
   return (
     <tr key={name}>
       <Cell>
         <SubtleText>{name}</SubtleText>
       </Cell>
-      {createStatCell(current, 'current', best ? 1 : 3)}
-      {best && createStatCell(best, 'best', 2)}
+      {createStatCell(current, "current", best ? 1 : 3)}
+      {best && createStatCell(best, "best", 2)}
     </tr>
   );
 
@@ -36,8 +36,10 @@ const TimeTableStatRow = ({
       );
     }
 
-    const isHardHighlighted = hardHighlightedStatName === name && hardHighlightedStatType === type;
-    const isSoftHighlighted = softHighlightedStatName === name && softHighlightedStatType === type;
+    const isHardHighlighted =
+      hardHighlightedStatName === name && hardHighlightedStatType === type;
+    const isSoftHighlighted =
+      softHighlightedStatName === name && softHighlightedStatType === type;
     const softHighlight = () => onSoftHighlight([name, type]);
     const hardHighlight = () => onHardHighlight([name, type]);
     const softUnhighlight = () => onSoftHighlight([]);
@@ -47,7 +49,9 @@ const TimeTableStatRow = ({
       <Cell
         bold
         colSpan={colSpan}
-        highlightColor={(isHardHighlighted && 'blue') || (isSoftHighlighted && 'grey')}
+        highlightColor={
+          (isHardHighlighted && "blue") || (isSoftHighlighted && "grey")
+        }
         onMouseEnter={softHighlight}
         onMouseLeave={softUnhighlight}
         onClick={isHardHighlighted ? hardUnhighlight : hardHighlight}
@@ -67,7 +71,7 @@ TimeTableStatRow.propTypes = {
   hardHighlightedStatName: PropTypes.string,
   hardHighlightedStatType: PropTypes.string,
   softHighlightedStatName: PropTypes.string,
-  softHighlightedStatType: PropTypes.string
+  softHighlightedStatType: PropTypes.string,
 };
 
 export default React.memo(TimeTableStatRow);

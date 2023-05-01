@@ -1,13 +1,15 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import LoginPromotion from '../../components/messages/LoginPromotion';
-import { dismissLoginPromotion } from '../../actions';
-import { shouldPromoteLogin } from '../../selectors/loginPromotion';
+import LoginPromotion from "../../components/messages/LoginPromotion";
+import { dismissLoginPromotion } from "../../actions";
+import { shouldPromoteLogin } from "../../selectors/loginPromotion";
 
 function mapStateToProps(state) {
   return {
-    shouldPromoteLogin: shouldPromoteLogin(state)
+    shouldPromoteLogin: shouldPromoteLogin(state),
   };
 }
 
-export default connect(mapStateToProps, { dismissLoginPromotion })(LoginPromotion);
+export default connect(mapStateToProps, { dismissLoginPromotion })(
+  LoginPromotion
+);

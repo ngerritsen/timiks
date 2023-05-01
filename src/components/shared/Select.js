@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getSize, getColor } from '../../helpers/theme';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getSize, getColor } from "../../helpers/theme";
 
 const Select = ({ onChange, options, value, numeric }) => (
   <SelectContainer>
@@ -12,7 +12,7 @@ const Select = ({ onChange, options, value, numeric }) => (
     </SelectIcon>
     <SelectInput
       value={value}
-      onChange={event => {
+      onChange={(event) => {
         const value = event.target.value;
         onChange(numeric ? Number(value) : value);
       }}
@@ -42,24 +42,24 @@ const SelectInput = styled.select`
   height: 2.6rem;
   border-radius: 0.4rem;
   box-sizing: border-box;
-  padding: 0 ${getSize('lg')} 0 ${getSize('xs')};
-  border: 1px solid ${getColor('grey')};
-  color: ${getColor('fg')};
-  background-color: ${getColor('bg')};
+  padding: 0 ${getSize("lg")} 0 ${getSize("xs")};
+  border: 1px solid ${getColor("grey")};
+  color: ${getColor("fg")};
+  background-color: ${getColor("bg")};
 
   &::-ms-expand {
     display: none;
   }
 
   &:hover {
-    border-color: ${getColor('subtleFg')};
+    border-color: ${getColor("subtleFg")};
   }
 
   &:focus {
-    border-color: ${getColor('blue')};
-    box-shadow: 0 0 0 1px ${getColor('blue')};
+    border-color: ${getColor("blue")};
+    box-shadow: 0 0 0 1px ${getColor("blue")};
     box-shadow: 0 0 0 1px -moz-mac-focusring;
-    color: ${getColor('fg')};
+    color: ${getColor("fg")};
     outline: none !important;
   }
 
@@ -82,11 +82,12 @@ Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
     })
   ).isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  numeric: PropTypes.bool
+  numeric: PropTypes.bool,
 };
 
 export default Select;

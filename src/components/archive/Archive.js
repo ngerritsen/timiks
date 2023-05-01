@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
 
-import * as CustomPropTypes from '../../propTypes';
-import Section from '../shared/Section';
-import { formatLocalDate } from '../../helpers/dateTime';
-import { getColor, getSize } from '../../helpers/theme';
-import ArchiveOptionsContainer from '../../containers/archive/ArchiveOptionsContainer';
-import ArchiveItem from './ArchiveItem';
-import { getPuzzle } from '../../helpers/puzzle';
-import { ARCHIVE_DAYS_OPTIONS } from '../../constants/settings';
-import { decapitalize } from '../../helpers/formatting';
-import Stats from './Stats';
-import SectionTitle from '../shared/SectionTitle';
-import Tiles from '../shared/Tiles';
-import Button from '../shared/Button';
-import ArchiveTimeGraphContainer from '../../containers/archive/ArchiveTimeGraphContainer';
-import Tag from '../shared/Tag';
+import * as CustomPropTypes from "../../propTypes";
+import Section from "../shared/Section";
+import { formatLocalDate } from "../../helpers/dateTime";
+import { getColor, getSize } from "../../helpers/theme";
+import ArchiveOptionsContainer from "../../containers/archive/ArchiveOptionsContainer";
+import ArchiveItem from "./ArchiveItem";
+import { getPuzzle } from "../../helpers/puzzle";
+import { ARCHIVE_DAYS_OPTIONS } from "../../constants/settings";
+import { decapitalize } from "../../helpers/formatting";
+import Stats from "./Stats";
+import SectionTitle from "../shared/SectionTitle";
+import Tiles from "../shared/Tiles";
+import Button from "../shared/Button";
+import ArchiveTimeGraphContainer from "../../containers/archive/ArchiveTimeGraphContainer";
+import Tag from "../shared/Tag";
 
 const Archive = ({
   times,
@@ -29,7 +29,7 @@ const Archive = ({
   removeTime,
   timesPerDay,
   requireTimes,
-  fixGraphYAxis
+  fixGraphYAxis,
 }) => {
   useEffect(() => {
     requireTimes(false, puzzle, days);
@@ -37,8 +37,9 @@ const Archive = ({
   const [showLastStats, setShowLastStats] = useState(false);
 
   const [expandedDays, setExpandedDays] = useState([0, 1, 2]);
-  const expandDay = index => setExpandedDays([...expandedDays, index]);
-  const collapseDay = index => setExpandedDays(expandedDays.filter(i => i !== index));
+  const expandDay = (index) => setExpandedDays([...expandedDays, index]);
+  const collapseDay = (index) =>
+    setExpandedDays(expandedDays.filter((i) => i !== index));
 
   return (
     <>
@@ -57,19 +58,31 @@ const Archive = ({
       </Section>
       {times.length === 0 && (
         <Message>
-          No {getPuzzle(puzzle).title} solves in the{' '}
-          {decapitalize(ARCHIVE_DAYS_OPTIONS.find(option => option.value === days).label)}.
+          No {getPuzzle(puzzle).title} solves in the{" "}
+          {decapitalize(
+            ARCHIVE_DAYS_OPTIONS.find((option) => option.value === days).label
+          )}
+          .
         </Message>
       )}
       {stats.length > 0 && (
         <Section margin="lg">
-          <SectionTitle>{showLastStats ? 'Last' : 'Top'} stats</SectionTitle>
+          <SectionTitle>{showLastStats ? "Last" : "Top"} stats</SectionTitle>
           <Section margin="sm">
-            <Stats solves={times.length} stats={stats} showLast={showLastStats} />
+            <Stats
+              solves={times.length}
+              stats={stats}
+              showLast={showLastStats}
+            />
           </Section>
           <Section margin="sm">
-            <Button size="sm" tag color="subtleBg" onClick={() => setShowLastStats(!showLastStats)}>
-              Show {showLastStats ? 'top' : 'last'} stats
+            <Button
+              size="sm"
+              tag
+              color="subtleBg"
+              onClick={() => setShowLastStats(!showLastStats)}
+            >
+              Show {showLastStats ? "top" : "last"} stats
             </Button>
           </Section>
         </Section>
@@ -89,8 +102,12 @@ const Archive = ({
             </SectionTitleClickable>
             {expanded && (
               <Tiles>
-                {times.map(time => (
-                  <ArchiveItem key={time.id} time={time} removeTime={removeTime} />
+                {times.map((time) => (
+                  <ArchiveItem
+                    key={time.id}
+                    time={time}
+                    removeTime={removeTime}
+                  />
                 ))}
               </Tiles>
             )}
@@ -106,7 +123,7 @@ Archive.propTypes = {
   timesPerDay: PropTypes.arrayOf(
     PropTypes.shape({
       date: PropTypes.instanceOf(Date),
-      times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired
+      times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
     })
   ).isRequired,
   requireTimes: PropTypes.func.isRequired,
@@ -114,7 +131,7 @@ Archive.propTypes = {
   puzzle: PropTypes.string.isRequired,
   days: PropTypes.number.isRequired,
   removeTime: PropTypes.func.isRequired,
-  fixGraphYAxis: PropTypes.bool
+  fixGraphYAxis: PropTypes.bool,
 };
 
 const SectionTitleClickable = styled(SectionTitle)`
@@ -129,7 +146,7 @@ const SectionTitleClickable = styled(SectionTitle)`
 `;
 
 const SectionTitleTitle = styled.span`
-  margin-right: ${getSize('sm')};
+  margin-right: ${getSize("sm")};
 `;
 
 const SectionTitleTag = styled.span`
@@ -139,7 +156,7 @@ const SectionTitleTag = styled.span`
 `;
 
 const Message = styled.p`
-  color: ${getColor('grey')};
+  color: ${getColor("grey")};
   font-weight: bold;
   padding: 15vh 0;
   text-align: center;

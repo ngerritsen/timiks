@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const ToggleContent = ({ toggle, content }) => {
   const [isShown, setIsShown] = useState(false);
@@ -17,7 +17,7 @@ const ToggleContent = ({ toggle, content }) => {
 
 ToggleContent.propTypes = {
   toggle: PropTypes.func,
-  content: PropTypes.func
+  content: PropTypes.func,
 };
 
 export default ToggleContent;

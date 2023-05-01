@@ -1,1 +1,2 @@
-export const shouldPromptNewVersion = state => state.version.shouldPromptNewVersion;
+export const shouldPromptNewVersion = (state) =>
+  state.version.shouldPromptNewVersion;
