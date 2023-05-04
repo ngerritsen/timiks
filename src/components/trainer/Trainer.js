@@ -18,7 +18,7 @@ const Trainer = () => {
 
   useEffect(() => {
     dispatch(setIsTraining(true));
-    return () => setIsTraining(false);
+    return () => dispatch(setIsTraining(false));
   }, []);
 
   return (
