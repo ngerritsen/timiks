@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUndo } from "@fortawesome/free-solid-svg-icons/faUndo";
@@ -7,7 +6,6 @@ import { faHistory } from "@fortawesome/free-solid-svg-icons/faHistory";
 import { transparentize } from "polished";
 import { useDispatch, useSelector } from "react-redux";
 
-import * as CustomPropTypes from "../../propTypes";
 import TrainerCaseDetails from "./TrainerCaseDetails";
 import ToggleContent from "../shared/ToggleContent";
 import LastLayerPreview from "../cube/LastLayerPreview";

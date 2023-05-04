@@ -5,7 +5,11 @@ import { ofType } from "redux-observable";
 import * as actionTypes from "../constants/actionTypes";
 import { saveTime, resetTime, saveTrainerTime } from "../actions";
 import { getPuzzle } from "../selectors/settings";
-import { getStartTime, hasInspectionPenalty, isTraining } from "../selectors/timer";
+import {
+  getStartTime,
+  hasInspectionPenalty,
+  isTraining,
+} from "../selectors/timer";
 import { getScramble } from "../selectors/scramble";
 import {
   getTrainingType,

@@ -26,7 +26,10 @@ export const updateTimeInput = createAction(
   types.UPDATE_TIME_INPUT,
   (timeInput) => timeInput
 );
-export const setIsTraining = createAction(types.SET_IS_TRAINING, (isTraining) => isTraining);
+export const setIsTraining = createAction(
+  types.SET_IS_TRAINING,
+  (isTraining) => isTraining
+);
 
 // Activation
 export const prepareActivation = createAction(types.PREPARE_ACTIVATION);

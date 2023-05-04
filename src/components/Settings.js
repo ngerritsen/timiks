@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useCallback } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
 import { useDispatch, useSelector } from "react-redux";
