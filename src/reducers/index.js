@@ -1,9 +1,7 @@
 import { combineReducers } from "redux";
-import { connectRouter } from "connected-react-router";
 
 import activation from "./activation";
 import authentication from "./authentication";
-import history from "../history";
 import loginPromotion from "./loginPromotion";
 import network from "./network";
 import notifications from "./notifications";
@@ -21,7 +19,6 @@ export default combineReducers({
   loginPromotion,
   network,
   notifications,
-  router: connectRouter(history),
   scramble,
   settings,
   theme,

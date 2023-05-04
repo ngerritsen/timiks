@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Section from "../shared/Section";
 import TimerContainer from "../../containers/timer/TimerContainer";
 import ActivationContainer from "../../containers/timer/ActivationContainer";
 import TrainerActions from "./TrainerActions";
 import TrainerCases from "./TrainerCases";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { shouldHideTrainerTimes } from "../../selectors/settings";
 import TrainerOptions from "./TrainerOptions";
 import TrainerTimeTable from "./TrainerTimeTable";
 import TrainerScramble from "./TrainerScramble";
+import { setIsTraining } from "../../actions";
 
 const Trainer = () => {
+  const dispatch = useDispatch();
   const shouldShowTrainerTimes = !useSelector(shouldHideTrainerTimes);
+
+  useEffect(() => {
+    dispatch(setIsTraining(true));
+    return () => setIsTraining(false);
+  }, []);
 
   return (
     <>

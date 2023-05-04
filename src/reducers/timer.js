@@ -9,6 +9,7 @@ const initialState = {
   timeInput: "",
   inspecting: false,
   lastTimeId: "",
+  isTraining: false,
 };
 
 export default handleActions(
@@ -49,6 +50,10 @@ export default handleActions(
     [actionTypes.UPDATE_TIME_INPUT]: (state, action) => ({
       ...state,
       timeInput: action.payload,
+    }),
+    [actionTypes.SET_IS_TRAINING]: (state, action) => ({
+      ...state,
+      isTraining: action.payload,
     }),
   },
   initialState

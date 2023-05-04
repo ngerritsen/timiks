@@ -1,14 +1,12 @@
 import shortid from "shortid";
 import { withLatestFrom, map } from "rxjs/operators";
 import { ofType } from "redux-observable";
-import { LOCATION_CHANGE } from "connected-react-router";
 
 import * as actionTypes from "../constants/actionTypes";
 import { saveTime, resetTime, saveTrainerTime } from "../actions";
 import { getPuzzle } from "../selectors/settings";
-import { getStartTime, hasInspectionPenalty } from "../selectors/timer";
+import { getStartTime, hasInspectionPenalty, isTraining } from "../selectors/timer";
 import { getScramble } from "../selectors/scramble";
-import { isInTrainer } from "../selectors/router";
 import {
   getTrainingType,
   getCurrentCaseId,
@@ -18,7 +16,6 @@ import {
 export const resetTimeEpic = (action$) =>
   action$.pipe(
     ofType(
-      LOCATION_CHANGE,
       actionTypes.CHANGE_TRAINING_TYPE,
       actionTypes.CLEAR_TRAINER_TIMES,
       actionTypes.REMOVE_TRAINER_TIME
@@ -52,7 +49,7 @@ export const stopTimerEpic = (action$, state$) =>
     ofType(actionTypes.STOP_TIMER),
     withLatestFrom(state$),
     map(([action, state]) =>
-      isInTrainer(state)
+      isTraining(state)
         ? saveTrainerTime({
             id: shortid.generate(),
             trainingType: getTrainingType(state),

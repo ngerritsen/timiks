@@ -128,7 +128,7 @@ const TrainerTimeTable = () => {
                               color="red"
                               onClick={() => {
                                 hide();
-                                dispatch(clearTrainerTimes());
+                                dispatch(clearTrainerTimes(trainingType));
                               }}
                             >
                               Remove

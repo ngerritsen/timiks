@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons/faThumbsUp";
 import { faSpaceShuttle } from "@fortawesome/free-solid-svg-icons/faSpaceShuttle";
+
 import * as CustomPropTypes from "../../propTypes";
 import Section from "../shared/Section";
 import Time from "../shared/Time";
@@ -101,9 +102,7 @@ const Timer = ({
     </Section>
     <TimeFooter withManualEntry={useManualTimeEntry}>
       <TimeFooterClickArea data-no-activation>
-        {isTraining && startTime > 0 && stopTime > 0 && (
-          <TrainerPreviousCase />
-        )}
+        {isTraining && startTime > 0 && stopTime > 0 && <TrainerPreviousCase />}
         {!isTraining && showLastTime && (
           <TimeFooterActionsClickArea>
             <TimeActionsContainer lastTime={lastTime} />

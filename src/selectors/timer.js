@@ -20,3 +20,4 @@ export const hasInspectionPenalty = (state) =>
 export const isValidTimeInput = createSelector(getTimeInput, (timeInput) =>
   Boolean(parseTimeInput(timeInput))
 );
+export const isTraining = (state) => state.timer.isTraining;

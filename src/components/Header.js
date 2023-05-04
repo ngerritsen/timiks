@@ -14,13 +14,9 @@ const Header = () => (
   <HeaderBar>
     <Title>Timiks</Title>
     <nav>
-      <StyledNavLink activeClassName="selected" exact to="/">
-        Timer
-      </StyledNavLink>
-      <StyledNavLink activeClassName="selected" to="/archive">
-        Archive
-      </StyledNavLink>
-      <StyledNavLink activeClassName="selected" to="/trainer">
+      <StyledNavLink to="/">Timer</StyledNavLink>
+      <StyledNavLink to="/archive">Archive</StyledNavLink>
+      <StyledNavLink to="/trainer">
         <FontAwesomeIcon icon={faDumbbell} />
       </StyledNavLink>
       <KeyboardShortcutsIconContainer breakpoint="sm" display="inline">
@@ -72,7 +68,7 @@ const StyledNavLink = styled(NavLink)`
     border-bottom: 2px solid ${getColor("grey")};
   }
 
-  &.selected {
+  &.active {
     border-bottom: 2px solid ${getColor("fg")};
   }
 `;

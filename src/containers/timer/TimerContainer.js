@@ -14,7 +14,6 @@ import {
 } from "../../selectors/activation";
 import * as timerSelectors from "../../selectors/timer";
 import * as settingsSelectors from "../../selectors/settings";
-import { isInTrainer } from "../../selectors/router";
 
 function mapStateToProps(state) {
   const startTime = timerSelectors.getStartTime(state);
@@ -32,7 +31,6 @@ function mapStateToProps(state) {
     !useManualTimeEntry &&
     !inspecting &&
     Boolean(lastTime);
-  const isTraining = isInTrainer(state);
 
   return {
     inspecting: timerSelectors.isInspecting(state),
@@ -50,7 +48,7 @@ function mapStateToProps(state) {
     useManualTimeEntry,
     useInspectionTime,
     showTimerTime: shouldShowTimerTime(state),
-    isTraining,
+    isTraining: timerSelectors.isTraining(state),
   };
 }
 

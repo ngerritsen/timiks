@@ -5,22 +5,25 @@ const buildNumber = require("./src/static/build");
 
 module.exports = {
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   entry: {
-    main: ["element-closest", path.join(__dirname, "src/index.js")],
+    main: path.join(__dirname, "src/index.tsx"),
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   output: {
     path: path.join(__dirname, "public"),
     filename: "[name].[chunkhash].js",
   },
+  resolve: {
+    extensions: ["...", ".ts", ".tsx"],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(?:t|j)sx?$/,
+        use: "ts-loader",
         exclude: /node_modules/,
-        loader: "babel-loader",
       },
     ],
   },
