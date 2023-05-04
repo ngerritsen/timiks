@@ -1,29 +1,10 @@
-import { combineReducers } from "redux";
-
-import activation from "./activation";
-import authentication from "./authentication";
-import loginPromotion from "./loginPromotion";
-import network from "./network";
-import notifications from "./notifications";
-import scramble from "./scramble";
-import settings from "./settings";
-import theme from "./theme";
-import timer from "./timer";
-import times from "./times";
-import trainer from "./trainer";
-import version from "./version";
-
-export default combineReducers({
-  activation,
-  authentication,
-  loginPromotion,
-  network,
-  notifications,
-  scramble,
-  settings,
-  theme,
-  timer,
-  times,
-  trainer,
-  version,
-});
+export { default as activation } from "./activation";
+export { default as authentication } from "./authentication";
+export { default as network } from "./network";
+export { default as notifications } from "./notifications";
+export { default as scramble } from "./scramble";
+export { default as settings } from "./settings";
+export { default as theme } from "./theme";
+export { default as timer } from "./timer";
+export { default as times } from "./times";
+export { default as trainer } from "./trainer";

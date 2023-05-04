@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withTheme } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDonate } from "@fortawesome/free-solid-svg-icons/faDonate";
 
@@ -16,8 +14,4 @@ const Donate = () => (
   </LinkButton>
 );
 
-Donate.propTypes = {
-  theme: PropTypes.object.isRequired,
-};
-
-export default withTheme(Donate);
+export default Donate;

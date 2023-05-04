@@ -7,11 +7,11 @@ import * as themes from "../theme";
 import Header from "./Header";
 import Section from "./shared/Section";
 import NotificationContainer from "../containers/NotificationContainer";
-import LoginPromotionContainer from "../containers/messages/LoginPromotionContainer";
-import NewVersionPromptContainer from "../containers/messages/NewVersionPromptContainer";
 import Footer from "./Footer";
 import NetworkStatusBarContainer from "../containers/NetworkStatusBarContainer";
 import { getTheme } from "../selectors/theme";
+import NewVersionPrompt from "./messages/NewVersionPrompt";
+import LoginPromotion from "./messages/LoginPromotion";
 
 const App = () => {
   const theme = themes[useSelector(getTheme)];
@@ -23,8 +23,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <NetworkStatusBarContainer />
-      <NewVersionPromptContainer />
-      <LoginPromotionContainer />
+      <NewVersionPrompt />
+      <LoginPromotion />
       <div className="container">
         <Section margin="md">
           <Header />

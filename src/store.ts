@@ -1,19 +1,22 @@
-import { createEpicMiddleware } from "redux-observable";
+import { Epic, createEpicMiddleware } from "redux-observable";
 
 import rootEpic from "./epics";
-import reducer from "./reducers";
+import * as reducers from "./reducers";
+import * as slices from "./slices";
 import { configureStore } from "@reduxjs/toolkit";
 
 const epicMiddleware = createEpicMiddleware();
 
 const store = configureStore({
-  reducer,
+  reducer: { ...reducers, ...slices },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }).concat(epicMiddleware),
 });
 
-epicMiddleware.run(rootEpic);
+epicMiddleware.run(rootEpic as Epic);
+
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;

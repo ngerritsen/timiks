@@ -16,6 +16,6 @@ window.addEventListener("error", () => {
     .querySelector("[data-error-message-reload]")
     .addEventListener("click", (e) => {
       e.preventDefault();
-      window.location.reload(true);
+      window.location.reload();
     });
 });

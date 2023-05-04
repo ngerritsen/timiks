@@ -5,7 +5,7 @@ import { catchError, tap, map, mergeMap, takeUntil } from "rxjs/operators";
 import * as authenticationService from "../services/authentication";
 import { LOGIN, LOGIN_SUCCEEDED, LOGOUT } from "../constants/actionTypes";
 import * as actions from "../actions";
-import { dismissLoginPromotion } from "../actions";
+import { dismissLoginPromotion } from "../slices/loginPromotion";
 
 export const loginStatusEpic = () =>
   authenticationService

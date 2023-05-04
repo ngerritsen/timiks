@@ -18,7 +18,7 @@ const YELLOW = "#f9e636";
 
 const BASE_SIZE = 0.8;
 
-const getSize = (n) => (BASE_SIZE * n).toFixed(1) + "rem";
+const getSize = (n: number) => (BASE_SIZE * n).toFixed(1) + "rem";
 
 export const light = {
   fonts: {
@@ -83,3 +83,10 @@ export const dark = {
     subtleFg: darken(0.4, WHITE),
   },
 };
+
+export type Theme = typeof light;
+export type Color = keyof typeof light.colors;
+export type Size = keyof typeof light.sizes;
+export type Breakpoint = keyof typeof light.breakpoints;
+export type ZIndex = keyof typeof light.zIndices;
+export type Font = keyof typeof light.fonts;

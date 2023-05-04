@@ -1,1 +1,1 @@
-export const POLL_VERSION_INTERVAL = 60000;
+export const POLL_VERSION_INTERVAL = 100;

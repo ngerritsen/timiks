@@ -114,16 +114,6 @@ export const changeSetting = createAction(
   })
 );
 
-// Version
-export const newVersionAvailable = createAction(types.NEW_VERSION_AVAILABLE);
-export const dismissNewVersion = createAction(types.DISMISS_NEW_VERSION);
-
-// Login promotion
-export const promoteLogin = createAction(types.PROMOTE_LOGIN);
-export const dismissLoginPromotion = createAction(
-  types.DISMISS_LOGIN_PROMOTION
-);
-
 // Notifications
 export const showNotification = createAction(
   types.SHOW_NOTIFICATION,
