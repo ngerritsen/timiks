@@ -22,7 +22,7 @@ const CubePreview = ({ scramble, cubeSize }) => {
   }
 
   return (
-    <div>
+    <>
       <CubePreviewScrollContainer>
         <CubePreviewContainer>
           {CUBE_LAYOUT.map((row, y) => (
@@ -43,7 +43,7 @@ const CubePreview = ({ scramble, cubeSize }) => {
       <Note>
         * Scrambled <strong>white</strong> up, <strong>green</strong> front.
       </Note>
-    </div>
+    </>
   );
 };
 

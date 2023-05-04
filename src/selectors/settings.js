@@ -31,6 +31,9 @@ export const getPuzzleInfo = createSelector(getPuzzle, puzzleHelpers.getPuzzle);
 export const shouldUseManualTimeEntry = (state) =>
   state.settings.useManualTimeEntry && !isInTrainer(state);
 
+export const shouldHideTrainerTimes = (state) =>
+  state.settings.hideTrainerTimes;
+
 export const shouldUseInspectionTime = (state) =>
   state.settings.useInspectionTime &&
   getPuzzleInfo(state).allowInspectionTime &&

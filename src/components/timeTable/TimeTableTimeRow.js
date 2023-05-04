@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import Time from "../shared/Time";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,15 +17,12 @@ import { Cell } from "../shared/Table";
 import { SubtleText } from "../shared/Typography";
 import CloudSyncIcon from "../shared/CloudSyncIcon";
 import { getColor, getSize } from "../../helpers/theme";
+import { removeTime } from "../../actions";
 
-const TimeTableTimeRow = ({
-  index,
-  time,
-  removeTime,
-  isIncluded,
-  isExcluded,
-}) => {
+const TimeTableTimeRow = ({ index, time, isIncluded, isExcluded }) => {
+  const dispatch = useDispatch();
   const highlightColor = isIncluded ? "blue" : isExcluded ? "orange" : "";
+
   return (
     <tr>
       <Cell width="3rem" highlightColor={highlightColor}>
@@ -42,7 +40,10 @@ const TimeTableTimeRow = ({
       </Cell>
       <Cell rightAlign highlightColor={highlightColor}>
         {time.stored && <CloudSyncIcon time={time} fixedWidth size="sm" />}
-        <RemoveItemIconButton color="red" onClick={() => removeTime(time.id)}>
+        <RemoveItemIconButton
+          color="red"
+          onClick={() => dispatch(removeTime(time.id))}
+        >
           <FontAwesomeIcon icon={faTimes} fixedWidth size="sm" />
         </RemoveItemIconButton>
         <ToggleContent
@@ -58,7 +59,7 @@ const TimeTableTimeRow = ({
                 onClose={hide}
                 onRemoveTime={() => {
                   hide();
-                  removeTime(time.id);
+                  dispatch(removeTime(time.id));
                 }}
               />
             </Modal>
@@ -72,7 +73,6 @@ const TimeTableTimeRow = ({
 TimeTableTimeRow.propTypes = {
   time: CustomPropTypes.Time.isRequired,
   index: PropTypes.number.isRequired,
-  removeTime: PropTypes.func.isRequired,
   isIncluded: PropTypes.bool,
   isExcluded: PropTypes.bool,
 };

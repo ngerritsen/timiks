@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUndo } from "@fortawesome/free-solid-svg-icons/faUndo";
 import { faHistory } from "@fortawesome/free-solid-svg-icons/faHistory";
 import { transparentize } from "polished";
+import { useDispatch, useSelector } from "react-redux";
 
 import * as CustomPropTypes from "../../propTypes";
 import TrainerCaseDetails from "./TrainerCaseDetails";
@@ -17,17 +18,24 @@ import Section from "../shared/Section";
 import Link from "../shared/Link";
 import Shortcut from "../shared/Shortcut";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { retryCase, reQueueCase } from "../../actions";
+import {
+  getTrainingType,
+  getLastCase,
+  isInRehearsal as getIsInRehearsal,
+  isQueued as getIsQueued,
+  getCurrentCaseId,
+} from "../../selectors/trainer";
 
-const TrainerPreviousCase = ({
-  trainingType,
-  lastCase,
-  retryCase,
-  reQueueCase,
-  isInRehearsal,
-  isQueued,
-  currentCaseId,
-}) =>
-  lastCase ? (
+const TrainerPreviousCase = () => {
+  const dispatch = useDispatch();
+  const trainingType = useSelector(getTrainingType);
+  const lastCase = useSelector(getLastCase);
+  const isInRehearsal = useSelector(getIsInRehearsal);
+  const isQueued = useSelector(getIsQueued);
+  const currentCaseId = useSelector(getCurrentCaseId);
+
+  return lastCase ? (
     <ToggleContent
       toggle={({ show }) => (
         <PreviousCase>
@@ -47,13 +55,15 @@ const TrainerPreviousCase = ({
                   <>
                     <Shortcut
                       command="retryCase"
-                      action={() => retryCase(trainingType, lastCase.id)}
+                      action={() =>
+                        dispatch(retryCase(trainingType, lastCase.id))
+                      }
                     />
                     <Link
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
-                        retryCase(trainingType, lastCase.id);
+                        dispatch(retryCase(trainingType, lastCase.id));
                       }}
                     >
                       <FontAwesomeIcon size="sm" icon={faUndo} /> Retry
@@ -69,13 +79,15 @@ const TrainerPreviousCase = ({
                 <>
                   <Shortcut
                     command="reQueueCase"
-                    action={() => reQueueCase(trainingType, lastCase.id)}
+                    action={() =>
+                      dispatch(reQueueCase(trainingType, lastCase.id))
+                    }
                   />
                   <Link
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
-                      reQueueCase(trainingType, lastCase.id);
+                      dispatch(reQueueCase(trainingType, lastCase.id));
                     }}
                   >
                     <FontAwesomeIcon size="sm" icon={faHistory} /> Re-queue
@@ -104,15 +116,6 @@ const TrainerPreviousCase = ({
       )}
     />
   ) : null;
-
-TrainerPreviousCase.propTypes = {
-  trainingType: PropTypes.string.isRequired,
-  lastCase: CustomPropTypes.Case,
-  retryCase: PropTypes.func.isRequired,
-  reQueueCase: PropTypes.func.isRequired,
-  isInRehearsal: PropTypes.bool,
-  isQueued: PropTypes.bool,
-  currentCaseId: PropTypes.number,
 };
 
 const Confirmation = styled.span`

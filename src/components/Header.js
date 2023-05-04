@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 import { faDumbbell } from "@fortawesome/free-solid-svg-icons/faDumbbell";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import SettingsContainer from "../containers/SettingsContainer";
 import KeyboardShortcuts from "./KeyboardShortcuts";
 import AccountContainer from "../containers/AccountContainer";
 import { getZIndex, getColor } from "../helpers/theme";
 import { VisibleFrom } from "./shared/Visibility";
+import Settings from "./Settings";
 
 const Header = () => (
   <HeaderBar>
@@ -27,7 +27,7 @@ const Header = () => (
         <KeyboardShortcuts />
       </KeyboardShortcutsIconContainer>
       <IconContainer>
-        <SettingsContainer />
+        <Settings />
       </IconContainer>
       <AccountContainer />
     </nav>

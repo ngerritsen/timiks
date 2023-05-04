@@ -20,6 +20,7 @@ const initialState = {
   activationDuration: DEFAULT_ACTIVATION_DURATION,
   showTimerTime: true,
   fixGraphYAxis: false,
+  hideTrainerTimes: false,
   disabledArchiveGraphLines: [],
 };
 

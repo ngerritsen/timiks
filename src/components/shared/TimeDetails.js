@@ -26,7 +26,7 @@ import IconButton from "./IconButton";
 
 const TimeDetails = ({ time, onRemoveTime, onClose }) => {
   return (
-    <div>
+    <>
       <Section margin="md">
         <InfoItemGrid>
           {time.stored && (
@@ -124,7 +124,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }) => {
         )}
         {!onRemoveTime && <Button onClick={onClose}>Close</Button>}
       </Section>
-    </div>
+    </>
   );
 };
 

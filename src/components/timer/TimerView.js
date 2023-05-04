@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
 import TimerOptionsContainer from "../../containers/timer/TimerOptionsContainer";
 import TimerContainer from "../../containers/timer/TimerContainer";
@@ -7,14 +7,17 @@ import ActivationContainer from "../../containers/timer/ActivationContainer";
 import TimeBoardContainer from "../../containers/timer/TimeBoardContainer";
 import ScrambleContainer from "../../containers/timer/ScrambleContainer";
 import Section from "../shared/Section";
+import { requireTimes } from "../../actions";
 
-const TimerView = ({ requireTimes }) => {
+const TimerView = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    requireTimes(true);
+    dispatch(requireTimes(true));
   }, []);
 
   return (
-    <div>
+    <>
       <Section margin="lg">
         <TimerContainer />
       </Section>
@@ -30,12 +33,8 @@ const TimerView = ({ requireTimes }) => {
       <Section>
         <TimeBoardContainer />
       </Section>
-    </div>
+    </>
   );
-};
-
-TimerView.propTypes = {
-  requireTimes: PropTypes.func.isRequired,
 };
 
 export default TimerView;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
+import { useDispatch, useSelector } from "react-redux";
 
 import { DARK, LIGHT, AUTO, THEME_OPTIONS } from "../constants/theme";
 import Shortcut from "./shared/Shortcut";
@@ -18,177 +18,182 @@ import Checkbox from "./shared/Checkbox";
 import Button from "./shared/Button";
 import Modal from "./shared/Modal";
 import { getSize, getColor } from "../helpers/theme";
+import { getSettings } from "../selectors/settings";
+import { changeSetting } from "../actions";
 
-const Settings = ({ settings, changeSetting }) => (
-  <>
-    <ToggleContent
-      toggle={({ show, toggle }) => (
-        <IconButton onClick={show}>
-          <Shortcut command="openSettings" action={toggle} />
-          {settings.theme !== AUTO && (
-            <Shortcut
-              command="toggleDarkMode"
-              action={() =>
-                changeSetting("theme", settings.theme === DARK ? LIGHT : DARK)
-              }
-            />
-          )}
-          <FontAwesomeIcon icon={faCog} fixedWidth />
-        </IconButton>
-      )}
-      content={({ hide }) => (
-        <Modal title="Settings" onClose={hide}>
-          <>
-            <Section margin="md">
-              <SectionTitle>Timer</SectionTitle>
-              <Section margin="sm">
-                <Setting>
-                  <label>Activation delay*</label>
-                  <Select
-                    onChange={(delay) =>
-                      changeSetting("activationDuration", delay)
-                    }
-                    options={ACTIVATION_DURATION_OPTIONS}
-                    value={settings.activationDuration}
-                    numeric
-                    fullWidth
-                  />
-                </Setting>
+const Settings = () => {
+  const settings = useSelector(getSettings);
+  const dispatch = useDispatch();
+  const set = (key) => (value) => dispatch(changeSetting(key, value));
+
+  return (
+    <>
+      <ToggleContent
+        toggle={({ show, toggle }) => (
+          <IconButton onClick={show}>
+            <Shortcut command="openSettings" action={toggle} />
+            {settings.theme !== AUTO && (
+              <Shortcut
+                command="toggleDarkMode"
+                action={() =>
+                  set("theme")(settings.theme === DARK ? LIGHT : DARK)
+                }
+              />
+            )}
+            <FontAwesomeIcon icon={faCog} fixedWidth />
+          </IconButton>
+        )}
+        content={({ hide }) => (
+          <Modal title="Settings" onClose={hide}>
+            <>
+              <Section margin="md">
+                <SectionTitle>Timer</SectionTitle>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Activation delay*</label>
+                    <Select
+                      onChange={set("activationDuration")}
+                      options={ACTIVATION_DURATION_OPTIONS}
+                      value={settings.activationDuration}
+                      numeric
+                      fullWidth
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Use inspection time</label>
+                    <Checkbox
+                      type="checkbox"
+                      onChange={set("useInspectionTime")}
+                      checked={settings.useInspectionTime}
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Voice alert for inspection time**</label>
+                    <Checkbox
+                      type="checkbox"
+                      onChange={set("warnForInspectionTime")}
+                      checked={settings.warnForInspectionTime}
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Manual time entry</label>
+                    <Checkbox
+                      type="checkbox"
+                      onChange={set("useManualTimeEntry")}
+                      checked={settings.useManualTimeEntry}
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Hide time during solve</label>
+                    <Checkbox
+                      type="checkbox"
+                      inverse
+                      onChange={set("showTimerTime")}
+                      checked={settings.showTimerTime}
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Show latest solve on top</label>
+                    <Checkbox
+                      type="checkbox"
+                      onChange={set("showLatestSolveOnTop")}
+                      checked={settings.showLatestSolveOnTop}
+                    />
+                  </Setting>
+                </Section>
               </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Use inspection time</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={(checked) =>
-                      changeSetting("useInspectionTime", checked)
-                    }
-                    checked={settings.useInspectionTime}
-                  />
-                </Setting>
+              <Section margin="md">
+                <SectionTitle>User Interface</SectionTitle>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Theme</label>
+                    <Select
+                      onChange={set("theme")}
+                      options={THEME_OPTIONS}
+                      value={settings.theme}
+                      fullWidth
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Start button color</label>
+                    <Select
+                      onChange={set("buttonColor")}
+                      options={BUTTON_COLORS}
+                      value={settings.buttonColor}
+                      fullWidth
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Start button color in dark mode</label>
+                    <Select
+                      onChange={set("buttonColorDarkMode")}
+                      options={[
+                        { label: "Inherit", value: "" },
+                        ...BUTTON_COLORS,
+                      ]}
+                      value={settings.buttonColorDarkMode}
+                      fullWidth
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Fix graph y-axis</label>
+                    <Checkbox
+                      type="checkbox"
+                      onChange={set("fixGraphYAxis")}
+                      checked={settings.fixGraphYAxis}
+                    />
+                  </Setting>
+                </Section>
               </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Voice alert for inspection time**</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={(checked) =>
-                      changeSetting("warnForInspectionTime", checked)
-                    }
-                    checked={settings.warnForInspectionTime}
-                  />
-                </Setting>
+              <Section margin="md">
+                <SectionTitle>Trainer</SectionTitle>
+                <Section margin="sm">
+                  <Setting>
+                    <label>Hide trainer times</label>
+                    <Checkbox
+                      type="checkbox"
+                      onChange={set("hideTrainerTimes")}
+                      checked={settings.hideTrainerTimes}
+                    />
+                  </Setting>
+                </Section>
               </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Manual time entry</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={(checked) =>
-                      changeSetting("useManualTimeEntry", checked)
-                    }
-                    checked={settings.useManualTimeEntry}
-                  />
-                </Setting>
+              <Section margin="xs">
+                <Explanation>
+                  *For how long you have to hold spacebar, mouse or touch before
+                  starting the timer.
+                </Explanation>
               </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Hide time during solve</label>
-                  <Checkbox
-                    type="checkbox"
-                    inverse
-                    onChange={(checked) =>
-                      changeSetting("showTimerTime", checked)
-                    }
-                    checked={settings.showTimerTime}
-                  />
-                </Setting>
+              <Section margin="md">
+                <Explanation>
+                  **Does not work on most mobile devices due to browser
+                  restrictions.
+                </Explanation>
               </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Show latest solve on top</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={(checked) =>
-                      changeSetting("showLatestSolveOnTop", checked)
-                    }
-                    checked={settings.showLatestSolveOnTop}
-                  />
-                </Setting>
-              </Section>
-            </Section>
-            <Section margin="md">
-              <SectionTitle>User Interface</SectionTitle>
-              <Section margin="sm">
-                <Setting>
-                  <label>Theme</label>
-                  <Select
-                    onChange={(theme) => changeSetting("theme", theme)}
-                    options={THEME_OPTIONS}
-                    value={settings.theme}
-                    fullWidth
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Start button color</label>
-                  <Select
-                    onChange={(color) => changeSetting("buttonColor", color)}
-                    options={BUTTON_COLORS}
-                    value={settings.buttonColor}
-                    fullWidth
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Start button color in dark mode</label>
-                  <Select
-                    onChange={(color) =>
-                      changeSetting("buttonColorDarkMode", color)
-                    }
-                    options={[
-                      { label: "Inherit", value: "" },
-                      ...BUTTON_COLORS,
-                    ]}
-                    value={settings.buttonColorDarkMode}
-                    fullWidth
-                  />
-                </Setting>
-              </Section>
-              <Section margin="sm">
-                <Setting>
-                  <label>Fix graph y-axis</label>
-                  <Checkbox
-                    type="checkbox"
-                    onChange={(checked) =>
-                      changeSetting("fixGraphYAxis", checked)
-                    }
-                    checked={settings.fixGraphYAxis}
-                  />
-                </Setting>
-              </Section>
-            </Section>
-            <Section margin="xs">
-              <Explanation>
-                *For how long you have to hold spacebar, mouse or touch before
-                starting the timer.
-              </Explanation>
-            </Section>
-            <Section margin="md">
-              <Explanation>
-                **Does not work on most mobile devices due to browser
-                restrictions.
-              </Explanation>
-            </Section>
-            <Button onClick={hide}>Close</Button>
-          </>
-        </Modal>
-      )}
-    />
-  </>
-);
+              <Button onClick={hide}>Close</Button>
+            </>
+          </Modal>
+        )}
+      />
+    </>
+  );
+};
 
 const Setting = styled.label`
   display: flex;
@@ -210,10 +215,5 @@ const Explanation = styled.span`
   color: ${getColor("subtleFg")};
   font-style: italic;
 `;
-
-Settings.propTypes = {
-  settings: PropTypes.object.isRequired,
-  changeSetting: PropTypes.func.isRequired,
-};
 
 export default React.memo(Settings);

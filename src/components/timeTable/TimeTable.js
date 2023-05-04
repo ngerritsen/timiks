@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons/faQuestionCircle";
+import { useSelector } from "react-redux";
 
-import * as CustomPropTypes from "../../propTypes";
 import TimeGraph from "../shared/TimeGraph";
 import ToggleContent from "../shared/ToggleContent";
 import IconButton from "../shared/IconButton";
@@ -17,6 +16,11 @@ import TimeTableStatRow from "./TimeTableStatRow";
 import StatsExplanation from "./StatsExplanation";
 import { getBreakpoint, getSize } from "../../helpers/theme";
 import { createDescSorter } from "../../helpers/general";
+import {
+  shouldFixGraphYAxis,
+  shouldShowLatestSolveOnTop,
+} from "../../selectors/settings";
+import * as timesSelectors from "../../selectors/times";
 
 function useHighlightedStats() {
   const [highlightState, setHighlightedStat] = useState([]);
@@ -25,14 +29,13 @@ function useHighlightedStats() {
   return [highlightedStatName, highlightedStatType, setHighlightedStat];
 }
 
-const TimeTable = ({
-  stats,
-  times,
-  showLatestSolveOnTop,
-  removeTime,
-  showGraph,
-  fixGraphYAxis,
-}) => {
+const TimeTable = () => {
+  const times = useSelector(timesSelectors.getCurrentMarkedSortedTimes);
+  const stats = useSelector(timesSelectors.getStatsForCurrentTimes);
+  const showGraph = useSelector(timesSelectors.getCurrentNoDnfTimes).length > 1;
+  const showLatestSolveOnTop = useSelector(shouldShowLatestSolveOnTop);
+  const fixGraphYAxis = useSelector(shouldFixGraphYAxis);
+
   const [
     softHighlightedStatName,
     softHighlightedStatType,
@@ -138,7 +141,6 @@ const TimeTable = ({
                 key={time.id}
                 time={time}
                 index={getSolveIndex(index)}
-                removeTime={removeTime}
                 isIncluded={includedIds.includes(time.id)}
                 isExcluded={excludedIds.includes(time.id)}
               />
@@ -148,15 +150,6 @@ const TimeTable = ({
       </TimeTableColumn>
     </TimeTableContainer>
   );
-};
-
-TimeTable.propTypes = {
-  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
-  removeTime: PropTypes.func.isRequired,
-  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  showGraph: PropTypes.bool,
-  showLatestSolveOnTop: PropTypes.bool,
-  fixGraphYAxis: PropTypes.bool,
 };
 
 const TimeTableContainer = styled.div`

@@ -19,7 +19,7 @@ const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
         previewArrows={trainingCase.previewArrows}
       />
     </Section>
-    <div>
+    <Section>
       <Section margin="sm">
         {trainingCase.algs.map((alg, i) => (
           <Section margin="xxs" key={i}>
@@ -42,7 +42,7 @@ const TrainerCaseDetails = ({ trainingCase, trainingType }) => (
           AlgDb.net
         </Link>
       </Section>
-    </div>
+    </Section>
   </CaseDetails>
 );
 

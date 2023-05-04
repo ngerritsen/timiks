@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
 import { faStop } from "@fortawesome/free-solid-svg-icons/faStop";
@@ -8,37 +8,51 @@ import Select from "../shared/Select";
 import { types } from "../../constants/trainer";
 import { Toolbar, ToolbarItem } from "../shared/Toolbar";
 import Button, { ButtonIcon } from "../shared/Button";
-
-const typeOptions = types.map((type) => ({ label: type, value: type }));
-
-const TrainerOptions = ({
+import { getTrainingType, isInRehearsal } from "../../selectors/trainer";
+import {
   changeTrainingType,
-  trainingType,
   startRehearsal,
   stopRehearsal,
-  inRehearsal,
-}) => {
+} from "../../actions";
+
+const TrainerOptions = () => {
+  const dispatch = useDispatch();
+  const trainingType = useSelector(getTrainingType);
+  const inRehearsal = useSelector(isInRehearsal);
+  const typeOptions = useMemo(
+    () => types.map((type) => ({ label: type, value: type })),
+    [types]
+  );
+
   return (
     <>
       <Toolbar>
         <ToolbarItem>Train:</ToolbarItem>
         <ToolbarItem>
           <Select
-            onChange={(type) => changeTrainingType(type)}
+            onChange={(type) => dispatch(changeTrainingType(type))}
             options={typeOptions}
             value={trainingType}
           />
         </ToolbarItem>
         <ToolbarItem>
           {inRehearsal ? (
-            <Button size="sm" onClick={stopRehearsal} color="orange">
+            <Button
+              size="sm"
+              onClick={() => dispatch(stopRehearsal())}
+              color="orange"
+            >
               <ButtonIcon>
                 <FontAwesomeIcon icon={faStop} />
               </ButtonIcon>
               Stop Rehearsal
             </Button>
           ) : (
-            <Button size="sm" onClick={startRehearsal} color="subtleBg">
+            <Button
+              size="sm"
+              onClick={() => dispatch(startRehearsal())}
+              color="subtleBg"
+            >
               <ButtonIcon>
                 <FontAwesomeIcon icon={faPlay} />
               </ButtonIcon>
@@ -49,14 +63,6 @@ const TrainerOptions = ({
       </Toolbar>
     </>
   );
-};
-
-TrainerOptions.propTypes = {
-  trainingType: PropTypes.string.isRequired,
-  changeTrainingType: PropTypes.func.isRequired,
-  startRehearsal: PropTypes.func.isRequired,
-  inRehearsal: PropTypes.bool,
-  stopRehearsal: PropTypes.func.isRequired,
 };
 
 export default TrainerOptions;

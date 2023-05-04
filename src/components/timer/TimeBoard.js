@@ -2,20 +2,18 @@ import React from "react";
 
 import Section from "../shared/Section";
 import TimeBoardActionsContainer from "../../containers/timer/TimeBoardActionsContainer";
-import TimeTableContainer from "../../containers/timeTable/TimeTableContainer";
+import TimeTable from "../timeTable/TimeTable";
 
-const TimeBoard = () => {
-  return (
-    <div>
-      <Section margin="sm">
-        <TimeTableContainer />
-      </Section>
+const TimeBoard = () => (
+  <>
+    <Section margin="sm">
+      <TimeTable />
+    </Section>
 
-      <Section margin="sm">
-        <TimeBoardActionsContainer />
-      </Section>
-    </div>
-  );
-};
+    <Section margin="sm">
+      <TimeBoardActionsContainer />
+    </Section>
+  </>
+);
 
 export default TimeBoard;

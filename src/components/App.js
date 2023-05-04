@@ -2,7 +2,6 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import Header from "./Header";
-import TimerViewContainer from "../containers/timer/TimerViewContainer";
 import ArchiveContainer from "../containers/archive/ArchiveContainer";
 import Section from "./shared/Section";
 import NotificationContainer from "../containers/NotificationContainer";
@@ -11,6 +10,7 @@ import NewVersionPromptContainer from "../containers/messages/NewVersionPromptCo
 import Footer from "./Footer";
 import Trainer from "./trainer/Trainer";
 import NetworkStatusBarContainer from "../containers/NetworkStatusBarContainer";
+import TimerView from "./timer/TimerView";
 
 const App = () => (
   <>
@@ -22,7 +22,7 @@ const App = () => (
         <Header />
       </Section>
       <Section margin="xl">
-        <Route exact path="/" component={TimerViewContainer} />
+        <Route exact path="/" component={TimerView} />
         <Route path="/archive" component={ArchiveContainer} />
         <Route path="/trainer" component={Trainer} />
       </Section>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -8,15 +8,15 @@ import Time from "../shared/Time";
 
 const Stats = ({ stats, solves, showLast }) => (
   <StatsContainer>
-    <div>
+    <>
       <StatTitle>
         <StatColor color="subtleFg" />
         solves:
       </StatTitle>
       <strong>{solves}</strong>
-    </div>
+    </>
     {stats.map((stat) => (
-      <div key={stat.name}>
+      <Fragment key={stat.name}>
         <StatTitle>
           <StatColor color={stat.color} />
           {stat.name}:
@@ -24,7 +24,7 @@ const Stats = ({ stats, solves, showLast }) => (
         <strong>
           <Time time={showLast ? stat.current : stat.best || stat.current} />
         </strong>
-      </div>
+      </Fragment>
     ))}
   </StatsContainer>
 );

@@ -11,6 +11,7 @@ import ScrambleDetails from "./ScrambleDetails";
 import { getColor, getSize, getFont } from "../../helpers/theme";
 import * as CustomPropTypes from "../../propTypes";
 import ScrambleCaseView from "./ScrambleCaseView";
+import { DEFAULT_PUZZLE } from "../../constants/settings";
 
 const Scramble = ({
   scramble,
@@ -98,6 +99,10 @@ Scramble.propTypes = {
   withTrainingCase: CustomPropTypes.Case,
   trainingType: PropTypes.string,
 };
+
+Scramble.defaultProps = {
+  puzzle: DEFAULT_PUZZLE
+}
 
 const ScrambleTabs = styled.div`
   display: flex;

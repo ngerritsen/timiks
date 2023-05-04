@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons/faStopwatch";
 import { faFlask } from "@fortawesome/free-solid-svg-icons/faFlask";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import * as CustomPropTypes from "../../propTypes";
 import Time from "../shared/Time";
@@ -14,58 +15,57 @@ import ToggleContent from "../shared/ToggleContent";
 import Modal from "../shared/Modal";
 import { buildFullCaseTitle } from "../../helpers/trainer";
 import { ButtonDuo, ButtonDuoItem } from "../shared/ButtonDuo";
+import { removeTrainerTime } from "../../actions";
 
-const TrainerTime = ({
-  trainerTime,
-  removeTrainerTime,
-  trainingType,
-  trainingCase,
-}) => (
-  <ToggleContent
-    toggle={({ show }) => (
-      <TrainerTimeTime onClick={show}>
-        <Time time={trainerTime} />
-      </TrainerTimeTime>
-    )}
-    content={({ hide }) => (
-      <Modal title="Remove trainer time" onClose={hide}>
-        <Section margin="md">
-          <Section margin="sm">
-            <FontAwesomeIcon icon={faFlask} fixedWidth />{" "}
-            {buildFullCaseTitle(trainingCase, trainingType)}
+const TrainerTime = ({ trainerTime, trainingType, trainingCase }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <ToggleContent
+      toggle={({ show }) => (
+        <TrainerTimeTime onClick={show}>
+          <Time time={trainerTime} />
+        </TrainerTimeTime>
+      )}
+      content={({ hide }) => (
+        <Modal title="Remove trainer time" onClose={hide}>
+          <Section margin="md">
+            <Section margin="sm">
+              <FontAwesomeIcon icon={faFlask} fixedWidth />{" "}
+              {buildFullCaseTitle(trainingCase, trainingType)}
+            </Section>
+            <Section margin="sm">
+              <FontAwesomeIcon icon={faStopwatch} fixedWidth />{" "}
+              <Time time={trainerTime} />
+            </Section>
           </Section>
-          <Section margin="sm">
-            <FontAwesomeIcon icon={faStopwatch} fixedWidth />{" "}
-            <Time time={trainerTime} />
-          </Section>
-        </Section>
-        <ButtonDuo>
-          <ButtonDuoItem>
-            <Button onClick={hide} outline color="subtleFg">
-              Cancel
-            </Button>
-          </ButtonDuoItem>
-          <ButtonDuoItem>
-            <Button
-              color="red"
-              onClick={() => {
-                removeTrainerTime(trainerTime.id);
-                hide();
-              }}
-            >
-              Remove
-            </Button>
-          </ButtonDuoItem>
-        </ButtonDuo>
-      </Modal>
-    )}
-  />
-);
+          <ButtonDuo>
+            <ButtonDuoItem>
+              <Button onClick={hide} outline color="subtleFg">
+                Cancel
+              </Button>
+            </ButtonDuoItem>
+            <ButtonDuoItem>
+              <Button
+                color="red"
+                onClick={() => {
+                  dispatch(removeTrainerTime(trainerTime.id));
+                  hide();
+                }}
+              >
+                Remove
+              </Button>
+            </ButtonDuoItem>
+          </ButtonDuo>
+        </Modal>
+      )}
+    />
+  );
+};
 
 TrainerTime.propTypes = {
   trainingCase: CustomPropTypes.Case.isRequired,
   trainerTime: CustomPropTypes.TrainingTime.isRequired,
-  removeTrainerTime: PropTypes.func.isRequired,
   trainingType: PropTypes.string.isRequired,
 };
 

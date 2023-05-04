@@ -1,24 +1,25 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 import SectionTitle from "../shared/SectionTitle";
 import Tiles from "../shared/Tiles";
 import { getSize } from "../../helpers/theme";
 import Checkbox from "../shared/Checkbox";
-import * as CustomPropTypes from "../../propTypes";
 import TrainerCase from "./TrainerCase";
 import Section from "../shared/Section";
+import { selectCases, deselectCases } from "../../actions";
+import {
+  getGroupedSelectedCases,
+  getTrainingType,
+} from "../../selectors/trainer";
 
-const TrainerCases = ({
-  groupedCases,
-  selectCase,
-  deselectCase,
-  selectCases,
-  deselectCases,
-  trainingType,
-}) =>
-  groupedCases.map((category) => {
+const TrainerCases = () => {
+  const dispatch = useDispatch();
+  const groupedCases = useSelector(getGroupedSelectedCases);
+  const trainingType = useSelector(getTrainingType);
+
+  return groupedCases.map((category) => {
     const allSelected = category.cases.every((c) => c.selected);
     const caseIds = category.cases.map((c) => c.id);
 
@@ -32,7 +33,9 @@ const TrainerCases = ({
               name={category.id}
               checked={allSelected}
               onChange={(checked) =>
-                checked ? selectCases(caseIds) : deselectCases(caseIds)
+                dispatch(
+                  checked ? selectCases(caseIds) : deselectCases(caseIds)
+                )
               }
             />
           </SelectAllLabel>
@@ -40,8 +43,6 @@ const TrainerCases = ({
         <Tiles>
           {category.cases.map((trainingCase) => (
             <TrainerCase
-              selectCase={selectCase}
-              deselectCase={deselectCase}
               trainingCase={trainingCase}
               key={trainingCase.id}
               trainingType={trainingType}
@@ -51,14 +52,6 @@ const TrainerCases = ({
       </Section>
     );
   });
-
-TrainerCases.propTypes = {
-  groupedCases: PropTypes.arrayOf(CustomPropTypes.CaseCategory).isRequired,
-  selectCase: PropTypes.func.isRequired,
-  deselectCase: PropTypes.func.isRequired,
-  selectCases: PropTypes.func.isRequired,
-  deselectCases: PropTypes.func.isRequired,
-  trainingType: PropTypes.string.isRequired,
 };
 
 const SelectAllLabel = styled.label`

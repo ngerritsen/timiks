@@ -1,20 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Button from "../shared/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getActiveEnabledCases, getAvailableCaseIds } from "../../selectors/trainer";
+import { selectCases, deselectCases } from "../../actions";
 
-const TrainerActions = ({
-  availableCaseIds,
-  selectedCaseIds,
-  selectCases,
-  deselectCases,
-}) => {
+const TrainerActions = () => {
+  const dispatch = useDispatch();
+  const selectedCaseIds = useSelector(getActiveEnabledCases);
+  const availableCaseIds = useSelector(getAvailableCaseIds);
+
   if (selectedCaseIds.length > 0) {
     return (
       <Button
         size="sm"
         color="subtleBg"
         tag
-        onClick={() => deselectCases(selectedCaseIds)}
+        onClick={() => dispatch(deselectCases(selectedCaseIds))}
       >
         Deselect all
       </Button>
@@ -26,22 +27,11 @@ const TrainerActions = ({
       size="sm"
       color="subtleBg"
       tag
-      onClick={() => selectCases(availableCaseIds)}
+      onClick={() => dispatch(selectCases(availableCaseIds))}
     >
       Select all
     </Button>
   );
-};
-
-TrainerActions.propTypes = {
-  availableCaseIds: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  ).isRequired,
-  selectedCaseIds: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  ).isRequired,
-  selectCases: PropTypes.func.isRequired,
-  deselectCases: PropTypes.func.isRequired,
 };
 
 export default TrainerActions;

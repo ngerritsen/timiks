@@ -20,8 +20,8 @@ import {
   getSize,
 } from "../../helpers/theme";
 import Tag from "../shared/Tag";
-import TrainerStatusContainer from "../../containers/trainer/TrainerStatusContainer";
-import TrainerPreviousCaseContainer from "../../containers/trainer/TrainerPreviousCaseContainer";
+import TrainerStatus from "../trainer/TrainerStatus";
+import TrainerPreviousCase from "../trainer/TrainerPreviousCase";
 
 const Timer = ({
   inspecting,
@@ -46,7 +46,7 @@ const Timer = ({
       <TimerHeader>
         {isTraining && (
           <span data-no-activation>
-            <TrainerStatusContainer />
+            <TrainerStatus />
           </span>
         )}
         {!isTraining && (
@@ -102,7 +102,7 @@ const Timer = ({
     <TimeFooter withManualEntry={useManualTimeEntry}>
       <TimeFooterClickArea data-no-activation>
         {isTraining && startTime > 0 && stopTime > 0 && (
-          <TrainerPreviousCaseContainer />
+          <TrainerPreviousCase />
         )}
         {!isTraining && showLastTime && (
           <TimeFooterActionsClickArea>
