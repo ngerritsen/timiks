@@ -1,9 +1,15 @@
 default:
   image: node:lts
   cache:
+    key:
+      files:
+        - pnpm-lock.yaml
     paths:
-      - node_modules/
+      - .pnpm-store
   before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest-8 --activate
+    - pnpm config set store-dir .pnpm-store
     - pnpm install
     - echo \"$CI_PIPELINE_IID\" > public/build.json
 
