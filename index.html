@@ -24,95 +24,91 @@
     <link
       rel="apple-touch-icon"
       sizes="58x58"
-      href="images/apple-icon-58.png"
+      href="./src/images/apple-icon-58.png"
     />
     <link
       rel="apple-touch-icon"
       sizes="76x76"
-      href="images/apple-icon-76.png"
+      href="./src/images/apple-icon-76.png"
     />
     <link
       rel="apple-touch-icon"
       sizes="80x80"
-      href="images/apple-icon-80.png"
+      href="./src/images/apple-icon-80.png"
     />
     <link
       rel="apple-touch-icon"
       sizes="120x120"
-      href="images/apple-icon-120.png"
+      href="./src/images/apple-icon-120.png"
     />
     <link
       rel="apple-touch-icon"
       sizes="152x152"
-      href="images/apple-icon-152.png"
+      href="./src/images/apple-icon-152.png"
     />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="images/apple-icon-180.png"
+      href="./src/images/apple-icon-180.png"
     />
-    <link rel="apple-touch-icon" href="images/apple-icon-180.png" />
+    <link rel="apple-touch-icon" href="./src/images/apple-icon-180.png" />
 
     <link
-      href="images/iphone5_splash.png"
+      href="./src/images/iphone5_splash.png"
       media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/iphone6_splash.png"
+      href="./src/images/iphone6_splash.png"
       media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/iphoneplus_splash.png"
+      href="./src/images/iphoneplus_splash.png"
       media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/iphonex_splash.png"
+      href="./src/images/iphonex_splash.png"
       media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/iphonexr_splash.png"
+      href="./src/images/iphonexr_splash.png"
       media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/iphonexsmax_splash.png"
+      href="./src/images/iphonexsmax_splash.png"
       media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/ipad_splash.png"
+      href="./src/images/ipad_splash.png"
       media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/ipadpro1_splash.png"
+      href="./src/images/ipadpro1_splash.png"
       media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/ipadpro3_splash.png"
+      href="./src/images/ipadpro3_splash.png"
       media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
       rel="apple-touch-startup-image"
     />
     <link
-      href="images/ipadpro2_splash.png"
+      href="./src/images/ipadpro2_splash.png"
       media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
       rel="apple-touch-startup-image"
     />
 
-    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="shortcut icon" href="./src/static/favicon.png" />
 
-    <link rel="manifest" href="/timiks.webmanifest" />
+    <link rel="manifest" href="./src/static/timiks.webmanifest" />
 
-    <link rel="preload" href="/fonts.css" as="style" />
-
-    <% htmlWebpackPlugin.files.js.forEach((file) => { %>
-    <link rel="preload" href="<%= file %>" as="script" />
-    <% }) %>
+    <link rel="preload" href="./src/static/fonts.css" as="style" />
 
     <link
       rel="preload"
@@ -122,13 +118,11 @@
 
     <title>Timiks - Cube timer made for speedsolvers</title>
 
-    <%= `
     <style>
-      ${require('uglifycss').processFiles(['./src/critical/style.css'])}
+        <%- criticalCss %>
     </style>
-    ` %>
   </head>
-  <body data-build-number="<%= htmlWebpackPlugin.options.buildNumber %>">
+  <body data-build-number="<%= buildNumber %>">
     <!--[if lt IE 11]>
       <div class="no-ie-box">
         Sorry, but I do not support your browser.
@@ -165,7 +159,7 @@
 
     <footer>
       <span class="build-number"
-        >Build <%= htmlWebpackPlugin.options.buildNumber %></span
+        >Build <%= buildNumber %></span
       >
       <span class="separator">|</span>
       <a href="https://gitlab.com/ngerritsen/timiks/issues" target="_blank"
@@ -178,13 +172,13 @@
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/serviceWorker.js");
+          navigator.serviceWorker.register("./src/static/serviceWorker.js");
         });
       }
     </script>
 
     <script>
-      <%= require('fs').readFileSync('./src/critical/script.js') %>
+      <%- criticalJs %>
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -204,7 +198,9 @@
 
     <script async>
       document.querySelector("head").innerHTML +=
-        '<link rel="stylesheet" type="text/css" href="/fonts.css" />';
+        '<link rel="stylesheet" type="text/css" href="./src/static/fonts.css" />';
     </script>
+
+    <script type="module" async defer src="./src/index.tsx"></script>
   </body>
 </html>

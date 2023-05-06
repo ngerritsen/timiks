@@ -101,8 +101,8 @@ Scramble.propTypes = {
 };
 
 Scramble.defaultProps = {
-  puzzle: DEFAULT_PUZZLE,
-};
+  puzzle: DEFAULT_PUZZLE
+}
 
 const ScrambleTabs = styled.div`
   display: flex;

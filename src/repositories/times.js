@@ -1,31 +1,41 @@
-import * as firebase from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  where,
+  query,
+  onSnapshot,
+  writeBatch,
+  setDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { serializeTime, parseTimes } from "../helpers/serialization";
 import { Observable } from "rxjs";
 import { getDateForDaysAgo } from "../helpers/dateTime";
+import app from "../firebase";
 
 const MAX_BATCH_SIZE = 500;
 
-const db = firebase.firestore();
-
-db.enablePersistence().catch(() => {});
+const db = getFirestore(app);
 
 export function listenForChanges(userId, current, puzzle, days) {
   return new Observable((observer) => {
-    let collection = db
-      .collection("times")
-      .where("userId", "==", userId)
-      .where("current", "==", current);
+    const statements = [
+      where("userId", "==", userId),
+      where("current", "==", current),
+    ];
 
     if (puzzle) {
-      collection = collection.where("puzzle", "==", puzzle);
+      statements.push(where("puzzle", "==", puzzle));
     }
 
     if (days) {
       const fromDate = getDateForDaysAgo(days);
-      collection = collection.where("timestamp", ">=", fromDate);
+      statements.push(where("timestamp", ">=", fromDate));
     }
 
-    return collection.onSnapshot(
+    return onSnapshot(
+      query(collection(db, "times"), ...statements),
       { includeMetadataChanges: true },
       (querySnapshot) => {
         const data = [];
@@ -45,18 +55,18 @@ export function listenForChanges(userId, current, puzzle, days) {
 }
 
 export function save(userId, time) {
-  return db
-    .collection("times")
-    .doc(time.id)
-    .set({ ...stripUndefined(serializeTime(time)), userId });
+  return setDoc(doc(db, "times", time.id), {
+    ...stripUndefined(serializeTime(time)),
+    userId,
+  });
 }
 
 export function saveAll(userId, times) {
   const chunk = times.slice(0, MAX_BATCH_SIZE);
-  const batch = db.batch();
+  const batch = writeBatch(db);
 
   chunk.forEach((time) => {
-    const timeRef = db.collection("times").doc(time.id);
+    const timeRef = doc(db, "times", time.id);
     batch.set(timeRef, { ...stripUndefined(serializeTime(time)), userId });
   });
 
@@ -70,15 +80,15 @@ export function saveAll(userId, times) {
 }
 
 export function update(timeId, fields) {
-  return db.collection("times").doc(timeId).set(fields, { merge: true });
+  return setDoc(doc(db, "times", timeId), fields, { merge: true });
 }
 
 export function updateAll(timeIds, fields) {
   const chunk = timeIds.slice(0, MAX_BATCH_SIZE);
-  const batch = db.batch();
+  const batch = writeBatch(db);
 
   chunk.forEach((id) => {
-    const timeRef = db.collection("times").doc(id);
+    const timeRef = doc(db, "times", id);
     batch.set(timeRef, fields, { merge: true });
   });
 
@@ -92,14 +102,14 @@ export function updateAll(timeIds, fields) {
 }
 
 export function remove(timeId) {
-  return db.collection("times").doc(timeId).delete();
+  return deleteDoc(doc(db, "times", timeId));
 }
 
 export function removeAll(timeIds) {
-  const batch = db.batch();
+  const batch = writeBatch(db);
 
   timeIds.forEach((id) => {
-    const timeRef = db.collection("times").doc(id);
+    const timeRef = doc(db, "times", id);
     batch.delete(timeRef);
   });
 

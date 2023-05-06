@@ -1,4 +1,4 @@
-src/vendor
-node_modules
-public
 .firebase
+dist
+node_modules
+src/vendor

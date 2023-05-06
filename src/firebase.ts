@@ -1,7 +1,5 @@
-import firebase from "firebase/app";
-
-import "firebase/auth";
-import "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { initializeFirestore, persistentLocalCache } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBUu8vGS4Lp0hGXqeh-Elct0WeNT8eqrYI",
@@ -13,4 +11,10 @@ const firebaseConfig = {
   appId: "1:562902872449:web:e76746cb3b1cd51b",
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+initializeFirestore(app, {
+  localCache: persistentLocalCache()
+});
+
+export default app;

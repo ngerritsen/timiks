@@ -19,16 +19,33 @@ import { cases, PLL, OLL } from "../../constants/trainer";
 import NetworkStatusBar from "../NetworkStatusBar";
 import CloudSyncIcon from "../shared/CloudSyncIcon";
 
+import cloudSyncImageUrl from "../../images/cloud-sync.png";
+import timerDarkImageUrl from "../../images/timer-dark.png";
+import timerLightImageUrl from "../../images/timer-light.png";
+import manualEntryDarkImageUrl from "../../images/manual-entry-dark.png";
+import manualEntryLightImageUrl from "../../images/manual-entry-light.png";
+import archiveGraphDarkImageUrl from "../../images/archive-graph-dark.png";
+import archiveGraphLightImageUrl from "../../images/archive-graph-light.png";
+import archiveTimesDarkImageUrl from "../../images/archive-times-dark.png";
+import archiveTimesLightImageUrl from "../../images/archive-times-light.png";
+import trainerTimesDarkImageUrl from "../../images/trainer-times-dark.png";
+import trainerTimesLightImageUrl from "../../images/trainer-times-light.png";
+import casesDarkImageUrl from "../../images/cases-dark.png";
+import casesLightImageUrl from "../../images/cases-light.png";
+import timeTableDarkImageUrl from "../../images/time-table-dark.png";
+import timeTableLightImageUrl from "../../images/time-table-light.png";
+import darkModeImageUrl from "../../images/dark-mode.png";
+import csvImageUrl from "../../images/csv.png";
+
 const relayScramble = `2x2x2 U' F' U F2 R' F2 R F' R' 3x3x3 F2 R B2 R2 D2 R' B2 L D2 B2 R B' R U' L2 R' F' U2 L' B2 D' 4x4x4 Rw Uw2 Fw Rw2 Fw' D2 F' Uw U' L2 R Fw' D' L Rw' R Uw R Uw Rw2 U2 L2 F2 L R2 U F' U' B F' L' D2 Fw2 D2 Fw L Rw2 R' F Uw 5x5x5 L B Fw' U L2 Lw Dw2 Uw U' L' Fw2 Uw2 Lw' F Dw Fw' F' R' Uw U2 B2 L Bw L' Lw' Dw Lw Rw2 Dw2 U B2 Bw2 Fw2 Lw' D' Dw' U Lw Bw2 R2 B2 L Bw2 F' L' Bw Lw' Fw Uw Fw2 F2 Dw R Bw2 F2 D2 Fw2 R B2 F 6x6x6 B2 3Fw Uw' R2 U2 R B Rw 3Uw2 Lw2 Dw' Fw2 D2 Lw2 Fw2 Rw' D2 3Fw Lw' B2 3Fw Fw2 D2 3Uw' U' L2 Lw R2 Bw Rw' D' Dw2 B' 3Fw R2 3Fw 3Rw Fw2 F Lw2 R D L' 3Fw Dw 3Uw' L Rw D2 Uw' Fw' R 3Uw' B' Fw' F' 3Uw B' L Uw R2 3Fw2 Fw' L2 3Rw' Fw2 L' R' Uw2 Bw 7x7x7 U2 R' 3Fw2 3Rw' Bw' 3Uw 3Bw2 Fw2 3Rw Dw U' 3Fw' 3Rw2 Fw2 3Uw' 3Lw2 3Fw' F' Rw2 3Fw 3Rw2 3Dw2 3Uw2 Rw B' 3Bw' Uw Bw 3Dw F' 3Lw2 Uw2 B2 R D2 U Rw 3Dw2 U 3Lw B2 Dw2 B' 3Lw' Rw2 Dw2 3Uw2 3Bw' Dw2 L' 3Rw2 3Uw2 U 3Bw' 3Fw2 Fw2 F2 R' Uw2 3Lw Dw' Uw2 B2 R' 3Dw' B' Fw 3Uw' U' Lw F D' L Lw' Uw R2 3Fw' Lw2 3Dw' Rw U2 Bw2 3Bw 3Fw' L' 3Lw B2 Bw' D2 L2 3Dw' Uw2 3Fw' D' U' Rw' 3Dw 3Rw D' 3Bw'`;
 
 type ShowcaseProps = {
   theme: {
-    dark: boolean
-  }
-}
+    dark: boolean;
+  };
+};
 
 const Showcase = ({ theme }: ShowcaseProps) => {
-  const screenshotTheme = theme.dark ? "dark" : "light";
   const features = [
     {
       title: "Cloud sync",
@@ -48,7 +65,7 @@ const Showcase = ({ theme }: ShowcaseProps) => {
           <p>
             With Google login it&apos;s a matter of seconds to start syncing.
           </p>
-          <Image src="/images/cloud-sync.png" />
+          <Image src={cloudSyncImageUrl} />
         </>
       ),
     },
@@ -67,13 +84,17 @@ const Showcase = ({ theme }: ShowcaseProps) => {
             penalty or DNF. Keyboard shortcuts are there for the real power
             users.
           </p>
-          <Image src={`/images/timer-${screenshotTheme}.png`} />
+          <Image src={theme.dark ? timerDarkImageUrl : timerLightImageUrl} />
           <p>
             Manual time entry allows you to quickly enter times that were timed
             from a different source. You can even enter DNF or add +2 to
             immediately mark the time with a penalty!
           </p>
-          <Image src={`/images/manual-entry-${screenshotTheme}.png`} />
+          <Image
+            src={
+              theme.dark ? manualEntryDarkImageUrl : manualEntryLightImageUrl
+            }
+          />
         </>
       ),
     },
@@ -87,8 +108,16 @@ const Showcase = ({ theme }: ShowcaseProps) => {
             nicely organized by date and event. You can even preview the
             scrambles of any solve in history.
           </p>
-          <Image src={`/images/archive-graph-${screenshotTheme}.png`} />
-          <Image src={`/images/archive-times-${screenshotTheme}.png`} />
+          <Image
+            src={
+              theme.dark ? archiveGraphDarkImageUrl : archiveGraphLightImageUrl
+            }
+          />
+          <Image
+            src={
+              theme.dark ? archiveTimesDarkImageUrl : archiveTimesLightImageUrl
+            }
+          />
         </>
       ),
     },
@@ -100,12 +129,16 @@ const Showcase = ({ theme }: ShowcaseProps) => {
             Train your OLL and PLL using the same awesome precision timer from
             Timiks. Select the cases to train and time your solutions.
           </p>
-          <Image src={`/images/trainer-times-${screenshotTheme}.png`} />
+          <Image
+            src={
+              theme.dark ? trainerTimesDarkImageUrl : trainerTimesLightImageUrl
+            }
+          />
           <p>
             All cases organized according to the Cubeskills categorization with
             beautiful previews.
           </p>
-          <Image src={`/images/cases-${screenshotTheme}.png`} />
+          <Image src={theme.dark ? casesDarkImageUrl : casesLightImageUrl} />
           <Section margin="md">
             <p>
               No need to leave Timiks to learn algorithms, information about
@@ -151,7 +184,7 @@ const Showcase = ({ theme }: ShowcaseProps) => {
             screen. With the auto setting it will even change based on your OS
             theme!
           </p>
-          <Image src="/images/dark-mode.png" />
+          <Image src={darkModeImageUrl} />
         </>
       ),
     },
@@ -166,7 +199,9 @@ const Showcase = ({ theme }: ShowcaseProps) => {
             are logged in, you will be able to have multiple devices and screens
             show the same session!
           </p>
-          <Image src={`/images/time-table-${screenshotTheme}.png`} />
+          <Image
+            src={theme.dark ? timeTableDarkImageUrl : timeTableLightImageUrl}
+          />
         </>
       ),
     },
@@ -190,7 +225,7 @@ const Showcase = ({ theme }: ShowcaseProps) => {
             Take control of your own analysis, with export as CSV you can have
             your archive per puzzle in your own spreadsheet application.
           </p>
-          <Image src="/images/csv.png" />
+          <Image src={csvImageUrl} />
           <p>
             You can import your existing sessions from Twisty Timer and csTimer,
             to continue where you left off.

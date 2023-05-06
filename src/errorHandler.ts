@@ -1,4 +1,6 @@
-window.addEventListener("error", () => {
+window.addEventListener("error", (e) => {
+  console.error(e.error);
+
   if (document.querySelector("[data-error-message]")) {
     return;
   }

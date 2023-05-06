@@ -5,7 +5,7 @@ default:
       - node_modules/
   before_script:
     - npm install
-    - echo \"$CI_PIPELINE_IID\" > src/static/build.json
+    - echo \"$CI_PIPELINE_IID\" > public/build.json
 
 stages:
   - build
@@ -18,12 +18,12 @@ build:
     - npm run build
   artifacts:
     paths:
-      - public/
+      - dist/
 
 test:
   stage: test
   script:
-    - npm run test
+    - npm run lint
 
 deploy:
   stage: deploy
