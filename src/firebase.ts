@@ -14,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 initializeFirestore(app, {
-  localCache: persistentLocalCache()
+  localCache: persistentLocalCache(),
 });
 
 export default app;

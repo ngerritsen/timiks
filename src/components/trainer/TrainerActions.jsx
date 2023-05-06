@@ -1,7 +1,10 @@
 import React from "react";
 import Button from "../shared/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getActiveEnabledCases, getAvailableCaseIds } from "../../selectors/trainer";
+import {
+  getActiveEnabledCases,
+  getAvailableCaseIds,
+} from "../../selectors/trainer";
 import { selectCases, deselectCases } from "../../actions";
 
 const TrainerActions = () => {

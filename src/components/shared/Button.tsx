@@ -32,10 +32,10 @@ const Button = styled.button.attrs<{
 }>((props) => ({
   bg: getColor(props.color)(props) || getColor("blue")(props),
 }))<{
-  size?: keyof typeof sizeToHeight,
-  tag?: boolean,
-  outline?: boolean,
-  bg?: Color
+  size?: keyof typeof sizeToHeight;
+  tag?: boolean;
+  outline?: boolean;
+  bg?: Color;
 }>`
   display: inline-block;
   text-align: center;
@@ -76,7 +76,7 @@ Button.defaultProps = {
 };
 
 export const ButtonIcon = styled.span<{
-  color?: Color
+  color?: Color;
 }>`
   color: ${(props) => getColor(props.color)(props) || "inherit"};
   margin-right: ${getSize("xs")};

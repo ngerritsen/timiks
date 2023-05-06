@@ -10,8 +10,8 @@ export default defineConfig({
     createHtmlPlugin({
       inject: {
         data: {
-          criticalJs: fs.readFileSync('./src/critical/script.js'),
-          criticalCss: fs.readFileSync('./src/critical/style.css'),
+          criticalJs: fs.readFileSync("./src/critical/script.js"),
+          criticalCss: fs.readFileSync("./src/critical/style.css"),
           buildNumber,
         },
       },

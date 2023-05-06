@@ -18,21 +18,17 @@ class AppContainer extends React.Component {
 
     const theme = themes[props.theme];
 
-
     return { theme };
   }
 
   render() {
-    return (
-        <App />
-    );
+    return <App />;
   }
 }
 
 AppContainer.propTypes = {
   theme: PropTypes.string.isRequired,
 };
-
 
 function mapStateToProps(state) {
   return {

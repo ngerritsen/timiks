@@ -14,7 +14,10 @@ import { POLL_VERSION_INTERVAL } from "../constants/version";
 import { newVersionAvailable } from "../slices/version";
 import { RootState } from "../store";
 
-export const newVersionEpic = (_: Observable<Action>, state$: Observable<RootState>) =>
+export const newVersionEpic = (
+  _: Observable<Action>,
+  state$: Observable<RootState>
+) =>
   interval(POLL_VERSION_INTERVAL).pipe(
     mergeMap(() =>
       versionService.getLatestBuildNumber().pipe(catchError(() => EMPTY))

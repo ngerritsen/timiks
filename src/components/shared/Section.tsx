@@ -3,8 +3,8 @@ import { getSize } from "../../helpers/theme";
 import type { Size } from "../../theme";
 
 const Section = styled.div<{
-  margin?: Size,
-  textAlign?: AlignSetting
+  margin?: Size;
+  textAlign?: AlignSetting;
 }>`
   margin-bottom: ${(props) =>
     props.margin ? getSize(props.margin)(props) : 0};

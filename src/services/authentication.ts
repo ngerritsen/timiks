@@ -1,5 +1,10 @@
 import { Observable } from "rxjs";
-import { getAuth, GoogleAuthProvider, getRedirectResult, signInWithRedirect } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  getRedirectResult,
+  signInWithRedirect,
+} from "firebase/auth";
 import app from "../firebase";
 
 const auth = getAuth(app);
