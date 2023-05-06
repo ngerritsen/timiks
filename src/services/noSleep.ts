@@ -1,7 +1,7 @@
-import NoSleep from "nosleep.js/dist/NoSleep.js";
+import NoSleep from "nosleep.js";
 import * as Sentry from "@sentry/browser";
 
-let noSleep = null;
+let noSleep: NoSleep = null;
 
 export function enable() {
   disable();

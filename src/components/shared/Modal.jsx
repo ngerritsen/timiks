@@ -59,9 +59,7 @@ const Modal = ({ title, onClose, children }) => {
     >
       <ModalBox
         style={{
-          transform: modalSpringProps.scale.interpolate(
-            (scale) => `scale(${scale})`
-          ),
+          transform: modalSpringProps.scale.to((scale) => `scale(${scale})`),
         }}
         ref={modalRef}
         tabIndex={-1}

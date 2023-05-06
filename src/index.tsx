@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import * as Sentry from "@sentry/browser";
 
 import "./errorHandler";
@@ -42,11 +42,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.render(
+createRoot(rootEl).render(
   <Provider store={store}>
     <ShortcutProvider keymap={keymap}>
       <RouterProvider router={router} />
     </ShortcutProvider>
-  </Provider>,
-  rootEl
+  </Provider>
 );

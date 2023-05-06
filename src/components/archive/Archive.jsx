@@ -48,7 +48,6 @@ const Archive = ({
           <ArchiveTimeGraphContainer
             times={times}
             stats={stats}
-            enableZoom
             fixYAxis={fixGraphYAxis}
           />
         </Section>

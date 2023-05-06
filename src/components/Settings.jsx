@@ -152,7 +152,7 @@ const Settings = () => {
                 </Section>
                 <Section margin="sm">
                   <Setting>
-                    <label>Fix graph y-axis</label>
+                    <label>Start graph y-axis from zero</label>
                     <Checkbox
                       type="checkbox"
                       onChange={set("fixGraphYAxis")}
