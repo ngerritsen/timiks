@@ -10,7 +10,6 @@ import * as noSleepEpics from "./noSleep";
 import * as notificationEpics from "./notifications";
 import * as scrambleEpics from "./scramble";
 import * as settingsEpics from "./settings";
-import * as themeEpics from "./theme";
 import * as timerEpics from "./timer";
 import * as timesEpics from "./times";
 import * as trainerEpics from "./trainer";
@@ -41,7 +40,6 @@ const rootEpic = combineEpics(
   scrambleEpics.scrambleEpic,
   settingsEpics.loadSettingsEpic,
   settingsEpics.storeSettingsEpic,
-  themeEpics.themeEpic,
   timerEpics.failInspectionEpic,
   timerEpics.resetTimeEpic,
   timerEpics.stopTimerEpic,

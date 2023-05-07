@@ -1,15 +1,37 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ReactDOM from "react-dom";
 
 import { NOTIFICATION_ROOT_SELECTOR } from "../constants/dom";
 import { getBreakpoint, getSize, getZIndex, getColor } from "../helpers/theme";
+import {
+  getMessage,
+  isError as getIsError,
+  shouldShow,
+} from "../selectors/notifications";
+import { hideNotification } from "../slices/notifications";
 
-const Notification = ({ message, isError, show, hideNotification }) => {
+type NotificationContainerProps = {
+  show: boolean;
+};
+
+type NotificationMessageProps = {
+  error: boolean;
+};
+
+const Notification = () => {
+  const dispatch = useDispatch();
+  const message = useSelector(getMessage);
+  const isError = useSelector(getIsError);
+  const show = useSelector(shouldShow);
+
   return ReactDOM.createPortal(
     <NotificationContainer show={show}>
-      <NotificationMessage error={isError} onClick={hideNotification}>
+      <NotificationMessage
+        error={isError}
+        onClick={() => dispatch(hideNotification())}
+      >
         {message}
       </NotificationMessage>
     </NotificationContainer>,
@@ -17,14 +39,7 @@ const Notification = ({ message, isError, show, hideNotification }) => {
   );
 };
 
-Notification.propTypes = {
-  message: PropTypes.string.isRequired,
-  error: PropTypes.bool,
-  show: PropTypes.bool,
-  hideNotification: PropTypes.func.isRequired,
-};
-
-const NotificationContainer = styled.div`
+const NotificationContainer = styled.div<NotificationContainerProps>`
   transition: bottom 1.2s ease;
   display: flex;
   position: fixed;
@@ -42,7 +57,7 @@ const NotificationContainer = styled.div`
   }
 `;
 
-const NotificationMessage = styled.div`
+const NotificationMessage = styled.div<NotificationMessageProps>`
   background-color: ${(props) => getColor(props.error ? "red" : "dark")(props)};
   color: ${getColor("white")};
   border-radius: 0.5rem;

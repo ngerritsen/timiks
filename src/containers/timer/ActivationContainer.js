@@ -11,8 +11,9 @@ import * as activationSelectors from "../../selectors/activation";
 import * as timerSelectors from "../../selectors/timer";
 import * as settingsSelectors from "../../selectors/settings";
 import { parseTimeInput } from "../../helpers/time";
+import { withTheme } from "styled-components";
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     time: timerSelectors.getTime(state),
     stopped: timerSelectors.isStopped(state),
@@ -25,7 +26,7 @@ function mapStateToProps(state) {
     timeInput: timerSelectors.getTimeInput(state),
     useInspectionTime: settingsSelectors.shouldUseInspectionTime(state),
     ready: activationSelectors.isReady(state),
-    buttonColor: settingsSelectors.getButtonColor(state),
+    buttonColor: settingsSelectors.getButtonColor(state, ownProps.theme.dark),
   };
 }
 
@@ -46,8 +47,10 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { startTimer, stopTimer, resetTime, submitTimeInput },
-  mergeProps
-)(Activation);
+export default withTheme(
+  connect(
+    mapStateToProps,
+    { startTimer, stopTimer, resetTime, submitTimeInput },
+    mergeProps
+  )(Activation)
+);

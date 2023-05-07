@@ -1,6 +1,5 @@
 import { createSelector } from "reselect";
 import * as puzzleHelpers from "../helpers/puzzle";
-import { isInDarkMode } from "./theme";
 import { isTraining } from "./timer";
 
 export const getSettings = (state) => state.settings;
@@ -21,8 +20,8 @@ export const getDisabledArchiveGraphLines = (state) =>
 export const shouldShowLatestSolveOnTop = (state) =>
   state.settings.showLatestSolveOnTop;
 
-export const getButtonColor = (state) =>
-  isInDarkMode(state)
+export const getButtonColor = (state, isInDarkMode) =>
+  isInDarkMode
     ? state.settings.buttonColorDarkMode || state.settings.buttonColor
     : state.settings.buttonColor;
 

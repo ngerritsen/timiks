@@ -65,10 +65,6 @@ export const setScramble = createAction(
 );
 export const refreshScramble = createAction(types.REFRESH_SCRAMBLE);
 
-// No Sleep
-export const noSleepEnabled = createAction(types.NO_SLEEP_ENABLED);
-export const noSleepDisabled = createAction(types.NO_SLEEP_DISABLED);
-
 // Times
 export const saveTime = createAction(types.SAVE_TIME, (time) => time);
 export const updateTime = createAction(types.UPDATE_TIME, (id, fields) => ({
@@ -114,26 +110,6 @@ export const changeSetting = createAction(
   })
 );
 
-// Version
-export const newVersionAvailable = createAction(types.NEW_VERSION_AVAILABLE);
-export const dismissNewVersion = createAction(types.DISMISS_NEW_VERSION);
-
-// Login promotion
-export const promoteLogin = createAction(types.PROMOTE_LOGIN);
-export const dismissLoginPromotion = createAction(
-  types.DISMISS_LOGIN_PROMOTION
-);
-
-// Notifications
-export const showNotification = createAction(
-  types.SHOW_NOTIFICATION,
-  (message, isError = false) => ({
-    message,
-    isError,
-  })
-);
-export const hideNotification = createAction(types.HIDE_NOTIFICATION);
-
 // Import
 export const importTimes = createAction(types.IMPORT_TIMES, (times) => ({
   times,
@@ -142,6 +118,3 @@ export const importTimes = createAction(types.IMPORT_TIMES, (times) => ({
 // Network
 export const networkOnline = createAction(types.NETWORK_ONLINE);
 export const networkOffline = createAction(types.NETWORK_OFFLINE);
-
-// Theme
-export const setTheme = createAction(types.SET_THEME, (theme) => theme);

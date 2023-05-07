@@ -1,4 +1,3 @@
-import { EMPTY, Observable } from "rxjs";
 import { Breakpoint, Font, Size, ZIndex } from "../theme";
 import { Theme, Color } from "../theme";
 
@@ -15,22 +14,3 @@ export const getZIndex = (zIndex: ZIndex) => (props: Props) =>
 export const isDark = (props: Props) => Boolean(props.theme.dark);
 export const getFont = (font: Font) => (props: Props) =>
   props.theme.fonts[font];
-
-export function listenForPreferredTheme() {
-  return window.matchMedia
-    ? new Observable((observer) =>
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", (event) =>
-            observer.next(event.matches ? "dark" : "light")
-          )
-      )
-    : EMPTY;
-}
-
-export function getPreferredTheme() {
-  return window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}

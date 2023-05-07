@@ -6,6 +6,7 @@ import * as authenticationService from "../services/authentication";
 import { LOGIN, LOGIN_SUCCEEDED, LOGOUT } from "../constants/actionTypes";
 import * as actions from "../actions";
 import { dismissLoginPromotion } from "../slices/loginPromotion";
+import { showNotification } from "../slices/notifications";
 
 export const loginStatusEpic = () =>
   authenticationService
@@ -21,7 +22,7 @@ export const loginStatusEpic = () =>
                 user.photoURL
               ),
               dismissLoginPromotion(),
-              actions.showNotification("Logged in")
+              showNotification({ message: "Logged in" })
             )
           : of(actions.logoutSucceeded())
       )
@@ -31,7 +32,10 @@ export const redirectStatusEpic = (action$) =>
   authenticationService.onRedirectError().pipe(
     takeUntil(action$.pipe(ofType(LOGIN_SUCCEEDED))),
     mergeMap(() =>
-      of(actions.loginFailed(), actions.showNotification("Login failed", true))
+      of(
+        actions.loginFailed(),
+        showNotification({ showNotification: "Login failed", error: true })
+      )
     )
   );
 
@@ -46,11 +50,11 @@ export const logoutEpic = (action$) =>
   action$.pipe(
     ofType(LOGOUT),
     mergeMap(() => from(authenticationService.logout())),
-    map(() => actions.showNotification("Logged out")),
+    map(() => showNotification({ message: "Logged out" })),
     catchError(() =>
       of(
         actions.logoutFailed(),
-        actions.showNotification("Logout failed", true)
+        actions.showNotification({ message: "Logout failed", error: true })
       )
     )
   );

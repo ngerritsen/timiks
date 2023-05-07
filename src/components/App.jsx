@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 
 import * as themes from "../theme";
 import Header from "./Header";
 import Section from "./shared/Section";
-import NotificationContainer from "../containers/NotificationContainer";
 import Footer from "./Footer";
 import NetworkStatusBarContainer from "../containers/NetworkStatusBarContainer";
-import { getTheme } from "../selectors/theme";
 import NewVersionPrompt from "./messages/NewVersionPrompt";
 import LoginPromotion from "./messages/LoginPromotion";
+import { useTheme } from "../hooks/useTheme";
+import Notification from "./Notification";
 
 const App = () => {
-  const theme = themes[useSelector(getTheme)];
+  const theme = themes[useTheme()];
 
   useEffect(() => {
     renderGlobalTheme(theme);
@@ -35,7 +34,7 @@ const App = () => {
         <Section textAlign="center">
           <Footer />
         </Section>
-        <NotificationContainer />
+        <Notification />
       </div>
     </ThemeProvider>
   );

@@ -147,7 +147,8 @@ export type SelectOption<T> = {
   value: T;
 };
 
-export type ThemeOption = "dark" | "light" | "auto";
+export type ThemeSetting = "dark" | "light" | "auto";
+export type ThemeType = "dark" | "light";
 
 export type CubeTile = { x: number; y: number; color: PuzzleColor };
 export type CubeFace = CubeTile[];

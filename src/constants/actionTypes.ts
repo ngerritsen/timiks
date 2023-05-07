@@ -15,10 +15,6 @@ export const SKIP_PREPARATION_STAGE = "SKIP_PREPARATION_STAGE";
 export const PREPARE_INSPECTION = "PREPARE_INSPECTION";
 export const FAIL_INSPECTION = "FAIL_INSPECTION";
 
-// No sleep
-export const NO_SLEEP_ENABLED = "NO_SLEEP_ENABLED";
-export const NO_SLEEP_DISABLED = "NO_SLEEP_DISABLED";
-
 // Scramble
 export const SET_SCRAMBLE = "SET_SCRAMBLE";
 export const REFRESH_SCRAMBLE = "REFRESH_SCRAMBLE";
@@ -47,16 +43,9 @@ export const SETTINGS_STORED = "SETTINGS_STORED";
 export const CHANGE_SETTING = "CHANGE_SETTING";
 export const LOAD_SETTINGS = "LOAD_SETTINGS";
 
-// Notifications
-export const SHOW_NOTIFICATION = "SHOW_NOTIFICATION";
-export const HIDE_NOTIFICATION = "HIDE_NOTIFICATION";
-
 // Import
 export const IMPORT_TIMES = "IMPORT_TIMES";
 
 // Network
 export const NETWORK_ONLINE = "NETWORK_ONLINE";
 export const NETWORK_OFFLINE = "NETWORK_OFFLINE";
-
-// Theme
-export const SET_THEME = "SET_THEME";
