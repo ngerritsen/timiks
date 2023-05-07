@@ -1,13 +1,12 @@
 import NoSleep from "nosleep.js";
 import * as Sentry from "@sentry/browser";
 
-let noSleep: NoSleep = null;
+const noSleep = new NoSleep();
 
 export function enable() {
   disable();
 
   try {
-    noSleep = new NoSleep();
     noSleep.enable();
   } catch (err) {
     Sentry.captureException(err);
