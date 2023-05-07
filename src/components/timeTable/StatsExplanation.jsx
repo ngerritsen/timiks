@@ -1,9 +1,5 @@
 import React from "react";
-import stats, {
-  STANDARD_DEVIATION,
-  AVERAGE,
-  MEAN,
-} from "../../constants/stats";
+import stats from "../../constants/stats";
 import { Table, Cell } from "../shared/Table";
 import { calculateTrim } from "../../helpers/stats";
 
@@ -18,7 +14,7 @@ const StatsExplanation = () => (
       <tbody>
         {stats.map((stat) => {
           switch (stat.type) {
-            case AVERAGE:
+            case "AVERAGE":
               return (
                 <tr key={stat.name}>
                   <Cell bold width="6rem">
@@ -33,7 +29,7 @@ const StatsExplanation = () => (
                   </Cell>
                 </tr>
               );
-            case MEAN:
+            case "MEAN":
               return stat.size ? (
                 <tr key={stat.name}>
                   <Cell bold width="6rem">
@@ -49,7 +45,7 @@ const StatsExplanation = () => (
                   <Cell>Mean (average) of all solves.</Cell>
                 </tr>
               );
-            case STANDARD_DEVIATION:
+            case "STANDARD_DEVIATION":
               return (
                 <tr key={stat.name}>
                   <Cell bold width="6rem">

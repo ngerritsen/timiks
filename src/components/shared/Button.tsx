@@ -3,6 +3,18 @@ import { darken, transparentize, getLuminance } from "polished";
 import { getColor, getSize } from "../../helpers/theme";
 import type { Color } from "../../theme";
 
+type ButtonProps = {
+  color?: Color;
+  size?: keyof typeof sizeToHeight;
+  tag?: boolean;
+  outline?: boolean;
+  bg?: Color;
+};
+
+type ButtonIconProps = {
+  color?: Color;
+};
+
 const sizeToHeight = {
   sm: "2.6rem",
   md: "4.2rem",
@@ -27,16 +39,9 @@ const sizeToFontSize = {
   lg: "1.8rem",
 };
 
-const Button = styled.button.attrs<{
-  color?: Color;
-}>((props) => ({
+const Button = styled.button.attrs<ButtonProps>((props) => ({
   bg: getColor(props.color)(props) || getColor("blue")(props),
-}))<{
-  size?: keyof typeof sizeToHeight;
-  tag?: boolean;
-  outline?: boolean;
-  bg?: Color;
-}>`
+}))<ButtonProps>`
   display: inline-block;
   text-align: center;
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
@@ -75,9 +80,7 @@ Button.defaultProps = {
   color: "blue",
 };
 
-export const ButtonIcon = styled.span<{
-  color?: Color;
-}>`
+export const ButtonIcon = styled.span<ButtonIconProps>`
   color: ${(props) => getColor(props.color)(props) || "inherit"};
   margin-right: ${getSize("xs")};
 `;

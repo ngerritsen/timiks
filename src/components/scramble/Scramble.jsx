@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect, Fragment } from "react";
 
 import Section from "../shared/Section";
-import { CUBE, RELAY } from "../../constants/puzzles";
 import { getPuzzle } from "../../helpers/puzzle";
 import { splitRelayScramble, splitScramble } from "../../helpers/scramble";
 import CubePreview from "../cube/CubePreview";
@@ -22,7 +21,7 @@ const Scramble = ({
   puzzle,
   expand,
 }) => {
-  const isRelay = getPuzzle(puzzle).type === RELAY;
+  const isRelay = getPuzzle(puzzle).type === "RELAY";
   const splitScrambles = isRelay
     ? splitRelayScramble(puzzle, scramble)
     : [{ scramble, puzzle }];
@@ -39,8 +38,8 @@ const Scramble = ({
   const activeScramble = scrambles.find(
     (s) => s.puzzle === activePuzzle
   ).scramble;
-  const showPreview = withPreview && type === CUBE;
-  const showDetails = withDetails && type === CUBE;
+  const showPreview = withPreview && type === "CUBE";
+  const showDetails = withDetails && type === "CUBE";
   const moves = splitScramble(activeScramble);
 
   return (

@@ -1,5 +1,4 @@
-import { interval, EMPTY, Observable } from "rxjs";
-import { Action } from "redux";
+import { interval, EMPTY } from "rxjs";
 import {
   mergeMap,
   catchError,
@@ -12,12 +11,9 @@ import * as versionService from "../services/version";
 import { shouldPromoteLogin } from "../selectors/loginPromotion";
 import { POLL_VERSION_INTERVAL } from "../constants/version";
 import { newVersionAvailable } from "../slices/version";
-import { RootState } from "../store";
+import { TimiksEpic } from "../types";
 
-export const newVersionEpic = (
-  _: Observable<Action>,
-  state$: Observable<RootState>
-) =>
+export const newVersionEpic: TimiksEpic = (_, state$) =>
   interval(POLL_VERSION_INTERVAL).pipe(
     mergeMap(() =>
       versionService.getLatestBuildNumber().pipe(catchError(() => EMPTY))

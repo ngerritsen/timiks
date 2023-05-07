@@ -114,6 +114,16 @@ export const changeSetting = createAction(
   })
 );
 
+// Version
+export const newVersionAvailable = createAction(types.NEW_VERSION_AVAILABLE);
+export const dismissNewVersion = createAction(types.DISMISS_NEW_VERSION);
+
+// Login promotion
+export const promoteLogin = createAction(types.PROMOTE_LOGIN);
+export const dismissLoginPromotion = createAction(
+  types.DISMISS_LOGIN_PROMOTION
+);
+
 // Notifications
 export const showNotification = createAction(
   types.SHOW_NOTIFICATION,
@@ -132,59 +142,6 @@ export const importTimes = createAction(types.IMPORT_TIMES, (times) => ({
 // Network
 export const networkOnline = createAction(types.NETWORK_ONLINE);
 export const networkOffline = createAction(types.NETWORK_OFFLINE);
-
-// Trainer
-export const nextCaseDetermined = createAction(
-  types.NEXT_CASE_DETERMINED,
-  (id, scramble) => ({
-    id,
-    scramble,
-  })
-);
-export const selectCase = createAction(types.SELECT_CASE, (id) => id);
-export const deselectCase = createAction(types.DESELECT_CASE, (id) => id);
-export const selectCases = createAction(types.SELECT_CASES, (ids) => ids);
-export const retryCase = createAction(
-  types.RETRY_CASE,
-  (trainingType, caseId) => ({
-    trainingType,
-    caseId,
-  })
-);
-export const reQueueCase = createAction(
-  types.RE_QUEUE_CASE,
-  (trainingType, caseId) => ({
-    trainingType,
-    caseId,
-  })
-);
-export const deselectCases = createAction(types.DESELECT_CASES, (ids) => ids);
-export const loadEnabledCases = createAction(
-  types.LOAD_ENABLED_CASES,
-  (ids) => ids
-);
-export const changeTrainingType = createAction(
-  types.CHANGE_TRAINING_TYPE,
-  (type) => type
-);
-export const saveTrainerTime = createAction(
-  types.SAVE_TRAINER_TIME,
-  (trainerTime) => trainerTime
-);
-export const clearTrainerTimes = createAction(
-  types.CLEAR_TRAINER_TIMES,
-  (trainingType) => trainingType
-);
-export const removeTrainerTime = createAction(
-  types.REMOVE_TRAINER_TIME,
-  (id) => id
-);
-export const loadTrainerTimes = createAction(
-  types.LOAD_TRAINER_TIMES,
-  (times) => times
-);
-export const startRehearsal = createAction(types.START_REHEARSAL);
-export const stopRehearsal = createAction(types.STOP_REHEARSAL);
 
 // Theme
 export const setTheme = createAction(types.SET_THEME, (theme) => theme);

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { AVERAGE, STANDARD_DEVIATION, SINGLE, MEAN } from "./constants/stats";
 
 export const StatTime = PropTypes.shape({
   ms: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -9,7 +8,7 @@ export const StatTime = PropTypes.shape({
 
 export const Stat = PropTypes.shape({
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([AVERAGE, STANDARD_DEVIATION, SINGLE, MEAN]),
+  type: PropTypes.oneOf(["AVERAGE", "STANDARD_DEVIATION", "SINGLE", "MEAN"]),
   size: PropTypes.number,
   trim: PropTypes.number,
   showInGraph: PropTypes.bool,

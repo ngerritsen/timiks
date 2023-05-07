@@ -2,8 +2,13 @@ import shortid from "shortid";
 import { withLatestFrom, map } from "rxjs/operators";
 import { ofType } from "redux-observable";
 
-import * as actionTypes from "../constants/actionTypes";
-import { saveTime, resetTime, saveTrainerTime } from "../actions";
+import { saveTime, resetTime } from "../actions";
+import {
+  changeTrainingType,
+  clearTrainerTimes,
+  removeTrainerTime,
+  saveTrainerTime,
+} from "../slices/trainer";
 import { getPuzzle } from "../selectors/settings";
 import {
   getStartTime,
@@ -16,27 +21,28 @@ import {
   getCurrentCaseId,
   getCurrentScramble,
 } from "../selectors/trainer";
+import {
+  FAIL_INSPECTION,
+  STOP_TIMER,
+  SUBMIT_TIME_INPUT,
+} from "../constants/actionTypes";
 
 export const resetTimeEpic = (action$) =>
   action$.pipe(
-    ofType(
-      actionTypes.CHANGE_TRAINING_TYPE,
-      actionTypes.CLEAR_TRAINER_TIMES,
-      actionTypes.REMOVE_TRAINER_TIME
-    ),
+    ofType(changeTrainingType, clearTrainerTimes, removeTrainerTime),
     map(resetTime)
   );
 
 export const failInspectionEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.FAIL_INSPECTION),
+    ofType(FAIL_INSPECTION),
     withLatestFrom(state$),
     map(([, state]) => createSaveTime(0, state, true))
   );
 
 export const submitTimeEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.SUBMIT_TIME_INPUT),
+    ofType(SUBMIT_TIME_INPUT),
     withLatestFrom(state$),
     map(([action, state]) =>
       createSaveTime(
@@ -50,7 +56,7 @@ export const submitTimeEpic = (action$, state$) =>
 
 export const stopTimerEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.STOP_TIMER),
+    ofType(STOP_TIMER),
     withLatestFrom(state$),
     map(([action, state]) =>
       isTraining(state)

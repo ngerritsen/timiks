@@ -15,7 +15,7 @@ import Shortcut from "../shared/Shortcut";
 import { BUTTON_COLORS } from "../../constants/settings";
 import { getSize, getColor } from "../../helpers/theme";
 import TrainerCaseDetails from "../trainer/TrainerCaseDetails";
-import { cases, PLL, OLL } from "../../constants/trainer";
+import { cases } from "../../constants/trainer";
 import NetworkStatusBar from "../NetworkStatusBar";
 import CloudSyncIcon from "../shared/CloudSyncIcon";
 
@@ -147,11 +147,11 @@ const Showcase = ({ theme }: ShowcaseProps) => {
           </Section>
           <Section margin="sm">
             <TrainerCaseDetails
-              trainingCase={cases[PLL][4]}
-              trainingType={PLL}
+              trainingCase={cases.PLL[4]}
+              trainingType="PLL"
             />
           </Section>
-          <TrainerCaseDetails trainingCase={cases[OLL][4]} trainingType={OLL} />
+          <TrainerCaseDetails trainingCase={cases.OLL[4]} trainingType="OLL" />
         </>
       ),
     },

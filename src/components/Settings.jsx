@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
 import { useDispatch, useSelector } from "react-redux";
 
-import { DARK, LIGHT, AUTO, THEME_OPTIONS } from "../constants/theme";
+import { THEME_OPTIONS } from "../constants/theme";
 import Shortcut from "./shared/Shortcut";
 import {
   ACTIVATION_DURATION_OPTIONS,
@@ -32,11 +32,11 @@ const Settings = () => {
         toggle={({ show, toggle }) => (
           <IconButton onClick={show}>
             <Shortcut command="openSettings" action={toggle} />
-            {settings.theme !== AUTO && (
+            {settings.theme !== "auto" && (
               <Shortcut
                 command="toggleDarkMode"
                 action={() =>
-                  set("theme")(settings.theme === DARK ? LIGHT : DARK)
+                  set("theme")(settings.theme === "dark" ? "light" : "dark")
                 }
               />
             )}

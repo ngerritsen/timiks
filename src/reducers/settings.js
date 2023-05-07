@@ -5,7 +5,6 @@ import {
   DEFAULT_ACTIVATION_DURATION,
   DEFAULT_ARCHIVE_DAYS,
 } from "../constants/settings";
-import { AUTO } from "../constants/theme";
 
 const initialState = {
   puzzle: settingsConstants.DEFAULT_PUZZLE,
@@ -14,7 +13,7 @@ const initialState = {
   useInspectionTime: false,
   useManualTimeEntry: false,
   warnForInspectionTime: true,
-  theme: AUTO,
+  theme: "auto",
   buttonColor: settingsConstants.DEFAULT_BUTTON_COLOR,
   buttonColorDarkMode: "",
   activationDuration: DEFAULT_ACTIVATION_DURATION,

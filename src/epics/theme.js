@@ -12,7 +12,6 @@ import * as actionTypes from "../constants/actionTypes";
 import * as settingsSelectors from "../selectors/settings";
 import * as themeSelectors from "../selectors/theme";
 import { setTheme } from "../actions";
-import { AUTO } from "../constants/theme";
 import { listenForPreferredTheme, getPreferredTheme } from "../helpers/theme";
 
 export const themeEpic = (action$, state$) =>
@@ -22,7 +21,7 @@ export const themeEpic = (action$, state$) =>
     mergeMap(([, state]) => {
       const themeSetting = settingsSelectors.getTheme(state);
 
-      if (themeSetting === AUTO) {
+      if (themeSetting === "auto") {
         return autoChangeTheme(action$, state$);
       }
 

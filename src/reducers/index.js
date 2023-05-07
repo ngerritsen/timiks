@@ -7,4 +7,3 @@ export { default as settings } from "./settings";
 export { default as theme } from "./theme";
 export { default as timer } from "./timer";
 export { default as times } from "./times";
-export { default as trainer } from "./trainer";

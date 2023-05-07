@@ -1,6 +1,5 @@
 import { Observable, of } from "rxjs";
 import { Action } from "redux";
-import { ofType } from "redux-observable";
 import { filter, ignoreElements, map, tap } from "rxjs/operators";
 
 import * as loginPromotionService from "../services/loginPromotion";
@@ -14,7 +13,7 @@ export const loginPromotionEpic = () =>
 
 export const dismissLoginPromotionEpic = (action$: Observable<Action>) =>
   action$.pipe(
-    ofType(promoteLogin),
+    filter(promoteLogin.match),
     tap(loginPromotionService.dismissLoginPromotion),
     ignoreElements()
   );

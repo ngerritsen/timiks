@@ -21,6 +21,7 @@ const BASE_SIZE = 0.8;
 const getSize = (n: number) => (BASE_SIZE * n).toFixed(1) + "rem";
 
 export const light = {
+  dark: false,
   fonts: {
     default: "Barlow, Arial, sans-serif",
     mono: '"Roboto Mono", monospace',
