@@ -44,7 +44,7 @@ export interface Time {
 export type GraphLine = {
   name: string;
   enabled: boolean;
-  color: string;
+  color: Color;
 };
 
 export type PreviewArrows = (number[] | boolean)[][];

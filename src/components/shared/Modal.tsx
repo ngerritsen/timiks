@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { transparentize } from "polished";
-import PropTypes from "prop-types";
 import React, { useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { useSpring, animated } from "react-spring";
@@ -12,7 +11,13 @@ import IconButton from "./IconButton";
 import { MODAL_ROOT_SELECTOR } from "../../constants/dom";
 import { getSize, getColor, getZIndex } from "../../helpers/theme";
 
-const Modal = ({ title, onClose, children }) => {
+type ModalProps = {
+  children: React.JSX.Element;
+  title: string;
+  onClose: () => void;
+};
+
+const Modal = ({ title, onClose, children }: ModalProps) => {
   const modalRef = useRef(null);
   const overlayRef = useRef(null);
   const overlaySpringProps = useSpring({
@@ -42,7 +47,7 @@ const Modal = ({ title, onClose, children }) => {
     };
   }, [modalRef]);
 
-  const onClickOverlay = (event) => {
+  const onClickOverlay = (event: Event) => {
     event.stopPropagation();
 
     if (event.target === overlayRef.current) {
@@ -50,7 +55,7 @@ const Modal = ({ title, onClose, children }) => {
     }
   };
 
-  return ReactDOM.createPortal(
+  return createPortal(
     <ModalOverlay
       style={overlaySpringProps}
       data-modal
@@ -76,12 +81,6 @@ const Modal = ({ title, onClose, children }) => {
     </ModalOverlay>,
     document.querySelector(MODAL_ROOT_SELECTOR)
   );
-};
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 const ModalOverlay = animated(styled.div`

@@ -96,20 +96,6 @@ export const requireTimes = createAction(
   })
 );
 
-// Settings
-export const loadSettings = createAction(
-  types.LOAD_SETTINGS,
-  (settings) => settings
-);
-export const settingsStored = createAction(types.SETTINGS_STORED);
-export const changeSetting = createAction(
-  types.CHANGE_SETTING,
-  (setting, value) => ({
-    setting,
-    value,
-  })
-);
-
 // Import
 export const importTimes = createAction(types.IMPORT_TIMES, (times) => ({
   times,

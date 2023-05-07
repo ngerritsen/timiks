@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import TimerOptionsContainer from "../../containers/timer/TimerOptionsContainer";
 import TimerContainer from "../../containers/timer/TimerContainer";
 import ActivationContainer from "../../containers/timer/ActivationContainer";
 import TimeBoardContainer from "../../containers/timer/TimeBoardContainer";
 import ScrambleContainer from "../../containers/timer/ScrambleContainer";
 import Section from "../shared/Section";
 import { requireTimes } from "../../actions";
+import TimerOptions from "./TimerOptions";
 
 const TimerView = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const TimerView = () => {
         <ActivationContainer />
       </Section>
       <Section margin="sm">
-        <TimerOptionsContainer />
+        <TimerOptions />
       </Section>
       <Section>
         <TimeBoardContainer />

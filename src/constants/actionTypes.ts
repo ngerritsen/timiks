@@ -38,11 +38,6 @@ export const LOGOUT = "LOGOUT";
 export const LOGOUT_SUCCEEDED = "LOGOUT_SUCCEEDED";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
-// Settings
-export const SETTINGS_STORED = "SETTINGS_STORED";
-export const CHANGE_SETTING = "CHANGE_SETTING";
-export const LOAD_SETTINGS = "LOAD_SETTINGS";
-
 // Import
 export const IMPORT_TIMES = "IMPORT_TIMES";
 

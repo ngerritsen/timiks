@@ -1,15 +1,33 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 
-import * as CustomPropTypes from "../../propTypes";
 import { getColor, getSize } from "../../helpers/theme";
+import { GraphLine } from "../../types";
+import { Color } from "chart.js";
 
-const TimeGraphLegend = ({ lines, enableLine, disableLine }) => {
+type TimeGraphLegendProps = {
+  lines: GraphLine[];
+  enableLine: (name: string) => void;
+  disableLine: (name: string) => void;
+};
+
+type LegendItemLabelProps = {
+  enabled: boolean;
+};
+
+type LegendItemIconProps = {
+  color: Color;
+};
+
+const TimeGraphLegend = ({
+  lines,
+  enableLine,
+  disableLine,
+}: TimeGraphLegendProps) => {
   return (
     <>
       {lines.map((line) => (
@@ -32,20 +50,14 @@ const TimeGraphLegend = ({ lines, enableLine, disableLine }) => {
   );
 };
 
-TimeGraphLegend.propTypes = {
-  lines: PropTypes.arrayOf(CustomPropTypes.GraphLine).isRequired,
-  enableLine: PropTypes.func.isRequired,
-  disableLine: PropTypes.func.isRequired,
-};
-
-const LegendItemIcon = styled.span`
+const LegendItemIcon = styled.span<LegendItemIconProps>`
   position; relative;
   top: 0.1rem;
   color: ${(props) => getColor(props.color)(props)};
   margin-right: ${getSize("xxs")};
 `;
 
-const LegendItemLabel = styled.span`
+const LegendItemLabel = styled.span<LegendItemLabelProps>`
   text-decoration: ${(props) => (props.enabled ? "none" : "line-through")};
 `;
 

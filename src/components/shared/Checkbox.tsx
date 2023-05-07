@@ -9,8 +9,8 @@ type CheckboxProps = {
   checked?: boolean;
   inverse?: boolean;
   onChange: (checked: boolean) => void;
-  name: string;
-  label: string;
+  name?: string;
+  label?: string;
 };
 
 type CheckboxBoxProps = {

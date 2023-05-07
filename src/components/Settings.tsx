@@ -19,18 +19,27 @@ import Button from "./shared/Button";
 import Modal from "./shared/Modal";
 import { getSize, getColor } from "../helpers/theme";
 import { getSettings } from "../selectors/settings";
-import { changeSetting } from "../actions";
+import { SettingsState, changeSetting } from "../slices/settings";
 
 const Settings = () => {
   const settings = useSelector(getSettings);
   const dispatch = useDispatch();
-  const set = (key) => (value) => dispatch(changeSetting(key, value));
+  const set =
+    <T extends keyof SettingsState>(setting: T) =>
+    (value: SettingsState[T]) => {
+      dispatch(changeSetting({ setting, value }));
+    };
 
   return (
     <>
       <ToggleContent
         toggle={({ show, toggle }) => (
           <IconButton onClick={show}>
+            <div
+              style={{
+                display: "x",
+              }}
+            />
             <Shortcut command="openSettings" action={toggle} />
             {settings.theme !== "auto" && (
               <Shortcut
@@ -64,7 +73,6 @@ const Settings = () => {
                   <Setting>
                     <label>Use inspection time</label>
                     <Checkbox
-                      type="checkbox"
                       onChange={set("useInspectionTime")}
                       checked={settings.useInspectionTime}
                     />
@@ -74,7 +82,6 @@ const Settings = () => {
                   <Setting>
                     <label>Voice alert for inspection time**</label>
                     <Checkbox
-                      type="checkbox"
                       onChange={set("warnForInspectionTime")}
                       checked={settings.warnForInspectionTime}
                     />
@@ -84,7 +91,6 @@ const Settings = () => {
                   <Setting>
                     <label>Manual time entry</label>
                     <Checkbox
-                      type="checkbox"
                       onChange={set("useManualTimeEntry")}
                       checked={settings.useManualTimeEntry}
                     />
@@ -94,7 +100,6 @@ const Settings = () => {
                   <Setting>
                     <label>Hide time during solve</label>
                     <Checkbox
-                      type="checkbox"
                       inverse
                       onChange={set("showTimerTime")}
                       checked={settings.showTimerTime}
@@ -105,7 +110,6 @@ const Settings = () => {
                   <Setting>
                     <label>Show latest solve on top</label>
                     <Checkbox
-                      type="checkbox"
                       onChange={set("showLatestSolveOnTop")}
                       checked={settings.showLatestSolveOnTop}
                     />
@@ -154,7 +158,6 @@ const Settings = () => {
                   <Setting>
                     <label>Start graph y-axis from zero</label>
                     <Checkbox
-                      type="checkbox"
                       onChange={set("fixGraphYAxis")}
                       checked={settings.fixGraphYAxis}
                     />
@@ -167,7 +170,6 @@ const Settings = () => {
                   <Setting>
                     <label>Hide trainer times</label>
                     <Checkbox
-                      type="checkbox"
                       onChange={set("hideTrainerTimes")}
                       checked={settings.hideTrainerTimes}
                     />

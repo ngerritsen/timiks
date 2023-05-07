@@ -1,17 +1,24 @@
 import styled from "styled-components";
 import { getBreakpoint } from "../../helpers/theme";
+import { Breakpoint } from "../../theme";
 
-export const VisibleFrom = styled.div`
+type VisibleFromProps = {
+  breakpoint: Breakpoint;
+};
+
+type HiddenFromProps = VisibleFromProps;
+
+export const VisibleFrom = styled.div<VisibleFromProps>`
   display: none;
 
   @media screen and (min-width: ${(props) =>
       getBreakpoint(props.breakpoint)(props)}) {
-    display: ${(props) => props.display || "block"};
+    display: "block";
   }
 `;
 
-export const HiddenFrom = styled.div`
-  display: ${(props) => props.display || "block"};
+export const HiddenFrom = styled.div<HiddenFromProps>`
+  display: "block";
 
   @media screen and (min-width: ${(props) =>
       getBreakpoint(props.breakpoint)(props)}) {

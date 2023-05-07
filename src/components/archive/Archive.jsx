@@ -9,7 +9,6 @@ import * as CustomPropTypes from "../../propTypes";
 import Section from "../shared/Section";
 import { formatLocalDate } from "../../helpers/dateTime";
 import { getColor, getSize } from "../../helpers/theme";
-import ArchiveOptionsContainer from "../../containers/archive/ArchiveOptionsContainer";
 import ArchiveItem from "./ArchiveItem";
 import { getPuzzle } from "../../helpers/puzzle";
 import { ARCHIVE_DAYS_OPTIONS } from "../../constants/settings";
@@ -18,8 +17,9 @@ import Stats from "./Stats";
 import SectionTitle from "../shared/SectionTitle";
 import Tiles from "../shared/Tiles";
 import Button from "../shared/Button";
-import ArchiveTimeGraphContainer from "../../containers/archive/ArchiveTimeGraphContainer";
 import Tag from "../shared/Tag";
+import ArchiveTimeGraph from "./ArchiveTimeGraph";
+import ArchiveOptions from "./ArchiveOptions";
 
 const Archive = ({
   times,
@@ -29,13 +29,12 @@ const Archive = ({
   removeTime,
   timesPerDay,
   requireTimes,
-  fixGraphYAxis,
 }) => {
   useEffect(() => {
     requireTimes(false, puzzle, days);
   }, [puzzle, days]);
-  const [showLastStats, setShowLastStats] = useState(false);
 
+  const [showLastStats, setShowLastStats] = useState(false);
   const [expandedDays, setExpandedDays] = useState([0, 1, 2]);
   const expandDay = (index) => setExpandedDays([...expandedDays, index]);
   const collapseDay = (index) =>
@@ -45,15 +44,11 @@ const Archive = ({
     <>
       {times.length > 1 && (
         <Section margin="md">
-          <ArchiveTimeGraphContainer
-            times={times}
-            stats={stats}
-            fixYAxis={fixGraphYAxis}
-          />
+          <ArchiveTimeGraph />
         </Section>
       )}
       <Section margin="lg">
-        <ArchiveOptionsContainer />
+        <ArchiveOptions />
       </Section>
       {times.length === 0 && (
         <Message>

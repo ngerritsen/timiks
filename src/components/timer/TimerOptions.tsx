@@ -1,22 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons/faSyncAlt";
 
-import InlineFontawesome from "../shared/InlineFontawesome";
+import { getSettings } from "../../selectors/settings";
 import Select from "../shared/Select";
 import Button from "../shared/Button";
 import puzzles from "../../constants/puzzles";
 import Shortcut from "../shared/Shortcut";
 import { VisibleFrom, HiddenFrom } from "../shared/Visibility";
 import { ToolbarItem, Toolbar } from "../shared/Toolbar";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshScramble } from "../../actions";
+import { changeSetting } from "../../slices/settings";
+import InlineFontawesome from "../shared/InlineFontawesome";
 
-const TimerOptions = ({
-  changeSetting,
-  puzzle,
-  refreshScramble,
-  useInspectionTime,
-  useManualTimeEntry,
-}) => {
+const TimerOptions = () => {
+  const { puzzle, useManualTimeEntry, useInspectionTime } =
+    useSelector(getSettings);
+  const dispatch = useDispatch();
+
   const scrambleButton = (
     <Button size="sm" color="subtleBg" onClick={refreshScramble}>
       <InlineFontawesome fixedWidth icon={faSyncAlt} />
@@ -26,7 +27,9 @@ const TimerOptions = ({
 
   const puzzleSelector = (
     <Select
-      onChange={(puzzle) => changeSetting("puzzle", puzzle)}
+      onChange={(puzzle) =>
+        dispatch(changeSetting({ setting: "puzzle", value: puzzle }))
+      }
       options={puzzles.map(({ name, title }) => ({
         label: title,
         value: name,
@@ -40,11 +43,21 @@ const TimerOptions = ({
       <Shortcut command="refreshScramble" action={refreshScramble} />
       <Shortcut
         command="toggleInspectionTime"
-        action={() => changeSetting("useInspectionTime", !useInspectionTime)}
+        action={() =>
+          changeSetting({
+            setting: "useInspectionTime",
+            value: !useInspectionTime,
+          })
+        }
       />
       <Shortcut
         command="toggleManualTimeEntry"
-        action={() => changeSetting("useManualTimeEntry", !useManualTimeEntry)}
+        action={() =>
+          changeSetting({
+            setting: "useManualTimeEntry",
+            value: !useManualTimeEntry,
+          })
+        }
       />
       <HiddenFrom breakpoint="sm">
         <Toolbar>
@@ -60,14 +73,6 @@ const TimerOptions = ({
       </VisibleFrom>
     </>
   );
-};
-
-TimerOptions.propTypes = {
-  changeSetting: PropTypes.func.isRequired,
-  puzzle: PropTypes.string.isRequired,
-  refreshScramble: PropTypes.func.isRequired,
-  useInspectionTime: PropTypes.bool,
-  useManualTimeEntry: PropTypes.bool,
 };
 
 export default React.memo(TimerOptions);

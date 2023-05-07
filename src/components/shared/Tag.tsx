@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { MouseEvent } from "react";
 import styled from "styled-components";
 import { getLuminance, darken } from "polished";
 import { getColor, getSize } from "../../helpers/theme";
+import { Color, Size } from "../../theme";
+
+type TagSize = "sm" | "md";
 
 const sizeToHeight = {
   sm: "2.2rem",
@@ -14,12 +16,28 @@ const sizeToFontSize = {
   md: "1.4rem",
 };
 
-const sizeToSidePadding = {
+const sizeToSidePadding: Record<TagSize, Size> = {
   sm: "xs",
   md: "sm",
 };
 
-const Tag = ({ children, color, onClick, size }) => (
+type TagProps = {
+  children: React.JSX.Element;
+  color: Color;
+  withCheckbox?: boolean;
+  checked?: boolean;
+  onClick: (event: MouseEvent) => void;
+  size: keyof typeof sizeToHeight;
+};
+
+type TagTagProps = {
+  color: Color;
+  size: keyof typeof sizeToHeight;
+  bg?: Color;
+  hoverable?: boolean;
+};
+
+const Tag = ({ children, color, onClick, size }: TagProps) => (
   <TagTag
     color={color}
     hoverable={Boolean(onClick)}
@@ -30,22 +48,13 @@ const Tag = ({ children, color, onClick, size }) => (
   </TagTag>
 );
 
-Tag.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  color: PropTypes.string,
-  withCheckbox: PropTypes.bool,
-  checked: PropTypes.bool,
-  onClick: PropTypes.func,
-  size: PropTypes.string,
-};
-
 Tag.defaultProps = {
   size: "md",
 };
 
-const TagTag = styled.span.attrs((props) => ({
+const TagTag = styled.span.attrs<TagTagProps>((props) => ({
   bg: getColor(props.color)(props) || getColor("grey")(props),
-}))`
+}))<TagTagProps>`
   display: inline-block;
   position: relative;
   height: ${(props) => sizeToHeight[props.size]};

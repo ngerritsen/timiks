@@ -1,19 +1,19 @@
 import { ofType } from "redux-observable";
-import { tap, withLatestFrom, map } from "rxjs/operators";
+import { tap, withLatestFrom, ignoreElements } from "rxjs/operators";
 import { of } from "rxjs";
 
-import * as actionTypes from "../constants/actionTypes";
-import { loadSettings, settingsStored } from "../actions";
+import { loadSettings, changeSetting } from "../slices/settings";
 import * as settingsRepository from "../repositories/settings";
 import { getSettings } from "../selectors/settings";
+import { TimiksEpic } from "../types";
 
-export const loadSettingsEpic = () =>
+export const loadSettingsEpic: TimiksEpic = () =>
   of(loadSettings(settingsRepository.get()));
 
-export const storeSettingsEpic = (action$, state$) =>
+export const storeSettingsEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.CHANGE_SETTING),
+    ofType(changeSetting),
     withLatestFrom(state$),
     tap(([, state]) => settingsRepository.store(getSettings(state))),
-    map(settingsStored)
+    ignoreElements()
   );

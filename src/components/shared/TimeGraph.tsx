@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
-import PropTypes from "prop-types";
 import { transparentize } from "polished";
-import styled, { withTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Chart } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -12,12 +11,16 @@ import {
   CategoryScale,
   Tooltip,
   Title,
+  TooltipItem,
 } from "chart.js";
 
-import * as CustomPropTypes from "../../propTypes";
 import { formatShortTime, getMs, formatTime } from "../../helpers/time";
 import TimeGraphLegend from "./TimeGraphLegend";
 import { formatLocalDateTime } from "../../helpers/dateTime";
+import { useSelector } from "react-redux";
+import { shouldFixGraphYAxis } from "../../selectors/settings";
+import { Stat, StatTime, Time } from "../../types";
+import { Color, Theme } from "../../theme";
 
 ChartJS.register(
   LineElement,
@@ -29,24 +32,33 @@ ChartJS.register(
   Tooltip
 );
 
+type TimeGraphProps = {
+  times: Time[];
+  stats: Stat[];
+  disabledLines: string[];
+  setDisabledLines: (disabledLines: string[]) => void;
+};
+
 const TimeGraph = ({
   disabledLines,
   setDisabledLines,
   times,
   stats,
-  theme,
-  fixYAxis,
-}) => {
+}: TimeGraphProps) => {
+  const fixYAxis = useSelector(shouldFixGraphYAxis);
+  const theme = useTheme() as Theme;
+
   if (!disabledLines || !setDisabledLines) {
     [disabledLines, setDisabledLines] = useState([]);
   }
 
   const chartRef = useRef(null);
 
-  const disableLine = (name) => setDisabledLines([...disabledLines, name]);
-  const enableLine = (name) =>
+  const disableLine = (name: string) =>
+    setDisabledLines([...disabledLines, name]);
+  const enableLine = (name: string) =>
     setDisabledLines(disabledLines.filter((lineName) => lineName !== name));
-  const buildLine = (name, data, color) => ({
+  const buildLine = (name: string, data: StatTime[], color: Color) => ({
     name,
     color,
     label: name,
@@ -110,13 +122,13 @@ const TimeGraph = ({
         footerMarginTop: 4,
         displayColors: false,
         callbacks: {
-          label: (tooltipItem) =>
+          label: (tooltipItem: TooltipItem<"line">) =>
             `${formatTime(tooltipItem.raw)}  (${
               data.datasets[tooltipItem.datasetIndex].name
             })`,
-          footer: (tooltipItem) =>
-            formatLocalDateTime(new Date(tooltipItem[0].label)),
-          title: () => null,
+          footer: (tooltipItems: TooltipItem<"line">[]) =>
+            formatLocalDateTime(new Date(tooltipItems[0].label)),
+          title: (): null => null,
         },
       },
     },
@@ -154,15 +166,6 @@ const TimeGraph = ({
   );
 };
 
-TimeGraph.propTypes = {
-  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
-  disabledLines: PropTypes.arrayOf(PropTypes.string),
-  setDisabledLines: PropTypes.func,
-  theme: PropTypes.object.isRequired,
-  fixYAxis: PropTypes.bool,
-};
-
 const GraphWrapper = styled.div`
   position: relative;
 `;
@@ -171,4 +174,4 @@ const LegendWrapper = styled.div`
   text-align: center;
 `;
 
-export default React.memo(withTheme(TimeGraph));
+export default React.memo(TimeGraph);
