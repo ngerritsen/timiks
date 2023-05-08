@@ -1,18 +1,18 @@
 import { fromEvent, of } from "rxjs";
 import { mergeMap } from "rxjs/operators";
-import { networkOnline, networkOffline } from "../actions";
+import { goOnline, goOffline } from "../slices/network";
 import { showNotification } from "../slices/notifications";
 
 export const onlineEpic = () =>
   fromEvent(window, "online").pipe(
     mergeMap(() =>
-      of(networkOnline(), showNotification({ message: "Application online" }))
+      of(goOnline(), showNotification({ message: "Application online" }))
     )
   );
 
 export const offlineEpic = () =>
   fromEvent(window, "offline").pipe(
     mergeMap(() =>
-      of(networkOffline(), showNotification({ message: "Application offline" }))
+      of(goOffline(), showNotification({ message: "Application offline" }))
     )
   );

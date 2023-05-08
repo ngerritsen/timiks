@@ -100,7 +100,3 @@ export const requireTimes = createAction(
 export const importTimes = createAction(types.IMPORT_TIMES, (times) => ({
   times,
 }));
-
-// Network
-export const networkOnline = createAction(types.NETWORK_ONLINE);
-export const networkOffline = createAction(types.NETWORK_OFFLINE);

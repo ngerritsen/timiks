@@ -40,8 +40,8 @@ const App = () => {
   );
 };
 
-function renderGlobalTheme(theme) {
-  document.body.style["background-color"] = theme.colors.bg;
+function renderGlobalTheme(theme: themes.Theme) {
+  document.body.style.backgroundColor = theme.colors.bg;
   document.body.style.color = theme.colors.fg;
 }
 

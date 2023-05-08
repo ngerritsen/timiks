@@ -4,6 +4,7 @@ import { Breakpoint } from "../../theme";
 
 type VisibleFromProps = {
   breakpoint: Breakpoint;
+  display?: "inline";
 };
 
 type HiddenFromProps = VisibleFromProps;
@@ -13,12 +14,12 @@ export const VisibleFrom = styled.div<VisibleFromProps>`
 
   @media screen and (min-width: ${(props) =>
       getBreakpoint(props.breakpoint)(props)}) {
-    display: "block";
+    display: ${(props) => props.display || "block"};
   }
 `;
 
 export const HiddenFrom = styled.div<HiddenFromProps>`
-  display: "block";
+  display: ${(props) => props.display || "block"};
 
   @media screen and (min-width: ${(props) =>
       getBreakpoint(props.breakpoint)(props)}) {

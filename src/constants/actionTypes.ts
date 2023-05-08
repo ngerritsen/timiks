@@ -40,7 +40,3 @@ export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 // Import
 export const IMPORT_TIMES = "IMPORT_TIMES";
-
-// Network
-export const NETWORK_ONLINE = "NETWORK_ONLINE";
-export const NETWORK_OFFLINE = "NETWORK_OFFLINE";
