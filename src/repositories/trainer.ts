@@ -23,16 +23,23 @@ export function storeTrainerTimes(times: TrainingTime[]) {
 export function getEnabledCaseIds(): EnabledCaseIds {
   const rawCaseIds = localStorage.getItem(storageConstants.ENABLED_CASE_IDS);
 
-  const parsedCases = rawCaseIds ? JSON.parse(rawCaseIds) : [];
+  let parsedCases = rawCaseIds ? JSON.parse(rawCaseIds) : [];
+
+  if (!parsedCases || !(parsedCases.OLL || parsedCases.PLL)) {
+    parsedCases = [];
+  }
 
   if (Array.isArray(parsedCases)) {
     return {
-      OLL: parsedCases,
+      OLL: parsedCases.map(String),
       PLL: [],
     };
   }
 
-  return parsedCases;
+  return {
+    OLL: (parsedCases.OLL || []).map(String),
+    PLL: (parsedCases.PLL || []).map(String),
+  };
 }
 
 export function getTrainerTimes() {
