@@ -1,5 +1,6 @@
 import React from "react";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons/faSyncAlt";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getSettings } from "../../selectors/settings";
 import Select from "../shared/Select";
@@ -8,10 +9,9 @@ import puzzles from "../../constants/puzzles";
 import Shortcut from "../shared/Shortcut";
 import { VisibleFrom, HiddenFrom } from "../shared/Visibility";
 import { ToolbarItem, Toolbar } from "../shared/Toolbar";
-import { useDispatch, useSelector } from "react-redux";
-import { refreshScramble } from "../../actions";
 import { changeSetting } from "../../slices/settings";
 import InlineFontawesome from "../shared/InlineFontawesome";
+import { refreshScramble } from "../../slices/scramble";
 
 const TimerOptions = () => {
   const { puzzle, useManualTimeEntry, useInspectionTime } =
@@ -19,7 +19,11 @@ const TimerOptions = () => {
   const dispatch = useDispatch();
 
   const scrambleButton = (
-    <Button size="sm" color="subtleBg" onClick={refreshScramble}>
+    <Button
+      size="sm"
+      color="subtleBg"
+      onClick={() => dispatch(refreshScramble())}
+    >
       <InlineFontawesome fixedWidth icon={faSyncAlt} />
       Scramble
     </Button>
@@ -40,7 +44,10 @@ const TimerOptions = () => {
 
   return (
     <>
-      <Shortcut command="refreshScramble" action={refreshScramble} />
+      <Shortcut
+        command="refreshScramble"
+        action={() => dispatch(refreshScramble())}
+      />
       <Shortcut
         command="toggleInspectionTime"
         action={() =>

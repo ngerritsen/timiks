@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import React, { useState, useEffect, Fragment } from "react";
 
 import Section from "../shared/Section";
@@ -8,9 +7,29 @@ import { splitRelayScramble, splitScramble } from "../../helpers/scramble";
 import CubePreview from "../cube/CubePreview";
 import ScrambleDetails from "./ScrambleDetails";
 import { getColor, getSize, getFont } from "../../helpers/theme";
-import * as CustomPropTypes from "../../propTypes";
 import ScrambleCaseView from "./ScrambleCaseView";
 import { DEFAULT_PUZZLE } from "../../constants/settings";
+import { Case } from "../../types";
+
+type ScrambleProps = {
+  withDetails?: boolean;
+  withPreview?: boolean;
+  scramble: string;
+  small?: boolean;
+  puzzle?: string;
+  expand?: boolean;
+  withTrainingCase?: Case;
+  trainingType?: string;
+};
+
+type ScrambleTabProps = {
+  active?: boolean;
+};
+
+type ScrambleBoxProps = {
+  withTabs?: boolean;
+  expand?: boolean;
+};
 
 const Scramble = ({
   scramble,
@@ -20,7 +39,7 @@ const Scramble = ({
   trainingType,
   puzzle,
   expand,
-}) => {
+}: ScrambleProps) => {
   const isRelay = getPuzzle(puzzle).type === "RELAY";
   const splitScrambles = isRelay
     ? splitRelayScramble(puzzle, scramble)
@@ -44,7 +63,7 @@ const Scramble = ({
 
   return (
     <>
-      <Section margin={showPreview ? "md" : ""}>
+      <Section margin={showPreview ? "md" : undefined}>
         {isRelay && (
           <ScrambleTabs>
             {scrambles.map(({ puzzle }) => (
@@ -88,17 +107,6 @@ const Scramble = ({
   );
 };
 
-Scramble.propTypes = {
-  withDetails: PropTypes.bool,
-  withPreview: PropTypes.bool,
-  scramble: PropTypes.string,
-  small: PropTypes.bool,
-  puzzle: PropTypes.string,
-  expand: PropTypes.bool,
-  withTrainingCase: CustomPropTypes.Case,
-  trainingType: PropTypes.string,
-};
-
 Scramble.defaultProps = {
   puzzle: DEFAULT_PUZZLE,
 };
@@ -111,7 +119,7 @@ const ScrambleTabs = styled.div`
   border-top-right-radius: 0.3rem;
 `;
 
-const ScrambleTab = styled.div`
+const ScrambleTab = styled.div<ScrambleTabProps>`
   background-color: ${getColor("subtleBg")};
   opacity: ${(props) => (props.active ? 1 : 0.4)};
   padding: 0.6rem 1.2rem;
@@ -131,7 +139,7 @@ const ScrambleTab = styled.div`
   }
 `;
 
-const ScrambleBox = styled.div`
+const ScrambleBox = styled.div<ScrambleBoxProps>`
   font-size: 2rem;
   text-align: center;
   font-family: ${getFont("mono")};

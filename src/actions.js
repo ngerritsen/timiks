@@ -55,16 +55,6 @@ export const logout = createAction(types.LOGOUT);
 export const logoutSucceeded = createAction(types.LOGOUT_SUCCEEDED);
 export const logoutFailed = createAction(types.LOGOUT_FAILED);
 
-// Scramble
-export const setScramble = createAction(
-  types.SET_SCRAMBLE,
-  (scramble, puzzle) => ({
-    scramble,
-    puzzle,
-  })
-);
-export const refreshScramble = createAction(types.REFRESH_SCRAMBLE);
-
 // Times
 export const saveTime = createAction(types.SAVE_TIME, (time) => time);
 export const updateTime = createAction(types.UPDATE_TIME, (id, fields) => ({

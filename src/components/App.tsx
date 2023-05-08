@@ -6,11 +6,11 @@ import * as themes from "../theme";
 import Header from "./Header";
 import Section from "./shared/Section";
 import Footer from "./Footer";
-import NetworkStatusBarContainer from "../containers/NetworkStatusBarContainer";
 import NewVersionPrompt from "./messages/NewVersionPrompt";
 import LoginPromotion from "./messages/LoginPromotion";
 import { useTheme } from "../hooks/useTheme";
 import Notification from "./Notification";
+import NetworkStatusBar from "./NetworkStatusBar";
 
 const App = () => {
   const theme = themes[useTheme()];
@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NetworkStatusBarContainer />
+      <NetworkStatusBar />
       <NewVersionPrompt />
       <LoginPromotion />
       <div className="container">

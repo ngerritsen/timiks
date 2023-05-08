@@ -15,10 +15,6 @@ export const SKIP_PREPARATION_STAGE = "SKIP_PREPARATION_STAGE";
 export const PREPARE_INSPECTION = "PREPARE_INSPECTION";
 export const FAIL_INSPECTION = "FAIL_INSPECTION";
 
-// Scramble
-export const SET_SCRAMBLE = "SET_SCRAMBLE";
-export const REFRESH_SCRAMBLE = "REFRESH_SCRAMBLE";
-
 // Times
 export const SAVE_TIME = "SAVE_TIME";
 export const REMOVE_TIME = "REMOVE_TIME";

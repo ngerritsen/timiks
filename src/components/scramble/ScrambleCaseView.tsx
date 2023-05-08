@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
@@ -7,10 +6,19 @@ import IconButton from "../shared/IconButton";
 import Shortcut from "../shared/Shortcut";
 import Modal from "../shared/Modal";
 import ToggleContent from "../shared/ToggleContent";
-import Scramble from "./Scramble";
-import Section from "../shared/Section";
+import TrainerCaseDetails from "../trainer/TrainerCaseDetails";
+import { buildFullCaseTitle } from "../../helpers/trainer";
+import { Case, TrainingType } from "../../types";
 
-const ScrambleDetails = ({ scramble, puzzle }) => (
+type ScrambleCaseViewProps = {
+  trainingCase: Case;
+  trainingType: TrainingType;
+};
+
+const ScrambleCaseView = ({
+  trainingCase,
+  trainingType,
+}: ScrambleCaseViewProps) => (
   <ToggleContent
     toggle={({ show, toggle }) => (
       <IconButton onClick={show}>
@@ -19,18 +27,17 @@ const ScrambleDetails = ({ scramble, puzzle }) => (
       </IconButton>
     )}
     content={({ hide }) => (
-      <Modal title="Scramble details" onClose={hide}>
-        <Section margin="sm">
-          <Scramble scramble={scramble} puzzle={puzzle} withPreview />
-        </Section>
+      <Modal
+        title={buildFullCaseTitle(trainingCase, trainingType)}
+        onClose={hide}
+      >
+        <TrainerCaseDetails
+          trainingCase={trainingCase}
+          trainingType={trainingType}
+        />
       </Modal>
     )}
   />
 );
 
-ScrambleDetails.propTypes = {
-  scramble: PropTypes.string,
-  puzzle: PropTypes.string,
-};
-
-export default ScrambleDetails;
+export default ScrambleCaseView;
