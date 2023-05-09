@@ -125,7 +125,7 @@ Timer.propTypes = {
   stopTime: PropTypes.number.isRequired,
   lastTime: CustomPropTypes.Time,
   useManualTimeEntry: PropTypes.bool.isRequired,
-  useInspectionTime: PropTypes.bool.isRequired,
+  useInspectionTime: PropTypes.bool,
   showTimerTime: PropTypes.bool.isRequired,
   isTraining: PropTypes.bool,
 };

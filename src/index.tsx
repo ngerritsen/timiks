@@ -13,8 +13,8 @@ import store from "./store";
 import ShortcutProvider from "./containers/ShortcutProvider";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import TimerView from "./components/timer/TimerView";
-import ArchiveContainer from "./containers/archive/ArchiveContainer";
 import Trainer from "./components/trainer/Trainer";
+import Archive from "./components/archive/Archive";
 
 Sentry.init({
   dsn: "https://d003788913ba4ca98086a0154b86a790@sentry.io/1517517",
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "archive",
-        element: <ArchiveContainer />,
+        element: <Archive />,
       },
       {
         path: "trainer",

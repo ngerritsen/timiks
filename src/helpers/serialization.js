@@ -1,4 +1,4 @@
-import shortid from "shortid";
+import { randomId } from "./id";
 
 export function parseTimes(rawTimes) {
   return rawTimes.map(parseTime);
@@ -25,7 +25,7 @@ export function serializeTimes(times) {
 
 export function serializeTime(time) {
   return {
-    id: time.id || shortid.generate(),
+    id: time.id || randomId(),
     ms: time.ms,
     puzzle: time.puzzle,
     comment: time.comment || "",

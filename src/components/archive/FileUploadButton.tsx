@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons/faFolderOpen";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons/faCircleNotch";
@@ -10,14 +9,26 @@ import { readFile } from "../../helpers/file";
 import { ButtonIcon, LabelButton } from "../shared/Button";
 import { getColor, getSize } from "../../helpers/theme";
 
-const FileUploadButton = ({ label, name, onChange, accept }) => {
+type FileUploadButtonProps = {
+  onChange: (res: { file: File; data: string }) => void;
+  accept: string;
+  name: string;
+  label: string;
+};
+
+const FileUploadButton = ({
+  label,
+  name,
+  onChange,
+  accept,
+}: FileUploadButtonProps) => {
   const [currentFile, setCurrentFile] = useState(null);
   const [loadingFile, setLoadingFile] = useState(false);
 
-  const fileInput = useRef(null);
+  const fileInput = useRef<HTMLInputElement>(null);
 
   function onChangeFile() {
-    const [file] = fileInput.current.files;
+    const file = fileInput.current.files[0];
 
     if (!file) return;
 
@@ -28,7 +39,7 @@ const FileUploadButton = ({ label, name, onChange, accept }) => {
       .then((data) => onChange({ file, data }))
       .catch((err) => {
         console.error(err); // eslint-disable-line no-console
-        onChange({ file, data: [] });
+        onChange({ file, data: "" });
       })
       .then(() => setLoadingFile(false));
   }
@@ -61,13 +72,6 @@ const FileUploadButton = ({ label, name, onChange, accept }) => {
       )}
     </>
   );
-};
-
-FileUploadButton.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  accept: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
 };
 
 const FileName = styled.div`

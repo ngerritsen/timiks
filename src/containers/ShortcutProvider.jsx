@@ -1,4 +1,3 @@
-import shortid from "shortid";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -7,6 +6,7 @@ import keycode from "keycode";
 import ShortcutContext from "./ShortcutContext";
 import { isStopped, getStopTime } from "../selectors/timer";
 import { TIMER_COOLDOWN } from "../constants/timer";
+import { randomId } from "../helpers/id";
 
 const inputElements = ["textarea", "input", "select"];
 
@@ -67,7 +67,7 @@ class ShortcutProvider extends Component {
   }
 
   _registerShortcut(command, action) {
-    const token = shortid.generate();
+    const token = randomId();
 
     this.shortcuts = [...this.shortcuts, { token, command, action }];
 

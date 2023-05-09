@@ -1,10 +1,11 @@
+import { Time } from "../types";
 import { getMs } from "./time";
 
 const ROW_DELIMITER = "\n";
 const COLUMN_DELIMTER = ",";
 const ESCAPE_CHAR = '"';
 
-export function timesToCsv(times) {
+export function timesToCsv(times: Time[]) {
   const headers = [
     "id",
     "ms",
@@ -14,6 +15,7 @@ export function timesToCsv(times) {
     "plus2",
     "dnf",
   ].join(COLUMN_DELIMTER);
+
   const rows = times.map((time) =>
     [
       time.id,
@@ -29,11 +31,15 @@ export function timesToCsv(times) {
   return [headers, rows.join(ROW_DELIMITER)].join(ROW_DELIMITER);
 }
 
-function escapeColumn(string) {
+function escapeColumn(string: string) {
   return `"${string.replace(/"/g, '""')}"`;
 }
 
-export function parseCsv(csv, delimiter = COLUMN_DELIMTER, headers = []) {
+export function parseCsv(
+  csv: string,
+  delimiter = COLUMN_DELIMTER,
+  headers: string[] = []
+): Record<string, string>[] {
   const trimmedCsv = csv.trim();
   const rows = [];
 

@@ -13,12 +13,12 @@ export function downloadAsFile(filename, data, type) {
   setTimeout(() => URL.revokeObjectURL(a.href), 1500);
 }
 
-export function readFile(file) {
+export function readFile(file: Blob): Promise<string> {
   return new Promise((resolve) => {
     const reader = new FileReader();
 
     reader.addEventListener("loadend", () => {
-      resolve(reader.result);
+      resolve(String(reader.result));
     });
 
     reader.readAsText(file);

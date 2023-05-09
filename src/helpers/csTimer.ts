@@ -1,13 +1,13 @@
 import { parseTimeInput, isValidTime } from "./time";
 import { parseCsv } from "./csv";
-import shortid from "shortid";
+import { randomId } from "./id";
 
-export default function parseCsTimerSession(csv) {
+export default function parseCsTimerSession(csv: string) {
   return parseCsv(csv, ";")
     .map((item) => {
       try {
         const time = {
-          id: shortid.generate(),
+          id: randomId(),
           ...parseCsTimerTime(item.Time),
           scramble: parseCsTimerScramble(item.Scramble),
           date: parseCsTimerDate(item.Date),
@@ -21,7 +21,7 @@ export default function parseCsTimerSession(csv) {
     .filter(Boolean);
 }
 
-function parseCsTimerDate(dateString) {
+function parseCsTimerDate(dateString: string) {
   const match = dateString.match(
     /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
   );
@@ -43,7 +43,7 @@ function parseCsTimerDate(dateString) {
   return date;
 }
 
-function parseCsTimerTime(string) {
+function parseCsTimerTime(string: string) {
   const dnfMatch = string.match(/^DNF\((.+)\)$/);
 
   if (dnfMatch) {
@@ -57,7 +57,7 @@ function parseCsTimerTime(string) {
   return parseTimeInput(string);
 }
 
-function parseCsTimerScramble(string) {
+function parseCsTimerScramble(string: string) {
   return string
     .trim()
     .replace(/\(\//g, ") /") // Add missing whitespace to square-1 scramble

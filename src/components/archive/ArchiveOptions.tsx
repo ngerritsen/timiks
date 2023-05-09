@@ -7,7 +7,7 @@ import Export from "./Export";
 import Section from "../shared/Section";
 import { ARCHIVE_DAYS_OPTIONS } from "../../constants/settings";
 import { Toolbar, ToolbarItem } from "../shared/Toolbar";
-import ImportContainer from "../../containers/archive/ImportContainer";
+import Import from "./Import";
 import { useDispatch, useSelector } from "react-redux";
 import { getSortedFilteredArchivedTimes } from "../../selectors/times";
 import { getArchiveDays, getArchivePuzzle } from "../../selectors/settings";
@@ -44,7 +44,7 @@ const ArchiveOptions = () => {
     />
   );
   const exportButton = <Export puzzle={puzzle} times={times} />;
-  const importButton = <ImportContainer />;
+  const importButton = <Import />;
 
   return (
     <>

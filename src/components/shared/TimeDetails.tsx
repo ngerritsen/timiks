@@ -25,7 +25,7 @@ import { Time as TimeType } from "../../types";
 
 type TimeDetailsProps = {
   time: TimeType;
-  onRemoveTime: () => void;
+  onRemoveTime?: () => void;
   onClose: () => void;
 };
 

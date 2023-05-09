@@ -1,9 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
 
-import * as CustomPropTypes from "../../propTypes";
 import { Table, Cell, HeadingCell } from "../shared/Table";
 import Time from "../shared/Time";
 import Tag from "../shared/Tag";
@@ -12,13 +10,20 @@ import TimeDetails from "../shared/TimeDetails";
 import IconButton from "../shared/IconButton";
 import Modal from "../shared/Modal";
 import { formatLocalDateTime } from "../../helpers/dateTime";
+import { Time as TimeType } from "../../types";
 
-const ImportPreview = ({ times, puzzle }) => (
+type ImportPreviewProps = {
+  times: TimeType[];
+  puzzle: string;
+};
+
+const ImportPreview = ({ times, puzzle }: ImportPreviewProps) => (
   <Table>
     <thead>
       <tr>
-        <HeadingCell colSpan="3">
-          Times to be imported &nbsp; <Tag size="sm">{times.length}</Tag>
+        <HeadingCell col-span="3">
+          Times to be imported &nbsp;{" "}
+          <Tag size="sm">{String(times.length)}</Tag>
         </HeadingCell>
       </tr>
     </thead>
@@ -50,10 +55,5 @@ const ImportPreview = ({ times, puzzle }) => (
     </tbody>
   </Table>
 );
-
-ImportPreview.propTypes = {
-  times: PropTypes.arrayOf(CustomPropTypes.Time).isRequired,
-  puzzle: PropTypes.string,
-};
 
 export default ImportPreview;

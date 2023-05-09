@@ -1,12 +1,22 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import * as CustomPropTypes from "../../propTypes";
 import { getBreakpoint, getSize, getColor } from "../../helpers/theme";
 import Time from "../shared/Time";
+import { Stat } from "../../types";
+import { Color } from "../../theme";
 
-const Stats = ({ stats, solves, showLast }) => (
+type StatsProps = {
+  stats: Stat[];
+  solves: number;
+  showLast: boolean;
+};
+
+type StatColorProps = {
+  color: Color;
+};
+
+const Stats = ({ stats, solves, showLast }: StatsProps) => (
   <StatsContainer>
     <>
       <StatTitle>
@@ -28,12 +38,6 @@ const Stats = ({ stats, solves, showLast }) => (
     ))}
   </StatsContainer>
 );
-
-Stats.propTypes = {
-  stats: PropTypes.arrayOf(CustomPropTypes.Stat).isRequired,
-  solves: PropTypes.number.isRequired,
-  showLast: PropTypes.bool,
-};
 
 const StatsContainer = styled.div`
   padding: ${getSize("sm")} ${getSize("xxs")};
@@ -58,7 +62,7 @@ const StatTitle = styled.span`
   width: 8rem;
 `;
 
-const StatColor = styled.span`
+const StatColor = styled.span<StatColorProps>`
   display: inline-block;
   font-weight: bold;
   width: 0.8rem;

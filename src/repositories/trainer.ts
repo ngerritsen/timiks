@@ -1,6 +1,6 @@
-import shortid from "shortid";
 import * as storageConstants from "../constants/storage";
 import { EnabledCaseIds, TrainingTime, TrainingType } from "../types";
+import { randomId } from "../helpers/id";
 
 export function storeEnabledCaseIds(enabledCases: EnabledCaseIds) {
   localStorage.setItem(
@@ -51,7 +51,7 @@ export function getTrainerTimes() {
   return times.map((time: TrainingTime) => ({
     ...time,
     scramble: String(time.scramble || ""),
-    id: time.id || shortid.generate(),
+    id: time.id || randomId(),
     timestamp: time.timestamp ? new Date(time.timestamp) : new Date(),
   }));
 }

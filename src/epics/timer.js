@@ -1,4 +1,3 @@
-import shortid from "shortid";
 import { withLatestFrom, map } from "rxjs/operators";
 import { ofType } from "redux-observable";
 
@@ -26,6 +25,7 @@ import {
   STOP_TIMER,
   SUBMIT_TIME_INPUT,
 } from "../constants/actionTypes";
+import { randomId } from "../helpers/id";
 
 export const resetTimeEpic = (action$) =>
   action$.pipe(
@@ -61,7 +61,7 @@ export const stopTimerEpic = (action$, state$) =>
     map(([action, state]) =>
       isTraining(state)
         ? saveTrainerTime({
-            id: shortid.generate(),
+            id: randomId(),
             trainingType: getTrainingType(state),
             caseId: getCurrentCaseId(state),
             ms: action.payload - getStartTime(state),
@@ -79,7 +79,7 @@ export const stopTimerEpic = (action$, state$) =>
 
 const createSaveTime = (ms, state, dnf, plus2) =>
   saveTime({
-    id: shortid.generate(),
+    id: randomId(),
     ms,
     date: new Date(),
     scramble: getScramble(state),

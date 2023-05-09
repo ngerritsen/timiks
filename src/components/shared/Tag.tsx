@@ -22,11 +22,11 @@ const sizeToSidePadding: Record<TagSize, Size> = {
 };
 
 type TagProps = {
-  children: React.JSX.Element;
-  color: Color;
+  children: React.JSX.Element | string;
+  color?: Color;
   withCheckbox?: boolean;
   checked?: boolean;
-  onClick: (event: MouseEvent) => void;
+  onClick?: (event: MouseEvent) => void;
   size: keyof typeof sizeToHeight;
 };
 

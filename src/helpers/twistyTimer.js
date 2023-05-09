@@ -1,13 +1,13 @@
 import { parseTimeInput, isValidTime } from "./time";
 import { parseCsv } from "./csv";
-import shortid from "shortid";
+import { randomId } from "./id";
 
 export default function parseTwistyTimerExport(csv) {
   return parseCsv(csv, ";", ["time", "scramble", "date", "penalty"])
     .map((item) => {
       try {
         const time = {
-          id: shortid.generate(),
+          id: randomId(),
           ...parseTwistyTimerTime(item.time, item.penalty),
           scramble: parseTwistyTimerScramble(item.scramble),
           date: new Date(item.date),
