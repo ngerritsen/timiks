@@ -3,17 +3,17 @@ import { useDispatch } from "react-redux";
 
 import TimerContainer from "../../containers/timer/TimerContainer";
 import ActivationContainer from "../../containers/timer/ActivationContainer";
-import TimeBoardContainer from "../../containers/timer/TimeBoardContainer";
 import Section from "../shared/Section";
-import { requireTimes } from "../../actions";
 import TimerOptions from "./TimerOptions";
 import TimerScramble from "./TimerScramble";
+import TimeBoard from "./TimeBoard";
+import { requireTimes } from "../../slices/times";
 
 const TimerView = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requireTimes(true));
+    dispatch(requireTimes({ current: true }));
   }, []);
 
   return (
@@ -31,7 +31,7 @@ const TimerView = () => {
         <TimerOptions />
       </Section>
       <Section>
-        <TimeBoardContainer />
+        <TimeBoard />
       </Section>
     </>
   );

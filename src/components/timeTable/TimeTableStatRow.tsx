@@ -1,10 +1,21 @@
-import PropTypes from "prop-types";
 import React from "react";
 
 import Time from "../shared/Time";
 import { Cell } from "../shared/Table";
 import { SubtleText } from "../shared/Typography";
-import * as CustomPropTypes from "../../propTypes";
+import { StatTime } from "../../types";
+
+type TimeTableStatRowProps = {
+  name: string;
+  current: StatTime;
+  best?: StatTime;
+  onHardHighlight: (params: string[]) => void;
+  onSoftHighlight: (params: string[]) => void;
+  hardHighlightedStatName?: string;
+  hardHighlightedStatType?: string;
+  softHighlightedStatName?: string;
+  softHighlightedStatType?: string;
+};
 
 const TimeTableStatRow = ({
   name,
@@ -16,7 +27,7 @@ const TimeTableStatRow = ({
   hardHighlightedStatType,
   softHighlightedStatName,
   softHighlightedStatType,
-}) => {
+}: TimeTableStatRowProps) => {
   return (
     <tr key={name}>
       <Cell>
@@ -27,7 +38,7 @@ const TimeTableStatRow = ({
     </tr>
   );
 
-  function createStatCell(statTime, type, colSpan) {
+  function createStatCell(statTime: StatTime, type: string, colSpan: number) {
     if (!current || !best) {
       return (
         <Cell bold colSpan={colSpan}>
@@ -50,7 +61,9 @@ const TimeTableStatRow = ({
         bold
         colSpan={colSpan}
         highlightColor={
-          (isHardHighlighted && "blue") || (isSoftHighlighted && "grey")
+          (isHardHighlighted && "blue") ||
+          (isSoftHighlighted && "grey") ||
+          undefined
         }
         onMouseEnter={softHighlight}
         onMouseLeave={softUnhighlight}
@@ -60,18 +73,6 @@ const TimeTableStatRow = ({
       </Cell>
     );
   }
-};
-
-TimeTableStatRow.propTypes = {
-  name: PropTypes.string.isRequired,
-  current: CustomPropTypes.StatTime.isRequired,
-  best: CustomPropTypes.StatTime,
-  onHardHighlight: PropTypes.func.isRequired,
-  onSoftHighlight: PropTypes.func.isRequired,
-  hardHighlightedStatName: PropTypes.string,
-  hardHighlightedStatType: PropTypes.string,
-  softHighlightedStatName: PropTypes.string,
-  softHighlightedStatType: PropTypes.string,
 };
 
 export default React.memo(TimeTableStatRow);

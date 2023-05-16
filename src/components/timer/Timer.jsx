@@ -9,7 +9,6 @@ import { faSpaceShuttle } from "@fortawesome/free-solid-svg-icons/faSpaceShuttle
 import * as CustomPropTypes from "../../propTypes";
 import Section from "../shared/Section";
 import Time from "../shared/Time";
-import TimeActionsContainer from "../../containers/timer/TimeActionsContainer";
 import TimeEntryContainer from "../../containers/timer/TimeEntryContainer";
 import IncrementingTime from "./IncrementingTime";
 import DecrementingTime from "./DecrementingTime";
@@ -23,6 +22,7 @@ import {
 import Tag from "../shared/Tag";
 import TrainerStatus from "../trainer/TrainerStatus";
 import TrainerPreviousCase from "../trainer/TrainerPreviousCase";
+import TimeActions from "./TimeActions";
 
 const Timer = ({
   inspecting,
@@ -105,7 +105,7 @@ const Timer = ({
         {isTraining && startTime > 0 && stopTime > 0 && <TrainerPreviousCase />}
         {!isTraining && showLastTime && (
           <TimeFooterActionsClickArea>
-            <TimeActionsContainer lastTime={lastTime} />
+            <TimeActions />
           </TimeFooterActionsClickArea>
         )}
       </TimeFooterClickArea>

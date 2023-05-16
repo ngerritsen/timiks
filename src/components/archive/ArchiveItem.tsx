@@ -13,7 +13,7 @@ import CloudSyncIcon from "../shared/CloudSyncIcon";
 import { getColor } from "../../helpers/theme";
 import { Time as TimeType } from "../../types";
 import { useDispatch } from "react-redux";
-import { removeTime } from "../../actions";
+import { removeTime } from "../../slices/times";
 
 type ArchiveItemProps = {
   time: TimeType;

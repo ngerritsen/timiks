@@ -21,7 +21,7 @@ const ImportPreview = ({ times, puzzle }: ImportPreviewProps) => (
   <Table>
     <thead>
       <tr>
-        <HeadingCell col-span="3">
+        <HeadingCell col-span={3}>
           Times to be imported &nbsp;{" "}
           <Tag size="sm">{String(times.length)}</Tag>
         </HeadingCell>

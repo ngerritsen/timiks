@@ -3,7 +3,7 @@ import { initializeFirestore, persistentLocalCache } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBUu8vGS4Lp0hGXqeh-Elct0WeNT8eqrYI",
-  authDomain: "timiks.com",
+  authDomain: "timiks-1fc10.firebaseapp.com",
   databaseURL: "https://timiks-1fc10.firebaseio.com",
   projectId: "timiks-1fc10",
   storageBucket: "timiks-1fc10.appspot.com",

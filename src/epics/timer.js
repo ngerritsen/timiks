@@ -1,7 +1,8 @@
 import { withLatestFrom, map } from "rxjs/operators";
 import { ofType } from "redux-observable";
 
-import { saveTime, resetTime } from "../actions";
+import { resetTime } from "../actions";
+import { saveTime } from "../slices/times";
 import {
   changeTrainingType,
   clearTrainerTimes,

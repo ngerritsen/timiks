@@ -35,8 +35,8 @@ ChartJS.register(
 type TimeGraphProps = {
   times: Time[];
   stats: Stat[];
-  disabledLines: string[];
-  setDisabledLines: (disabledLines: string[]) => void;
+  disabledLines?: string[];
+  setDisabledLines?: (disabledLines: string[]) => void;
 };
 
 const TimeGraph = ({

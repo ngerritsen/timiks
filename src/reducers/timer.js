@@ -1,5 +1,6 @@
 import { handleActions } from "redux-actions";
 import * as actionTypes from "../constants/actionTypes";
+import { saveTime } from "../slices/times";
 
 const initialState = {
   startTime: 0,
@@ -27,7 +28,7 @@ export default handleActions(
       inspectionStartTime: action.payload,
       inspecting: true,
     }),
-    [actionTypes.SAVE_TIME]: (state, action) => ({
+    [saveTime]: (state, action) => ({
       ...state,
       startTime: 0,
       inspectionStartTime: 0,

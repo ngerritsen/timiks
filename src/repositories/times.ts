@@ -13,12 +13,19 @@ import { serializeTime, parseTimes } from "../helpers/serialization";
 import { Observable } from "rxjs";
 import { getDateForDaysAgo } from "../helpers/dateTime";
 import app from "../firebase";
+import { Time } from "../types";
+import { Partial } from "react-spring";
 
 const MAX_BATCH_SIZE = 500;
 
 const db = getFirestore(app);
 
-export function listenForChanges(userId, current, puzzle, days) {
+export function listenForChanges(
+  userId: string,
+  current: boolean,
+  puzzle?: string,
+  days?: number
+): Observable<Time[]> {
   return new Observable((observer) => {
     const statements = [
       where("userId", "==", userId),
@@ -38,7 +45,7 @@ export function listenForChanges(userId, current, puzzle, days) {
       query(collection(db, "times"), ...statements),
       { includeMetadataChanges: true },
       (querySnapshot) => {
-        const data = [];
+        const data: Record<string, unknown>[] = [];
 
         querySnapshot.forEach((snapshot) =>
           data.push(
@@ -54,14 +61,14 @@ export function listenForChanges(userId, current, puzzle, days) {
   });
 }
 
-export function save(userId, time) {
+export function save(userId: string, time: Time) {
   return setDoc(doc(db, "times", time.id), {
     ...stripUndefined(serializeTime(time)),
     userId,
   });
 }
 
-export function saveAll(userId, times) {
+export async function saveAll(userId: string, times: Time[]) {
   const chunk = times.slice(0, MAX_BATCH_SIZE);
   const batch = writeBatch(db);
 
@@ -70,20 +77,17 @@ export function saveAll(userId, times) {
     batch.set(timeRef, { ...stripUndefined(serializeTime(time)), userId });
   });
 
-  return batch
-    .commit()
-    .then(
-      () =>
-        times.length > MAX_BATCH_SIZE &&
-        saveAll(userId, times.slice(MAX_BATCH_SIZE))
-    );
+  await batch.commit();
+  if (times.length > MAX_BATCH_SIZE) {
+    await saveAll(userId, times.slice(MAX_BATCH_SIZE));
+  }
 }
 
-export function update(timeId, fields) {
+export function update(timeId: string, fields: Partial<Time>) {
   return setDoc(doc(db, "times", timeId), fields, { merge: true });
 }
 
-export function updateAll(timeIds, fields) {
+export async function updateAll(timeIds: string[], fields: Partial<Time>) {
   const chunk = timeIds.slice(0, MAX_BATCH_SIZE);
   const batch = writeBatch(db);
 
@@ -92,20 +96,18 @@ export function updateAll(timeIds, fields) {
     batch.set(timeRef, fields, { merge: true });
   });
 
-  return batch
-    .commit()
-    .then(
-      () =>
-        timeIds.length > MAX_BATCH_SIZE &&
-        updateAll(timeIds.slice(MAX_BATCH_SIZE), fields)
-    );
+  await batch.commit();
+
+  if (timeIds.length > MAX_BATCH_SIZE) {
+    await updateAll(timeIds.slice(MAX_BATCH_SIZE), fields);
+  }
 }
 
-export function remove(timeId) {
+export function remove(timeId: string) {
   return deleteDoc(doc(db, "times", timeId));
 }
 
-export function removeAll(timeIds) {
+export function removeAll(timeIds: string[]) {
   const batch = writeBatch(db);
 
   timeIds.forEach((id) => {
@@ -116,10 +118,10 @@ export function removeAll(timeIds) {
   return batch.commit();
 }
 
-function stripUndefined(object) {
+function stripUndefined<T extends Record<string, unknown>>(object: T): T {
   return Object.keys(object).reduce(
     (obj, key) =>
       object[key] === undefined ? obj : { ...obj, [key]: object[key] },
     {}
-  );
+  ) as T;
 }

@@ -25,7 +25,7 @@ import {
   getSortedFilteredArchivedTimes,
   getStatsForArchivedTimesForPuzzle,
 } from "../../selectors/times";
-import { requireTimes } from "../../actions";
+import { requireTimes } from "../../slices/times";
 
 const Archive = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const Archive = () => {
   const days = useSelector(getArchiveDays);
 
   useEffect(() => {
-    dispatch(requireTimes(false, puzzle, days));
+    dispatch(requireTimes({ current: false, puzzle, days }));
   }, [puzzle, days]);
 
   const [showLastStats, setShowLastStats] = useState(false);

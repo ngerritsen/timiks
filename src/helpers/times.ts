@@ -1,18 +1,19 @@
+import { Time } from "../types";
 import { getMs } from "./time";
 
-export function addPuzzleToTimes(times, puzzle) {
+export function addPuzzleToTimes(times: Time[], puzzle: string) {
   return times.map((time) => ({ ...time, puzzle }));
 }
 
-export function isCurrent(time) {
+export function isCurrent(time: Time) {
   return Boolean(time.current);
 }
 
-export function getId(time) {
+export function getId(time: Time) {
   return time.id;
 }
 
-export function markBestTime(times) {
+export function markBestTime(times: Time[]) {
   if (times.length < 2) {
     return times;
   }

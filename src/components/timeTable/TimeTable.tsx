@@ -16,14 +16,12 @@ import TimeTableStatRow from "./TimeTableStatRow";
 import StatsExplanation from "./StatsExplanation";
 import { getBreakpoint, getSize } from "../../helpers/theme";
 import { createDescSorter } from "../../helpers/general";
-import {
-  shouldFixGraphYAxis,
-  shouldShowLatestSolveOnTop,
-} from "../../selectors/settings";
+import { shouldShowLatestSolveOnTop } from "../../selectors/settings";
 import * as timesSelectors from "../../selectors/times";
+import { Stat, StatTime } from "../../types";
 
-function useHighlightedStats() {
-  const [highlightState, setHighlightedStat] = useState([]);
+function useHighlightedStats(): [string, string, (params: string[]) => void] {
+  const [highlightState, setHighlightedStat] = useState<string[]>([]);
   const [highlightedStatName, highlightedStatType] = highlightState;
 
   return [highlightedStatName, highlightedStatType, setHighlightedStat];
@@ -34,31 +32,35 @@ const TimeTable = () => {
   const stats = useSelector(timesSelectors.getStatsForCurrentTimes);
   const showGraph = useSelector(timesSelectors.getCurrentNoDnfTimes).length > 1;
   const showLatestSolveOnTop = useSelector(shouldShowLatestSolveOnTop);
-  const fixGraphYAxis = useSelector(shouldFixGraphYAxis);
 
   const [
     softHighlightedStatName,
     softHighlightedStatType,
     setSoftHighlightedStat,
-  ] = useHighlightedStats(stats);
+  ] = useHighlightedStats();
 
   const [
     hardHighlightedStatName,
     hardHighlightedStatType,
     setHardHighlightedStat,
-  ] = useHighlightedStats(stats);
+  ] = useHighlightedStats();
 
   const highlightedStatName =
     softHighlightedStatName || hardHighlightedStatName;
+
   const highlightedStatType =
     softHighlightedStatType || hardHighlightedStatType;
-  const highlightedStat =
-    stats.find((stat) => stat.name === highlightedStatName) || {};
-  const { includedIds = [], excludedIds = [] } =
-    highlightedStat[highlightedStatType] || {};
 
-  const getSolveIndex = (index) =>
+  const highlightedStat =
+    stats.find((stat) => stat.name === highlightedStatName) || ({} as Stat);
+
+  const { includedIds = [], excludedIds = [] } = (highlightedStat[
+    highlightedStatType as keyof Stat
+  ] || {}) as StatTime;
+
+  const getSolveIndex = (index: number) =>
     showLatestSolveOnTop ? times.length - 1 - index : index;
+
   const sortedTimes = showLatestSolveOnTop
     ? [...times].sort(createDescSorter("date"))
     : times;
@@ -66,7 +68,7 @@ const TimeTable = () => {
   return (
     <TimeTableContainer>
       <TimeTableColumn>
-        <Section margin={showGraph ? "xs" : ""}>
+        <Section margin={showGraph ? "xs" : undefined}>
           <Table>
             <thead>
               <tr>
@@ -92,7 +94,7 @@ const TimeTable = () => {
             <tbody>
               {stats.length === 0 && (
                 <tr>
-                  <Cell colSpan="2">
+                  <Cell colSpan={2}>
                     <i>Not enough solves yet.</i>
                   </Cell>
                 </tr>
@@ -115,27 +117,28 @@ const TimeTable = () => {
             </tbody>
           </Table>
         </Section>
-        {showGraph && (
-          <TimeGraph
-            stats={stats}
-            times={sortedTimes}
-            fixYAxis={fixGraphYAxis}
-          />
-        )}
+        {showGraph && <TimeGraph stats={stats} times={sortedTimes} />}
       </TimeTableColumn>
       <TimeTableColumn>
         <Table>
           <thead>
             <tr>
-              <HeadingCell colSpan="3">
+              <HeadingCell colSpan={3}>
                 Times &nbsp;
                 <Tag size="sm" color="subtleBg">
-                  {times.length}
+                  {String(times.length)}
                 </Tag>
               </HeadingCell>
             </tr>
           </thead>
           <tbody>
+            {sortedTimes.length === 0 && (
+              <tr>
+                <Cell colSpan={2}>
+                  <i>No solves yet.</i>
+                </Cell>
+              </tr>
+            )}
             {sortedTimes.map((time, index) => (
               <TimeTableTimeRow
                 key={time.id}

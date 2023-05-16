@@ -7,6 +7,7 @@ import { Color } from "../../theme";
 type CellProps = {
   rightAlign?: boolean;
   highlightColor?: Color;
+  color?: Color;
   bold?: boolean;
 };
 

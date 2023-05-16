@@ -27,19 +27,21 @@ export interface Stat extends StatConfig {
   best: StatTime;
 }
 
-export interface Time {
+export type Time = {
   date: Date;
   dnf?: boolean;
   id: string;
   ms: number;
-  timestamp: Date;
+  timestamp?: Date;
   plus2?: boolean;
   puzzle: string;
   scramble: string;
   stored?: boolean;
   dirty?: boolean;
   comment?: string;
-}
+  current?: boolean;
+  best?: boolean;
+};
 
 export type GraphLine = {
   name: string;

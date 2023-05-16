@@ -12,7 +12,7 @@ import { MODAL_ROOT_SELECTOR } from "../../constants/dom";
 import { getSize, getColor, getZIndex } from "../../helpers/theme";
 
 type ModalProps = {
-  children: React.JSX.Element;
+  children: React.JSX.Element | React.JSX.Element[];
   title: string;
   onClose: () => void;
 };

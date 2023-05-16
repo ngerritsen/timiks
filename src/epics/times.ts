@@ -11,7 +11,6 @@ import {
 } from "rxjs/operators";
 
 import * as actionTypes from "../constants/actionTypes";
-import * as actions from "../actions";
 import * as timesRepository from "../repositories/times";
 import { getUserId, isLoggedIn } from "../selectors/authentication";
 import {
@@ -20,10 +19,20 @@ import {
   getRequiredTimes,
 } from "../selectors/times";
 import { listenForChanges } from "../repositories/times";
+import {
+  archiveTimes,
+  clearTimes,
+  loadTimes,
+  removeTime,
+  requireTimes,
+  saveTime,
+  updateTime,
+} from "../slices/times";
+import { TimiksEpic } from "../types";
 
-export const saveTimeEpic = (action$, state$) =>
+export const saveTimeEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.SAVE_TIME),
+    filter(saveTime.match),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
     mergeMap(([action, state]) =>
@@ -32,7 +41,7 @@ export const saveTimeEpic = (action$, state$) =>
     ignoreElements()
   );
 
-export const storeTimesEpic = (action$, state$) =>
+export const storeTimesEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
     ofType(actionTypes.LOGIN_SUCCEEDED),
     withLatestFrom(state$),
@@ -43,9 +52,9 @@ export const storeTimesEpic = (action$, state$) =>
     ignoreElements()
   );
 
-export const updateTimeEpic = (action$, state$) =>
+export const updateTimeEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.UPDATE_TIME),
+    filter(updateTime.match),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
     mergeMap(([action]) =>
@@ -54,18 +63,18 @@ export const updateTimeEpic = (action$, state$) =>
     ignoreElements()
   );
 
-export const removeTimeEpic = (action$, state$) =>
+export const removeTimeEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.REMOVE_TIME),
+    filter(removeTime.match),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
     mergeMap(([action]) => from(timesRepository.remove(action.payload))),
     ignoreElements()
   );
 
-export const archiveTimesEpic = (action$, state$) =>
+export const archiveTimesEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.ARCHIVE_TIMES),
+    filter(archiveTimes.match),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
     mergeMap(([, state]) =>
@@ -78,9 +87,9 @@ export const archiveTimesEpic = (action$, state$) =>
     ignoreElements()
   );
 
-export const clearTimesEpic = (action$, state$) =>
+export const clearTimesEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.CLEAR_TIMES),
+    filter(clearTimes.match),
     withLatestFrom(state$),
     filter(([, state]) => isLoggedIn(state)),
     mergeMap(([, state]) =>
@@ -89,10 +98,10 @@ export const clearTimesEpic = (action$, state$) =>
     ignoreElements()
   );
 
-export const loadTimesEpic = (action$, state$) =>
+export const loadTimesEpic: TimiksEpic = (action$, state$) =>
   merge(
     action$.pipe(ofType(actionTypes.LOGIN_SUCCEEDED)),
-    action$.pipe(ofType(actionTypes.REQUIRE_TIMES)).pipe(
+    action$.pipe(filter(requireTimes.match)).pipe(
       withLatestFrom(state$),
       filter(([, state]) => isLoggedIn(state))
     )
@@ -102,7 +111,7 @@ export const loadTimesEpic = (action$, state$) =>
       const { current, puzzle, days } = getRequiredTimes(state);
 
       return listenForChanges(getUserId(state), current, puzzle, days).pipe(
-        map((times) => actions.loadTimes(times, current, puzzle)),
+        map((times) => loadTimes({ times, current, puzzle })),
         takeUntil(action$.pipe(ofType(actionTypes.LOGOUT_SUCCEEDED)))
       );
     })

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
 import { faArchive } from "@fortawesome/free-solid-svg-icons/faArchive";
 
@@ -12,8 +11,11 @@ import { Toolbar, ToolbarItem } from "../shared/Toolbar";
 import Shortcut from "../shared/Shortcut";
 import Modal from "../shared/Modal";
 import { VisibleFrom, HiddenFrom } from "../shared/Visibility";
+import { useDispatch } from "react-redux";
+import { archiveTimes, clearTimes } from "../../slices/times";
 
-const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
+const TimeBoardActions = () => {
+  const dispatch = useDispatch();
   const archiveButton = (
     <ToggleContent
       toggle={({ toggle }) => (
@@ -38,7 +40,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
                 <Button
                   onClick={() => {
                     hide();
-                    archiveTimes();
+                    dispatch(archiveTimes());
                   }}
                 >
                   Archive
@@ -76,7 +78,7 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
                   color="red"
                   onClick={() => {
                     hide();
-                    clearTimes();
+                    dispatch(clearTimes());
                   }}
                 >
                   Remove
@@ -105,11 +107,6 @@ const TimeBoardActions = ({ archiveTimes, clearTimes }) => {
       </HiddenFrom>
     </>
   );
-};
-
-TimeBoardActions.propTypes = {
-  archiveTimes: PropTypes.func.isRequired,
-  clearTimes: PropTypes.func.isRequired,
 };
 
 export default TimeBoardActions;

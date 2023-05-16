@@ -1,5 +1,8 @@
+import { Partial } from "react-spring";
+import { Time } from "../types";
 import { fillZeroes } from "./formatting";
 import { multiMatch } from "./general";
+import Time from "../components/shared/Time";
 
 const MILLISECONDS_IN_SECOND = 1000;
 const SECONDS_IN_MINUTE = 60;
@@ -36,7 +39,7 @@ const timeInputPatterns = [
   },
 ];
 
-export function isValidTime(time) {
+export function isValidTime(time?: Partial<Time>): time is Time {
   return (
     time &&
     typeof time.ms === "number" &&
@@ -46,7 +49,7 @@ export function isValidTime(time) {
   );
 }
 
-export function breakUpTime(ms) {
+export function breakUpTime(ms: number) {
   let milliseconds = Math.round(ms);
 
   const minutes = Math.floor(milliseconds / MILLISECONDS_IN_MINUTE);
@@ -60,7 +63,7 @@ export function breakUpTime(ms) {
   return { minutes, seconds, milliseconds };
 }
 
-export function formatShortTime(ms) {
+export function formatShortTime(ms: number) {
   const { minutes, seconds, milliseconds } = breakUpTime(ms);
   return (
     (minutes > 0 ? minutes + ":" : "") +
@@ -70,7 +73,7 @@ export function formatShortTime(ms) {
   );
 }
 
-export function formatTime(ms) {
+export function formatTime(ms: number) {
   const { minutes, seconds, milliseconds } = breakUpTime(ms);
   return (
     (minutes > 0 ? fillZeroes(String(minutes), 2) + ":" : "") +
@@ -80,7 +83,7 @@ export function formatTime(ms) {
   );
 }
 
-export function parseTimeInput(input) {
+export function parseTimeInput(input: string) {
   if (!input) {
     return null;
   }
@@ -113,7 +116,7 @@ export function parseTimeInput(input) {
   return { ms, plus2, dnf: false };
 }
 
-function parseTimeInputTime(timeInput) {
+function parseTimeInputTime(timeInput: string) {
   let ms = 0;
 
   const match = multiMatch(timeInputPatterns, timeInput);
@@ -147,7 +150,7 @@ function parseTimeInputTime(timeInput) {
   return ms;
 }
 
-export function getMs(time) {
+export function getMs(time: Time) {
   if (time.dnf) {
     return Infinity;
   }

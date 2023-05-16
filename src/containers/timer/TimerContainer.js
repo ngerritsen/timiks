@@ -32,6 +32,14 @@ function mapStateToProps(state) {
     !inspecting &&
     Boolean(lastTime);
 
+  console.log(
+    startTime === 0,
+    !ready,
+    !useManualTimeEntry,
+    !inspecting,
+    lastTime
+  );
+
   return {
     inspecting: timerSelectors.isInspecting(state),
     inspectionStartTime: timerSelectors.getInspectionStartTime(state),

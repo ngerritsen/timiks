@@ -1,14 +1,16 @@
+import { Timestamp } from "firebase/firestore";
+import { Time } from "../types";
 import { randomId } from "./id";
 
-export function parseTimes(rawTimes) {
+export function parseTimes(rawTimes: Record<string, unknown>[]) {
   return rawTimes.map(parseTime);
 }
 
-export function parseTime(raw) {
+export function parseTime(raw: Record<string, unknown>): Time {
   return {
-    id: raw.id,
-    ms: raw.ms,
-    puzzle: raw.puzzle,
+    id: String(raw.id),
+    ms: Number(raw.ms),
+    puzzle: String(raw.puzzle),
     comment: String(raw.comment || ""),
     scramble: String(raw.scramble || ""),
     date: parseDate(raw),
@@ -19,11 +21,11 @@ export function parseTime(raw) {
   };
 }
 
-export function serializeTimes(times) {
+export function serializeTimes(times: Time[]) {
   return times.map(serializeTime);
 }
 
-export function serializeTime(time) {
+export function serializeTime(time: Time) {
   return {
     id: time.id || randomId(),
     ms: time.ms,
@@ -37,7 +39,7 @@ export function serializeTime(time) {
   };
 }
 
-function parseDate(rawTime) {
+function parseDate(rawTime: Record<string, unknown>) {
   const date = rawTime.timestamp || rawTime.date;
 
   if (!date) {
@@ -45,6 +47,6 @@ function parseDate(rawTime) {
   }
 
   return typeof date === "string"
-    ? new Date(rawTime.timestamp)
-    : rawTime.timestamp.toDate();
+    ? new Date(String(rawTime.timestamp))
+    : (rawTime.timestamp as Timestamp).toDate();
 }

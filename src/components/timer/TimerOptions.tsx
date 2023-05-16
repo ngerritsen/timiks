@@ -50,21 +50,25 @@ const TimerOptions = () => {
       />
       <Shortcut
         command="toggleInspectionTime"
-        action={() =>
-          changeSetting({
-            setting: "useInspectionTime",
-            value: !useInspectionTime,
-          })
-        }
+        action={() => {
+          dispatch(
+            changeSetting({
+              setting: "useInspectionTime",
+              value: !useInspectionTime,
+            })
+          );
+        }}
       />
       <Shortcut
         command="toggleManualTimeEntry"
-        action={() =>
-          changeSetting({
-            setting: "useManualTimeEntry",
-            value: !useManualTimeEntry,
-          })
-        }
+        action={() => {
+          dispatch(
+            changeSetting({
+              setting: "useManualTimeEntry",
+              value: !useManualTimeEntry,
+            })
+          );
+        }}
       />
       <HiddenFrom breakpoint="sm">
         <Toolbar>

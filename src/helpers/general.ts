@@ -1,8 +1,5 @@
 import { MatchPattern } from "../types";
 
-type Sign = -1 | 0 | 1;
-type Sorter = <T extends Record<string, unknown>>(a: T, b: T) => Sign;
-
 export function generateArr(n: number): number[] {
   const arr = new Array(n);
 
@@ -13,8 +10,10 @@ export function generateArr(n: number): number[] {
   return arr;
 }
 
-export function createAscSorter(property: string): Sorter {
-  return (a, b) => {
+export function createAscSorter<T extends Record<string, unknown>>(
+  property: keyof T
+) {
+  return (a: T, b: T) => {
     if (a[property] < b[property]) {
       return -1;
     }
@@ -27,8 +26,10 @@ export function createAscSorter(property: string): Sorter {
   };
 }
 
-export function createDescSorter(property: string): Sorter {
-  return (a, b) => {
+export function createDescSorter<T extends Record<string, unknown>>(
+  property: keyof T
+) {
+  return (a: T, b: T) => {
     if (a[property] < b[property]) {
       return 1;
     }

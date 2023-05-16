@@ -7,10 +7,11 @@ import { getLastTimeId } from "./timer";
 import { groupByDay } from "../helpers/archive";
 import { createAscSorter } from "../helpers/general";
 import { getDateForDaysAgo } from "../helpers/dateTime";
+import { RootState } from "../store";
 
-export const getTimes = (state) => state.times.times;
+export const getTimes = (state: RootState) => state.times.times;
 
-export const getTime = (state, id) =>
+export const getTime = (state: RootState, id: string) =>
   getTimes(state).find((time) => time.id === id);
 
 export const getCurrentTimes = createSelector(
@@ -20,21 +21,25 @@ export const getCurrentTimes = createSelector(
     times.filter(isCurrent).filter((time) => time.puzzle === puzzle)
 );
 
-export const getRequiredTimes = (state) => state.times.requiredTimes;
+export const getRequiredTimes = (state: RootState) => state.times.requiredTimes;
 
-export const getCurrentTimeIds = (state) => getCurrentTimes(state).map(getId);
+export const getCurrentTimeIds = (state: RootState) =>
+  getCurrentTimes(state).map(getId);
 
-export const getTimesForLocalStorage = (state, isLoggedIn) =>
-  isLoggedIn ? getUnstoredTimes(state) : getTimes(state);
+export const getTimesForLocalStorage = (
+  state: RootState,
+  isLoggedIn: boolean
+) => (isLoggedIn ? getUnstoredTimes(state) : getTimes(state));
 
-export const getUnstoredTimes = (state) =>
+export const getUnstoredTimes = (state: RootState) =>
   getTimes(state).filter((time) => !time.stored);
 
 export const getArchivedTimes = createSelector(getTimes, (times) =>
   times.filter((time) => !time.current)
 );
 
-export const hasCurrentTimes = (state) => getCurrentTimes(state).length > 0;
+export const hasCurrentTimes = (state: RootState) =>
+  getCurrentTimes(state).length > 0;
 
 export const getCurrentMarkedSortedTimes = createSelector(
   getCurrentTimes,

@@ -16,7 +16,7 @@ import { addPuzzleToTimes } from "../../helpers/times";
 import Warning from "../shared/Warning";
 import importSources from "../../constants/importSources";
 import { useDispatch } from "react-redux";
-import { importTimes } from "../../actions";
+import { importTimes } from "../../slices/times";
 
 const puzzleOptions = [
   { label: "Select a puzzle", value: "" },

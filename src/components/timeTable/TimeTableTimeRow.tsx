@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
@@ -11,17 +10,33 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import ToggleContent from "../shared/ToggleContent";
 import Modal from "../shared/Modal";
 import TimeDetails from "../shared/TimeDetails";
-import * as CustomPropTypes from "../../propTypes";
 import IconButton from "../shared/IconButton";
 import { Cell } from "../shared/Table";
 import { SubtleText } from "../shared/Typography";
 import CloudSyncIcon from "../shared/CloudSyncIcon";
 import { getColor, getSize } from "../../helpers/theme";
-import { removeTime } from "../../actions";
+import { removeTime } from "../../slices/times";
+import { Time as TimeType } from "../../types";
 
-const TimeTableTimeRow = ({ index, time, isIncluded, isExcluded }) => {
+type TimeTableTimeRowProps = {
+  index: number;
+  time: TimeType;
+  isIncluded?: boolean;
+  isExcluded?: boolean;
+};
+
+const TimeTableTimeRow = ({
+  index,
+  time,
+  isIncluded,
+  isExcluded,
+}: TimeTableTimeRowProps) => {
   const dispatch = useDispatch();
-  const highlightColor = isIncluded ? "blue" : isExcluded ? "orange" : "";
+  const highlightColor = isIncluded
+    ? "blue"
+    : isExcluded
+    ? "orange"
+    : undefined;
 
   return (
     <tr>
@@ -68,13 +83,6 @@ const TimeTableTimeRow = ({ index, time, isIncluded, isExcluded }) => {
       </Cell>
     </tr>
   );
-};
-
-TimeTableTimeRow.propTypes = {
-  time: CustomPropTypes.Time.isRequired,
-  index: PropTypes.number.isRequired,
-  isIncluded: PropTypes.bool,
-  isExcluded: PropTypes.bool,
 };
 
 const TimeInfo = styled.span`

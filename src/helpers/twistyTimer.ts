@@ -2,7 +2,7 @@ import { parseTimeInput, isValidTime } from "./time";
 import { parseCsv } from "./csv";
 import { randomId } from "./id";
 
-export default function parseTwistyTimerExport(csv) {
+export default function parseTwistyTimerExport(csv: string) {
   return parseCsv(csv, ";", ["time", "scramble", "date", "penalty"])
     .map((item) => {
       try {
@@ -21,13 +21,13 @@ export default function parseTwistyTimerExport(csv) {
     .filter(Boolean);
 }
 
-function parseTwistyTimerTime(string, penalty) {
+function parseTwistyTimerTime(string: string, penalty: string) {
   return {
     ...parseTimeInput(string),
     dnf: penalty === "DNF",
   };
 }
 
-function parseTwistyTimerScramble(string) {
+function parseTwistyTimerScramble(string: string) {
   return string.trim().replace(/[\n\s]+/g, " ");
 }

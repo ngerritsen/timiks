@@ -1,14 +1,13 @@
-import { map, withLatestFrom, mergeMap } from "rxjs/operators";
+import { map, withLatestFrom, mergeMap, filter } from "rxjs/operators";
 import { from } from "rxjs";
-import { ofType } from "redux-observable";
-import { IMPORT_TIMES } from "../constants/actionTypes";
 import { getUserId, isLoggedIn } from "../selectors/authentication";
 import * as timesRepository from "../repositories/times";
 import { showNotification } from "../slices/notifications";
+import { importTimes } from "../slices/times";
 
 export const importTimesEpic = (action$, state$) =>
   action$.pipe(
-    ofType(IMPORT_TIMES),
+    filter(importTimes.match),
     withLatestFrom(state$),
     mergeMap(([action, state]) =>
       from(

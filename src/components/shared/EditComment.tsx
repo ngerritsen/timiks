@@ -8,19 +8,25 @@ import Modal from "./Modal";
 import Section from "./Section";
 import { getColor } from "../../helpers/theme";
 import { Time } from "../../types";
+import { useDispatch } from "react-redux";
+import { updateTime } from "../../slices/times";
 
 const MAX_COMMENT_LENGTH = 256;
 
 type EditCommentProps = {
   time: Time;
-  onSave: (comment: string) => void;
   onCancel: () => void;
 };
 
-const EditComment = ({ time, onCancel, onSave }: EditCommentProps) => {
+const EditComment = ({ time, onCancel }: EditCommentProps) => {
+  const dispatch = useDispatch();
   const [comment, setComment] = useState(time.comment || "");
   const valid = comment.length <= MAX_COMMENT_LENGTH;
   const changed = comment !== (time.comment || "");
+  const onSave = () => {
+    dispatch(updateTime({ id: time.id, fields: { comment } }));
+    onCancel();
+  };
 
   return (
     <Modal title="Edit comment" onClose={onCancel}>
@@ -46,7 +52,7 @@ const EditComment = ({ time, onCancel, onSave }: EditCommentProps) => {
           </Button>
         </ButtonDuoItem>
         <ButtonDuoItem>
-          <Button disabled={!changed || !valid} onClick={() => onSave(comment)}>
+          <Button disabled={!changed || !valid} onClick={onSave}>
             Save
           </Button>
         </ButtonDuoItem>

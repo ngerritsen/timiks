@@ -54,39 +54,3 @@ export const loginFailed = createAction(types.LOGIN_FAILED);
 export const logout = createAction(types.LOGOUT);
 export const logoutSucceeded = createAction(types.LOGOUT_SUCCEEDED);
 export const logoutFailed = createAction(types.LOGOUT_FAILED);
-
-// Times
-export const saveTime = createAction(types.SAVE_TIME, (time) => time);
-export const updateTime = createAction(types.UPDATE_TIME, (id, fields) => ({
-  id,
-  fields,
-}));
-export const loadTimes = createAction(
-  types.LOAD_TIMES,
-  (times = [], current, puzzle) => ({
-    times,
-    current,
-    puzzle,
-  })
-);
-export const loadLocalTimes = createAction(
-  types.LOAD_LOCAL_TIMES,
-  (times = []) => times
-);
-export const removeTime = createAction(types.REMOVE_TIME, (id) => id);
-export const clearTimes = createAction(types.CLEAR_TIMES);
-export const archiveTimes = createAction(types.ARCHIVE_TIMES);
-export const storedLocalTimes = createAction(types.STORED_LOCAL_TIMES);
-export const requireTimes = createAction(
-  types.REQUIRE_TIMES,
-  (current, puzzle, days) => ({
-    current,
-    puzzle,
-    days,
-  })
-);
-
-// Import
-export const importTimes = createAction(types.IMPORT_TIMES, (times) => ({
-  times,
-}));
