@@ -1,3 +1,4 @@
+export { default as auth } from "./auth";
 export { default as loginPromotion } from "./loginPromotion";
 export { default as network } from "./network";
 export { default as notifications } from "./notifications";

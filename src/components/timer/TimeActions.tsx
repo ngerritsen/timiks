@@ -8,7 +8,7 @@ import { getSize } from "../../helpers/theme";
 import Button from "../shared/Button";
 import Shortcut from "../shared/Shortcut";
 import ToggleContent from "../shared/ToggleContent";
-import EditCommentContainer from "../../containers/EditCommentContainer";
+import EditComment from "../shared/EditComment";
 import { getLastTime } from "../../selectors/times";
 import { removeTime, updateTime } from "../../slices/times";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +59,7 @@ const TimeActions = () => {
             </>
           )}
           content={({ hide }) => (
-            <EditCommentContainer onCancel={hide} time={lastTime} />
+            <EditComment onCancel={hide} time={lastTime} />
           )}
         />
       </TimeAction>

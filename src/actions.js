@@ -38,19 +38,3 @@ export const resetActivation = createAction(types.RESET_ACTIVATION);
 export const incrementPreparationStage = createAction(
   types.INCREMENT_PREPARATION_STAGE
 );
-
-// Authentication
-export const login = createAction(types.LOGIN);
-export const loginSucceeded = createAction(
-  types.LOGIN_SUCCEEDED,
-  (userId, displayName, email, avatarUrl) => ({
-    userId,
-    displayName,
-    email,
-    avatarUrl,
-  })
-);
-export const loginFailed = createAction(types.LOGIN_FAILED);
-export const logout = createAction(types.LOGOUT);
-export const logoutSucceeded = createAction(types.LOGOUT_SUCCEEDED);
-export const logoutFailed = createAction(types.LOGOUT_FAILED);

@@ -1,7 +1,7 @@
 import { combineEpics } from "redux-observable";
 
 import * as activationEpics from "./activation";
-import * as authenticationEpics from "./authentication";
+import * as authEpics from "./auth";
 import * as importEpics from "./import";
 import * as localTimesEpics from "./localTimes";
 import * as loginPromotionEpics from "./loginPromotionEpic";
@@ -23,10 +23,10 @@ const rootEpic = combineEpics(
   activationEpics.runInspectionEpic,
   activationEpics.stopActivationEpic,
   activationEpics.warnForInspectionEpic,
-  authenticationEpics.loginEpic,
-  authenticationEpics.loginStatusEpic,
-  authenticationEpics.logoutEpic,
-  authenticationEpics.redirectStatusEpic,
+  authEpics.loginEpic,
+  authEpics.loginStatusEpic,
+  authEpics.logoutEpic,
+  authEpics.redirectStatusEpic,
   importEpics.importTimesEpic,
   localTimesEpics.loadLocalTimesEpic,
   localTimesEpics.storeLocalTimesEpic,

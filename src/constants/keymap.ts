@@ -1,4 +1,6 @@
-const keymap = [
+import { KeyMapping } from "../types";
+
+const keymap: KeyMapping[] = [
   {
     key: ",",
     commands: ["openSettings"],

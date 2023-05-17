@@ -155,3 +155,10 @@ export type ThemeType = "dark" | "light";
 export type CubeTile = { x: number; y: number; color: PuzzleColor };
 export type CubeFace = CubeTile[];
 export type Cube = Record<CubeDirection, CubeFace>;
+
+export type KeyMapping = {
+  key: string;
+  commands: string[];
+  description?: string;
+  hide?: boolean;
+};

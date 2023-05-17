@@ -19,7 +19,7 @@ import ToggleContent from "./ToggleContent";
 import { getPuzzle } from "../../helpers/puzzle";
 import { formatLocalDateTime } from "../../helpers/dateTime";
 import { getSize, getBreakpoint } from "../../helpers/theme";
-import EditCommentContainer from "../../containers/EditCommentContainer";
+import EditComment from "../shared/EditComment";
 import IconButton from "./IconButton";
 import { Time as TimeType } from "../../types";
 
@@ -85,9 +85,7 @@ const TimeDetails = ({ time, onRemoveTime, onClose }: TimeDetailsProps) => {
               )}
             </InfoItem>
           )}
-          content={({ hide }) => (
-            <EditCommentContainer onCancel={hide} time={time} />
-          )}
+          content={({ hide }) => <EditComment onCancel={hide} time={time} />}
         />
       </Section>
       <Section margin="md">

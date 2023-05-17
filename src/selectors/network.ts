@@ -1,3 +1,3 @@
 import { RootState } from "../store";
 
-export const isOnline = (state: RootState) => state.network.isOnline;
+export const getNetworkState = (state: RootState) => state.network;

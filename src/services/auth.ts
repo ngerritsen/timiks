@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   getRedirectResult,
   signInWithRedirect,
+  User,
 } from "firebase/auth";
 import app from "../firebase";
 
@@ -23,7 +24,7 @@ export function logout() {
   return auth.signOut();
 }
 
-export function onUserChanged() {
+export function onUserChanged(): Observable<User> {
   return new Observable((observer) => {
     auth.onAuthStateChanged((user) => observer.next(user));
   });

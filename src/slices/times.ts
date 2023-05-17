@@ -1,7 +1,7 @@
-import * as actionTypes from "../constants/actionTypes";
 import { Time } from "../types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Partial } from "react-spring";
+import { loginSucceeded, logoutSucceeded } from "./auth";
 
 type TimesState = {
   times: Time[];
@@ -109,10 +109,10 @@ const { reducer, actions } = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(actionTypes.LOGIN_SUCCEEDED, (state) => {
+      .addCase(loginSucceeded, (state) => {
         state.useLocalTimes = false;
       })
-      .addCase(actionTypes.LOGOUT_SUCCEEDED, (state) => {
+      .addCase(logoutSucceeded, (state) => {
         state.useLocalTimes = true;
       });
   },

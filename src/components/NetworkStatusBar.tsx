@@ -5,15 +5,17 @@ import { faPlane } from "@fortawesome/free-solid-svg-icons/faPlane";
 
 import { getColor, getSize } from "../helpers/theme";
 import { useSelector } from "react-redux";
-import { isOnline } from "../selectors/network";
+import { getNetworkState } from "../selectors/network";
 
-const NetworkStatusBar = () =>
-  useSelector(isOnline) ? null : (
+const NetworkStatusBar = () => {
+  const { isOnline } = useSelector(getNetworkState);
+  return isOnline ? null : (
     <StatusBar>
       <FontAwesomeIcon size="sm" icon={faPlane} />
       &nbsp; Offline
     </StatusBar>
   );
+};
 
 const StatusBar = styled.div`
   background-color: ${getColor("orange")};

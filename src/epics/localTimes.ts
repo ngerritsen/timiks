@@ -5,13 +5,13 @@ import {
   tap,
   withLatestFrom,
   ignoreElements,
+  filter,
 } from "rxjs/operators";
 import { merge, of } from "rxjs";
 
 import * as timesRepository from "../repositories/localTimes";
 import { getTimesForLocalStorage } from "../selectors/times";
-import { isLoggedIn } from "../selectors/authentication";
-import { LOGOUT_SUCCEEDED } from "../constants/actionTypes";
+import { getIsLoggedIn } from "../selectors/auth";
 import {
   archiveTimes,
   clearTimes,
@@ -22,9 +22,10 @@ import {
   updateTime,
 } from "../slices/times";
 import { TimiksEpic } from "../types";
+import { logoutSucceeded } from "../slices/auth";
 
 export const loadLocalTimesEpic: TimiksEpic = (action$) =>
-  merge(of(0), action$.pipe(ofType(LOGOUT_SUCCEEDED))).pipe(
+  merge(of(0), action$.pipe(filter(logoutSucceeded.match))).pipe(
     map(() => loadLocalTimes(timesRepository.getAll()))
   );
 
@@ -41,7 +42,9 @@ export const storeLocalTimesEpic: TimiksEpic = (action$, state$) =>
     delay(0),
     withLatestFrom(state$),
     tap(([, state]) =>
-      timesRepository.store(getTimesForLocalStorage(state, isLoggedIn(state)))
+      timesRepository.store(
+        getTimesForLocalStorage(state, getIsLoggedIn(state))
+      )
     ),
     ignoreElements()
   );

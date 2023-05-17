@@ -6,11 +6,9 @@ import * as Sentry from "@sentry/browser";
 import "./errorHandler";
 import "./firebase";
 
-import keymap from "./constants/keymap";
 import { APP_ROOT_SELECTOR } from "./constants/dom";
 import App from "./components/App";
 import store from "./store";
-import ShortcutProvider from "./containers/ShortcutProvider";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import TimerView from "./components/timer/TimerView";
 import Trainer from "./components/trainer/Trainer";
@@ -44,8 +42,6 @@ const router = createBrowserRouter([
 
 createRoot(rootEl).render(
   <Provider store={store}>
-    <ShortcutProvider keymap={keymap}>
-      <RouterProvider router={router} />
-    </ShortcutProvider>
+    <RouterProvider router={router} />
   </Provider>
 );
