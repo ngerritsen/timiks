@@ -19,7 +19,7 @@ const Shortcut = ({ command, action }: ShortcutProps): null => {
   const key = useMemo(
     () =>
       (keymap.find((mapping) => mapping.commands.includes(command)) || {}).key,
-    [command]
+    [command, stopped, stopTime]
   );
 
   useEffect(() => {
