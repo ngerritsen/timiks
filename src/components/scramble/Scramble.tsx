@@ -9,7 +9,7 @@ import ScrambleDetails from "./ScrambleDetails";
 import { getColor, getSize, getFont } from "../../helpers/theme";
 import ScrambleCaseView from "./ScrambleCaseView";
 import { DEFAULT_PUZZLE } from "../../constants/settings";
-import { Case } from "../../types";
+import { Case, TrainingType } from "../../types";
 
 type ScrambleProps = {
   withDetails?: boolean;
@@ -19,7 +19,7 @@ type ScrambleProps = {
   puzzle?: string;
   expand?: boolean;
   withTrainingCase?: Case;
-  trainingType?: string;
+  trainingType?: TrainingType;
 };
 
 type ScrambleTabProps = {

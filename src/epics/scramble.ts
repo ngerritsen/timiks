@@ -2,20 +2,21 @@ import { ofType } from "redux-observable";
 import { merge, timer, of } from "rxjs";
 import { mergeMap, withLatestFrom, map, filter } from "rxjs/operators";
 
-import * as actionTypes from "../constants/actionTypes";
 import { generateScramble } from "../helpers/scramble";
 import { getPuzzle } from "../selectors/settings";
 import { changeSetting, loadSettings } from "../slices/settings";
 import { refreshScramble, setScramble } from "../slices/scramble";
+import { stopTimer, submitTimeInput } from "../slices/timer";
+import { TimiksEpic } from "../types";
 
-export const scrambleEpic = (action$, state$) =>
+export const scrambleEpic: TimiksEpic = (action$, state$) =>
   merge(
     action$.pipe(
       ofType(
-        String(loadSettings),
-        String(refreshScramble),
-        actionTypes.STOP_TIMER,
-        actionTypes.SUBMIT_TIME_INPUT
+        loadSettings.toString(),
+        refreshScramble.toString(),
+        stopTimer.toString(),
+        submitTimeInput.toString()
       )
     ),
     action$.pipe(

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 
 import Time from "../shared/Time";
 import { TIMER_UPDATE_RATE } from "../../constants/timer";
 
-const IncrementingTimer = ({ startTime }) => {
+type IncrementingTimerProps = {
+  startTime: number;
+};
+
+const IncrementingTimer = ({ startTime }: IncrementingTimerProps) => {
   const [ms, setMs] = useState(Date.now() - startTime);
 
   useEffect(() => {
@@ -16,10 +19,6 @@ const IncrementingTimer = ({ startTime }) => {
   }, [startTime]);
 
   return <Time time={{ ms }} showMilliseconds />;
-};
-
-IncrementingTimer.propTypes = {
-  startTime: PropTypes.number.isRequired,
 };
 
 export default IncrementingTimer;

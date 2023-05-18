@@ -1,14 +1,13 @@
 import { Epic, createEpicMiddleware } from "redux-observable";
 
 import rootEpic from "./epics";
-import * as reducers from "./reducers";
-import * as slices from "./slices";
+import * as reducers from "./slices";
 import { configureStore } from "@reduxjs/toolkit";
 
 const epicMiddleware = createEpicMiddleware();
 
 const store = configureStore({
-  reducer: { ...reducers, ...slices },
+  reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

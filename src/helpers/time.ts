@@ -1,5 +1,5 @@
 import { Partial } from "react-spring";
-import { Time } from "../types";
+import { Time, TimeInputData } from "../types";
 import { fillZeroes } from "./formatting";
 import { multiMatch } from "./general";
 import Time from "../components/shared/Time";
@@ -83,7 +83,7 @@ export function formatTime(ms: number) {
   );
 }
 
-export function parseTimeInput(input: string) {
+export function parseTimeInput(input: string): TimeInputData {
   if (!input) {
     return null;
   }

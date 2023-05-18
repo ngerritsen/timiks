@@ -40,7 +40,7 @@ export function getRemainingRehearsalCaseIds(
 }
 
 export function getRandomScramble(trainingType: TrainingType, caseId: string) {
-  return pickRandom<number>(scrambles[trainingType][caseId]);
+  return pickRandom(scrambles[trainingType][caseId]);
 }
 
 export function selectCases(trainingType: TrainingType, enabledIds: string[]) {

@@ -5,12 +5,14 @@ import { RootState } from "../store";
 
 export const getCurrentCaseId = (state: RootState) =>
   state.trainer.currentCaseId;
+
 export const getTrainingType = (state: RootState) => state.trainer.trainingType;
 export const getEnabledCases = (state: RootState) => state.trainer.enabledCases;
 export const getActiveEnabledCases = (state: RootState) =>
   getEnabledCases(state)[getTrainingType(state)];
 export const getCurrentScramble = (state: RootState) =>
   state.trainer.currentScramble;
+
 export const getTrainerTimes = (state: RootState) => state.trainer.times;
 export const isInRehearsal = (state: RootState) => state.trainer.inRehearsal;
 export const getRehearsedCaseIds = (state: RootState) =>

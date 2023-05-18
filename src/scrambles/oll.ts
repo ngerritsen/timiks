@@ -1,4 +1,4 @@
-{
+const scrambles: TrainerScrambles = {
   "1": [
     "F' L F L' U' L2 B L B' U L",
     "B' R B R' U' R2 F R F' U R",
@@ -74,7 +74,7 @@
     "F' U2 R B2 L' B2 R' U2 B L F B'",
     "B' U R B' R' B2 L2 F' L' F U' L'",
     "L' B' U R' U R2 B2 L' B R' B2 L2",
-    "R' F' U L' U L2 F2 R' F L' F2 R2"
+    "R' F' U L' U L2 F2 R' F L' F2 R2",
   ],
   "2": [
     "R U B' R B R2 U' R' F R F'",
@@ -151,7 +151,7 @@
     "F' U' L' U F B' U' B U F' L F",
     "B L U' F U2 L' U' B' U L F' L'",
     "R B U' L U2 B' U' R' U B L' B'",
-    "F B U2 B' R B U2 B2 R' B U2 F'"
+    "F B U2 B' R B U2 B2 R' B U2 F'",
   ],
   "3": [
     "B F2 L' F L' B' U2 B L' B' F",
@@ -228,7 +228,7 @@
     "L' U' L U' F R U' B U2 B' R' F'",
     "B L' B' R B' L B2 R' U2 R B' R'",
     "R' F' R U2 R' F2 L F' R F' L' F",
-    "F R2 B' R' B F2 D2 B2 L B2 D2 F"
+    "F R2 B' R' B F2 D2 B2 L B2 D2 F",
   ],
   "4": [
     "L' R2 B R' B L U2 L' B L R'",
@@ -305,7 +305,7 @@
     "R2 D L' B' L D' R' U B U B' R'",
     "R B L U2 L' B' R' U2 F R' F' R",
     "F2 D B' R' B D' F' U R U R' F'",
-    "F' D' B L B' D F2 U F' L' U2 L"
+    "F' D' B L B' D F2 U F' L' U2 L",
   ],
   "5": [
     "R' F R' F' R F' L' U2 L F R",
@@ -382,7 +382,7 @@
     "F U2 F' U L2 U' B L' B' L U L2",
     "L' R B2 R' B D L2 U' L2 D' B L",
     "B D L' F2 D' L' D L F2 L D' B'",
-    "F' L F L2 D B D' L' D B' D' L2"
+    "F' L F L2 D B D' L' D B' D' L2",
   ],
   "6": [
     "R B U B' U R' F2 L F L' F",
@@ -459,7 +459,7 @@
     "B L F' L B D2 B' L2 U2 F B' R2",
     "R' D' F L2 D F D' F' L2 F' D R",
     "F' D' L B2 D L D' L' B2 L' D F",
-    "R U' F B' R2 B R2 F' R' F' U F"
+    "R U' F B' R2 B R2 F' R' F' U F",
   ],
   "7": [
     "R U2 F U F2 L F L2 U L R'",
@@ -536,7 +536,7 @@
     "R' F' U L F' L' F2 U' R B U2 B'",
     "R' L' D2 F' L U2 L' F D2 L U2 R",
     "F' L' U B L' B' L2 U' F R U2 R'",
-    "B' R' U F R' F' R2 U' B L U2 L'"
+    "B' R' U F R' F' R2 U' B L U2 L'",
   ],
   "8": [
     "F B2 R2 B R B' R B R F' B",
@@ -613,7 +613,7 @@
     "L U' B D2 R2 U2 F U R2 U' D2 L",
     "L F' L B D2 B U2 F2 R2 B2 D2 F'",
     "B L' B R D2 R U2 L2 F2 R2 D2 L'",
-    "R B' D' R2 U R2 D B' L' B2 L R'"
+    "R B' D' R2 U R2 D B' L' B2 L R'",
   ],
   "9": [
     "R' U2 R U R' U F' U' F U R",
@@ -690,7 +690,7 @@
     "B L' U2 L F U' F' U2 B' L' U L",
     "L' B2 R2 D2 R' D2 B R' B2 L B'",
     "L' U' L B L' U' L2 U L2 U L B'",
-    "F R B U2 F' B' L' F R' F' U2 L"
+    "F R B U2 F' B' L' F R' F' U2 L",
   ],
   "10": [
     "R' L F L' F' L F' R L2 U2 L",
@@ -767,7 +767,7 @@
     "L' B U2 B' R' U R U2 L B U' B'",
     "F U F2 U2 L D' L' U2 L2 D L2 F",
     "F' L2 U2 F' L' F L U L' U L2 F",
-    "B L2 D2 F2 L D2 B' L B' U2 R B"
+    "B L2 D2 F2 L D2 B' L B' U2 R B",
   ],
   "11": [
     "L R' F2 D F D2 L D L2 F R",
@@ -844,7 +844,7 @@
     "R B' R2 F R' D2 B' D2 B2 R2 F'",
     "B F' L2 U L2 U' L' U L' U' B' F",
     "R' U2 R B2 L R2 F' L F L2 R2 B2",
-    "L' D2 L2 F L2 D2 B L B' R2 B R2"
+    "L' D2 L2 F L2 D2 B L B' R2 B R2",
   ],
   "12": [
     "F' L2 B L B' L U' L' U L F",
@@ -921,7 +921,7 @@
     "R' U2 R U2 L' B L' R B R' B' L2",
     "R' F R' F2 U' F U R2 U' B U2 B'",
     "L U2 L' U' L2 F' L' F2 U' F' L'",
-    "L' U2 L U2 R' F R' L F L' F' R2"
+    "L' U2 L U2 R' F R' L F L' F' R2",
   ],
   "13": [
     "L' U' B' U B U R U' L U R'",
@@ -998,7 +998,7 @@
     "L F U F' U' L2 U' L U' L' U2 L",
     "R' D' F L2 F D F' D' L2 F' D R",
     "L F U2 L' B2 D' R D B2 L F' L'",
-    "B' R' B L2 D F D' L2 B' U2 R B"
+    "B' R' B L2 D F D' L2 B' U2 R B",
   ],
   "14": [
     "L' U' L U L F' L2 U' L U F",
@@ -1075,7 +1075,7 @@
     "F2 U F' L' U L F U' F2 L' U2 L",
     "R D B' L2 B' D' B D L2 B D' R'",
     "R2 U R B' R B2 U B' U2 F R2 F'",
-    "L F' L' F U2 F U2 R U R' U' F'"
+    "L F' L' F U2 F U2 R U R' U' F'",
   ],
   "15": [
     "F2 D' B L B' D F L' U' L F",
@@ -1152,7 +1152,7 @@
     "F U' F2 D' L' U' L U D F2 U F'",
     "L U F L' B2 D' R' D B2 L F' L'",
     "F R' D' R' D2 L B2 L' D' R2 F'",
-    "R' F R U R' U' F' R U' R' U2 R"
+    "R' F R U R' U' F' R U' R' U2 R",
   ],
   "16": [
     "B U2 B' R2 F R F2 U' F U R",
@@ -1229,7 +1229,7 @@
     "R' B' R U' R' B L2 D F D' L2 R",
     "F R B2 D B' U' B D' B2 U R' F'",
     "F U F2 L F' D R2 D R2 D2 F2 L'",
-    "L U' D2 R2 U B U2 R2 D2 F U' L"
+    "L U' D2 R2 U B U2 R2 D2 F U' L",
   ],
   "17": [
     "F R U R' U F' U2 F' L F L'",
@@ -1306,7 +1306,7 @@
     "R U2 R2 F R F L' B L' B' L2 F2",
     "L U2 L2 B L B R' F R' F' R2 B2",
     "L F L' B2 D' R D B2 L U' F' L'",
-    "B' R' B L2 D F' D' L2 B' U R B"
+    "B' R' B L2 D F' D' L2 B' U R B",
   ],
   "18": [
     "R' F R F' U2 F' U L' U L F",
@@ -1383,7 +1383,7 @@
     "F B2 D R D F B' D' L' D' F2 B'",
     "F U2 F' L' U2 L F U' F2 L F L'",
     "R U2 R' F' U' F' L F L2 U' L F",
-    "R' U2 R B U B L' B' L2 U L' B'"
+    "R' U2 R B U B L' B' L2 U L' B'",
   ],
   "19": [
     "R U B L' U' B U L U' B2 R'",
@@ -1460,7 +1460,7 @@
     "B L U B' R2 D' F' D R2 B L' B'",
     "B' R' U' B L2 D F D' L2 B' R B",
     "R U B' U' R' U R B2 U B' U' R'",
-    "B' R' U2 R U2 L U F U' F' L' B"
+    "B' R' U2 R U2 L U F U' F' L' B",
   ],
   "20": [
     "R2 L D' F D R2 L' B L U' L' B'",
@@ -1537,7 +1537,7 @@
     "B F R B2 D2 F2 U2 F2 D2 R' B' F'",
     "L' R' B' R2 D2 L2 U2 L2 D2 B L R",
     "L R B U2 R2 D2 L2 D2 R2 B' L' R'",
-    "F B L F2 D2 B2 U2 B2 D2 L' F' B'"
+    "F B L F2 D2 B2 U2 B2 D2 L' F' B'",
   ],
   "21": [
     "F' U2 F U F' U' F U F' U F",
@@ -1614,7 +1614,7 @@
     "L U2 D2 L' B2 U2 R F2 R2 U2 R B2",
     "R' F2 D R2 U' R2 D' F2 L F2 R L'",
     "L' B2 D L2 U' L2 D' B2 R B2 L R'",
-    "R' F2 L2 D2 L' D2 L' F2 R2 U2 R'"
+    "R' F2 L2 D2 L' D2 L' F2 R2 U2 R'",
   ],
   "22": [
     "R U R' U R U L' U R' U' L",
@@ -1691,7 +1691,7 @@
     "F' L2 U' B D' B' U B2 D B2 L2 F",
     "B' D L2 U' B2 R2 U L2 D' F2 R2 B",
     "L' B2 R2 D F2 U' B2 L2 U F2 D' L",
-    "L' D F2 U' L2 B2 U F2 D' R2 B2 L"
+    "L' D F2 U' L2 B2 U F2 D' R2 B2 L",
   ],
   "23": [
     "R B R' F R B2 R' F' R B R'",
@@ -1768,7 +1768,7 @@
     "L' U L2 D' R2 D L2 D' R2 U' D L",
     "R' U2 R U2 R B L' B2 R' B2 L B'",
     "R' B2 R' B2 U2 L' B2 L B2 U2 R2",
-    "L2 R B U B' D2 B U' B' D2 L2 R'"
+    "L2 R B U B' D2 B U' B' D2 L2 R'",
   ],
   "24": [
     "B' U' B U R U' B' U B U R'",
@@ -1845,7 +1845,7 @@
     "B2 D2 F U F' D' F U' F' D' B2",
     "B L2 R' U F U' F' U' R U L2 B'",
     "B' L R2 U' F' U F U L' U' R2 B",
-    "R' F R B' F2 U L F' L' F2 U' B"
+    "R' F R B' F2 U L F' L' F2 U' B",
   ],
   "25": [
     "R B L' B L B2 U B U' B' R'",
@@ -1922,7 +1922,7 @@
     "R U2 R' F' U F U' F2 L F L' F",
     "F' U2 F U2 F R' F' U' F' U F R",
     "F' B L2 B L2 B2 U B U' F U2 B'",
-    "B' F R2 F R2 F2 U F U' B U2 F'"
+    "B' F R2 F R2 F2 U F U' B U2 F'",
   ],
   "26": [
     "B L' B' U' L U L U' F' L' F",
@@ -1999,7 +1999,7 @@
     "B2 L2 F U' B U F' U' B' U L2 B2",
     "R' F U R2 U' L2 U R2 U' L2 F' R",
     "L F2 D' L2 U L2 D L' U' R U' R'",
-    "B R2 B U2 B' D' B U2 B' D R2 B'"
+    "B R2 B U2 B' D' B U2 B' D R2 B'",
   ],
   "27": [
     "F2 B L B L' F L B' L' F B'",
@@ -2076,7 +2076,7 @@
     "R' D' F R2 B U B' U' R2 F' D R",
     "B' R B2 R L U L' U' R' B2 R' B",
     "B L2 F' D' B' D F D' B D L2 B'",
-    "L' B2 D L D' R D L' D' R' B2 L"
+    "L' B2 D L D' R D L' D' R' B2 L",
   ],
   "28": [
     "R U' R' U R L' B' R B R2 L",
@@ -2153,7 +2153,7 @@
     "F' B R' U D' L2 U' D F2 R F B'",
     "R' L B' U D' F2 U' D R2 B R L'",
     "F R' F' U2 F U R U' F' R' U2 R",
-    "L B R B2 U' D L2 U D' R' B' L'"
+    "L B R B2 U' D L2 U D' R' B' L'",
   ],
   "29": [
     "B' U B U L U2 L' B L' B' L",
@@ -2230,7 +2230,7 @@
     "R' F R D B2 D' R F' R' D B2 D'",
     "R2 U2 F' U F U' F R F' R' U2 R2",
     "F' L F' L' F2 U2 B' R' F R F' B",
-    "B' R B' R' B2 U2 F' L' B L B' F"
+    "B' R B' R' B2 U2 F' L' B L B' F",
   ],
   "30": [
     "F U R' U' R B' D' R D F' B",
@@ -2307,7 +2307,7 @@
     "R2 U2 B U' B' U B' R' B R U2 R2",
     "D' F L F2 L' F R2 D B2 U' B2 R2",
     "D' R F R2 F' R B2 D L2 U' L2 B2",
-    "L2 F2 R B' D' B D R D' R2 F2 L2"
+    "L2 F2 R B' D' B D R D' R2 F2 L2",
   ],
   "31": [
     "B' U B U2 B' U' R' U R U B",
@@ -2384,7 +2384,7 @@
     "F R' D B2 R B2 R' U' B2 U D' F'",
     "R B' D L2 B L2 B' U' L2 U D' R'",
     "R2 D' L F2 L' D R2 U2 R B' R' B",
-    "F2 L2 B L' D F' D' F L B' L2 F2"
+    "F2 L2 B L' D F' D' F L B' L2 F2",
   ],
   "32": [
     "F U F U F' L' U2 L F U' F2",
@@ -2461,7 +2461,7 @@
     "R2 B2 L' B D' R D R' B' L B2 R2",
     "B D' B2 U2 B' R B R' U2 B2 D B'",
     "R2 B2 L' D L B' L' B D' L B2 R2",
-    "R' U2 R B2 L' D2 F' R F D2 B2 L"
+    "R' U2 R B2 L' D2 F' R F D2 B2 L",
   ],
   "33": [
     "L F' L' F L' U2 L U F U F'",
@@ -2538,7 +2538,7 @@
     "B U2 F' U' F L F' U F L' U2 B'",
     "R2 F2 L D' F L' F' L D L' F2 R2",
     "L2 F2 R' D F' R F R' D' R F2 L2",
-    "F2 L2 B D' L B' L' B D B' L2 F2"
+    "F2 L2 B D' L B' L' B D B' L2 F2",
   ],
   "34": [
     "B U L' B L D B' U' B D' B2",
@@ -2615,7 +2615,7 @@
     "F B U2 F' U L U' L' F U2 F' B'",
     "L' U2 L U2 L U F' L' F L U' L'",
     "R B' R B2 U B' U' R2 U2 F' U F",
-    "L F' L F2 U F' U' L2 U2 B' U B"
+    "L F' L F2 U F' U' L2 U2 B' U B",
   ],
   "35": [
     "B' R B U B' R' B U R U2 R'",
@@ -2692,7 +2692,7 @@
     "B' U D' F2 U' R' F2 R F2 D R' B",
     "F' U2 F R' F R B2 D2 F D2 F2 B2",
     "B' F2 R2 B' R F' R' B F R2 B F2",
-    "L2 F2 L U' L U L2 F2 L' F' L' F"
+    "L2 F2 L U' L U L2 F2 L' F' L' F",
   ],
   "36": [
     "B2 U' R B L' R' D' B D L B",
@@ -2769,7 +2769,7 @@
     "L B2 L2 B2 L' B' R B D2 L2 D2 R'",
     "L2 R D2 L2 B' R' B L2 R D2 L2 R'",
     "R' F2 D2 R' B L' B' R D2 F' R F'",
-    "R' F2 D2 B' L' B D2 R F2 L' U2 L"
+    "R' F2 D2 B' L' B D2 R F2 L' U2 L",
   ],
   "37": [
     "R U R2 U' R' F R U R U' F'",
@@ -2846,7 +2846,7 @@
     "B L' B' L U F B2 D' R' D F' B2",
     "B' U R' F R' F' R2 B U2 L U L'",
     "L F' L' F U R L2 D' B' D R' L2",
-    "R' U F' L F' L' F2 R U2 B U B'"
+    "R' U F' L F' L' F2 R U2 B U B'",
   ],
   "38": [
     "F R2 D B2 R D2 F L D F2 R",
@@ -2923,7 +2923,7 @@
     "B U2 F2 D' L' D F2 R U2 R' U B'",
     "L' U' L U2 F2 U R' F R F' U' F2",
     "B2 D' B R B' R' B' D B' L U2 L'",
-    "B' R2 B' L2 B R U' R U B' L2 B2"
+    "B' R2 B' L2 B R U' R U B' L2 B2",
   ],
   "39": [
     "R B' R B R2 U R B U B' R'",
@@ -3000,7 +3000,7 @@
     "F' U2 F U' F R U R' U' F2 U' F",
     "L' R U' B' U R2 D' R' D B L R2",
     "R' U' B L2 D2 F D2 L B' L U' R",
-    "B' U2 B U' B L U L' U' B2 U' B"
+    "B' U2 B U' B L U L' U' B2 U' B",
   ],
   "40": [
     "L' U' B' R' F' U F U R B L",
@@ -3077,7 +3077,7 @@
     "R' B' R U' R2 U F' R B R' F R2",
     "L U2 L' U L' B' U' B U L2 U L'",
     "B' L' B U' B2 U R' B L B' R B2",
-    "L' B' U F R U' R' B F' L' U L2"
+    "L' B' U F R U' R' B F' L' U L2",
   ],
   "41": [
     "L U F U F' U' L' U2 L U L'",
@@ -3154,7 +3154,7 @@
     "L' R2 B R F2 R F R2 B' L D2 R2",
     "F' D2 B2 L' B2 D2 F2 U R' U' F'",
     "B' D2 F2 R' F2 D2 B2 U L' U' B'",
-    "R' D2 L2 F' L2 D2 R2 U B' U' R'"
+    "R' D2 L2 F' L2 D2 R2 U B' U' R'",
   ],
   "42": [
     "B F' D L D' B2 F R' U' R B",
@@ -3231,7 +3231,7 @@
     "R U2 B' U2 B2 U2 B L' R B2 L R2",
     "B2 L' B' R B2 L U B U' B2 R' B'",
     "R2 B' R' F R2 B U R U' R2 F' R'",
-    "L2 F' L' B L2 F U L U' L2 B' L'"
+    "L2 F' L' B L2 F U L U' L2 B' L'",
   ],
   "43": [
     "L U L' U' B' U2 B U L U L'",
@@ -3308,7 +3308,7 @@
     "L F2 R2 F L B D2 B' L2 F2 R2 F'",
     "R B2 L2 B R F D2 F' R2 B2 L2 B'",
     "L D' L2 U2 B L' B' L U2 L2 D L'",
-    "R D' R2 U2 F R' F' R U2 R2 D R'"
+    "R D' R2 U2 F R' F' R U2 R2 D R'",
   ],
   "44": [
     "B U L' U' B' U L U L U' L'",
@@ -3385,7 +3385,7 @@
     "F R U R' U F2 B2 D2 F' D2 F2 B2",
     "R U B' R B' F2 L' D' L B2 F2 R2",
     "L2 D L2 U2 F U L' U L2 F' D' L'",
-    "R' F2 R2 B2 L' D2 L B R F2 R2 B"
+    "R' F2 R2 B2 L' D2 L B R F2 R2 B",
   ],
   "45": [
     "R' U' F R' D' F D F2 R U R",
@@ -3462,7 +3462,7 @@
     "F U R U' R' B2 F U2 D2 B2 F2 D2",
     "B2 F2 U2 D2 B2 F U' L' U L F D2",
     "F R U2 B2 L U L' U' B2 R' U2 F'",
-    "B L U2 F2 R U R' U' F2 L' U2 B'"
+    "B L U2 F2 R U R' U' F2 L' U2 B'",
   ],
   "46": [
     "B F' L U B L B' L' U' B' F",
@@ -3539,7 +3539,7 @@
     "L F' L' F U2 F2 D B' R2 B D' F2",
     "B2 R2 D' F R' F' D F R F' R2 B2",
     "B2 L2 D F' L F D' F' L' F L2 B2",
-    "B' R2 F D' F L D' L' D2 F2 R2 B"
+    "B' R2 F D' F L D' L' D2 F2 R2 B",
   ],
   "47": [
     "L' U2 L2 U L' U L U2 F' L' F",
@@ -3616,7 +3616,7 @@
     "L' B L' B' L2 F2 D B' R2 B D' F2",
     "B L2 U L2 U L2 U2 L' U2 L' U2 B'",
     "B' R B' R' B2 L2 D R' F2 R D' L2",
-    "F' U' F U' F R' F' R' B' R' B R'"
+    "F' U' F U' F R' F' R' B' R' B R'",
   ],
   "48": [
     "R U B U' B D B D2 R D R2 B",
@@ -3693,7 +3693,7 @@
     "B U L' B2 R D B' L' D' L2 B2 R'",
     "R B2 L2 B R B' F' D2 F L2 B2 R2",
     "F R2 B2 R F R' L' D2 L B2 R2 F2",
-    "R U B' R2 F D R' B' D' B2 R2 F'"
+    "R U B' R2 F D R' B' D' B2 R2 F'",
   ],
   "49": [
     "L F' L' F U F' L F L2 U L",
@@ -3770,7 +3770,7 @@
     "R' F2 L2 F L2 F U L U' R U2 L'",
     "R' U2 R L B' U2 B2 U2 B L2 B2 L",
     "F' U2 F B R' U2 R2 U2 R B2 R2 B",
-    "R D2 L2 B L B' D' L2 D' R' U B2"
+    "R D2 L2 B L B' D' L2 D' R' U B2",
   ],
   "50": [
     "R B U B' U' R2 U' F' U F R",
@@ -3847,7 +3847,7 @@
     "F' L F L' U' L F' L' F2 U' F'",
     "F2 L2 F L2 F L F R' F' R U2 L'",
     "F2 R2 F U2 B F2 U2 B2 R F' R B",
-    "R2 B2 R U2 L R2 U2 L2 B R' B L"
+    "R2 B2 R U2 L R2 U2 L2 B R' B L",
   ],
   "51": [
     "F' U2 F U F' L F' L' F U F",
@@ -3924,7 +3924,7 @@
     "B' R2 F R D R2 D' R' B F2 U2 F",
     "F D R' D' R2 U R U' R2 F2 U2 F",
     "B U2 B2 F R' D' R2 D R B R2 F'",
-    "L D F' D' F2 U F U' F2 L2 U2 L"
+    "L D F' D' F2 U F U' F2 L2 U2 L",
   ],
   "52": [
     "L F' L F L B L B' U B' U B",
@@ -4001,7 +4001,7 @@
     "L U L F' D' L D L2 F2 U' F' L'",
     "L D R2 D R2 D' F' D' F L2 U2 L",
     "R U B U2 B2 F R2 B R2 F' U' R'",
-    "B L2 F2 D F L D' B' L2 F U' L'"
+    "B L2 F2 D F L D' B' L2 F U' L'",
   ],
   "53": [
     "R U R2 F R F' U F R' F' R",
@@ -4078,7 +4078,7 @@
     "R U2 R U R2 U R2 F R' F' U2 R2",
     "F R' F R F' R U' B U2 B' R' F'",
     "L' U2 R B L' B' R' L2 U L' U L",
-    "F' U2 B L F' L' B' F2 U F' U F"
+    "F' U2 B L F' L' B' F2 U F' U F",
   ],
   "54": [
     "L F2 R' F' R F R' F' R F' L'",
@@ -4155,7 +4155,7 @@
     "L' B R2 B D' B' D R2 B' L2 U' L'",
     "R' F R' F' R2 U' R' U' R B U' B'",
     "B2 F' D2 L' D2 L D2 L B' F L2 B'",
-    "F U L' U2 L F2 R' F2 R2 U' R' F'"
+    "F U L' U2 L F2 R' F2 R2 U' R' F'",
   ],
   "55": [
     "B' R B L' B' R2 U R U' B L",
@@ -4232,7 +4232,7 @@
     "R' F2 U' F2 R F' R' F' U F' R F'",
     "L' U' L' B L U2 B2 U' B2 U' B' L",
     "L' B2 U' B2 L B' L' B' U B' L B'",
-    "L' B L2 F U' F' U2 L' U' B2 U2 B"
+    "L' B L2 F U' F' U2 L' U' B2 U2 B",
   ],
   "56": [
     "F L' U' B' U L F2 L' B L F",
@@ -4309,7 +4309,7 @@
     "B' U' R B' R' B U' B U2 B L' B' L",
     "B U' L' U2 L' U L U' L U2 L U' B'",
     "F' U' L F' L' F U' F U2 F R' F' R",
-    "L U' F' U2 F' U F U' F U2 F U' L'"
+    "L U' F' U2 F' U F U' F U2 F U' L'",
   ],
   "57": [
     "B U' B' R' U R B L' B L B2",
@@ -4386,6 +4386,8 @@
     "B2 U L F R' U2 R F' L' B2 U' B2",
     "F' U L B2 F2 R' D' R B2 F2 L' F",
     "B F L U2 L' B' F' R2 D' F2 D R2",
-    "F2 D' B' R' F U2 F' R B L2 D F2"
-  ]
-}
+    "F2 D' B' R' F U2 F' R B L2 D F2",
+  ],
+};
+
+export default scrambles;

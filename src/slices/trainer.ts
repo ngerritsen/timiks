@@ -7,7 +7,7 @@ type TrainerState = {
   enabledCases: EnabledCaseIds;
   trainingType: TrainingType;
   currentCaseId: string;
-  currentScramble: number;
+  currentScramble: string;
   inRehearsal: boolean;
   rehearsedCaseIds: string[];
   times: TrainingTime[];
@@ -20,7 +20,7 @@ const initialState: TrainerState = {
   },
   trainingType: types[0],
   currentCaseId: Object.keys(cases[types[0]])[0],
-  currentScramble: 0,
+  currentScramble: "",
   inRehearsal: false,
   rehearsedCaseIds: [],
   times: [],
@@ -69,7 +69,7 @@ const { reducer, actions } = createSlice({
     },
     nextCaseDetermined(
       state,
-      action: PayloadAction<{ id: string; scramble: number }>
+      action: PayloadAction<{ id: string; scramble: string }>
     ) {
       state.currentCaseId = action.payload.id;
       state.currentScramble = action.payload.scramble;

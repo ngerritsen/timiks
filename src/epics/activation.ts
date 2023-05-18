@@ -1,5 +1,5 @@
-import { fromEvent, interval, merge, of, timer } from "rxjs";
 import keycode from "keycode";
+import { fromEvent, interval, merge, of, timer } from "rxjs";
 import {
   filter,
   withLatestFrom,
@@ -10,23 +10,43 @@ import {
   mergeMap,
   ignoreElements,
 } from "rxjs/operators";
+
 import {
   getActivationDuration,
   shouldUseInspectionTime,
   shouldUseManualTimeEntry,
   shouldWarnForInspectionTime,
 } from "../selectors/settings";
-import * as actions from "../actions";
+
 import * as timerContants from "../constants/timer";
-import { ofType } from "redux-observable";
-import * as actionTypes from "../constants/actionTypes";
-import * as activationSelectors from "../selectors/activation";
-import { isStopped, isInspecting, getStopTime } from "../selectors/timer";
 import { playSound } from "../helpers/audio";
+import { TimiksEpic } from "../types";
+
+import {
+  prepareInspection,
+  skipPreparationStage,
+  prepareActivation,
+  incrementPreparationState,
+  resetActivation,
+  startInspection,
+  resetTime,
+  startTimer,
+  failInspection,
+  stopTimer,
+} from "../slices/timer";
+
+import {
+  getStopTime,
+  isInspecting,
+  isPreparing,
+  isPreparingForInspection,
+  isReady,
+  isStopped,
+} from "../selectors/timer";
 
 const inputElements = ["input", "textarea"];
 
-export const initializeActivationEpic = (_, state$) =>
+export const initializeActivationEpic: TimiksEpic = (_, state$) =>
   initiates().pipe(
     withLatestFrom(state$),
     filter(
@@ -34,38 +54,38 @@ export const initializeActivationEpic = (_, state$) =>
         !shouldUseManualTimeEntry(state) &&
         isStopped(state) &&
         Date.now() - getStopTime(state) > timerContants.TIMER_COOLDOWN &&
-        !activationSelectors.isPreparing(state)
+        !isPreparing(state)
     ),
     tap(scrollToTop),
     map(([, state]) =>
       shouldUseInspectionTime(state) && !isInspecting(state)
-        ? actions.prepareInspection()
+        ? prepareInspection()
         : getActivationDuration(state) === 0
-        ? actions.skipPreparationStage()
-        : actions.prepareActivation()
+        ? skipPreparationStage()
+        : prepareActivation()
     ),
-    mergeMap((action) => merge(of(action), of(actions.resetTime())))
+    mergeMap((action) => merge(of(action), of(resetTime())))
   );
 
-export const prepareActivationEpic = (action$, state$) =>
+export const prepareActivationEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.PREPARE_ACTIVATION),
+    filter(prepareActivation.match),
     withLatestFrom(state$),
     switchMap(([, state]) =>
       interval(
         getActivationDuration(state) / timerContants.PREPARATION_STAGES
       ).pipe(
         withLatestFrom(state$),
-        filter(([, state]) => !activationSelectors.isReady(state)),
-        map(actions.incrementPreparationStage),
-        takeUntil(action$.pipe(ofType(actionTypes.RESET_ACTIVATION)))
+        filter(([, state]) => !isReady(state)),
+        map(() => incrementPreparationState()),
+        takeUntil(action$.pipe(filter(resetActivation.match)))
       )
     )
   );
 
-export const warnForInspectionEpic = (action$, state$) =>
+export const warnForInspectionEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(actionTypes.START_INSPECTION),
+    filter(startInspection.match),
     withLatestFrom(state$),
     filter(([, state]) => shouldWarnForInspectionTime(state)),
     mergeMap(() =>
@@ -75,49 +95,49 @@ export const warnForInspectionEpic = (action$, state$) =>
             tap(() => playSound(sound))
           )
         )
-      ).pipe(takeUntil(action$.pipe(ofType(actionTypes.START_TIMER))))
+      ).pipe(takeUntil(action$.pipe(filter(startTimer.match))))
     ),
     ignoreElements()
   );
 
-export const fireInspectionEpic = (_, state$) =>
+export const fireInspectionEpic: TimiksEpic = (_, state$) =>
   fires().pipe(
     withLatestFrom(state$),
-    filter(([, state]) => activationSelectors.isPreparingForInspection(state)),
+    filter(([, state]) => isPreparingForInspection(state)),
     tap(([event]) => preventEventSideEffects(event)),
-    map(() => actions.startInspection(Date.now()))
+    map(() => startInspection(Date.now()))
   );
 
-export const runInspectionEpic = (action$) =>
+export const runInspectionEpic: TimiksEpic = (action$) =>
   action$.pipe(
-    ofType(actionTypes.START_INSPECTION),
+    filter(startInspection.match),
     switchMap(() =>
       timer(
         timerContants.INSPECTION_TIME +
           timerContants.INSPECTION_TIME_PENALTY_TIME
-      ).pipe(takeUntil(action$.pipe(ofType(actionTypes.START_TIMER))))
+      ).pipe(takeUntil(action$.pipe(filter(startTimer.match))))
     ),
-    map(actions.failInspection)
+    map(() => failInspection())
   );
 
-export const fireActivationEpic = (_, state$) =>
+export const fireActivationEpic: TimiksEpic = (_, state$) =>
   fires().pipe(
     withLatestFrom(state$),
-    filter(([, state]) => activationSelectors.isPreparing(state)),
+    filter(([, state]) => isPreparing(state)),
     tap(([event]) => preventEventSideEffects(event)),
     mergeMap(([, state]) =>
-      activationSelectors.isReady(state)
-        ? of(actions.resetActivation(), actions.startTimer(Date.now()))
-        : of(actions.resetActivation())
+      isReady(state)
+        ? of(resetActivation(), startTimer(Date.now()))
+        : of(resetActivation())
     )
   );
 
-export const stopActivationEpic = (_, state$) =>
+export const stopActivationEpic: TimiksEpic = (_, state$) =>
   stops().pipe(
     withLatestFrom(state$),
     filter(([, state]) => !isStopped(state)),
     tap(([event]) => preventEventSideEffects(event)),
-    map(() => actions.stopTimer(Date.now()))
+    map(() => stopTimer(Date.now()))
   );
 
 const initiates = () =>
@@ -147,28 +167,31 @@ const stops = () =>
     fromEvent(window, "mousedown")
   );
 
-const isValidActivationEvent = (event) =>
+const isValidActivationEvent = (event: Event) =>
   Boolean(document.querySelector("[data-activation]")) &&
   !document.querySelector("[data-modal]") &&
-  !event.repeat &&
-  !inputElements.includes(String(event.target.tagName).toLowerCase()) &&
-  !event.target.closest(inputElements.join(","));
+  !(event as KeyboardEvent).repeat &&
+  !inputElements.includes(
+    String((event.target as HTMLElement).tagName).toLowerCase()
+  ) &&
+  !(event.target as Element).closest(inputElements.join(","));
 
-const preventEventSideEffects = (event) => {
+const preventEventSideEffects = (event: Event) => {
   event.preventDefault();
-  event.target.blur();
+  (event.target as HTMLElement).blur();
 };
 
-const preventRepeatEventSideEffects = (event) => {
-  if (event.repeat) {
+const preventRepeatEventSideEffects = (event: Event) => {
+  if ((event as KeyboardEvent).repeat) {
     event.preventDefault();
   }
 };
 
-const isValidTouchClickEvent = (event) =>
-  Boolean(event.target.closest("[data-activation]")) &&
-  !event.target.closest("[data-no-activation]") &&
-  !(event.type.includes("mouse") && event.button !== 0);
+const isValidTouchClickEvent = (event: Event) =>
+  Boolean((event.target as Element).closest("[data-activation]")) &&
+  !(event.target as Element).closest("[data-no-activation]") &&
+  !(event.type.includes("mouse") && (event as MouseEvent).button !== 0);
 
-const isSpacebarEvent = (event) => keycode(event.keyCode) === "space";
+const isSpacebarEvent = (event: Event) => keycode.isEventKey(event, "space");
+
 const scrollToTop = () => window.scrollTo(0, 0);

@@ -1,7 +1,6 @@
-import { withLatestFrom, map } from "rxjs/operators";
+import { withLatestFrom, map, filter } from "rxjs/operators";
 import { ofType } from "redux-observable";
 
-import { resetTime } from "../actions";
 import { saveTime } from "../slices/times";
 import {
   changeTrainingType,
@@ -12,8 +11,8 @@ import {
 import { getPuzzle } from "../selectors/settings";
 import {
   getStartTime,
+  getTimerState,
   hasInspectionPenalty,
-  isTraining,
 } from "../selectors/timer";
 import { getScramble } from "../selectors/scramble";
 import {
@@ -21,29 +20,37 @@ import {
   getCurrentCaseId,
   getCurrentScramble,
 } from "../selectors/trainer";
-import {
-  FAIL_INSPECTION,
-  STOP_TIMER,
-  SUBMIT_TIME_INPUT,
-} from "../constants/actionTypes";
 import { randomId } from "../helpers/id";
+import { TimiksEpic } from "../types";
+import {
+  failInspection,
+  resetTime,
+  stopTimer,
+  submitTimeInput,
+} from "../slices/timer";
+import { RootState } from "../store";
+import { DEFAULT_PUZZLE } from "../constants/settings";
 
-export const resetTimeEpic = (action$) =>
+export const resetTimeEpic: TimiksEpic = (action$) =>
   action$.pipe(
-    ofType(changeTrainingType, clearTrainerTimes, removeTrainerTime),
-    map(resetTime)
+    ofType(
+      changeTrainingType.toString(),
+      clearTrainerTimes.toString(),
+      removeTrainerTime.toString()
+    ),
+    map(() => resetTime())
   );
 
-export const failInspectionEpic = (action$, state$) =>
+export const failInspectionEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(FAIL_INSPECTION),
+    filter(failInspection.match),
     withLatestFrom(state$),
-    map(([, state]) => createSaveTime(0, state, true))
+    map(([, state]) => createSaveTime(0, state, true, false))
   );
 
-export const submitTimeEpic = (action$, state$) =>
+export const submitTimeEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(SUBMIT_TIME_INPUT),
+    filter(submitTimeInput.match),
     withLatestFrom(state$),
     map(([action, state]) =>
       createSaveTime(
@@ -55,12 +62,12 @@ export const submitTimeEpic = (action$, state$) =>
     )
   );
 
-export const stopTimerEpic = (action$, state$) =>
+export const stopTimerEpic: TimiksEpic = (action$, state$) =>
   action$.pipe(
-    ofType(STOP_TIMER),
+    filter(stopTimer.match),
     withLatestFrom(state$),
     map(([action, state]) =>
-      isTraining(state)
+      getTimerState(state).isTraining
         ? saveTrainerTime({
             id: randomId(),
             trainingType: getTrainingType(state),
@@ -68,6 +75,8 @@ export const stopTimerEpic = (action$, state$) =>
             ms: action.payload - getStartTime(state),
             timestamp: new Date(),
             scramble: getCurrentScramble(state),
+            date: new Date(),
+            puzzle: DEFAULT_PUZZLE,
           })
         : createSaveTime(
             action.payload - getStartTime(state),
@@ -78,7 +87,12 @@ export const stopTimerEpic = (action$, state$) =>
     )
   );
 
-const createSaveTime = (ms, state, dnf, plus2) =>
+const createSaveTime = (
+  ms: number,
+  state: RootState,
+  dnf: boolean,
+  plus2: boolean
+) =>
   saveTime({
     id: randomId(),
     ms,

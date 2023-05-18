@@ -3,7 +3,7 @@ import keycode from "keycode";
 
 import { TIMER_COOLDOWN } from "../../constants/timer";
 import { useSelector } from "react-redux";
-import { getStopTime, isStopped } from "../../selectors/timer";
+import { getTimerState } from "../../selectors/timer";
 import keymap from "../../constants/keymap";
 
 type ShortcutProps = {
@@ -14,8 +14,7 @@ type ShortcutProps = {
 const inputElements = ["textarea", "input", "select"];
 
 const Shortcut = ({ command, action }: ShortcutProps): null => {
-  const stopped = useSelector(isStopped);
-  const stopTime = useSelector(getStopTime);
+  const { stopped, stopTime } = useSelector(getTimerState);
   const key = useMemo(
     () => (keymap.find((m) => m.commands.includes(command)) || {}).key,
     [command]

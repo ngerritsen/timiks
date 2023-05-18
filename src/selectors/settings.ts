@@ -29,7 +29,7 @@ export const getDisabledArchiveGraphLines = (state: RootState) =>
 export const shouldShowLatestSolveOnTop = (state: RootState) =>
   state.settings.showLatestSolveOnTop;
 
-export const getButtonColor = (state: RootState, isInDarkMode?: boolean) =>
+export const getButtonColor = (state: RootState, isInDarkMode: boolean) =>
   isInDarkMode
     ? state.settings.buttonColorDarkMode || state.settings.buttonColor
     : state.settings.buttonColor;

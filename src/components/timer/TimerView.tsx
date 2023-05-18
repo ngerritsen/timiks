@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import TimerContainer from "../../containers/timer/TimerContainer";
-import ActivationContainer from "../../containers/timer/ActivationContainer";
+import Timer from "./Timer";
+import Activation from "./Activation";
 import Section from "../shared/Section";
 import TimerOptions from "./TimerOptions";
 import TimerScramble from "./TimerScramble";
@@ -19,13 +19,13 @@ const TimerView = () => {
   return (
     <>
       <Section margin="lg">
-        <TimerContainer />
+        <Timer />
       </Section>
       <Section margin="sm">
         <TimerScramble />
       </Section>
       <Section margin="sm">
-        <ActivationContainer />
+        <Activation />
       </Section>
       <Section margin="sm">
         <TimerOptions />

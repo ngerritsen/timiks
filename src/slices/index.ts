@@ -5,5 +5,6 @@ export { default as notifications } from "./notifications";
 export { default as settings } from "./settings";
 export { default as scramble } from "./scramble";
 export { default as times } from "./times";
+export { default as timer } from "./timer";
 export { default as trainer } from "./trainer";
 export { default as version } from "./version";

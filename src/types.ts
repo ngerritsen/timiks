@@ -162,3 +162,11 @@ export type KeyMapping = {
   description?: string;
   hide?: boolean;
 };
+
+export type TimeInputData = {
+  ms: number;
+  dnf: boolean;
+  plus2: boolean;
+};
+
+export type TrainerScrambles = Record<string, string[]>;
