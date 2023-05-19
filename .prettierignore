@@ -3,4 +3,5 @@ dist
 node_modules
 src/vendor
 .pnpm-store
-.pnpm-lock.yaml
+pnpm-lock.yaml
+package-lock.json
