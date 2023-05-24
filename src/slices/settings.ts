@@ -23,6 +23,7 @@ export type SettingsState = {
   hideTrainerTimes: boolean;
   showLatestSolveOnTop: boolean;
   disabledArchiveGraphLines: string[];
+  timeEntryShorthandPrecision: number;
 };
 
 const initialState: SettingsState = {
@@ -41,6 +42,7 @@ const initialState: SettingsState = {
   fixGraphYAxis: false,
   hideTrainerTimes: false,
   disabledArchiveGraphLines: [],
+  timeEntryShorthandPrecision: 3,
 };
 
 const { reducer, actions } = createSlice({

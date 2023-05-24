@@ -12,33 +12,6 @@ const MILLISECONDS_IN_HOUR = MINUTES_IN_HOUR * MILLISECONDS_IN_MINUTE;
 const MAX_MINUTES_IN_HOUR = 59;
 const MAX_SECONDS_IN_MINUTE = 59;
 
-const timeInputPatterns = [
-  {
-    regex: /^(\d{1,2}):(\d{1,2}):(\d{1,2})\.(\d{1,3})$/,
-    fields: ["hours", "minutes", "seconds", "milliseconds"],
-  },
-  {
-    regex: /^(\d{1,2}):(\d{1,2}):(\d{1,2})$/,
-    fields: ["hours", "minutes", "seconds"],
-  },
-  {
-    regex: /^(\d{1,2}):(\d{1,2})\.(\d{1,3})$/,
-    fields: ["minutes", "seconds", "milliseconds"],
-  },
-  {
-    regex: /^(\d{1,2}):(\d{1,2})$/,
-    fields: ["minutes", "seconds"],
-  },
-  {
-    regex: /^(\d{1,2})\.(\d{1,3})$/,
-    fields: ["seconds", "milliseconds"],
-  },
-  {
-    regex: /^(\d{1,2})\.?$/,
-    fields: ["seconds"],
-  },
-];
-
 export function isValidTime(time?: Partial<Time>): time is Time {
   return isValidInputTime(time) && time.date && !isNaN(time.date.getTime());
 }
@@ -81,7 +54,10 @@ export function formatTime(ms: number) {
   );
 }
 
-export function parseTimeInput(input: string): TimeInputData {
+export function parseTimeInput(
+  input: string,
+  shorthandPrecision = 3
+): TimeInputData {
   if (!input) {
     return null;
   }
@@ -105,7 +81,7 @@ export function parseTimeInput(input: string): TimeInputData {
     plus2 = true;
   }
 
-  const ms = parseTimeInputTime(timeInput);
+  const ms = parseTimeInputTime(timeInput, shorthandPrecision);
 
   if (!ms || ms <= 0 || isNaN(ms)) {
     return null;
@@ -114,10 +90,10 @@ export function parseTimeInput(input: string): TimeInputData {
   return { ms, plus2, dnf: false };
 }
 
-function parseTimeInputTime(timeInput: string) {
+function parseTimeInputTime(timeInput: string, shorthandPrecision = 3) {
   let ms = 0;
 
-  const match = multiMatch(timeInputPatterns, timeInput);
+  const match = multiMatch(getTimeInputPatterns(shorthandPrecision), timeInput);
 
   if (!match) return null;
 
@@ -158,4 +134,41 @@ export function getMs(time: Time) {
   }
 
   return time.ms;
+}
+
+export function getTimeInputPatterns(shorthandPrecision = 3) {
+  return [
+    {
+      regex: /^(\d{1,2}):(\d{1,2}):(\d{1,2})\.(\d{1,3})$/,
+      fields: ["hours", "minutes", "seconds", "milliseconds"],
+    },
+    {
+      regex: /^(\d{1,2}):(\d{1,2}):(\d{1,2})$/,
+      fields: ["hours", "minutes", "seconds"],
+    },
+    {
+      regex: /^(\d{1,2}):(\d{1,2})\.(\d{1,3})$/,
+      fields: ["minutes", "seconds", "milliseconds"],
+    },
+    {
+      regex: /^(\d{1,2}):(\d{1,2})$/,
+      fields: ["minutes", "seconds"],
+    },
+    {
+      regex: /^(\d{1,2})\.(\d{1,3})$/,
+      fields: ["seconds", "milliseconds"],
+    },
+    {
+      regex: /^(\d{1,2})\.?$/,
+      fields: ["seconds"],
+    },
+    {
+      regex: new RegExp(`^(\\d{1,2})(\\d{${shorthandPrecision}})$`),
+      fields: ["seconds", "milliseconds"],
+    },
+    {
+      regex: new RegExp(`^(\\d{1,2})(\\d{2})(\\d{${shorthandPrecision}})$`),
+      fields: ["minutes", "seconds", "milliseconds"],
+    },
+  ];
 }

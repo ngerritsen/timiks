@@ -3,6 +3,7 @@ import { INSPECTION_TIME, PREPARATION_STAGES } from "../constants/timer";
 import { RootState } from "../store";
 import { createSelector } from "reselect";
 import { isValidInputTime, parseTimeInput } from "../helpers/time";
+import { getTimeEntryShorthandPrecision } from "./settings";
 
 export const getTimerState = (state: RootState) => state.timer;
 export const getStartTime = (state: RootState) => state.timer.startTime;
@@ -16,7 +17,12 @@ export const isTraining = (state: RootState) => state.timer.isTraining;
 export const getInspectionStartTime = (state: RootState) =>
   state.timer.inspectionStartTime;
 
-export const getTimeInputTime = createSelector(getTimeInput, parseTimeInput);
+export const getTimeInputTime = createSelector(
+  getTimeInput,
+  getTimeEntryShorthandPrecision,
+  parseTimeInput
+);
+
 export const isTimeInputValid = createSelector(
   getTimeInputTime,
   isValidInputTime

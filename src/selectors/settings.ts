@@ -7,6 +7,8 @@ export const getSettings = (state: RootState) => state.settings;
 export const getPuzzle = (state: RootState) => state.settings.puzzle;
 export const getArchiveDays = (state: RootState) => state.settings.archiveDays;
 export const getTheme = (state: RootState) => state.settings.theme;
+export const getTimeEntryShorthandPrecision = (state: RootState) =>
+  state.settings.timeEntryShorthandPrecision;
 
 export const getArchivePuzzle = (state: RootState) =>
   state.settings.archivePuzzle;

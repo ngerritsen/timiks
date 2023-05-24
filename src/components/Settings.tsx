@@ -98,6 +98,20 @@ const Settings = () => {
                 </Section>
                 <Section margin="sm">
                   <Setting>
+                    <label>Time entry shorthand precision</label>
+                    <Select
+                      onChange={set("timeEntryShorthandPrecision")}
+                      options={[
+                        { label: "10ms (2 digits)", value: 2 },
+                        { label: "1ms (3 digits)", value: 3 },
+                      ]}
+                      value={settings.timeEntryShorthandPrecision}
+                      fullWidth
+                    />
+                  </Setting>
+                </Section>
+                <Section margin="sm">
+                  <Setting>
                     <label>Hide time during solve</label>
                     <Checkbox
                       inverse
