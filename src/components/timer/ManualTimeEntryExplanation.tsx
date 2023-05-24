@@ -31,6 +31,11 @@ const ManualTimeEntryExplanation = () => (
             For DNF solves simply enter <strong>dnf</strong> (case insensitive).
           </p>
 
+          <p>
+            Use Enter or Space or start typing a number to quickly focus the
+            input field from anywhere.
+          </p>
+
           <h3>Examples</h3>
           <ul>
             <li>
@@ -38,6 +43,9 @@ const ManualTimeEntryExplanation = () => (
             </li>
             <li>
               <strong>15</strong> - <i>15 sec. and 0 ms</i>
+            </li>
+            <li>
+              <strong>16.321</strong> - <i>16 sec. and 321 ms</i>
             </li>
             <li>
               <strong>1:3:12</strong> - <i>1 hour, 3 minutes and 12 sec.</i>

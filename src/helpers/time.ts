@@ -34,19 +34,17 @@ const timeInputPatterns = [
     fields: ["seconds", "milliseconds"],
   },
   {
-    regex: /^(\d{1,2})$/,
+    regex: /^(\d{1,2})\.?$/,
     fields: ["seconds"],
   },
 ];
 
 export function isValidTime(time?: Partial<Time>): time is Time {
-  return (
-    time &&
-    typeof time.ms === "number" &&
-    !isNaN(time.ms) &&
-    time.date &&
-    !isNaN(time.date.getTime())
-  );
+  return isValidInputTime(time) && time.date && !isNaN(time.date.getTime());
+}
+
+export function isValidInputTime(time?: Partial<Time>): time is Time {
+  return time && typeof time.ms === "number" && !isNaN(time.ms);
 }
 
 export function breakUpTime(ms: number) {

@@ -2,7 +2,7 @@ import { shouldUseInspectionTime } from "./settings";
 import { INSPECTION_TIME, PREPARATION_STAGES } from "../constants/timer";
 import { RootState } from "../store";
 import { createSelector } from "reselect";
-import { isValidTime, parseTimeInput } from "../helpers/time";
+import { isValidInputTime, parseTimeInput } from "../helpers/time";
 
 export const getTimerState = (state: RootState) => state.timer;
 export const getStartTime = (state: RootState) => state.timer.startTime;
@@ -17,7 +17,10 @@ export const getInspectionStartTime = (state: RootState) =>
   state.timer.inspectionStartTime;
 
 export const getTimeInputTime = createSelector(getTimeInput, parseTimeInput);
-export const isTimeInputValid = createSelector(getTimeInputTime, isValidTime);
+export const isTimeInputValid = createSelector(
+  getTimeInputTime,
+  isValidInputTime
+);
 
 export const hasInspectionPenalty = (state: RootState) =>
   shouldUseInspectionTime(state) &&

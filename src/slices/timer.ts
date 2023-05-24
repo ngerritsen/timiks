@@ -76,8 +76,8 @@ const { reducer, actions } = createSlice({
     setIsTraining: (state, action: PayloadAction<boolean>) => {
       state.isTraining = action.payload;
     },
-    updateTimeInput: (state) => {
-      state.timeInput = "";
+    updateTimeInput: (state, action: PayloadAction<string>) => {
+      state.timeInput = action.payload;
     },
   },
   extraReducers: (builder) => {
