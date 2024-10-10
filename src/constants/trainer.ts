@@ -4,7 +4,7 @@ import ollScrambles from "../scrambles/oll";
 import pllScrambles from "../scrambles/pll";
 import { Case, CaseCategory, TrainerScrambles, TrainingType } from "../types";
 
-export const ALGDB_BASE_URL = "http://algdb.net";
+export const SPEEDCUBE_DB_BASE_URL = "https://speedcubedb.com";
 export const types: TrainingType[] = ["OLL", "PLL"];
 
 export const cases: Record<TrainingType, Case[]> = {

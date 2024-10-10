@@ -6,7 +6,7 @@ import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons/faExternalL
 import LastLayerPreview from "../cube/LastLayerPreview";
 import { getSize, getColor, getBreakpoint } from "../../helpers/theme";
 import Section from "../shared/Section";
-import { buildAlgDbUrl } from "../../helpers/trainer";
+import { buildSpeedcubeDbUrl } from "../../helpers/trainer";
 import Link from "../shared/Link";
 import { Case, TrainingType } from "../../types";
 
@@ -41,12 +41,12 @@ const TrainerCaseDetails = ({
       </Section>
       <Section margin="sm">
         <Link
-          href={buildAlgDbUrl(trainingType, trainingCase.id)}
+          href={buildSpeedcubeDbUrl(trainingType, trainingCase.id)}
           target="_blank"
           rel="noopener noreferrer"
         >
           <FontAwesomeIcon size="sm" icon={faExternalLinkAlt} /> View on
-          AlgDb.net
+          speedcubedb.com
         </Link>
       </Section>
     </Section>

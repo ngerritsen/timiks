@@ -2,7 +2,7 @@ import { pickRandom } from "./general";
 import {
   cases,
   scrambles,
-  ALGDB_BASE_URL,
+  SPEEDCUBE_DB_BASE_URL,
   categories,
 } from "../constants/trainer";
 import { Case, TrainingTime, TrainingType } from "../types";
@@ -116,13 +116,16 @@ export function buildFullCaseTitle(
   );
 }
 
-export function buildAlgDbUrl(trainingType: TrainingType, caseId: string) {
+export function buildSpeedcubeDbUrl(
+  trainingType: TrainingType,
+  caseId: string
+) {
   switch (trainingType) {
     case "OLL":
-      return ALGDB_BASE_URL + "/puzzle/333/oll/oll" + caseId;
+      return SPEEDCUBE_DB_BASE_URL + "/a/3x3/OLL/OLL_" + caseId;
     case "PLL":
-      return ALGDB_BASE_URL + "/puzzle/333/pll/" + caseId;
+      return SPEEDCUBE_DB_BASE_URL + "/a/3x3/PLL/" + caseId;
     default:
-      return ALGDB_BASE_URL;
+      return "";
   }
 }
